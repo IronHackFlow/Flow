@@ -1,0 +1,265 @@
+.TestAudio {
+    height: 97.2%;
+    width: 100%;
+  }
+/*------------------ top rhymes container ----------------------*/
+.scroll-rhymes-outer {
+    @include flexCenter(center, center, column);
+    height: 40%;
+    background-image: url('./images/turnt-bg-image.jpg');
+    background-size: 104%;
+    background-position-x: 50%;
+    background-position-y: 10%;
+
+    .scroll-rhymes-container {
+        height: 70%;
+        width: 87%;
+        margin-top: 3%;
+        overflow-y: scroll;
+        @include flexCenter(flex-start, stretch, column);
+        border-radius: 20px;
+        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+    }
+
+    .scroll-rhymes-line {
+        height: 15%;
+        width: 88%;
+        margin-top: 4%;
+        @include flexCenter(center, center, row);
+        border-radius: 15px;
+        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+        overflow-x: scroll;
+
+        .transcript-line-2 {
+          height: 90%;
+          width: 93%;
+          text-align: start;
+          overflow-y: scroll;
+          color: #01fff3;
+          font-size: 14px;
+          font-weight: bold;
+          text-shadow: 3px 4px 5px #494848;
+        }
+    }
+}
+
+/* --------------------- Controls panel --------------------- */
+.nav-buttons-play {
+    height: 60%;
+    padding-top: 10px;
+    background: $lightgrayBg;
+    border-top: 5px solid $lightgrayBg;
+    box-shadow: inset 0px 3px 5px #cecece;
+
+    .suggestions-container {
+        height: 40%;
+        width: 100%;
+        background: $lightgrayBg;
+        @include flexCenter(center, center, row);
+
+        .suggestions {
+            height: 45%;
+            width: 95%;
+            margin: 5px;
+            @include flexCenter(center, center, column);
+            border-radius: 50px;
+            box-shadow: inset 2px 2px 3px 0px #d0d2d4, inset -2px -2px 3px #ffffff;
+
+            .custom-rhyme {
+                height: 74%;
+                width: 94%;
+                @include flexCenter(center, center, row);
+                border-radius: 50px;
+                box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
+
+                .custom-rhyme-inner {
+                    height: 65%;
+                    width: 93%;
+                    @include flexCenter(center, stretch, row);
+                    background: $charcoalBg;
+                    border-radius: 50px;
+                    overflow-x: scroll;
+                    box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
+
+                    .transcript-line-3 {
+                        color: #ff95da;
+                        font-size: 16px;
+                        width: 95%;
+                        font-weight: bold;
+                        text-shadow: 3px 4px 5px #494848;
+                    }
+                    .transcript-line-4 {
+                        color:#ecf9b5;
+                        font-size: 16px;
+                        width: 95%;
+                        font-weight: bold;
+                        text-shadow: 3px 4px 5px #494848;
+                    }
+                }
+            }
+        }
+    }
+
+    
+    .canvas-anim-box {
+        background: $lightgrayBg;
+        border-bottom: 5px solid $lightgrayBg;
+        box-shadow: inset 0px -5px 4px #d8d5d5;
+        height: 25%;
+        width: 100%;
+        @include flexCenter(center, stretch, row);
+
+        .canvas-outset {
+            height: 85%;
+            width: 93%;
+            margin-top: 2%;
+            @include flexCenter(center, center, row);
+            border-radius: 50px;
+            background: $lightgrayBg;
+            box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
+
+            .canvas-inset {
+                height: 80%;
+                width: 94%;
+                @include flexCenter(center, center, row);
+                border-radius: 50px;
+                box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
+
+                .canvas-container {
+                    height: 70%;
+                    width: 91%;
+                    border-radius: 50px;
+                    overflow: hidden;
+                    canvas {
+                      position: relative;
+                      bottom: 80%;
+                    }
+                }
+            }
+        }
+    }
+
+    .playback-controls-panel {
+        height: 35%;
+        background: $charcoalBg;
+        border-top: 2px solid #8a8c8e;
+        box-shadow: inset 1px 3px 4px 0px #adadad;
+    
+        .playback-container {
+            height: 33%;
+            @include flexCenter(center, stretch, row);
+    
+            .playback-wrapper {
+                height: 100%;
+                width: 95%;
+                @include flexCenter(flex-start, center, row);
+    
+                .tracks-container {
+                    height: 80%;
+                    width: 60%;
+                    @include flexCenter(center, center, row);
+    
+                    .tracks-inset {
+                        height: 90%;
+                        width: 90%;
+                        @include flexCenter(center, center, row);
+                        border-radius: 50px;
+                        box-shadow: inset 5px 5px 15px #313232,
+                                    inset -5px -5px 5px #9fa2a4;
+    
+                        .tracks-onset {
+                            height: 65%;
+                            width: 90%;
+                            @include flexCenter(center, center, row);
+                            background: #383838;
+                            border-radius: 50px;
+    
+                            .track-select {
+                                background-color: #383838;
+                                color: white;
+                                border-color: #383838;
+                
+                                &:focus {
+                                    outline: none !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .selected-container {
+                    width: 20%;
+                    display: flex;
+                    justify-content: center;
+                    .selected-container div {
+                        height: 30px;
+                        width: 30px;
+                        border-radius: 50px;
+                        font-size: .7em;
+                        padding: 1px;
+                        @include flexCenter(center, center, row);
+                        box-shadow: 4px 4px 7px #3d3f3f,
+                                 -4px -4px 5px #939597;
+                    }
+                }
+            }
+        }
+    
+        .duration-container {
+            height: 12%;
+            @include flexCenter(center, center, row);
+    
+            .dur-inset {
+                height: 100%;
+                width: 90%;
+                @include flexCenter(center, center, row);
+                border-radius: 50px;
+                box-shadow: inset 5px 5px 15px #313232,
+                            inset -5px -5px 5px #9fa2a4;
+    
+                .dur-onset {
+                  height: 40%;
+                  width: 95%;
+                  border-radius: 50px;
+                  background: #63DEBC;
+                }
+            }   
+        }
+    
+        .nav-list-play{
+            height: 55%;
+            width: 100%;
+            border-top: 1px solid $charcoalBg;
+            @include flexCenter(space-evenly, center, row);
+    
+            .button-icons-inset {
+                height: 75px;
+                width: 75px;
+                padding: 3px;
+                @include flexCenter(center, center, row);
+                border-radius: 50%;
+                background: $charcoalBg;
+                box-shadow: inset 5px 5px 15px #313232, 
+                            inset -5px -5px 15px #9fa2a4;
+            
+                .button-icons-outset {
+                    height: 40px;
+                    width: 40px;
+                    text-align: center;
+                    font-weight: bold;
+                    border-radius: 50%;
+                    @include flexCenter(center, center, row);
+                    background: $charcoalBg;
+                    box-shadow:  4px 4px 10px #3d3f3f,
+                                -4px -4px 10px #939597;
+                    &:active {
+                        box-shadow: inset 2px 2px 3px #313232, 
+                                    inset -2px -2px 3px #9fa2a4;
+                    }
+                }
+            }
+        }
+    }
+}
+
+  

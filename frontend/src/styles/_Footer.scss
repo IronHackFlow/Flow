@@ -1,0 +1,130 @@
+/* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
+.com-cont-1, .comments-container, .input-container, .input-inset {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+footer {
+    @include flexCenter(space-between, center, column);
+    height: 20%;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: linear-gradient(90deg, #ec66b7, #40bdac);
+
+    .social-buttons {
+        @include flexCenter(center, center, row);
+        width: 100%;
+        height: 40%;
+        border-bottom: 1px solid #616161;
+        box-shadow: 5px 5px solid gray;
+        background: $charcoalBg;
+        border-top: 1px solid #adadad;
+        box-shadow: inset 0px 3px 5px #bfbfbf, inset 1px -3px 5px #525151;
+
+        .social-list {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            .like-comment-container {
+                @include flexCenter(flex-start, center, row);
+                height: 100%;
+            }
+            .individual-btn {
+                @include flexCenter(center, center, row);
+                height: 40px;
+                width: 40px;
+                color: #ec6aa0;
+                list-style-type: none;
+                margin: 0px 10px 0px 10px;
+                border-radius: 50px;
+                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+                &:active {
+                    box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                inset -2px -2px 3px #989898;
+                }
+
+                .individual-profile-pic {
+                    height: 85%;
+                    width: 85%;
+                    background-size: cover;
+                    overflow: hidden;
+                    background-position: center;
+                    border-radius: 50px;
+                    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+                }
+            }
+        }
+    }
+
+    .nav-buttons {
+        width: 100%;
+        height: 55%;
+        background: $lightgrayBg;
+        border-top: 1px solid #a9a9a9;
+        box-shadow: inset 1px 5px 4px #ffffff;
+    
+        .nav-list {
+            @include flexCenter(space-evenly, center, row);
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+    
+            .nav-buttons-rim {
+                @include flexCenter(center, center, row);
+                height: 80%;
+                width: 20%;
+                border-radius: 50%;
+                box-shadow: 1px 1px 3px 0px #b7b8b9, -2px -2px 3px #ffffff;
+    
+                .nav-buttons-outset {
+                    @include flexCenter(center, center, row);
+                    height: 90%;
+                    width: 92%;
+                    border-radius: 50%;
+                    box-shadow: inset 2px 2px 5px #cacaca, inset -3px -3px 4px #ffffff;
+    
+                    .nav-buttons-inset {
+                        @include flexCenter(center, center, row);
+                        height: 70%;
+                        width: 70%;
+                        border-radius: 50%;
+                        box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
+                        &:active {
+                            box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
+                                        inset -2px -2px 3px #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* ------------------------ Profile page fixed footer --------------------------- */
+.nb-profile {
+    height: 11%;
+    position: fixed;
+    bottom: 0;
+    border: none;
+}
+
+
+
+
+
+
+  .profile-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+
+
+  .edit-profile-button:active {
+    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+  }

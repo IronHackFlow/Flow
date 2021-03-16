@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import './App.css'
+import './styles/style.css'
 import './otherstyles.css'
 import actions from './api'
 import Home from './components/Home'
