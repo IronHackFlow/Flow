@@ -12,8 +12,9 @@ import mic from "../images/record2.svg";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import stop from "../images/stop.svg";
-import trashbin from "../images/trashbin.svg";
+import trashbin from "../images/delete2.svg";
 import save from "../images/save.svg";
+import help from "../images/help2.svg";
 import replay from "../images/replay.svg";
 import AudioCanvas from "./AudioCanvas";
 import TheContext from "../TheContext";
@@ -367,13 +368,12 @@ function TestAudio(props) {
 
   const modalPopup = () => {
     const modal = document.querySelector(".modal");
+    modal.style.bottom = "0vh"
+    modal.style.transition = "bottom .5s"
     const closeBtn = document.querySelector(".close-btn");
-    const helpBtn = document.querySelector(".help-btn");
-    modal.style.display = "flex";
-    helpBtn.style.display = "none";
     closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-      helpBtn.style.display = "block";
+      modal.style.bottom = "-65vh"
+      modal.style.transition = "bottom .5s"
     });
   };
 
@@ -387,14 +387,6 @@ function TestAudio(props) {
     <div className="TestAudio">
       <audio id="song" src={beat1} loop={true}></audio>
       <p id="fixer"></p>
-      {/* --- MODAL BUTTON BEGINS HERE --- */}
-      <button
-        className="help-btn"
-        onClick={modalPopup}
-      >
-        ?
-      </button>
-      {/* --- MODAL BUTTON ENDS HERE --- */}
       <div className="scroll-rhymes-outer">
         <div className="scroll-rhymes-container" id="currentTranscript">
           {line}
@@ -494,9 +486,9 @@ function TestAudio(props) {
                   </div>
                 </div>
               </div>
-              <div className="selected-container" onClick={saveFile}>
+              <div className="selected-container" onClick={modalPopup}>
                 <div>
-                  <img className="button-icons" src={save}></img>
+                  <img className="button-icons" src={help}></img>
                 </div>
               </div>
               <div className="tracks-container">
@@ -521,21 +513,8 @@ function TestAudio(props) {
             <div className="button-icons-inset">
               <div
                 className="button-icons-outset"
-                onClick={handlePlayPause}
-                id="playButton"
-              >
-                <img
-                  className="button-icons bi-play"
-                  id="play-stop-img"
-                  src={play}
-                ></img>
-              </div>
-            </div>
-            <div className="button-icons-inset">
-              <div
-                className="button-icons-outset"
-                id="record-stop"
                 onClick={handleRecStop}
+                id="record-stop"
               >
                 <img
                   className="button-icons bi-record"
@@ -545,8 +524,26 @@ function TestAudio(props) {
               </div>
             </div>
             <div className="button-icons-inset">
+              <div
+                className="button-icons-outset"
+                id="playPause"
+                onClick={handlePlayPause}
+              >
+                <img
+                  className="button-icons bi-play"
+                  id="play-stop-img"
+                  src={play}
+                ></img>
+              </div>
+            </div>
+            <div className="button-icons-inset">
               <div className="button-icons-outset" onClick={deleteTake}>
                 <img className="button-icons bi-play" src={trashbin}></img>
+              </div>
+            </div>
+            <div className="button-icons-inset">
+              <div className="button-icons-outset" onClick={saveFile}>
+                <img className="button-icons bi-help" src={save}></img>
               </div>
             </div>
           </div>

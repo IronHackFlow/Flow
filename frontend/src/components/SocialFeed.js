@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import gradientbg from "../images/gradient-bg-2.png";
 import play from "../images/play.svg";
@@ -197,19 +197,21 @@ let profilePicRef=useRef()
       >
         <div className="last-div"></div>
         <div className="text-container">
-          <h5 className="ud-text udt-1">
+          <p className="ud-text udt-1">
             <span style={{ color: "#ec6aa0" }}>
               {eachSong.songUser.userName}
-            </span>{" "}
-          </h5>
-          <h6 className="ud-text udt-2">{eachSong.songName}</h6>
-          <h6 className="ud-text udt-3">
+            </span>
+          </p>
+          <p className="ud-text udt-2">
+            {eachSong.songName}
+          </p>
+          <p className="ud-text udt-3">
             {eachSong.caption ? (
               <p>{eachSong.caption}</p>
             ) : (
               <p>no caption for this flow</p>
             )}
-          </h6>
+          </p>
         </div>
       </li>
     );
@@ -257,13 +259,17 @@ let profilePicRef=useRef()
       })
       .catch(console.error);
   }
-
+//   <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: ele.profile}} className="search-results-link">
+//   <img className="prof-pic" src={ele.picture} alt=""></img>
+// </Link>
+  const linkBtnAnim = (e) => {
+    console.log(e.target)
+    e.target.style.backgroundColor = 'red'
+  }
   const showNavBar = () => {
     return (
-      <footer
-        style={{ height: `${props.height}`, flexDirection: `${props.row}` }}
-      >
-        <div className="social-buttons" style={{ display: `${props.display}` }}>
+      <footer>
+        <div className="social-buttons">
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
@@ -274,8 +280,11 @@ let profilePicRef=useRef()
               <div className="individual-btn" onClick={followUser}>
                 <img className="social-icons follow" src={follow}></img>
               </div>
-              <div className="individual-btn">
-                <img className="social-icons heart" onClick={likePost} src={heart2}></img><p>{likes}</p>
+              <div className="individual-btn" onClick={likePost}>
+                <img className="social-icons heart" src={heart2}></img>
+                <div className="likes-number-container">
+                    <p>{likes}</p>
+                </div>
               </div>
               <div className="individual-btn" onClick={popUpSearch}>
                 <img className="social-icons heart" src={search}></img>
@@ -286,34 +295,25 @@ let profilePicRef=useRef()
             </div>
           </div>
         </div>
-        <div
-          className="nav-buttons"
-          style={{ boxShadow: `${props.shadowDisplay}` }}
-        >
+        <div className="nav-buttons">
           <div className="nav-list">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  {userViewed._id ? (
-                    <Link to="/recordingBooth">
-                      <img className="button-icons bi-record" src={mic}></img>
-                    </Link>
-                  ) : (
-                    <Link to="/auth">
-                      <img className="button-icons bi-record" src={mic}></img>
-                    </Link>
-                  )}
-                  {/* <img className="button-icons bi-record" src={mic}></img> */}
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic}></img>
+                  </Link>
                 </div>
               </div>
             </div>
 
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                <Link to="/explore-feed">
-                  <img className="button-icons bi-explore" src={explore} alt="explore"></img></Link>
-                </div>
+                {/* <div className="nav-buttons-inset"> */}
+                  <Link to="/explore-feed" onClick={linkBtnAnim} className="nav-buttons-inset">
+                    <img className="button-icons bi-explore" src={explore} alt="explore"></img>
+                  </Link>
+                {/* </div> */}
               </div>
             </div>
 
@@ -328,16 +328,9 @@ let profilePicRef=useRef()
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  {user._id ? (
-                    <Link to="/profile">
-                      <img className="button-icons bi-profile-social" src={avatar3}></img>
-                    </Link>
-                  ) : (
-                    <Link to="/auth">
-                      <img className="button-icons bi-profile-social" src={avatar3}></img>
-                    </Link>
-                  )}
-                  {/* <img className="button-icons" src={avatar3}></img> */}
+                  <Link to={user._id ? ("/profile") : ("/auth")}>
+                    <img className="button-icons bi-profile-social" src={avatar3}></img>
+                  </Link>
                 </div>
               </div>
             </div>

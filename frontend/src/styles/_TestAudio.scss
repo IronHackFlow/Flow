@@ -1,32 +1,26 @@
 .TestAudio {
     height: 97.2%;
     width: 100%;
+    position: absolute;
   }
-/*------------------ top rhymes container ----------------------*/
+
 .scroll-rhymes-outer {
-    @include flexCenter(center, center, column);
-    height: 40%;
-    background-image: url('./images/turnt-bg-image.jpg');
+    @include flexCenter(40%, 100%, 0px, center, center, column);
+    background-image: url('../images/turnt-bg-image.jpg');
     background-size: 104%;
     background-position-x: 50%;
     background-position-y: 10%;
 
     .scroll-rhymes-container {
-        height: 70%;
-        width: 87%;
+        @include flexCenter(70%, 87%, 20px, flex-start, stretch, column);
         margin-top: 3%;
         overflow-y: scroll;
-        @include flexCenter(flex-start, stretch, column);
-        border-radius: 20px;
         box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
     }
 
     .scroll-rhymes-line {
-        height: 15%;
-        width: 88%;
+        @include flexCenter(15%, 88%, 15px, center, center, row);
         margin-top: 4%;
-        @include flexCenter(center, center, row);
-        border-radius: 15px;
         box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
         overflow-x: scroll;
 
@@ -52,32 +46,21 @@
     box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
-        height: 40%;
-        width: 100%;
+        @include flexCenter(40%, 100%, 0px, center, center, column);
         background: $lightgrayBg;
-        @include flexCenter(center, center, row);
 
         .suggestions {
-            height: 45%;
-            width: 95%;
+            @include flexCenter(45%, 95%, 50px, center, center, column);
             margin: 5px;
-            @include flexCenter(center, center, column);
-            border-radius: 50px;
             box-shadow: inset 2px 2px 3px 0px #d0d2d4, inset -2px -2px 3px #ffffff;
 
             .custom-rhyme {
-                height: 74%;
-                width: 94%;
-                @include flexCenter(center, center, row);
-                border-radius: 50px;
+                @include flexCenter(74%, 94%, 50px, center, center, row);
                 box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
 
                 .custom-rhyme-inner {
-                    height: 65%;
-                    width: 93%;
-                    @include flexCenter(center, stretch, row);
+                    @include flexCenter(65%, 93%, 50px, center, stretch, row);
                     background: $charcoalBg;
-                    border-radius: 50px;
                     overflow-x: scroll;
                     box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
 
@@ -102,27 +85,19 @@
 
     
     .canvas-anim-box {
+        @include flexCenter(25%, 100%, 0px, center, stretch, row);
         background: $lightgrayBg;
         border-bottom: 5px solid $lightgrayBg;
-        box-shadow: inset 0px -5px 4px #d8d5d5;
-        height: 25%;
-        width: 100%;
-        @include flexCenter(center, stretch, row);
+        box-shadow: inset 0 -5px 4px #d8d8d8;
 
         .canvas-outset {
-            height: 85%;
-            width: 93%;
-            margin-top: 2%;
-            @include flexCenter(center, center, row);
-            border-radius: 50px;
+            @include flexCenter(85%, 93%, 50px, center, center, row);
             background: $lightgrayBg;
+            margin-top: 2%;
             box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
 
             .canvas-inset {
-                height: 80%;
-                width: 94%;
-                @include flexCenter(center, center, row);
-                border-radius: 50px;
+                @include flexCenter(80%, 94%, 50px, center, center, row);
                 box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
 
                 .canvas-container {
@@ -146,33 +121,22 @@
         box-shadow: inset 1px 3px 4px 0px #adadad;
     
         .playback-container {
-            height: 33%;
-            @include flexCenter(center, stretch, row);
+            @include flexCenter(33%, 100%, 0px, center, stretch, row);
     
             .playback-wrapper {
-                height: 100%;
-                width: 95%;
-                @include flexCenter(flex-start, center, row);
+                @include flexCenter(100%, 95%, 0px, flex-start, center, row);
     
                 .tracks-container {
-                    height: 80%;
-                    width: 60%;
-                    @include flexCenter(center, center, row);
+                    @include flexCenter(80%, 60%, 0px, center, center, row);
     
                     .tracks-inset {
-                        height: 90%;
-                        width: 90%;
-                        @include flexCenter(center, center, row);
-                        border-radius: 50px;
+                        @include flexCenter(90%, 90%, 50px, center, center, row);
                         box-shadow: inset 5px 5px 15px #313232,
                                     inset -5px -5px 5px #9fa2a4;
     
                         .tracks-onset {
-                            height: 65%;
-                            width: 90%;
-                            @include flexCenter(center, center, row);
+                            @include flexCenter(65%, 90%, 50px, center, center, row);
                             background: #383838;
-                            border-radius: 50px;
     
                             .track-select {
                                 background-color: #383838;
@@ -188,16 +152,12 @@
                 }
 
                 .selected-container {
-                    width: 20%;
-                    display: flex;
-                    justify-content: center;
-                    .selected-container div {
-                        height: 30px;
-                        width: 30px;
-                        border-radius: 50px;
+                    @include flexCenter(100%, 20%, 0px, center, center, row);
+
+                    div {
+                        @include flexCenter(30px, 30px, 50px, center, center, row);
                         font-size: .7em;
                         padding: 1px;
-                        @include flexCenter(center, center, row);
                         box-shadow: 4px 4px 7px #3d3f3f,
                                  -4px -4px 5px #939597;
                     }
@@ -206,14 +166,10 @@
         }
     
         .duration-container {
-            height: 12%;
-            @include flexCenter(center, center, row);
+            @include flexCenter(12%, 100%, 0px, center, center, row);
     
             .dur-inset {
-                height: 100%;
-                width: 90%;
-                @include flexCenter(center, center, row);
-                border-radius: 50px;
+                @include flexCenter(100%, 90%, 50px, center, center, row);
                 box-shadow: inset 5px 5px 15px #313232,
                             inset -5px -5px 5px #9fa2a4;
     
@@ -226,29 +182,21 @@
             }   
         }
     
-        .nav-list-play{
-            height: 55%;
-            width: 100%;
+        .nav-list-play {
+            @include flexCenter(55%, 100%, 0px, space-evenly, center, row);
             border-top: 1px solid $charcoalBg;
-            @include flexCenter(space-evenly, center, row);
-    
+
             .button-icons-inset {
-                height: 75px;
-                width: 75px;
+                @include flexCenter(70px, 70px, 50%, center, center, row);
                 padding: 3px;
-                @include flexCenter(center, center, row);
-                border-radius: 50%;
                 background: $charcoalBg;
                 box-shadow: inset 5px 5px 15px #313232, 
                             inset -5px -5px 15px #9fa2a4;
             
                 .button-icons-outset {
-                    height: 40px;
-                    width: 40px;
+                    @include flexCenter(50px, 50px, 50%, center, center,row);
                     text-align: center;
                     font-weight: bold;
-                    border-radius: 50%;
-                    @include flexCenter(center, center, row);
                     background: $charcoalBg;
                     box-shadow:  4px 4px 10px #3d3f3f,
                                 -4px -4px 10px #939597;

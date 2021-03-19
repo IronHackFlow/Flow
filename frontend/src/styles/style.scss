@@ -1,11 +1,171 @@
-@import './TestAudio';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
 $charcoalBg: #686a6b;
 $lightgrayBg: #ecf0f3;
 
-@mixin flexCenter($justify, $align, $direction) {
+@mixin flexCenter($height: 100%, $width: 100%, $border-radius: none, $justify: center, $align: center, $direction: row) {
+    height: $height;
+    width: $width;
+    border-radius: $border-radius;
     display: flex;
     justify-content: $justify;
     align-items: $align;
     flex-direction: $direction;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body, #root {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
+}
+.App {
+  height: 100%;
+  width: 100%;
+  margin-top: -5px;
+  text-align: center;
+}
+
+@import './NavBar';
+@import './Footer';
+@import './Home';
+@import './TestAudio';
+@import './SocialFeed';
+@import './Profile';
+@import './AuthLogin';
+@import './EditProfile';
+@import './Buttons';
+@import './ModalAndNotifications';
+
+
+:root {
+  --routedi2bg: #ecf0f3;
+  --menuOpacity: 0;
+  --btnOpacity: 0;
+
+  --mo6opacity: 0;
+  --mo5opacity: 0;
+  --mo4opacity: 0;
+  --mo3opacity: 0;
+  --mo2opacity: 0;
+  --mo1opacity: 0;
+
+  --link-color-6: #686a6b;
+  --link-color-5: #686a6b;
+  --link-color-4: #686a6b;
+  --link-color-3: #686a6b;
+  --link-color-2: #686a6b;
+  --link-color-1: #686a6b;
+
+  --anim-dip-6: btnDip .3s forwards;
+  --anim-pop-6: btnPop .3s .3s forwards;
+  --anim-dip-5: btnDip .3s forwards;
+  --anim-pop-5: btnPop .3s .3s forwards;
+  --anim-dip-4: btnDip .3s forwards;
+  --anim-pop-4: btnPop .3s .3s forwards;
+  --anim-dip-3: btnDip .3s forwards;
+  --anim-pop-3: btnPop .3s .3s forwards;
+  --anim-dip-2: btnDip .3s forwards;
+  --anim-pop-2: btnPop .3s .3s forwards;
+  --anim-dip-1: btnDip .3s forwards;
+  --anim-pop-1: btnPop .3s .3s forwards;
+}
+@keyframes btnDip {
+  0% {
+    box-shadow: inset 0px 0px 0px #686a6b, inset -0px -0px 0px #686a6b;
+  }
+  100% {
+    box-shadow: inset 4px 4px 5px #505050, inset -4px -4px 5px #7d7f80;
+  }
+}
+@keyframes btnPop {
+  0% {
+    box-shadow: 0px 0px 0px #686a6b, -0px -0px 0px #686a6b;
+    background: linear-gradient(139deg, #686a6b, #686a6b);
+  }
+  50% {
+    background: linear-gradient(139deg, #d9dada, #919292);
+    box-shadow: 1px 1px 8px #2a2a2b, -2px -2px 8px #a6aaab;
+    --link-color-6: #686a6b;
+    --link-color-5: #686a6b;
+    --link-color-4: #686a6b;
+    --link-color-3: #686a6b;
+    --link-color-2: #686a6b;
+    --link-color-1: #686a6b;
+  }
+  100% {
+    box-shadow: 1px 1px 8px #2a2a2b, -2px -2px 8px #a6aaab;
+    background: linear-gradient(139deg, #d9dada, #919292);
+    --link-color-6: #ec6aa0;
+    --link-color-5: #ec6aa0;
+    --link-color-4: #ec6aa0;
+    --link-color-3: #ec6aa0;
+    --link-color-2: #ec6aa0;
+    --link-color-1: #ec6aa0;
+  }
+}
+@keyframes massiveMenu {
+  0% {
+    --menuOpacity: 1;
+  }
+  14% {
+    --mo6opacity: 1;
+    --anim-dip-6: btnDip .3s forwards;
+    --anim-pop-6: btnPop .3s .35s forwards;
+  }
+  28% {
+    --mo3opacity: 1;
+    --anim-dip-3: btnDip .3s forwards;
+    --anim-pop-3: btnPop .3s .3s forwards;
+  }
+  44% {
+    --mo5opacity: 1;
+    --anim-dip-5: btnDip .3s forwards;
+    --anim-pop-5: btnPop .3s .3s forwards;
+  }
+  58% {
+    --mo2opacity: 1;
+    --anim-dip-2: btnDip .3s forwards;
+    --anim-pop-2: btnPop .3s .3s forwards;
+  }
+  72% {
+    --mo4opacity: 1;
+    --anim-dip-4: btnDip .3s forwards;
+    --anim-pop-4: btnPop .3s .3s forwards;
+  }
+  86% {
+    --mo1opacity: 1;
+    --anim-dip-1: btnDip .3s forwards;
+    --anim-pop-1: btnPop .3s .3s forwards;
+  }
+  100% {
+    --menuOpacity: 1;
+    --mo6opacity: 1;
+    --mo5opacity: 1;
+    --mo4opacity: 1;
+    --mo3opacity: 1;
+    --mo2opacity: 1;
+    --mo1opacity: 1;
+  }
+}
+
+@keyframes notify {
+    0% {
+        margin-left: 100vw;}
+    50% {
+        margin-left:65vw}
+    100%{
+        margin-left: 100vw;}
+}
+@keyframes hideNotify {
+    from {
+      width:25vw
+    }
+    to {
+      width:0vw
+    }
 }

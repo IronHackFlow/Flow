@@ -1,0 +1,130 @@
+.LogIn {
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    position: absolute;
+}
+.page-container {
+    @include flexCenter(100%, 100%, none, flex-start, center, column);
+    background: #ecf0f3;
+
+    .upper-container {
+        @include flexCenter(10%, 100%, none, center, center, column);
+
+        .upper-outset {
+            @include flexCenter(70%, 85%, 50px, center, center, row);
+            box-shadow: inset 2px 2px 3px #cccccc, inset -2px -2px 3px #fdfeff;
+
+            .upper-inset {
+                @include flexCenter(70%, 94%, 50px, space-around, center, row);
+                box-shadow: inset 2px 2px 4px #c7c7c7, inset -2px -2px 2px #ffffff;
+
+                div {
+                    border-radius: 100%;
+                    width: 22px;
+                    height: 22px;
+                    box-shadow: 2px 2px 3px #b5b5b5, -2px -2px 3px #ffffff;
+                }
+            }
+        }
+    }
+
+
+    .middle-container {
+        @include flexCenter(75%, 93%, 10px, center, center, row);
+        box-shadow: 3px 3px 5px #adadad, -3px -3px 3px #ffffff;
+
+        .mid-outset {
+            @include flexCenter(97%, 95%, 10px, center, center, row);
+            background-image: url('https://media.giphy.com/media/csC81vIxkW6fm35G7q/source.gif');
+            background-position: center;
+            background-size: cover;
+            box-shadow: inset 4px 4px 10px #1f1f1f66, inset -4px -4px 8px #dcdcdcb8;
+
+            .mid-inset {
+                @include flexCenter(60%, 75%, 20px, center, center, row);
+                background: #ecf0f3;
+                box-shadow: -7px 8px 9px #00000073, 0px 0px 3px #fdfeff;
+
+                .login-container {
+                    @include flexCenter(97.3%, 96%, 18px, center, center, column);
+                    box-shadow: inset 2px 2px 3px #afafaf, inset -2px -2px 3px #fdfeff;
+        
+                    .title-container {
+                        height: 20%;
+                        width: 80%;
+        
+                        h1 {
+                            font-size: 50px;
+                            background: #b7b5b5;
+                            color: transparent;
+                            text-shadow: 2px 2px 3px #ffffff;
+                            -webkit-background-clip: text;
+                        }
+                    }
+        
+                    .user-input-container {
+                        @include flexCenter(70%, 90%, 20px, space-evenly, center, column);
+                        box-shadow: 3px 3px 5px #d0d0d0, -3px -3px 3px #fdfeff;
+
+                        .user-input {
+                            height: 10%;
+                            width: 80%;
+                            padding: 5px;
+                            border-radius: 20px;
+                            box-shadow: inset 2px 2px 3px #bbbaba, inset -2px -2px 3px #ffffff;
+
+                            .user-text {
+                                height: 100%;
+                                width: 100%;
+                                border-radius: 20px;
+                                border: none;
+
+                                &::placeholder {
+                                    color: rgb(165, 164, 164);
+                                }
+                            }
+                        }
+                        .ui-login-i {
+                            padding: 0px;
+                            height: 15%;
+                            .ui-login-t {
+                                background: none;
+                                font-family: inherit;
+                                padding-left: 10%;
+                                &:focus {
+                                    outline: none !important;
+                                    border: 2px solid rgb(46, 194, 145);
+                                    color: rgb(38, 153, 115);
+                                }
+                            }
+                        }
+                        .login-link {
+                            text-decoration: none;
+                            color: white;
+                            height: 15%;
+                            width: 85%;
+                            .login-button {
+                                @include flexCenter(100%, 100%, 20px, center, center, row);
+                                background: rgb(46, 194, 145);
+                                box-shadow: 3px 4px 8px #a9a9a9, -1px 1px 3px #fdfeff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom-container {
+        @include flexCenter(15%, 85%, none, center, center, column);
+
+        .useless-bars {
+            height: 15%;
+            width: 90%;
+            margin: 2% 0% 2% 0%;
+            border-radius: 20px;
+            box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+        }
+    }
+}

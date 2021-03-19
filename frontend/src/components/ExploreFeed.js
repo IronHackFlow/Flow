@@ -198,19 +198,21 @@ let profilePicRef=useRef()
       >
         <div className="last-div"></div>
         <div className="text-container">
-          <h5 className="ud-text udt-1">
+          <p className="ud-text udt-1">
             <span style={{ color: "#ec6aa0" }}>
               {eachSong.songUser.userName}
             </span>{" "}
-          </h5>
-          <h6 className="ud-text udt-2">{eachSong.songName}</h6>
-          <h6 className="ud-text udt-3">
+          </p>
+          <p className="ud-text udt-2">
+            {eachSong.songName}
+          </p>
+          <p className="ud-text udt-3">
             {eachSong.caption ? (
               <p>{eachSong.caption}</p>
             ) : (
               <p>NO CAPTION FOR THIS FLOW</p>
             )}
-          </h6>
+          </p>
         </div>
       </li>
     );
@@ -276,7 +278,10 @@ let profilePicRef=useRef()
                 <img className="social-icons follow" src={follow}></img>
               </div>
               <div className="individual-btn">
-                <img className="social-icons heart" onClick={(() => likePost())} src={heart2}></img><p>{songLikez}</p>
+                <img className="social-icons heart" onClick={(() => likePost())} src={heart2}></img>
+                <div className="likes-number-container">
+                    <p>{songLikez}</p>
+                </div>
               </div>
               <div className="individual-btn" onClick={popUpSearch}>
                 <img className="social-icons heart" src={search}></img>
@@ -295,16 +300,9 @@ let profilePicRef=useRef()
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  {userViewed._id ? (
-                    <Link to="/recordingBooth">
-                      <img className="button-icons bi-record" src={mic}></img>
-                    </Link>
-                  ) : (
-                    <Link to="/auth">
-                      <img className="button-icons bi-record" src={mic}></img>
-                    </Link>
-                  )}
-                  {/* <img className="button-icons bi-record" src={mic}></img> */}
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic}></img>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -330,16 +328,9 @@ let profilePicRef=useRef()
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  {user._id ? (
-                    <Link to="/profile">
-                      <img className="button-icons bi-profile-social" src={avatar3}></img>
-                    </Link>
-                  ) : (
-                    <Link to="/auth">
-                      <img className="button-icons bi-profile-social" src={avatar3}></img>
-                    </Link>
-                  )}
-                  {/* <img className="button-icons" src={avatar3}></img> */}
+                  <Link to={user._id ? ("/profile") : ("/auth")}>
+                    <img className="button-icons bi-profile-social" src={avatar3}></img>
+                  </Link>
                 </div>
               </div>
             </div>

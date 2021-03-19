@@ -99,22 +99,29 @@ function Profile(props) {
     return thisUserSongs.map((eachSong) => {
       console.log(eachSong.songLyricsStr)
       return (
-        <li className="your-track-container">
-          <div className="lyrics-play">
-            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="lyrics-outter-container">
-              <div className="nav-buttons-inset play-ur-song">
-                <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)}></img>
-              </div>
-            </div>
-            <div className="lyrics-songname-cont">
-              <h4>{eachSong.songName}</h4>
+      <li className="your-track-container">
+        <div className="lyrics-play">
+
+          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+          <div className="lyrics-songname-cont">
+            <h4>{eachSong.songName}</h4>
+          </div>
+          <div className="lyrics-outter-container">
+            <div className="nav-buttons-inset play-ur-song">
+              <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)}></img>
             </div>
           </div>
-          <div className="lyrics-container">
+
+
+        </div>
+
+        <div className="lyrics-container">
+          <div className="para-container">
             {showLyrics(eachSong.songLyricsStr)}
           </div>
-        </li>
+        </div>
+        
+      </li>
       )
     })
   }
@@ -221,13 +228,9 @@ function Profile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-
-            { userViewed._id ? (<Link to="/recordingBooth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) }
-              {/* <img className="button-icons bi-record" src={mic}></img> */}
+              <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                <img className="button-icons bi-record" src={mic}></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -235,8 +238,9 @@ function Profile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-            <Link to="/explore-feed">
-                  <img className="button-icons bi-explore" src={explore} alt="explore"></img></Link>
+              <Link to="/explore-feed">
+                <img className="button-icons bi-explore-profile" src={explore} alt="explore"></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -244,12 +248,9 @@ function Profile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-            { user._id ? (<Link to="/social-feed">
-                              <img className="button-icons bi-social-p" src={social}></img>
-                          </Link>) : (<Link to="/auth">
-                              <img className="button-icons bi-social-p" src={social}></img>
-                          </Link>)}
-              {/* <img className="button-icons" src={social}></img> */}
+              <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                <img className="button-icons bi-social-p" src={social}></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -257,8 +258,7 @@ function Profile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-            
-              <img className="button-icons bi-profile" src={avatar3}></img>
+              <img className="button-icons bi-avatar-profile" src={avatar3}></img>
             </div>
           </div>
         </div>
@@ -269,38 +269,3 @@ function Profile(props) {
 }
 
 export default Profile;
-
-      // {/* <h3>[database call: email]</h3>
-
-      //       {showPosts()} */}
-      //       <header className="profile-header">
-
-      //       <div className="header-bio">
-      //         {showProfileDetails()}
-    
-      //         {user.id === userViewed.id ? (
-      //           <Link to="/editProfile">
-      //             <button>Edit profile</button>
-      //           </Link>
-      //         ) : null}
-      //         {/* <Link  to="/editProfile">
-      //         <button>Edit profile</button></Link> */}
-      //         {user.id && userViewed.id && user.id === userViewed.id ? (
-      //           <button onClick={logout}>Logout</button>
-      //         ) : null}
-    
-      //         <button onClick={logout}>Logout</button>
-      //       </div>
-      //       <div>
-      //       {/* NEED TO ADD TEST TO MAKE SURE USER AND USERVIEWED ARE NOT SAME TO DETERMINE IF FOLLOW BUTTON SHOULD BE DISPLAYED */}
-      //       <button onClick={followUser}>Follow This User</button>
-      //       </div>
-      //       <img
-      //         className="profile-header-propic"
-      //         // src="https://assets.capitalxtra.com/2017/47/nicki-minaj-1511527250-view-0.jpg"
-      //         src={thisUser.picture}
-      //         alt=""
-      //       />
-      //     </header>
-      //     <div className="profile-post-feed">{showSongs()}</div>
-    

@@ -1,218 +1,234 @@
+@keyframes insetButtons {
+  from {
+    box-shadow: none
+  }
+  to {
+    box-shadow: inset 5px 5px 5px #505050, 
+                inset -2px -2px 5px #9fa2a4;
+  }
+}
+@keyframes outsetButtons {
+  from {
+    box-shadow: none
+  }
+  to {
+    box-shadow: 3px 3px 5px #abacad, 
+               -3px -3px 4px #ffffff;
+  }
+}
+@keyframes outsetButtonsException {
+  from {
+    box-shadow: none
+  }
+  to {
+    box-shadow: inset 2px 2px 3px #abacad, inset -2px -2px 3px #ffffff;
+  }
+}
+
+@keyframes iconButtons {
+  from {
+    box-shadow: none
+  }
+  to {
+    box-shadow: 1px 1px 4px #353535, 
+                -1px -1px 3px #bbbcbd;
+  }
+}
+@keyframes buttonOpacity {
+  0% {
+    --btnOpacity: 0;
+
+  }
+  25% {
+    --btnOpacity: 0.25;
+  }
+  50% {
+    --btnOpacity: 0.5;
+  }
+  75% {
+    --btnOpacity: 0.75
+  }
+  100% {
+    --btnOpacity: 1;
+
+  }
+}
+@keyframes flowColor {
+  0% {
+    --routedi2bg: #ecf0f3;
+  }
+  50% {
+    --routedi2bg: #7bc5a6;
+  }
+  100% {
+    --routedi2bg: #58c397;
+  }
+}
 .Home {
     height: 100%;
     width: 100%;
+    position: absolute;
   }
 /*------------------------------HOME HOME HOME HOME HOME HOME HOME HOME PAGE----------------------------*/
 .img-panel-container {
-    height: 60%;
-    background-image: url('./images/hero-image-1.png');
-    background-size: cover;
-    background-position-x: center;
-}
-  .vp-home {
+  height: 60%;
+
+  ul {
     height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    background-size: 100% 100%;
+
+    .vp-home {
+      @include flexCenter(100%, 100%, 0px, center, stretch, row);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      background-size: 100% 100%;
+
+      .test-transparent {
+        @include flexCenter(84.9%, 84.9%, 45px, flex-start, center, column);
+        margin: auto;
+        box-shadow: inset 3px 3px 2px #0000007a, inset -2px -2px 5px #ffffff61;
+        
+        h5 {
+          position: relative;
+          color: white;
+          bottom: -85%;
+          left: 25%;
+        }
+      }
+      
+    }
   }
-  .test-transparent {
-    height: 84.9%;
-    width: 84.9%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 45px;
-    box-shadow: inset 3px 3px 2px #0000007a, inset -2px -2px 5px #ffffff61;
-  }
-  .test-transparent h5 {
-    position: relative;
-    color: white;
-    bottom: -85%;
-    left: 25%;
-  }
-  .bottom-directories {
+}
+
+.bottom-directories {
     height: 40%;
     background: #686a6b;
-    /* border-top: 1px solid #686a6b; */
     box-shadow: inset -1px 3px 5px 0px #8c8c8c;
     font-family: 'Major Mono Display', monospace;
     color: white;
-  }
-  .bm-dir-container {
-    height: 33%;
-    display: flex;
-  }
-  .dir-route {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .dir-icon {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .bottom-directories h4 {
-    opacity: var(--btnOpacity);
-    animation: buttonOpacity .3s .8s linear forwards;
-  }
-  .route-outset, .route-inset, .route-double-inset, .icon-outset, .icon-inset, .icon-double-inset {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-  }
-  .home-record, .home-heart, .home-avatar {
-    font-size: .7em;
-    opacity: var(--btnOpacity);
-  }
-  @keyframes insetButtons {
-    from {
-      box-shadow: none
+
+    .bm-dir-container {
+      height: 33%;
+      display: flex;
+
+      .dir-icon {
+        @include flexCenter(100%, 30%, 0px, center, center, row);
+
+        .icon-outset {
+          @include flexCenter(80%, 80%, 50px, center, center, row);
+
+          .icon-inset {
+            @include flexCenter(75%, 75%, 50px, center, center, row);
+
+            .icon-double-inset {
+              @include flexCenter(60%, 60%, 50px, center, center, row);
+
+            }
+          }
+        }
+      }
+
+      .dir-route {
+        @include flexCenter(100%, 70%, 0px, center, center, row);
+
+        .route-outset {
+          @include flexCenter(85%, 90%, 50px, center, center, row);
+
+          .route-inset {
+            @include flexCenter(70%, 85%, 50px, center, center, row);
+
+            .route-double-inset {
+              @include flexCenter(55%, 80%, 50px, center, center, row);
+
+              a {
+                text-decoration: none;
+                color: white;
+
+                h4 {
+                  opacity: var(--btnOpacity);
+                  animation: buttonOpacity .3s .8s linear forwards;
+                }
+              }
+            }
+          }
+        }
+      }
     }
-    to {
-      box-shadow: inset 5px 5px 5px #505050, 
-                  inset -2px -2px 5px #9fa2a4;
-    }
-  }
-  @keyframes outsetButtons {
-    from {
-      box-shadow: none
-    }
-    to {
-      box-shadow: 3px 3px 5px #abacad, 
-                 -3px -3px 4px #ffffff;
-    }
-  }
-  @keyframes outsetButtonsException {
-    from {
-      box-shadow: none
-    }
-    to {
-      box-shadow: inset 2px 2px 3px #abacad, inset -2px -2px 3px #ffffff;
-    }
-  }
-  
-  @keyframes iconButtons {
-    from {
-      box-shadow: none
-    }
-    to {
-      box-shadow: 1px 1px 4px #353535, 
-                  -1px -1px 3px #bbbcbd;
-    }
-  }
-  @keyframes buttonOpacity {
-    0% {
-      --btnOpacity: 0;
-  
-    }
-    25% {
-      --btnOpacity: 0.25;
-    }
-    50% {
-      --btnOpacity: 0.5;
-    }
-    75% {
-      --btnOpacity: 0.75
-    }
-    100% {
-      --btnOpacity: 1;
-  
-    }
-  }
-  @keyframes flowColor {
-    0% {
-      --routedi2bg: #ecf0f3;
-    }
-    50% {
-      --routedi2bg: #7bc5a6;
-    }
-    100% {
-      --routedi2bg: #58c397;
-    }
-  }
-  .dr-1 .route-outset,
-  .dr-3 .route-outset {
-    height: 85%;
-    width: 90%;
-    animation: insetButtons .3s linear forwards;
-  }
-  .dr-1 .route-inset,
-  .dr-3 .route-inset {
-    height: 70%;
-    width: 85%;
-    animation: insetButtons .3s .3s linear forwards;
-  }
-  .dr-1 .route-double-inset,
-  .dr-3 .route-double-inset  {
-    height: 55%;
-    width: 80%;
-    animation: insetButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
-  }
-  .bdc-1 {
-    border-bottom: 1px solid #686a6b;
-    box-shadow: inset 1px -4px 5px #585858;
-  }
-  .bdc-2 {
-    background: #ecf0f3;
-  }
-  .bdc-3 {
-    box-shadow: inset -1px 5px 5px 0px #8c8c8c;
-  }
-  .route-o2 {
-    height: 85%;
-    width: 90%;
-    animation: outsetButtons .3s linear forwards;
-  }
-  .route-i2 {
-    height: 70%;
-    width: 85%;
-    animation: outsetButtons .3s .3s linear forwards;
-  }
-  .route-di2 {
-    height: 55%;
-    width: 80%;
-    background: var(--routedi2bg);
-    animation: outsetButtons .3s .6s linear forwards, flowColor 1s .5s linear forwards;
-  }
-  
-  .di-1 .icon-outset,
-  .di-3 .icon-outset {
-    height: 70%;
-    width: 70%;
-    animation: insetButtons .3s linear forwards;
-  }
-  .di-1 .icon-inset,
-  .di-3 .icon-inset {
-    height: 75%;
-    width: 75%;
-    animation: insetButtons .3s .3s linear forwards;
-  }
-  .di-1 .icon-double-inset,
-  .di-3 .icon-double-inset  {
-    height: 60%;
-    width: 60%;
-    animation: iconButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
-  }
-  .io-2 {
-    height: 70%;
-    width: 70%;
-    animation: outsetButtons .3s linear forwards;
-  }
-  .ii-2 {
-    height: 75%;
-    width: 75%;
-    animation: outsetButtons .3s .3s linear forwards;
-  }
-  .idi-2 {
-    height: 60%;
-    width: 60%;
-    animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
-  }
+}
+
+
+.home-record, .home-heart, .home-avatar {
+  font-size: .7em;
+  opacity: var(--btnOpacity);
+}
+.dr-1 .route-outset,
+.dr-3 .route-outset {
+  animation: insetButtons .3s linear forwards;
+}
+.dr-1 .route-inset,
+.dr-3 .route-inset {
+  animation: insetButtons .3s .3s linear forwards;
+}
+.dr-1 .route-double-inset,
+.dr-3 .route-double-inset  {
+  animation: insetButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+}
+.bdc-1 {
+  border-bottom: 1px solid #686a6b;
+  box-shadow: inset 1px -4px 5px #585858;
+}
+.bdc-2 {
+  background: #ecf0f3;
+}
+.bdc-3 {
+  border-bottom: 1px solid #686a6b;
+  box-shadow: inset -1px 5px 5px 0px #8c8c8c;
+}
+.route-o2 {
+  animation: outsetButtons .3s linear forwards;
+}
+.route-i2 {
+  animation: outsetButtons .3s .3s linear forwards;
+}
+.route-di2 {
+  background: var(--routedi2bg);
+  animation: outsetButtons .3s .6s linear forwards, flowColor 1s .5s linear forwards;
+}
+.di-1 .icon-outset,
+.di-3 .icon-outset {
+  animation: insetButtons .3s linear forwards;
+}
+.di-1 .icon-inset,
+.di-3 .icon-inset {
+  animation: insetButtons .3s .3s linear forwards;
+}
+.di-1 .icon-double-inset,
+.di-3 .icon-double-inset  {
+  animation: iconButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+}
+.io-2 {
+  animation: outsetButtons .3s linear forwards;
+}
+.ii-2 {
+  animation: outsetButtons .3s .3s linear forwards;
+}
+.idi-2 {
+  animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+}
+
+.fade-appear,
+.fade-enter {
+  left: 100vw;
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  left: 0;
+  transition: left 200ms linear
+}
+.fade-exit {
+  right: 100vw;
+}
+.fade-exit.fade-exit-active {
+  right: 0;
+  transition: left 200ms linear;
+}

@@ -56,7 +56,9 @@ function Home(props) {
                         <div className="route-outset">
                             <div className="route-inset">
                                 <div className="route-double-inset">
-                                    <h4>Social Feed</h4>
+                                    <Link to="/social-feed">
+                                        <h4>Social Feed</h4>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -67,11 +69,9 @@ function Home(props) {
                         <div className="icon-outset io-2">
                             <div className="icon-inset ii-2">
                                 <div className="icon-double-inset idi-2">
-                                { userViewed._id ? (<Link to="/recordingBooth">
+                                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
                                         <img className="button-icons home-record" src={mic}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons home-record" src={mic}></img>
-                                    </Link>) }
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,9 @@ function Home(props) {
                         <div className="route-outset route-o2">
                             <div className="route-inset route-i2">
                                 <div className="route-double-inset route-di2">
-                                    <h4>Flow</h4>
+                                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                                        <h4>Flow</h4>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +93,9 @@ function Home(props) {
                         <div className="icon-outset io-3">
                             <div className="icon-inset ii-3">
                                 <div className="icon-double-inset idi-3">
-                                { user._id ? (<Link to="/profile">
+                                    <Link to={user._id ? ("/profile") : ("/auth")}>
                                         <img className="button-icons home-avatar" src={avatar3}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons home-avatar" src={avatar3}></img>
-                                    </Link>)}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,9 @@ function Home(props) {
                         <div className="route-outset">
                             <div className="route-inset">
                                 <div className="route-double-inset">
-                                    <h4>Profile</h4>
+                                    <Link to={user._id ? ("/profile") : ("/auth")}>
+                                        <h4>Profile</h4>                                    
+                                    </Link>
                                 </div>
                             </div>
                         </div>

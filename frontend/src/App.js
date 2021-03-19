@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
-import './App.css'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './styles/style.css'
-import './otherstyles.css'
 import actions from './api'
 import Home from './components/Home'
 import AddPost from './components/AddPost'
@@ -115,26 +114,34 @@ function App() {
         <div></div>
         <div></div>
       </div>
+
       <Notification/>
-      <Switch>
-        <Route exact path="/" render={(props) => <Home {...props} />} />
-        <Route exact path="/all-posts" render={(props) => <AllPosts {...props} />} />
-        <Route exact path="/add-posts" render={(props) => <AddPost {...props} />} />
-        <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
-        <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
-        <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
-        <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
-        <Route exact path="/comments" render={(props) => <Comments {...props} />} />
-        <Route exact path="/likes" render={(props) => <Likes {...props} />} />
-        <Route exact path="/uploadFile" render={(props) => <UploadFile {...props} kind='song' />} />
-        <Route exact path="/uploadProfilePic" render={(props) => <UploadFile {...props} kind='profilePic' />} />
-        <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
-        <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
-        <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
-        <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
-        <Route exact path="/explore-feed" render={(props) => <ExploreFeed {...props} />} />
-        <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-      </Switch>
+
+      <Route render={({location}) => (
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            timeout={450}
+            classNames="fade"
+            >
+            <Switch location={location}>
+              <Route exact path="/" render={(props) => <Home {...props} />} />
+              <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
+              <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
+              <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
+              <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
+              <Route exact path="/uploadFile" render={(props) => <UploadFile {...props} kind='song' />} />
+              <Route exact path="/uploadProfilePic" render={(props) => <UploadFile {...props} kind='profilePic' />} />
+              <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
+              <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
+              <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
+              <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
+              <Route exact path="/explore-feed" render={(props) => <ExploreFeed {...props} />} />
+              <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )} />
     </div>
     </TheContext.Provider>
   );
