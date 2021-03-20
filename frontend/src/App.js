@@ -117,14 +117,14 @@ function App() {
 
       <Notification/>
 
-      <Route render={({location}) => (
+      {/* <Route render={({location}) => (
         <TransitionGroup>
           <CSSTransition
             key={location.key}
             timeout={450}
             classNames="fade"
-            >
-            <Switch location={location}>
+            > */}
+            <Switch>
               <Route exact path="/" render={(props) => <Home {...props} />} />
               <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
               <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
@@ -139,9 +139,9 @@ function App() {
               <Route exact path="/explore-feed" render={(props) => <ExploreFeed {...props} />} />
               <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
             </Switch>
-          </CSSTransition>
+          {/* </CSSTransition>
         </TransitionGroup>
-      )} />
+      )} /> */}
     </div>
     </TheContext.Provider>
   );

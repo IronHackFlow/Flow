@@ -18,14 +18,41 @@ $lightgrayBg: #ecf0f3;
   margin: 0;
   padding: 0;
 }
-html, body, #root {
-  height: 100vh;
-  width: 100vw;
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  margin: auto;
+  max-height: 812px;
+  min-height: 730px;
+  width: 375px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+body, 
+#root, 
+.App, 
+.Home, 
+.TestAudio, 
+.SocialFeed, 
+.Profile, 
+.EditProfileScreen, 
+.LogIn {
+  height: 100%;
+  width: 375px;
   font-family: 'Poppins', sans-serif;
 }
+
+footer, 
+.nav-buttons,
+.nb-profile {
+  width: 375px;
+}
+
 .App {
-  height: 100%;
-  width: 100%;
+  // height: 100%;
+  // width: 100%;
   margin-top: -5px;
   text-align: center;
 }

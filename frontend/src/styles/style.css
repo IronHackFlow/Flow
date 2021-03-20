@@ -5,15 +5,42 @@
   padding: 0;
 }
 
-html, body, #root {
-  height: 100vh;
-  width: 100vw;
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  margin: auto;
+  max-height: 812px;
+  min-height: 730px;
+  width: 375px;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body,
+#root,
+.App,
+.Home,
+.TestAudio,
+.SocialFeed,
+.Profile,
+.EditProfileScreen,
+.LogIn {
+  height: 100%;
+  width: 375px;
   font-family: 'Poppins', sans-serif;
 }
 
+footer,
+.nav-buttons,
+.nb-profile {
+  width: 375px;
+}
+
 .App {
-  height: 100%;
-  width: 100%;
   margin-top: -5px;
   text-align: center;
 }
@@ -254,7 +281,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 /* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
 footer {
   height: 20%;
-  width: 100%;
+  width: 375px;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -413,7 +440,6 @@ footer .social-buttons .social-list .individual-btn .individual-profile-pic .pro
 }
 
 footer .nav-buttons {
-  width: 100%;
   height: 55%;
   background: #ecf0f3;
   border-top: 1px solid #a9a9a9;
@@ -693,8 +719,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .Home {
-  height: 100%;
-  width: 100%;
   position: absolute;
 }
 
@@ -1049,8 +1073,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .TestAudio {
-  height: 97.2%;
-  width: 100%;
   position: absolute;
 }
 
@@ -1617,8 +1639,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .SocialFeed {
-  height: 100%;
-  width: 100%;
   background: #000000eb;
   position: absolute;
 }
@@ -2364,8 +2384,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .Profile {
-  height: 100%;
-  width: 100%;
   position: absolute;
 }
 
@@ -3156,7 +3174,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .nb-profile {
   height: 11%;
-  width: 100%;
   position: fixed;
   bottom: 0;
   border: none;
@@ -3254,8 +3271,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .LogIn {
-  height: 100%;
-  width: 100%;
   z-index: 100;
   position: absolute;
 }
@@ -3577,8 +3592,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .EditProfileScreen {
-  height: 100%;
-  width: 100%;
   position: absolute;
 }
 
