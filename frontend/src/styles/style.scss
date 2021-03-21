@@ -23,15 +23,17 @@ $lightgrayBg: #ecf0f3;
 }
 
 html {
-  margin: auto;
-  max-height: 812px;
-  min-height: 730px;
-  width: 375px;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-body, 
-#root, 
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+}
 .App, 
 .Home, 
 .TestAudio, 
@@ -40,14 +42,44 @@ body,
 .EditProfileScreen, 
 .LogIn {
   height: 100%;
-  width: 375px;
-  font-family: 'Poppins', sans-serif;
+  width: 100%;
+
 }
 
 footer, 
 .nav-buttons,
 .nb-profile {
-  width: 375px;
+  width: 100%;
+}  
+
+@media screen and (min-width: 1000px) {
+  html {
+    margin: auto;
+    max-height: 812px;
+    min-height: 730px;
+    width: 375px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  body, 
+  #root, 
+  .App, 
+  .Home, 
+  .TestAudio, 
+  .SocialFeed, 
+  .Profile, 
+  .EditProfileScreen, 
+  .LogIn {
+    height: 100%;
+    width: 375px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  footer, 
+  .nav-buttons,
+  .nb-profile {
+    width: 375px;
+  }  
 }
 
 .App {

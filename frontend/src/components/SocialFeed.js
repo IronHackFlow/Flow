@@ -309,11 +309,11 @@ let profilePicRef=useRef()
 
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                {/* <div className="nav-buttons-inset"> */}
-                  <Link to="/explore-feed" onClick={linkBtnAnim} className="nav-buttons-inset">
+                <div className="nav-buttons-inset">
+                  <Link to="/explore-feed" onClick={linkBtnAnim}>
                     <img className="button-icons bi-explore" src={explore} alt="explore"></img>
                   </Link>
-                {/* </div> */}
+                </div>
               </div>
             </div>
 
@@ -423,20 +423,17 @@ let profilePicRef=useRef()
               </form>
             </div>
           </div>
-          </div>
+        </div>
 
         <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
           <div className="comments-container">
             <div className="comment-list-container">
-              
-
                {renderEachComment()}
-
-             
             </div>
           </div>
         </div>
       </div>
+
       <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
         <div className="inner-bar"></div>
       </div>
@@ -454,7 +451,8 @@ let profilePicRef=useRef()
           <div className="video-details-container">
             <div className="transparent-test">
               <div className="user-details-container">
-                <div className="user-details-inset"></div>
+                <div className="user-details-inset">
+                </div>
               </div>
 
               <div className="user-profile-image">

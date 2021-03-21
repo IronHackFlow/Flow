@@ -1,6 +1,10 @@
 /* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
 footer {
-    @include flexCenter(20%, 375px, 0px, space-between, center, column);
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    // @include flexCenter(20%, 375px, 0px, space-between, center, column);
     position: fixed;
     bottom: 0;
     background: linear-gradient(90deg, #ec66b7, #40bdac);

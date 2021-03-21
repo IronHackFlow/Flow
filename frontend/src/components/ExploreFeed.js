@@ -436,11 +436,11 @@ let profilePicRef=useRef()
             </div>
           </div>
         </div>
-        <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
-          <div className="inner-bar"></div>
-        </div>
       </div>
+      <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
+        <div className="inner-bar"></div>
       </div>
+    </div>
     
 
     )

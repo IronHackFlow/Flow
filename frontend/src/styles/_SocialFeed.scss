@@ -37,10 +37,10 @@
                 box-shadow: 2px 2px 3px #00000099, -2px -2px 2px #ffffff7a;
             }
             .text-container {
-                @include flexCenter(9.5%, 53%, 0px, flex-start, stretch, column);
+                @include flexCenter(10%, 53%, 0px, flex-start, stretch, column);
                 overflow-x: hidden;
                 position: relative;
-                bottom: -11.5%;
+                bottom: -9%;
                 left: -7%;
 
                 // .ud-text {

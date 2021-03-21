@@ -114,7 +114,7 @@
         @include flexCenter(100%, 30%, 0px, center, center, row);
 
         .icon-outset {
-          @include flexCenter(80%, 80%, 50px, center, center, row);
+          @include flexCenter(80px, 80px, 50px, center, center, row);
 
           .icon-inset {
             @include flexCenter(75%, 75%, 50px, center, center, row);
