@@ -5,7 +5,7 @@
 }
 
 .profile-header {
-    @include flexCenter(50%, 100%, none, space-evenly, center, column);
+    @include flexCenter(49.4%, 100%, none, space-evenly, center, column);
     background-color: #686a6b;
     border-bottom: 5px solid #686a6b;
     box-shadow: inset -1px -3px 5px 0px #8e8b8b;
@@ -260,8 +260,8 @@
 .nb-profile {
     height: 11%;
     // width: 100%;
-    position: fixed;
-    bottom: 0;
+    // position: fixed;
+    // bottom: 0;
     border: none;
     background: $lightgrayBg;
     box-shadow: inset 1px 5px 4px #ffffff;

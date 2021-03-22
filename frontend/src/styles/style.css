@@ -9,7 +9,7 @@
   display: none;
 }
 
-html {
+html, body, #root, .App {
   height: 100vh;
   width: 100vw;
   font-family: 'Poppins', sans-serif;
@@ -19,35 +19,33 @@ html {
   /* Firefox */
 }
 
-body,
-#root {
-  height: 100vh;
-  width: 100vw;
-}
-
-.App,
 .Home,
 .TestAudio,
 .SocialFeed,
 .Profile,
 .EditProfileScreen,
 .LogIn {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 footer,
 .nav-buttons,
 .nb-profile {
-  width: 100%;
+  width: 100vw;
 }
 
 @media screen and (min-width: 1000px) {
   html {
     margin: auto;
-    max-height: 812px;
+    height: 812px;
     min-height: 730px;
     width: 375px;
+    font-family: 'Poppins', sans-serif;
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
@@ -62,9 +60,9 @@ footer,
   .Profile,
   .EditProfileScreen,
   .LogIn {
-    height: 100%;
+    height: 812px;
+    min-height: 730px;
     width: 375px;
-    font-family: 'Poppins', sans-serif;
   }
   footer,
   .nav-buttons,
@@ -311,7 +309,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   color: var(--link-color-1);
 }
 
-/* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
 footer {
   height: 20%;
   display: -webkit-box;
@@ -324,8 +321,6 @@ footer {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: fixed;
-  bottom: 0;
   background: -webkit-gradient(linear, left top, right top, from(#ec66b7), to(#40bdac));
   background: linear-gradient(90deg, #ec66b7, #40bdac);
 }
@@ -350,8 +345,8 @@ footer .social-buttons {
   background: #686a6b;
   border-top: 1px solid #adadad;
   border-bottom: 1px solid #616161;
-  -webkit-box-shadow: inset 0px 3px 5px #bfbfbf, inset 1px -3px 5px #525151;
-          box-shadow: inset 0px 3px 5px #bfbfbf, inset 1px -3px 5px #525151;
+  -webkit-box-shadow: inset 0px 3px 5px #a0a0a0,  inset 1px -3px 5px #525151;
+          box-shadow: inset 0px 3px 5px #a0a0a0,  inset 1px -3px 5px #525151;
 }
 
 footer .social-buttons .social-list {
@@ -788,9 +783,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -804,10 +799,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .img-panel-container ul .vp-home .test-transparent h5 {
-  position: relative;
   color: white;
-  bottom: -85%;
-  left: 25%;
 }
 
 .bottom-directories {
@@ -1186,7 +1178,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 /* --------------------- Controls panel --------------------- */
 .nav-buttons-play {
-  height: 60%;
+  height: 57.3%;
   padding-top: 10px;
   background: #ecf0f3;
   border-top: 5px solid #ecf0f3;
@@ -1739,7 +1731,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           flex-direction: column;
   overflow-x: hidden;
   position: relative;
-  bottom: -9%;
+  bottom: -11.5%;
   left: -7%;
 }
 
@@ -1954,9 +1946,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1991,7 +1983,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 2% 0% 1% 0%;
   background: #ecf0f3;
   -webkit-box-shadow: inset 2px 2px 4px #cccccc, inset -2px -2px 4px #ffffff;
           box-shadow: inset 2px 2px 4px #cccccc, inset -2px -2px 4px #ffffff;
@@ -2250,7 +2241,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 .comment-pop-out .bottom-bar {
   height: 4%;
   width: 96%;
-  margin: 1% 0% 2% 0%;
+  margin: 2% 0% 0% 0%;
   border-radius: 20px;
   background: #ecf0f3;
   -webkit-box-shadow: inset 2px 2px 3px #bdc0c2, inset -2px -2px 3px #ffffff;
@@ -2416,7 +2407,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .profile-header {
-  height: 50%;
+  height: 49.4%;
   width: 100%;
   border-radius: none;
   display: -webkit-box;
@@ -3202,8 +3193,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .nb-profile {
   height: 11%;
-  position: fixed;
-  bottom: 0;
   border: none;
   background: #ecf0f3;
   -webkit-box-shadow: inset 1px 5px 4px #ffffff;

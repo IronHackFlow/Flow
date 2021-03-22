@@ -76,7 +76,9 @@ function Search(props) {
           <div className="input-inset">
             <form className="social-comment-form">
               <input onChange={listUsers}
-                    className="social-comment-input" 
+                    className="social-comment-input"
+                    ref={props.dumbSearch}
+                    style={{opacity: '0'}}
                     type='text' 
                     placeholder='Search' 
                     ></input>

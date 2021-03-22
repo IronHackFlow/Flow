@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './styles/style.css'
@@ -59,7 +59,7 @@ function App() {
     }    
   }
   return (
-    <TheContext.Provider value={{user, setUser, userViewed, setUserViewed}}>
+    <TheContext.Provider value={{user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed}}>
     <div className="App">
       {/* <h4>{user.email}</h4> */}
       <nav className="navigation">

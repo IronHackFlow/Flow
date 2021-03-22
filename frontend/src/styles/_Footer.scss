@@ -1,12 +1,11 @@
-/* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
 footer {
     height: 20%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     // @include flexCenter(20%, 375px, 0px, space-between, center, column);
-    position: fixed;
-    bottom: 0;
+    // position: fixed;
+    // bottom: 0;
     background: linear-gradient(90deg, #ec66b7, #40bdac);
 
     .social-buttons {
@@ -14,7 +13,8 @@ footer {
         background: $charcoalBg;
         border-top: 1px solid #adadad;
         border-bottom: 1px solid #616161;
-        box-shadow: inset 0px 3px 5px #bfbfbf, inset 1px -3px 5px #525151;
+        box-shadow: inset 0px 3px 5px #a0a0a0, 
+                    inset 1px -3px 5px #525151;
 
         .social-list {
             @include flexCenter(100%, 100%, 0px, space-between, center, row);
@@ -99,8 +99,6 @@ footer {
     }
 }
 /* ------------------------ Profile page fixed footer --------------------------- */
-
-
 
   .profile-container {
     display: flex;

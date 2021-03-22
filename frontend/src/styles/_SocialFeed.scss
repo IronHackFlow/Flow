@@ -40,7 +40,7 @@
                 @include flexCenter(10%, 53%, 0px, flex-start, stretch, column);
                 overflow-x: hidden;
                 position: relative;
-                bottom: -9%;
+                bottom: -11.5%;
                 left: -7%;
 
                 // .ud-text {
@@ -143,11 +143,12 @@
 /* ------------------------------ Comment Pop Up menu ------------------------------------------*/
 .comment-pop-out {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 0px;
     width: 100%;
+    // z-index: -1;
     position: absolute;
     bottom: 20%;
     background: #ecf0f3;
@@ -156,7 +157,7 @@
 
     .inner-com {
         @include flexCenter(90%, 96%, 25px, flex-start, center, column);
-        margin: 2% 0% 1% 0%;
+        // margin: 2% 0% 1% 0%;
         background: #ecf0f3;
         box-shadow: inset 2px 2px 4px #cccccc, inset -2px -2px 4px #ffffff;
 
@@ -199,6 +200,7 @@
                                 border-radius: 20px;
                             }
                         }
+
                     }
                 }
             }
@@ -257,7 +259,7 @@
     .bottom-bar {
         height: 4%;
         width: 96%;
-        margin: 1% 0% 2% 0%;
+        margin: 2% 0% 0% 0%;
         border-radius: 20px;
         background: #ecf0f3;
         box-shadow: inset 2px 2px 3px #bdc0c2, inset -2px -2px 3px #ffffff;

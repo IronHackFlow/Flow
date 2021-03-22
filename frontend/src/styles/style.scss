@@ -22,42 +22,39 @@ $lightgrayBg: #ecf0f3;
   display: none;
 }
 
-html {
+html, body, #root, .App {
   height: 100vh;
   width: 100vw;
   font-family: 'Poppins', sans-serif;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-body,
-#root {
-  height: 100vh;
-  width: 100vw;
-}
-.App, 
+
 .Home, 
 .TestAudio, 
 .SocialFeed, 
 .Profile, 
 .EditProfileScreen, 
 .LogIn {
-  height: 100%;
-  width: 100%;
-
+  height: 100vh;
+  width: 100vw;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 footer, 
 .nav-buttons,
 .nb-profile {
-  width: 100%;
+  width: 100vw;
 }  
 
 @media screen and (min-width: 1000px) {
   html {
     margin: auto;
-    max-height: 812px;
+    height: 812px;
     min-height: 730px;
     width: 375px;
+    font-family: 'Poppins', sans-serif;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
@@ -70,9 +67,9 @@ footer,
   .Profile, 
   .EditProfileScreen, 
   .LogIn {
-    height: 100%;
+    height: 812px;
+    min-height: 730px;
     width: 375px;
-    font-family: 'Poppins', sans-serif;
   }
   
   footer, 

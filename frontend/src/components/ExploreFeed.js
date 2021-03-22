@@ -21,13 +21,11 @@ let SONG = {};
 let songLikez = ''
 
 function SocialFeed(props) {
-  const { user, setUser, userViewed, setUserViewed } = React.useContext(
+  const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed  } = React.useContext(
     TheContext
   );
 
   // axios.get();
-
-
   const [comment, setComment] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
@@ -40,43 +38,68 @@ function SocialFeed(props) {
   const opacityRef3 = useRef();
   const popUpSearchRef = useRef();
   const opacitySearchRef3 = useRef();
+  const dumbSearchRef = useRef();
 
-  const popUpComments = () => {
-   
-    if (poppedUp == false) {
-      opacityRef1.current.style.opacity = 1;
-      opacityRef2.current.style.opacity = 1;
-      opacityRef3.current.style.opacity = 1;
-      popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-
-      setPoppedUp(true);
-    } else {
+  const menuDown = (whichMenu) => {
+    if (whichMenu == 'search') {
+    popUpSearchRef.current.style.height = "0px";
+    windowRef.current.style.bottom = "0";
+    opacitySearchRef3.current.style.opacity = 0;
+    dumbSearchRef.current.style.opacity = 0;
+    setSearchPoppedUp(false);
+    }
+    else if (whichMenu == 'comment') {
       popUpRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
-
       opacityRef1.current.style.opacity = 0;
       opacityRef2.current.style.opacity = 0;
       opacityRef3.current.style.opacity = 0;
       setPoppedUp(false);
     }
+  }
+  const menuUp = (whichMenu) => {
+    if (whichMenu == 'search') {
+    opacitySearchRef3.current.style.opacity = 1;
+    dumbSearchRef.current.style.opacity = 1;
+    popUpSearchRef.current.style.height = "50%";
+    windowRef.current.style.bottom = "50%";
+    setSearchPoppedUp(true);
+    }
+    else if (whichMenu == 'comment') {
+      opacityRef1.current.style.opacity = 1;
+      opacityRef2.current.style.opacity = 1;
+      opacityRef3.current.style.opacity = 1;
+      popUpRef.current.style.height = "50%";
+      windowRef.current.style.bottom = "50%";
+      setPoppedUp(true);
+    }
+  }
+
+  const popUpComments = () => {
+    if (poppedUp == false) {
+      menuDown('search')
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
   };
 
   const popUpSearch = () => {
     if (searchPoppedUp == false) {
-      opacitySearchRef3.current.style.opacity = 1;
-      popUpSearchRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-
-      setSearchPoppedUp(true);
+      menuDown('comment')
+      menuUp('search')
     } else {
-      popUpSearchRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-
-      opacitySearchRef3.current.style.opacity = 0;
-      setSearchPoppedUp(false);
+      menuDown('search')
     }
   };
+  
+  useEffect(() => {
+    if (navDisplayed == true) {
+      menuDown('search')
+      menuDown('comment')
+    }
+  })
+
 
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   let page = 1;
@@ -193,7 +216,7 @@ let profilePicRef=useRef()
         ref={ref}
         className="video-pane"
         style={{
-          backgroundImage: `url('${getRandomBackground()}')`
+          backgroundImage: `url('${gradientbg}'), url('${getRandomBackground()}')`
         }}
       >
         <div className="last-div"></div>
@@ -343,7 +366,7 @@ let profilePicRef=useRef()
   const displaySearch = () => {
     return (
       <div ref={popUpSearchRef} className="comment-pop-out">
-        <Search />
+        <Search dumbSearch = {dumbSearchRef}/>
 
         <div
           ref={opacitySearchRef3}
