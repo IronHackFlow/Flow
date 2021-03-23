@@ -1,12 +1,25 @@
 .button-icons {
-    height: 2.3em;
-    width: 2.3em;
-    filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);}
+  height: 2.3em;
+  width: 2.3em;
+  // font-size: 1em;
+  filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+}
   .social-icons {
     height: 1.5em;
     width: 1.5em;
     filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
   }
+.bi-record {
+    height: 2.2em;
+    width: 2.2em;
+    margin: 5px 0px 0px 0px;
+    filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
+}
+.home-record {
+    height: 2.2em;
+    width: 2.2em;
+    filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
+}
   .follow {
     font-size: 2.3em;
   }
@@ -31,17 +44,7 @@
   .bi-social-p {
     margin: 7px 0px 0px 0px;
   }
-  .bi-record {
-    height: 2.2em;
-    width: 2.2em;
-    margin: 5px 0px 0px 0px;
-    filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
-  }
-  .home-record {
-    height: 2.2em;
-    width: 2.2em;
-    filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
-  }
+
   .bi-explore {
     margin: 7px 0px 0px 0px;
   }

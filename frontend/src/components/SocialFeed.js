@@ -25,23 +25,43 @@ function SocialFeed(props) {
   );
 
   // axios.get();
+  const [userForSong, setUserForSong] = useState({});
+  const [activeSong, setActiveSong] = useState({});
+  const [writer, setWriter] = useState();
   const [comment, setComment] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [likes, setLikes] = useState(0)
   const [bg, setBg] = useState('')
+
+  
+  const audioRef = useRef();
   const windowRef = useRef();
   const popUpRef = useRef();
-
+  const commentBtn = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
   const opacityRef3 = useRef();
   const popUpSearchRef = useRef();
+  const searchBtn = useRef();
   const opacitySearchRef3 = useRef();
   const dumbSearchRef = useRef();
+  const socialRim = useRef();
+  const socialOut = useRef();
+  const socialIn = useRef();
+  const socialIcon = useRef();
+  const profilePicRef=useRef()
+
+  useEffect(() => {
+    socialRim.current.style.animation = "rim .5s linear forwards"
+    socialOut.current.style.animation = "out .5s linear forwards"
+    socialIn.current.style.animation = "in .5s linear forwards"
+    socialIcon.current.style.animation = "iconScale .5s linear forwards"
+  }, [])
 
   const menuDown = (whichMenu) => {
     if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
     popUpSearchRef.current.style.height = "0px";
     windowRef.current.style.bottom = "0";
     opacitySearchRef3.current.style.opacity = 0;
@@ -49,6 +69,7 @@ function SocialFeed(props) {
     setSearchPoppedUp(false);
     }
     else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       opacityRef1.current.style.opacity = 0;
@@ -59,6 +80,7 @@ function SocialFeed(props) {
   }
   const menuUp = (whichMenu) => {
     if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
     opacitySearchRef3.current.style.opacity = 1;
     dumbSearchRef.current.style.opacity = 1;
     popUpSearchRef.current.style.height = "50%";
@@ -66,6 +88,7 @@ function SocialFeed(props) {
     setSearchPoppedUp(true);
     }
     else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       opacityRef1.current.style.opacity = 1;
       opacityRef2.current.style.opacity = 1;
       opacityRef3.current.style.opacity = 1;
@@ -124,12 +147,6 @@ function SocialFeed(props) {
       .catch(console.error);
   }, [page]);
 
-
-  const [userForSong, setUserForSong] = useState({})
-
-  const [activeSong,setActiveSong]=useState({})
-
-  
 // const getSongUsers = (theUserId) => {
 //     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
 //     actions
@@ -164,8 +181,6 @@ function SocialFeed(props) {
   //     .catch(console.error);
   // };
 
-
-
   let gifsCopy = [...gifsArr]
 
   const getRandomBackground = () => {
@@ -176,22 +191,14 @@ function SocialFeed(props) {
     // }
   }
 
-  const audioRef=useRef()
-
   const handlePlayPause=()=>{
-    
     if(audioRef.current.paused){
-
      audioRef.current.play()
- 
-    }else
-    {
+    }
+    else {
      audioRef.current.pause()
    }
   }
-
-let profilePicRef=useRef()
-
 
   function DisplaySong(eachSong) {
     const [ref, inView] = useInView({
@@ -200,12 +207,12 @@ let profilePicRef=useRef()
     if (inView) {
       // eachSong.setActiveSong(eachSong)
       SONG = eachSong;
-      audioRef.current.src=eachSong.songURL
-      profilePicRef.current.src=eachSong.songUser.picture
+      audioRef.current.src = eachSong.songURL
+      profilePicRef.current.src = eachSong.songUser.picture
       setLikes(eachSong.songLikes?.length)
       console.log(likes)
-    } else {
-    }
+    } 
+    else {}
     // console.log("scrolling", inView, eachSong);
     return (
       <li
@@ -293,7 +300,9 @@ let profilePicRef=useRef()
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
+                <Link to={`/profile/other/${user._id}`}>
+                  <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
+                </Link>
               </div>
             </div>
             <div className="like-comment-container">
@@ -306,10 +315,10 @@ let profilePicRef=useRef()
                     <p>{likes}</p>
                 </div>
               </div>
-              <div className="individual-btn" onClick={popUpSearch}>
+              <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
                 <img className="social-icons heart" src={search}></img>
               </div>
-              <div className="individual-btn" onClick={popUpComments}>
+              <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
                 <img className="social-icons comment" src={comments}></img>
               </div>
             </div>
@@ -337,10 +346,11 @@ let profilePicRef=useRef()
               </div>
             </div>
 
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div onClick={getSocialFeed} className="nav-buttons-inset">
-                  <img className="button-icons bi-social" src={social}></img>
+            <div className="nav-buttons-rim" ref={socialRim}>
+              <div className="nav-buttons-outset" ref={socialOut}>
+                <div className="nav-buttons-inset" ref={socialIn}
+                     onClick={getSocialFeed}>
+                  <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
                 </div>
               </div>
             </div>
@@ -376,17 +386,10 @@ let profilePicRef=useRef()
     );
   };
 
-  //prevent default
-
   const handleSubmit =(e)=>{
-
     e.preventDefault()
     actions.addComment({comment,SONG})
-   
   }
-
-
-  const [writer,setWriter]=useState()
 
   const getCommentWriter=(num)=>{
     actions
@@ -400,29 +403,27 @@ let profilePicRef=useRef()
   }
 
   const renderEachComment = ()=>{
-
     console.log(SONG)
     if(!SONG.songComments){
-
-    }else{
-
-    return SONG.songComments.map((each)=>{
-      getCommentWriter(each.commUser)
-      return (
-        <div className="comment-list">
-          <div className="comment-list-inner">
-            <p className="comment-username">
-                {writer}
-            </p>
-            <p className="comment-text">
-              {each.comment}
-            </p>
+    }
+    else {
+      return SONG.songComments.map((each)=>{
+        getCommentWriter(each.commUser)
+        return (
+          <div className="comment-list">
+            <div className="comment-list-inner">
+              <p className="comment-username">
+                  {writer}
+              </p>
+              <p className="comment-text">
+                {each.comment}
+              </p>
+            </div>
           </div>
-        </div>
-    )
-  })
-}
-}
+        )
+      })
+    }
+  }
 
   const displayComments=()=>{
     return(
@@ -474,7 +475,6 @@ let profilePicRef=useRef()
                 <div className="user-details-inset">
                 </div>
               </div>
-
               <div className="user-profile-image">
                 <div className="user-profile-inset social-p">
                   <div className="nav-buttons-inset inset-social-p">
@@ -486,11 +486,12 @@ let profilePicRef=useRef()
           </div>
         </ul>
       </div>
+
       {displayComments()}
       {displaySearch()}
       {showNavBar()}
       <audio ref={audioRef} id='damn' ></audio>
-      </div>
+    </div>
     )
   }
 

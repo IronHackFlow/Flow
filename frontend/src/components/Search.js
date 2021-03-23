@@ -7,15 +7,11 @@ function Search(props) {
  const { user, setUser, userViewed, setUserViewed } = React.useContext(
     TheContext
   );
-
-
   const searchRef = useRef();
+
   const [suggestions, setSuggestions] = useState(
     <h4>Find Friends & Artists</h4>
   );
-
-  useEffect(() => {});
-
 
   const listUsers = (e) => {
     if (e.target.value.length > 0) {
@@ -36,9 +32,11 @@ function Search(props) {
        console.log(ele)
         return (
           <div className="search-results">
+
             <div className="search-username-container">
               <p className="comment-username">{`@${ele.userName}`}</p>
             </div>
+
             <div className="search-prof-container">
               <div className="search-prof-inset">
                 <div className="search-prof-outset">
@@ -48,6 +46,7 @@ function Search(props) {
                 </div>
               </div>
             </div>
+
           </div>
         );
       });       ///this part is for cases where the search returns 2-4

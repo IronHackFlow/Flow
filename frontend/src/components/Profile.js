@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import NavBar from './NavBar.js'
 import actions from "../api";
 import axios from "axios";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'
-import follow from '../images/follow.svg'
-import comment from '../images/comment.svg'
-import heart2 from '../images/heart2.svg'
 import editicon from '../images/edit.svg'
 import logouticon from '../images/logout.svg'
 import explore from '../images/explore.svg'
@@ -17,18 +13,26 @@ import play from '../images/play.svg'
 
 
 function Profile(props) {
-  const [posts, setPosts] = useState([]);
-
   const { user, setUser, userViewed, setUserViewed } = React.useContext(
     TheContext
   );
-
+  const [posts, setPosts] = useState([]);
   const [thisUser, setThisUser] = useState([userViewed]);
   const [trigger, setTrigger] = useState(false)
+  const profileRim = useRef();
+  const profileOut = useRef();
+  const profileIn = useRef();
+  const profileIcon = useRef();
 
-    
+
   useEffect(() => {
-    
+    profileRim.current.style.animation = "rim .5s linear forwards"
+    profileOut.current.style.animation = "out .5s linear forwards"
+    profileIn.current.style.animation = "in .5s linear forwards"
+    profileIcon.current.style.animation = "iconScale .5s linear forwards"
+  }, [])
+
+  useEffect(() => {
       console.log(4)
       actions
         .getOneUser()
@@ -255,10 +259,10 @@ function Profile(props) {
           </div>
         </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <img className="button-icons bi-avatar-profile" src={avatar3}></img>
+        <div className="nav-buttons-rim" ref={profileRim}>
+          <div className="nav-buttons-outset" ref={profileOut}>
+            <div className="nav-buttons-inset" ref={profileIn}>
+              <img className="button-icons bi-avatar-profile" src={avatar3} ref={profileIcon}></img>
             </div>
           </div>
         </div>

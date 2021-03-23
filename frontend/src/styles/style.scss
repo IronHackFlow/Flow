@@ -13,6 +13,57 @@ $lightgrayBg: #ecf0f3;
     align-items: $align;
     flex-direction: $direction;
 }
+@mixin pageIndicator($name, 
+                     $bsX1, $bsX1-2, $bsBlur1, $bsColor1, $bsColor2,
+                     $bsX2, $bsX2-2, $bsBlur2, $bsColor1-2, $bsColor2-2, 
+                     $background, $background2, 
+                     $height, $height2,
+                     $width, $width2, $bsSetCheck: "", $bsSet2: inset) {
+  @if $bsSetCheck != "" {
+    @keyframes #{$name} {
+      from {
+        box-shadow: $bsX1 $bsX1 $bsBlur1 $bsColor1, $bsX1-2 $bsX1-2 $bsBlur1 $bsColor2;
+        background: $background;
+        height: $height;
+        width: $width;
+      }
+      to {
+        box-shadow: $bsSet2 $bsX2 $bsX2 $bsBlur2 $bsColor1-2, $bsSet2 $bsX2-2 $bsX2-2 $bsBlur2 $bsColor2-2;
+        background: $background2;
+        height: $height2;
+        width: $width2;
+      }
+    }
+  }
+  @else {
+    @keyframes #{$name} {
+      from {
+        box-shadow: $bsSet2 $bsX1 $bsX1 $bsBlur1 $bsColor1, $bsSet2 $bsX1-2 $bsX1-2 $bsBlur1 $bsColor2;
+        background: $background;
+        height: $height;
+        width: $width;
+      }
+      to {
+        box-shadow: $bsX2 $bsX2 $bsBlur2 $bsColor1-2, $bsX2-2 $bsX2-2 $bsBlur2 $bsColor2-2;
+        background: $background2;
+        height: $height2;
+        width: $width2;
+      }
+    }
+  }
+}
+@keyframes iconScale {
+  from {
+    transform: scale(1)
+  }
+  to {
+    transform: scale(.85)
+  }
+}
+@include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 80%, 80%, 20%, 20%, "x", inset);
+@include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
+@include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
+// @include pageIndicator(rim, unset, 2px, 2px, 3px, #b7b8b9, unset)
 
 * {
   margin: 0;
@@ -48,11 +99,10 @@ footer,
   width: 100vw;
 }  
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 800px) {
   html {
     margin: auto;
-    height: 812px;
-    min-height: 730px;
+    height: 730px;
     width: 375px;
     font-family: 'Poppins', sans-serif;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -67,8 +117,7 @@ footer,
   .Profile, 
   .EditProfileScreen, 
   .LogIn {
-    height: 812px;
-    min-height: 730px;
+    height: 730px;
     width: 375px;
   }
   

@@ -1,5 +1,128 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@-webkit-keyframes iconScale {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
+}
+@keyframes iconScale {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
+}
+
+@-webkit-keyframes rim {
+  from {
+    -webkit-box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
+            box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
+    background: #ecf0f3;
+    height: 80%;
+    width: 20%;
+  }
+  to {
+    -webkit-box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
+            box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
+    background: #686a6b;
+    height: 80%;
+    width: 20%;
+  }
+}
+
+@keyframes rim {
+  from {
+    -webkit-box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
+            box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
+    background: #ecf0f3;
+    height: 80%;
+    width: 20%;
+  }
+  to {
+    -webkit-box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
+            box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
+    background: #686a6b;
+    height: 80%;
+    width: 20%;
+  }
+}
+
+@-webkit-keyframes out {
+  from {
+    -webkit-box-shadow: inset 2px 2px 4px #cacaca, inset -2px -2px 4px #ffffff;
+            box-shadow: inset 2px 2px 4px #cacaca, inset -2px -2px 4px #ffffff;
+    background: #ecf0f3;
+    height: 90%;
+    width: 92%;
+  }
+  to {
+    -webkit-box-shadow: 1px 1px 3px #353535, -1px -1px 3px #afafaf;
+            box-shadow: 1px 1px 3px #353535, -1px -1px 3px #afafaf;
+    background: #686a6b;
+    height: 77%;
+    width: 77%;
+  }
+}
+
+@keyframes out {
+  from {
+    -webkit-box-shadow: inset 2px 2px 4px #cacaca, inset -2px -2px 4px #ffffff;
+            box-shadow: inset 2px 2px 4px #cacaca, inset -2px -2px 4px #ffffff;
+    background: #ecf0f3;
+    height: 90%;
+    width: 92%;
+  }
+  to {
+    -webkit-box-shadow: 1px 1px 3px #353535, -1px -1px 3px #afafaf;
+            box-shadow: 1px 1px 3px #353535, -1px -1px 3px #afafaf;
+    background: #686a6b;
+    height: 77%;
+    width: 77%;
+  }
+}
+
+@-webkit-keyframes in {
+  from {
+    -webkit-box-shadow: 2px 2px 3px #b0b1b3, -2px -2px 3px #ffffff;
+            box-shadow: 2px 2px 3px #b0b1b3, -2px -2px 3px #ffffff;
+    background: #ecf0f3;
+    height: 70%;
+    width: 70%;
+  }
+  to {
+    -webkit-box-shadow: inset 2px 2px 3px #3f4040, inset -2px -2px 3px #a7a7a7;
+            box-shadow: inset 2px 2px 3px #3f4040, inset -2px -2px 3px #a7a7a7;
+    background: #686a6b;
+    height: 75%;
+    width: 75%;
+  }
+}
+
+@keyframes in {
+  from {
+    -webkit-box-shadow: 2px 2px 3px #b0b1b3, -2px -2px 3px #ffffff;
+            box-shadow: 2px 2px 3px #b0b1b3, -2px -2px 3px #ffffff;
+    background: #ecf0f3;
+    height: 70%;
+    width: 70%;
+  }
+  to {
+    -webkit-box-shadow: inset 2px 2px 3px #3f4040, inset -2px -2px 3px #a7a7a7;
+            box-shadow: inset 2px 2px 3px #3f4040, inset -2px -2px 3px #a7a7a7;
+    background: #686a6b;
+    height: 75%;
+    width: 75%;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -39,11 +162,10 @@ footer,
   width: 100vw;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 800px) {
   html {
     margin: auto;
-    height: 812px;
-    min-height: 730px;
+    height: 730px;
     width: 375px;
     font-family: 'Poppins', sans-serif;
     -ms-overflow-style: none;
@@ -60,8 +182,7 @@ footer,
   .Profile,
   .EditProfileScreen,
   .LogIn {
-    height: 812px;
-    min-height: 730px;
+    height: 730px;
     width: 375px;
   }
   footer,
@@ -3785,6 +3906,21 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
 
+.bi-record {
+  height: 2.2em;
+  width: 2.2em;
+  margin: 5px 0px 0px 0px;
+  -webkit-filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
+          filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
+}
+
+.home-record {
+  height: 2.2em;
+  width: 2.2em;
+  -webkit-filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
+          filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
+}
+
 .follow {
   font-size: 2.3em;
 }
@@ -3814,21 +3950,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .bi-social-p {
   margin: 7px 0px 0px 0px;
-}
-
-.bi-record {
-  height: 2.2em;
-  width: 2.2em;
-  margin: 5px 0px 0px 0px;
-  -webkit-filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
-          filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
-}
-
-.home-record {
-  height: 2.2em;
-  width: 2.2em;
-  -webkit-filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
-          filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
 }
 
 .bi-explore {

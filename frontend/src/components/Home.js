@@ -4,18 +4,9 @@ import heart from '../images/heart.svg'
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
 import TheContext from '../TheContext'
-import gradientbg from '../images/gradient-bg-2.png'
 import backgroundFrame from '../images/bg-frame-2.png'
-import Search from './Search'
 
 function Home(props) {
-    // useEffect(() => {
-    //     document.querySelector('.dr-1').style.transform = 'none'
-    //     document.querySelector('.route-o2').style.transform = 'none'
-    //     document.querySelector('.dr-3').style.transform = 'none'
-
-    // }, [])
-
     const { user, setUser, userViewed, setUserViewed  } = React.useContext(TheContext)
 
     user ? setUserViewed(user) : setUser({})
@@ -38,7 +29,6 @@ function Home(props) {
                     </li>
                 </ul>
             </div>
-            {/* <Search /> */}
             <div className="bottom-directories">
                 <div className="bm-dir-container bdc-1">
                     <div className="dir-icon di-1">

@@ -26,22 +26,41 @@ function SocialFeed(props) {
   );
 
   // axios.get();
+  const [userForSong, setUserForSong] = useState({})
+  const [activeSong,setActiveSong]=useState({})
+  const [writer,setWriter]=useState()
   const [comment, setComment] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [likes, setLikes] = useState(0)
+
+  const audioRef = useRef();
   const windowRef = useRef();
   const popUpRef = useRef();
-
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
   const opacityRef3 = useRef();
   const popUpSearchRef = useRef();
   const opacitySearchRef3 = useRef();
   const dumbSearchRef = useRef();
+  const searchBtn = useRef();
+  const commentBtn = useRef();
+  const exploreRim = useRef();
+  const exploreOut = useRef();
+  const exploreIn = useRef();
+  const exploreIcon = useRef();
+  const profilePicRef = useRef()
 
+  useEffect(() => {
+    exploreRim.current.style.animation = "rim .5s linear forwards"
+    exploreOut.current.style.animation = "out .5s linear forwards"
+    exploreIn.current.style.animation = "in .5s linear forwards"
+    exploreIcon.current.style.animation = "iconScale .5s linear forwards"
+  }, [])
+  
   const menuDown = (whichMenu) => {
     if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
     popUpSearchRef.current.style.height = "0px";
     windowRef.current.style.bottom = "0";
     opacitySearchRef3.current.style.opacity = 0;
@@ -49,6 +68,7 @@ function SocialFeed(props) {
     setSearchPoppedUp(false);
     }
     else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       opacityRef1.current.style.opacity = 0;
@@ -59,6 +79,7 @@ function SocialFeed(props) {
   }
   const menuUp = (whichMenu) => {
     if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
     opacitySearchRef3.current.style.opacity = 1;
     dumbSearchRef.current.style.opacity = 1;
     popUpSearchRef.current.style.height = "50%";
@@ -66,6 +87,7 @@ function SocialFeed(props) {
     setSearchPoppedUp(true);
     }
     else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       opacityRef1.current.style.opacity = 1;
       opacityRef2.current.style.opacity = 1;
       opacityRef3.current.style.opacity = 1;
@@ -100,7 +122,6 @@ function SocialFeed(props) {
     }
   })
 
-
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   let page = 1;
   let userUser = "";
@@ -129,12 +150,6 @@ function SocialFeed(props) {
       .catch(console.error);
   }, [page]);
 
-
-  const [userForSong, setUserForSong] = useState({})
-
-  const [activeSong,setActiveSong]=useState({})
-
-  
 // const getSongUsers = (theUserId) => {
 //     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
 //     actions
@@ -181,8 +196,6 @@ function SocialFeed(props) {
     // }
   }
 
-  const audioRef=useRef()
-
   const handlePlayPause=()=>{
     
     if(audioRef.current.paused){
@@ -193,9 +206,6 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
-
-let profilePicRef=useRef()
-
 
   function DisplaySong(eachSong) {
     const [ref, inView] = useInView({
@@ -208,8 +218,8 @@ let profilePicRef=useRef()
       profilePicRef.current.src=eachSong.songUser.picture
       songLikez = eachSong.songLikes?.length
       console.log(songLikez, '>>>>>>>><<<<<<<<<', eachSong.songLikes)
-    } else {
     }
+    else {}
     // console.log("scrolling", inView, eachSong);
     return (
       <li
@@ -220,6 +230,7 @@ let profilePicRef=useRef()
         }}
       >
         <div className="last-div"></div>
+
         <div className="text-container">
           <p className="ud-text udt-1">
             <span style={{ color: "#ec6aa0" }}>
@@ -286,10 +297,8 @@ let profilePicRef=useRef()
 
   const showNavBar = () => {
     return (
-      <footer
-        style={{ height: `${props.height}`, flexDirection: `${props.row}` }}
-      >
-        <div className="social-buttons" style={{ display: `${props.display}` }}>
+      <footer>
+        <div className="social-buttons">
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
@@ -306,19 +315,17 @@ let profilePicRef=useRef()
                     <p>{songLikez}</p>
                 </div>
               </div>
-              <div className="individual-btn" onClick={popUpSearch}>
+              <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
                 <img className="social-icons heart" src={search}></img>
               </div>
-              <div className="individual-btn" onClick={popUpComments}>
+              <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
                 <img className="social-icons comment" src={comments}></img>
               </div>
             </div>
           </div>
         </div>
-        <div
-          className="nav-buttons"
-          style={{ boxShadow: `${props.shadowDisplay}` }}
-        >
+
+        <div className="nav-buttons">
           <div className="nav-list">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
@@ -330,10 +337,10 @@ let profilePicRef=useRef()
               </div>
             </div>
 
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <img className="button-icons bi-explore-e" src={explore}></img>
+            <div className="nav-buttons-rim" ref={exploreRim}>
+              <div className="nav-buttons-outset" ref={exploreOut}>
+                <div className="nav-buttons-inset" ref={exploreIn}>
+                  <img className="button-icons bi-explore-e" src={explore} ref={exploreIcon}></img>
                 </div>
               </div>
             </div>
@@ -368,28 +375,17 @@ let profilePicRef=useRef()
       <div ref={popUpSearchRef} className="comment-pop-out">
         <Search dumbSearch = {dumbSearchRef}/>
 
-        <div
-          ref={opacitySearchRef3}
-          style={{ opacity: "0" }}
-          className="bottom-bar"
-        >
+        <div ref={opacitySearchRef3} style={{ opacity: "0" }} className="bottom-bar">
           <div className="inner-bar"></div>
         </div>
       </div>
     );
   };
 
-  //prevent default
-
   const handleSubmit =(e)=>{
-
     e.preventDefault()
-    actions.addComment({comment,SONG})
-   
+    actions.addComment({comment,SONG}) 
   }
-
-
-  const [writer,setWriter]=useState()
 
   const getCommentWriter=(num)=>{
     actions
@@ -403,35 +399,33 @@ let profilePicRef=useRef()
   }
 
   const renderEachComment = ()=>{
-
     console.log(SONG)
     if(!SONG.songComments){
-
-    }else{
-
-    return SONG.songComments.map((each)=>{
-      getCommentWriter(each.commUser)
-      return (
-        <div className="comment-list">
-      <div className="comment-list-inner">
-      <p className="comment-username">
-          {writer}
-      </p>
-      <p className="comment-text">
-        {each.comment}
-      </p>
-    </div>
-    </div>
-    )
-  })
-}
-}
+    }
+    else{
+      return SONG.songComments.map((each)=>{
+        getCommentWriter(each.commUser)
+        return (
+          <div className="comment-list">
+            <div className="comment-list-inner">
+              <p className="comment-username">
+                  {writer}
+              </p>
+              <p className="comment-text">
+                {each.comment}
+              </p>
+            </div>
+          </div>
+        )
+      })
+    }
+  }
 
   const displayComments=()=>{
     return(
     <div ref={popUpRef} className="comment-pop-out">
-      <div className="inner-com">
 
+      <div className="inner-com">
         <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
           <div className="input-container">
             <div className="input-inset">
@@ -446,26 +440,22 @@ let profilePicRef=useRef()
               </form>
             </div>
           </div>
-          </div>
+        </div>
 
         <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
           <div className="comments-container">
             <div className="comment-list-container">
-              
-
                {renderEachComment()}
-
-             
             </div>
           </div>
         </div>
       </div>
+
       <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
         <div className="inner-bar"></div>
       </div>
-    </div>
-    
 
+    </div>
     )
   }
 
@@ -479,7 +469,6 @@ let profilePicRef=useRef()
               <div className="user-details-container">
                 <div className="user-details-inset"></div>
               </div>
-
               <div className="user-profile-image">
                 <div className="user-profile-inset social-p">
                   <div className="nav-buttons-inset inset-social-p">
@@ -491,6 +480,7 @@ let profilePicRef=useRef()
           </div>
         </ul>
       </div>
+      
       {displayComments()}
       {displaySearch()}
       {showNavBar()}
