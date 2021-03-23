@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Home from './Home'
 import actions from '../api'
 import TheContext from '../TheContext'
@@ -9,13 +9,14 @@ const Auth = (props) => {
 
     const { user, setUser } = React.useContext(TheContext)
 
+
     const onResponse = (response) => {
         actions
             .logIn(response)
             .then(res => {
-                console.log(res)
+                console.log("THIS", props)
                 props.setUser(res.data)
-                
+                props.history.push('/')
             })
             .catch(console.error)
     }
@@ -42,14 +43,14 @@ const Auth = (props) => {
                                 </div>
                                 <div className="user-input-container">
                                     <div className="user-input ui-login-i">
-                                        <input className="user-text ui-login-t" type="text" placeholder="Username"></input>
+                                        <input className="user-text ui-login-t" type="text" placeholder="DO NOT USE"></input>
                                     </div>
                                     <div className="user-input ui-login-i">
-                                        <input className="user-text ui-login-t" type="text" placeholder="Password"></input>
+                                        <input className="user-text ui-login-t" type="text" placeholder="DO NOT USE"></input>
                                     </div>
                                     <Link to ="/" className="login-link">
                                         <div className="login-button">
-                                                <h4>Log In</h4>
+                                                <h4>Enter</h4>
                                         </div>
                                     </Link>
                                     <GoogleLogin 
