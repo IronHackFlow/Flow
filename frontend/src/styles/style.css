@@ -4131,9 +4131,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center row;
-      -ms-flex-align: center row;
-          align-items: center row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -4162,8 +4162,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 7px #c1c1c1, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 7px #c1c1c1, inset -2px -2px 3px #ffffff;
+  -webkit-box-shadow: inset 2px 2px 3px #c7c7c7, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px #c7c7c7, inset -2px -2px 3px #ffffff;
 }
 
 .notification .notification-inset .notification-outset {
@@ -4183,11 +4183,11 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 6px 0px #b1b1b1, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 6px 0px #b1b1b1, -2px -2px 2px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #cbcbcb, -2px -2px 3px #ffffff;
+          box-shadow: 2px 2px 3px 0px #cbcbcb, -2px -2px 3px #ffffff;
 }
 
-.notification .notification-inset .notification-outset .notification-outset p {
+.notification .notification-inset .notification-outset p {
   color: #ec6aa0;
   font-weight: bold;
   font-size: 14px;

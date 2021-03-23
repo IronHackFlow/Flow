@@ -53,7 +53,7 @@
 }
 
 .notification {
-    @include flexCenter(60px, 120px, 50px, center, center row);
+    @include flexCenter(60px, 120px, 50px, center, center, row);
     z-index: 200;
     position: fixed;
     margin-left: 100vw;
@@ -62,13 +62,12 @@
 
     .notification-inset {
         @include flexCenter(80%, 90%, 50px, center, center, row);
-        box-shadow: inset 2px 2px 7px #c1c1c1, inset -2px -2px 3px #ffffff;
+        box-shadow: inset 2px 2px 3px #c7c7c7, inset -2px -2px 3px #ffffff;
 
         .notification-outset {
             @include flexCenter(65%, 85%, 20px, center, center, row);
-            box-shadow: 2px 2px 6px 0px #b1b1b1, -2px -2px 2px #ffffff;
-
-            .notification-outset p {
+            box-shadow: 2px 2px 3px 0px #cbcbcb, -2px -2px 3px #ffffff;
+            p {
                 color: #ec6aa0;
                 font-weight: bold;
                 font-size: 14px;
