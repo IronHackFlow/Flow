@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
-import './App.css'
-import './otherstyles.css'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './styles/style.css'
 import actions from './api'
 import Home from './components/Home'
-import AddPost from './components/AddPost'
-import AllPosts from './components/AllPosts'
 import Auth from './components/Auth'
 import Profile from './components/Profile'
 import SocialFeed from './components/SocialFeed'
 import TestAudio from './components/TestAudio'
-import Comments from './components/Comments'
-import Likes from './components/Likes'
 import UploadFile from './components/UploadFile'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
@@ -59,7 +55,7 @@ function App() {
     }    
   }
   return (
-    <TheContext.Provider value={{user, setUser, userViewed, setUserViewed}}>
+    <TheContext.Provider value={{user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed}}>
     <div className="App">
       {/* <h4>{user.email}</h4> */}
       <nav className="navigation">
@@ -114,26 +110,34 @@ function App() {
         <div></div>
         <div></div>
       </div>
+
       <Notification/>
-      <Switch>
-        <Route exact path="/" render={(props) => <Home {...props} />} />
-        <Route exact path="/all-posts" render={(props) => <AllPosts {...props} />} />
-        <Route exact path="/add-posts" render={(props) => <AddPost {...props} />} />
-        <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
-        <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
-        <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
-        <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
-        <Route exact path="/comments" render={(props) => <Comments {...props} />} />
-        <Route exact path="/likes" render={(props) => <Likes {...props} />} />
-        <Route exact path="/uploadFile" render={(props) => <UploadFile {...props} kind='song' />} />
-        <Route exact path="/uploadProfilePic" render={(props) => <UploadFile {...props} kind='profilePic' />} />
-        <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
-        <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
-        <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
-        <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
-        <Route exact path="/explore-feed" render={(props) => <ExploreFeed {...props} />} />
-        <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-      </Switch>
+
+      {/* <Route render={({location}) => (
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            timeout={450}
+            classNames="fade"
+            > */}
+            <Switch>
+              <Route exact path="/" render={(props) => <Home {...props} />} />
+              <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
+              <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
+              <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
+              <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
+              <Route exact path="/uploadFile" render={(props) => <UploadFile {...props} kind='song' />} />
+              <Route exact path="/uploadProfilePic" render={(props) => <UploadFile {...props} kind='profilePic' />} />
+              <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
+              <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
+              <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
+              <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
+              <Route exact path="/explore-feed" render={(props) => <ExploreFeed {...props} />} />
+              <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+            </Switch>
+          {/* </CSSTransition>
+        </TransitionGroup>
+      )} /> */}
     </div>
     </TheContext.Provider>
   );

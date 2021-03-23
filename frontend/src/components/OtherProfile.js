@@ -5,6 +5,7 @@ import actions from "../api";
 import axios from "axios";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
+import play from '../images/play.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'
 import follow from '../images/follow.svg'
@@ -94,13 +95,28 @@ function OtherProfile(props) {
   const showSongs = () => {
     return thisUserSongs.map((eachSong) => {
       return (
-        <li className="your-track-container">
-          <h4>{eachSong.songName}</h4>
-          
-          <div className="lyrics-container">
+      <li className="your-track-container">
+        <div className="lyrics-play">
+      
+          <div className="lyrics-songname-cont">
+            <h4>{eachSong.songName}</h4>
+          </div>
+
+          <div className="lyrics-outter-container">
+            <div className="nav-buttons-inset play-ur-song">
+              <img className="button-icons bi-play-2" src={play}></img>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="lyrics-container">
+          <div className="para-container">
             {showLyrics(eachSong.songLyricsStr)}
           </div>
-        </li>
+        </div>
+        
+      </li>
       )
     })
   }
@@ -127,7 +143,7 @@ function OtherProfile(props) {
             <div className="username-container">
               <div className="username-outset">
                 <div className="username-inset">
-                  <h3>{thisUser.userName}</h3>
+                  <h3 className="username-text-me">{thisUser.userName}</h3>
                 </div>
               </div>
             </div>
@@ -166,7 +182,7 @@ function OtherProfile(props) {
               <div className="edit-profile-outset">
                 <div className="edit-profile-inset">
                   <div className="edit-profile-button" onClick={followUser}>                  
-                      <img className="button-icons follow" src={follow} />
+                      <img className="button-icons follow-social" src={follow} />
                   </div>
                 </div>
               </div>
@@ -203,11 +219,9 @@ function OtherProfile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-              { userViewed._id ? (<Link to="/recordingBooth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) }
+              <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                <img className="button-icons bi-record" src={mic}></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -215,8 +229,9 @@ function OtherProfile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-            <Link to="/explore-feed">
-                  <img className="button-icons bi-explore" src={explore} alt="explore"></img></Link>
+              <Link to="/explore-feed">
+                <img className="button-icons bi-explore" src={explore} alt="explore"></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -224,11 +239,9 @@ function OtherProfile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-              { user._id ? (<Link to="/social-feed">
-                                        <img className="button-icons bi-social-p" src={social}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons bi-social-p" src={social}></img>
-                                    </Link>)}
+              <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                <img className="button-icons bi-social-p" src={social}></img>
+              </Link>
             </div>
           </div>
         </div>
@@ -236,8 +249,9 @@ function OtherProfile(props) {
         <div className="nav-buttons-rim">
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
-            <Link to="/profile"><img className="button-icons bi-profile" src={avatar3}></img></Link>
-              
+              <Link to="/profile">
+                <img className="button-icons bi-profile" src={avatar3}></img>
+              </Link>
             </div>
           </div>
         </div>

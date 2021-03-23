@@ -1,0 +1,213 @@
+.TestAudio {
+    // height: 97.2%;
+    // width: 100%;
+    position: absolute;
+  }
+
+.scroll-rhymes-outer {
+    @include flexCenter(40%, 100%, 0px, center, center, column);
+    background-image: url('../images/turnt-bg-image.jpg');
+    background-size: 104%;
+    background-position-x: 50%;
+    background-position-y: 10%;
+
+    .scroll-rhymes-container {
+        @include flexCenter(70%, 87%, 20px, flex-start, stretch, column);
+        margin-top: 3%;
+        overflow-y: scroll;
+        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+    }
+
+    .scroll-rhymes-line {
+        @include flexCenter(15%, 88%, 15px, center, center, row);
+        margin-top: 4%;
+        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+        overflow-x: scroll;
+
+        .transcript-line-2 {
+          height: 90%;
+          width: 93%;
+          text-align: start;
+          overflow-y: scroll;
+          color: #01fff3;
+          font-size: 14px;
+          font-weight: bold;
+          text-shadow: 3px 4px 5px #494848;
+        }
+    }
+}
+
+/* --------------------- Controls panel --------------------- */
+.nav-buttons-play {
+    height: 57.3%;
+    padding-top: 10px;
+    background: $lightgrayBg;
+    border-top: 5px solid $lightgrayBg;
+    box-shadow: inset 0px 3px 5px #cecece;
+
+    .suggestions-container {
+        @include flexCenter(40%, 100%, 0px, center, center, column);
+        background: $lightgrayBg;
+
+        .suggestions {
+            @include flexCenter(45%, 95%, 50px, center, center, column);
+            margin: 5px;
+            box-shadow: inset 2px 2px 3px 0px #d0d2d4, inset -2px -2px 3px #ffffff;
+
+            .custom-rhyme {
+                @include flexCenter(74%, 94%, 50px, center, center, row);
+                box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
+
+                .custom-rhyme-inner {
+                    @include flexCenter(65%, 93%, 50px, center, stretch, row);
+                    background: $charcoalBg;
+                    overflow-x: scroll;
+                    box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
+
+                    .transcript-line-3 {
+                        color: #ff95da;
+                        font-size: 16px;
+                        width: 95%;
+                        font-weight: bold;
+                        text-shadow: 3px 4px 5px #494848;
+                    }
+                    .transcript-line-4 {
+                        color:#ecf9b5;
+                        font-size: 16px;
+                        width: 95%;
+                        font-weight: bold;
+                        text-shadow: 3px 4px 5px #494848;
+                    }
+                }
+            }
+        }
+    }
+
+    
+    .canvas-anim-box {
+        @include flexCenter(25%, 100%, 0px, center, stretch, row);
+        background: $lightgrayBg;
+        border-bottom: 5px solid $lightgrayBg;
+        box-shadow: inset 0 -5px 4px #d8d8d8;
+
+        .canvas-outset {
+            @include flexCenter(85%, 93%, 50px, center, center, row);
+            background: $lightgrayBg;
+            margin-top: 2%;
+            box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
+
+            .canvas-inset {
+                @include flexCenter(80%, 94%, 50px, center, center, row);
+                box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
+
+                .canvas-container {
+                    height: 70%;
+                    width: 91%;
+                    border-radius: 50px;
+                    overflow: hidden;
+                    canvas {
+                      position: relative;
+                      bottom: 80%;
+                    }
+                }
+            }
+        }
+    }
+
+    .playback-controls-panel {
+        height: 35%;
+        background: $charcoalBg;
+        border-top: 2px solid #8a8c8e;
+        box-shadow: inset 1px 3px 4px 0px #adadad;
+    
+        .playback-container {
+            @include flexCenter(33%, 100%, 0px, center, stretch, row);
+    
+            .playback-wrapper {
+                @include flexCenter(100%, 95%, 0px, flex-start, center, row);
+    
+                .tracks-container {
+                    @include flexCenter(80%, 60%, 0px, center, center, row);
+    
+                    .tracks-inset {
+                        @include flexCenter(90%, 90%, 50px, center, center, row);
+                        box-shadow: inset 5px 5px 15px #313232,
+                                    inset -5px -5px 5px #9fa2a4;
+    
+                        .tracks-onset {
+                            @include flexCenter(65%, 90%, 50px, center, center, row);
+                            background: #383838;
+    
+                            .track-select {
+                                background-color: #383838;
+                                color: white;
+                                border-color: #383838;
+                
+                                &:focus {
+                                    outline: none !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .selected-container {
+                    @include flexCenter(100%, 20%, 0px, center, center, row);
+
+                    div {
+                        @include flexCenter(30px, 30px, 50px, center, center, row);
+                        font-size: .7em;
+                        padding: 1px;
+                        box-shadow: 4px 4px 7px #3d3f3f,
+                                 -4px -4px 5px #939597;
+                    }
+                }
+            }
+        }
+    
+        .duration-container {
+            @include flexCenter(12%, 100%, 0px, center, center, row);
+    
+            .dur-inset {
+                @include flexCenter(100%, 90%, 50px, center, center, row);
+                box-shadow: inset 5px 5px 15px #313232,
+                            inset -5px -5px 5px #9fa2a4;
+    
+                .dur-onset {
+                  height: 40%;
+                  width: 95%;
+                  border-radius: 50px;
+                  background: #63DEBC;
+                }
+            }   
+        }
+    
+        .nav-list-play {
+            @include flexCenter(55%, 100%, 0px, space-evenly, center, row);
+            border-top: 1px solid $charcoalBg;
+
+            .button-icons-inset {
+                @include flexCenter(70px, 70px, 50%, center, center, row);
+                padding: 3px;
+                background: $charcoalBg;
+                box-shadow: inset 5px 5px 15px #313232, 
+                            inset -5px -5px 15px #9fa2a4;
+            
+                .button-icons-outset {
+                    @include flexCenter(50px, 50px, 50%, center, center,row);
+                    text-align: center;
+                    font-weight: bold;
+                    background: $charcoalBg;
+                    box-shadow:  4px 4px 10px #3d3f3f,
+                                -4px -4px 10px #939597;
+                    &:active {
+                        box-shadow: inset 2px 2px 3px #313232, 
+                                    inset -2px -2px 3px #9fa2a4;
+                    }
+                }
+            }
+        }
+    }
+}
+
+  

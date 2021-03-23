@@ -4,18 +4,9 @@ import heart from '../images/heart.svg'
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
 import TheContext from '../TheContext'
-import gradientbg from '../images/gradient-bg-2.png'
 import backgroundFrame from '../images/bg-frame-2.png'
-import Search from './Search'
 
 function Home(props) {
-    // useEffect(() => {
-    //     document.querySelector('.dr-1').style.transform = 'none'
-    //     document.querySelector('.route-o2').style.transform = 'none'
-    //     document.querySelector('.dr-3').style.transform = 'none'
-
-    // }, [])
-
     const { user, setUser, userViewed, setUserViewed  } = React.useContext(TheContext)
 
     user ? setUserViewed(user) : setUser({})
@@ -38,7 +29,6 @@ function Home(props) {
                     </li>
                 </ul>
             </div>
-            {/* <Search /> */}
             <div className="bottom-directories">
                 <div className="bm-dir-container bdc-1">
                     <div className="dir-icon di-1">
@@ -56,7 +46,9 @@ function Home(props) {
                         <div className="route-outset">
                             <div className="route-inset">
                                 <div className="route-double-inset">
-                                    <h4>Social Feed</h4>
+                                    <Link to="/social-feed">
+                                        <h4>Social Feed</h4>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -67,11 +59,9 @@ function Home(props) {
                         <div className="icon-outset io-2">
                             <div className="icon-inset ii-2">
                                 <div className="icon-double-inset idi-2">
-                                { userViewed._id ? (<Link to="/recordingBooth">
+                                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
                                         <img className="button-icons home-record" src={mic}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons home-record" src={mic}></img>
-                                    </Link>) }
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +70,9 @@ function Home(props) {
                         <div className="route-outset route-o2">
                             <div className="route-inset route-i2">
                                 <div className="route-double-inset route-di2">
-                                    <h4>Flow</h4>
+                                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                                        <h4>Flow</h4>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +83,9 @@ function Home(props) {
                         <div className="icon-outset io-3">
                             <div className="icon-inset ii-3">
                                 <div className="icon-double-inset idi-3">
-                                { user._id ? (<Link to="/profile">
+                                    <Link to={user._id ? ("/profile") : ("/auth")}>
                                         <img className="button-icons home-avatar" src={avatar3}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons home-avatar" src={avatar3}></img>
-                                    </Link>)}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +94,9 @@ function Home(props) {
                         <div className="route-outset">
                             <div className="route-inset">
                                 <div className="route-double-inset">
-                                    <h4>Profile</h4>
+                                    <Link to={user._id ? ("/profile") : ("/auth")}>
+                                        <h4>Profile</h4>                                    
+                                    </Link>
                                 </div>
                             </div>
                         </div>

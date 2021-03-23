@@ -7,15 +7,11 @@ function Search(props) {
  const { user, setUser, userViewed, setUserViewed } = React.useContext(
     TheContext
   );
-
-
   const searchRef = useRef();
+
   const [suggestions, setSuggestions] = useState(
     <h4>Find Friends & Artists</h4>
   );
-
-  useEffect(() => {});
-
 
   const listUsers = (e) => {
     if (e.target.value.length > 0) {
@@ -24,36 +20,6 @@ function Search(props) {
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
   };
-  const boxStyle = {
-    display: "flex",
-    height: "8vh",
-    padding: "10px",
-    justifyContent: "space-evenly",
-    marginLeft: "0px",
-    borderBottom: 'solid 1px black'
-  };
-
-  const suggestStyle1 = {
-    display: "flex",
-    justifyContent: "space-evenly",
-    maxHeight: '100%',
-    maxWidth: 'fit-content',
-    alignItems: 'center',
-    textDecoration: 'none',
-    fontSize: 'large'
-  };
-
-  const imgStyle = {
-      height: '8vh',
-      width: 'auto',
-      borderRadius: '80px'
-  }
-
-  const userStyle = {
-      padding: '10px',
-      textDecoration: 'none'
-  }
-  
 
   const suggestionBox = (info) => {
     //render top 1, 2 or 4 suggestions
@@ -66,9 +32,11 @@ function Search(props) {
        console.log(ele)
         return (
           <div className="search-results">
+
             <div className="search-username-container">
               <p className="comment-username">{`@${ele.userName}`}</p>
             </div>
+
             <div className="search-prof-container">
               <div className="search-prof-inset">
                 <div className="search-prof-outset">
@@ -78,6 +46,7 @@ function Search(props) {
                 </div>
               </div>
             </div>
+
           </div>
         );
       });       ///this part is for cases where the search returns 2-4
@@ -106,7 +75,9 @@ function Search(props) {
           <div className="input-inset">
             <form className="social-comment-form">
               <input onChange={listUsers}
-                    className="social-comment-input" 
+                    className="social-comment-input"
+                    ref={props.dumbSearch}
+                    style={{opacity: '0'}}
                     type='text' 
                     placeholder='Search' 
                     ></input>
@@ -118,8 +89,8 @@ function Search(props) {
       <div className="com-cont-2">
         <div className="comments-container">
           <div className="comment-list-container com-list-cont">
-            <div className="comment-list com-list-search">
-              <div className="comment-list-inner com-search">
+            <div className="com-list-search">
+              <div className="com-search">
                 {suggestions}
               </div>
             </div>
