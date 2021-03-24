@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import axios from "axios";
-import gradientbg from "../images/gradient-bg-2.png";
-import play from "../images/play.svg";
 import TheContext from "../TheContext";
 import actions from "../api";
+import gradientbg from "../images/gradient-bg-2.png";
+import play from "../images/play.svg";
 import mic from "../images/record2.svg";
 import avatar3 from "../images/avatar3.svg";
 import social from "../images/social.svg";
@@ -14,7 +15,6 @@ import search from "../images/search.svg";
 import heart2 from "../images/heart2.svg";
 import explore from "../images/explore.svg";
 import Search from "../components/Search";
-import { useInView } from "react-intersection-observer";
 import gifsArr from "../images/gifs.json"
 
 let SONG = {};
@@ -26,6 +26,11 @@ function SocialFeed(props) {
   );
 
   // axios.get();
+  let page = 1;
+  let userUser = "";
+  let songUsersArr = [];
+
+  const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [userForSong, setUserForSong] = useState({})
   const [activeSong,setActiveSong]=useState({})
   const [writer,setWriter]=useState()
@@ -49,7 +54,8 @@ function SocialFeed(props) {
   const exploreOut = useRef();
   const exploreIn = useRef();
   const exploreIcon = useRef();
-  const profilePicRef = useRef()
+  const profilePicRef = useRef();
+  const songLikesRef = useRef();
 
   useEffect(() => {
     exploreRim.current.style.animation = "rim .5s linear forwards"
@@ -122,27 +128,10 @@ function SocialFeed(props) {
     }
   })
 
-  const [thisFeedSongs, setThisFeedSongs] = useState([]);
-  let page = 1;
-  let userUser = "";
-  let songUsersArr = [];
-
-  //TEMPORARY CODE TO SHOW ALL SONGS JUST TO GET SOME LIKES ADDED
-  // useEffect(() => {
-  //   actions
-  //     .getUserSongs(user)
-  //     .then((usersSongs) => {
-  //       setThisFeedSongs(usersSongs.data);
-  //       console.log("inside useffect", thisFeedSongs);
-  //     })
-  //     .catch(console.error);
-  // }, [page]);
-
   useEffect(() => {
     actions
       .getMostLikedSongs()
       .then((usersSongs) => {
-        
         usersSongs.data.reverse()
         setThisFeedSongs(usersSongs.data);
         console.log("inside useffect", thisFeedSongs);
@@ -184,8 +173,6 @@ function SocialFeed(props) {
   //     .catch(console.error);
   // };
 
-
-
   let gifsCopy = [...gifsArr]
 
   const getRandomBackground = () => {
@@ -197,14 +184,12 @@ function SocialFeed(props) {
   }
 
   const handlePlayPause=()=>{
-    
-    if(audioRef.current.paused){
+    if(audioRef.current.paused) {
      audioRef.current.play()
- 
-    }else
-    {
+    }
+    else {
      audioRef.current.pause()
-   }
+    }
   }
 
   function DisplaySong(eachSong) {
@@ -216,6 +201,7 @@ function SocialFeed(props) {
       SONG = eachSong;
       audioRef.current.src=eachSong.songURL
       profilePicRef.current.src=eachSong.songUser.picture
+      songLikesRef.current.innerHTML = eachSong.songLikes.length
       songLikez = eachSong.songLikes?.length
       console.log(songLikez, '>>>>>>>><<<<<<<<<', eachSong.songLikes)
     }
@@ -226,7 +212,7 @@ function SocialFeed(props) {
         ref={ref}
         className="video-pane"
         style={{
-          backgroundImage: `url('${gradientbg}'), url('${getRandomBackground()}')`
+          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
         }}
       >
         <div className="last-div"></div>
@@ -254,6 +240,7 @@ function SocialFeed(props) {
 
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
+      eachSong.shorts = getRandomBackground()
       // setUserUser(eachSong)
       // console.log(userForSong)
       return <DisplaySong i={i} {...eachSong} />;
@@ -279,10 +266,6 @@ function SocialFeed(props) {
       .catch(console.error);
   };
 
-  // const likePost = () => {
-  //   setLikes(likes + 1)
-  // }
-
   const likePost = () => {
     console.log(user, userViewed);
     document.getElementById("notify").click();
@@ -302,7 +285,7 @@ function SocialFeed(props) {
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                <img  src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
+                <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
               </div>
             </div>
             <div className="like-comment-container">
@@ -312,7 +295,7 @@ function SocialFeed(props) {
               <div className="individual-btn">
                 <img className="social-icons heart" onClick={(() => likePost())} src={heart2}></img>
                 <div className="likes-number-container">
-                    <p>{songLikez}</p>
+                    <p ref={songLikesRef}></p>
                 </div>
               </div>
               <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
@@ -382,12 +365,12 @@ function SocialFeed(props) {
     );
   };
 
-  const handleSubmit =(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault()
-    actions.addComment({comment,SONG}) 
+    actions.addComment({comment, SONG}) 
   }
 
-  const getCommentWriter=(num)=>{
+  const getCommentWriter = (num) => {
     actions
     .getAUser({id: num})
     .then((res)=>{
@@ -398,7 +381,7 @@ function SocialFeed(props) {
     })
   }
 
-  const renderEachComment = ()=>{
+  const renderEachComment = () => {
     console.log(SONG)
     if(!SONG.songComments){
     }
@@ -481,12 +464,12 @@ function SocialFeed(props) {
         </ul>
       </div>
       
-      {displayComments()}
-      {displaySearch()}
-      {showNavBar()}
-      <audio ref={audioRef} id='damn' ></audio>
-      </div>
-    )
-  }
+    {displayComments()}
+    {displaySearch()}
+    {showNavBar()}
+    <audio ref={audioRef} id='damn' ></audio>
+    </div>
+  )
+}
 
 export default SocialFeed;

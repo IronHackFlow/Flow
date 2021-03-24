@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import axios from "axios";
-import gradientbg from "../images/gradient-bg-2.png";
-import play from "../images/play.svg";
 import TheContext from "../TheContext";
 import actions from "../api";
+import gradientbg from "../images/gradient-bg-2.png";
+import play from "../images/play.svg";
 import mic from "../images/record2.svg";
 import avatar3 from "../images/avatar3.svg";
 import social from "../images/social.svg";
@@ -13,9 +14,8 @@ import comments from "../images/comment.svg";
 import search from "../images/search.svg";
 import heart2 from "../images/heart2.svg";
 import explore from "../images/explore.svg";
+import gifsArr from "../images/gifs.json";
 import Search from "../components/Search";
-import { useInView } from "react-intersection-observer";
-import gifsArr from "../images/gifs.json"
 
 let SONG = {};
 
@@ -25,6 +25,11 @@ function SocialFeed(props) {
   );
 
   // axios.get();
+  let page = 1;
+  let userUser = "";
+  let songUsersArr = [];
+
+  const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [userForSong, setUserForSong] = useState({});
   const [activeSong, setActiveSong] = useState({});
   const [writer, setWriter] = useState();
@@ -34,7 +39,6 @@ function SocialFeed(props) {
   const [likes, setLikes] = useState(0)
   const [bg, setBg] = useState('')
 
-  
   const audioRef = useRef();
   const windowRef = useRef();
   const popUpRef = useRef();
@@ -50,7 +54,8 @@ function SocialFeed(props) {
   const socialOut = useRef();
   const socialIn = useRef();
   const socialIcon = useRef();
-  const profilePicRef=useRef()
+  const profilePicRef = useRef();
+  const likesRef = useRef();
 
   useEffect(() => {
     socialRim.current.style.animation = "rim .5s linear forwards"
@@ -120,11 +125,6 @@ function SocialFeed(props) {
       menuDown('comment')
     }
   })
-
-  const [thisFeedSongs, setThisFeedSongs] = useState([]);
-  let page = 1;
-  let userUser = "";
-  let songUsersArr = [];
 
   //TEMPORARY CODE TO SHOW ALL SONGS JUST TO GET SOME LIKES ADDED
   // useEffect(() => {
@@ -209,7 +209,7 @@ function SocialFeed(props) {
       SONG = eachSong;
       audioRef.current.src = eachSong.songURL
       profilePicRef.current.src = eachSong.songUser.picture
-      setLikes(eachSong.songLikes?.length)
+      likesRef.current.innerHTML= eachSong.songLikes.length
       console.log(likes)
     } 
     else {}
@@ -219,7 +219,7 @@ function SocialFeed(props) {
         ref={ref}
         className="video-pane"
         style={{
-          backgroundImage: `url('${gradientbg}'), url('${getRandomBackground()}')`
+          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
         }}
       >
         <div className="last-div"></div>
@@ -246,6 +246,7 @@ function SocialFeed(props) {
 
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
+     eachSong.shorts = getRandomBackground();
       // setUserUser(eachSong)
       // console.log(userForSong)
       return <DisplaySong i={i} {...eachSong} />;
@@ -271,10 +272,6 @@ function SocialFeed(props) {
       .catch(console.error);
   };
 
-  // const likePost = () => {
-  //   setLikes(likes + 1)
-  // }
-
   const likePost = () => {
     console.log(user, userViewed);
     document.getElementById("notifyLike").click();
@@ -286,13 +283,7 @@ function SocialFeed(props) {
       })
       .catch(console.error);
   }
-//   <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: ele.profile}} className="search-results-link">
-//   <img className="prof-pic" src={ele.picture} alt=""></img>
-// </Link>
-  const linkBtnAnim = (e) => {
-    console.log(e.target)
-    e.target.style.backgroundColor = 'red'
-  }
+
   const showNavBar = () => {
     return (
       <footer>
@@ -300,9 +291,9 @@ function SocialFeed(props) {
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                <Link to={`/profile/other/${user._id}`}>
+                {/* <Link to={{pathname: `/profile/other/${userProfile}`}}> */}
                   <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
             <div className="like-comment-container">
@@ -312,7 +303,7 @@ function SocialFeed(props) {
               <div className="individual-btn" onClick={likePost}>
                 <img className="social-icons heart" src={heart2}></img>
                 <div className="likes-number-container">
-                    <p>{likes}</p>
+                    <p ref={likesRef}></p>
                 </div>
               </div>
               <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
@@ -339,7 +330,7 @@ function SocialFeed(props) {
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  <Link to="/explore-feed" onClick={linkBtnAnim}>
+                  <Link to="/explore-feed">
                     <img className="button-icons bi-explore" src={explore} alt="explore"></img>
                   </Link>
                 </div>
