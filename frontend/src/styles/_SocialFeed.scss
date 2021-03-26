@@ -11,8 +11,9 @@
 }
 .social-panel {
     height: 80%;
-    position: relative;
-    bottom: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 20%;
     transition: bottom .5s;
     overflow-y: hidden;
 

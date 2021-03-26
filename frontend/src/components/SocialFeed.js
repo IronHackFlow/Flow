@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Link, Redirect } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import ExploreFeed from "../components/ExploreFeed"
 import axios from "axios";
 import TheContext from "../TheContext";
 import actions from "../api";
@@ -18,6 +20,7 @@ import gifsArr from "../images/gifs.json";
 import Search from "../components/Search";
 
 let SONG = {};
+let SONGUSER = {}
 
 function SocialFeed(props) {
   const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed } = React.useContext(
@@ -68,7 +71,7 @@ function SocialFeed(props) {
     if (whichMenu == 'search') {
     searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
     popUpSearchRef.current.style.height = "0px";
-    windowRef.current.style.bottom = "0";
+    windowRef.current.style.bottom = "20%";
     opacitySearchRef3.current.style.opacity = 0;
     dumbSearchRef.current.style.opacity = 0;
     setSearchPoppedUp(false);
@@ -76,7 +79,7 @@ function SocialFeed(props) {
     else if (whichMenu == 'comment') {
       commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
+      windowRef.current.style.bottom = "20%";
       opacityRef1.current.style.opacity = 0;
       opacityRef2.current.style.opacity = 0;
       opacityRef3.current.style.opacity = 0;
@@ -89,7 +92,7 @@ function SocialFeed(props) {
     opacitySearchRef3.current.style.opacity = 1;
     dumbSearchRef.current.style.opacity = 1;
     popUpSearchRef.current.style.height = "50%";
-    windowRef.current.style.bottom = "50%";
+    windowRef.current.style.bottom = "70%";
     setSearchPoppedUp(true);
     }
     else if (whichMenu == 'comment') {
@@ -98,7 +101,7 @@ function SocialFeed(props) {
       opacityRef2.current.style.opacity = 1;
       opacityRef3.current.style.opacity = 1;
       popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
+      windowRef.current.style.bottom = "70%";
       setPoppedUp(true);
     }
   }
@@ -199,10 +202,16 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
+  // const profilePicRefs = useRef()
+  // useEffect(() => {
 
+  //   profilePicRefs.current = SONG.songUser._id
+  // }, [])
+  // const linkToProfileRef = useRef()
+  // const  [profileLink, setProfileLink] = useState({})
   function DisplaySong(eachSong) {
     const [ref, inView] = useInView({
-      threshold: 0.5,
+      threshold: .5,
     });
     if (inView) {
       // eachSong.setActiveSong(eachSong)
@@ -210,10 +219,12 @@ function SocialFeed(props) {
       audioRef.current.src = eachSong.songURL
       profilePicRef.current.src = eachSong.songUser.picture
       likesRef.current.innerHTML= eachSong.songLikes.length
+      // setProfileLink(eachSong.songUser)
       console.log(likes)
+      console.log(SONG.songUser._id)
+      SONGUSER = eachSong.songUser
     } 
     else {}
-    // console.log("scrolling", inView, eachSong);
     return (
       <li
         ref={ref}
@@ -247,6 +258,7 @@ function SocialFeed(props) {
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
      eachSong.shorts = getRandomBackground();
+
       // setUserUser(eachSong)
       // console.log(userForSong)
       return <DisplaySong i={i} {...eachSong} />;
@@ -283,6 +295,30 @@ function SocialFeed(props) {
       })
       .catch(console.error);
   }
+  // const profilePicRoute = (info) => {
+  //   const mappedRes2 = info.data.map((elem) => {
+  //     return { userName: elem.userName, picture: elem.picture, profile: elem};
+  //   });
+  //   return mappedRes2.map((ele) => {
+  //     console.log(ele)
+  //   }
+  // }
+  // const [toggleExplore, setToggleExplore] = useState(false);
+  // const [toggleSocial, setToggleSocial] = useState(true);
+  // const toggleExploreFeed = () => {
+  //   if (toggleExplore === false) {
+  //     setToggleExplore(true)
+  //     setToggleSocial(false)
+
+  //   }
+  // }
+  // const toggleSocialFeed = () => {
+  //   if (toggleSocial === false) {
+  //     setToggleSocial(true)
+  //     setToggleExplore(false)
+      
+  //   }
+  // }
 
   const showNavBar = () => {
     return (
@@ -291,9 +327,10 @@ function SocialFeed(props) {
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                {/* <Link to={{pathname: `/profile/other/${userProfile}`}}> */}
+                <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}}>
                   <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-                {/* </Link> */}
+                  {console.log(SONG.songUser?._id)}
+                </Link>
               </div>
             </div>
             <div className="like-comment-container">
@@ -450,14 +487,17 @@ function SocialFeed(props) {
         <div className="inner-bar"></div>
       </div>
     </div>
-    
-
     )
   }
 
   return (
     <div className="SocialFeed">
-      <div ref={windowRef} className="social-panel">
+      <CSSTransition
+        in={true}
+        appear={true}
+        classNames="fade"
+        timeout={300}>
+      <div ref={windowRef} className="social-panel" key={'key4'}>
         <ul className="video-scroll-container">
           {showSongs()}
           <div className="video-details-container">
@@ -477,7 +517,7 @@ function SocialFeed(props) {
           </div>
         </ul>
       </div>
-
+      </CSSTransition>
       {displayComments()}
       {displaySearch()}
       {showNavBar()}

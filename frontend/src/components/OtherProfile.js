@@ -28,9 +28,8 @@ function OtherProfile(props) {
 
     
   useEffect(() => {
-    
     setThisUser(props.location.profileInfo)
-    
+    setThisUser(props.location.profInfo)
   }, []);
 
   const followUser = () => {
@@ -46,24 +45,6 @@ function OtherProfile(props) {
       })
       .catch(console.error);
   };
-
-
-  // const showProfileDetails = () => {
-  //   return (
-  //     <div className="users-details-container">
-  //       <p>About {thisUser.userAbout}</p>
-  //       <p>Instagram {thisUser.Instagram}</p>
-  //       <p>Twitter {thisUser.userTwitter}</p>
-  //       <p>SoundCloud {thisUser.userSoundCloud}</p>
-  //     </div>
-  //   );
-  // };
-
-  useEffect(() => {
-    axios.get("https://rickandmortyapi.com/api/character").then((res) => {
-      setPosts(res.data.results);
-    });
-  }, []);
 
   const logout = () => {
     setUser({});
@@ -135,7 +116,7 @@ function OtherProfile(props) {
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
                 <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser.picture}/>
+                  <img className="profile-pic" src={thisUser?.picture}/>
                 </div>
               </div>
             </div>
@@ -143,7 +124,7 @@ function OtherProfile(props) {
             <div className="username-container">
               <div className="username-outset">
                 <div className="username-inset">
-                  <h3 className="username-text-me">{thisUser.userName}</h3>
+                  <h3 className="username-text-me">{thisUser?.userName}</h3>
                 </div>
               </div>
             </div>
@@ -158,19 +139,19 @@ function OtherProfile(props) {
 
                 <div className="users-details-each ude-1">
                   <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
-                  <p className="big-p">{thisUser.userAbout}</p>
+                  <p className="big-p">{thisUser?.userAbout}</p>
                 </div>
 
                 <div className="users-details-each ude-2">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser.userInstagram}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser?.userInstagram}</p>
                 </div>
 
                 <div className="users-details-each ude-3">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser.userTwitter}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser?.userTwitter}</p>
                 </div>
 
                 <div className="users-details-each ude-4">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser.userSoundCloud}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser?.userSoundCloud}</p>
                 </div>
               </div>
             </div>
@@ -193,7 +174,7 @@ function OtherProfile(props) {
                 <div className="log-profile-inset">
                   <div className="edit-profile-button" >
                     <img className="button-icons hearts" src={heart2} />
-                    <h4 style={{color: 'pink'}}>{thisUser.userFollows?.length}</h4>
+                    <h4 style={{color: 'pink'}}>{thisUser?.userFollows?.length}</h4>
                   </div>
                 </div>
               </div>
