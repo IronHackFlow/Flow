@@ -1,277 +1,498 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
-import gradientbg from '../images/gradient-bg-2.png'
-import play from '../images/play.svg'
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+import axios from "axios";
 import TheContext from "../TheContext";
 import actions from "../api";
-import mic from '../images/record2.svg'
-import avatar3 from '../images/avatar3.svg'
-import social from '../images/social.svg'
-import follow from '../images/follow.svg'
-import comments from '../images/comment.svg'
-import heart2 from '../images/heart2.svg'
-import explore from '../images/explore.svg'
+import gradientbg from "../images/gradient-bg-2.png";
+import play from "../images/play.svg";
+import mic from "../images/record2.svg";
+import avatar3 from "../images/avatar3.svg";
+import social from "../images/social.svg";
+import follow from "../images/follow.svg";
+import comments from "../images/comment.svg";
+import search from "../images/search.svg";
+import heart2 from "../images/heart2.svg";
+import explore from "../images/explore.svg";
+import gifsArr from "../images/gifs.json";
+import Search from "../components/Search";
+
+let SONG = {};
 
 function SocialFeed(props) {
+  const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed } = React.useContext(
+    TheContext
+  );
 
-    const { user, setUser, userViewed, setUserViewed } = React.useContext(
-        TheContext
-      );
+  // axios.get();
+  let page = 1;
+  let userUser = "";
+  let songUsersArr = [];
 
-    axios.get()
+  const [thisFeedSongs, setThisFeedSongs] = useState([]);
+  const [userForSong, setUserForSong] = useState({});
+  const [activeSong, setActiveSong] = useState({});
+  const [writer, setWriter] = useState();
+  const [comment, setComment] = useState();
+  const [poppedUp, setPoppedUp] = useState(false);
+  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
+  const [likes, setLikes] = useState(0)
+  const [bg, setBg] = useState('')
 
-    const [comment, setComment] = useState()
-    const [poppedUp, setPoppedUp] = useState(false)
-    const windowRef = useRef()
-    const popUpRef = useRef()
-    const trackInfo = useRef()
-    const opacityRef1 = useRef()
-    const opacityRef2 = useRef()
-    const opacityRef3 = useRef()
+  const audioRef = useRef();
+  const windowRef = useRef();
+  const popUpRef = useRef();
+  const commentBtn = useRef();
+  const opacityRef1 = useRef();
+  const opacityRef2 = useRef();
+  const opacityRef3 = useRef();
+  const popUpSearchRef = useRef();
+  const searchBtn = useRef();
+  const opacitySearchRef3 = useRef();
+  const dumbSearchRef = useRef();
+  const socialRim = useRef();
+  const socialOut = useRef();
+  const socialIn = useRef();
+  const socialIcon = useRef();
+  const profilePicRef = useRef();
+  const likesRef = useRef();
 
-    const popUpComments = () => {
-        if(poppedUp == false) {
-            opacityRef1.current.style.opacity = 1 
-            opacityRef2.current.style.opacity = 1 
-            opacityRef3.current.style.opacity = 1 
-            popUpRef.current.style.height = '50%'
-            windowRef.current.style.bottom = '46%'
-            trackInfo.current.style.bottom = '8%'
-            setPoppedUp(true)
-        }
-        else {
-            popUpRef.current.style.height = '0px'
-            windowRef.current.style.bottom = '0'
-            trackInfo.current.style.bottom = '3%'
-            opacityRef1.current.style.opacity = 0 
-            opacityRef2.current.style.opacity = 0 
-            opacityRef3.current.style.opacity = 0 
-            setPoppedUp(false)
-        }
+  useEffect(() => {
+    socialRim.current.style.animation = "rim .5s linear forwards"
+    socialOut.current.style.animation = "out .5s linear forwards"
+    socialIn.current.style.animation = "in .5s linear forwards"
+    socialIcon.current.style.animation = "iconScale .5s linear forwards"
+  }, [])
+
+  const menuDown = (whichMenu) => {
+    if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+    popUpSearchRef.current.style.height = "0px";
+    windowRef.current.style.bottom = "20%";
+    opacitySearchRef3.current.style.opacity = 0;
+    dumbSearchRef.current.style.opacity = 0;
+    setSearchPoppedUp(false);
     }
-
-    const [thisFeedSongs, setThisFeedSongs] = useState([]);
-    let [page, setPage] = useState(1);
-
-    //TEMPORARY CODE TO SHOW ALL SONGS JUST TO GET SOME LIKES ADDED
-    useEffect(() => {
-        actions
-          .getUserSongs(user)
-          .then((usersSongs) => {
-            setThisFeedSongs(usersSongs.data);
-          })
-          .catch(console.error);
-      }, [page]);
-
-      console.log('thisFeedSongs', thisFeedSongs)
-
-      const showSongs = () => {
-        return thisFeedSongs.map((eachSong) => {
-            return (
-                <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/l3b01SFaxG0V0GqV6N/source.gif')`}}>
-                <div ref={trackInfo} style={{ position: "relative" }} className="video-details-container">
-                    <div className="transparent-test">
-                        <div className="user-details-container">
-                            <div className="user-details-inset">
-                                <div className="text-container">
-                                    <h5 className="ud-text udt-1"><span style={{color: '#ec6aa0'}}>@Usernamesernamese</span> - Super Dope Track Super Dope Track Super</h5>
-                                    <h6 className="ud-text udt-2">{eachSong.songName}</h6>
-                                    <h6 className="ud-text udt-3">{eachSong.songCaption}</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="user-profile-image">
-                            <div className="user-profile-inset social-p">
-                               <div className="nav-buttons-inset inset-social-p">
-                                 <img className="button-icons bi-play" src={play}></img>
-                             </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            );
-        });
-
-      };
-
-// REAL CODE TO REPLACE TEMPORARY GET ALL SONGS CODE ABOVE HERE
-    // useEffect(() => {
-    //   actions
-    //     .getUserLikedSongs(user)
-    //     .then((usersSongs) => {
-    //       setThisFeedSongs(usersSongs.data);
-    //     })
-    //     .catch(console.error);
-    // }, [page]);
-
-    const getSocialFeed = () => {
-        page === 1 ? setPage(0) : setPage(1)
-        console.log('GET SOCIAL FEED SONGS FUNCTION')
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      popUpRef.current.style.height = "0px";
+      windowRef.current.style.bottom = "20%";
+      opacityRef1.current.style.opacity = 0;
+      opacityRef2.current.style.opacity = 0;
+      opacityRef3.current.style.opacity = 0;
+      setPoppedUp(false);
     }
-
-    const showNavBar = () => {
-        return (
-            <footer style={{height: `${props.height}`, flexDirection: `${props.row}`}}>
-              <div className="social-buttons" style={{display: `${props.display}`}}>
-                  <div className="social-list">
-                     <div className="profile-container">
-                        <div className="individual-btn">
-                            <div className="individual-profile-pic">
-                            {/* stuff it in my tiny hole! (user's profile img) */}
-                            </div>
-                        </div>
-                      </div>
-                      <div className="like-comment-container">
-                          <div className="individual-btn"><img className="social-icons follow" src={follow}></img></div>
-                          <div className="individual-btn"><img className="social-icons heart" src={heart2}></img></div>
-                          <div className="individual-btn" onClick={popUpComments}><img className="social-icons comment" src={comments}></img></div>
-                      </div>
-                  </div>
-              </div>
-              <div className="nav-buttons" style={{boxShadow: `${props.shadowDisplay}`}}>
-                <div className="nav-list">
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <div className="nav-buttons-inset">
-                    { userViewed._id ? (<Link to="/recordingBooth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons bi-record" src={mic}></img>
-                                    </Link>) }
-                      {/* <img className="button-icons bi-record" src={mic}></img> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <div className="nav-buttons-inset">
-                      <img className="button-icons" src={explore}></img>
-                    </div>
-                  </div>
-                </div>
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <div onClick={getSocialFeed} className="nav-buttons-inset">
-                      <img className="button-icons" src={social}></img>
-                    </div>
-                  </div>
-                </div> 
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <div className="nav-buttons-inset">
-                    { user._id ? (<Link to="/profile">
-                                        <img className="button-icons" src={avatar3}></img>
-                                    </Link>) : (<Link to="/auth">
-                                        <img className="button-icons" src={avatar3}></img>
-                                    </Link>)}
-                      {/* <img className="button-icons" src={avatar3}></img> */}
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </footer>
-        );
+  }
+  const menuUp = (whichMenu) => {
+    if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+    opacitySearchRef3.current.style.opacity = 1;
+    dumbSearchRef.current.style.opacity = 1;
+    popUpSearchRef.current.style.height = "50%";
+    windowRef.current.style.bottom = "70%";
+    setSearchPoppedUp(true);
     }
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      opacityRef1.current.style.opacity = 1;
+      opacityRef2.current.style.opacity = 1;
+      opacityRef3.current.style.opacity = 1;
+      popUpRef.current.style.height = "50%";
+      windowRef.current.style.bottom = "70%";
+      setPoppedUp(true);
+    }
+  }
+
+  const popUpComments = () => {
+    if (poppedUp == false) {
+      menuDown('search')
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
+  };
+  const popUpSearch = () => {
+    if (searchPoppedUp == false) {
+      menuDown('comment')
+      menuUp('search')
+    } else {
+      menuDown('search')
+    }
+  };
+  useEffect(() => {
+    if (navDisplayed == true) {
+      menuDown('search')
+      menuDown('comment')
+    }
+  })
+
+  //TEMPORARY CODE TO SHOW ALL SONGS JUST TO GET SOME LIKES ADDED
+  // useEffect(() => {
+  //   actions
+  //     .getUserSongs(user)
+  //     .then((usersSongs) => {
+  //       setThisFeedSongs(usersSongs.data);
+  //       console.log("inside useffect", thisFeedSongs);
+  //     })
+  //     .catch(console.error);
+  // }, [page]);
+
+  useEffect(() => {
+    actions
+      .getMostLikedSongs()
+      .then((usersSongs) => {
+        setThisFeedSongs(usersSongs.data);
+        console.log("inside useffect", thisFeedSongs);
+      })
+      .catch(console.error);
+  }, [page]);
+
+// const getSongUsers = (theUserId) => {
+//     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
+//     actions
+//     .getAUser(theUserId)
+//     .then((useUser) => {
+//         setUserForSong(useUser.data)
+//     })
+//     .catch(console.error)
+// }git add
+
+// useEffect(() => {
+//     actions
+//     .getAUser(userUser)
+//     .then((useUser) => {
+//         setUserForSong(useUser.data)
+//     })
+//     .catch(console.error)
+// }, [userUser]);
+
+
+
+  // const [userForSong, setUserForSong] = useState({});
+
+  // const [activeSong, setActiveSong] = useState({});
+
+  // const getUserName = (id) => {
+  //   actions
+  //     .getAUser(id)
+  //     .then((name) => {
+  //       console.log(`@${name.data.userName}`);
+  //     })
+  //     .catch(console.error);
+  // };
+
+  let gifsCopy = [...gifsArr]
+
+  const getRandomBackground = () => {
+    let index = Math.floor(Math.random()*gifsCopy.length)
+    // gifsCopy.splice(index, 1)
+    // while (!gifsCopy.includes(gifsCopy[index])) {
+      return gifsCopy[index].url
+    // }
+  }
+
+  const handlePlayPause=()=>{
+    if(audioRef.current.paused){
+     audioRef.current.play()
+    }
+    else {
+     audioRef.current.pause()
+   }
+  }
+  // const profilePicRefs = useRef()
+  // useEffect(() => {
+
+  //   profilePicRefs.current = SONG.songUser._id
+  // }, [])
+  // const linkToProfileRef = useRef()
+  // const  [profileLink, setProfileLink] = useState({})
+  function DisplaySong(eachSong) {
+    const [ref, inView] = useInView({
+      threshold: .5,
+    });
+    if (inView) {
+      // eachSong.setActiveSong(eachSong)
+      SONG = eachSong;
+      audioRef.current.src = eachSong.songURL
+      profilePicRef.current.src = eachSong.songUser.picture
+      likesRef.current.innerHTML= eachSong.songLikes.length
+      // setProfileLink(eachSong.songUser)
+      console.log(likes)
+      console.log(SONG.songUser._id)
+      SONGUSER = eachSong.songUser
+    } 
+    else {}
 
     return (
-        <div className="SocialFeed">
-            <div ref={windowRef} className="social-panel">
-                <ul className="video-scroll-container">
-                    {showSongs()}
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/l3b01SFaxG0V0GqV6N/source.gif')`}}>
-                        <div ref={trackInfo} className="video-details-container">
-                            <div className="transparent-test">
-                                <div className="user-details-container">
-                                    <div className="user-details-inset">
-                                    </div>
-                                </div>
-                                <div className="user-profile-image">
-                                    <div className="user-profile-inset social-p">
-                                       <div className="nav-buttons-inset inset-social-p">
-                                         <img className="button-icons bi-play" src={play}></img>
-                                     </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="text-container">
-                            <h5 className="ud-text udt-1"><span style={{color: '#ec6aa0'}}>@Usernamesernamese</span> - Super Dope Track Super Dope Track Super</h5>
-                            <h6 className="ud-text udt-2">User stating that this is dopeUser stating that this is dopeUse</h6>
-                            <h6 className="ud-text udt-3">caption</h6>
-                        </div>
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/RLQaZ8LeuqrTx0Eeat/source.gif')`}}>
+      <li
+        key={eachSong.songUser._id}
+        ref={ref}
+        className="video-pane"
+        style={{
+          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
+        }}
+      >
+        <div className="last-div"></div>
+        <div className="text-container">
+          <p className="ud-text udt-1">
+            <span style={{ color: "#ec6aa0" }}>
+              {eachSong.songUser.userName}
+            </span>
+          </p>
+          <p className="ud-text udt-2">
+            {eachSong.songName}
+          </p>
+          <p className="ud-text udt-3">
+            {eachSong.caption ? (
+              <p>{eachSong.caption}</p>
+            ) : (
+              <p>no caption for this flow</p>
+            )}
+          </p>
+        </div>
+      </li>
+    );
+  }
 
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/s2fB8Mv2UYBPLC041d/source.gif')`}}>
+  const showSongs = () => {
+    return thisFeedSongs.map((eachSong, i) => {
+     eachSong.shorts = getRandomBackground();
 
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/2xDcfbqistol0Ox63h/source.gif')`}}>
+      // setUserUser(eachSong)
+      // console.log(userForSong)
+      return <DisplaySong i={i} {...eachSong} />;
+    });
+  };
 
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/13hSJauZ5CUJ0c/source.gif')`}}>
 
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/3o7btZxS1IFtwrgfQY/source.gif`}}>
+  const getSocialFeed = () => {
+    page === 1 ? (page = 0) : (page = 1);
+    console.log("GET SOCIAL FEED SONGS FUNCTION");
+  };
 
-                    </li>
-                    <li className="video-pane" style={{backgroundImage: `url('${gradientbg}'), url('https://media.giphy.com/media/t7QSxX3Ebs2OE9cOfG/source.gif')`}}>
+  const followUser = () => {
+    console.log(user, userViewed);
+    document.getElementById("notify").click();
+    const followData = { user1: user._id, user2: userViewed._id };
+    console.log("profile follow user function ", followData);
+    actions
+      .addFollow(followData)
+      .then((somethingreturnedfromapi) => {
+        document.getElementById("notify").click();
+      })
+      .catch(console.error);
+  };
 
-                    </li>
-                </ul>
+  const likePost = () => {
+    console.log(user, userViewed);
+    document.getElementById("notifyLike").click();
+    const likeData = { user1: user._id, songLiked: SONG._id };
+    actions
+      .addLike(likeData)
+      .then((whatever) => {
+        document.getElementById("notifyLike").click();
+      })
+      .catch(console.error);
+  }
+
+  const showNavBar = () => {
+    return (
+      <footer>
+        <div className="social-buttons">
+          <div className="social-list">
+            <div className="individual-btn">
+              <div className="individual-profile-pic">
+                <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}}>
+                  <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
+                  {console.log(SONG.songUser?._id)}
+                </Link>
+              </div>
             </div>
-            <div ref={popUpRef} className="comment-pop-out">
-                <div className="inner-com">
-                    <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
-                        <div className="input-container">
-                            <div className="input-inset">
-                                <form className="social-comment-form">
-                                    <input
-                                        className="social-comment-input" 
-                                        type='text' 
-                                        value='' 
-                                        placeholder='Drop yo comment' 
-                                        ></input>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
-                    <div className="comments-container">
-                        <div className="comment-list-container">
-
-                            <div className="comment-list">
-                                <div className="comment-list-inner">
-                                    <p className="comment-username">
-                                        @username
-                                    </p>
-                                    <p className="comment-date">12m</p>
-                                    <p className="comment-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+            <div className="like-comment-container">
+              <div className="individual-btn" onClick={followUser}>
+                <img className="social-icons follow" src={follow}></img>
+              </div>
+              <div className="individual-btn" onClick={likePost}>
+                <img className="social-icons heart" src={heart2}></img>
+                <div className="likes-number-container">
+                    <p ref={likesRef}></p>
                 </div>
-            </div>
-            
-            <div ref={opacityRef3} style={{opacity: '0'}} className="bottom-bar">
-                <div className="inner-bar"></div>
+              </div>
+              <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
+                <img className="social-icons heart" src={search}></img>
+              </div>
+              <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
+                <img className="social-icons comment" src={comments}></img>
+              </div>
             </div>
           </div>
-          {showNavBar()}
-            {/* <NavBar 
-                comments = {popUpComments}/> */}
         </div>
+        <div className="nav-buttons">
+          <div className="nav-list">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic}></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to="/explore-feed">
+                    <img className="button-icons bi-explore" src={explore} alt="explore"></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="nav-buttons-rim" ref={socialRim}>
+              <div className="nav-buttons-outset" ref={socialOut}>
+                <div className="nav-buttons-inset" ref={socialIn}
+                     onClick={getSocialFeed}>
+                  <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
+                </div>
+              </div>
+            </div>
+
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={user._id ? ("/profile") : ("/auth")}>
+                    <img className="button-icons bi-profile-social" src={avatar3}></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     );
-}
+  };
+
+  const displaySearch = () => {
+    return (
+      <div ref={popUpSearchRef} className="comment-pop-out">
+        <Search dumbSearch = {dumbSearchRef}/>
+
+        <div
+          ref={opacitySearchRef3}
+          style={{ opacity: "0" }}
+          className="bottom-bar"
+        >
+          <div className="inner-bar"></div>
+        </div>
+      </div>
+    );
+  };
+
+  const handleSubmit =(e)=>{
+    e.preventDefault()
+    actions.addComment({comment,SONG})
+  }
+
+  const getCommentWriter=(num)=>{
+    actions
+    .getAUser({id: num})
+    .then((res)=>{
+      setWriter( `@${res.data.userName}`)
+      
+    }).catch((e)=>{
+      console.log('failed to get name')
+    })
+  }
+
+  const renderEachComment = ()=>{
+    console.log(SONG)
+    if(!SONG.songComments){
+    }
+    else {
+      return SONG.songComments.map((each)=>{
+        getCommentWriter(each.commUser)
+        return (
+          <div className="comment-list">
+            <div className="comment-list-inner">
+              <p className="comment-username">
+                  {writer}
+              </p>
+              <p className="comment-text">
+                {each.comment}
+              </p>
+            </div>
+          </div>
+        )
+      })
+    }
+  }
+
+  const displayComments=()=>{
+    return(
+    <div ref={popUpRef} className="comment-pop-out">
+      <div className="inner-com">
+
+        <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
+          <div className="input-container">
+            <div className="input-inset">
+              <form className="social-comment-form" onSubmit={handleSubmit}>
+                <input
+                    className="social-comment-input" 
+                    type='text' 
+                    onChange={(e)=>setComment(e.target.value)}
+                    placeholder='Drop yo comment' 
+                    ></input>
+                  <button></button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
+          <div className="comments-container">
+            <div className="comment-list-container">
+               {renderEachComment()}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
+        <div className="inner-bar"></div>
+      </div>
+    </div>
+    )
+  }
+
+  return (
+    <div className="SocialFeed">    
+      <div ref={windowRef} className="social-panel">
+        <ul className="video-scroll-container">
+          {showSongs()}
+          <div className="video-details-container">
+            <div className="transparent-test">
+              <div className="user-details-container">
+                <div className="user-details-inset">
+                </div>
+              </div>
+              <div className="user-profile-image">
+                <div className="user-profile-inset social-p">
+                  <div className="nav-buttons-inset inset-social-p">
+                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+      {displayComments()}
+      {displaySearch()}
+      {showNavBar()}
+      <audio ref={audioRef} id='damn'></audio>
+    </div>
+    )
+  }
 
 export default SocialFeed;

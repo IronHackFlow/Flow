@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Link, Redirect } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import ExploreFeed from "../components/ExploreFeed"
 import axios from "axios";
 import TheContext from "../TheContext";
 import actions from "../api";
@@ -29,10 +28,12 @@ function SocialFeed(props) {
 
   // axios.get();
   let page = 1;
+  let page2 = 1
   let userUser = "";
   let songUsersArr = [];
 
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
+  const [exploreFeedSongs, setExploreFeedSongs] = useState([])
   const [userForSong, setUserForSong] = useState({});
   const [activeSong, setActiveSong] = useState({});
   const [writer, setWriter] = useState();
@@ -41,6 +42,8 @@ function SocialFeed(props) {
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [likes, setLikes] = useState(0)
   const [bg, setBg] = useState('')
+  const [toggleExplore, setToggleExplore] = useState(false);
+  const [toggleSocial, setToggleSocial] = useState(true);
 
   const audioRef = useRef();
   const windowRef = useRef();
@@ -57,14 +60,18 @@ function SocialFeed(props) {
   const socialOut = useRef();
   const socialIn = useRef();
   const socialIcon = useRef();
+  const exploreRim = useRef();
+  const exploreOut = useRef();
+  const exploreIn = useRef();
+  const exploreIcon = useRef();
   const profilePicRef = useRef();
   const likesRef = useRef();
 
   useEffect(() => {
-    socialRim.current.style.animation = "rim .5s linear forwards"
-    socialOut.current.style.animation = "out .5s linear forwards"
-    socialIn.current.style.animation = "in .5s linear forwards"
-    socialIcon.current.style.animation = "iconScale .5s linear forwards"
+      socialRim.current.style.animation = "rim .5s linear forwards"
+      socialOut.current.style.animation = "out .5s linear forwards"
+      socialIn.current.style.animation = "in .5s linear forwards"
+      socialIcon.current.style.animation = "iconScale .5s linear forwards"
   }, [])
 
   const menuDown = (whichMenu) => {
@@ -129,26 +136,26 @@ function SocialFeed(props) {
     }
   })
 
-  //TEMPORARY CODE TO SHOW ALL SONGS JUST TO GET SOME LIKES ADDED
-  // useEffect(() => {
-  //   actions
-  //     .getUserSongs(user)
-  //     .then((usersSongs) => {
-  //       setThisFeedSongs(usersSongs.data);
-  //       console.log("inside useffect", thisFeedSongs);
-  //     })
-  //     .catch(console.error);
-  // }, [page]);
-
   useEffect(() => {
     actions
       .getMostLikedSongs()
       .then((usersSongs) => {
         setThisFeedSongs(usersSongs.data);
-        console.log("inside useffect", thisFeedSongs);
+        console.log("inside useeffect", thisFeedSongs);
       })
       .catch(console.error);
   }, [page]);
+
+  useEffect(() => {
+    actions
+      .getMostLikedSongs()
+      .then((exploreSongs) => {
+        exploreSongs.data.reverse()
+        setExploreFeedSongs(exploreSongs.data)
+        console.log("inside explore useeffect", exploreFeedSongs)
+      })
+      .catch(console.error);
+  }, [page2]);
 
 // const getSongUsers = (theUserId) => {
 //     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
@@ -209,10 +216,22 @@ function SocialFeed(props) {
   // }, [])
   // const linkToProfileRef = useRef()
   // const  [profileLink, setProfileLink] = useState({})
+
   function DisplaySong(eachSong) {
-    const [ref, inView] = useInView({
-      threshold: .5,
+    // const [ref, inView] = useInView({
+    //   threshold: .5,
+    // });
+    const ref = useRef()
+    const [inViewRef, inView] = useInView({
+      threshold: .8,
     });
+    const setRefs = useCallback(
+      (node) => {
+        ref.current = node;
+        inViewRef(node)
+      },
+      [inViewRef],
+    )
     if (inView) {
       // eachSong.setActiveSong(eachSong)
       SONG = eachSong;
@@ -220,14 +239,13 @@ function SocialFeed(props) {
       profilePicRef.current.src = eachSong.songUser.picture
       likesRef.current.innerHTML= eachSong.songLikes.length
       // setProfileLink(eachSong.songUser)
-      console.log(likes)
-      console.log(SONG.songUser._id)
-      SONGUSER = eachSong.songUser
     } 
     else {}
+
     return (
       <li
-        ref={ref}
+        key={eachSong.songUser._id}
+        ref={setRefs}
         className="video-pane"
         style={{
           backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
@@ -264,7 +282,12 @@ function SocialFeed(props) {
       return <DisplaySong i={i} {...eachSong} />;
     });
   };
-
+ const showExploreSongs = () => {
+   return exploreFeedSongs.map((eachSong, j) => {
+     eachSong.shorts = getRandomBackground();
+     return <DisplaySong j={j} {...eachSong} />
+   })
+ }
 
   const getSocialFeed = () => {
     page === 1 ? (page = 0) : (page = 1);
@@ -303,8 +326,8 @@ function SocialFeed(props) {
   //     console.log(ele)
   //   }
   // }
-  // const [toggleExplore, setToggleExplore] = useState(false);
-  // const [toggleSocial, setToggleSocial] = useState(true);
+
+
   // const toggleExploreFeed = () => {
   //   if (toggleExplore === false) {
   //     setToggleExplore(true)
@@ -312,11 +335,14 @@ function SocialFeed(props) {
 
   //   }
   // }
-  // const toggleSocialFeed = () => {
+  // const toggleFeed = () => {
   //   if (toggleSocial === false) {
   //     setToggleSocial(true)
   //     setToggleExplore(false)
-      
+  //   }
+  //   else {
+  //     setToggleExplore(true)
+  //     setToggleSocial(false)
   //   }
   // }
 
@@ -329,7 +355,7 @@ function SocialFeed(props) {
               <div className="individual-profile-pic">
                 <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}}>
                   <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-                  {console.log(SONG.songUser?._id)}
+                  {console.log()}
                 </Link>
               </div>
             </div>
@@ -364,12 +390,10 @@ function SocialFeed(props) {
               </div>
             </div>
 
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to="/explore-feed">
-                    <img className="button-icons bi-explore" src={explore} alt="explore"></img>
-                  </Link>
+            <div className="nav-buttons-rim" ref={exploreRim}>
+              <div className="nav-buttons-outset" ref={exploreOut}>
+                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => {setToggleExplore(true); setToggleSocial(false)}}>
+                    <img className="button-icons bi-explore" ref={exploreIcon} src={explore} alt="explore"></img>
                 </div>
               </div>
             </div>
@@ -377,7 +401,7 @@ function SocialFeed(props) {
             <div className="nav-buttons-rim" ref={socialRim}>
               <div className="nav-buttons-outset" ref={socialOut}>
                 <div className="nav-buttons-inset" ref={socialIn}
-                     onClick={getSocialFeed}>
+                     onClick={() => {setToggleSocial(true); setToggleExplore(false)}}>
                   <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
                 </div>
               </div>
@@ -489,39 +513,73 @@ function SocialFeed(props) {
     </div>
     )
   }
-
+  
   return (
     <div className="SocialFeed">
-      <CSSTransition
-        in={true}
-        appear={true}
-        classNames="fade"
-        timeout={300}>
-      <div ref={windowRef} className="social-panel" key={'key4'}>
-        <ul className="video-scroll-container">
-          {showSongs()}
-          <div className="video-details-container">
-            <div className="transparent-test">
-              <div className="user-details-container">
-                <div className="user-details-inset">
+      <div ref={windowRef} className="social-panel">
+        <CSSTransition 
+          in={toggleExplore}
+          key={'key1'}
+          mountOnEnter
+          classNames="fade"
+          unmountOnExit
+          timeout={400}
+          onEnter={()=>console.log("entered explore 1")}
+          onExit={()=>console.log("exited explore 1")}
+          >
+          <ul className="video-scroll-container">
+            {showExploreSongs()}
+            <div className="video-details-container">
+              <div className="transparent-test">
+                <div className="user-details-container">
+                  <div className="user-details-inset">
+                  </div>
                 </div>
-              </div>
-              <div className="user-profile-image">
-                <div className="user-profile-inset social-p">
-                  <div className="nav-buttons-inset inset-social-p">
-                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                <div className="user-profile-image">
+                  <div className="user-profile-inset social-p">
+                    <div className="nav-buttons-inset inset-social-p">
+                      <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ul>
+          </ul>
+        </CSSTransition>
+        <CSSTransition
+          in={toggleSocial}
+          key={'key2'}
+          classNames="fade"
+          mountOnEnter
+          unmountOnExit
+          onEnter={()=>console.log("entered explore 2")}
+          onExit={()=>console.log("exited explore 2")}
+          timeout={400}>
+          <ul className="video-scroll-container">
+            {showSongs()}
+            <div className="video-details-container">
+              <div className="transparent-test">
+                <div className="user-details-container">
+                  <div className="user-details-inset">
+                  </div>
+                </div>
+                <div className="user-profile-image">
+                  <div className="user-profile-inset social-p">
+                    <div className="nav-buttons-inset inset-social-p">
+                      <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </CSSTransition>
       </div>
-      </CSSTransition>
+      
       {displayComments()}
       {displaySearch()}
       {showNavBar()}
-      <audio ref={audioRef} id='damn' ></audio>
+      <audio ref={audioRef} id='damn'></audio>
     </div>
     )
   }

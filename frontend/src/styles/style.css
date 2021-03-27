@@ -123,6 +123,29 @@
   }
 }
 
+.fade-appear,
+.fade-enter {
+  left: 100vw;
+  z-index: 1;
+}
+
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  left: 0;
+  -webkit-transition: left 200ms linear;
+  transition: left 200ms linear;
+}
+
+.fade-exit {
+  right: 100vw;
+}
+
+.fade-exit.fade-exit-active {
+  right: 0;
+  -webkit-transition: left 200ms linear;
+  transition: left 200ms linear;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -1190,29 +1213,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 .idi-2 {
   -webkit-animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
           animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
-}
-
-.fade-appear,
-.fade-enter {
-  left: 100vw;
-  z-index: 1;
-}
-
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-  left: 0;
-  -webkit-transition: left 200ms linear;
-  transition: left 200ms linear;
-}
-
-.fade-exit {
-  right: 100vw;
-}
-
-.fade-exit.fade-exit-active {
-  right: 0;
-  -webkit-transition: left 200ms linear;
-  transition: left 200ms linear;
 }
 
 .TestAudio {
@@ -3958,10 +3958,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .bi-social-p {
-  margin: 7px 0px 0px 0px;
-}
-
-.bi-explore {
   margin: 7px 0px 0px 0px;
 }
 

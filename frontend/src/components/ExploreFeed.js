@@ -20,7 +20,7 @@ import gifsArr from "../images/gifs.json"
 let SONG = {};
 let songLikez = ''
 
-function SocialFeed(props) {
+function SocialFeed({ toggleExplore }) {
   const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed  } = React.useContext(
     TheContext
   );
@@ -57,12 +57,12 @@ function SocialFeed(props) {
   const profilePicRef = useRef();
   const songLikesRef = useRef();
 
-  useEffect(() => {
-    exploreRim.current.style.animation = "rim .5s linear forwards"
-    exploreOut.current.style.animation = "out .5s linear forwards"
-    exploreIn.current.style.animation = "in .5s linear forwards"
-    exploreIcon.current.style.animation = "iconScale .5s linear forwards"
-  }, [])
+  // useEffect(() => {
+  //   exploreRim.current.style.animation = "rim .5s linear forwards"
+  //   exploreOut.current.style.animation = "out .5s linear forwards"
+  //   exploreIn.current.style.animation = "in .5s linear forwards"
+  //   exploreIcon.current.style.animation = "iconScale .5s linear forwards"
+  // }, [])
   
   const menuDown = (whichMenu) => {
     if (whichMenu == 'search') {
@@ -200,8 +200,8 @@ function SocialFeed(props) {
       // eachSong.setActiveSong(eachSong)
       SONG = eachSong;
       audioRef.current.src=eachSong.songURL
-      profilePicRef.current.src=eachSong.songUser.picture
-      songLikesRef.current.innerHTML = eachSong.songLikes.length
+      // profilePicRef.current.src=eachSong.songUser.picture
+      // songLikesRef.current.innerHTML = eachSong.songLikes.length
       songLikez = eachSong.songLikes?.length
       console.log(songLikez, '>>>>>>>><<<<<<<<<', eachSong.songLikes)
     }
@@ -253,197 +253,197 @@ function SocialFeed(props) {
     console.log("GET SOCIAL FEED SONGS FUNCTION");
   };
 
-  const followUser = () => {
-    console.log(user, userViewed);
-    document.getElementById("notify").click();
-    const followData = { user1: user._id, user2: userViewed._id };
-    console.log("profile follow user function ", followData);
-    actions
-      .addFollow(followData)
-      .then((somethingreturnedfromapi) => {
-        document.getElementById("notify").click();
-      })
-      .catch(console.error);
-  };
+  // const followUser = () => {
+  //   console.log(user, userViewed);
+  //   document.getElementById("notify").click();
+  //   const followData = { user1: user._id, user2: userViewed._id };
+  //   console.log("profile follow user function ", followData);
+  //   actions
+  //     .addFollow(followData)
+  //     .then((somethingreturnedfromapi) => {
+  //       document.getElementById("notify").click();
+  //     })
+  //     .catch(console.error);
+  // };
 
-  const likePost = () => {
-    console.log(user, userViewed);
-    document.getElementById("notify").click();
-    const likeData = { user1: user._id, songLiked: SONG._id };
-    actions
-      .addLike(likeData)
-      .then((whatever) => {
-        document.getElementById("notify").click();
-      })
-      .catch(console.error);
-  }
+  // const likePost = () => {
+  //   console.log(user, userViewed);
+  //   document.getElementById("notify").click();
+  //   const likeData = { user1: user._id, songLiked: SONG._id };
+  //   actions
+  //     .addLike(likeData)
+  //     .then((whatever) => {
+  //       document.getElementById("notify").click();
+  //     })
+  //     .catch(console.error);
+  // }
 
-  const showNavBar = () => {
-    return (
-      <footer>
-        <div className="social-buttons">
-          <div className="social-list">
-            <div className="individual-btn">
-              <div className="individual-profile-pic">
-                <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-              </div>
-            </div>
-            <div className="like-comment-container">
-              <div className="individual-btn" onClick={followUser}>
-                <img className="social-icons follow" src={follow}></img>
-              </div>
-              <div className="individual-btn">
-                <img className="social-icons heart" onClick={(() => likePost())} src={heart2}></img>
-                <div className="likes-number-container">
-                    <p ref={songLikesRef}></p>
-                </div>
-              </div>
-              <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
-                <img className="social-icons heart" src={search}></img>
-              </div>
-              <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
-                <img className="social-icons comment" src={comments}></img>
-              </div>
-            </div>
-          </div>
-        </div>
+  // const showNavBar = () => {
+  //   return (
+  //     <footer style={{display: 'none'}}>
+  //       <div className="social-buttons">
+  //         <div className="social-list">
+  //           <div className="individual-btn">
+  //             <div className="individual-profile-pic">
+  //               <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
+  //             </div>
+  //           </div>
+  //           <div className="like-comment-container">
+  //             <div className="individual-btn" onClick={followUser}>
+  //               <img className="social-icons follow" src={follow}></img>
+  //             </div>
+  //             <div className="individual-btn">
+  //               <img className="social-icons heart" onClick={(() => likePost())} src={heart2}></img>
+  //               <div className="likes-number-container">
+  //                   <p ref={songLikesRef}></p>
+  //               </div>
+  //             </div>
+  //             <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
+  //               <img className="social-icons heart" src={search}></img>
+  //             </div>
+  //             <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
+  //               <img className="social-icons comment" src={comments}></img>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
 
-        <div className="nav-buttons">
-          <div className="nav-list">
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                    <img className="button-icons bi-record" src={mic}></img>
-                  </Link>
-                </div>
-              </div>
-            </div>
+  //       <div className="nav-buttons">
+  //         <div className="nav-list">
+  //           <div className="nav-buttons-rim">
+  //             <div className="nav-buttons-outset">
+  //               <div className="nav-buttons-inset">
+  //                 <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+  //                   <img className="button-icons bi-record" src={mic}></img>
+  //                 </Link>
+  //               </div>
+  //             </div>
+  //           </div>
 
-            <div className="nav-buttons-rim" ref={exploreRim}>
-              <div className="nav-buttons-outset" ref={exploreOut}>
-                <div className="nav-buttons-inset" ref={exploreIn}>
-                  <img className="button-icons bi-explore-e" src={explore} ref={exploreIcon}></img>
-                </div>
-              </div>
-            </div>
+  //           <div className="nav-buttons-rim" ref={exploreRim}>
+  //             <div className="nav-buttons-outset" ref={exploreOut}>
+  //               <div className="nav-buttons-inset" ref={exploreIn}>
+  //                 <img className="button-icons bi-explore-e" src={explore} ref={exploreIcon}></img>
+  //               </div>
+  //             </div>
+  //           </div>
 
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to='/social-feed'>
-                    <img className="button-icons bi-social-explore" src={social} alt="social"></img>
-                  </Link>
-                </div>
-              </div>
-            </div>
+  //           <div className="nav-buttons-rim">
+  //             <div className="nav-buttons-outset">
+  //               <div className="nav-buttons-inset">
+  //                 <Link to='/social-feed'>
+  //                   <img className="button-icons bi-social-explore" src={social} alt="social"></img>
+  //                 </Link>
+  //               </div>
+  //             </div>
+  //           </div>
 
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={user._id ? ("/profile") : ("/auth")}>
-                    <img className="button-icons bi-profile-social" src={avatar3}></img>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
-  };
+  //           <div className="nav-buttons-rim">
+  //             <div className="nav-buttons-outset">
+  //               <div className="nav-buttons-inset">
+  //                 <Link to={user._id ? ("/profile") : ("/auth")}>
+  //                   <img className="button-icons bi-profile-social" src={avatar3}></img>
+  //                 </Link>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </footer>
+  //   );
+  // };
 
-  const displaySearch = () => {
-    return (
-      <div ref={popUpSearchRef} className="comment-pop-out">
-        <Search dumbSearch = {dumbSearchRef}/>
+  // const displaySearch = () => {
+  //   return (
+  //     <div ref={popUpSearchRef} className="comment-pop-out" style={{display: 'none'}}>
+  //       <Search dumbSearch = {dumbSearchRef}/>
 
-        <div ref={opacitySearchRef3} style={{ opacity: "0" }} className="bottom-bar">
-          <div className="inner-bar"></div>
-        </div>
-      </div>
-    );
-  };
+  //       <div ref={opacitySearchRef3} style={{ opacity: "0" }} className="bottom-bar">
+  //         <div className="inner-bar"></div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    actions.addComment({comment, SONG}) 
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   actions.addComment({comment, SONG}) 
+  // }
 
-  const getCommentWriter = (num) => {
-    actions
-    .getAUser({id: num})
-    .then((res)=>{
-      setWriter( `@${res.data.userName}`)
+  // const getCommentWriter = (num) => {
+  //   actions
+  //   .getAUser({id: num})
+  //   .then((res)=>{
+  //     setWriter( `@${res.data.userName}`)
       
-    }).catch((e)=>{
-      console.log('failed to get name')
-    })
-  }
+  //   }).catch((e)=>{
+  //     console.log('failed to get name')
+  //   })
+  // }
 
-  const renderEachComment = () => {
-    console.log(SONG)
-    if(!SONG.songComments){
-    }
-    else{
-      return SONG.songComments.map((each)=>{
-        getCommentWriter(each.commUser)
-        return (
-          <div className="comment-list">
-            <div className="comment-list-inner">
-              <p className="comment-username">
-                  {writer}
-              </p>
-              <p className="comment-text">
-                {each.comment}
-              </p>
-            </div>
-          </div>
-        )
-      })
-    }
-  }
+  // const renderEachComment = () => {
+  //   console.log(SONG)
+  //   if(!SONG.songComments){
+  //   }
+  //   else{
+  //     return SONG.songComments.map((each)=>{
+  //       getCommentWriter(each.commUser)
+  //       return (
+  //         <div className="comment-list">
+  //           <div className="comment-list-inner">
+  //             <p className="comment-username">
+  //                 {writer}
+  //             </p>
+  //             <p className="comment-text">
+  //               {each.comment}
+  //             </p>
+  //           </div>
+  //         </div>
+  //       )
+  //     })
+  //   }
+  // }
 
-  const displayComments=()=>{
-    return(
-    <div ref={popUpRef} className="comment-pop-out">
+  // const displayComments=()=>{
+  //   return(
+  //   <div ref={popUpRef} className="comment-pop-out" style={{display: 'none'}}>
 
-      <div className="inner-com">
-        <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
-          <div className="input-container">
-            <div className="input-inset">
-              <form className="social-comment-form" onSubmit={handleSubmit}>
-                <input
-                    className="social-comment-input" 
-                    type='text' 
-                    onChange={(e)=>setComment(e.target.value)}
-                    placeholder='Drop yo comment' 
-                    ></input>
-                  <button></button>
-              </form>
-            </div>
-          </div>
-        </div>
+  //     <div className="inner-com">
+  //       <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
+  //         <div className="input-container">
+  //           <div className="input-inset">
+  //             <form className="social-comment-form" onSubmit={handleSubmit}>
+  //               <input
+  //                   className="social-comment-input" 
+  //                   type='text' 
+  //                   onChange={(e)=>setComment(e.target.value)}
+  //                   placeholder='Drop yo comment' 
+  //                   ></input>
+  //                 <button></button>
+  //             </form>
+  //           </div>
+  //         </div>
+  //       </div>
 
-        <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
-          <div className="comments-container">
-            <div className="comment-list-container">
-               {renderEachComment()}
-            </div>
-          </div>
-        </div>
-      </div>
+  //       <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
+  //         <div className="comments-container">
+  //           <div className="comment-list-container">
+  //              {renderEachComment()}
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
 
-      <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
-        <div className="inner-bar"></div>
-      </div>
+  //     <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
+  //       <div className="inner-bar"></div>
+  //     </div>
 
-    </div>
-    )
-  }
+  //   </div>
+  //   )
+  // }
 
   return (
-    <div className="SocialFeed">
+    // <div className="SocialFeed">
       <div ref={windowRef} className="social-panel">
         <ul className="video-scroll-container">
           {showSongs()}
@@ -462,12 +462,12 @@ function SocialFeed(props) {
             </div>
           </div>
         </ul>
-      </div>
-      
+      {/* </div> */}
+{/*       
     {displayComments()}
     {displaySearch()}
-    {showNavBar()}
-    <audio ref={audioRef} id='damn' ></audio>
+    {showNavBar()} */}
+    <audio ref={audioRef} id='damn'></audio>
     </div>
   )
 }

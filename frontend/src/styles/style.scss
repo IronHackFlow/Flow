@@ -64,7 +64,23 @@ $lightgrayBg: #ecf0f3;
 @include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
 @include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
 // @include pageIndicator(rim, unset, 2px, 2px, 3px, #b7b8b9, unset)
-
+.fade-appear,
+.fade-enter {
+  left: 100vw;
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  left: 0;
+  transition: left 200ms linear
+}
+.fade-exit {
+  right: 100vw;
+}
+.fade-exit.fade-exit-active {
+  right: 0;
+  transition: left 200ms linear;
+}
 * {
   margin: 0;
   padding: 0;
