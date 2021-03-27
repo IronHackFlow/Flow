@@ -1802,6 +1802,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -ms-scroll-snap-type: y mandatory;
       scroll-snap-type: y mandatory;
   overflow-y: scroll;
+  position: absolute;
 }
 
 .social-panel .video-scroll-container .video-pane {
