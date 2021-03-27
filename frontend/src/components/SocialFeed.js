@@ -67,12 +67,12 @@ function SocialFeed(props) {
   const profilePicRef = useRef();
   const likesRef = useRef();
 
-  useEffect(() => {
-      socialRim.current.style.animation = "rim .5s linear forwards"
-      socialOut.current.style.animation = "out .5s linear forwards"
-      socialIn.current.style.animation = "in .5s linear forwards"
-      socialIcon.current.style.animation = "iconScale .5s linear forwards"
-  }, [])
+  // useEffect(() => {
+  //     socialRim.current.style.animation = "rim .5s linear forwards"
+  //     socialOut.current.style.animation = "out .5s linear forwards"
+  //     socialIn.current.style.animation = "in .5s linear forwards"
+  //     socialIcon.current.style.animation = "iconScale .5s linear forwards"
+  // }, [])
 
   const menuDown = (whichMenu) => {
     if (whichMenu == 'search') {
@@ -513,7 +513,14 @@ function SocialFeed(props) {
     </div>
     )
   }
-  
+  const transClass = () => {
+    if (toggleSocial === true) {
+      return "fade2"
+    }
+    if (toggleExplore === true) {
+      return "fade"
+    }
+  }
   return (
     <div className="SocialFeed">
       <div ref={windowRef} className="social-panel">
@@ -521,42 +528,73 @@ function SocialFeed(props) {
           in={toggleExplore}
           key={'key1'}
           mountOnEnter
-          classNames="fade"
+          classNames={transClass()}
           unmountOnExit
-          timeout={400}
-          onEnter={()=>console.log("entered explore 1")}
-          onExit={()=>console.log("exited explore 1")}
+          timeout={1000}
+          onEnter={()=> {
+            exploreRim.current.style.animation = "rim .5s linear forwards"
+            exploreOut.current.style.animation = "out .5s linear forwards"
+            exploreIn.current.style.animation = "in .5s linear forwards"
+            exploreIcon.current.style.animation = "iconScale .5s linear forwards"
+          }}
+          onExit={()=> {
+            exploreRim.current.style.animation = "none"
+            exploreOut.current.style.animation = "none"
+            exploreIn.current.style.animation = "none"
+            exploreIcon.current.style.animation = "none"
+          }}
           >
           <ul className="video-scroll-container">
             {showExploreSongs()}
-            <div className="video-details-container">
-              <div className="transparent-test">
-                <div className="user-details-container">
-                  <div className="user-details-inset">
+            <CSSTransition
+              in={toggleExplore}
+              key={'key3'}
+              classNames="fade3"
+              timeout={400}>
+              <div className="video-details-container">
+                <div className="transparent-test">
+                  <div className="user-details-container">
+                    <div className="user-details-inset">
+                    </div>
                   </div>
-                </div>
-                <div className="user-profile-image">
-                  <div className="user-profile-inset social-p">
-                    <div className="nav-buttons-inset inset-social-p">
-                      <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                  <div className="user-profile-image">
+                    <div className="user-profile-inset social-p">
+                      <div className="nav-buttons-inset inset-social-p">
+                        <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </CSSTransition>
           </ul>
         </CSSTransition>
         <CSSTransition
           in={toggleSocial}
           key={'key2'}
-          classNames="fade"
+          classNames={transClass()}
           mountOnEnter
           unmountOnExit
-          onEnter={()=>console.log("entered explore 2")}
-          onExit={()=>console.log("exited explore 2")}
-          timeout={400}>
+          onEnter={()=> {
+            socialRim.current.style.animation = "rim .5s linear forwards"
+            socialOut.current.style.animation = "out .5s linear forwards"
+            socialIn.current.style.animation = "in .5s linear forwards"
+            socialIcon.current.style.animation = "iconScale .5s linear forwards"
+          }}
+          onExit={()=> {
+            socialRim.current.style.animation = "none"
+            socialOut.current.style.animation = "none"
+            socialIn.current.style.animation = "none"
+            socialIcon.current.style.animation = "none"
+          }}
+          timeout={1000}>
           <ul className="video-scroll-container">
             {showSongs()}
+            <CSSTransition
+              in={toggleSocial}
+              key={'key4'}
+              classNames="fade3"
+              timeout={400}>
             <div className="video-details-container">
               <div className="transparent-test">
                 <div className="user-details-container">
@@ -572,6 +610,7 @@ function SocialFeed(props) {
                 </div>
               </div>
             </div>
+            </CSSTransition>
           </ul>
         </CSSTransition>
       </div>

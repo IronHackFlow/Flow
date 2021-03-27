@@ -132,18 +132,41 @@
 .fade-appear-active,
 .fade-enter.fade-enter-active {
   left: 0;
-  -webkit-transition: left 200ms linear;
-  transition: left 200ms linear;
+  -webkit-transition: left 500ms linear;
+  transition: left 500ms linear;
 }
 
 .fade-exit {
-  right: 100vw;
+  left: 0;
 }
 
 .fade-exit.fade-exit-active {
+  left: -100vw;
+  -webkit-transition: left 500ms linear;
+  transition: left 500ms linear;
+}
+
+.fade2-appear,
+.fade2-enter {
+  right: 100vw;
+  z-index: 1;
+}
+
+.fade2-appear-active,
+.fade2-enter.fade-enter-active {
   right: 0;
-  -webkit-transition: left 200ms linear;
-  transition: left 200ms linear;
+  -webkit-transition: right 500ms linear;
+  transition: right 500ms linear;
+}
+
+.fade2-exit {
+  right: 0;
+}
+
+.fade2-exit.fade-exit-active {
+  right: -100vw;
+  -webkit-transition: right 500ms linear;
+  transition: right 500ms linear;
 }
 
 * {
