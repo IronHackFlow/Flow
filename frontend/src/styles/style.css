@@ -132,8 +132,8 @@
 .fade-appear-active,
 .fade-enter.fade-enter-active {
   left: 0;
-  -webkit-transition: left 500ms linear;
-  transition: left 500ms linear;
+  -webkit-transition: left 400ms linear;
+  transition: left 400ms linear;
 }
 
 .fade-exit {
@@ -142,31 +142,31 @@
 
 .fade-exit.fade-exit-active {
   left: -100vw;
-  -webkit-transition: left 500ms linear;
-  transition: left 500ms linear;
+  -webkit-transition: left 400ms linear;
+  transition: left 400ms linear;
 }
 
-.fade2-appear,
-.fade2-enter {
-  right: 100vw;
+.fadeRight-appear,
+.fadeRight-enter {
+  left: -100vw;
   z-index: 1;
 }
 
-.fade2-appear-active,
-.fade2-enter.fade-enter-active {
-  right: 0;
-  -webkit-transition: right 500ms linear;
-  transition: right 500ms linear;
+.fadeRight-appear-active,
+.fadeRight-enter.fadeRight-enter-active {
+  left: 0;
+  -webkit-transition: left 400ms linear;
+  transition: left 400ms linear;
 }
 
-.fade2-exit {
-  right: 0;
+.fadeRight-exit {
+  left: 0;
 }
 
-.fade2-exit.fade-exit-active {
-  right: -100vw;
-  -webkit-transition: right 500ms linear;
-  transition: right 500ms linear;
+.fadeRight-exit.fadeRight-exit-active {
+  left: 100vw;
+  -webkit-transition: left 400ms linear;
+  transition: left 400ms linear;
 }
 
 * {
@@ -488,8 +488,6 @@ footer {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: fixed;
-  bottom: 0;
   background: -webkit-gradient(linear, left top, right top, from(#ec66b7), to(#40bdac));
   background: linear-gradient(90deg, #ec66b7, #40bdac);
 }
@@ -1288,6 +1286,14 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
 }
 
+.scroll-rhymes-outer .scroll-rhymes-container .transcript-line-1 {
+  color: white;
+  font-size: 16px;
+  width: 95%;
+  font-weight: bold;
+  text-shadow: 3px 4px 5px #494848;
+}
+
 .scroll-rhymes-outer .scroll-rhymes-line {
   height: 15%;
   width: 88%;
@@ -1812,8 +1818,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 .social-panel {
   height: 80%;
   width: 100%;
-  position: absolute;
-  bottom: 20%;
+  position: relative;
+  bottom: 0;
   -webkit-transition: bottom .5s;
   transition: bottom .5s;
   overflow-y: hidden;
@@ -1923,7 +1929,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           animation: floatText 5s linear infinite;
 }
 
-.social-panel .video-scroll-container .video-details-container {
+.social-panel .video-details-container {
   height: 130px;
   width: 356px;
   border-radius: 55px;
@@ -1945,13 +1951,14 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   background-image: url("../images/bg-transparent2.png");
   background-size: cover;
   background-position: center;
+  z-index: 10;
   bottom: 3%;
   left: 2.5%;
   -webkit-box-shadow: 0px 8px 20px 0px #00000099;
           box-shadow: 0px 8px 20px 0px #00000099;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test {
+.social-panel .video-details-container .transparent-test {
   height: 90%;
   width: 96.5%;
   border-radius: 49px;
@@ -1971,7 +1978,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: inset 3px 3px 6px #353535, inset -2px -2px 3px #8c8f90;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-details-container {
+.social-panel .video-details-container .transparent-test .user-details-container {
   height: 70%;
   width: 70%;
   border-radius: 15px;
@@ -1994,7 +2001,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 2px #7b7b7b;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-details-container .user-details-inset {
+.social-panel .video-details-container .transparent-test .user-details-container .user-details-inset {
   height: 80%;
   width: 92%;
   border-radius: 10px;
@@ -2017,7 +2024,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-profile-image {
+.social-panel .video-details-container .transparent-test .user-profile-image {
   height: 70%;
   width: 20%;
   border-radius: 0px;
@@ -2036,7 +2043,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           flex-direction: row;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-profile-image .social-p {
+.social-panel .video-details-container .transparent-test .user-profile-image .social-p {
   height: 80%;
   width: 90%;
   border-radius: 50%;
@@ -2058,7 +2065,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p {
+.social-panel .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p {
   height: 70%;
   width: 70%;
   border-radius: 50%;
@@ -2079,12 +2086,12 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p:active {
+.social-panel .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p:active {
   -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
           box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
 }
 
-.social-panel .video-scroll-container .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p .bi-play {
+.social-panel .video-details-container .transparent-test .user-profile-image .social-p .inset-social-p .bi-play {
   font-size: .9em;
   margin-left: 3px;
 }

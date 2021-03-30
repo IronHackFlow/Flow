@@ -1,8 +1,6 @@
 .TestAudio {
-    // height: 97.2%;
-    // width: 100%;
     position: absolute;
-  }
+}
 
 .scroll-rhymes-outer {
     @include flexCenter(40%, 100%, 0px, center, center, column);
@@ -16,6 +14,14 @@
         margin-top: 3%;
         overflow-y: scroll;
         box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+
+        .transcript-line-1 {
+            color: white;
+            font-size: 16px;
+            width: 95%;
+            font-weight: bold;
+            text-shadow: 3px 4px 5px #494848;
+        }
     }
 
     .scroll-rhymes-line {

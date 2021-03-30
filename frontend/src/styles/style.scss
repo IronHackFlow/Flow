@@ -72,31 +72,31 @@ $lightgrayBg: #ecf0f3;
 .fade-appear-active,
 .fade-enter.fade-enter-active {
   left: 0;
-  transition: left 500ms linear
+  transition: left 400ms linear
 }
 .fade-exit {
   left: 0;
 }
 .fade-exit.fade-exit-active {
   left: -100vw;
-  transition: left 500ms linear;
+  transition: left 400ms linear;
 }
-.fade2-appear,
-.fade2-enter {
-  right: 100vw;
+.fadeRight-appear,
+.fadeRight-enter {
+  left: -100vw;
   z-index: 1;
 }
-.fade2-appear-active,
-.fade2-enter.fade-enter-active {
-  right: 0;
-  transition: right 500ms linear
+.fadeRight-appear-active,
+.fadeRight-enter.fadeRight-enter-active {
+  left: 0;
+  transition: left 400ms linear
 }
-.fade2-exit {
-  right: 0;
+.fadeRight-exit {
+  left: 0;
 }
-.fade2-exit.fade-exit-active {
-  right: -100vw;
-  transition: right 500ms linear;
+.fadeRight-exit.fadeRight-exit-active {
+  left: 100vw;
+  transition: left 400ms linear;
 }
 * {
   margin: 0;

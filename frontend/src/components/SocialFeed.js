@@ -19,18 +19,22 @@ import gifsArr from "../images/gifs.json";
 import Search from "../components/Search";
 
 let SONG = {};
-let SONGUSER = {}
 
 function SocialFeed(props) {
-  const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed } = React.useContext(
+  const { user, setUser, 
+          userViewed, setUserViewed, 
+          navDisplayed, setNavDisplayed, 
+          toggleSocial, setToggleSocial, 
+          toggleExplore, setToggleExplore,
+          socialAppear, setSocialAppear,
+          exploreAppear, setExploreAppear
+        } = React.useContext(
     TheContext
   );
 
-  // axios.get();
   let page = 1;
   let page2 = 1
-  let userUser = "";
-  let songUsersArr = [];
+  let gifsCopy = [...gifsArr]
 
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [exploreFeedSongs, setExploreFeedSongs] = useState([])
@@ -41,10 +45,10 @@ function SocialFeed(props) {
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [likes, setLikes] = useState(0)
-  const [bg, setBg] = useState('')
-  const [toggleExplore, setToggleExplore] = useState(false);
-  const [toggleSocial, setToggleSocial] = useState(true);
 
+
+  const songUserIdRef = useRef();
+  const songRef = useRef(thisFeedSongs[0]);
   const audioRef = useRef();
   const windowRef = useRef();
   const popUpRef = useRef();
@@ -67,18 +71,11 @@ function SocialFeed(props) {
   const profilePicRef = useRef();
   const likesRef = useRef();
 
-  // useEffect(() => {
-  //     socialRim.current.style.animation = "rim .5s linear forwards"
-  //     socialOut.current.style.animation = "out .5s linear forwards"
-  //     socialIn.current.style.animation = "in .5s linear forwards"
-  //     socialIcon.current.style.animation = "iconScale .5s linear forwards"
-  // }, [])
-
   const menuDown = (whichMenu) => {
     if (whichMenu == 'search') {
     searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
     popUpSearchRef.current.style.height = "0px";
-    windowRef.current.style.bottom = "20%";
+    windowRef.current.style.bottom = "0";
     opacitySearchRef3.current.style.opacity = 0;
     dumbSearchRef.current.style.opacity = 0;
     setSearchPoppedUp(false);
@@ -86,7 +83,7 @@ function SocialFeed(props) {
     else if (whichMenu == 'comment') {
       commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "20%";
+      windowRef.current.style.bottom = "0";
       opacityRef1.current.style.opacity = 0;
       opacityRef2.current.style.opacity = 0;
       opacityRef3.current.style.opacity = 0;
@@ -99,7 +96,7 @@ function SocialFeed(props) {
     opacitySearchRef3.current.style.opacity = 1;
     dumbSearchRef.current.style.opacity = 1;
     popUpSearchRef.current.style.height = "50%";
-    windowRef.current.style.bottom = "70%";
+    windowRef.current.style.bottom = "50%";
     setSearchPoppedUp(true);
     }
     else if (whichMenu == 'comment') {
@@ -108,7 +105,7 @@ function SocialFeed(props) {
       opacityRef2.current.style.opacity = 1;
       opacityRef3.current.style.opacity = 1;
       popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "70%";
+      windowRef.current.style.bottom = "50%";
       setPoppedUp(true);
     }
   }
@@ -129,6 +126,7 @@ function SocialFeed(props) {
       menuDown('search')
     }
   };
+
   useEffect(() => {
     if (navDisplayed == true) {
       menuDown('search')
@@ -137,11 +135,34 @@ function SocialFeed(props) {
   })
 
   useEffect(() => {
+    if (toggleExplore === true && toggleSocial === false){
+      exploreRim.current.style.animation = "rim .5s linear forwards"
+      exploreOut.current.style.animation = "out .5s linear forwards"
+      exploreIn.current.style.animation = "in .5s linear forwards"
+      exploreIcon.current.style.animation = "iconScale .5s linear forwards"
+      socialRim.current.style.animation = "none"
+      socialOut.current.style.animation = "nones"
+      socialIn.current.style.animation = "none"
+      socialIcon.current.style.animation = "none"
+    }
+    else {
+      socialRim.current.style.animation = "rim .5s linear forwards"
+      socialOut.current.style.animation = "out .5s linear forwards"
+      socialIn.current.style.animation = "in .5s linear forwards"
+      socialIcon.current.style.animation = "iconScale .5s linear forwards"
+      exploreRim.current.style.animation = "none"
+      exploreOut.current.style.animation = "nones"
+      exploreIn.current.style.animation = "none"
+      exploreIcon.current.style.animation = "none"
+    }
+  }, [toggleExplore, toggleSocial])
+
+  useEffect(() => {
     actions
       .getMostLikedSongs()
       .then((usersSongs) => {
         setThisFeedSongs(usersSongs.data);
-        console.log("inside useeffect", thisFeedSongs);
+        console.log("inside social feed useeffect", thisFeedSongs);
       })
       .catch(console.error);
   }, [page]);
@@ -152,99 +173,57 @@ function SocialFeed(props) {
       .then((exploreSongs) => {
         exploreSongs.data.reverse()
         setExploreFeedSongs(exploreSongs.data)
-        console.log("inside explore useeffect", exploreFeedSongs)
+        console.log("inside explore feed useeffect", exploreFeedSongs)
       })
       .catch(console.error);
   }, [page2]);
 
-// const getSongUsers = (theUserId) => {
-//     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
-//     actions
-//     .getAUser(theUserId)
-//     .then((useUser) => {
-//         setUserForSong(useUser.data)
-//     })
-//     .catch(console.error)
-// }git add
 
-// useEffect(() => {
-//     actions
-//     .getAUser(userUser)
-//     .then((useUser) => {
-//         setUserForSong(useUser.data)
-//     })
-//     .catch(console.error)
-// }, [userUser]);
-
-
-
-  // const [userForSong, setUserForSong] = useState({});
-
-  // const [activeSong, setActiveSong] = useState({});
-
-  // const getUserName = (id) => {
-  //   actions
-  //     .getAUser(id)
-  //     .then((name) => {
-  //       console.log(`@${name.data.userName}`);
-  //     })
-  //     .catch(console.error);
-  // };
-
-  let gifsCopy = [...gifsArr]
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
-    // gifsCopy.splice(index, 1)
-    // while (!gifsCopy.includes(gifsCopy[index])) {
-      return gifsCopy[index].url
-    // }
+    return gifsCopy[index].url
   }
 
-  const handlePlayPause=()=>{
-    if(audioRef.current.paused){
+  const handlePlayPause = () => {
+    if (audioRef.current.paused) {
      audioRef.current.play()
     }
     else {
      audioRef.current.pause()
    }
   }
-  // const profilePicRefs = useRef()
-  // useEffect(() => {
-
-  //   profilePicRefs.current = SONG.songUser._id
-  // }, [])
-  // const linkToProfileRef = useRef()
-  // const  [profileLink, setProfileLink] = useState({})
 
   function DisplaySong(eachSong) {
     // const [ref, inView] = useInView({
     //   threshold: .5,
     // });
-    const ref = useRef()
-    const [inViewRef, inView] = useInView({
+    const viewRef = useRef()
+    const [inViewRef, inView, entry] = useInView({
       threshold: .8,
     });
+
     const setRefs = useCallback(
       (node) => {
-        ref.current = node;
+        viewRef.current = node;
         inViewRef(node)
       },
       [inViewRef],
     )
+
     if (inView) {
-      // eachSong.setActiveSong(eachSong)
       SONG = eachSong;
       audioRef.current.src = eachSong.songURL
       profilePicRef.current.src = eachSong.songUser.picture
+      songRef.current = eachSong.songUser
+      songUserIdRef.current = eachSong.songUser._id
       likesRef.current.innerHTML= eachSong.songLikes.length
-      // setProfileLink(eachSong.songUser)
-    } 
-    else {}
+    }
 
     return (
       <li
         key={eachSong.songUser._id}
+        id={eachSong.songUser._id}
         ref={setRefs}
         className="video-pane"
         style={{
@@ -272,13 +251,10 @@ function SocialFeed(props) {
       </li>
     );
   }
-
+  
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
-     eachSong.shorts = getRandomBackground();
-
-      // setUserUser(eachSong)
-      // console.log(userForSong)
+      eachSong.shorts = getRandomBackground();
       return <DisplaySong i={i} {...eachSong} />;
     });
   };
@@ -318,34 +294,14 @@ function SocialFeed(props) {
       })
       .catch(console.error);
   }
-  // const profilePicRoute = (info) => {
-  //   const mappedRes2 = info.data.map((elem) => {
-  //     return { userName: elem.userName, picture: elem.picture, profile: elem};
-  //   });
-  //   return mappedRes2.map((ele) => {
-  //     console.log(ele)
-  //   }
-  // }
 
-
-  // const toggleExploreFeed = () => {
-  //   if (toggleExplore === false) {
-  //     setToggleExplore(true)
-  //     setToggleSocial(false)
-
-  //   }
-  // }
-  // const toggleFeed = () => {
-  //   if (toggleSocial === false) {
-  //     setToggleSocial(true)
-  //     setToggleExplore(false)
-  //   }
-  //   else {
-  //     setToggleExplore(true)
-  //     setToggleSocial(false)
-  //   }
-  // }
-
+  const findPicture = () => {
+    thisFeedSongs.filter((each) => {
+      if (each.songUser.picture == SONG.songUser?.picture) {
+        return each.songUser
+      }
+    })
+  }
   const showNavBar = () => {
     return (
       <footer>
@@ -353,9 +309,9 @@ function SocialFeed(props) {
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}}>
+                <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}} ref={songRef}>
                   <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-                  {console.log()}
+            
                 </Link>
               </div>
             </div>
@@ -392,7 +348,11 @@ function SocialFeed(props) {
 
             <div className="nav-buttons-rim" ref={exploreRim}>
               <div className="nav-buttons-outset" ref={exploreOut}>
-                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => {setToggleExplore(true); setToggleSocial(false)}}>
+                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => {
+                                                                    setToggleExplore(true)
+                                                                    setToggleSocial(false)
+                                                                    {console.log(toggleExplore, toggleSocial)}
+                                                                    }}>
                     <img className="button-icons bi-explore" ref={exploreIcon} src={explore} alt="explore"></img>
                 </div>
               </div>
@@ -401,7 +361,11 @@ function SocialFeed(props) {
             <div className="nav-buttons-rim" ref={socialRim}>
               <div className="nav-buttons-outset" ref={socialOut}>
                 <div className="nav-buttons-inset" ref={socialIn}
-                     onClick={() => {setToggleSocial(true); setToggleExplore(false)}}>
+                     onClick={() => {                       
+                        setToggleSocial(true)
+                        setToggleExplore(false)
+                        {console.log(toggleExplore, toggleSocial)}
+                        }}>
                   <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
                 </div>
               </div>
@@ -455,7 +419,6 @@ function SocialFeed(props) {
   }
 
   const renderEachComment = ()=>{
-    console.log(SONG)
     if(!SONG.songComments){
     }
     else {
@@ -513,14 +476,16 @@ function SocialFeed(props) {
     </div>
     )
   }
+
   const transClass = () => {
-    if (toggleSocial === true) {
-      return "fade2"
+    if (toggleSocial === true && toggleExplore === false) {
+      return "fadeRight"
     }
-    if (toggleExplore === true) {
+    if (toggleExplore === true && toggleSocial === false) {
       return "fade"
     }
   }
+
   return (
     <div className="SocialFeed">
       <div ref={windowRef} className="social-panel">
@@ -530,89 +495,63 @@ function SocialFeed(props) {
           mountOnEnter
           classNames={transClass()}
           unmountOnExit
-          timeout={1000}
-          onEnter={()=> {
-            exploreRim.current.style.animation = "rim .5s linear forwards"
-            exploreOut.current.style.animation = "out .5s linear forwards"
-            exploreIn.current.style.animation = "in .5s linear forwards"
-            exploreIcon.current.style.animation = "iconScale .5s linear forwards"
-          }}
-          onExit={()=> {
-            exploreRim.current.style.animation = "none"
-            exploreOut.current.style.animation = "none"
-            exploreIn.current.style.animation = "none"
-            exploreIcon.current.style.animation = "none"
-          }}
+          timeout={800}
+          // onEnter={()=> {
+          //   exploreRim.current.style.animation = "rim .5s linear forwards"
+          //   exploreOut.current.style.animation = "out .5s linear forwards"
+          //   exploreIn.current.style.animation = "in .5s linear forwards"
+          //   exploreIcon.current.style.animation = "iconScale .5s linear forwards"
+          // }}
+          // onExit={()=> {
+          //   exploreRim.current.style.animation = "none"
+          //   exploreOut.current.style.animation = "none"
+          //   exploreIn.current.style.animation = "none"
+          //   exploreIcon.current.style.animation = "none"
+          // }}
           >
           <ul className="video-scroll-container">
             {showExploreSongs()}
-            <CSSTransition
-              in={toggleExplore}
-              key={'key3'}
-              classNames="fade3"
-              timeout={400}>
-              <div className="video-details-container">
-                <div className="transparent-test">
-                  <div className="user-details-container">
-                    <div className="user-details-inset">
-                    </div>
-                  </div>
-                  <div className="user-profile-image">
-                    <div className="user-profile-inset social-p">
-                      <div className="nav-buttons-inset inset-social-p">
-                        <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CSSTransition>
           </ul>
         </CSSTransition>
+
         <CSSTransition
           in={toggleSocial}
           key={'key2'}
           classNames={transClass()}
-          mountOnEnter
           unmountOnExit
-          onEnter={()=> {
-            socialRim.current.style.animation = "rim .5s linear forwards"
-            socialOut.current.style.animation = "out .5s linear forwards"
-            socialIn.current.style.animation = "in .5s linear forwards"
-            socialIcon.current.style.animation = "iconScale .5s linear forwards"
-          }}
-          onExit={()=> {
-            socialRim.current.style.animation = "none"
-            socialOut.current.style.animation = "none"
-            socialIn.current.style.animation = "none"
-            socialIcon.current.style.animation = "none"
-          }}
-          timeout={1000}>
+          // onEnter={()=> {
+          //   socialRim.current.style.animation = "rim .5s linear forwards"
+          //   socialOut.current.style.animation = "out .5s linear forwards"
+          //   socialIn.current.style.animation = "in .5s linear forwards"
+          //   socialIcon.current.style.animation = "iconScale .5s linear forwards"
+          // }}
+          // onExit={()=> {
+          //   socialRim.current.style.animation = "none"
+          //   socialOut.current.style.animation = "none"
+          //   socialIn.current.style.animation = "none"
+          //   socialIcon.current.style.animation = "none"
+          // }}
+          timeout={800}>
           <ul className="video-scroll-container">
             {showSongs()}
-            <CSSTransition
-              in={toggleSocial}
-              key={'key4'}
-              classNames="fade3"
-              timeout={400}>
-            <div className="video-details-container">
-              <div className="transparent-test">
-                <div className="user-details-container">
-                  <div className="user-details-inset">
-                  </div>
-                </div>
-                <div className="user-profile-image">
-                  <div className="user-profile-inset social-p">
-                    <div className="nav-buttons-inset inset-social-p">
-                      <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
-                    </div>
-                  </div>
+          </ul>
+        </CSSTransition>
+
+        <div className="video-details-container">
+          <div className="transparent-test">
+            <div className="user-details-container">
+              <div className="user-details-inset">
+              </div>
+            </div>
+            <div className="user-profile-image">
+              <div className="user-profile-inset social-p">
+                <div className="nav-buttons-inset inset-social-p">
+                  <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
                 </div>
               </div>
             </div>
-            </CSSTransition>
-          </ul>
-        </CSSTransition>
+          </div>
+        </div>
       </div>
       
       {displayComments()}

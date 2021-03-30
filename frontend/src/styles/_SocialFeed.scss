@@ -12,8 +12,8 @@
 .social-panel {
     height: 80%;
     width: 100%;
-    position: absolute;
-    bottom: 20%;
+    position: relative;
+    bottom: 0;
     transition: bottom .5s;
     overflow-y: hidden;
 
@@ -85,60 +85,60 @@
                 }
             }
         }
+    }
+    .video-details-container {
+        @include flexCenter(130px, 356px, 55px, center, center, row);
+        position: absolute;
+        border: 1px solid $charcoalBg;
+        background-image: url('../images/bg-transparent2.png');
+        background-size: cover;
+        background-position: center;
+        z-index: 10;
+        bottom: 3%;
+        left: 2.5%;
+        box-shadow: 0px 8px 20px 0px #00000099;
+    
+        .transparent-test {
+            @include flexCenter(90%, 96.5%, 49px, space-around, center, row);
+            box-shadow: inset 3px 3px 6px #353535, inset -2px -2px 3px #8c8f90; 
 
-        .video-details-container {
-            @include flexCenter(130px, 356px, 55px, center, center, row);
-            position: absolute;
-            border: 1px solid $charcoalBg;
-            background-image: url('../images/bg-transparent2.png');
-            background-size: cover;
-            background-position: center;
-            bottom: 3%;
-            left: 2.5%;
-            box-shadow: 0px 8px 20px 0px #00000099;
-        
-            .transparent-test {
-                @include flexCenter(90%, 96.5%, 49px, space-around, center, row);
-                box-shadow: inset 3px 3px 6px #353535, inset -2px -2px 3px #8c8f90; 
+            .user-details-container {
+                @include flexCenter(70%, 70%, 15px, center, center, row);
+                margin-left: 5%;
+                background-position: 24% 50%;
+                box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 2px #7b7b7b;
 
-                .user-details-container {
-                    @include flexCenter(70%, 70%, 15px, center, center, row);
-                    margin-left: 5%;
-                    background-position: 24% 50%;
-                    box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 2px #7b7b7b;
-
-                    .user-details-inset {
-                        @include flexCenter(80%, 92%, 10px, center, center, column);
-                        color: white;
-                        border: 2px solid #5a5a5a;
-                        box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
-                    }
+                .user-details-inset {
+                    @include flexCenter(80%, 92%, 10px, center, center, column);
+                    color: white;
+                    border: 2px solid #5a5a5a;
+                    box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
                 }
-                .user-profile-image {
-                    @include flexCenter(70%, 20%, 0px, center, center, row);
+            }
+            .user-profile-image {
+                @include flexCenter(70%, 20%, 0px, center, center, row);
 
-                    .social-p {
-                        @include flexCenter(80%, 90%, 50%, center, center, row);
-                        margin-right: 3%;
+                .social-p {
+                    @include flexCenter(80%, 90%, 50%, center, center, row);
+                    margin-right: 3%;
+                    box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
+
+                    .inset-social-p {
+                        @include flexCenter(70%, 70%, 50%, center, center, row);
                         box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
 
-                        .inset-social-p {
-                            @include flexCenter(70%, 70%, 50%, center, center, row);
-                            box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
-
-                            &:active {
-                                box-shadow: inset 2px 2px 3px #313232, 
-                                          inset -2px -2px 3px #9fa2a4;
-                            }
-                            .bi-play {
-                                font-size: .9em;
-                                margin-left: 3px;
-                            }
+                        &:active {
+                            box-shadow: inset 2px 2px 3px #313232, 
+                                      inset -2px -2px 3px #9fa2a4;
+                        }
+                        .bi-play {
+                            font-size: .9em;
+                            margin-left: 3px;
                         }
                     }
                 }
-
             }
+
         }
     }
 }
