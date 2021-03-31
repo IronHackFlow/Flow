@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
-import { Link, Redirect } from "react-router-dom";
+import { Link, useLocation, Redirect } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import TheContext from "../TheContext";
@@ -18,20 +18,18 @@ import explore from "../images/explore.svg";
 import gifsArr from "../images/gifs.json";
 import Search from "../components/Search";
 
-let SONG = {};
+// let SONG = {};
 
 function SocialFeed(props) {
   const { user, setUser, 
           userViewed, setUserViewed, 
-          navDisplayed, setNavDisplayed, 
-          toggleSocial, setToggleSocial, 
-          toggleExplore, setToggleExplore,
-          socialAppear, setSocialAppear,
-          exploreAppear, setExploreAppear
+          navDisplayed, setNavDisplayed
         } = React.useContext(
     TheContext
   );
-
+  const location = useLocation();
+  
+  let SONG = {}
   let page = 1;
   let page2 = 1
   let gifsCopy = [...gifsArr]
@@ -44,8 +42,9 @@ function SocialFeed(props) {
   const [comment, setComment] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
-  const [likes, setLikes] = useState(0)
-
+  const [likes, setLikes] = useState(0);
+  const [toggleExplore, setToggleExplore] = useState();
+  const [toggleSocial, setToggleSocial] = useState();
 
   const songUserIdRef = useRef();
   const songRef = useRef(thisFeedSongs[0]);
@@ -71,71 +70,21 @@ function SocialFeed(props) {
   const profilePicRef = useRef();
   const likesRef = useRef();
 
-  const menuDown = (whichMenu) => {
-    if (whichMenu == 'search') {
-    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-    popUpSearchRef.current.style.height = "0px";
-    windowRef.current.style.bottom = "0";
-    opacitySearchRef3.current.style.opacity = 0;
-    dumbSearchRef.current.style.opacity = 0;
-    setSearchPoppedUp(false);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-      popUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      opacityRef1.current.style.opacity = 0;
-      opacityRef2.current.style.opacity = 0;
-      opacityRef3.current.style.opacity = 0;
-      setPoppedUp(false);
-    }
-  }
-  const menuUp = (whichMenu) => {
-    if (whichMenu == 'search') {
-    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-    opacitySearchRef3.current.style.opacity = 1;
-    dumbSearchRef.current.style.opacity = 1;
-    popUpSearchRef.current.style.height = "50%";
-    windowRef.current.style.bottom = "50%";
-    setSearchPoppedUp(true);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-      opacityRef1.current.style.opacity = 1;
-      opacityRef2.current.style.opacity = 1;
-      opacityRef3.current.style.opacity = 1;
-      popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setPoppedUp(true);
-    }
-  }
 
-  const popUpComments = () => {
-    if (poppedUp == false) {
-      menuDown('search')
-      menuUp('comment')
-    } else {
-      menuDown('comment')
-    }
-  };
-  const popUpSearch = () => {
-    if (searchPoppedUp == false) {
-      menuDown('comment')
-      menuUp('search')
-    } else {
-      menuDown('search')
-    }
-  };
 
   useEffect(() => {
-    if (navDisplayed == true) {
-      menuDown('search')
-      menuDown('comment')
+    if (location.pathname === "/explore-feed") {
+      setToggleExplore(true)
+      setToggleSocial(false)
     }
-  })
+    if (location.pathname === "/social-feed") {
+      setToggleSocial(true)
+      setToggleExplore(false)
+    }
+  }, [location])
 
   useEffect(() => {
-    if (toggleExplore === true && toggleSocial === false){
+    if (toggleExplore === true){
       exploreRim.current.style.animation = "rim .5s linear forwards"
       exploreOut.current.style.animation = "out .5s linear forwards"
       exploreIn.current.style.animation = "in .5s linear forwards"
@@ -178,8 +127,78 @@ function SocialFeed(props) {
       .catch(console.error);
   }, [page2]);
 
+  useEffect(() => {
+    if (navDisplayed == true) {
+      menuDown('search')
+      menuDown('comment')
+    }
+  }, [navDisplayed])
 
+  const popUpComments = () => {
+    if (poppedUp == false) {
+      menuDown('search')
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
+  };
 
+  const popUpSearch = () => {
+    if (searchPoppedUp == false) {
+      menuDown('comment')
+      menuUp('search')
+    } else {
+      menuDown('search')
+    }
+  };
+
+  const menuDown = (whichMenu) => {
+    if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+    popUpSearchRef.current.style.height = "0px";
+    windowRef.current.style.bottom = "0";
+    opacitySearchRef3.current.style.opacity = 0;
+    dumbSearchRef.current.style.opacity = 0;
+    setSearchPoppedUp(false);
+    }
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      popUpRef.current.style.height = "0px";
+      windowRef.current.style.bottom = "0";
+      opacityRef1.current.style.opacity = 0;
+      opacityRef2.current.style.opacity = 0;
+      opacityRef3.current.style.opacity = 0;
+      setPoppedUp(false);
+    }
+  }
+  const menuUp = (whichMenu) => {
+    if (whichMenu == 'search') {
+    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+    opacitySearchRef3.current.style.opacity = 1;
+    dumbSearchRef.current.style.opacity = 1;
+    popUpSearchRef.current.style.height = "50%";
+    windowRef.current.style.bottom = "50%";
+    setSearchPoppedUp(true);
+    }
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      opacityRef1.current.style.opacity = 1;
+      opacityRef2.current.style.opacity = 1;
+      opacityRef3.current.style.opacity = 1;
+      popUpRef.current.style.height = "50%";
+      windowRef.current.style.bottom = "50%";
+      setPoppedUp(true);
+    }
+  }
+
+  const transClass = () => {
+    if (toggleSocial === true) {
+      return "fadeRight"
+    }
+    else {
+      return "fade"
+    }
+  }
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
     return gifsCopy[index].url
@@ -193,19 +212,20 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
-
+  const viewRef = useRef()
   function DisplaySong(eachSong) {
     // const [ref, inView] = useInView({
     //   threshold: .5,
     // });
-    const viewRef = useRef()
+
     const [inViewRef, inView, entry] = useInView({
       threshold: .8,
+      initialInView: true,
     });
 
     const setRefs = useCallback(
       (node) => {
-        viewRef.current = node;
+        viewRef.current = { node: node, songUser: eachSong.songUser };
         inViewRef(node)
       },
       [inViewRef],
@@ -218,6 +238,7 @@ function SocialFeed(props) {
       songRef.current = eachSong.songUser
       songUserIdRef.current = eachSong.songUser._id
       likesRef.current.innerHTML= eachSong.songLikes.length
+      // viewRef.current.songUser = eachSong.songUser
     }
 
     return (
@@ -226,9 +247,7 @@ function SocialFeed(props) {
         id={eachSong.songUser._id}
         ref={setRefs}
         className="video-pane"
-        style={{
-          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
-        }}
+        style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
       >
         <div className="last-div"></div>
         <div className="text-container">
@@ -241,11 +260,7 @@ function SocialFeed(props) {
             {eachSong.songName}
           </p>
           <p className="ud-text udt-3">
-            {eachSong.caption ? (
-              <p>{eachSong.caption}</p>
-            ) : (
-              <p>no caption for this flow</p>
-            )}
+            {eachSong.caption ? eachSong.caption : "no caption for this flow"}
           </p>
         </div>
       </li>
@@ -294,13 +309,13 @@ function SocialFeed(props) {
       })
       .catch(console.error);
   }
-
-  const findPicture = () => {
-    thisFeedSongs.filter((each) => {
-      if (each.songUser.picture == SONG.songUser?.picture) {
-        return each.songUser
-      }
-    })
+  const checkViewRef = () => {
+    if(viewRef === null) {
+      return null
+    }
+    else {
+      return viewRef.current.songUser._id
+    }
   }
   const showNavBar = () => {
     return (
@@ -311,7 +326,6 @@ function SocialFeed(props) {
               <div className="individual-profile-pic">
                 <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}} ref={songRef}>
                   <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-            
                 </Link>
               </div>
             </div>
@@ -348,10 +362,10 @@ function SocialFeed(props) {
 
             <div className="nav-buttons-rim" ref={exploreRim}>
               <div className="nav-buttons-outset" ref={exploreOut}>
-                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => {
-                                                                    setToggleExplore(true)
-                                                                    setToggleSocial(false)
-                                                                    {console.log(toggleExplore, toggleSocial)}
+                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
+                                                                      setToggleExplore(true)
+                                                                      setToggleSocial(false)
+                                                                      console.log(viewRef.current.songUser.userName, "explore in")
                                                                     }}>
                     <img className="button-icons bi-explore" ref={exploreIcon} src={explore} alt="explore"></img>
                 </div>
@@ -362,10 +376,10 @@ function SocialFeed(props) {
               <div className="nav-buttons-outset" ref={socialOut}>
                 <div className="nav-buttons-inset" ref={socialIn}
                      onClick={() => {                       
-                        setToggleSocial(true)
                         setToggleExplore(false)
-                        {console.log(toggleExplore, toggleSocial)}
-                        }}>
+                        setToggleSocial(true)
+                        console.log(viewRef.current.songUser.userName, "social in")
+                      }}>
                   <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
                 </div>
               </div>
@@ -375,7 +389,7 @@ function SocialFeed(props) {
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
                   <Link to={user._id ? ("/profile") : ("/auth")}>
-                    <img className="button-icons bi-profile-social" src={avatar3}></img>
+                    <img className="button-icons bi-profile" src={avatar3}></img>
                   </Link>
                 </div>
               </div>
@@ -440,7 +454,7 @@ function SocialFeed(props) {
     }
   }
 
-  const displayComments=()=>{
+  const displayComments = () => {
     return(
     <div ref={popUpRef} className="comment-pop-out">
       <div className="inner-com">
@@ -452,7 +466,7 @@ function SocialFeed(props) {
                 <input
                     className="social-comment-input" 
                     type='text' 
-                    onChange={(e)=>setComment(e.target.value)}
+                    onChange={(e) => setComment(e.target.value)}
                     placeholder='Drop yo comment' 
                     ></input>
                   <button></button>
@@ -477,37 +491,15 @@ function SocialFeed(props) {
     )
   }
 
-  const transClass = () => {
-    if (toggleSocial === true && toggleExplore === false) {
-      return "fadeRight"
-    }
-    if (toggleExplore === true && toggleSocial === false) {
-      return "fade"
-    }
-  }
-
   return (
     <div className="SocialFeed">
       <div ref={windowRef} className="social-panel">
         <CSSTransition 
           in={toggleExplore}
           key={'key1'}
-          mountOnEnter
           classNames={transClass()}
           unmountOnExit
           timeout={800}
-          // onEnter={()=> {
-          //   exploreRim.current.style.animation = "rim .5s linear forwards"
-          //   exploreOut.current.style.animation = "out .5s linear forwards"
-          //   exploreIn.current.style.animation = "in .5s linear forwards"
-          //   exploreIcon.current.style.animation = "iconScale .5s linear forwards"
-          // }}
-          // onExit={()=> {
-          //   exploreRim.current.style.animation = "none"
-          //   exploreOut.current.style.animation = "none"
-          //   exploreIn.current.style.animation = "none"
-          //   exploreIcon.current.style.animation = "none"
-          // }}
           >
           <ul className="video-scroll-container">
             {showExploreSongs()}
@@ -519,19 +511,8 @@ function SocialFeed(props) {
           key={'key2'}
           classNames={transClass()}
           unmountOnExit
-          // onEnter={()=> {
-          //   socialRim.current.style.animation = "rim .5s linear forwards"
-          //   socialOut.current.style.animation = "out .5s linear forwards"
-          //   socialIn.current.style.animation = "in .5s linear forwards"
-          //   socialIcon.current.style.animation = "iconScale .5s linear forwards"
-          // }}
-          // onExit={()=> {
-          //   socialRim.current.style.animation = "none"
-          //   socialOut.current.style.animation = "none"
-          //   socialIn.current.style.animation = "none"
-          //   socialIcon.current.style.animation = "none"
-          // }}
-          timeout={800}>
+          timeout={800}
+          >
           <ul className="video-scroll-container">
             {showSongs()}
           </ul>

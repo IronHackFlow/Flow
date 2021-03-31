@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import NavBar from './NavBar.js'
 import actions from "../api";
 import axios from "axios";
 import TheContext from "../TheContext";
@@ -9,27 +8,45 @@ import play from '../images/play.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'
 import follow from '../images/follow.svg'
-import comment from '../images/comment.svg'
 import heart2 from '../images/heart2.svg'
-import editicon from '../images/edit.svg'
-import logouticon from '../images/logout.svg'
 import explore from '../images/explore.svg'
 
 
 function OtherProfile(props) {
-  const [posts, setPosts] = useState([]);
-
   const { user, setUser, userViewed, setUserViewed } = React.useContext(
     TheContext
   );
 
+  const [posts, setPosts] = useState([]);
+  const [thisUserSongs, setThisUserSongs] = useState([]);
   const [thisUser, setThisUser] = useState([userViewed]);
   const [trigger, setTrigger] = useState(false)
 
-    
+  const profileRim = useRef();
+  const profileOut = useRef();
+  const profileIn = useRef();
+  const profileIcon = useRef();
+
   useEffect(() => {
     setThisUser(props.location.profileInfo)
     setThisUser(props.location.profInfo)
+  }, []);
+  
+  useEffect(() => {
+    profileRim.current.style.animation = "rim .5s linear forwards"
+    profileOut.current.style.animation = "out .5s linear forwards"
+    profileIn.current.style.animation = "in .5s linear forwards"
+    profileIcon.current.style.animation = "iconScale .5s linear forwards"
+  }, [])
+
+  useEffect(() => {
+    console.log("profile.js line 53 ", user);
+    actions
+      .getUserSongs(props.location.profileInfo)
+      .then((usersSongs) => {
+        setThisUserSongs(usersSongs.data);
+      })
+      .catch(console.error);
   }, []);
 
   const followUser = () => {
@@ -45,25 +62,6 @@ function OtherProfile(props) {
       })
       .catch(console.error);
   };
-
-  const logout = () => {
-    setUser({});
-    setThisUser({});
-    setUserViewed({});
-    localStorage.clear();
-  };
-
-  const [thisUserSongs, setThisUserSongs] = useState([]);
-
-  useEffect(() => {
-    console.log("profile.js line 53 ", user);
-    actions
-      .getUserSongs(props.location.profileInfo)
-      .then((usersSongs) => {
-        setThisUserSongs(usersSongs.data);
-      })
-      .catch(console.error);
-  }, []);
   
   const showLyrics = (lyrics) => {
     return lyrics.map((eachLine) => {
@@ -78,7 +76,6 @@ function OtherProfile(props) {
       return (
       <li className="your-track-container">
         <div className="lyrics-play">
-      
           <div className="lyrics-songname-cont">
             <h4>{eachSong.songName}</h4>
           </div>
@@ -88,7 +85,6 @@ function OtherProfile(props) {
               <img className="button-icons bi-play-2" src={play}></img>
             </div>
           </div>
-
         </div>
 
         <div className="lyrics-container">
@@ -211,7 +207,7 @@ function OtherProfile(props) {
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
               <Link to="/explore-feed">
-                <img className="button-icons bi-explore" src={explore} alt="explore"></img>
+                <img className="button-icons bi-explore-p" src={explore} alt="explore"></img>
               </Link>
             </div>
           </div>
@@ -227,11 +223,11 @@ function OtherProfile(props) {
           </div>
         </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
+        <div className="nav-buttons-rim" ref={profileRim}>
+          <div className="nav-buttons-outset" ref={profileOut}>
+            <div className="nav-buttons-inset" ref={profileIn}>
               <Link to="/profile">
-                <img className="button-icons bi-profile" src={avatar3}></img>
+                <img className="button-icons bi-profile-o" ref={profileIcon} src={avatar3}></img>
               </Link>
             </div>
           </div>
@@ -243,125 +239,3 @@ function OtherProfile(props) {
 }
 
 export default OtherProfile;
-
-
-///Reference Code from oldprofile Logic
-
-
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import actions from "../api";
-// import axios from "axios";
-// import TheContext from "../TheContext";
-
-// function Profile(props) {
-//   const [posts, setPosts] = useState([]);
-
-//   const { user, setUser, userViewed, setUserViewed } = React.useContext(
-//     TheContext
-//   );
-
-//   const [thisUser, setThisUser] = useState(props.location.profileInfo);
-  
-//     console.log(props)
-    
-//   useEffect(() => {
-    
-   
-   
-//           setThisUser(props.location.profileInfo)
-      
-     
-   
-//   }, []);
-
-//   const showProfileDetails = () => {
-//     return (
-//       <div>
-//         <h1>User Name {thisUser.userName}</h1>
-//         <p>About {thisUser.userAbout}</p>
-//         <p>Instagram {thisUser.Instagram}</p>
-//         <p>Twitter {thisUser.userTwitter}</p>
-//         <p>SoundCloud {thisUser.userSoundCloud}</p>
-//       </div>
-//     );
-//   };
-
-//   useEffect(() => {
-//     axios.get("https://rickandmortyapi.com/api/character").then((res) => {
-//       setPosts(res.data.results);
-//     });
-//   }, []);
-
-//   const logout = () => {
-//     setUser({});
-//     setThisUser({});
-//     setUserViewed({});
-//     localStorage.clear();
-//   };
-
-//   const [thisUserSongs, setThisUserSongs] = useState([]);
-
-//   useEffect(() => {
-//     console.log("profile.js line 53 ", user);
-//     actions
-//       .getUserSongs(user)
-//       .then((usersSongs) => {
-//         setThisUserSongs(usersSongs.data);
-//       })
-//       .catch(console.error);
-//   }, []);
-
-//   const showSongs = () => {
-//     return thisUserSongs.map((eachSong) => {
-//       return (
-//         <div>
-//           <h1>Song Name: {eachSong.songName}</h1>
-//           <p>Song Lyrics: {eachSong.songLyricsStr}</p>
-//         </div>
-//       );
-//     });
-//   };
-
-
-//   return (
-//     <div>
-//       {/* <h3>[database call: email]</h3>
-
-//             {showPosts()} */}
-//       <header className="profile-header">
-//         <div className="header-bio">
-//           {showProfileDetails()}
-
-//           {user.id === userViewed.id ? (
-//             <Link to="/editProfile">
-//               <button>Edit profile</button>
-//             </Link>
-//           ) : null}
-//           {/* <Link  to="/editProfile">
-//           <button>Edit profile</button></Link> */}
-
-//           {user.id && userViewed.id && user.id === userViewed.id ? (
-//             <button onClick={logout}>Logout</button>
-//           ) : null}
-
-//           <button onClick={logout}>Logout</button>
-//         </div>
-//         <div>
-//           {/* NEED TO ADD TEST TO MAKE SURE USER AND USERVIEWED ARE NOT SAME TO DETERMINE IF FOLLOW BUTTON SHOULD BE DISPLAYED */}
-//           <button onClick={followUser}>Follow This User</button>
-//         </div>
-//         <img
-//           className="profile-header-propic"
-//           // src="https://assets.capitalxtra.com/2017/47/nicki-minaj-1511527250-view-0.jpg"
-//           src={thisUser.picture}
-//           alt=""
-//         />
-//       </header>
-//       <div className="profile-post-feed">{showSongs()}</div>
-//       {/* <NavBar/> */}
-//     </div>
-//   );
-// }
-
-// export default Profile;

@@ -18,27 +18,7 @@ function App() {
   const [navDisplayed, setNavDisplayed] = useState(false)
   const [user, setUser] = useState({})
   const [userViewed, setUserViewed] = useState({})
-
-  const [toggleExplore, setToggleExplore] = useState(false);
-  const [toggleSocial, setToggleSocial] = useState(false);
-
-  const [socialAppear, setSocialAppear] = useState(true);
-  const [exploreAppear, setExploreAppear] = useState(true);
-
   const navRef = useRef();
-
-  // useEffect(() => {
-  //   if (socialAppear === true) {
-  //     setToggleSocial(true)
-  //     setToggleExplore(false)
-  //     console.log("ok, socialAppear is true")
-  //   }
-  //   else {
-  //     setToggleSocial(false)
-  //     setToggleExplore(true)
-  //     console.log("ok, socialAppear is false ")
-  //   }
-  // }, [setSocialAppear])
 
   useEffect(() => {
     actions.getUser().then(res => {
@@ -71,13 +51,9 @@ function App() {
         user, setUser, 
         userViewed, setUserViewed, 
         navDisplayed, setNavDisplayed, 
-        toggleSocial, setToggleSocial, 
-        toggleExplore, setToggleExplore, 
-        socialAppear, setSocialAppear,
-        exploreAppear, setExploreAppear
     }}>
       <div className="App">
-        <nav className="navigation" ref={navRef}>
+        <nav ref={navRef}>
             <div className="menu">
               <div className="menu-route mr-1">
                 <div className="menu-outset mo-1">
@@ -89,21 +65,21 @@ function App() {
               <div className="menu-route mr-2">
                 <div className="menu-outset mo-2">
                   <div className="menu-inset mi-2">
-                    <Link to="/social-feed" onClick={hideNavBar}>Social</Link>
+                    <Link to="/auth" onClick={hideNavBar}>Log in</Link>
                   </div>
                 </div>
               </div>
               <div className="menu-route mr-3">
                 <div className="menu-outset mo-3">
                   <div className="menu-inset mi-3">
-                    <Link to="/editprofile-screen" onClick={hideNavBar}>Edit Profile</Link>
+                    <Link to="/explore-feed" onClick={hideNavBar}>Explore</Link>
                   </div>
                 </div>
               </div>
               <div className="menu-route mr-4">
                 <div className="menu-outset mo-4">
                   <div className="menu-inset mi-4">
-                    <Link to="/auth" onClick={hideNavBar}>Log in</Link>
+                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
                   </div>
                 </div>
               </div>
@@ -117,7 +93,7 @@ function App() {
               <div className="menu-route mr-6">
                 <div className="menu-outset mo-6">
                   <div className="menu-inset mi-6">
-                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
+                    <Link to="/social-feed" onClick={hideNavBar}>Social</Link>
                   </div>
                 </div>
               </div>
@@ -142,8 +118,8 @@ function App() {
           <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
           <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
           <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
-          <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} socialProp={setToggleSocial(true)} exploreProp={setToggleExplore(false)} />} />
-          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} exploreProp={setToggleExplore(true)} socialProp={setToggleSocial(false)} />} />
+          <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
+          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
         </Switch>
       </div>

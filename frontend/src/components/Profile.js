@@ -43,23 +43,6 @@ function Profile(props) {
     
   }, []);
 
-  // const showProfileDetails = () => {
-  //   return (
-  //     <div className="users-details-container">
-  //       <p>About {thisUser.userAbout}</p>
-  //       <p>Instagram {thisUser.Instagram}</p>
-  //       <p>Twitter {thisUser.userTwitter}</p>
-  //       <p>SoundCloud {thisUser.userSoundCloud}</p>
-  //     </div>
-  //   );
-  // };
-
-  useEffect(() => {
-    axios.get("https://rickandmortyapi.com/api/character").then((res) => {
-      setPosts(res.data.results);
-    });
-  }, []);
-
   const logout = () => {
     setUser({});
     setThisUser({});
@@ -243,7 +226,7 @@ function Profile(props) {
           <div className="nav-buttons-outset">
             <div className="nav-buttons-inset">
               <Link to="/explore-feed">
-                <img className="button-icons bi-explore-profile" src={explore} alt="explore"></img>
+                <img className="button-icons bi-explore-p" src={explore} alt="explore"></img>
               </Link>
             </div>
           </div>
@@ -262,7 +245,7 @@ function Profile(props) {
         <div className="nav-buttons-rim" ref={profileRim}>
           <div className="nav-buttons-outset" ref={profileOut}>
             <div className="nav-buttons-inset" ref={profileIn}>
-              <img className="button-icons bi-avatar-profile" src={avatar3} ref={profileIcon}></img>
+              <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon}></img>
             </div>
           </div>
         </div>

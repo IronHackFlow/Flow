@@ -85,7 +85,7 @@ const actions = {
   },
 
   getAUser: async (userid) => {
-    console.log('HEY HEY EY HEY HEY from the getAUser  API', userid)
+    // console.log('HEY HEY EY HEY HEY from the getAUser  API', userid)
     return await axios.post(`${baseURL}/getAUserRT`, userid, resetHead());
   },
 
