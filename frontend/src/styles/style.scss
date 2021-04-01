@@ -153,13 +153,22 @@ footer,
     height: 715px;
     width: 375px;
   }
-  
   footer, 
   .nav-buttons,
   .nb-profile {
     width: 375px;
   }
-
+  .SocialFeed {
+    .social-panel {
+      .video-scroll-container {
+        .video-pane {
+          .text-container {
+            bottom: -9%;
+          }
+        }
+      }
+    }
+  }
 }
 
 .App {

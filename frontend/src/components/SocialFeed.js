@@ -203,7 +203,21 @@ function SocialFeed(props) {
     let index = Math.floor(Math.random()*gifsCopy.length)
     return gifsCopy[index].url
   }
+  const scrollText = () => {
+    let pOne = document.querySelector('.udt-1').offsetWidth
+    let pTwo = document.querySelector('.udt-2').offsetWidth
+    let pThree = document.querySelector('.udt-3').offsetWidth
+    //1. find value of 2nd longest ptag and set all ptags container width to that value (min value = 50px,  max value = 115px) p-container == ptag with middle value 
+    //2. if 2nd longest ptag width is between 50-65 duration is set to 2, 66-81 - 3, 82 - 97 - 4, 98-115 - 5 set p-container duration
+    //3. divide each ptag by corresponding duration value to equate the pace that'll be set
 
+
+    //4. smallest and 2nd smallest ptags will recieve animations that will play once on enter of longest ptag. marquee in -100% transX to 0% transX
+    //5. calculate remaining duration of longest ptag and at duration approximate end call animation. marquee out 0% transX to 100% transX
+    //6. set animation marquee in after
+    //find the width of longest ptag
+    //set the transform value of smaller ptags to sync with the time it takes the longest ptag to do a full transformation
+  }
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
      audioRef.current.play()
@@ -213,6 +227,7 @@ function SocialFeed(props) {
    }
   }
   const viewRef = useRef()
+  
   function DisplaySong(eachSong) {
     // const [ref, inView] = useInView({
     //   threshold: .5,
@@ -251,17 +266,23 @@ function SocialFeed(props) {
       >
         <div className="last-div"></div>
         <div className="text-container">
-          <p className="ud-text udt-1">
-            <span style={{ color: "#ec6aa0" }}>
-              {eachSong.songUser.userName}
-            </span>
-          </p>
-          <p className="ud-text udt-2">
-            {eachSong.songName}
-          </p>
-          <p className="ud-text udt-3">
-            {eachSong.caption ? eachSong.caption : "no caption for this flow"}
-          </p>
+          <div className="udt-1-container">
+            <p className="ud-text udt-1">
+              <span style={{ color: "#ec6aa0" }}>
+                {eachSong.songUser.userName}
+              </span>
+            </p>
+          </div>
+          <div className="udt-2-container">
+            <p className="ud-text udt-2">
+              {eachSong.songName}
+            </p>
+          </div>
+          <div className="udt-3-container">
+            <p className="ud-text udt-3">
+              {eachSong.caption ? eachSong.caption : "no caption for this flow"}
+            </p>
+          </div>
         </div>
       </li>
     );
@@ -365,7 +386,6 @@ function SocialFeed(props) {
                 <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
                                                                       setToggleExplore(true)
                                                                       setToggleSocial(false)
-                                                                      console.log(viewRef.current.songUser.userName, "explore in")
                                                                     }}>
                     <img className="button-icons bi-explore" ref={exploreIcon} src={explore} alt="explore"></img>
                 </div>
@@ -378,7 +398,6 @@ function SocialFeed(props) {
                      onClick={() => {                       
                         setToggleExplore(false)
                         setToggleSocial(true)
-                        console.log(viewRef.current.songUser.userName, "social in")
                       }}>
                   <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
                 </div>

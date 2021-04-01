@@ -236,6 +236,9 @@ footer,
   .nb-profile {
     width: 375px;
   }
+  .SocialFeed .social-panel .video-scroll-container .video-pane .text-container {
+    bottom: -9%;
+  }
 }
 
 .App {
@@ -1876,9 +1879,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -1889,44 +1892,50 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   left: -7%;
 }
 
+.social-panel .video-scroll-container .video-pane .text-container div {
+  height: 30%;
+  width: 80px;
+  overflow-x: hidden;
+}
+
 .social-panel .video-scroll-container .video-pane .text-container .udt-1 {
+  height: 90%;
   white-space: nowrap;
-  width: 95%;
   text-align: left;
   display: inline-block;
-  -webkit-transform: translateX(110%);
-          transform: translateX(110%);
-  -webkit-animation: floatText 5s linear infinite;
-          animation: floatText 5s linear infinite;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: floatText 2s linear infinite;
+          animation: floatText 2s linear infinite;
   font-size: 17px;
   font-weight: bold;
   line-height: 1;
 }
 
 .social-panel .video-scroll-container .video-pane .text-container .udt-2 {
+  height: 90%;
   white-space: nowrap;
-  width: 95%;
   text-align: left;
   display: inline-block;
-  -webkit-transform: translateX(110%);
-          transform: translateX(110%);
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: floatText 3s linear infinite;
+          animation: floatText 3s linear infinite;
   color: white;
-  -webkit-animation: floatText 5s linear infinite;
-          animation: floatText 5s linear infinite;
   font-size: 15px;
 }
 
 .social-panel .video-scroll-container .video-pane .text-container .udt-3 {
+  height: 90%;
   white-space: nowrap;
-  width: 95%;
   text-align: left;
   display: inline-block;
-  -webkit-transform: translateX(110%);
-          transform: translateX(110%);
-  color: white;
-  font-size: 12px;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
   -webkit-animation: floatText 5s linear infinite;
           animation: floatText 5s linear infinite;
+  color: white;
+  font-size: 12px;
 }
 
 .social-panel .video-details-container {
@@ -2555,12 +2564,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 .com-list-cont .com-list-search .com-search .search-results .search-prof-container .search-prof-inset .search-prof-outset .search-results-link img {
   height: 100%;
   width: 100%;
-}
-
-@media screen and (min-width: 800px) {
-  .text-container {
-    bottom: -9%;
-  }
 }
 
 .Profile {
