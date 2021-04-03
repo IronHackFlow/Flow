@@ -1,6 +1,19 @@
 @keyframes floatText {
     to {
-      transform: translateX(-110%);
+      transform: translateX(-100%);
+    }
+}
+@keyframes floatStop {
+    to {
+        transform: translateX(0%);
+    }
+}
+@keyframes stopFloat {
+    from {
+        transform: translateX(0%)
+    }
+    to {
+        transform: translateX(-100%)
     }
 }
 .SocialFeed {
@@ -54,7 +67,7 @@
                 // }
                 div {
                     height: 30%;
-                    width: 80px;
+                    width: 100px;
                     overflow-x: hidden;
                 }
                 .udt-1 {
@@ -64,7 +77,7 @@
                     text-align: left;
                     display: inline-block;
                     transform: translateX(100%);
-                    animation: floatText 2s linear infinite;
+                    animation: floatText 2.2s linear infinite;
                     font-size: 17px;
                     font-weight: bold;
                     line-height: 1;
@@ -76,7 +89,7 @@
                     text-align: left;
                     display: inline-block;
                     transform: translateX(100%);
-                    animation: floatText 3s linear infinite;
+                    animation: floatText 3.2s linear infinite;
                     color: white;
                     font-size: 15px;
                 }
@@ -87,7 +100,7 @@
                     text-align: left;
                     display: inline-block;
                     transform: translateX(100%);
-                    animation: floatText 5s linear infinite;
+                    animation: floatText 5.3s linear infinite;
                     color: white;
                     font-size: 12px;
                 }
@@ -335,5 +348,10 @@
                 }
             }
         }
+    }
+}
+@mixin scrollingText() {
+    @keyframes scrollAnim {
+
     }
 }

@@ -1801,15 +1801,51 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 @-webkit-keyframes floatText {
   to {
-    -webkit-transform: translateX(-110%);
-            transform: translateX(-110%);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
   }
 }
 
 @keyframes floatText {
   to {
-    -webkit-transform: translateX(-110%);
-            transform: translateX(-110%);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes floatStop {
+  to {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+
+@keyframes floatStop {
+  to {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes stopFloat {
+  from {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes stopFloat {
+  from {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
   }
 }
 
@@ -1894,7 +1930,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .social-panel .video-scroll-container .video-pane .text-container div {
   height: 30%;
-  width: 80px;
+  width: 100px;
   overflow-x: hidden;
 }
 
@@ -1905,8 +1941,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: inline-block;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
-  -webkit-animation: floatText 2s linear infinite;
-          animation: floatText 2s linear infinite;
+  -webkit-animation: floatText 2.2s linear infinite;
+          animation: floatText 2.2s linear infinite;
   font-size: 17px;
   font-weight: bold;
   line-height: 1;
@@ -1919,8 +1955,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: inline-block;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
-  -webkit-animation: floatText 3s linear infinite;
-          animation: floatText 3s linear infinite;
+  -webkit-animation: floatText 3.2s linear infinite;
+          animation: floatText 3.2s linear infinite;
   color: white;
   font-size: 15px;
 }
@@ -1932,8 +1968,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: inline-block;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
-  -webkit-animation: floatText 5s linear infinite;
-          animation: floatText 5s linear infinite;
+  -webkit-animation: floatText 5.3s linear infinite;
+          animation: floatText 5.3s linear infinite;
   color: white;
   font-size: 12px;
 }

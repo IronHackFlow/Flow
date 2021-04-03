@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback, useLayoutEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Link, useLocation, Redirect } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
@@ -90,7 +90,7 @@ function SocialFeed(props) {
       exploreIn.current.style.animation = "in .5s linear forwards"
       exploreIcon.current.style.animation = "iconScale .5s linear forwards"
       socialRim.current.style.animation = "none"
-      socialOut.current.style.animation = "nones"
+      socialOut.current.style.animation = "none"
       socialIn.current.style.animation = "none"
       socialIcon.current.style.animation = "none"
     }
@@ -100,7 +100,7 @@ function SocialFeed(props) {
       socialIn.current.style.animation = "in .5s linear forwards"
       socialIcon.current.style.animation = "iconScale .5s linear forwards"
       exploreRim.current.style.animation = "none"
-      exploreOut.current.style.animation = "nones"
+      exploreOut.current.style.animation = "none"
       exploreIn.current.style.animation = "none"
       exploreIcon.current.style.animation = "none"
     }
@@ -204,9 +204,20 @@ function SocialFeed(props) {
     return gifsCopy[index].url
   }
   const scrollText = () => {
-    let pOne = document.querySelector('.udt-1').offsetWidth
-    let pTwo = document.querySelector('.udt-2').offsetWidth
-    let pThree = document.querySelector('.udt-3').offsetWidth
+    let pOne = document.querySelector('.udt-1')
+    let pTwo = document.querySelector('.udt-2')
+    let pThree = document.querySelector('.udt-3')
+    let pOneWidth = document.querySelector('.udt-1').offsetWidth
+    let pTwoWidth = document.querySelector('.udt-2').offsetWidth
+    let pThreeWidth = document.querySelector('.udt-3').offsetWidth
+    const pArray = [pOneWidth, pTwoWidth, pThreeWidth]
+    const pObjects = { pOne: pOneWidth, pTwo: pTwoWidth,  pThree: pThreeWidth }
+    const pNewObjects = Object.keys(pObjects).sort((a, b) => a - b)
+    pArray.sort((a, b) => a - b)
+    console.log(pNewObjects)
+    // setInterval(() => {
+      
+    // })
     //1. find value of 2nd longest ptag and set all ptags container width to that value (min value = 50px,  max value = 115px) p-container == ptag with middle value 
     //2. if 2nd longest ptag width is between 50-65 duration is set to 2, 66-81 - 3, 82 - 97 - 4, 98-115 - 5 set p-container duration
     //3. divide each ptag by corresponding duration value to equate the pace that'll be set
@@ -218,6 +229,7 @@ function SocialFeed(props) {
     //find the width of longest ptag
     //set the transform value of smaller ptags to sync with the time it takes the longest ptag to do a full transformation
   }
+
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
      audioRef.current.play()
@@ -227,7 +239,8 @@ function SocialFeed(props) {
    }
   }
   const viewRef = useRef()
-  
+
+
   function DisplaySong(eachSong) {
     // const [ref, inView] = useInView({
     //   threshold: .5,
@@ -245,7 +258,6 @@ function SocialFeed(props) {
       },
       [inViewRef],
     )
-
     if (inView) {
       SONG = eachSong;
       audioRef.current.src = eachSong.songURL
@@ -294,12 +306,12 @@ function SocialFeed(props) {
       return <DisplaySong i={i} {...eachSong} />;
     });
   };
- const showExploreSongs = () => {
-   return exploreFeedSongs.map((eachSong, j) => {
-     eachSong.shorts = getRandomBackground();
-     return <DisplaySong j={j} {...eachSong} />
-   })
- }
+  const showExploreSongs = () => {
+    return exploreFeedSongs.map((eachSong, j) => {
+      eachSong.shorts = getRandomBackground();
+      return <DisplaySong j={j} {...eachSong} />
+    })
+  }
 
   const getSocialFeed = () => {
     page === 1 ? (page = 0) : (page = 1);
@@ -330,14 +342,7 @@ function SocialFeed(props) {
       })
       .catch(console.error);
   }
-  const checkViewRef = () => {
-    if(viewRef === null) {
-      return null
-    }
-    else {
-      return viewRef.current.songUser._id
-    }
-  }
+
   const showNavBar = () => {
     return (
       <footer>
@@ -350,6 +355,7 @@ function SocialFeed(props) {
                 </Link>
               </div>
             </div>
+
             <div className="like-comment-container">
               <div className="individual-btn" onClick={followUser}>
                 <img className="social-icons follow" src={follow}></img>
