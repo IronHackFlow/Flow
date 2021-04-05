@@ -71,6 +71,33 @@ function SocialFeed(props) {
   const likesRef = useRef();
 
 
+  // setTimeout(() => {
+  //   let pOne = document.querySelector('.udt-1')
+  //   let pTwo = document.querySelector('.udt-2')
+  //   let pThree = document.querySelector('.udt-3')
+  //   let pOneWidth = document.querySelector('.udt-1').offsetWidth
+  //   let pTwoWidth = document.querySelector('.udt-2').offsetWidth
+  //   let pThreeWidth = document.querySelector('.udt-3').offsetWidth
+  //   const pArray = [pOneWidth, pTwoWidth, pThreeWidth]
+  //   pArray.sort((a, b) => a - b)
+  //   let durationSet = (pArray[2] / 25)
+  //   let durationSetMs = durationSet * 1000
+  //   let middleDuration = (pArray[1] / 25)
+  //   let smallDuration = (pArray[0] / 25)
+  //   let pxPerSec = ((pArray[2] + 100) / durationSet)
+  //   let introAnimDur = (100 / pxPerSec)
+  //   let smallpOutroDur = (pArray[0] / pxPerSec)
+  //   let midpOutroDur = (pArray[1] / pxPerSec)
+  //   let smallpOutroDel = durationSet - smallpOutroDur
+  //   let midpOutroDel = durationSet - midpOutroDur
+  //   setInterval(() => {
+  //     pThree.style.animation = `floatText ${durationSet}s linear infinite`
+  //     pOne.style.animation = `floatStop ${introAnimDur}s linear forwards infinite`
+  //     pTwo.style.animation = `floatStop ${introAnimDur}s linear forwards infinite`
+  //     setTimeout(pOne.style.animation = `stopFloat ${smallpOutroDur}s linear`, smallpOutroDel)
+  //     setTimeout(pTwo.style.animation = `stopFloat ${midpOutroDur}s linear`, midpOutroDel)
+  //   }, durationSetMs)
+  // }, 800)
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -203,32 +230,6 @@ function SocialFeed(props) {
     let index = Math.floor(Math.random()*gifsCopy.length)
     return gifsCopy[index].url
   }
-  const scrollText = () => {
-    let pOne = document.querySelector('.udt-1')
-    let pTwo = document.querySelector('.udt-2')
-    let pThree = document.querySelector('.udt-3')
-    let pOneWidth = document.querySelector('.udt-1').offsetWidth
-    let pTwoWidth = document.querySelector('.udt-2').offsetWidth
-    let pThreeWidth = document.querySelector('.udt-3').offsetWidth
-    const pArray = [pOneWidth, pTwoWidth, pThreeWidth]
-    const pObjects = { pOne: pOneWidth, pTwo: pTwoWidth,  pThree: pThreeWidth }
-    const pNewObjects = Object.keys(pObjects).sort((a, b) => a - b)
-    pArray.sort((a, b) => a - b)
-    console.log(pNewObjects)
-    // setInterval(() => {
-      
-    // })
-    //1. find value of 2nd longest ptag and set all ptags container width to that value (min value = 50px,  max value = 115px) p-container == ptag with middle value 
-    //2. if 2nd longest ptag width is between 50-65 duration is set to 2, 66-81 - 3, 82 - 97 - 4, 98-115 - 5 set p-container duration
-    //3. divide each ptag by corresponding duration value to equate the pace that'll be set
-
-
-    //4. smallest and 2nd smallest ptags will recieve animations that will play once on enter of longest ptag. marquee in -100% transX to 0% transX
-    //5. calculate remaining duration of longest ptag and at duration approximate end call animation. marquee out 0% transX to 100% transX
-    //6. set animation marquee in after
-    //find the width of longest ptag
-    //set the transform value of smaller ptags to sync with the time it takes the longest ptag to do a full transformation
-  }
 
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
@@ -279,7 +280,7 @@ function SocialFeed(props) {
         <div className="last-div"></div>
         <div className="text-container">
           <div className="udt-1-container">
-            <p className="ud-text udt-1">
+            <p className="ud-text udt-1"> 
               <span style={{ color: "#ec6aa0" }}>
                 {eachSong.songUser.userName}
               </span>
@@ -494,7 +495,6 @@ function SocialFeed(props) {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder='Drop yo comment' 
                     ></input>
-                  <button></button>
               </form>
             </div>
           </div>
