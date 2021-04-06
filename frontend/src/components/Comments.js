@@ -1,29 +1,86 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useRef } from "react";
+import TheContext from "../TheContext"
+import actions from '../api'
 
 function Comments(props) {
-  const [comments, setComments] = useState([]);
+  const {
+    writer, setWriter,
+    popUpRef, opacityRef1, opacityRef2, opacityRef3
+    } = React.useContext(
+    TheContext
+  );
 
-  useEffect(() => {
-    axios.get("https://rickandmortyapi.com/api/character").then((res) => {
-      console.log(res.data.results);
-      setComments(res.data.results);
-    });
-  }, []);
+  // const handleSubmit =(e)=>{
+  //   e.preventDefault()
+  //   actions.addComment({comment, SONG})
+  // }
 
-  const loadComments = () => {
-    return comments.map(eachComment => {
-        return (
-            <li>{eachComment.origin.name}</li>
-        )
+  const getCommentWriter=(num)=>{
+    actions
+    .getAUser({id: num})
+    .then((res)=>{
+      setWriter( `@${res.data.userName}`)
+      
+    }).catch((e)=>{
+      console.log('failed to get name')
     })
-  };
+  }
 
+  // const renderEachComment = ()=>{
+  //   if(!SONG.songComments){
+  //   }
+  //   else {
+  //     return SONG.songComments.map((each)=>{
+  //       getCommentWriter(each.commUser)
+  //       return (
+  //         <div className="comment-list">
+  //           <div className="comment-list-inner">
+  //             <p className="comment-username">
+  //                 {writer}
+  //             </p>
+  //             <p className="comment-text">
+  //               {each.comment}
+  //             </p>
+  //           </div>
+  //         </div>
+  //       )
+  //     })
+  //   }
+  // }
+
+  // onSubmit={handleSubmit}
   return (
-    <div style={{ backgroundColor: "gray" }}>
-      Comments
-      {loadComments()}
-    </div>
+    <div ref={popUpRef} className="comment-pop-out">
+      <div className="inner-com">
+
+        <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
+          <div className="input-container">
+            <div className="input-inset">
+              <form className="social-comment-form" >
+                <input
+                    className="social-comment-input" 
+                    type='text' 
+                    // onChange={(e) => setComment(e.target.value)}
+                    placeholder='Drop yo comment' 
+                    ></input>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
+          <div className="comments-container">
+            <div className="comment-list-container">
+               {/* {renderEachComment()} */}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
+        <div className="inner-bar"></div>
+      </div>
+    </div>  
   );
 }
 

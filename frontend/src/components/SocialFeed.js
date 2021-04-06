@@ -91,13 +91,15 @@ function SocialFeed(props) {
   //   let smallpOutroDel = durationSet - smallpOutroDur
   //   let midpOutroDel = durationSet - midpOutroDur
   //   setInterval(() => {
+  //     pOne.style.animation = "none"
+  //     pTwo.style.animation = "none"
   //     pThree.style.animation = `floatText ${durationSet}s linear infinite`
-  //     pOne.style.animation = `floatStop ${introAnimDur}s linear forwards infinite`
-  //     pTwo.style.animation = `floatStop ${introAnimDur}s linear forwards infinite`
+  //     pOne.style.animation = `floatStop ${introAnimDur}s linear forwards`
+  //     pTwo.style.animation = `floatStop ${introAnimDur}s linear forwards`
   //     setTimeout(pOne.style.animation = `stopFloat ${smallpOutroDur}s linear`, smallpOutroDel)
   //     setTimeout(pTwo.style.animation = `stopFloat ${midpOutroDur}s linear`, midpOutroDel)
   //   }, durationSetMs)
-  // }, 800)
+  // }, 1000)
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -444,7 +446,7 @@ function SocialFeed(props) {
 
   const handleSubmit =(e)=>{
     e.preventDefault()
-    actions.addComment({comment,SONG})
+    actions.addComment({comment, SONG})
   }
 
   const getCommentWriter=(num)=>{

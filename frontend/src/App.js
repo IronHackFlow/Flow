@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Auth from './components/Auth'
 import Profile from './components/Profile'
 import SocialFeed from './components/SocialFeed'
+import NewSocialFeed from './components/NewSocialFeed'
 import TestAudio from './components/TestAudio'
 import UploadFile from './components/UploadFile'
 import EditProfileScreen from './components/EditProfileScreen'
@@ -121,6 +122,8 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+
+          {/* <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} /> */}
         </Switch>
       </div>
     </TheContext.Provider>
