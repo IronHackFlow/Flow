@@ -17,15 +17,11 @@ function NavBar(props) {
     navDisplayed, windowRef,
     toggleSocial, setToggleSocial,
     toggleExplore, setToggleExplore,
-    profilePicRef, likesRef, popUpSearchRef
+    profilePicRef, likesRef
     } = React.useContext(
     TheContext
   );
-  const [poppedUp, setPoppedUp] = useState(false);
-  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
 
-  const commentBtn = useRef();
-  const searchBtn = useRef();
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -34,14 +30,6 @@ function NavBar(props) {
   const exploreOut = useRef();
   const exploreIn = useRef();
   const exploreIcon = useRef();
-  const popUpRef = useRef();
-  const opacityRef1 = useRef();
-  const opacityRef2 = useRef();
-  const opacityRef3 = useRef();
-  const dumbSearchRef = useRef();  
-  const opacitySearchRef3 = useRef();  
-
-  const [refStyles, setRefStyles] = useState({})
 
   useEffect(() => {
     if (toggleExplore === true){
@@ -66,73 +54,6 @@ function NavBar(props) {
     }
   }, [toggleExplore, toggleSocial])
 
-  useEffect(() => {
-    popUpSearchRef.current.style.height = "0px"
-  }, [popUpSearchRef])
-
-  useEffect(() => {
-    if (navDisplayed == true) {
-      menuDown('search')
-      menuDown('comment')
-    }
-  }, [navDisplayed])
-
-  const menuDown = (whichMenu) => {
-    if (whichMenu == 'search') {
-      searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-      popUpSearchRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      opacitySearchRef3.current.style.opacity = 0;
-      dumbSearchRef.current.style.opacity = 0;
-      setSearchPoppedUp(false);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-      popUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      opacityRef1.current.style.opacity = 0;
-      opacityRef2.current.style.opacity = 0;
-      opacityRef3.current.style.opacity = 0;
-      setPoppedUp(false);
-    }
-  }
-  const menuUp = (whichMenu) => {
-    if (whichMenu == 'search') {
-      searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-      opacitySearchRef3.current.style.opacity = 1;
-      dumbSearchRef.current.style.opacity = 1;
-      popUpSearchRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setSearchPoppedUp(true);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-      opacityRef1.current.style.opacity = 1;
-      opacityRef2.current.style.opacity = 1;
-      opacityRef3.current.style.opacity = 1;
-      popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setPoppedUp(true);
-    }
-  }
-
-  const popUpComments = () => {
-    if (poppedUp == false) {
-      menuDown('search')
-      menuUp('comment')
-    } else {
-      menuDown('comment')
-    }
-  };
-
-  const popUpSearch = () => {
-    if (searchPoppedUp == false) {
-      menuDown('comment')
-      menuUp('search')
-    } else {
-      menuDown('search')
-    }
-  };
 
   const followUser = () => {
     console.log(user, userViewed);
@@ -183,10 +104,10 @@ function NavBar(props) {
                     <p ref={likesRef}></p>
                 </div>
               </div>
-              <div className="individual-btn" ref={searchBtn} onClick={popUpSearch}>
+              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
                 <img className="social-icons heart" src={search}></img>
               </div>
-              <div className="individual-btn" ref={commentBtn} onClick={popUpComments}>
+              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
                 <img className="social-icons comment" src={comments}></img>
               </div>
             </div>

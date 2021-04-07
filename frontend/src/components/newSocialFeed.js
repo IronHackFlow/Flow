@@ -17,8 +17,7 @@ import gifsArr from "../images/gifs.json";
 function SocialFeed(props) {
   const { user, setUser, 
           userViewed, setUserViewed, 
-          navDisplayed, setNavDisplayed,
-          searchBtn, commentBtn
+          navDisplayed, setNavDisplayed
     } = React.useContext(
     TheContext
   );
@@ -39,14 +38,24 @@ function SocialFeed(props) {
   const [likes, setLikes] = useState(0);
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
+  const [poppedUp, setPoppedUp] = useState(false);
+  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
 
+  const popUpSearchRef = useRef();
+  const commentBtn = useRef();
+  const searchBtn = useRef();
   const songUserIdRef = useRef();
   const songRef = useRef(thisFeedSongs[0]);
   const audioRef = useRef();
   const windowRef = useRef();
   const profilePicRef = useRef();
   const likesRef = useRef();
-
+  const popUpRef = useRef();
+  const opacityRef1 = useRef();
+  const opacityRef2 = useRef();
+  const opacityRef3 = useRef();
+  const dumbSearchRef = useRef();  
+  const opacitySearchRef3 = useRef();  
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -80,6 +89,69 @@ function SocialFeed(props) {
       .catch(console.error);
   }, [page2]);
 
+  useEffect(() => {
+    if (navDisplayed == true) {
+      menuDown('search')
+      menuDown('comment')
+    }
+  }, [navDisplayed])
+
+  const menuDown = (whichMenu) => {
+    if (whichMenu == 'search') {
+      searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      popUpSearchRef.current.style.height = "0px";
+      windowRef.current.style.bottom = "0";
+      opacitySearchRef3.current.style.opacity = 0;
+      dumbSearchRef.current.style.opacity = 0;
+      setSearchPoppedUp(false);
+    }
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      popUpRef.current.style.height = "0px";
+      windowRef.current.style.bottom = "0";
+      opacityRef1.current.style.opacity = 0;
+      opacityRef2.current.style.opacity = 0;
+      opacityRef3.current.style.opacity = 0;
+      setPoppedUp(false);
+    }
+  }
+  const menuUp = (whichMenu) => {
+    if (whichMenu == 'search') {
+      searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      opacitySearchRef3.current.style.opacity = 1;
+      dumbSearchRef.current.style.opacity = 1;
+      popUpSearchRef.current.style.height = "50%";
+      windowRef.current.style.bottom = "50%";
+      setSearchPoppedUp(true);
+    }
+    else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      opacityRef1.current.style.opacity = 1;
+      opacityRef2.current.style.opacity = 1;
+      opacityRef3.current.style.opacity = 1;
+      popUpRef.current.style.height = "50%";
+      windowRef.current.style.bottom = "50%";
+      setPoppedUp(true);
+    }
+  }
+
+  const popUpComments = () => {
+    if (poppedUp == false) {
+      menuDown('search')
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
+  };
+
+  const popUpSearch = () => {
+    if (searchPoppedUp == false) {
+      menuDown('comment')
+      menuUp('search')
+    } else {
+      menuDown('search')
+    }
+  };
 
   const transClass = () => {
     if (toggleSocial === true) {
@@ -220,9 +292,20 @@ function SocialFeed(props) {
           </div>
         </div>
         
-        <SearchBackup />
-        <Comments />
-        <NavBar />
+        <SearchBackup popUpSearchRef={popUpSearchRef} 
+                      dumbSearchRef={dumbSearchRef} 
+                      opacitySearchRef3={opacitySearchRef3} 
+                      />
+        <Comments popUpRef={popUpRef} 
+                  opacityRef1={opacityRef1} 
+                  opacityRef2={opacityRef2} 
+                  opacityRef3={opacityRef3}
+                  />
+        <NavBar popUpSearch={popUpSearch} 
+                popUpComments={popUpComments} 
+                searchBtn={searchBtn} 
+                commentBtn={commentBtn} 
+                />
         <audio ref={audioRef} id='damn'></audio>
       </div>
     )

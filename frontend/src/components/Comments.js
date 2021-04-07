@@ -4,8 +4,7 @@ import actions from '../api'
 
 function Comments(props) {
   const {
-    writer, setWriter,
-    popUpRef, opacityRef1, opacityRef2, opacityRef3
+    writer, setWriter
     } = React.useContext(
     TheContext
   );
@@ -50,10 +49,10 @@ function Comments(props) {
 
   // onSubmit={handleSubmit}
   return (
-    <div ref={popUpRef} className="comment-pop-out">
+    <div ref={props.popUpRef} className="comment-pop-out">
       <div className="inner-com">
 
-        <div ref={opacityRef1} style={{opacity: '0'}} className="com-cont-1">
+        <div ref={props.opacityRef1} style={{opacity: '0'}} className="com-cont-1">
           <div className="input-container">
             <div className="input-inset">
               <form className="social-comment-form" >
@@ -68,7 +67,7 @@ function Comments(props) {
           </div>
         </div>
 
-        <div ref={opacityRef2} style={{opacity: '0'}} className="com-cont-2">
+        <div ref={props.opacityRef2} style={{opacity: '0'}} className="com-cont-2">
           <div className="comments-container">
             <div className="comment-list-container">
                {/* {renderEachComment()} */}
@@ -77,7 +76,7 @@ function Comments(props) {
         </div>
       </div>
 
-      <div ref={opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
+      <div ref={props.opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
         <div className="inner-bar"></div>
       </div>
     </div>  
