@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback, useLayoutEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Link, useLocation, Redirect } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
+import { useInView, InView } from "react-intersection-observer";
 
 import TheContext from "../TheContext"
 import Comments from "../components/Comments"
@@ -58,7 +58,7 @@ function SocialFeed(props) {
   const opacitySearchRef3 = useRef();  
 
   useEffect(() => {
-    if (location.pathname === "/explore-feed") {
+    if (location.pathname === "/social-test") {
       setToggleExplore(true)
       setToggleSocial(false)
     }
@@ -174,39 +174,50 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
-  const viewRef = useRef()
+  // const viewRef = useRef()
+  // const [inViewRef] = useInView({
+  //   threshold: .8,
+  // });
 
+  // const setRefs = useCallback(
+  //   (node) => {
+  //     viewRef.current = node;
+  //     inViewRef(node)
+  //   },
+  //   [inViewRef],
+  // )
+  const viewRef = useRef()
+  const [test, setTest] = useState()
 
   function DisplaySong(eachSong) {
-    const [inViewRef, inView, entry] = useInView({
-      threshold: .8,
-      initialInView: true,
-    });
-
-    const setRefs = useCallback(
-      (node) => {
-        viewRef.current = { node: node, songUser: eachSong.songUser };
-        inViewRef(node)
-      },
-      [inViewRef],
-    )
-    if (inView) {
-      SONG = eachSong;
-      audioRef.current.src = eachSong.songURL
-      profilePicRef.current.src = eachSong.songUser.picture
-      songRef.current = eachSong.songUser
-      songUserIdRef.current = eachSong.songUser._id
-      likesRef.current.innerHTML= eachSong.songLikes.length
-    }
+    // if (inView) {
+    //   SONG = eachSong;
+    //   audioRef.current.src = eachSong.songURL
+    //   profilePicRef.current.src = eachSong.songUser.picture
+    //   songRef.current = eachSong.songUser
+    //   songUserIdRef.current = eachSong.songUser._id
+    //   likesRef.current.innerHTML= eachSong.songLikes.length
+    //   console.log(eachSong.songUser)
+    // }
 
     return (
-      <li
+      <InView
+        as="li"
+        onChange={(inView, entry) => {
+          console.log('Inview:', inView, entry.target)
+          SONG = eachSong
+          audioRef.current.src = eachSong.songURL
+          // profilePicRef.current.src = eachSong.songUser.picture
+          // songRef.current = eachSong.songUser
+          // songUserIdRef.current = eachSong.songUser._id
+          // likesRef.current.innerHTML= eachSong.songLikes.length
+          console.log(eachSong.songUser)
+        }}
         key={eachSong.songUser._id}
-        id={eachSong.songUser._id}
-        ref={setRefs}
+        // ref={setRefs}
         className="video-pane"
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
-      >
+        >
         <div className="last-div"></div>
         <div className="text-container">
           <div className="udt-1-container">
@@ -227,7 +238,7 @@ function SocialFeed(props) {
             </p>
           </div>
         </div>
-      </li>
+      </InView>
     );
   }
   
@@ -304,7 +315,8 @@ function SocialFeed(props) {
         <NavBar popUpSearch={popUpSearch} 
                 popUpComments={popUpComments} 
                 searchBtn={searchBtn} 
-                commentBtn={commentBtn} 
+                commentBtn={commentBtn}
+
                 />
         <audio ref={audioRef} id='damn'></audio>
       </div>

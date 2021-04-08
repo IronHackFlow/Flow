@@ -73,7 +73,7 @@ function App() {
               <div className="menu-route mr-3">
                 <div className="menu-outset mo-3">
                   <div className="menu-inset mi-3">
-                    <Link to="/social-test" onClick={hideNavBar}>Explore</Link>
+                    <Link to="/explore-feed" onClick={hideNavBar}>Explore</Link>
                   </div>
                 </div>
               </div>
@@ -122,8 +122,8 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-
-          <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} />
+{/* 
+          <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} /> */}
         </Switch>
       </div>
     </TheContext.Provider>
