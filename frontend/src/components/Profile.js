@@ -83,10 +83,10 @@ function Profile(props) {
 
 
   const showSongs = () => {
-    return thisUserSongs.map((eachSong) => {
+    return thisUserSongs.map((eachSong, i) => {
       console.log(eachSong.songLyricsStr)
       return (
-      <li className="your-track-container">
+      <li key={i} className="your-track-container">
         <div className="lyrics-play">
 
           <audio id={eachSong.songName} src={eachSong.songURL}></audio>

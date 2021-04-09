@@ -273,7 +273,6 @@ function SocialFeed(props) {
 
     return (
       <li
-        key={eachSong.songUser._id}
         id={eachSong.songUser._id}
         ref={setRefs}
         className="video-pane"
@@ -306,13 +305,13 @@ function SocialFeed(props) {
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
       eachSong.shorts = getRandomBackground();
-      return <DisplaySong i={i} {...eachSong} />;
+      return <DisplaySong key={i} {...eachSong} />;
     });
   };
   const showExploreSongs = () => {
     return exploreFeedSongs.map((eachSong, j) => {
       eachSong.shorts = getRandomBackground();
-      return <DisplaySong j={j} {...eachSong} />
+      return <DisplaySong key={j} {...eachSong} />
     })
   }
 
