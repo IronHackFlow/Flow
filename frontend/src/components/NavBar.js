@@ -72,7 +72,6 @@ function NavBar(props) {
     console.log(user, songLikeId);
     document.getElementById("notifyLike").click();
     const likeData = { user1: user._id, songLiked: songLikeId };
-    console.log(userViewed)
     actions
       .addLike(likeData)
       .then((whatever) => {

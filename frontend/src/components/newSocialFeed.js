@@ -19,8 +19,7 @@ function SocialFeed(props) {
           userViewed, setUserViewed, 
           navDisplayed, setNavDisplayed,
           getSongName, setGetSongName,
-          songLikeId, setSongLikeId,
-          getSongComments, setGetSongComments
+          songLikeId, setSongLikeId
     } = React.useContext(
     TheContext
   );
@@ -201,14 +200,13 @@ function SocialFeed(props) {
       setGetSongName(eachSong.songName)
       setGetSongCaption(eachSong.songCaption)
       setUserViewed(eachSong.songUser)
-      setGetSongComments(eachSong.songComments)
+      console.log(eachSong)
       audioRef.current.src = eachSong.songURL
       likesRef.current.innerHTML= eachSong.songLikes.length
-      console.log(eachSong)
+
       // profilePicRef.current.src = eachSong.songUser.picture
       // songRef.current = eachSong.songUser
       // songUserIdRef.current = eachSong.songUser._id
-
     }
 
     return (
