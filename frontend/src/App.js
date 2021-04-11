@@ -19,6 +19,9 @@ function App() {
   const [navDisplayed, setNavDisplayed] = useState(false)
   const [user, setUser] = useState({})
   const [userViewed, setUserViewed] = useState({})
+  const [songLikeId, setSongLikeId] = useState({})
+  const [getSongName, setGetSongName] = useState({});
+  const [getSongComments, setGetSongComments] = useState({})
   const navRef = useRef();
 
   useEffect(() => {
@@ -51,7 +54,10 @@ function App() {
     <TheContext.Provider value={{
         user, setUser, 
         userViewed, setUserViewed, 
-        navDisplayed, setNavDisplayed, 
+        navDisplayed, setNavDisplayed,
+        getSongName, setGetSongName,
+        songLikeId, setSongLikeId,
+        getSongComments, setGetSongComments
     }}>
       <div className="App">
         <nav ref={navRef}>
@@ -80,7 +86,7 @@ function App() {
               <div className="menu-route mr-4">
                 <div className="menu-outset mo-4">
                   <div className="menu-inset mi-4">
-                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
+                    <Link to="/social-test" onClick={hideNavBar}>Record</Link>
                   </div>
                 </div>
               </div>
@@ -122,8 +128,8 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-{/* 
-          <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} /> */}
+
+          <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>

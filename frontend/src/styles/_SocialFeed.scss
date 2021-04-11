@@ -51,57 +51,7 @@
                 border-radius: 20px;
                 box-shadow: 2px 2px 3px #00000099, -2px -2px 2px #ffffff7a;
             }
-            .text-container {
-                @include flexCenter(10%, 53%, 0px, flex-start, flex-start, column);
-                overflow-x: hidden;
-                position: relative;
-                bottom: -11.5%;
-                left: -7%;
-
-                // .ud-text {
-                //     white-space: nowrap;
-                //     width: 95%;
-                //     text-align: left;
-                //     display: inline-block;
-                //     transform: translateX(110%)
-                // }
-                div {
-                    height: 30%;
-                    width: 100px;
-                    overflow-x: hidden;
-                }
-                .udt-1 {
-                    height: 90%;
-                    white-space: nowrap;
-                    text-align: left;
-                    display: inline-block;
-                    transform: translateX(100%);
-                    animation: floatText 2.2s linear infinite;
-                    font-size: 17px;
-                    font-weight: bold;
-                    line-height: 1;
-                }
-                .udt-2 {
-                    height: 90%;
-                    white-space: nowrap;
-                    text-align: left;
-                    display: inline-block;
-                    transform: translateX(100%);
-                    animation: floatText 3.2s linear infinite;
-                    color: white;
-                    font-size: 15px;
-                }
-                .udt-3 {
-                    height: 90%;
-                    white-space: nowrap;
-                    text-align: left;
-                    display: inline-block;
-                    transform: translateX(100%);
-                    animation: floatText 5.3s linear infinite;
-                    color: white;
-                    font-size: 12px;
-                }
-            }
+            
         }
     }
     .video-details-container {
@@ -127,10 +77,57 @@
                 box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 2px #7b7b7b;
 
                 .user-details-inset {
-                    @include flexCenter(80%, 92%, 10px, center, center, column);
+                    @include flexCenter(80%, 92%, 10px, center, flex-start, column);
                     color: white;
                     border: 2px solid #5a5a5a;
                     box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
+                    .text-container {
+                        @include flexCenter(90%, 53%, 0px, flex-start, flex-start, column);
+                        overflow-x: hidden;
+                        // position: relative;
+                        // bottom: -11.5%;
+                        // left: -7%;
+        
+                        // .ud-text {
+                        //     white-space: nowrap;
+                        //     width: 95%;
+                        //     text-align: left;
+                        //     display: inline-block;
+                        //     transform: translateX(110%)
+                        // }
+
+                        .udt-1 {
+                            height: 30%;
+                            white-space: nowrap;
+                            text-align: left;
+                            
+                            transform: translateX(100%);
+                            animation: floatText 2.2s linear infinite;
+                            font-size: 17px;
+                            font-weight: bold;
+                            line-height: 1;
+                        }
+                        .udt-2 {
+                            height: 30%;
+                            white-space: nowrap;
+                            text-align: left;
+                            
+                            transform: translateX(100%);
+                            animation: floatText 2.2s linear infinite;
+                            color: white;
+                            font-size: 15px;
+                        }
+                        .udt-3 {
+                            height: 30%;
+                            white-space: nowrap;
+                            text-align: left;
+                            
+                            transform: translateX(100%);
+                            animation: floatText 5.3s linear infinite;
+                            color: white;
+                            font-size: 12px;
+                        }
+                    }
                 }
             }
             .user-profile-image {

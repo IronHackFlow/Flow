@@ -14,10 +14,10 @@ import TheContext from "../TheContext";
 function NavBar(props) {
   const {
     user, userViewed,
-    navDisplayed, windowRef,
+    userForSong, setUserForSong,
+    songLikeId, setSongLikeId,
     toggleSocial, setToggleSocial,
-    toggleExplore, setToggleExplore,
-    profilePicRef, likesRef
+    toggleExplore, setToggleExplore
     } = React.useContext(
     TheContext
   );
@@ -68,61 +68,58 @@ function NavBar(props) {
       .catch(console.error);
   };
 
-  // const likePost = () => {
-  //   console.log(user, userViewed);
-  //   document.getElementById("notifyLike").click();
-  //   const likeData = { user1: user._id, songLiked: SONG._id };
-  //   actions
-  //     .addLike(likeData)
-  //     .then((whatever) => {
-  //       document.getElementById("notifyLike").click();
-  //     })
-  //     .catch(console.error);
-  // }
+  const likePost = () => {
+    console.log(user, songLikeId);
+    document.getElementById("notifyLike").click();
+    const likeData = { user1: user._id, songLiked: songLikeId };
+    console.log(userViewed)
+    actions
+      .addLike(likeData)
+      .then((whatever) => {
+        document.getElementById("notifyLike").click();
+      })
+      .catch(console.error);
+  }
 
-  // onClick={likePost}
     return (
       <footer>
         <div className="social-buttons">
           <div className="social-list">
-
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                {/* <Link to={{pathname: `/profile/other/${SONG.songUser?._id}`, profInfo: SONG.songUser}} ref={songRef}>
-                  <img className="prof-pic" src={SONG.songUser?.picture} ref={profilePicRef} alt=''/>
-                </Link> */}
+                <Link to={{pathname: `/profile/other/${props.songForUserId}`, profInfo: props.songForUserProfile}}>
+                  <img className="prof-pic" src={props.songForUserPic} alt="user in view profile" ref={props.profilePicRef} />
+                </Link>
               </div>
             </div>  
 
             <div className="like-comment-container">
               <div className="individual-btn" onClick={followUser}>
-                <img className="social-icons follow" src={follow}></img>
+                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
-              <div className="individual-btn" >
-                <img className="social-icons heart" src={heart2}></img>
+              <div className="individual-btn" onClick={likePost}>
+                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
                 <div className="likes-number-container">
-                    <p ref={likesRef}></p>
+                    <p ref={props.likesRef}></p>
                 </div>
               </div>
               <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                <img className="social-icons heart" src={search}></img>
+                <img className="social-icons heart" src={search} alt="search user icon"></img>
               </div>
               <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-                <img className="social-icons comment" src={comments}></img>
+                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
               </div>
             </div>
-
           </div>
         </div>
 
         <div className="nav-buttons">
           <div className="nav-list">
-            
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
                   <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                    <img className="button-icons bi-record" src={mic}></img>
+                    <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
                   </Link>
                 </div>
               </div>
@@ -134,7 +131,7 @@ function NavBar(props) {
                                                                       setToggleExplore(true)
                                                                       setToggleSocial(false)
                                                                     }}>
-                    <img className="button-icons bi-explore" ref={exploreIcon} src={explore} alt="explore"></img>
+                    <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
                 </div>
               </div>
             </div>  
@@ -146,7 +143,7 @@ function NavBar(props) {
                         setToggleExplore(false)
                         setToggleSocial(true)
                       }}>
-                  <img className="button-icons bi-social" src={social} ref={socialIcon}></img>
+                  <img className="button-icons bi-social" src={social} alt="social feed icon" ref={socialIcon}></img>
                 </div>
               </div>
             </div>  
@@ -155,12 +152,11 @@ function NavBar(props) {
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
                   <Link to={user._id ? ("/profile") : ("/auth")}>
-                    <img className="button-icons bi-profile" src={avatar3}></img>
+                    <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
                   </Link>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </footer>

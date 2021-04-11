@@ -1905,75 +1905,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 2px 2px 3px #00000099, -2px -2px 2px #ffffff7a;
 }
 
-.social-panel .video-scroll-container .video-pane .text-container {
-  height: 10%;
-  width: 53%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  overflow-x: hidden;
-  position: relative;
-  bottom: -11.5%;
-  left: -7%;
-}
-
-.social-panel .video-scroll-container .video-pane .text-container div {
-  height: 30%;
-  width: 100px;
-  overflow-x: hidden;
-}
-
-.social-panel .video-scroll-container .video-pane .text-container .udt-1 {
-  height: 90%;
-  white-space: nowrap;
-  text-align: left;
-  display: inline-block;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 2.2s linear infinite;
-          animation: floatText 2.2s linear infinite;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 1;
-}
-
-.social-panel .video-scroll-container .video-pane .text-container .udt-2 {
-  height: 90%;
-  white-space: nowrap;
-  text-align: left;
-  display: inline-block;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 3.2s linear infinite;
-          animation: floatText 3.2s linear infinite;
-  color: white;
-  font-size: 15px;
-}
-
-.social-panel .video-scroll-container .video-pane .text-container .udt-3 {
-  height: 90%;
-  white-space: nowrap;
-  text-align: left;
-  display: inline-block;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 5.3s linear infinite;
-          animation: floatText 5.3s linear infinite;
-  color: white;
-  font-size: 12px;
-}
-
 .social-panel .video-details-container {
   height: 130px;
   width: 356px;
@@ -2056,9 +1987,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -2067,6 +1998,63 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   border: 2px solid #5a5a5a;
   -webkit-box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
           box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
+}
+
+.social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container {
+  height: 90%;
+  width: 53%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-x: hidden;
+}
+
+.social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container .udt-1 {
+  height: 30%;
+  white-space: nowrap;
+  text-align: left;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: floatText 2.2s linear infinite;
+          animation: floatText 2.2s linear infinite;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container .udt-2 {
+  height: 30%;
+  white-space: nowrap;
+  text-align: left;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: floatText 2.2s linear infinite;
+          animation: floatText 2.2s linear infinite;
+  color: white;
+  font-size: 15px;
+}
+
+.social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container .udt-3 {
+  height: 30%;
+  white-space: nowrap;
+  text-align: left;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: floatText 5.3s linear infinite;
+          animation: floatText 5.3s linear infinite;
+  color: white;
+  font-size: 12px;
 }
 
 .social-panel .video-details-container .transparent-test .user-profile-image {

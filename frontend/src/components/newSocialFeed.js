@@ -17,7 +17,10 @@ import gifsArr from "../images/gifs.json";
 function SocialFeed(props) {
   const { user, setUser, 
           userViewed, setUserViewed, 
-          navDisplayed, setNavDisplayed
+          navDisplayed, setNavDisplayed,
+          getSongName, setGetSongName,
+          songLikeId, setSongLikeId,
+          getSongComments, setGetSongComments
     } = React.useContext(
     TheContext
   );
@@ -31,9 +34,10 @@ function SocialFeed(props) {
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [exploreFeedSongs, setExploreFeedSongs] = useState([])
   const [userForSong, setUserForSong] = useState({});
+
   const [activeSong, setActiveSong] = useState({});
-  const [writer, setWriter] = useState();
-  const [comment, setComment] = useState();
+
+  const [getSongCaption, setGetSongCaption] = useState()
 
   const [likes, setLikes] = useState(0);
   const [toggleExplore, setToggleExplore] = useState();
@@ -179,8 +183,9 @@ function SocialFeed(props) {
 
   function DisplaySong(eachSong) {
 
-    const [inViewRef, inView, entry] = useInView({
-      threshold: .8,
+    const [inViewRef, inView] = useInView({
+      threshold: 1,
+      root: document.querySelector('.video-scroll-container'),
     });
   
     const setRefs = useCallback(
@@ -191,16 +196,19 @@ function SocialFeed(props) {
       [inViewRef],
     )
     if (inView) {
-      SONG = eachSong;
-      console.log(viewRef.current)
-      console.log(entry.target)
-      console.log(thisFeedSongs[0])
+      setUserForSong(eachSong.songUser)
+      setSongLikeId(eachSong._id)
+      setGetSongName(eachSong.songName)
+      setGetSongCaption(eachSong.songCaption)
+      setUserViewed(eachSong.songUser)
+      setGetSongComments(eachSong.songComments)
       audioRef.current.src = eachSong.songURL
+      likesRef.current.innerHTML= eachSong.songLikes.length
+      console.log(eachSong)
       // profilePicRef.current.src = eachSong.songUser.picture
       // songRef.current = eachSong.songUser
       // songUserIdRef.current = eachSong.songUser._id
-      // likesRef.current.innerHTML= eachSong.songLikes.length
-      console.log(eachSong.songUser)
+
     }
 
     return (
@@ -211,25 +219,6 @@ function SocialFeed(props) {
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
         >
         <div className="last-div"></div>
-        <div className="text-container">
-          <div className="udt-1-container">
-            <p className="ud-text udt-1"> 
-              <span style={{ color: "#ec6aa0" }}>
-                {eachSong.songUser.userName}
-              </span>
-            </p>
-          </div>
-          <div className="udt-2-container">
-            <p className="ud-text udt-2">
-              {eachSong.songName}
-            </p>
-          </div>
-          <div className="udt-3-container">
-            <p className="ud-text udt-3">
-              {eachSong.caption ? eachSong.caption : "no caption for this flow"}
-            </p>
-          </div>
-        </div>
       </li>
     );
   }
@@ -282,6 +271,25 @@ function SocialFeed(props) {
             <div className="transparent-test">
               <div className="user-details-container">
                 <div className="user-details-inset">
+                  <div className="text-container">
+                    <div className="udt-1-container">
+                      <p className="ud-text udt-1"> 
+                        <span style={{ color: "#ec6aa0" }}>
+                          {userForSong.userName}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="udt-2-container">
+                      <p className="ud-text udt-2">
+                        {getSongName}
+                      </p>
+                    </div>
+                    <div className="udt-3-container">
+                      <p className="ud-text udt-3">
+                        {getSongCaption ? getSongCaption : "no caption for this flow"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="user-profile-image">
@@ -308,7 +316,11 @@ function SocialFeed(props) {
                 popUpComments={popUpComments} 
                 searchBtn={searchBtn} 
                 commentBtn={commentBtn}
-
+                songForUserId={userForSong._id}
+                songForUserProfile={userForSong}
+                songForUserPic={userForSong.picture}
+                profilePicRef={profilePicRef}
+                likesRef={likesRef}
                 />
         <audio ref={audioRef} id='damn'></audio>
       </div>
