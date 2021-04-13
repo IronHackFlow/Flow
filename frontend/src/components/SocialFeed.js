@@ -464,6 +464,7 @@ function SocialFeed(props) {
     }
     else {
       return SONG.songComments.map((each)=>{
+
         getCommentWriter(each.commUser)
         return (
           <div className="comment-list">

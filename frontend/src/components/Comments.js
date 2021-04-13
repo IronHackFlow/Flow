@@ -1,53 +1,60 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from 'react-router-dom'
 import TheContext from "../TheContext"
 import actions from '../api'
 
 function Comments(props) {
   const {
-    writer, setWriter
+    songComments, setSongComments,
+    songLikeId, setSongLikeId,
+    getSongName, setGetSongName,
     } = React.useContext(
     TheContext
   );
 
-  // const handleSubmit =(e)=>{
-  //   e.preventDefault()
-  //   actions.addComment({comment, SONG})
-  // }
+  const [writer, setWriter] = useState();
+  const [comment, setComment] = useState();
+  const [commenterData, setCommenterData] = useState({})
 
-  const getCommentWriter=(num)=>{
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(comment, songLikeId)
+    actions.addComment({comment, songLikeId})
+  }
+
+  const getCommentWriter = (num) => {
     actions
     .getAUser({id: num})
-    .then((res)=>{
+    .then((res) => {
       setWriter( `@${res.data.userName}`)
-      
-    }).catch((e)=>{
+    }).catch((e) => {
       console.log('failed to get name')
     })
   }
 
-  // const renderEachComment = ()=>{
-  //   if(!SONG.songComments){
-  //   }
-  //   else {
-  //     return SONG.songComments.map((each)=>{
-  //       getCommentWriter(each.commUser)
-  //       return (
-  //         <div className="comment-list">
-  //           <div className="comment-list-inner">
-  //             <p className="comment-username">
-  //                 {writer}
-  //             </p>
-  //             <p className="comment-text">
-  //               {each.comment}
-  //             </p>
-  //           </div>
-  //         </div>
-  //       )
-  //     })
-  //   }
-  // }
+  function renderEachComment() {
+    if(!songComments){
+    }
+    else {
+      return songComments.map((each, i) => {
+        getCommentWriter(each.commUser)
+        return (
+          <div key={i} className="comment-list">
+            <div className="comment-list-inner">
+              <p className="comment-username">
+                  {writer}
+              </p>
+              <p className="comment-text">
+                {each.comment}
+              </p>
+            </div>
+          </div>
+        )
+      })
+    }
+  }
 
-  // onSubmit={handleSubmit}
+
   return (
     <div ref={props.popUpRef} className="comment-pop-out">
       <div className="inner-com">
@@ -55,11 +62,11 @@ function Comments(props) {
         <div ref={props.opacityRef1} style={{opacity: '0'}} className="com-cont-1">
           <div className="input-container">
             <div className="input-inset">
-              <form className="social-comment-form" >
+              <form className="social-comment-form" onSubmit={handleSubmit}>
                 <input
                     className="social-comment-input" 
                     type='text' 
-                    // onChange={(e) => setComment(e.target.value)}
+                    onChange={(e) => setComment(e.target.value)}
                     placeholder='Drop yo comment' 
                     ></input>
               </form>
@@ -70,7 +77,7 @@ function Comments(props) {
         <div ref={props.opacityRef2} style={{opacity: '0'}} className="com-cont-2">
           <div className="comments-container">
             <div className="comment-list-container">
-               {/* {renderEachComment()} */}
+               {renderEachComment()}
             </div>
           </div>
         </div>

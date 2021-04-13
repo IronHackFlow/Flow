@@ -1,11 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import actions from "../api";
 import { Link } from "react-router-dom";
-import TheContext from '../TheContext'
 
 function Search(props) {
-
-  const searchRef = useRef();
   const [suggestions, setSuggestions] = useState(
     <h4>Find Friends & Artists</h4>
   );
@@ -66,9 +63,7 @@ function Search(props) {
 
   return (
     <div ref={props.popUpSearchRef} className="comment-pop-out">
-
       <div className="inner-com">
-
         <div className="com-cont-1">
           <div className="input-container">
             <div className="input-inset">
@@ -96,41 +91,13 @@ function Search(props) {
             </div>
           </div>
         </div>
-
       </div>
 
-      <div
-        ref={props.opacitySearchRef3}
-        style={{ opacity: "0" }}
-        className="bottom-bar"
-      >
+      <div  className="bottom-bar" ref={props.opacitySearchRef3} style={{ opacity: "0" }}>
         <div className="inner-bar"></div>
       </div>
-
     </div>
   );
 }
 
 export default Search;
-
-// <>
-// <div className="input-container">
-//     <div className="input-inset">
-//         <form className="social-comment-form">
-//             <input onChange={listUsers}
-//                 className="social-comment-input" 
-//                 type='text' 
-//                 placeholder='       Search' 
-//                 ></input>
-//         </form>
-//     </div>
-// </div>
-// <div className="comments-container">
-// <div className="comment-list-container">
-
-//     {suggestions}
-
-// </div>
-// </div>
-// </>
-// {suggestions}

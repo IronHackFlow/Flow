@@ -20,7 +20,8 @@ function App() {
   const [user, setUser] = useState({})
   const [userViewed, setUserViewed] = useState({})
   const [songLikeId, setSongLikeId] = useState({})
-  const [getSongName, setGetSongName] = useState();
+  const [getSongName, setGetSongName] = useState('');
+  const [songComments, setSongComments] = useState([])
   const navRef = useRef();
 
   useEffect(() => {
@@ -55,7 +56,8 @@ function App() {
         userViewed, setUserViewed, 
         navDisplayed, setNavDisplayed,
         getSongName, setGetSongName,
-        songLikeId, setSongLikeId
+        songLikeId, setSongLikeId,
+        songComments, setSongComments
     }}>
       <div className="App">
         <nav ref={navRef}>
