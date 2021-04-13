@@ -60,9 +60,9 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
       })
       .catch((err)=> res.status(500).json(err));
     
-  })
+})
 
-  router.post(`/getCommentsRT`, async (req, res, next) => {
+router.post(`/getCommentsRT`, async (req, res, next) => {
 
     Comments.find({ CommSong: req.body._id})
     .then((songs) => {
@@ -72,7 +72,7 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
-
+  console.log("wtf is thi shit", req.body)
     Songs.find({ songUser: req.body._id})
     .populate('songUser')
     .populate('songComments')
@@ -124,7 +124,6 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   .catch(err => res.status(500).json(err))
   });
 
-
 router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
@@ -137,14 +136,13 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       let comment = await Comments.create(body);
       // console.log(comment)
       // console.log(2)
-      let s = await Songs.findByIdAndUpdate(req.body.SONG._id,{$push:{songComments:comment._id}})
-      // console.log(s)
+      let s = await Songs.findByIdAndUpdate(req.body.songLikeId, {$push: { songComments: comment._id }})
+      console.log("wtf man come on", s)
       // console.log(3)
       res.status(200).json(comment);
     }
   });
 });
-
 
 router.post(`/addUserProfRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", (err, authData) => {
