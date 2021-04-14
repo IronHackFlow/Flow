@@ -82,8 +82,9 @@
                     border: 2px solid #5a5a5a;
                     box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
                     .text-container {
-                        @include flexCenter(90%, 53%, 0px, flex-start, flex-start, column);
+                        @include flexCenter(90%, 100%, 0px, flex-start, flex-start, column);
                         overflow-x: hidden;
+                        padding-left: 5px;
                         // position: relative;
                         // bottom: -11.5%;
                         // left: -7%;
@@ -101,8 +102,8 @@
                             white-space: nowrap;
                             text-align: left;
                             
-                            transform: translateX(100%);
-                            animation: floatText 2.2s linear infinite;
+                            // transform: translateX(100%);
+                            // animation: floatText 2.2s linear infinite;
                             font-size: 17px;
                             font-weight: bold;
                             line-height: 1;
@@ -112,8 +113,8 @@
                             white-space: nowrap;
                             text-align: left;
                             
-                            transform: translateX(100%);
-                            animation: floatText 2.2s linear infinite;
+                            // transform: translateX(100%);
+                            // animation: floatText 2.2s linear infinite;
                             color: white;
                             font-size: 15px;
                         }
@@ -122,8 +123,8 @@
                             white-space: nowrap;
                             text-align: left;
                             
-                            transform: translateX(100%);
-                            animation: floatText 5.3s linear infinite;
+                            // transform: translateX(100%);
+                            // animation: floatText 5.3s linear infinite;
                             color: white;
                             font-size: 12px;
                         }

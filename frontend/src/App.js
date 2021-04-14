@@ -2,26 +2,28 @@ import { useEffect, useState, useRef } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import './styles/style.css'
 import actions from './api'
+import TheContext from './TheContext'
 import Home from './components/Home'
 import Auth from './components/Auth'
-import Profile from './components/Profile'
 import SocialFeed from './components/SocialFeed'
-import NewSocialFeed from './components/NewSocialFeed'
 import TestAudio from './components/TestAudio'
 import UploadFile from './components/UploadFile'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
-import TheContext from './TheContext'
-import Notification from './components/Notification'
+import Profile from './components/Profile'
 import OtherProfile from './components/OtherProfile'
+import Notification from './components/Notification'
 
 function App() {
-  const [navDisplayed, setNavDisplayed] = useState(false)
-  const [user, setUser] = useState({})
-  const [userViewed, setUserViewed] = useState({})
+  const [navDisplayed, setNavDisplayed] = useState(false);
+  const [user, setUser] = useState({});
+  const [userViewed, setUserViewed] = useState({});
+  const [toggleExplore, setToggleExplore] = useState();
+  const [toggleSocial, setToggleSocial] = useState();
   const [songLikeId, setSongLikeId] = useState({})
   const [getSongName, setGetSongName] = useState('');
-  const [songComments, setSongComments] = useState([])
+  const [songComments, setSongComments] = useState([]);
+
   const navRef = useRef();
 
   useEffect(() => {
@@ -55,6 +57,8 @@ function App() {
         user, setUser, 
         userViewed, setUserViewed, 
         navDisplayed, setNavDisplayed,
+        toggleSocial, setToggleSocial,
+        toggleExplore, setToggleExplore,
         getSongName, setGetSongName,
         songLikeId, setSongLikeId,
         songComments, setSongComments
@@ -86,7 +90,7 @@ function App() {
               <div className="menu-route mr-4">
                 <div className="menu-outset mo-4">
                   <div className="menu-inset mi-4">
-                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
+                    <Link to="/social-test" onClick={hideNavBar}>Record</Link>
                   </div>
                 </div>
               </div>
@@ -128,8 +132,6 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-{/* 
-          <Route exact path="/social-test" render={(props) => <NewSocialFeed {...props} />} /> */}
         </Switch>
       </div>
     </TheContext.Provider>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom'
 import actions from "../api"
 import mic from "../images/record2.svg";
 import avatar3 from "../images/avatar3.svg";
@@ -86,7 +86,7 @@ function NavBar(props) {
           <div className="social-list">
             <div className="individual-btn">
               <div className="individual-profile-pic">
-                <Link to={{pathname: `/profile/other/${props.songForUserId}`, profInfo: props.songForUserProfile}}>
+                <Link to={{pathname: `/profile/other/${props.songForUserId}`, profileInfo: props.songForUserProfile}}>
                   <img className="prof-pic" src={props.songForUserPic} alt="user in view profile" ref={props.profilePicRef} />
                 </Link>
               </div>
@@ -127,8 +127,8 @@ function NavBar(props) {
             <div className="nav-buttons-rim" ref={exploreRim}>
               <div className="nav-buttons-outset" ref={exploreOut}>
                 <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
-                                                                      setToggleExplore(true)
                                                                       setToggleSocial(false)
+                                                                      setToggleExplore(true)
                                                                     }}>
                     <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
                 </div>

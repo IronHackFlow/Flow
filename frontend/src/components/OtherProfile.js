@@ -29,7 +29,6 @@ function OtherProfile(props) {
 
   useEffect(() => {
     setThisUser(props.location.profileInfo)
-    setThisUser(props.location.profInfo)
   }, []);
   
   useEffect(() => {

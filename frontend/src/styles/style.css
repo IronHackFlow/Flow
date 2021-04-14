@@ -2002,7 +2002,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container {
   height: 90%;
-  width: 53%;
+  width: 100%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2018,16 +2018,13 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
       -ms-flex-direction: column;
           flex-direction: column;
   overflow-x: hidden;
+  padding-left: 5px;
 }
 
 .social-panel .video-details-container .transparent-test .user-details-container .user-details-inset .text-container .udt-1 {
   height: 30%;
   white-space: nowrap;
   text-align: left;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 2.2s linear infinite;
-          animation: floatText 2.2s linear infinite;
   font-size: 17px;
   font-weight: bold;
   line-height: 1;
@@ -2037,10 +2034,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   height: 30%;
   white-space: nowrap;
   text-align: left;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 2.2s linear infinite;
-          animation: floatText 2.2s linear infinite;
   color: white;
   font-size: 15px;
 }
@@ -2049,10 +2042,6 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   height: 30%;
   white-space: nowrap;
   text-align: left;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  -webkit-animation: floatText 5.3s linear infinite;
-          animation: floatText 5.3s linear infinite;
   color: white;
   font-size: 12px;
 }

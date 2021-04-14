@@ -42,7 +42,9 @@ function Comments(props) {
           <div key={i} className="comment-list">
             <div className="comment-list-inner">
               <p className="comment-username">
+                {/* <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: each.commUser}}> */}
                   {writer}
+                {/* </Link> */}
               </p>
               <p className="comment-text">
                 {each.comment}
