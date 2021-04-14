@@ -6,6 +6,7 @@ import TheContext from './TheContext'
 import Home from './components/Home'
 import Auth from './components/Auth'
 import SocialFeed from './components/SocialFeed'
+import OriginalSocialFeed from './components/OriginalSocialFeed'
 import TestAudio from './components/TestAudio'
 import UploadFile from './components/UploadFile'
 import EditProfileScreen from './components/EditProfileScreen'
@@ -129,9 +130,12 @@ function App() {
           <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} />
           <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
           <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
-          <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
-          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
+          {/* <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
+          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} /> */}
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+
+          <Route exact path="/social-feed" render={(props) => <OriginalSocialFeed {...props} />} />
+          <Route exact path="/explore-feed" render={(props) => <OriginalSocialFeed {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>

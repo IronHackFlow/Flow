@@ -16,7 +16,7 @@ import search from "../images/search.svg";
 import heart2 from "../images/heart2.svg";
 import explore from "../images/explore.svg";
 import gifsArr from "../images/gifs.json";
-import Search from "./Search";
+import OriginalSearch from "./OriginalSearch";
 
 // let SONG = {};
 
@@ -279,20 +279,20 @@ function SocialFeed(props) {
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
       >
         <div className="last-div"></div>
-        <div className="text-container">
-          <div className="udt-1-container">
+        <div className="text-container" style={{position: 'relative', bottom: '-10.5%', left: '-10%', color: 'white', textAlign: 'left'}}>
+          <div className="udt-1-container" style={{height: '20px'}}>
             <p className="ud-text udt-1"> 
               <span style={{ color: "#ec6aa0" }}>
                 {eachSong.songUser.userName}
               </span>
             </p>
           </div>
-          <div className="udt-2-container">
+          <div className="udt-2-container" style={{height: '20px'}}>
             <p className="ud-text udt-2">
               {eachSong.songName}
             </p>
           </div>
-          <div className="udt-3-container">
+          <div className="udt-3-container" style={{height: '20px'}}>
             <p className="ud-text udt-3">
               {eachSong.caption ? eachSong.caption : "no caption for this flow"}
             </p>
