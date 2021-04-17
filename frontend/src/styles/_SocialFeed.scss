@@ -36,14 +36,12 @@
         scroll-snap-type: y mandatory;
         overflow-y: scroll;
         position: absolute;
-
         .video-pane {
             @include flexCenter(100%, 100%, 0px, flex-start, center, column);
             scroll-snap-align: start;
             scroll-snap-stop: always;
             background-size: cover;
             background-position-x: center;
-
             .last-div {
                 height: 65%;
                 width: 85%;
@@ -54,6 +52,7 @@
             
         }
     }
+
     .video-details-container {
         @include flexCenter(130px, 356px, 55px, center, center, row);
         position: absolute;
@@ -65,7 +64,7 @@
         bottom: 3%;
         left: 2.5%;
         box-shadow: 0px 8px 20px 0px #00000099;
-    
+
         .transparent-test {
             @include flexCenter(90%, 96.5%, 49px, space-around, center, row);
             box-shadow: inset 3px 3px 6px #353535, inset -2px -2px 3px #8c8f90; 
@@ -174,13 +173,13 @@
     transition: height .5s;
 
     .inner-com {
-        @include flexCenter(90%, 96%, 25px, flex-start, center, column);
+        @include flexCenter(95%, 96%, 25px, flex-start, center, column);
         // margin: 2% 0% 1% 0%;
         background: #ecf0f3;
         box-shadow: inset 2px 2px 4px #cccccc, inset -2px -2px 4px #ffffff;
 
         .com-cont-1 {
-            @include flexCenter(30%, 100%, 0px, center, center, row);
+            @include flexCenter(20%, 100%, 0px, center, center, row);
 
             .input-container {
                 @include flexCenter(75%, 93%, 20px, center, center, row);
@@ -224,58 +223,98 @@
             }
         }
 
-
         .com-cont-2 {
-            @include flexCenter(67%, 93%, 25px, center, center, row);
-            box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+            @include flexCenter(80%, 100%, 25px, center, center, column);
 
+            .comments-title {
+                height: 8%;
+                width: 90%;
+                .comments-title-inner {
+                    @include flexCenter(88%, 100%, 21px, center, center, row);
+                    box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+                }
+            }
             .comments-container {
-                @include flexCenter(88%, 93%, 24px, center, center, row);
-                box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
-
+                @include flexCenter(88%, 95%, 21px, center, center, row);
+                
                 .comment-list-container {
-                    @include flexCenter(88%, 92%, 15px, flex-start, center, column);
+                    @include flexCenter(93%, 94%, 15px, flex-start, center, column);
                     overflow-y: scroll;
                     background: #686a6b;
                     box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #afafaf;
 
                     .comment-list {
-                        @include flexCenter(80px, 93%, 20px, center, center, row);
-                        margin-top: 4%;
+                        // @include flexCenter(80px, 93%, 20px, center, center, row);
+                        min-height: 80px;
+                        width: 93%;
+                        border-radius: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: 2%;
                         background: #686a6b;
                         box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
 
-                        .comment-list-inner {
-                            @include flexCenter(85%, 95%, 15px, flex-start, center, column);
-                            position: relative;
-                            box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-            
-                            .comment-username {
-                                color: #ec6aa0;
-                                font-weight: bold;
-                                text-align: start;
-                                width: 90%;
-                                margin: auto;
+                        .comment-list-photo {
+                            @include flexCenter(100%, 22%, 0px, center, center, row);
+
+                            .comment-photo-inner {
+                                @include flexCenter(50px, 80%, 50px, center, center, row);
+                                box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+
+                                .comment-photo-outer {
+                                    @include flexCenter(80%, 80%, 50px, center, center, row);
+                                    box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+
+                                    a {
+                                        @include flexCenter(90%, 90%, 50px, center, center, row);
+                                        overflow: hidden;
+                                        object-fit: contain;
+
+                                        img {
+                                            height: 100%;
+                                            width: 100%;
+                                        }
+                                    }
+                                }
                             }
-                            .comment-text {
-                                height: 50%;
-                                width: 90%;
-                                text-align: start;
-                                color: white;
-                                word-wrap: break-word;
-                                font-size: 14px;
-                                overflow-y: scroll;
-                                line-height: 1;
+                        }
+                    }
+                        .comment-list-inner {
+                            @include flexCenter(100%, 78%, 0px, flex-start, center, row);
+                            
+                            
+                            .comment-list-outer {
+                                @include flexCenter(80%, 96%, 15px, center, center, column);
+                                box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+
+                                .comment-username {
+                                    color: #ec6aa0;
+                                    font-weight: bold;
+                                    text-align: start;
+                                    width: 90%;
+                                    margin: auto;
+                                }
+                                .comment-text {
+                                    min-height: 30px;
+                                    width: 90%;
+                                    text-align: start;
+                                    color: white;
+                                    word-wrap: break-word;
+                                    font-size: 14px;
+                                    overflow-y: scroll;
+                                    line-height: 1;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
     }
+    
 
     .bottom-bar {
-        height: 4%;
+        height: 2%;
         width: 96%;
         margin: 2% 0% 0% 0%;
         border-radius: 20px;

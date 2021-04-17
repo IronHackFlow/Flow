@@ -93,9 +93,6 @@ function Search(props) {
         </div>
       </div>
 
-      <div  className="bottom-bar" ref={props.opacitySearchRef3} style={{ opacity: "0" }}>
-        <div className="inner-bar"></div>
-      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { CSSTransition } from "react-transition-group"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import actions from "../api";
@@ -48,9 +48,7 @@ function SocialFeed(props) {
   const popUpRef = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
-  const opacityRef3 = useRef();
   const dumbSearchRef = useRef();  
-  const opacitySearchRef3 = useRef();  
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -68,7 +66,7 @@ function SocialFeed(props) {
       .getMostLikedSongs()
       .then((usersSongs) => {
         setThisFeedSongs(usersSongs.data);
-        console.log("inside social feed useeffect", thisFeedSongs);
+        // console.log("inside social feed useeffect", thisFeedSongs);
       })
       .catch(console.error);
   }, [page]);
@@ -79,7 +77,7 @@ function SocialFeed(props) {
       .then((exploreSongs) => {
         exploreSongs.data.reverse()
         setExploreFeedSongs(exploreSongs.data)
-        console.log("inside explore feed useeffect", exploreFeedSongs)
+        // console.log("inside explore feed useeffect", exploreFeedSongs)
       })
       .catch(console.error);
   }, [page2]);
@@ -96,7 +94,6 @@ function SocialFeed(props) {
       searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpSearchRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
-      opacitySearchRef3.current.style.opacity = 0;
       dumbSearchRef.current.style.opacity = 0;
       setSearchPoppedUp(false);
     }
@@ -106,14 +103,12 @@ function SocialFeed(props) {
       windowRef.current.style.bottom = "0";
       opacityRef1.current.style.opacity = 0;
       opacityRef2.current.style.opacity = 0;
-      opacityRef3.current.style.opacity = 0;
       setPoppedUp(false);
     }
   }
   const menuUp = (whichMenu) => {
     if (whichMenu == 'search') {
       searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-      opacitySearchRef3.current.style.opacity = 1;
       dumbSearchRef.current.style.opacity = 1;
       popUpSearchRef.current.style.height = "50%";
       windowRef.current.style.bottom = "50%";
@@ -123,7 +118,6 @@ function SocialFeed(props) {
       commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       opacityRef1.current.style.opacity = 1;
       opacityRef2.current.style.opacity = 1;
-      opacityRef3.current.style.opacity = 1;
       popUpRef.current.style.height = "50%";
       windowRef.current.style.bottom = "50%";
       setPoppedUp(true);
@@ -169,7 +163,7 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
-
+  
   function DisplaySong(eachSong) {
     const viewRef = useRef();
     const [inViewRef, inView] = useInView({
@@ -191,12 +185,11 @@ function SocialFeed(props) {
       setGetSongCaption(eachSong.songCaption)
       setUserViewed(eachSong.songUser)
       setSongComments(eachSong.songComments)
-
       console.log(eachSong)
       audioRef.current.src = eachSong.songURL
       likesRef.current.innerHTML= eachSong.songLikes.length
     }
-
+  
     return (
       <li
         ref={setRefs}
@@ -208,7 +201,7 @@ function SocialFeed(props) {
       </li>
     );
   }
-  
+
   const showSongs = () => {
     return thisFeedSongs.map((eachSong, i) => {
       eachSong.shorts = getRandomBackground();
@@ -221,41 +214,41 @@ function SocialFeed(props) {
       return <DisplaySong key={j+100} {...eachSong} />
     })
   }
-  // const [displaySongList, setDisplaySongList] = useState([])
-  // useEffect(() => {
-  //   if (toggleSocial === true && toggleExplore === false) {
-  //     showSongs()
-  //   } else {
-  //     showExploreSongs()
-  //   }
-  // }, [toggleExplore, toggleSocial])
+
   return (
       <div className="SocialFeed">
         <div ref={windowRef} className="social-panel">
-          <CSSTransition 
-            in={toggleExplore}
-            key={'key1'}
-            classNames={transClass()}
-            timeout={800}
-            unmountOnExit
-            >
-            <ul className="video-scroll-container">
-              {showExploreSongs()}
-            </ul>
-          </CSSTransition>
+          <div className="video-scroll-container" style={{width: '99%'}}>
+              <CSSTransition
+                in={toggleSocial}
+                key={'key2'}
+                classNames={transClass()}
+                timeout={800}
+                mountOnEnter
+                unmountOnExit
+                onEnter={()=>console.log('social entered')}
+                onExit={()=>console.log('social exited')}
+                >
+                  <ul className="video-scroll-container">
+                  {showSongs()}
+                  </ul>
+              </CSSTransition>
+              <CSSTransition 
+                in={toggleExplore}
+                key={'key1'}
+                classNames={transClass()}
+                timeout={800}
+                mountOnEnter
+                unmountOnExit
+                onEnter={()=>console.log('explore entered')}
+                onExit={()=>console.log('explore exited')}
+                >
+                  <ul className="video-scroll-container">
+                {showExploreSongs()}
+                </ul>
+              </CSSTransition>
 
-          <CSSTransition
-            in={toggleSocial}
-            key={'key2'}
-            classNames={transClass()}
-            timeout={800}
-            unmountOnExit
-            >
-            <ul className="video-scroll-container">
-              {showSongs()}
-            </ul>
-          </CSSTransition>
-
+          </div>
           <div className="video-details-container">
             <div className="transparent-test">
               <div className="user-details-container">
@@ -294,12 +287,10 @@ function SocialFeed(props) {
         
         <Search popUpSearchRef={popUpSearchRef} 
                 dumbSearchRef={dumbSearchRef} 
-                opacitySearchRef3={opacitySearchRef3} 
                 />
         <Comments popUpRef={popUpRef} 
                   opacityRef1={opacityRef1} 
                   opacityRef2={opacityRef2} 
-                  opacityRef3={opacityRef3}
                   />
         <NavBar popUpSearch={popUpSearch} 
                 popUpComments={popUpComments} 

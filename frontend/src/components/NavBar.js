@@ -123,7 +123,9 @@ function NavBar(props) {
                 </div>
               </div>
             </div>  
-
+            {/* <div className="button-title-container">
+              Record
+            </div> */}
             <div className="nav-buttons-rim" ref={exploreRim}>
               <div className="nav-buttons-outset" ref={exploreOut}>
                 <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
@@ -134,7 +136,9 @@ function NavBar(props) {
                 </div>
               </div>
             </div>  
-
+            {/* <div className="button-title-container">
+              Explore
+            </div> */}
             <div className="nav-buttons-rim" ref={socialRim}>
               <div className="nav-buttons-outset" ref={socialOut}>
                 <div className="nav-buttons-inset" ref={socialIn}
@@ -146,7 +150,9 @@ function NavBar(props) {
                 </div>
               </div>
             </div>  
-
+            {/* <div className="button-title-container">
+              Following
+            </div> */}
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
@@ -156,6 +162,9 @@ function NavBar(props) {
                 </div>
               </div>
             </div>
+            {/* <div className="button-title-container">
+              Profile
+            </div> */}
           </div>
         </div>
       </footer>
