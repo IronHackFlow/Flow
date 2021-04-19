@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from 'react-router-dom'
 import TheContext from "../TheContext"
 import actions from '../api'
@@ -6,60 +6,77 @@ import actions from '../api'
 function Comments(props) {
   const {
     songComments, setSongComments,
-    songLikeId, setSongLikeId,
+    songId, setSongId,
     getSongName, setGetSongName,
+    userViewed
     } = React.useContext(
     TheContext
   );
-
-  const [writer, setWriter] = useState();
+  let writerArray = []
+  const [writers, setWriters] = useState([])
   const [comment, setComment] = useState();
-  const [commenterData, setCommenterData] = useState({})
+  const [songData, setSongData] = useState({})
   const [photo, setPhoto] = useState();
+  const renders = useRef(0)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(comment, songLikeId)
-    actions.addComment({comment, songLikeId})
+    console.log(comment, songId)
+    actions.addComment({comment, songId})
   }
+
+  // useEffect(() => {
+  //   actions
+  //   .getComments({id: songId})
+  //   .then((res) => {
+  //     setSongData(res.data)
+  //   }).catch((e) => {
+  //     console.log('failed to get song', e)
+  //   })
+  // }, [songId])
 
   const getCommentWriter = (num) => {
     actions
     .getAUser({id: num})
     .then((res) => {
-      setWriter( `@${res.data.userName}`)
-      setPhoto(res.data.picture)
+      writerArray.push(res.data.userName)
     }).catch((e) => {
-      console.log('failed to get name')
+      console.log('failed to get name', e)
     })
   }
 
-  function renderEachComment() {
+
+  const renderEachComment = useCallback(() => {
     if(!songComments){
     }
     else {
       return songComments.map((each, i) => {
         getCommentWriter(each.commUser)
+        console.log(each.commUser)
+        // console.log(songData)
         return (
           <div key={i} className="comment-list">
             <div className="comment-list-photo">
               <div className="comment-photo-inner">
                 <div className="comment-photo-outer">
-                  <Link to="">
+                  {/* <Link to="">
                     <img src={photo} alt="user's profile"></img>
-                  </Link>
+                  </Link> */}
+                  {console.log(renders.current++)}
                 </div>
               </div>
             </div>
             <div className="comment-list-inner">
               <div className="comment-list-outer">
-                <p className="comment-username">
+                  <p className="comment-username">
                   {/* <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: each.commUser}}> */}
-                    {writer}
+                    {writerArray[i]}
+                    {/* {console.log(writers)} */}
                   {/* </Link> */}
-                </p>
+                  </p>
                 <p className="comment-text">
                   {each.comment}
+
                 </p>
               </div>
             </div>
@@ -67,8 +84,12 @@ function Comments(props) {
         )
       })
     }
-  }
+  }, [songComments])
 
+  useEffect(() => {
+    writerArray = []
+    console.log(writerArray)
+  }, [songComments])
 
   return (
     <div ref={props.popUpRef} className="comment-pop-out">
@@ -88,7 +109,6 @@ function Comments(props) {
             </div>
           </div>
         </div>
-
         <div className="com-cont-2" ref={props.opacityRef2} style={{opacity: '0'}}>
           <div className="comments-title">
             <div className="comments-title-inner">
@@ -104,10 +124,6 @@ function Comments(props) {
           </div>
         </div>
       </div>
-{/* 
-      <div ref={props.opacityRef3} style={{ opacity: "0" }} className="bottom-bar">
-        <div className="inner-bar"></div>
-      </div> */}
     </div>  
   );
 }

@@ -21,7 +21,7 @@ function App() {
   const [userViewed, setUserViewed] = useState({});
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
-  const [songLikeId, setSongLikeId] = useState({})
+  const [songId, setSongId] = useState({})
   const [getSongName, setGetSongName] = useState('');
   const [songComments, setSongComments] = useState([]);
 
@@ -61,7 +61,7 @@ function App() {
         toggleSocial, setToggleSocial,
         toggleExplore, setToggleExplore,
         getSongName, setGetSongName,
-        songLikeId, setSongLikeId,
+        songId, setSongId,
         songComments, setSongComments
     }}>
       <div className="App">

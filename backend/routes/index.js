@@ -43,7 +43,7 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
 
 router.post(`/getAUserRT`, async (req, res, next) => {
   //GETTING A PARTICULAR USER
-  console.log('hey hey hey hey hey ', req.body)
+  // console.log('hey hey hey hey hey ', req.body)
       await User.findById(req.body.id)
         .then((user) => {
           res.status(200).json(user);
@@ -62,17 +62,20 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
     
 })
 
+// changed this to find a single song out of desperate measures 
 router.post(`/getCommentsRT`, async (req, res, next) => {
-
-    Comments.find({ CommSong: req.body._id})
+    console.log("lol not comments, but songs", req.body)
+    Songs.findById(req.body.id)
+    .populate('songUser')
+    .populate('songComments')
     .then((songs) => {
-        res.status(200).json(songs);
+      res.status(200).json(songs);
     })
     .catch((err) => res.status(500).json(err))
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
-  console.log("wtf is thi shit", req.body)
+  console.log("wtf is this shit", req.body)
     Songs.find({ songUser: req.body._id})
     .populate('songUser')
     .populate('songComments')
@@ -83,7 +86,7 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 })
 
 router.post(`/getSongLikesRT`, async (req, res, next) => {
-  Songs.find({ SongTotLikes: req.body._id})
+  Songs.findById({ SongTotLikes: req.body._id})
   console.log('getting LIKES from SONG LIKES ROUTE...', req.body._id)
   .then((songLikes) => {
       res.status(200).json(songLikes);
@@ -137,7 +140,7 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       // console.log(comment)
       // console.log(2)
       let s = await Songs.findByIdAndUpdate(req.body.songLikeId, {$push: { songComments: comment._id }})
-      console.log("wtf man come on", s)
+      console.log(s)
       // console.log(3)
       res.status(200).json(comment);
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
@@ -20,7 +20,7 @@ function SocialFeed(props) {
           toggleSocial, setToggleSocial,
           toggleExplore, setToggleExplore,
           getSongName, setGetSongName,
-          songLikeId, setSongLikeId,
+          songId, setSongId,
           songComments, setSongComments
     } = React.useContext(
     TheContext
@@ -163,7 +163,7 @@ function SocialFeed(props) {
      audioRef.current.pause()
    }
   }
-  
+
   function DisplaySong(eachSong) {
     const viewRef = useRef();
     const [inViewRef, inView] = useInView({
@@ -180,12 +180,12 @@ function SocialFeed(props) {
     )
     if (inView) {
       setUserForSong(eachSong.songUser)
-      setSongLikeId(eachSong._id)
+      setSongId(eachSong._id)
       setGetSongName(eachSong.songName)
       setGetSongCaption(eachSong.songCaption)
       setUserViewed(eachSong.songUser)
       setSongComments(eachSong.songComments)
-      console.log(eachSong)
+      console.log(eachSong._id, eachSong.songUser._id)
       audioRef.current.src = eachSong.songURL
       likesRef.current.innerHTML= eachSong.songLikes.length
     }
@@ -197,6 +197,7 @@ function SocialFeed(props) {
         className="video-pane"
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
         >
+          {/* {console.log(rendersz.current++)} */}
         <div className="last-div"></div>
       </li>
     );
@@ -207,7 +208,7 @@ function SocialFeed(props) {
       eachSong.shorts = getRandomBackground();
       return <DisplaySong key={i} {...eachSong} />;
     });
-  };
+  }
   const showExploreSongs = () => {
     return exploreFeedSongs.map((eachSong, j) => {
       eachSong.shorts = getRandomBackground();
@@ -226,11 +227,9 @@ function SocialFeed(props) {
                 timeout={800}
                 mountOnEnter
                 unmountOnExit
-                onEnter={()=>console.log('social entered')}
-                onExit={()=>console.log('social exited')}
                 >
                   <ul className="video-scroll-container">
-                  {showSongs()}
+                    {showSongs()}
                   </ul>
               </CSSTransition>
               <CSSTransition 
@@ -240,15 +239,13 @@ function SocialFeed(props) {
                 timeout={800}
                 mountOnEnter
                 unmountOnExit
-                onEnter={()=>console.log('explore entered')}
-                onExit={()=>console.log('explore exited')}
                 >
                   <ul className="video-scroll-container">
-                {showExploreSongs()}
-                </ul>
+                    {showExploreSongs()}
+                  </ul>
               </CSSTransition>
-
           </div>
+
           <div className="video-details-container">
             <div className="transparent-test">
               <div className="user-details-container">
@@ -290,7 +287,7 @@ function SocialFeed(props) {
                 />
         <Comments popUpRef={popUpRef} 
                   opacityRef1={opacityRef1} 
-                  opacityRef2={opacityRef2} 
+                  opacityRef2={opacityRef2}
                   />
         <NavBar popUpSearch={popUpSearch} 
                 popUpComments={popUpComments} 

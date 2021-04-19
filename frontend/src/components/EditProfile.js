@@ -9,7 +9,7 @@ function EditProfile(props) {
   const { user } = React.useContext(TheContext);
 
   const [thisUser, setThisUser] = useState([user]);
-  let redirectRef=useRef()
+  let redirectRef = useRef()
 
   const handleChange = (e) => {
     setThisUser({
