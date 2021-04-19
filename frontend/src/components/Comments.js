@@ -7,89 +7,70 @@ function Comments(props) {
   const {
     songComments, setSongComments,
     songId, setSongId,
-    getSongName, setGetSongName,
-    userViewed
     } = React.useContext(
     TheContext
   );
-  let writerArray = []
-  const [writers, setWriters] = useState([])
-  const [comment, setComment] = useState();
-  const [songData, setSongData] = useState({})
-  const [photo, setPhoto] = useState();
-  const renders = useRef(0)
 
+  const commentUsers = []
+  const [comment, setComment] = useState();
+
+  useEffect(() => {
+    songComments.map((each) => {
+      actions
+      .getAUser({id: each.commUser})
+      .then((res) => {
+        commentUsers.push({ user: res.data, comment: each.comment })
+      }).catch((e) => {
+        console.log('failed to get name', e)
+      })
+    })
+  }, [songComments])
+
+  // const getCommentWriter = (num) => {
+  //   actions
+  //   .getAUser({id: num})
+  //   .then((res) => {
+  //     writerArray.push(res.data.userName)
+  //   }).catch((e) => {
+  //     console.log('failed to get name', e)
+  //   })
+  // }
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(comment, songId)
     actions.addComment({comment, songId})
   }
 
-  // useEffect(() => {
-  //   actions
-  //   .getComments({id: songId})
-  //   .then((res) => {
-  //     setSongData(res.data)
-  //   }).catch((e) => {
-  //     console.log('failed to get song', e)
-  //   })
-  // }, [songId])
-
-  const getCommentWriter = (num) => {
-    actions
-    .getAUser({id: num})
-    .then((res) => {
-      writerArray.push(res.data.userName)
-    }).catch((e) => {
-      console.log('failed to get name', e)
-    })
-  }
-
-
   const renderEachComment = useCallback(() => {
-    if(!songComments){
-    }
-    else {
-      return songComments.map((each, i) => {
-        getCommentWriter(each.commUser)
-        console.log(each.commUser)
-        // console.log(songData)
-        return (
-          <div key={i} className="comment-list">
-            <div className="comment-list-photo">
-              <div className="comment-photo-inner">
-                <div className="comment-photo-outer">
-                  {/* <Link to="">
-                    <img src={photo} alt="user's profile"></img>
-                  </Link> */}
-                  {console.log(renders.current++)}
-                </div>
-              </div>
-            </div>
-            <div className="comment-list-inner">
-              <div className="comment-list-outer">
-                  <p className="comment-username">
-                  {/* <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: each.commUser}}> */}
-                    {writerArray[i]}
-                    {/* {console.log(writers)} */}
-                  {/* </Link> */}
-                  </p>
-                <p className="comment-text">
-                  {each.comment}
-
-                </p>
+    return commentUsers.map((each, i) => {
+      return (
+        <div key={i} className="comment-list">
+          <div className="comment-list-photo">
+            <div className="comment-photo-inner">
+              <div className="comment-photo-outer">
+                <Link to={{pathname: `/profile/other/${each.user?._id}`, profileInfo: each.user}}>
+                  <img src={each.user?.picture} alt="user's profile"></img>
+                </Link>
               </div>
             </div>
           </div>
-        )
-      })
-    }
+
+          <div className="comment-list-inner">
+            <div className="comment-list-outer">
+              <p className="comment-username">
+                {each.user.userName}
+              </p>
+              <p className="comment-text">
+                {each.comment}
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    })
   }, [songComments])
 
-  useEffect(() => {
-    writerArray = []
-    console.log(writerArray)
-  }, [songComments])
 
   return (
     <div ref={props.popUpRef} className="comment-pop-out">
@@ -109,6 +90,7 @@ function Comments(props) {
             </div>
           </div>
         </div>
+
         <div className="com-cont-2" ref={props.opacityRef2} style={{opacity: '0'}}>
           <div className="comments-title">
             <div className="comments-title-inner">
@@ -117,6 +99,7 @@ function Comments(props) {
               </p>
             </div>
           </div>
+
           <div className="comments-container">
             <div className="comment-list-container">
                {renderEachComment()}

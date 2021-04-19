@@ -59,10 +59,9 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
         console.log('yo its ya boi' + user)
       })
       .catch((err)=> res.status(500).json(err));
-    
 })
 
-// changed this to find a single song out of desperate measures 
+// changed this to find a single song out of desperate measures.. Should change it back but don't think it's being used anyway lol
 router.post(`/getCommentsRT`, async (req, res, next) => {
     console.log("lol not comments, but songs", req.body)
     Songs.findById(req.body.id)
@@ -139,7 +138,7 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       let comment = await Comments.create(body);
       // console.log(comment)
       // console.log(2)
-      let s = await Songs.findByIdAndUpdate(req.body.songLikeId, {$push: { songComments: comment._id }})
+      let s = await Songs.findByIdAndUpdate(req.body.songId, {$push: { songComments: comment._id }})
       console.log(s)
       // console.log(3)
       res.status(200).json(comment);

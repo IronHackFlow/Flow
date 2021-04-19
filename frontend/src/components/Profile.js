@@ -86,9 +86,8 @@ function Profile(props) {
     return thisUserSongs.map((eachSong, i) => {
       console.log(eachSong.songLyricsStr)
       return (
-      <li key={i} className="your-track-container">
+      <li key={eachSong.id} className="your-track-container">
         <div className="lyrics-play">
-
           <audio id={eachSong.songName} src={eachSong.songURL}></audio>
           <div className="lyrics-songname-cont">
             <h4>{eachSong.songName}</h4>
@@ -98,8 +97,6 @@ function Profile(props) {
               <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)}></img>
             </div>
           </div>
-
-
         </div>
 
         <div className="lyrics-container">
@@ -107,7 +104,6 @@ function Profile(props) {
             {showLyrics(eachSong.songLyricsStr)}
           </div>
         </div>
-        
       </li>
       )
     })
