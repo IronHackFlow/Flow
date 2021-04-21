@@ -19,7 +19,7 @@ function EditProfileScreen(props) {
                 </div>
                 <div className="bottom-container profile-bc">
                     <div className="useless-bars profile-ub"></div>
-                    <div className="useless-bars profile-ub"></div>
+                    {/* <div className="useless-bars profile-ub"></div> */}
                 </div>
             </div>
         </div>

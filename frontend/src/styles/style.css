@@ -3944,7 +3944,8 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .profile-pc .profile-mc .profile-mo .profile-mi {
-  height: 80%;
+  height: 94%;
+  width: 90%;
   background: #686a6b;
   -webkit-box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
           box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
@@ -3952,6 +3953,12 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .profile-pc .profile-mc .profile-mo .profile-mi .profile-lc {
   background: #686a6b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-shadow: inset 3px 3px 4px #4f5050,  inset -3px -3px 4px #8c8f90;
           box-shadow: inset 3px 3px 4px #4f5050,  inset -3px -3px 4px #8c8f90;
 }
@@ -3963,9 +3970,9 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3975,9 +3982,280 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           flex-direction: column;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections {
-  height: 11%;
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container {
+  height: 70%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin: 5% 0% 5% 0%;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section {
+  height: 30%;
   width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner {
+  height: 90px;
+  width: 90px;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer {
+  height: 80%;
+  width: 80%;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .public-sections {
+  height: 70%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .personal-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .social-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .songs-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.profile-pc .profile-bc {
+  height: 5%;
+}
+
+.profile-pc .profile-bc .profile-ub {
+  height: 30%;
+  width: 100%;
+  -webkit-box-shadow: inset 3px 3px 4px #484b4c,  inset -3px -3px 4px #8c8f90;
+          box-shadow: inset 3px 3px 4px #484b4c,  inset -3px -3px 4px #8c8f90;
+}
+
+.submit-button-edit {
+  border: none;
+  border-radius: 20px;
+  background: #2ec291;
+  width: 100%;
+  height: 8%;
+  color: white;
+  -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+          box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+}
+
+.submit-button-edit:active {
+  outline: none !important;
+  border: 2px solid white;
+}
+
+.section-header {
+  height: 10%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.section-header .section-header-inner {
+  height: 90%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: white;
+}
+
+.public-input-container {
+  height: 90%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: none;
+}
+
+.input-sections {
+  height: 50px;
+  width: 90%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3996,12 +4274,12 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   color: white;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections p {
+.input-sections p {
   text-align: start;
   padding-left: 2%;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i {
+.input-sections .profile-user-i {
   height: 100%;
   width: 100%;
   padding: 0px;
@@ -4010,7 +4288,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t {
+.input-sections .profile-user-i .profile-user-t {
   background: none;
   border: none;
   height: 95%;
@@ -4019,57 +4297,31 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   padding-left: 12%;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t::-webkit-input-placeholder {
+.input-sections .profile-user-i .profile-user-t::-webkit-input-placeholder {
   color: #a5a4a4;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t:-ms-input-placeholder {
+.input-sections .profile-user-i .profile-user-t:-ms-input-placeholder {
   color: #a5a4a4;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t::-ms-input-placeholder {
+.input-sections .profile-user-i .profile-user-t::-ms-input-placeholder {
   color: #a5a4a4;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t::placeholder {
+.input-sections .profile-user-i .profile-user-t::placeholder {
   color: #a5a4a4;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t:defined {
+.input-sections .profile-user-i .profile-user-t:defined {
   color: pink;
 }
 
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .input-sections .profile-user-i .profile-user-t:focus {
+.input-sections .profile-user-i .profile-user-t:focus {
   border: 2px solid pink;
   outline: none !important;
   color: white;
   border-radius: 20px;
-}
-
-.profile-pc .profile-bc {
-  height: 10%;
-}
-
-.profile-pc .profile-bc .profile-ub {
-  -webkit-box-shadow: inset 3px 3px 4px #484b4c,  inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #484b4c,  inset -3px -3px 4px #8c8f90;
-}
-
-.submit-button-edit {
-  border: none;
-  border-radius: 20px;
-  background: #2ec291;
-  width: 100%;
-  height: 8%;
-  color: white;
-  margin-top: 6%;
-  -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-          box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-}
-
-.submit-button-edit:active {
-  outline: none !important;
-  border: 2px solid white;
 }
 
 .button-icons {

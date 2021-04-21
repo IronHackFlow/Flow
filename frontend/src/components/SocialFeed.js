@@ -9,6 +9,7 @@ import Search from "./Search.js"
 import NavBar from "./NavBar"
 import gradientbg from "../images/gradient-bg-2.png";
 import play from "../images/play.svg";
+import pause from "../images/pause.svg"
 import gifsArr from "../images/gifs.json";
 
 // let SONG = {};
@@ -61,12 +62,19 @@ function SocialFeed(props) {
     }
   }, [location])
 
+  const getRandomBackground = () => {
+    let index = Math.floor(Math.random()*gifsCopy.length)
+    return gifsCopy[index].url
+  }
+
   useEffect(() => {
     actions
       .getMostLikedSongs()
       .then((usersSongs) => {
-        setThisFeedSongs(usersSongs.data);
-        // console.log("inside social feed useeffect", thisFeedSongs);
+        const songsArray = usersSongs.data.map((each) => {
+          return {song: each, songVideo: getRandomBackground()}
+        })
+        setThisFeedSongs(songsArray);
       })
       .catch(console.error);
   }, [page]);
@@ -76,8 +84,10 @@ function SocialFeed(props) {
       .getMostLikedSongs()
       .then((exploreSongs) => {
         exploreSongs.data.reverse()
-        setExploreFeedSongs(exploreSongs.data)
-        // console.log("inside explore feed useeffect", exploreFeedSongs)
+        const exploreSongsArray = exploreSongs.data.map((each) => {
+          return {song: each, songVideo: getRandomBackground()}
+        })
+        setExploreFeedSongs(exploreSongsArray)
       })
       .catch(console.error);
   }, [page2]);
@@ -150,10 +160,7 @@ function SocialFeed(props) {
       return "fade"
     }
   }
-  const getRandomBackground = () => {
-    let index = Math.floor(Math.random()*gifsCopy.length)
-    return gifsCopy[index].url
-  }
+
 
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
@@ -179,23 +186,23 @@ function SocialFeed(props) {
       [inViewRef],
     )
     if (inView) {
-      setUserForSong(eachSong.songUser)
-      setSongId(eachSong._id)
-      setGetSongName(eachSong.songName)
-      setGetSongCaption(eachSong.songCaption)
-      setUserViewed(eachSong.songUser)
-      setSongComments(eachSong.songComments)
+      setUserForSong(eachSong.song.songUser)
+      setSongId(eachSong.song._id)
+      setGetSongName(eachSong.song.songName)
+      setGetSongCaption(eachSong.song.songCaption)
+      setUserViewed(eachSong.song.songUser)
+      setSongComments(eachSong.song.songComments)
       console.log(eachSong)
-      audioRef.current.src = eachSong.songURL
-      likesRef.current.innerHTML= eachSong.songLikes.length
+      audioRef.current.src = eachSong.song.songURL
+      likesRef.current.innerHTML= eachSong.song.songLikes.length
     }
   
     return (
       <li
         ref={setRefs}
-        id={eachSong.songUser._id}
+        id={eachSong.song.songUser._id}
         className="video-pane"
-        style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')` }}
+        style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')` }}
         >
           {/* {console.log(rendersz.current++)} */}
         <div className="last-div"></div>
@@ -204,15 +211,15 @@ function SocialFeed(props) {
   }
 
   const showSongs = () => {
-    return thisFeedSongs.map((eachSong, i) => {
-      eachSong.shorts = getRandomBackground();
-      return <DisplaySong key={i} {...eachSong} />;
+    return thisFeedSongs.map((eachSong) => {
+      // eachSong.shorts = getRandomBackground();
+      return <DisplaySong key={eachSong.song?._id} {...eachSong} />;
     });
   }
   const showExploreSongs = () => {
-    return exploreFeedSongs.map((eachSong, j) => {
-      eachSong.shorts = getRandomBackground();
-      return <DisplaySong key={j+100} {...eachSong} />
+    return exploreFeedSongs.map((eachSong, index) => {
+      // eachSong.shorts = getRandomBackground();
+      return <DisplaySong key={eachSong.song._id + index} {...eachSong} />
     })
   }
 

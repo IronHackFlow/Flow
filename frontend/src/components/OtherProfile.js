@@ -71,9 +71,9 @@ function OtherProfile(props) {
   }
 
   const showSongs = () => {
-    return thisUserSongs.map((eachSong, j) => {
+    return thisUserSongs.map((eachSong, index) => {
       return (
-      <li className="your-track-container" key={j}>
+      <li key={index} className="your-track-container">
         <div className="lyrics-play">
           <div className="lyrics-songname-cont">
             <h4>{eachSong.songName}</h4>
@@ -91,7 +91,6 @@ function OtherProfile(props) {
             {showLyrics(eachSong.songLyricsStr)}
           </div>
         </div>
-        
       </li>
       )
     })

@@ -91,7 +91,7 @@ function App() {
               <div className="menu-route mr-4">
                 <div className="menu-outset mo-4">
                   <div className="menu-inset mi-4">
-                    <Link to="/social-test" onClick={hideNavBar}>Record</Link>
+                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
                   </div>
                 </div>
               </div>

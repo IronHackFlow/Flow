@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from 'react-router-dom'
 import TheContext from "../TheContext"
 import actions from '../api'
+import e from "cors";
 
 function Comments(props) {
   const {
-    songComments, setSongComments,
-    songId, setSongId,
+    songComments, songId
     } = React.useContext(
     TheContext
   );
@@ -43,9 +43,9 @@ function Comments(props) {
   }
 
   const renderEachComment = useCallback(() => {
-    return commentUsers.map((each, i) => {
+    return commentUsers.map((each, index) => {
       return (
-        <div key={i} className="comment-list">
+        <div key={index} className="comment-list">
           <div className="comment-list-photo">
             <div className="comment-photo-inner">
               <div className="comment-photo-outer">
