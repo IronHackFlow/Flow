@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from 'react-router-dom'
-import axios from "axios";
-import { Redirect, useHistory } from "react-router";
 import TheContext from "../TheContext";
 import actions from "../api";
+import back from "../images/back.svg"
 
 function EditProfile(props) {
   const { user } = React.useContext(TheContext);
 
   const [thisUser, setThisUser] = useState([user]);
+  const [thisUsersSongs, setThisUsersSongs] = useState([])
   let redirectRef = useRef()
 
-  const publicSect = useRef('70%');
-  const personalSect = useRef('10%');
-  const socialSect = useRef('10%');
-  const songsSect = useRef('10%');
-  const sectionArray = [publicSect, personalSect, socialSect, songsSect];
+  const publicSect = useRef();
+  const personalSect = useRef();
+  const socialSect = useRef();
+  const songsSect = useRef();
+  const sectionRefsArray = [publicSect, personalSect, socialSect, songsSect];
 
   const handleChange = (e) => {
     setThisUser({
@@ -29,9 +29,19 @@ function EditProfile(props) {
       .getOneUser()
       .then((thisUserDbData) => {
         setThisUser(thisUserDbData.data);
+        console.log(thisUser)
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    actions
+      .getUserSongs(thisUser)
+      .then((res) => {
+        setThisUsersSongs(res.data);
+      })
+      .catch(console.error);
+  }, [thisUser]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -39,35 +49,56 @@ function EditProfile(props) {
     actions
       .addUserProf(thisUser)
       .then((newUserUpdate) => {
-        // console.log('new new user update!', newUserUpdate)
-        //Redirect to all-posts page
-       redirectRef.current.click()
-
+        console.log('new new user update!', newUserUpdate)
       })
       .catch(console.error);
   };
 
   const expandSection = (e) => {
-    console.log(e.current.children[1])
-    sectionArray.map((each) => {
-      if (e.current === each.current) {
-        e.current.style.height = '70%'
-        e.current.children[1].style.display = 'flex'
-      }
-      else {
+    sectionRefsArray.map((each) => {
+      if (e.current !== each.current) {
         each.current.style.height = '5%'
+        each.current.style.transition = 'height .5s'
+        each.current.children[1].style.animation = 'none'
+        each.current.children[1].style.animation = 'editOpacityOut .5s forwards'
         each.current.children[1].style.display = 'none'
       }
+      else {
+        e.current.children[1].style.animation = 'none'
+        e.current.children[1].style.animation = 'editOpacityIn .5s forwards'
+        e.current.children[1].style.display = 'flex'
+        e.current.style.height = '70%'
+        e.current.style.transition = 'height .5s'
+      }
+    })
+  }
+
+  // const toggleExpand = (e) => {
+  //   // console.log(e.current.style.height)
+  //   // console.log(sectionArray)
+  //   if (e.current.style.height === '70%') {
+  //     console.log(e)
+  //     e.current.style.height = '40%'
+  //     console.log(e.current.style.height)
+  //   }
+  // }
+  const songsToEdit = () => {
+    return thisUsersSongs.map((each, index) => {
+      return (
+        <div key={each._id} className="input-sections">
+          <p>Song {index + 1}</p>
+          <div className="user-input profile-user-i">
+            <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="songName" placeholder={each.songName}></input>
+          </div>
+        </div>
+      )
     })
   }
 
   return (
       <div className="mid-inset profile-mi">
-
-          <div className="login-container profile-lc">
+          <form className="login-container profile-lc" onSubmit={submit}>
               <div className="input-sections-container">
-                {/* <form onSubmit={submit} style={{height: '100%', width: '80%'}}> */}
-
                   <div className="public-section-container" onClick={(e) => expandSection(publicSect)} ref={publicSect}>
                     <div className="section-header">
                       <div className="section-header-inner">
@@ -78,7 +109,7 @@ function EditProfile(props) {
                       <div className="edit-photo-section">
                         <div className="edit-photo-inner">
                           <div className="edit-photo-outer">
-                            <img src={thisUser.picture} alt="profile photo"></img>
+                            <img src={thisUser?.picture} alt="profile photo"></img>
                           </div>
                         </div>
                       </div>
@@ -96,6 +127,12 @@ function EditProfile(props) {
                             <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="userAbout" placeholder={thisUser.userAbout}></input>
                           </div>
                         </div>
+                        <div className="input-sections">
+                          <p>Location</p>
+                          <div className="user-input profile-user-i">
+                            <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="userLocation" placeholder={thisUser.userLocation}></input>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -105,24 +142,27 @@ function EditProfile(props) {
                       <div className="section-header-inner">
                         Personal
                       </div>
+                      {/* <div className="expand-toggle" onClick={(e) => toggleExpand(personalSect)}>
+                        x
+                      </div> */}
                     </div>
                     <div className="public-input-container hide-personal">
                       <div className="input-sections">
                         <p>First Name</p>
                         <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="given_name" placeholder={thisUser.given_name}></input>
+                          <input className="user-text profile-user-t" type="text" autoComplete='nope' onChange={handleChange} name="given_name" placeholder={thisUser.given_name}></input>
                         </div>
                       </div>
                       <div className="input-sections">
                         <p>Last Name</p>
                         <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="family_name" placeholder={thisUser.family_name}></input>
+                          <input className="user-text profile-user-t" type="text" autoComplete='nope' onChange={handleChange} name="family_name" placeholder={thisUser.family_name}></input>
                         </div>
                       </div>
                       <div className="input-sections">
                         <p>Email</p>
                         <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="email" placeholder={thisUser.email}></input>
+                          <input className="user-text profile-user-t" type="text" autoComplete='nope' onChange={handleChange} name="email" placeholder={thisUser.email}></input>
                         </div>
                       </div>
                     </div>
@@ -162,37 +202,25 @@ function EditProfile(props) {
                         Songs
                       </div>
                     </div>
-                    <div className="public-input-container hide-songs">
-                      <div className="input-sections">
-                        <p>First Name</p>
-                        <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="given_name" placeholder={thisUser.given_name}></input>
-                        </div>
-                      </div>
-                      <div className="input-sections">
-                        <p>Last Name</p>
-                        <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="family_name" placeholder={thisUser.family_name}></input>
-                        </div>
-                      </div>
-                      <div className="input-sections">
-                        <p>Email</p>
-                        <div className="user-input profile-user-i">
-                          <input className="user-text profile-user-t" type="text" autoComplete='off' onChange={handleChange} name="email" placeholder={thisUser.email}></input>
-                        </div>
-                      </div>
+                    <div className="public-input-container hide-songs" style={{overflow: 'scroll'}}>
+                      {songsToEdit()}
                     </div>
                   </div>
-
-                  {/* </form> */}
               </div>
-              <button type="submit" className="submit-button-edit">
-                        Submit
-                    </button>
-                    <Link to={`/profile/${user._id}`}>
-                      <p style={{display: 'none'}} ref={redirectRef}></p>
+
+              <div className="save-back-container">
+                <div className="back-container">
+                  <div className="back-inner">
+                    <Link to={`/profile/${user._id}`} style={{height: '100%'}}>
+                      <img className="button-icons bi-back" src={back} alt="back button icon"></img>
                     </Link>
-          </div>
+                  </div>
+                </div>
+                <button type="submit" className="submit-button-edit">
+                  Save
+                </button>
+              </div>
+          </form>
       </div>
   );
 }

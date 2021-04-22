@@ -10,6 +10,7 @@ const User = model('User', new Schema({
     userPhoto: String,
     userSignUpDate: Date,
     userAbout: String,
+    userLocation: String,
     userTwitter: String,
     userInstagram: String,
     userSoundCloud: String,
