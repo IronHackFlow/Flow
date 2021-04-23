@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import actions from "../api";
-import axios from "axios";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
@@ -16,9 +15,7 @@ function Profile(props) {
   const { user, setUser, userViewed, setUserViewed } = React.useContext(
     TheContext
   );
-  const [posts, setPosts] = useState([]);
   const [thisUser, setThisUser] = useState([userViewed]);
-  const [trigger, setTrigger] = useState(false)
   const profileRim = useRef();
   const profileOut = useRef();
   const profileIn = useRef();
@@ -33,7 +30,6 @@ function Profile(props) {
   }, [])
 
   useEffect(() => {
-      console.log(4)
       actions
         .getOneUser()
         .then((thisUserDbData) => {
@@ -63,10 +59,9 @@ function Profile(props) {
   }, []);
   
   const showLyrics = (lyrics) => {
-    
-    return lyrics.map((eachLine) => {
+    return lyrics.map((eachLine, index) => {
       return (
-        <p>{eachLine}</p>
+        <p key={`${eachLine}_${index}`}>{eachLine}</p>
       )
     })
   }
@@ -83,10 +78,9 @@ function Profile(props) {
 
 
   const showSongs = () => {
-    return thisUserSongs.map((eachSong, i) => {
-      console.log(eachSong.songLyricsStr)
+    return thisUserSongs.map((eachSong, index) => {
       return (
-      <li key={eachSong._id} className="your-track-container">
+      <li key={`${eachSong._id}_${index}`} className="your-track-container">
         <div className="lyrics-play">
           <audio id={eachSong.songName} src={eachSong.songURL}></audio>
           <div className="lyrics-songname-cont">

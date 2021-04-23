@@ -194,7 +194,7 @@ function SocialFeed(props) {
       setSongComments(eachSong.song.songComments)
       console.log(eachSong)
       audioRef.current.src = eachSong.song.songURL
-      likesRef.current.innerHTML= eachSong.song.songLikes.length
+      likesRef.current.innerHTML = eachSong.song.songLikes.length
     }
   
     return (

@@ -15,7 +15,7 @@ function NavBar(props) {
   const {
     user, userViewed,
     userForSong, setUserForSong,
-    songLikeId, setSongLikeId,
+    songId, setSongId,
     toggleSocial, setToggleSocial,
     toggleExplore, setToggleExplore
     } = React.useContext(
@@ -69,12 +69,13 @@ function NavBar(props) {
   };
 
   const likePost = () => {
-    console.log(user, songLikeId);
-    document.getElementById("notifyLike").click();
-    const likeData = { user1: user._id, songLiked: songLikeId };
+    console.log(user._id, songId);
+    // document.getElementById("notifyLike").click();
+    // const likeData = { likeUser: user._id, LikerSong: songId };
     actions
-      .addLike(likeData)
+      .addLike({likerSong: songId})
       .then((whatever) => {
+        console.log(whatever)
         document.getElementById("notifyLike").click();
       })
       .catch(console.error);

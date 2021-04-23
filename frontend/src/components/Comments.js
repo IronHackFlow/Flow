@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from 'react-router-dom'
 import TheContext from "../TheContext"
 import actions from '../api'
-import e from "cors";
 
 function Comments(props) {
   const {
@@ -11,10 +10,11 @@ function Comments(props) {
     TheContext
   );
 
-  const commentUsers = []
+  let commentUsers = []
   const [comment, setComment] = useState();
 
   useEffect(() => {
+    commentUsers = []
     songComments.map((each) => {
       actions
       .getAUser({id: each.commUser})

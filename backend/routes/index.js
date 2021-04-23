@@ -93,12 +93,49 @@ router.post(`/getSongLikesRT`, async (req, res, next) => {
   .catch((err) => res.status(500).json(err))
 })
 
-router.post(`/addLikeRT`, async (req, res, next) => {
-  let body = { likeUser: req.body.user1, likerSong: req.body.songLiked }
-  let liked = await Likes.create(body)
-  console.log(liked)
-  let stuff = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked._id}})
-  res.status(200).json(info)
+router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
+    if (err) {
+      res.status(403).json(err);
+    } 
+    else {
+      body = { likeUser: authData.user._id, likerSong: req.body.likerSong }
+      let liked = await Likes.create(body)
+      let likesPush = ''
+      let userId = liked.likeUser
+  
+      await Songs.findById(liked.likerSong)
+        .then((song) => {
+
+          song.songLikes.forEach((each) => {
+            if (song.songLikes.includes(userId)) {
+              likesPush = false
+            }
+            else {
+              likesPush = true
+            }
+          })
+        })
+        console.log(liked)
+        console.log('asdfasdf', likesPush)
+        if (likesPush === true) {
+          let stuff = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked.likeUser}})
+          res.status(200).json(info)
+          console.log('song like added', res)
+        }
+        // else if (likesPush === false) {
+        //   let deleteThis = await Likes.findByIdAndDelete(liked._id, (err, likeDeleted) => {
+        //     if (err) {
+        //       res.status(403).json(err)
+        //     }
+        //     else {
+        //       res.status(200).json(likeDeleted)
+        //       console.log(likeDeleted, 'oh shit wtf??!')
+        //     }
+        //   })
+        // }
+    }
+  })
 })
 
 router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
