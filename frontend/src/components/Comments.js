@@ -15,11 +15,13 @@ function Comments(props) {
 
   useEffect(() => {
     commentUsers = []
+
     songComments.map((each) => {
       actions
       .getAUser({id: each.commUser})
       .then((res) => {
         commentUsers.push({ user: res.data, comment: each.comment })
+        console.log(commentUsers)
       }).catch((e) => {
         console.log('failed to get name', e)
       })
@@ -39,7 +41,8 @@ function Comments(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(comment, songId)
-    actions.addComment({comment, songId})
+    actions
+      .addComment({comment, songId})
   }
 
   const renderEachComment = useCallback(() => {

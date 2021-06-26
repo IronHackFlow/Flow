@@ -161,7 +161,6 @@ function SocialFeed(props) {
     }
   }
 
-
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
      audioRef.current.play()
