@@ -32,7 +32,7 @@ function NavBar(props) {
   const exploreIcon = useRef();
 
   useEffect(() => {
-    if (toggleExplore === true){
+    if (toggleExplore === true) {
       exploreRim.current.style.animation = "rim .5s linear forwards"
       exploreOut.current.style.animation = "out .5s linear forwards"
       exploreIn.current.style.animation = "in .5s linear forwards"
@@ -58,11 +58,11 @@ function NavBar(props) {
   const followUser = () => {
     console.log(user, userViewed);
     document.getElementById("notify").click();
-    const followData = { user1: user._id, user2: userViewed._id };
+    const followData = { followedUser: userViewed._id, follower: user };
     console.log("profile follow user function ", followData);
     actions
       .addFollow(followData)
-      .then((somethingreturnedfromapi) => {
+      .then((res) => {
         document.getElementById("notify").click();
       })
       .catch(console.error);
@@ -74,8 +74,8 @@ function NavBar(props) {
     // const likeData = { likeUser: user._id, LikerSong: songId };
     actions
       .addLike({likerSong: songId})
-      .then((whatever) => {
-        console.log(whatever, "i liked this!")
+      .then((res) => {
+        console.log(res, "i liked this!")
         document.getElementById("notifyLike").click();
       })
       .catch(console.error);

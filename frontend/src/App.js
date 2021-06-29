@@ -28,7 +28,9 @@ function App() {
   const navRef = useRef();
 
   useEffect(() => {
-    actions.getUser().then(res => {
+    actions
+    .getUser()
+    .then(res => {
       setUser(res.data)
     }).catch(console.error)
   }, [])

@@ -63,7 +63,7 @@ const actions = {
   },
 
   addFollow: async (followDat) => {
-    console.log('followDat from the API', followDat)
+    // console.log('followDat from the API', followDat)
     return await axios.post(`${baseURL}/addFollowRT`, followDat, resetHead())
   },
 

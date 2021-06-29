@@ -17,6 +17,7 @@ router.get(`/user`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       User.findById(authData.user._id)
+        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -32,6 +33,7 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       User.findById(authData.user._id)
+        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -45,6 +47,7 @@ router.post(`/getAUserRT`, async (req, res, next) => {
   //GETTING A PARTICULAR USER
   // console.log('hey hey hey hey hey ', req.body)
       await User.findById(req.body.id)
+        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -103,28 +106,46 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
       let liked = await Likes.create(body)
       let likesPush = ''
       let userId = liked.likeUser
-  
+
       await Songs.findById(liked.likerSong)
         .then((song) => {
-
           song.songLikes.forEach((each) => {
             if (song.songLikes.includes(userId)) {
               likesPush = false
+
+              song.songLikes.splice(0, 1, userId)
+              console.log(song.songLikes.length)
+              // Likes.findByIdAndRemove(liked._id, (err, likeDeleted) => {
+              //   if (err) {
+              //     res.status(403).json(err)
+              //   }
+              //   else {
+              //     res.status(200).json(likeDeleted)
+              //     console.log(likeDeleted, 'oh shit wtf??!')
+              //   }
+              // })
             }
             else {
               likesPush = true
+
+              Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked.likeUser}})
+              res.status(200).json(liked)
+              console.log('song like added', liked)
             }
           })
         })
-        console.log(liked)
-        console.log('asdfasdf', likesPush)
-        if (likesPush === true) {
-          let stuff = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked.likeUser}})
-          res.status(200).json(info)
-          console.log('song like added', res)
-        }
+
+        // console.log(`this is the like that was created`, liked)
+        // console.log('the userId liker has liked this already toggle is', likesPush)
+        
+        // if (likesPush === true) {
+        //   let stuff = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked.likeUser}})
+        //   res.status(200).json(liked)
+        //   console.log('song like added', liked)
+        // }
         // else if (likesPush === false) {
-        //   let deleteThis = await Likes.findByIdAndDelete(liked._id, (err, likeDeleted) => {
+          
+        //   let deleteLike = await Likes.findByIdAndRemove(liked._id, (err, likeDeleted) => {
         //     if (err) {
         //       res.status(403).json(err)
         //     }
@@ -143,10 +164,19 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
     if (err) {
       res.status(403).json(err);
     } else {
-      let follow = {followed: req.body.user1._id, follower: authData.user._id}
-      let followed = await Follows.create(follow)
-      let stuff = await User.findByIdAndUpdate(req.body.user1._id,{$push:{userFollows:followed._id}})  
-      res.status(200).json(followed);
+      let body = { followed: req.body.followedUser, follower: req.body.follower._id }
+      let followedObject = await Follows.create(body)
+      console.log(`added a follow here`, followedObject)
+      console.log(req.body.follower)
+      // const userFollowers = await User.findById(body.follower)
+      // .populate('userFollows')
+      // .then((followers) => {
+      //   res.status(200).json(followers);
+      // })
+      // console.log(userFollowers.userFollows)
+      // let stuff = await User.findByIdAndUpdate(req.body.user1._id, {$push:{userFollows:followed._id}})
+      let stuff = await User.findByIdAndUpdate(req.body.follower, {$push: { userFollows: followedObject.followed }})
+      res.status(200).json(followedObject);
     }
   });
 });
@@ -170,7 +200,8 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
     } else {
       // console.log('Bodied',req.body)
       let body = req.body;
-      body.commUser = authData.user._id;
+      body.commUser = authData.user._id
+      console.log(body, 'this is')
       // console.log(1)
       let comment = await Comments.create(body);
       // console.log(comment)
@@ -262,7 +293,6 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
      
       Songs.create(song)
         .then((theSong) => {
-          
           res.status(200).json(theSong);
         })
         .catch((err) => res.status(500).json(err));

@@ -12,9 +12,13 @@ import play from '../images/play.svg'
 
 
 function Profile(props) {
-  const { user, setUser, userViewed, setUserViewed } = React.useContext(
+  const { 
+    user, setUser, 
+    userViewed, setUserViewed
+    } = React.useContext(
     TheContext
   );
+
   const [thisUser, setThisUser] = useState([userViewed]);
   const profileRim = useRef();
   const profileOut = useRef();
@@ -30,13 +34,12 @@ function Profile(props) {
   }, [])
 
   useEffect(() => {
-      actions
-        .getOneUser()
-        .then((thisUserDbData) => {
-          setThisUser(thisUserDbData.data);
-        })
-        .catch(console.error);
-    
+    actions
+      .getOneUser()
+      .then((res) => {
+        setThisUser(res.data);
+      })
+      .catch(console.error);
   }, []);
 
   const logout = () => {

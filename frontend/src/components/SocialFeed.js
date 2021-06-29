@@ -199,7 +199,6 @@ function SocialFeed(props) {
     return (
       <li
         ref={setRefs}
-        id={eachSong.song.songUser._id}
         className="video-pane"
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')` }}
         >
