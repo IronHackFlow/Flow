@@ -113,8 +113,6 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
             if (song.songLikes.includes(userId)) {
               likesPush = false
 
-              song.songLikes.splice(0, 1, userId)
-              console.log(song.songLikes.length)
               // Likes.findByIdAndRemove(liked._id, (err, likeDeleted) => {
               //   if (err) {
               //     res.status(403).json(err)
