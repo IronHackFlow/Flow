@@ -99,35 +99,41 @@ router.post(`/getSongLikesRT`, async (req, res, next) => {
 router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     let likesPush = ''
+    let deleteLikesArray = []
 
     if (err) {
       res.status(403).json(err);
     } 
     else {
       body = { likeUser: authData.user._id, likerSong: req.body.likerSong }
-
       let userId = body.likeUser
-      let deleteLikesArray = []
 
+      async function removeLikesFromDb(each) {
+        await Songs.findByIdAndUpdate(body.likerSong, {$pull: {songLikes: each}})
+          .then((remove) => {
+            res.status(200).json(remove)
+            console.log('removed like from songLikes array : ', each)
+          })
+          .catch((err) => res.status(500).json(err))
+
+        await Likes.findByIdAndRemove(each, function(err, docs) {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            console.log('removed like :', docs)
+          }
+        })
+      }
+      
       await Songs.findById(body.likerSong)
         .populate('songLikes')
         .then((song) => {
           song.songLikes.forEach((each) => {
             if (each.likeUser == userId) {
               likesPush = false
-              console.log(`holy shit, i found ${each._id}`)
               deleteLikesArray.push(each._id)
             }
-              // Likes.findByIdAndRemove(liked._id, (err, likeDeleted) => {
-              //   if (err) {
-              //     res.status(403).json(err)
-              //   }
-              //   else {
-              //     res.status(200).json(likeDeleted)
-              //     console.log(likeDeleted, 'oh shit wtf??!')
-              //   }
-              // })
-            
             else {
               likesPush = true
             }
@@ -136,46 +142,15 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
 
       if (likesPush === true) {
         let liked = await Likes.create(body)
-        let addSong = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked}})
+        let addLiketoSong = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked}})
         res.status(200).json(liked)
-        console.log('song like added', liked)
+        console.log('song like added : ', liked)
       }
-      
       else if (likesPush === false) {
-        console.log(deleteLikesArray)
         deleteLikesArray.forEach((each) => {
-          let removeLike = Likes.findByIdAndRemove(each, (err, likeDeleted) => {
-            if (err) {
-              res.status(403).json(err)
-            }
-            else {
-              res.status(200).json(likeDeleted)
-              console.log(likeDeleted, 'oh shit wtf??!')
-            }
-          })
+          removeLikesFromDb(each)
         })
-
       }
-        // console.log(`this is the like that was created`, liked)
-        // console.log('the userId liker has liked this already toggle is', likesPush)
-        
-        // if (likesPush === true) {
-        //   let stuff = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked.likeUser}})
-        //   res.status(200).json(liked)
-        //   console.log('song like added', liked)
-        // }
-        // else if (likesPush === false) {
-          
-        //   let deleteLike = await Likes.findByIdAndRemove(liked._id, (err, likeDeleted) => {
-        //     if (err) {
-        //       res.status(403).json(err)
-        //     }
-        //     else {
-        //       res.status(200).json(likeDeleted)
-        //       console.log(likeDeleted, 'oh shit wtf??!')
-        //     }
-        //   })
-        // }
     }
   })
 })
