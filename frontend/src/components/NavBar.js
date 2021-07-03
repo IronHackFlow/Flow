@@ -56,22 +56,16 @@ function NavBar(props) {
 
 
   const followUser = () => {
-    console.log(user, userViewed);
-    document.getElementById("notify").click();
-    const followData = { followedUser: userViewed._id, follower: user };
-    console.log("profile follow user function ", followData);
     actions
-      .addFollow(followData)
+      .addFollow({followedUser: userViewed._id})
       .then((res) => {
+        console.log(res, "i followed this")
         document.getElementById("notify").click();
       })
       .catch(console.error);
   };
 
   const likePost = () => {
-    console.log(user._id, songId);
-    // document.getElementById("notifyLike").click();
-    // const likeData = { likeUser: user._id, LikerSong: songId };
     actions
       .addLike({likerSong: songId})
       .then((res) => {

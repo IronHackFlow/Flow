@@ -14,7 +14,8 @@ const User = model('User', new Schema({
     userTwitter: String,
     userInstagram: String,
     userSoundCloud: String,
-    userFollows: [{ type: Schema.Types.ObjectId, ref: 'Follows' }]
+    followers: [{ type: Schema.Types.ObjectId, ref: 'Follows' }],
+    followsUser: [{ type: Schema.Types.ObjectId, ref: 'Follows' }]
 
 }))
 module.exports = User 

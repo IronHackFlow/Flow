@@ -68,14 +68,14 @@ function Profile(props) {
       )
     })
   }
+  
   const handlePlayPause=(x)=>{
     const currentPlayer=document.getElementById(`${x}`)
-    if(currentPlayer.paused){
-     currentPlayer.play()
- 
-    }else
-    {
-    currentPlayer.pause()
+    if(currentPlayer.paused) {
+      currentPlayer.play()
+    }
+    else {
+      currentPlayer.pause()
    }
   }
 

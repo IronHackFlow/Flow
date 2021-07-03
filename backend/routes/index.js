@@ -96,6 +96,7 @@ router.post(`/getSongLikesRT`, async (req, res, next) => {
   .catch((err) => res.status(500).json(err))
 })
 
+// adds (if likeUser hasn't yet liked) or deletes (if likeUser has already liked) a like from songLikes of clicked song. Acts as a like toggle.
 router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     let likesPush = ''
@@ -129,6 +130,7 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
       await Songs.findById(body.likerSong)
         .populate('songLikes')
         .then((song) => {
+          console.log('these are the songLikes : ', song.songLikes)
           song.songLikes.forEach((each) => {
             if (each.likeUser == userId) {
               likesPush = false
@@ -155,15 +157,30 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
   })
 })
 
+// update so that i can differentiate between following and followers. 
 router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
       res.status(403).json(err);
     } else {
-      let body = { followed: req.body.followedUser, follower: req.body.follower._id }
-      let followedObject = await Follows.create(body)
-      console.log(`added a follow here`, followedObject)
-      console.log(req.body.follower)
+      let body = { followed: req.body.followedUser, follower: authData.user._id }
+      // let followedObject = await Follows.create(body)
+      console.log(body)
+
+      await User.findById(body.followed)
+      .populate('userFollows')
+      .then((user) => {
+        console.log("these are the user's follows : ", user.userFollows)
+        // user.userFollows.forEach((each) => {
+        //   if (each.likeUser == userId) {
+        //     likesPush = false
+        //     deleteLikesArray.push(each._id)
+        //   }
+        //   else {
+        //     likesPush = true
+        //   }
+        // })
+      })
       // const userFollowers = await User.findById(body.follower)
       // .populate('userFollows')
       // .then((followers) => {
@@ -171,7 +188,10 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
       // })
       // console.log(userFollowers.userFollows)
       // let stuff = await User.findByIdAndUpdate(req.body.user1._id, {$push:{userFollows:followed._id}})
-      let stuff = await User.findByIdAndUpdate(req.body.follower, {$push: { userFollows: followedObject.followed }})
+      let following = await User.findByIdAndUpdate(body.follower, {$push: { userFollows: followedObject }})
+      res.status(200).json(followedObject);
+
+      let followers = await User.findByIdAndUpdate(body.followed, {$push: { followers: followedObject }})
       res.status(200).json(followedObject);
     }
   });
