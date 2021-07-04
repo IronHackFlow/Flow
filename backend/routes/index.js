@@ -164,23 +164,34 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       let body = { followed: req.body.followedUser, follower: authData.user._id }
-      // let followedObject = await Follows.create(body)
-      console.log(body)
+      let followedObject = await Follows.create(body)
 
       await User.findById(body.followed)
-      .populate('userFollows')
+      .populate('followers')
       .then((user) => {
-        console.log("these are the user's follows : ", user.userFollows)
-        // user.userFollows.forEach((each) => {
-        //   if (each.likeUser == userId) {
-        //     likesPush = false
-        //     deleteLikesArray.push(each._id)
-        //   }
-        //   else {
-        //     likesPush = true
-        //   }
-        // })
+        console.log("these are the user's followers: ", user.followers)
+        user.followers.forEach((each) => {
+          if (each.follower == body.follower) {
+            console.log("already a follower, should delete user from follows")
+          }
+          else {
+            console.log('nope not here, add the follow')
+          }
+        })
       })
+      await User.findById(body.follower)
+        .populate('followsUser')
+        .then((user) => {
+          console.log("these are those the user is following: ", user.followsUser)
+          user.followsUser.forEach((each) => {
+            if (each.followed == body.followed) {
+              console.log("already following this user, should delete it")
+            }
+            else {
+              console.log("nope not here, follow away")
+            }
+          })
+        })
       // const userFollowers = await User.findById(body.follower)
       // .populate('userFollows')
       // .then((followers) => {
