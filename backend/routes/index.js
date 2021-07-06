@@ -17,7 +17,6 @@ router.get(`/user`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       User.findById(authData.user._id)
-        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -33,7 +32,6 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       User.findById(authData.user._id)
-        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -47,12 +45,22 @@ router.post(`/getAUserRT`, async (req, res, next) => {
   //GETTING A PARTICULAR USER
   // console.log('hey hey hey hey hey ', req.body)
       await User.findById(req.body.id)
-        .populate('userFollows')
+        .populate('followers')
         .then((user) => {
           res.status(200).json(user);
         })
         .catch((err) => res.status(500).json(err));
 });
+
+router.post(`/getSongRT`, async (req, res, next) => {
+    await Songs.findById(req.body.id)
+      .populate('songUser')
+      .then((user) => {
+        res.status(200).json(user);
+        console.log("i hope i can see this song: ", user)
+      })
+      .catch((err) => res.status(500).json(err));
+})
 
 //search bar bobby
 router.post('/getManyUsersRT', async (req,res,next)=> {
@@ -163,35 +171,36 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
     if (err) {
       res.status(403).json(err);
     } else {
-      let body = { followed: req.body.followedUser, follower: authData.user._id }
-      let followedObject = await Follows.create(body)
+      let body = { follower: authData.user._id, followed: req.body.followedUser, delete: req.body.delete }
+      // let followedObject = await Follows.create(body)
+      console.log(body)
+      // await User.findById(body.followed)
+      // .populate('followers')
+      // .then((user) => {
+      //   console.log("these are the user's followers: ", user.followers)
+      //   user.followers.forEach((each) => {
+      //     if (each.follower == body.follower) {
+      //       console.log("already a follower, should delete user from follows")
+      //     }
+      //     else {
+      //       console.log('nope not here, add the follow')
+      //     }
+      //   })
+      // })
+      // await User.findById(body.follower)
+      //   .populate('followsUser')
+      //   .then((user) => {
+      //     console.log("these are those the user is following: ", user.followsUser)
+      //     user.followsUser.forEach((each) => {
+      //       if (each.followed == body.followed) {
+      //         console.log("already following this user, should delete it")
+      //       }
+      //       else {
+      //         console.log("nope not here, follow away")
+      //       }
+      //     })
+      //   })
 
-      await User.findById(body.followed)
-      .populate('followers')
-      .then((user) => {
-        console.log("these are the user's followers: ", user.followers)
-        user.followers.forEach((each) => {
-          if (each.follower == body.follower) {
-            console.log("already a follower, should delete user from follows")
-          }
-          else {
-            console.log('nope not here, add the follow')
-          }
-        })
-      })
-      await User.findById(body.follower)
-        .populate('followsUser')
-        .then((user) => {
-          console.log("these are those the user is following: ", user.followsUser)
-          user.followsUser.forEach((each) => {
-            if (each.followed == body.followed) {
-              console.log("already following this user, should delete it")
-            }
-            else {
-              console.log("nope not here, follow away")
-            }
-          })
-        })
       // const userFollowers = await User.findById(body.follower)
       // .populate('userFollows')
       // .then((followers) => {
@@ -199,11 +208,12 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
       // })
       // console.log(userFollowers.userFollows)
       // let stuff = await User.findByIdAndUpdate(req.body.user1._id, {$push:{userFollows:followed._id}})
-      let following = await User.findByIdAndUpdate(body.follower, {$push: { userFollows: followedObject }})
-      res.status(200).json(followedObject);
 
-      let followers = await User.findByIdAndUpdate(body.followed, {$push: { followers: followedObject }})
-      res.status(200).json(followedObject);
+      // let following = await User.findByIdAndUpdate(body.follower, {$push: { userFollows: followedObject }})
+      // res.status(200).json(followedObject);
+
+      // let followers = await User.findByIdAndUpdate(body.followed, {$push: { followers: followedObject }})
+      // res.status(200).json(followedObject);
     }
   });
 });

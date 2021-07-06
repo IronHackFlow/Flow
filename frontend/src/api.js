@@ -43,7 +43,7 @@ const actions = {
   },
 
   getSong: async (songId) => {
-    return await axios.get(`${baseURL}/getSongRT`, songId, resetHead());
+    return await axios.post(`${baseURL}/getSongRT`, songId, resetHead());
   },
 
   getUserLikedSongs: async () => {

@@ -54,15 +54,23 @@ function NavBar(props) {
     }
   }, [toggleExplore, toggleSocial])
 
-
   const followUser = () => {
+    let deleteCheck = ''
+    userViewed.followers.forEach((each) => {
+      if (each.follower === user._id) {
+        deleteCheck = true
+      }
+      else {
+        deleteCheck = false
+      }
+    })
     actions
-      .addFollow({followedUser: userViewed._id})
-      .then((res) => {
-        console.log(res, "i followed this")
-        document.getElementById("notify").click();
+      .addFollow({ followedUser: userViewed._id, delete: deleteCheck })
+      .then((fol) => {
+        console.log("i must delete this follow", fol)
       })
-      .catch(console.error);
+      .catch(console.error)
+      // document.getElementById("notify").click();
   };
 
   const likePost = () => {
