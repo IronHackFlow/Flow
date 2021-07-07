@@ -54,23 +54,33 @@ function NavBar(props) {
     }
   }, [toggleExplore, toggleSocial])
 
-  const followUser = () => {
-    let deleteCheck = ''
-    userViewed.followers.forEach((each) => {
-      if (each.follower === user._id) {
-        deleteCheck = true
-      }
-      else {
-        deleteCheck = false
-      }
-    })
+  const followCheck = () => {
     actions
-      .addFollow({ followedUser: userViewed._id, delete: deleteCheck })
-      .then((fol) => {
-        console.log("i must delete this follow", fol)
+      .getAUser({ id: user._id})
+      .then((res) => {
+        console.log(`this is the user data yo`, res.data)
+        let deleteCheck = false
+        let deleteObj = null
+        res.data.userFollows.forEach((each) => {
+          console.log(each)
+          if (each.followed === userViewed._id) {
+            deleteCheck = true
+            deleteObj = each
+          }
+        })
+        followUser(deleteCheck, deleteObj)
       })
       .catch(console.error)
-      // document.getElementById("notify").click();
+  }
+
+  const followUser = (deleteCheck, deleteObj) => {
+    actions
+      .addFollow({ followedUser: userViewed._id, deleteCheck: deleteCheck, deleteObj: deleteObj })
+      .then((res) => {
+        console.log("follower data: ", res)
+        // document.getElementById("notify").click();
+      })
+      .catch(console.error);
   };
 
   const likePost = () => {
@@ -96,7 +106,7 @@ function NavBar(props) {
             </div>  
 
             <div className="like-comment-container">
-              <div className="individual-btn" onClick={followUser}>
+              <div className="individual-btn" onClick={followCheck}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="individual-btn" onClick={likePost}>

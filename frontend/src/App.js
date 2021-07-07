@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     actions
     .getUser()
-    .then(res => {
+    .then((res) => {
       setUser(res.data)
     }).catch(console.error)
   }, [])
