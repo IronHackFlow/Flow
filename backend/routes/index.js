@@ -169,98 +169,85 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
 // update so that i can differentiate between following and followers. 
 router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
-
     if (err) {
       res.status(403).json(err);
-
     } else {
-      let deleteObjCheck = false
-
       let bodyData = { follower: authData.user._id, 
                        followed: req.body.followedUser, 
                        deleteCheck: req.body.deleteCheck, 
                        deleteObj: req.body.deleteObj }
       let follow = { follower: authData.user._id, followed: req.body.followedUser }
-
-      if (bodyData.deleteObj === null) {
-        deleteObjCheck = true
-      }
-
-      console.log(bodyData.follower, 'alsdkfjals;df')
-      
+      console.log('DATA received from follow button click', bodyData)
+      //async function to add follows to db, user, userViewed
       async function addFollowData() {
         let followedObject = await Follows.create(follow)
+        console.log(`CREATED follow object: `, followedObject)
 
-        let following = await User.findByIdAndUpdate(bodyData.follower, {$push: { userFollows: followedObject }})
-        res.status(200).json(followedObject);
+        let following = await User.findByIdAndUpdate(
+          bodyData.follower, 
+          {$push: { userFollows: followedObject }}, 
+          { new: true }
+        )
+          .then((res) => {
+            console.log(`ADDED a follow to User: ${res.userName}'s userFollows: `, res.userFollows)
+          })
+          .catch((err) => {
+            next(err)
+          })
 
-        let followers = await User.findByIdAndUpdate(bodyData.followed, {$push: { followers: followedObject }})
-        res.status(200).json(followedObject);
-
-        // let following = await User.findByIdAndUpdate(bodyData.followed, 
-        //   {$push: { followers: followedObject }},
-        //   function (err, docs) {
-        //     if (err) {
-        //       console.log(err)
-        //     }
-        //     else {
-        //       console.log('updated followers', docs)
-        //     }
-        //   });
-        // let followers = await User.findByIdAndUpdate(bodyData.follower, 
-        //    {$push: { userFollows: followedObject }},
-        //    function (err, docs) {
-        //      if (err) {
-        //        console.log(err)
-        //      }
-        //      else {
-        //        console.log('updated userFollows', docs)
-        //      }
-        //    });
+        let followers = await User.findByIdAndUpdate(
+          bodyData.followed, 
+          {$push: { followers: followedObject }},
+          { new: true }
+        )
+          .then((res) => {
+            console.log(`ADDED a follow to User: ${res.userName}'s followers: `, res.followers)
+          })
+          .catch((err) => {
+            next(err)
+          })
       }
-      if (deleteObjCheck === true) {
+      // async function to delete follows from user, userViewed, and from db
+      async function delFollowData(objId) {
+        let deleteFollower = await User.findByIdAndUpdate(
+          bodyData.follower, 
+          {$pull: { userFollows: objId }}, 
+          { new: true }
+        )
+        .then((res) => {
+          console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
+        })
+        .catch((err) => {
+          next(err)
+        })
+
+        let deleteFollowed = await User.findByIdAndUpdate(
+          bodyData.followed, 
+          {$pull: { followers: objId }}, 
+          { new: true }
+        )
+        .then((res) => {
+          console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
+        })
+        .catch((err) => {
+          next(err)
+        })
+
+        let deleteFollow = await Follows.findByIdAndDelete(objId)
+          .then((res) => {
+            console.log('this follow has been eliminated!', res)
+          })
+          .catch((err) => {
+            next(err)
+          })
+      }
+
+      if (bodyData.deleteObj === null) {
         addFollowData()
       }
-      // await User.findById(body.followed)
-      // .populate('followers')
-      // .then((user) => {
-      //   console.log("these are the user's followers: ", user.followers)
-      //   user.followers.forEach((each) => {
-      //     if (each.follower == body.follower) {
-      //       console.log("already a follower, should delete user from follows")
-      //     }
-      //     else {
-      //       console.log('nope not here, add the follow')
-      //     }
-      //   })
-      // })
-      // await User.findById(body.follower)
-      //   .populate('followsUser')
-      //   .then((user) => {
-      //     console.log("these are those the user is following: ", user.followsUser)
-      //     user.followsUser.forEach((each) => {
-      //       if (each.followed == body.followed) {
-      //         console.log("already following this user, should delete it")
-      //       }
-      //       else {
-      //         console.log("nope not here, follow away")
-      //       }
-      //     })
-      //   })
-
-      // const userFollowers = await User.findById(body.follower)
-      // .populate('userFollows')
-      // .then((followers) => {
-      //   res.status(200).json(followers);
-      // })
-      // console.log(userFollowers.userFollows)
-      // let stuff = await User.findByIdAndUpdate(req.body.user1._id, {$push:{userFollows:followed._id}})
-
-      // let following = await User.findByIdAndUpdate(body.follower, {$push: { userFollows: followedObject }})
-      // res.status(200).json(followedObject);
-
-      // let followers = await User.findByIdAndUpdate(body.followed, {$push: { followers: followedObject }})
-      // res.status(200).json(followedObject);
+      else {
+        delFollowData(bodyData.deleteObj._id)
+      }
     }
   });
 });
