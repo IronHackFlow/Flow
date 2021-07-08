@@ -246,6 +246,28 @@ footer,
   text-align: center;
 }
 
+@-webkit-keyframes followInset {
+  0% {
+    -webkit-box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+            box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+  }
+  100% {
+    -webkit-box-shadow: inset 3px 3px 3px #3d3f3f, inset -2px -2px 3px #939597;
+            box-shadow: inset 3px 3px 3px #3d3f3f, inset -2px -2px 3px #939597;
+  }
+}
+
+@keyframes followInset {
+  0% {
+    -webkit-box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+            box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+  }
+  100% {
+    -webkit-box-shadow: inset 3px 3px 3px #3d3f3f, inset -2px -2px 3px #939597;
+            box-shadow: inset 3px 3px 3px #3d3f3f, inset -2px -2px 3px #939597;
+  }
+}
+
 nav {
   height: 0;
   width: 100%;

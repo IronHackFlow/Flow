@@ -67,6 +67,10 @@ const actions = {
     return await axios.post(`${baseURL}/addFollowRT`, followDat, resetHead())
   },
 
+  deleteFollow: async (delFollow) => {
+    return await axios.post(`${baseURL}/deleteFollowRT`, delFollow, resetHead())
+  },
+
   addSong: async (song) => {
     return await axios.post(`${baseURL}/addSongRT`, song, resetHead());
   },

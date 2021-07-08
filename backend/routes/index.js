@@ -115,7 +115,7 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } 
     else {
-      body = { likeUser: authData.user._id, likerSong: req.body.likerSong }
+      body = { likeUser: authData.user._id, likerSong: req.body.likerSong, likeDate: req.body.likeDate }
       let userId = body.likeUser
 
       async function removeLikesFromDb(each) {
@@ -166,25 +166,69 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
   })
 })
 
-// update so that i can differentiate between following and followers. 
+router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
+    if (err) {
+      res.status(403).json(err);
+    }
+    else {
+      let body = { follower: authData.user._id,
+                   followed: req.body.followedUser,
+                   deleteObj: req.body.deleteObj}
+                   
+      await User.findByIdAndUpdate(
+        body.follower, 
+        {$pull: { userFollows: body.deleteObj._id }}, 
+        { new: true }
+      )
+      .then((res) => {
+        console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
+      })
+      .catch((err) => {
+        next(err)
+      })
+
+      await User.findByIdAndUpdate(
+        body.followed, 
+        {$pull: { followers: body.deleteObj._id }}, 
+        { new: true }
+      )
+      .then((res) => {
+        console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
+      })
+      .catch((err) => {
+        next(err)
+      })
+
+      await Follows.findByIdAndDelete(body.deleteObj._id)
+        .then((res) => {
+          console.log('this follow has been eliminated!', res)
+        })
+        .catch((err) => {
+          next(err)
+        })
+    }
+  })
+})
+
 router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
       res.status(403).json(err);
-    } else {
-      let bodyData = { follower: authData.user._id, 
-                       followed: req.body.followedUser, 
-                       deleteCheck: req.body.deleteCheck, 
-                       deleteObj: req.body.deleteObj }
-      let follow = { follower: authData.user._id, followed: req.body.followedUser }
-      console.log('DATA received from follow button click', bodyData)
+    } 
+    else {
+      let body = { follower: authData.user._id, 
+                   followed: req.body.followedUser,
+                   followDate: req.body.followDate }
+
+      console.log('DATA received from follow button click', body)
       //async function to add follows to db, user, userViewed
-      async function addFollowData() {
-        let followedObject = await Follows.create(follow)
+
+        let followedObject = await Follows.create(body)
         console.log(`CREATED follow object: `, followedObject)
 
-        let following = await User.findByIdAndUpdate(
-          bodyData.follower, 
+        await User.findByIdAndUpdate(
+          body.follower, 
           {$push: { userFollows: followedObject }}, 
           { new: true }
         )
@@ -195,8 +239,8 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
             next(err)
           })
 
-        let followers = await User.findByIdAndUpdate(
-          bodyData.followed, 
+        await User.findByIdAndUpdate(
+          body.followed, 
           {$push: { followers: followedObject }},
           { new: true }
         )
@@ -206,48 +250,48 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
           .catch((err) => {
             next(err)
           })
-      }
+
       // async function to delete follows from user, userViewed, and from db
-      async function delFollowData(objId) {
-        let deleteFollower = await User.findByIdAndUpdate(
-          bodyData.follower, 
-          {$pull: { userFollows: objId }}, 
-          { new: true }
-        )
-        .then((res) => {
-          console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
-        })
-        .catch((err) => {
-          next(err)
-        })
+      // async function delFollowData(objId) {
+      //   let deleteFollower = await User.findByIdAndUpdate(
+      //     body.follower, 
+      //     {$pull: { userFollows: objId }}, 
+      //     { new: true }
+      //   )
+      //   .then((res) => {
+      //     console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
+      //   })
+      //   .catch((err) => {
+      //     next(err)
+      //   })
 
-        let deleteFollowed = await User.findByIdAndUpdate(
-          bodyData.followed, 
-          {$pull: { followers: objId }}, 
-          { new: true }
-        )
-        .then((res) => {
-          console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
-        })
-        .catch((err) => {
-          next(err)
-        })
+      //   let deleteFollowed = await User.findByIdAndUpdate(
+      //     body.followed, 
+      //     {$pull: { followers: objId }}, 
+      //     { new: true }
+      //   )
+      //   .then((res) => {
+      //     console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
+      //   })
+      //   .catch((err) => {
+      //     next(err)
+      //   })
 
-        let deleteFollow = await Follows.findByIdAndDelete(objId)
-          .then((res) => {
-            console.log('this follow has been eliminated!', res)
-          })
-          .catch((err) => {
-            next(err)
-          })
-      }
+      //   let deleteFollow = await Follows.findByIdAndDelete(objId)
+      //     .then((res) => {
+      //       console.log('this follow has been eliminated!', res)
+      //     })
+      //     .catch((err) => {
+      //       next(err)
+      //     })
+      // }
 
-      if (bodyData.deleteObj === null) {
-        addFollowData()
-      }
-      else {
-        delFollowData(bodyData.deleteObj._id)
-      }
+      // if (body.deleteObj === null) {
+      //   addFollowData()
+      // }
+      // else {
+      //   delFollowData(body.deleteObj._id)
+      // }
     }
   });
 });

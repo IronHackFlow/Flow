@@ -30,6 +30,7 @@ function NavBar(props) {
   const exploreOut = useRef();
   const exploreIn = useRef();
   const exploreIcon = useRef();
+  const followBtn = useRef();
 
   useEffect(() => {
     if (toggleExplore === true) {
@@ -55,37 +56,55 @@ function NavBar(props) {
   }, [toggleExplore, toggleSocial])
 
   const followCheck = () => {
+    if (user._id === userViewed._id) {
+      console.log(`You can't follow yourself lol`)
+      return null
+    }
     actions
       .getAUser({ id: user._id})
       .then((res) => {
         console.log(`this is the user data yo`, res.data)
-        let deleteCheck = false
         let deleteObj = null
         res.data.userFollows.forEach((each) => {
-          console.log(each)
           if (each.followed === userViewed._id) {
-            deleteCheck = true
             deleteObj = each
           }
         })
-        followUser(deleteCheck, deleteObj)
+        if (deleteObj === null) {
+          followUser()
+        }
+        else {
+          deleteFollow(deleteObj)
+        }
       })
       .catch(console.error)
   }
 
-  const followUser = (deleteCheck, deleteObj) => {
+  const followUser = () => {
+    followBtn.current.style.animation = "followInset .5s linear forwards"
     actions
-      .addFollow({ followedUser: userViewed._id, deleteCheck: deleteCheck, deleteObj: deleteObj })
+      .addFollow({ followedUser: userViewed._id, 
+                   followDate: new Date() })
       .then((res) => {
-        console.log("follower data: ", res)
+        console.log(res, "follower data ")
         // document.getElementById("notify").click();
       })
       .catch(console.error);
   };
 
+  const deleteFollow = (deleteObj) => {
+    followBtn.current.style.animation = "followInset .5s linear reverse"
+    actions
+      .deleteFollow({ followedUser: userViewed._id, deleteObj: deleteObj })
+      .then((res) => {
+        console.log(res, "deleted follower")
+      })
+      .catch(console.error)
+  }
+
   const likePost = () => {
     actions
-      .addLike({likerSong: songId})
+      .addLike({ likerSong: songId, likeDate: new Date() })
       .then((res) => {
         console.log(res, "i liked this!")
         document.getElementById("notifyLike").click();
@@ -106,7 +125,7 @@ function NavBar(props) {
             </div>  
 
             <div className="like-comment-container">
-              <div className="individual-btn" onClick={followCheck}>
+              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="individual-btn" onClick={likePost}>
