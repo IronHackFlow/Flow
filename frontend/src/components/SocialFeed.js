@@ -46,6 +46,7 @@ function SocialFeed(props) {
   const windowRef = useRef();
   const profilePicRef = useRef();
   const likesRef = useRef();
+  const followsRef = useRef();
   const popUpRef = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
@@ -194,6 +195,7 @@ function SocialFeed(props) {
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
       likesRef.current.innerHTML = eachSong.song.songLikes.length
+      followsRef.current.innerHTML = eachSong.song.songUser.followers.length
     }
   
     return (
@@ -202,7 +204,6 @@ function SocialFeed(props) {
         className="video-pane"
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')` }}
         >
-          {/* {console.log(rendersz.current++)} */}
         <div className="last-div"></div>
       </li>
     );
@@ -279,7 +280,7 @@ function SocialFeed(props) {
               <div className="user-profile-image">
                 <div className="user-profile-inset social-p">
                   <div className="nav-buttons-inset inset-social-p">
-                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
+                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause} alt="play button icon"></img>
                   </div>
                 </div>
               </div>
@@ -303,6 +304,7 @@ function SocialFeed(props) {
                 songForUserPic={userForSong.picture}
                 profilePicRef={profilePicRef}
                 likesRef={likesRef}
+                followsRef={followsRef}
                 />
         <audio ref={audioRef} id='damn'></audio>
       </div>

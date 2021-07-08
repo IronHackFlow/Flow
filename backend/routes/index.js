@@ -250,48 +250,6 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
           .catch((err) => {
             next(err)
           })
-
-      // async function to delete follows from user, userViewed, and from db
-      // async function delFollowData(objId) {
-      //   let deleteFollower = await User.findByIdAndUpdate(
-      //     body.follower, 
-      //     {$pull: { userFollows: objId }}, 
-      //     { new: true }
-      //   )
-      //   .then((res) => {
-      //     console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
-      //   })
-      //   .catch((err) => {
-      //     next(err)
-      //   })
-
-      //   let deleteFollowed = await User.findByIdAndUpdate(
-      //     body.followed, 
-      //     {$pull: { followers: objId }}, 
-      //     { new: true }
-      //   )
-      //   .then((res) => {
-      //     console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
-      //   })
-      //   .catch((err) => {
-      //     next(err)
-      //   })
-
-      //   let deleteFollow = await Follows.findByIdAndDelete(objId)
-      //     .then((res) => {
-      //       console.log('this follow has been eliminated!', res)
-      //     })
-      //     .catch((err) => {
-      //       next(err)
-      //     })
-      // }
-
-      // if (body.deleteObj === null) {
-      //   addFollowData()
-      // }
-      // else {
-      //   delFollowData(body.deleteObj._id)
-      // }
     }
   });
 });
@@ -313,17 +271,14 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
     if (err) {
       res.status(403).json(err);
     } else {
-      // console.log('Bodied',req.body)
-      let body = req.body;
-      body.commUser = authData.user._id
+      let body = { comment: req.body.comment, 
+                   commUser: authData.user._id,
+                   commSong: req.body.commSong,
+                   commDate: req.body.commDate, }
       console.log(body, 'this is')
-      // console.log(1)
+      
       let comment = await Comments.create(body);
-      // console.log(comment)
-      // console.log(2)
       let s = await Songs.findByIdAndUpdate(req.body.songId, {$push: { songComments: comment._id }})
-      console.log(s)
-      // console.log(3)
       res.status(200).json(comment);
     }
   });

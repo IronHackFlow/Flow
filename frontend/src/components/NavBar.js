@@ -127,6 +127,9 @@ function NavBar(props) {
             <div className="like-comment-container">
               <div className="individual-btn" onClick={followCheck} ref={followBtn}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
+                <div className="likes-number-container">
+                    <p ref={props.followsRef}></p>
+                </div>
               </div>
               <div className="individual-btn" onClick={likePost}>
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>

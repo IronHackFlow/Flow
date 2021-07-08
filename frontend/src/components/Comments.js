@@ -40,9 +40,14 @@ function Comments(props) {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(comment, songId)
     actions
-      .addComment({comment, songId})
+      .addComment({ comment: comment, 
+                    commSong: songId,
+                    commDate: new Date() })
+      .then((res) => {
+        console.log(res, "comment data ")
+      })
+      .catch(console.error);
   }
 
   const renderEachComment = useCallback(() => {
