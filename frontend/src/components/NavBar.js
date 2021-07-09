@@ -22,7 +22,9 @@ function NavBar(props) {
     TheContext
   );
 
-  const [userFollowers, setUserFollowers] = useState();
+  const [totalFollowers, setTotalFollowers] = useState();
+  const [totalLikes, setTotalLikes] = useState();
+
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -34,8 +36,18 @@ function NavBar(props) {
   const followBtn = useRef();
 
   useEffect(() => {
-    setUserFollowers(userViewed.followers.length)
+    setTotalFollowers(userViewed.followers.length)
   }, [userViewed])
+
+  useEffect(() => {
+    actions
+      .getSong({ id: songId })
+      .then((res) => {
+        console.log(res.data)
+        setTotalLikes(res.data.songLikes.length)
+      })
+      .catch(console.error)
+  }, [songId])
 
   useEffect(() => {
     if (toggleExplore === true) {
@@ -83,6 +95,28 @@ function NavBar(props) {
       })
       .catch(console.error)
   }
+  
+  const likeCheck = () => {
+    actions
+      .getSong({ id: songId})
+      .then((res) => {
+        console.log(res)
+        let deleteObj = null
+        res.data.songLikes.forEach((each) => {
+          console.log(each, 'oh boy thats a lot of likes')
+          if (each.likeUser === user._id) {
+            deleteObj = each
+          }
+        })
+        if (deleteObj === null) {
+          likePost()
+        }
+        else {
+          deleteLike(deleteObj)
+        }
+      })
+      .catch(console.error)
+  }
 
   const followUser = () => {
     followBtn.current.style.animation = "followInset .5s linear forwards"
@@ -91,8 +125,7 @@ function NavBar(props) {
                    followDate: new Date() })
       .then((res) => {
         console.log(`added a follow to: `, res.data)
-        setUserFollowers(res.data.followers.length)
-        // document.getElementById("notify").click();
+        setTotalFollowers(res.data.followers.length)
       })
       .catch(console.error);
   };
@@ -103,7 +136,7 @@ function NavBar(props) {
       .deleteFollow({ followedUser: userViewed._id, deleteObj: deleteObj })
       .then((res) => {
         console.log(`deleted a follow from: `, res.data)
-        setUserFollowers(res.data.followers.length)
+        setTotalFollowers(res.data.followers.length)
       })
       .catch(console.error)
   }
@@ -112,104 +145,109 @@ function NavBar(props) {
     actions
       .addLike({ likerSong: songId, likeDate: new Date() })
       .then((res) => {
-        console.log(res, "i liked this!")
-        document.getElementById("notifyLike").click();
+        console.log(`added a like to: `, res.data)
+        setTotalLikes(res.data.songLikes.length)
       })
       .catch(console.error);
   }
-
-    return (
-      <footer>
-        <div className="social-buttons">
-          <div className="social-list">
-            <div className="individual-btn">
-              <div className="individual-profile-pic">
-                <Link to={{pathname: `/profile/other/${props.songForUserId}`, profileInfo: props.songForUserProfile}}>
-                  <img className="prof-pic" src={props.songForUserPic} alt="user in view profile" ref={props.profilePicRef} />
+  const deleteLike = (deleteObj) => {
+    actions
+      .deleteLike({ likerSong: songId, deleteObj: deleteObj })
+      .then((res) => {
+        console.log(`deleted a like from: `, res.data)
+        setTotalLikes(res.data.songLikes.length)
+      })
+  }
+  return (
+    <footer>
+      <div className="social-buttons">
+        <div className="social-list">
+          <div className="individual-btn">
+            <div className="individual-profile-pic">
+              <Link to={{pathname: `/profile/other/${props.songForUserId}`, profileInfo: props.songForUserProfile}}>
+                <img className="prof-pic" src={props.songForUserPic} alt="user in view profile" ref={props.profilePicRef} />
+              </Link>
+            </div>
+          </div>  
+          <div className="like-comment-container">
+            <div className="individual-btn" onClick={followCheck} ref={followBtn}>
+              <img className="social-icons follow" src={follow} alt="follow user icon"></img>
+              <div className="likes-number-container">
+                  <p>{totalFollowers}</p>
+              </div>
+            </div>
+            <div className="individual-btn" onClick={likeCheck}>
+              <img className="social-icons heart" src={heart2} alt="like post icon"></img>
+              <div className="likes-number-container">
+                  <p>{totalLikes}</p>
+              </div>
+            </div>
+            <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
+              <img className="social-icons heart" src={search} alt="search user icon"></img>
+            </div>
+            <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+              <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="nav-buttons">
+        <div className="nav-list">
+          <div className="nav-buttons-rim">
+            <div className="nav-buttons-outset">
+              <div className="nav-buttons-inset">
+                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                  <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
                 </Link>
               </div>
-            </div>  
-
-            <div className="like-comment-container">
-              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
-                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
-                <div className="likes-number-container">
-                    <p>{userFollowers}</p>
-                </div>
+            </div>
+          </div>  
+          {/* <div className="button-title-container">
+            Record
+          </div> */}
+          <div className="nav-buttons-rim" ref={exploreRim}>
+            <div className="nav-buttons-outset" ref={exploreOut}>
+              <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
+                                                                    setToggleSocial(false)
+                                                                    setToggleExplore(true)
+                                                                  }}>
+                  <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
               </div>
-              <div className="individual-btn" onClick={likePost}>
-                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
-                <div className="likes-number-container">
-                    <p ref={props.likesRef}></p>
-                </div>
+            </div>
+          </div>  
+          {/* <div className="button-title-container">
+            Explore
+          </div> */}
+          <div className="nav-buttons-rim" ref={socialRim}>
+            <div className="nav-buttons-outset" ref={socialOut}>
+              <div className="nav-buttons-inset" ref={socialIn}
+                   onClick={() => {                       
+                      setToggleExplore(false)
+                      setToggleSocial(true)
+                    }}>
+                <img className="button-icons bi-social" src={social} alt="social feed icon" ref={socialIcon}></img>
               </div>
-              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                <img className="social-icons heart" src={search} alt="search user icon"></img>
-              </div>
-              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+            </div>
+          </div>  
+          {/* <div className="button-title-container">
+            Following
+          </div> */}
+          <div className="nav-buttons-rim">
+            <div className="nav-buttons-outset">
+              <div className="nav-buttons-inset">
+                <Link to={user._id ? ("/profile") : ("/auth")}>
+                  <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
+                </Link>
               </div>
             </div>
           </div>
+          {/* <div className="button-title-container">
+            Profile
+          </div> */}
         </div>
-
-        <div className="nav-buttons">
-          <div className="nav-list">
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                    <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
-                  </Link>
-                </div>
-              </div>
-            </div>  
-            {/* <div className="button-title-container">
-              Record
-            </div> */}
-            <div className="nav-buttons-rim" ref={exploreRim}>
-              <div className="nav-buttons-outset" ref={exploreOut}>
-                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
-                                                                      setToggleSocial(false)
-                                                                      setToggleExplore(true)
-                                                                    }}>
-                    <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
-                </div>
-              </div>
-            </div>  
-            {/* <div className="button-title-container">
-              Explore
-            </div> */}
-            <div className="nav-buttons-rim" ref={socialRim}>
-              <div className="nav-buttons-outset" ref={socialOut}>
-                <div className="nav-buttons-inset" ref={socialIn}
-                     onClick={() => {                       
-                        setToggleExplore(false)
-                        setToggleSocial(true)
-                      }}>
-                  <img className="button-icons bi-social" src={social} alt="social feed icon" ref={socialIcon}></img>
-                </div>
-              </div>
-            </div>  
-            {/* <div className="button-title-container">
-              Following
-            </div> */}
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={user._id ? ("/profile") : ("/auth")}>
-                    <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* <div className="button-title-container">
-              Profile
-            </div> */}
-          </div>
-        </div>
-      </footer>
-    );
+      </div>
+    </footer>
+  );
 }
 
 export default NavBar;

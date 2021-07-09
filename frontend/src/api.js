@@ -58,6 +58,10 @@ const actions = {
     return await axios.post(`${baseURL}/addLikeRT`, likePassed, resetHead());
   },
 
+  deleteLike: async (delLike) => {
+    return await axios.post(`${baseURL}/deleteLikeRT`, delLike, resetHead())
+  },
+
   getSongLikes: async (song) => {
     return await axios.post(`${baseURL}/getSongLikesRT`, song, resetHead());
   },

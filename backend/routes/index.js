@@ -56,12 +56,13 @@ router.post(`/getAUserRT`, async (req, res, next) => {
 router.post(`/getSongRT`, async (req, res, next) => {
     await Songs.findById(req.body.id)
       .populate('songUser')
-      .then((user) => {
-        res.status(200).json(user);
-        console.log("i hope i can see this song: ", user)
+      .populate('songLikes')
+      .then((song) => {
+        res.status(200).json(song);
+        console.log("i hope i can see this song: ", song)
       })
       .catch((err) => res.status(500).json(err));
-})
+});
 
 //search bar bobby
 router.post('/getManyUsersRT', async (req,res,next)=> {
@@ -105,6 +106,41 @@ router.post(`/getSongLikesRT`, async (req, res, next) => {
   .catch((err) => res.status(500).json(err))
 })
 
+router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
+    if (err) {
+      res.status(403).json(err);
+    }
+    else {
+      let body = { 
+        likeUser: authData.user._id, 
+        likerSong: req.body.likerSong,
+        deleteObj: req.body.deleteObj }
+
+      await Songs.findByIdAndUpdate(
+        body.likerSong, 
+        {$pull: { songLikes: body.deleteObj._id }},
+        { new: true }
+      )
+      .then((song) => {
+        res.status(200).json(song)
+        console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
+      })
+      .catch((err) => {
+        next(err)
+      })
+
+      await Likes.findByIdAndDelete(body.deleteObj._id)
+      .then((res) => {
+        console.log('this like has been eliminated!', res)
+      })
+      .catch((err) => {
+        next(err)
+      })
+
+    }
+  })
+})
 // adds (if likeUser hasn't yet liked) or deletes (if likeUser has already liked) a like from songLikes of clicked song. Acts as a like toggle.
 router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
@@ -115,53 +151,76 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } 
     else {
-      body = { likeUser: authData.user._id, likerSong: req.body.likerSong, likeDate: req.body.likeDate }
-      let userId = body.likeUser
+      let body = { 
+        likeUser: authData.user._id, 
+        likerSong: req.body.likerSong, 
+        likeDate: req.body.likeDate }
+      // let userId = body.likeUser
+      console.log('DATA received from like button click', body)
 
-      async function removeLikesFromDb(each) {
-        await Songs.findByIdAndUpdate(body.likerSong, {$pull: {songLikes: each}})
-          .then((remove) => {
-            res.status(200).json(remove)
-            console.log('removed like from songLikes array : ', each)
-          })
-          .catch((err) => res.status(500).json(err))
+      let likedObject = await Likes.create(body)
+      console.log(`CREATED like object: `, likedObject)
 
-        await Likes.findByIdAndRemove(each, function(err, docs) {
-          if (err) {
-            console.log(err)
-          }
-          else {
-            console.log('removed like :', docs)
-          }
-        })
-      }
-      
-      await Songs.findById(body.likerSong)
-        .populate('songLikes')
+      await Songs.findByIdAndUpdate(
+        body.likerSong, 
+        {$push: { songLikes: likedObject }},
+        { new: true }
+      )
         .then((song) => {
-          console.log('these are the songLikes : ', song.songLikes)
-          song.songLikes.forEach((each) => {
-            if (each.likeUser == userId) {
-              likesPush = false
-              deleteLikesArray.push(each._id)
-            }
-            else {
-              likesPush = true
-            }
-          })
+          res.status(200).json(song)
+          console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
+        })
+        .catch((err) => {
+          next(err)
         })
 
-      if (likesPush === true) {
-        let liked = await Likes.create(body)
-        let addLiketoSong = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked}})
-        res.status(200).json(liked)
-        console.log('song like added : ', liked)
-      }
-      else if (likesPush === false) {
-        deleteLikesArray.forEach((each) => {
-          removeLikesFromDb(each)
-        })
-      }
+      // let addLiketoSong = await Songs.findByIdAndUpdate(likedObject.likerSong, {$push: {songLikes: likedObject}})
+      // res.status(200).json(likedObject)
+      // console.log('song like added : ', likedObject)
+      // async function removeLikesFromDb(each) {
+      //   await Songs.findByIdAndUpdate(body.likerSong, {$pull: {songLikes: each}})
+      //     .then((remove) => {
+      //       res.status(200).json(remove)
+      //       console.log('removed like from songLikes array : ', each)
+      //     })
+      //     .catch((err) => res.status(500).json(err))
+
+      //   await Likes.findByIdAndRemove(each, function(err, docs) {
+      //     if (err) {
+      //       console.log(err)
+      //     }
+      //     else {
+      //       console.log('removed like :', docs)
+      //     }
+      //   })
+      // }
+      
+      // await Songs.findById(body.likerSong)
+      //   .populate('songLikes')
+      //   .then((song) => {
+      //     console.log('these are the songLikes : ', song.songLikes)
+      //     song.songLikes.forEach((each) => {
+      //       if (each.likeUser == userId) {
+      //         likesPush = false
+      //         deleteLikesArray.push(each._id)
+      //       }
+      //       else {
+      //         likesPush = true
+      //       }
+      //     })
+      //   })
+
+      // if (likesPush === true) {
+      //   let liked = await Likes.create(body)
+      //   let addLiketoSong = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked}})
+      //   res.status(200).json(liked)
+      //   console.log('song like added : ', liked)
+      // }
+      // else if (likesPush === false) {
+      //   deleteLikesArray.forEach((each) => {
+      //     removeLikesFromDb(each)
+      //   })
+      // }
     }
   })
 })
@@ -174,7 +233,7 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
     else {
       let body = { follower: authData.user._id,
                    followed: req.body.followedUser,
-                   deleteObj: req.body.deleteObj}
+                   deleteObj: req.body.deleteObj }
                    
       await User.findByIdAndUpdate(
         body.follower, 
