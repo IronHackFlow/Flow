@@ -193,12 +193,19 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
         {$pull: { followers: body.deleteObj._id }}, 
         { new: true }
       )
-      .then((res) => {
-        console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
-      })
-      .catch((err) => {
-        next(err)
-      })
+        .then((user) => {
+          res.status(200).json(user)
+          console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)
+        })
+        .catch((err) => {
+          next(err)
+        })
+      // .then((res) => {
+      //   console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
+      // })
+      // .catch((err) => {
+      //   next(err)
+      // })
 
       await Follows.findByIdAndDelete(body.deleteObj._id)
         .then((res) => {
@@ -244,8 +251,9 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
           {$push: { followers: followedObject }},
           { new: true }
         )
-          .then((res) => {
-            console.log(`ADDED a follow to User: ${res.userName}'s followers: `, res.followers)
+          .then((user) => {
+            res.status(200).json(user)
+            console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
           })
           .catch((err) => {
             next(err)

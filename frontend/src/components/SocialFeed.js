@@ -46,7 +46,6 @@ function SocialFeed(props) {
   const windowRef = useRef();
   const profilePicRef = useRef();
   const likesRef = useRef();
-  const followsRef = useRef();
   const popUpRef = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
@@ -195,7 +194,6 @@ function SocialFeed(props) {
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
       likesRef.current.innerHTML = eachSong.song.songLikes.length
-      followsRef.current.innerHTML = eachSong.song.songUser.followers.length
     }
   
     return (
@@ -304,7 +302,6 @@ function SocialFeed(props) {
                 songForUserPic={userForSong.picture}
                 profilePicRef={profilePicRef}
                 likesRef={likesRef}
-                followsRef={followsRef}
                 />
         <audio ref={audioRef} id='damn'></audio>
       </div>

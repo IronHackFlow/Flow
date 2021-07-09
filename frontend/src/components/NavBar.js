@@ -22,6 +22,7 @@ function NavBar(props) {
     TheContext
   );
 
+  const [userFollowers, setUserFollowers] = useState();
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -31,6 +32,10 @@ function NavBar(props) {
   const exploreIn = useRef();
   const exploreIcon = useRef();
   const followBtn = useRef();
+
+  useEffect(() => {
+    setUserFollowers(userViewed.followers.length)
+  }, [userViewed])
 
   useEffect(() => {
     if (toggleExplore === true) {
@@ -63,7 +68,6 @@ function NavBar(props) {
     actions
       .getAUser({ id: user._id})
       .then((res) => {
-        console.log(`this is the user data yo`, res.data)
         let deleteObj = null
         res.data.userFollows.forEach((each) => {
           if (each.followed === userViewed._id) {
@@ -86,7 +90,8 @@ function NavBar(props) {
       .addFollow({ followedUser: userViewed._id, 
                    followDate: new Date() })
       .then((res) => {
-        console.log(res, "follower data ")
+        console.log(`added a follow to: `, res.data)
+        setUserFollowers(res.data.followers.length)
         // document.getElementById("notify").click();
       })
       .catch(console.error);
@@ -97,7 +102,8 @@ function NavBar(props) {
     actions
       .deleteFollow({ followedUser: userViewed._id, deleteObj: deleteObj })
       .then((res) => {
-        console.log(res, "deleted follower")
+        console.log(`deleted a follow from: `, res.data)
+        setUserFollowers(res.data.followers.length)
       })
       .catch(console.error)
   }
@@ -128,7 +134,7 @@ function NavBar(props) {
               <div className="individual-btn" onClick={followCheck} ref={followBtn}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
                 <div className="likes-number-container">
-                    <p ref={props.followsRef}></p>
+                    <p>{userFollowers}</p>
                 </div>
               </div>
               <div className="individual-btn" onClick={likePost}>
