@@ -22,7 +22,8 @@ function SocialFeed(props) {
           toggleExplore, setToggleExplore,
           getSongName, setGetSongName,
           songId, setSongId,
-          songComments, setSongComments
+          songComments, setSongComments,
+          songLikes, setSongLikes
     } = React.useContext(
     TheContext
   );
@@ -93,21 +94,21 @@ function SocialFeed(props) {
   }, [page2]);
 
   useEffect(() => {
-    if (navDisplayed == true) {
+    if (navDisplayed === true) {
       menuDown('search')
       menuDown('comment')
     }
   }, [navDisplayed])
 
   const menuDown = (whichMenu) => {
-    if (whichMenu == 'search') {
+    if (whichMenu === 'search') {
       searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpSearchRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       dumbSearchRef.current.style.opacity = 0;
       setSearchPoppedUp(false);
     }
-    else if (whichMenu == 'comment') {
+    else if (whichMenu === 'comment') {
       commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
       popUpRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
@@ -117,14 +118,14 @@ function SocialFeed(props) {
     }
   }
   const menuUp = (whichMenu) => {
-    if (whichMenu == 'search') {
+    if (whichMenu === 'search') {
       searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       dumbSearchRef.current.style.opacity = 1;
       popUpSearchRef.current.style.height = "50%";
       windowRef.current.style.bottom = "50%";
       setSearchPoppedUp(true);
     }
-    else if (whichMenu == 'comment') {
+    else if (whichMenu === 'comment') {
       commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       opacityRef1.current.style.opacity = 1;
       opacityRef2.current.style.opacity = 1;
@@ -135,7 +136,7 @@ function SocialFeed(props) {
   }
 
   const popUpComments = () => {
-    if (poppedUp == false) {
+    if (poppedUp === false) {
       menuDown('search')
       menuUp('comment')
     } else {
@@ -144,7 +145,7 @@ function SocialFeed(props) {
   };
 
   const popUpSearch = () => {
-    if (searchPoppedUp == false) {
+    if (searchPoppedUp === false) {
       menuDown('comment')
       menuUp('search')
     } else {
@@ -191,6 +192,7 @@ function SocialFeed(props) {
       setGetSongCaption(eachSong.song.songCaption)
       setUserViewed(eachSong.song.songUser)
       setSongComments(eachSong.song.songComments)
+      setSongLikes(eachSong.song.songLikes.length)
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
     }

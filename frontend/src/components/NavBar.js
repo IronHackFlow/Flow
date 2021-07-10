@@ -16,15 +16,15 @@ function NavBar(props) {
     user, userViewed,
     userForSong, setUserForSong,
     songId, setSongId,
+    songLikes, setSongLikes,
     toggleSocial, setToggleSocial,
     toggleExplore, setToggleExplore
     } = React.useContext(
     TheContext
   );
 
-  const [totalFollowers, setTotalFollowers] = useState();
-  const [totalLikes, setTotalLikes] = useState();
-
+  const [totalFollowers, setTotalFollowers] = useState('');
+  const [totalLikes, setTotalLikes] = useState(songLikes);
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -40,14 +40,8 @@ function NavBar(props) {
   }, [userViewed])
 
   useEffect(() => {
-    actions
-      .getSong({ id: songId })
-      .then((res) => {
-        console.log(res.data)
-        setTotalLikes(res.data.songLikes.length)
-      })
-      .catch(console.error)
-  }, [songId])
+    setTotalLikes(songLikes)
+  }, [songLikes])
 
   useEffect(() => {
     if (toggleExplore === true) {
@@ -78,7 +72,7 @@ function NavBar(props) {
       return null
     }
     actions
-      .getAUser({ id: user._id})
+      .getAUser({ id: user._id })
       .then((res) => {
         let deleteObj = null
         res.data.userFollows.forEach((each) => {
@@ -98,14 +92,13 @@ function NavBar(props) {
   
   const likeCheck = () => {
     actions
-      .getSong({ id: songId})
+      .getSong({ id: songId })
       .then((res) => {
-        console.log(res)
         let deleteObj = null
         res.data.songLikes.forEach((each) => {
-          console.log(each, 'oh boy thats a lot of likes')
           if (each.likeUser === user._id) {
             deleteObj = each
+            console.log(each, 'need to delete this')
           }
         })
         if (deleteObj === null) {
@@ -150,6 +143,7 @@ function NavBar(props) {
       })
       .catch(console.error);
   }
+
   const deleteLike = (deleteObj) => {
     actions
       .deleteLike({ likerSong: songId, deleteObj: deleteObj })
@@ -158,6 +152,7 @@ function NavBar(props) {
         setTotalLikes(res.data.songLikes.length)
       })
   }
+
   return (
     <footer>
       <div className="social-buttons">

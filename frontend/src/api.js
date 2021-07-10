@@ -42,8 +42,8 @@ const actions = {
     return await axios.post(`${baseURL}/getManyUsersRT`, searchStr, resetHead());
   },
 
-  getSong: async (songId) => {
-    return await axios.post(`${baseURL}/getSongRT`, songId, resetHead());
+  getSong: async (getSong) => {
+    return await axios.post(`${baseURL}/getSongRT`, getSong, resetHead());
   },
 
   getUserLikedSongs: async () => {

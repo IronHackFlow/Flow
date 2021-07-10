@@ -24,6 +24,7 @@ function App() {
   const [songId, setSongId] = useState({})
   const [getSongName, setGetSongName] = useState('');
   const [songComments, setSongComments] = useState([]);
+  const [songLikes, setSongLikes] = useState()
 
   const navRef = useRef();
 
@@ -64,7 +65,8 @@ function App() {
         toggleExplore, setToggleExplore,
         getSongName, setGetSongName,
         songId, setSongId,
-        songComments, setSongComments
+        songComments, setSongComments,
+        songLikes, setSongLikes
     }}>
       <div className="App">
         <nav ref={navRef}>

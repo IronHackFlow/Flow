@@ -59,7 +59,6 @@ router.post(`/getSongRT`, async (req, res, next) => {
       .populate('songLikes')
       .then((song) => {
         res.status(200).json(song);
-        console.log("i hope i can see this song: ", song)
       })
       .catch((err) => res.status(500).json(err));
 });
