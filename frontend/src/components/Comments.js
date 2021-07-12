@@ -12,6 +12,7 @@ function Comments(props) {
 
   let commentUsers = []
   const [comment, setComment] = useState();
+  const [commState, setCommState] = useState([])
 
   useEffect(() => {
     commentUsers = []
@@ -22,11 +23,18 @@ function Comments(props) {
       .then((res) => {
         commentUsers.push({ user: res.data, comment: each.comment })
         console.log(commentUsers)
+        // setCommState(oldArray =>  [...oldArray, { user: res.data, comment: each.comment }])
+        // console.log(commState, 'this prob gonna cause many renderz')
       }).catch((e) => {
         console.log('failed to get name', e)
       })
     })
   }, [songComments])
+
+  useEffect(() => {
+    actions
+      .getSong({})
+  })
 
   // const getCommentWriter = (num) => {
   //   actions

@@ -17,6 +17,7 @@ router.get(`/user`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } else {
       User.findById(authData.user._id)
+        .populate('userFollows')
         .then((user) => {
           res.status(200).json(user);
         })
@@ -105,6 +106,37 @@ router.post(`/getSongLikesRT`, async (req, res, next) => {
   .catch((err) => res.status(500).json(err))
 })
 
+router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
+    if (err) {
+      res.status(403).json(err);
+    } 
+    else {
+      let body = { 
+        likeUser: authData.user._id, 
+        likerSong: req.body.likerSong, 
+        likeDate: req.body.likeDate }
+      console.log('DATA received from like button click', body)
+
+      let likedObject = await Likes.create(body)
+      console.log(`CREATED like object: `, likedObject)
+
+      await Songs.findByIdAndUpdate(
+        body.likerSong, 
+        {$push: { songLikes: likedObject }},
+        { new: true }
+      )
+        .then((song) => {
+          res.status(200).json(song)
+          console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
+        })
+        .catch((err) => {
+          next(err)
+        })
+    }
+  })
+})
+
 router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
@@ -140,89 +172,49 @@ router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
     }
   })
 })
-// adds (if likeUser hasn't yet liked) or deletes (if likeUser has already liked) a like from songLikes of clicked song. Acts as a like toggle.
-router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
-  jwt.verify(req.token, "secretkey", async (err, authData) => {
-    let likesPush = ''
-    let deleteLikesArray = []
 
+router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
       res.status(403).json(err);
     } 
     else {
-      let body = { 
-        likeUser: authData.user._id, 
-        likerSong: req.body.likerSong, 
-        likeDate: req.body.likeDate }
-      // let userId = body.likeUser
-      console.log('DATA received from like button click', body)
+      let body = { follower: authData.user._id, 
+                   followed: req.body.followedUser,
+                   followDate: req.body.followDate }
 
-      let likedObject = await Likes.create(body)
-      console.log(`CREATED like object: `, likedObject)
+      console.log('DATA received from follow button click', body)
 
-      await Songs.findByIdAndUpdate(
-        body.likerSong, 
-        {$push: { songLikes: likedObject }},
+      let followedObject = await Follows.create(body)
+      console.log(`CREATED follow object: `, followedObject)
+
+      await User.findByIdAndUpdate(
+        body.follower, 
+        {$push: { userFollows: followedObject }}, 
         { new: true }
       )
-        .then((song) => {
-          res.status(200).json(song)
-          console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
+        .then((res) => {
+          console.log(`ADDED a follow to User: ${res.userName}'s userFollows: `, res.userFollows)
         })
         .catch((err) => {
           next(err)
         })
 
-      // let addLiketoSong = await Songs.findByIdAndUpdate(likedObject.likerSong, {$push: {songLikes: likedObject}})
-      // res.status(200).json(likedObject)
-      // console.log('song like added : ', likedObject)
-      // async function removeLikesFromDb(each) {
-      //   await Songs.findByIdAndUpdate(body.likerSong, {$pull: {songLikes: each}})
-      //     .then((remove) => {
-      //       res.status(200).json(remove)
-      //       console.log('removed like from songLikes array : ', each)
-      //     })
-      //     .catch((err) => res.status(500).json(err))
-
-      //   await Likes.findByIdAndRemove(each, function(err, docs) {
-      //     if (err) {
-      //       console.log(err)
-      //     }
-      //     else {
-      //       console.log('removed like :', docs)
-      //     }
-      //   })
-      // }
-      
-      // await Songs.findById(body.likerSong)
-      //   .populate('songLikes')
-      //   .then((song) => {
-      //     console.log('these are the songLikes : ', song.songLikes)
-      //     song.songLikes.forEach((each) => {
-      //       if (each.likeUser == userId) {
-      //         likesPush = false
-      //         deleteLikesArray.push(each._id)
-      //       }
-      //       else {
-      //         likesPush = true
-      //       }
-      //     })
-      //   })
-
-      // if (likesPush === true) {
-      //   let liked = await Likes.create(body)
-      //   let addLiketoSong = await Songs.findByIdAndUpdate(liked.likerSong, {$push: {songLikes: liked}})
-      //   res.status(200).json(liked)
-      //   console.log('song like added : ', liked)
-      // }
-      // else if (likesPush === false) {
-      //   deleteLikesArray.forEach((each) => {
-      //     removeLikesFromDb(each)
-      //   })
-      // }
+      await User.findByIdAndUpdate(
+        body.followed, 
+        {$push: { followers: followedObject }},
+        { new: true }
+      )
+        .then((user) => {
+          res.status(200).json(user)
+          console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
+        })
+        .catch((err) => {
+          next(err)
+        })
     }
-  })
-})
+  });
+});
 
 router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", async (err, authData) => {
@@ -258,12 +250,6 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
         .catch((err) => {
           next(err)
         })
-      // .then((res) => {
-      //   console.log(`DELETED a follow from User: ${res.userName}'s followers: `, res.followers)
-      // })
-      // .catch((err) => {
-      //   next(err)
-      // })
 
       await Follows.findByIdAndDelete(body.deleteObj._id)
         .then((res) => {
@@ -275,50 +261,6 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
     }
   })
 })
-
-router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
-  jwt.verify(req.token, "secretkey", async (err, authData) => {
-    if (err) {
-      res.status(403).json(err);
-    } 
-    else {
-      let body = { follower: authData.user._id, 
-                   followed: req.body.followedUser,
-                   followDate: req.body.followDate }
-
-      console.log('DATA received from follow button click', body)
-      //async function to add follows to db, user, userViewed
-
-        let followedObject = await Follows.create(body)
-        console.log(`CREATED follow object: `, followedObject)
-
-        await User.findByIdAndUpdate(
-          body.follower, 
-          {$push: { userFollows: followedObject }}, 
-          { new: true }
-        )
-          .then((res) => {
-            console.log(`ADDED a follow to User: ${res.userName}'s userFollows: `, res.userFollows)
-          })
-          .catch((err) => {
-            next(err)
-          })
-
-        await User.findByIdAndUpdate(
-          body.followed, 
-          {$push: { followers: followedObject }},
-          { new: true }
-        )
-          .then((user) => {
-            res.status(200).json(user)
-            console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
-          })
-          .catch((err) => {
-            next(err)
-          })
-    }
-  });
-});
 
 router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   // Songs.find({$sort: {"songTotLikes": -1}})

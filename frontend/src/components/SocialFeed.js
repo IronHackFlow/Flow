@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group"
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { CSSTransition } from "react-transition-group"
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import actions from "../api";
@@ -22,35 +22,34 @@ function SocialFeed(props) {
           toggleExplore, setToggleExplore,
           getSongName, setGetSongName,
           songId, setSongId,
-          songComments, setSongComments,
-          songLikes, setSongLikes
+          songComments, setSongComments
     } = React.useContext(
     TheContext
   );
   const location = useLocation();
 
-  let page = 1;
-  let page2 = 1
   let gifsCopy = [...gifsArr]
 
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [exploreFeedSongs, setExploreFeedSongs] = useState([])
-  const [userForSong, setUserForSong] = useState({});
+  const [userForSong, setUserForSong] = useState();
   const [getSongCaption, setGetSongCaption] = useState()
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
-  
+  const [songLikes, setSongLikes] = useState();
+  const [songUserFollowers, setSongUserFollowers] = useState();
+
   const popUpSearchRef = useRef();
+  const popUpRef = useRef();
   const commentBtn = useRef();
   const searchBtn = useRef();
   const audioRef = useRef();
   const windowRef = useRef();
   const profilePicRef = useRef();
-
-  const popUpRef = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
   const dumbSearchRef = useRef();  
+  const playPauseRef = useRef();
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -61,7 +60,7 @@ function SocialFeed(props) {
       setToggleSocial(true)
       setToggleExplore(false)
     }
-  }, [location])
+  }, [location, setToggleSocial, setToggleExplore])
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
@@ -78,7 +77,7 @@ function SocialFeed(props) {
         setThisFeedSongs(songsArray);
       })
       .catch(console.error);
-  }, [page]);
+  }, []);
 
   useEffect(() => {
     actions
@@ -91,7 +90,7 @@ function SocialFeed(props) {
         setExploreFeedSongs(exploreSongsArray)
       })
       .catch(console.error);
-  }, [page2]);
+  }, []);
 
   useEffect(() => {
     if (navDisplayed === true) {
@@ -165,9 +164,11 @@ function SocialFeed(props) {
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
      audioRef.current.play()
+     playPauseRef.current.src = pause
     }
     else {
      audioRef.current.pause()
+     playPauseRef.current.src = play
    }
   }
 
@@ -192,7 +193,8 @@ function SocialFeed(props) {
       setGetSongCaption(eachSong.song.songCaption)
       setUserViewed(eachSong.song.songUser)
       setSongComments(eachSong.song.songComments)
-      setSongLikes(eachSong.song.songLikes.length)
+      setSongLikes(eachSong.song.songLikes)
+      setSongUserFollowers(eachSong.song.songUser.followers)
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
     }
@@ -259,7 +261,7 @@ function SocialFeed(props) {
                     <div className="udt-1-container">
                       <p className="ud-text udt-1"> 
                         <span style={{ color: "#ec6aa0" }}>
-                          {userForSong.userName}
+                          {userForSong?.userName}
                         </span>
                       </p>
                     </div>
@@ -279,7 +281,7 @@ function SocialFeed(props) {
               <div className="user-profile-image">
                 <div className="user-profile-inset social-p">
                   <div className="nav-buttons-inset inset-social-p">
-                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause} alt="play button icon"></img>
+                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause} alt="play button icon" ref={playPauseRef}></img>
                   </div>
                 </div>
               </div>
@@ -298,10 +300,13 @@ function SocialFeed(props) {
                 popUpComments={popUpComments} 
                 searchBtn={searchBtn} 
                 commentBtn={commentBtn}
-                songForUserId={userForSong._id}
-                songForUserProfile={userForSong}
-                songForUserPic={userForSong.picture}
                 profilePicRef={profilePicRef}
+                userForSong={userForSong}
+                songLikes={songLikes}
+                setSongLikes={setSongLikes}
+                songUserFollowers={songUserFollowers}
+                setSongUserFollowers={setSongUserFollowers}
+
                 />
         <audio ref={audioRef} id='damn'></audio>
       </div>

@@ -13,18 +13,16 @@ import TheContext from "../TheContext";
 
 function NavBar(props) {
   const {
-    user, userViewed,
-    userForSong, setUserForSong,
+    user, userViewed, setUserViewed,
     songId, setSongId,
-    songLikes, setSongLikes,
     toggleSocial, setToggleSocial,
     toggleExplore, setToggleExplore
     } = React.useContext(
     TheContext
   );
 
-  const [totalFollowers, setTotalFollowers] = useState('');
-  const [totalLikes, setTotalLikes] = useState(songLikes);
+  const [totalFollowers, setTotalFollowers] = useState();
+  const [totalLikes, setTotalLikes] = useState();
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -36,12 +34,24 @@ function NavBar(props) {
   const followBtn = useRef();
 
   useEffect(() => {
-    setTotalFollowers(userViewed.followers.length)
-  }, [userViewed])
+    setTotalFollowers(props.songUserFollowers?.length)
+  }, [props.songUserFollowers])
 
   useEffect(() => {
-    setTotalLikes(songLikes)
-  }, [songLikes])
+    setTotalLikes(props.songLikes?.length)
+  }, [props.songLikes])
+
+  // useEffect(() => {
+  //   user.userFollows.map((each) => {
+  //     if (each.followed === props.userForSong?._id) {
+  //       console.log(each.followed)
+  //       followBtn.current.style.boxShadow = "rgb(61 63 63) 2px 2px 3px inset, rgb(152 152 152) -2px -2px 3px inset"
+  //     }
+  //     else {
+  //       followBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+  //     }
+  //   })
+  // }, [props.userForSong, user])
 
   useEffect(() => {
     if (toggleExplore === true) {
@@ -124,7 +134,7 @@ function NavBar(props) {
   };
 
   const deleteFollow = (deleteObj) => {
-    followBtn.current.style.animation = "followInset .5s linear reverse"
+    followBtn.current.style.animation = "followInset .5s linear reverse forwards"
     actions
       .deleteFollow({ followedUser: userViewed._id, deleteObj: deleteObj })
       .then((res) => {
@@ -159,8 +169,8 @@ function NavBar(props) {
         <div className="social-list">
           <div className="individual-btn">
             <div className="individual-profile-pic">
-              <Link to={{pathname: `/profile/other/${props.songForUserId}`, profileInfo: props.songForUserProfile}}>
-                <img className="prof-pic" src={props.songForUserPic} alt="user in view profile" ref={props.profilePicRef} />
+              <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}}>
+                <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
               </Link>
             </div>
           </div>  
