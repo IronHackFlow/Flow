@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom'
 import TheContext from "../TheContext";
 import actions from "../api";
@@ -9,7 +9,6 @@ function EditProfile(props) {
 
   const [thisUser, setThisUser] = useState([user]);
   const [thisUsersSongs, setThisUsersSongs] = useState([])
-  let redirectRef = useRef()
 
   const publicSect = useRef();
   const personalSect = useRef();
@@ -55,7 +54,7 @@ function EditProfile(props) {
   };
 
   const expandSection = (e) => {
-    sectionRefsArray.map((each) => {
+    sectionRefsArray.forEach((each) => {
       if (e.current !== each.current) {
         each.current.style.height = '5%'
         each.current.style.transition = 'height .5s'
@@ -109,7 +108,7 @@ function EditProfile(props) {
                       <div className="edit-photo-section">
                         <div className="edit-photo-inner">
                           <div className="edit-photo-outer">
-                            <img src={thisUser?.picture} alt="profile photo"></img>
+                            <img src={thisUser?.picture} alt="profile"></img>
                           </div>
                         </div>
                       </div>

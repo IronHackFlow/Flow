@@ -98,6 +98,24 @@ function SocialFeed(props) {
       menuDown('comment')
     }
   }, [navDisplayed])
+  
+  const popUpComments = () => {
+    if (poppedUp === false) {
+      menuDown('search')
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
+  };
+
+  const popUpSearch = () => {
+    if (searchPoppedUp === false) {
+      menuDown('comment')
+      menuUp('search')
+    } else {
+      menuDown('search')
+    }
+  };
 
   const menuDown = (whichMenu) => {
     if (whichMenu === 'search') {
@@ -133,24 +151,6 @@ function SocialFeed(props) {
       setPoppedUp(true);
     }
   }
-
-  const popUpComments = () => {
-    if (poppedUp === false) {
-      menuDown('search')
-      menuUp('comment')
-    } else {
-      menuDown('comment')
-    }
-  };
-
-  const popUpSearch = () => {
-    if (searchPoppedUp === false) {
-      menuDown('comment')
-      menuUp('search')
-    } else {
-      menuDown('search')
-    }
-  };
 
   const transClass = () => {
     if (toggleSocial === true) {

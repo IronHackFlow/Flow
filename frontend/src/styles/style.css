@@ -26,15 +26,15 @@
     -webkit-box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
             box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
     background: #ecf0f3;
-    height: 80%;
-    width: 20%;
+    height: 70%;
+    width: 60%;
   }
   to {
     -webkit-box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
             box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
     background: #686a6b;
-    height: 80%;
-    width: 20%;
+    height: 70%;
+    width: 60%;
   }
 }
 
@@ -43,15 +43,15 @@
     -webkit-box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
             box-shadow: 2px 2px 3px #b7b8b9, -2px -2px 3px #ffffff;
     background: #ecf0f3;
-    height: 80%;
-    width: 20%;
+    height: 70%;
+    width: 60%;
   }
   to {
     -webkit-box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
             box-shadow: inset 2px 2px 3px #3c3c3c, inset -2px -2px 3px #b2b2b2;
     background: #686a6b;
-    height: 80%;
-    width: 20%;
+    height: 70%;
+    width: 60%;
   }
 }
 
@@ -656,6 +656,12 @@ footer .social-buttons .social-list .individual-btn .individual-profile-pic .pro
 
 footer .nav-buttons {
   height: 55%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   background: #ecf0f3;
   border-top: 1px solid #a9a9a9;
   -webkit-box-shadow: inset 1px 5px 4px #ffffff;
@@ -663,7 +669,7 @@ footer .nav-buttons {
 }
 
 footer .nav-buttons .nav-list {
-  height: 100%;
+  height: 95%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -682,9 +688,27 @@ footer .nav-buttons .nav-list {
   margin: 0 auto;
 }
 
-footer .nav-buttons .nav-list .nav-buttons-rim {
-  height: 80%;
-  width: 20%;
+footer .nav-buttons .nav-list .nav-buttons-containers {
+  height: 95%;
+  width: 25%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+footer .nav-buttons .nav-list .nav-buttons-containers .nav-buttons-rim {
+  height: 70%;
+  width: 60%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -703,7 +727,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim {
           box-shadow: 1px 1px 3px 0px #b7b8b9, -2px -2px 3px #ffffff;
 }
 
-footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset {
+footer .nav-buttons .nav-list .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset {
   height: 90%;
   width: 92%;
   border-radius: 50%;
@@ -724,7 +748,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset {
           box-shadow: inset 2px 2px 5px #cacaca, inset -3px -3px 4px #ffffff;
 }
 
-footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
+footer .nav-buttons .nav-list .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
   height: 70%;
   width: 70%;
   border-radius: 50%;
@@ -743,6 +767,26 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
           box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
+}
+
+footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
+  height: 15%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 14px;
 }
 
 /* ------------------------ Profile page fixed footer --------------------------- */
@@ -3516,6 +3560,12 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 
 .nb-profile {
   height: 11%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   border: none;
   background: #ecf0f3;
   -webkit-box-shadow: inset 1px 5px 4px #ffffff;
@@ -3523,7 +3573,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
 }
 
 .nb-profile .nav-list {
-  height: 100%;
+  height: 95%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3542,9 +3592,27 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
   margin: 0 auto;
 }
 
-.nb-profile .nav-list .nav-buttons-rim {
-  height: 80%;
-  width: 20%;
+.nb-profile .nav-list .nav-buttons-containers {
+  height: 95%;
+  width: 25%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nb-profile .nav-list .nav-buttons-containers .nav-buttons-rim {
+  height: 70%;
+  width: 60%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3563,7 +3631,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 1px 1px 3px 0px #b7b8b9, -2px -2px 3px #ffffff;
 }
 
-.nb-profile .nav-list .nav-buttons-rim .nav-buttons-outset {
+.nb-profile .nav-list .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset {
   height: 90%;
   width: 92%;
   border-radius: 50%;
@@ -3584,7 +3652,7 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: inset 2px 2px 5px #cacaca, inset -3px -3px 4px #ffffff;
 }
 
-.nb-profile .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
+.nb-profile .nav-list .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
   height: 70%;
   width: 70%;
   border-radius: 50%;
@@ -3605,9 +3673,29 @@ footer .nav-buttons .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-
           box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.nb-profile .nav-list .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset:active {
+.nb-profile .nav-list .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset:active {
   -webkit-box-shadow: inset 2px 2px 3px 0px #b0b1b3,  inset -2px -2px 3px #ffffff;
           box-shadow: inset 2px 2px 3px 0px #b0b1b3,  inset -2px -2px 3px #ffffff;
+}
+
+.nb-profile .nav-list .nav-buttons-containers .button-title-container {
+  height: 15%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 14px;
 }
 
 .LogIn {

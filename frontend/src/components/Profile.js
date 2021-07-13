@@ -205,43 +205,63 @@ function Profile(props) {
       <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
         <div className="nav-list">
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                <img className="button-icons bi-record" src={mic}></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="button-title-container">
+              Record
             </div>
           </div>
-        </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to="/explore-feed">
-                <img className="button-icons bi-explore-p" src={explore} alt="explore"></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to="/explore-feed">
+                    <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="button-title-container">
+              Explore
             </div>
           </div>
-        </div>
+          
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                    <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="button-title-container">
+              Following
+            </div>
+          </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to={user._id ? ("/social-feed") : ("/auth")}>
-                <img className="button-icons bi-social-p" src={social}></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim" ref={profileRim}>
+              <div className="nav-buttons-outset" ref={profileOut}>
+                <div className="nav-buttons-inset" ref={profileIn}>
+                  <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon} alt="avatar icon"></img>
+                </div>
+              </div>
+            </div>
+            <div className="button-title-container">
+              Profile
             </div>
           </div>
-        </div>
-
-        <div className="nav-buttons-rim" ref={profileRim}>
-          <div className="nav-buttons-outset" ref={profileOut}>
-            <div className="nav-buttons-inset" ref={profileIn}>
-              <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon}></img>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     </div>

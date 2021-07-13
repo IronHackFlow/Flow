@@ -1,14 +1,11 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login'
-import { Link, Redirect } from 'react-router-dom'
-import Home from './Home'
+import { Link } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 
 const Auth = (props) => {
-
-    const { user, setUser } = React.useContext(TheContext)
-
+    const { user } = React.useContext(TheContext)
 
     const onResponse = (response) => {
         actions
@@ -20,8 +17,9 @@ const Auth = (props) => {
             })
             .catch(console.error)
     }
-
+    
     console.log('ice cream', user)
+
     return (
         <div className="LogIn">
             <div className="page-container">

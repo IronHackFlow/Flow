@@ -13,8 +13,7 @@ import TheContext from "../TheContext";
 
 function NavBar(props) {
   const {
-    user, userViewed, setUserViewed,
-    songId, setSongId,
+    user, userViewed, songId, 
     toggleSocial, setToggleSocial,
     toggleExplore, setToggleExplore
     } = React.useContext(
@@ -23,6 +22,7 @@ function NavBar(props) {
 
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
+
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
@@ -85,11 +85,13 @@ function NavBar(props) {
       .getAUser({ id: user._id })
       .then((res) => {
         let deleteObj = null
+
         res.data.userFollows.forEach((each) => {
           if (each.followed === userViewed._id) {
             deleteObj = each
           }
         })
+
         if (deleteObj === null) {
           followUser()
         }
@@ -105,12 +107,13 @@ function NavBar(props) {
       .getSong({ id: songId })
       .then((res) => {
         let deleteObj = null
+
         res.data.songLikes.forEach((each) => {
           if (each.likeUser === user._id) {
             deleteObj = each
-            console.log(each, 'need to delete this')
           }
         })
+
         if (deleteObj === null) {
           likePost()
         }
@@ -161,6 +164,7 @@ function NavBar(props) {
         console.log(`deleted a like from: `, res.data)
         setTotalLikes(res.data.songLikes.length)
       })
+      .catch(console.error);
   }
 
   return (
@@ -196,59 +200,71 @@ function NavBar(props) {
           </div>
         </div>
       </div>
+
       <div className="nav-buttons">
         <div className="nav-list">
-          <div className="nav-buttons-rim">
-            <div className="nav-buttons-outset">
-              <div className="nav-buttons-inset">
-                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                  <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
-                </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>  
-          {/* <div className="button-title-container">
-            Record
-          </div> */}
-          <div className="nav-buttons-rim" ref={exploreRim}>
-            <div className="nav-buttons-outset" ref={exploreOut}>
-              <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
-                                                                    setToggleSocial(false)
-                                                                    setToggleExplore(true)
-                                                                  }}>
-                  <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
-              </div>
-            </div>
-          </div>  
-          {/* <div className="button-title-container">
-            Explore
-          </div> */}
-          <div className="nav-buttons-rim" ref={socialRim}>
-            <div className="nav-buttons-outset" ref={socialOut}>
-              <div className="nav-buttons-inset" ref={socialIn}
-                   onClick={() => {                       
-                      setToggleExplore(false)
-                      setToggleSocial(true)
-                    }}>
-                <img className="button-icons bi-social" src={social} alt="social feed icon" ref={socialIcon}></img>
-              </div>
-            </div>
-          </div>  
-          {/* <div className="button-title-container">
-            Following
-          </div> */}
-          <div className="nav-buttons-rim">
-            <div className="nav-buttons-outset">
-              <div className="nav-buttons-inset">
-                <Link to={user._id ? ("/profile") : ("/auth")}>
-                  <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
-                </Link>
-              </div>
+            </div>  
+            <div className="button-title-container">
+              Record
             </div>
           </div>
-          {/* <div className="button-title-container">
-            Profile
-          </div> */}
+
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim" ref={exploreRim}>
+              <div className="nav-buttons-outset" ref={exploreOut}>
+                <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
+                                                                      setToggleSocial(false)
+                                                                      setToggleExplore(true)
+                                                                    }}>
+                    <img className="button-icons bi-explore" src={explore} alt="explore users icon" ref={exploreIcon}></img>
+                </div>
+              </div>
+            </div>  
+            <div className="button-title-container">
+              Explore
+            </div>
+          </div>
+
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim" ref={socialRim}>
+              <div className="nav-buttons-outset" ref={socialOut}>
+                <div className="nav-buttons-inset" ref={socialIn}
+                    onClick={() => {                       
+                        setToggleExplore(false)
+                        setToggleSocial(true)
+                      }}>
+                  <img className="button-icons bi-social" src={social} alt="social feed icon" ref={socialIcon}></img>
+                </div>
+              </div>
+            </div>  
+            <div className="button-title-container">
+              Following
+            </div>
+          </div>
+
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={user._id ? ("/profile") : ("/auth")}>
+                    <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="button-title-container">
+              Profile
+            </div>
+          </div>
         </div>
       </div>
     </footer>

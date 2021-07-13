@@ -52,7 +52,7 @@ router.post(`/getAUserRT`, async (req, res, next) => {
           res.status(200).json(user);
         })
         .catch((err) => res.status(500).json(err));
-});
+}); 
 
 router.post(`/getSongRT`, async (req, res, next) => {
     await Songs.findById(req.body.id)
@@ -74,20 +74,20 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
       .catch((err)=> res.status(500).json(err));
 })
 
-// changed this to find a single song out of desperate measures.. Should change it back but don't think it's being used anyway lol
 router.post(`/getCommentsRT`, async (req, res, next) => {
-    console.log("lol not comments, but songs", req.body)
-    Songs.findById(req.body.id)
-    .populate('songUser')
+  let body = { id: req.body.id }
+  Songs.findById(body.id)
     .populate('songComments')
-    .then((songs) => {
-      res.status(200).json(songs);
+    .populate({ path: 'songComments', populate: 'commUser'})
+    .then((song) => {
+      res.status(200).json(song);
     })
-    .catch((err) => res.status(500).json(err))
+    .catch((err) => {
+      next(err)
+    })
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
-  console.log("wtf is this shit", req.body)
     Songs.find({ songUser: req.body._id})
     .populate('songUser')
     .populate('songComments')

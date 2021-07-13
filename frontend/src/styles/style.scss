@@ -60,7 +60,11 @@ $lightgrayBg: #ecf0f3;
     transform: scale(.85)
   }
 }
-@include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 80%, 80%, 20%, 20%, "x", inset);
+// @include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 80%, 80%, 20%, 20%, "x", inset);
+// @include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
+// @include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
+
+@include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 70%, 70%, 60%, 60%, "x", inset);
 @include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
 @include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
 // @include pageIndicator(rim, unset, 2px, 2px, 3px, #b7b8b9, unset)
