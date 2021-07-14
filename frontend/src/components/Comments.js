@@ -4,6 +4,11 @@ import TheContext from "../TheContext"
 import actions from '../api'
 import heart2 from "../images/heart2.svg";
 import comments from "../images/comment.svg";
+import edit from "../images/edit.svg";
+import trash from "../images/trashbin.svg";
+import moment from 'moment'
+
+
 
 function Comments(props) {
   const {
@@ -55,7 +60,6 @@ function Comments(props) {
   //   })
   // }
 
- 
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -68,7 +72,15 @@ function Comments(props) {
       })
       .catch(console.error);
   }
-
+  
+  const deleteComment = () => {
+    actions
+      .deleteComment({})
+      .then((res) => {
+        console.log(`deleted a comment from: `, res.data)
+      })
+      .catch(console.error)
+  }
 
   function GetComments(each) {
     const commentListRef = useRef();
@@ -84,11 +96,11 @@ function Comments(props) {
         // console.log(commentTextRef.current ? commentTextRef.current.scrollHeight : 'lol')
         if (commentTextRef.current !== null && commentListRef.current !== null) {
           console.log(commentTextRef.current)
-          if (commentTextRef.current.scrollHeight > 30) {
+          if (commentTextRef.current.scrollHeight > 20) {
             console.log('YEP', commentTextRef.current.scrollHeight)
             let commentText = commentTextRef.current.scrollHeight
-            let commentListOuter = commentText + 25
-            let commentList = commentListOuter + 60
+            let commentListOuter = commentText + 47
+            let commentList = commentListOuter + 65
             commentTextRef.current.style.height = `${commentText}px`
             commentListOuterRef.current.style.height = `${commentListOuter}px`
             commentListRef.current.style.minHeight = `${commentList}px`
@@ -117,6 +129,9 @@ function Comments(props) {
             <p className="comment-username">
               {each.commUser.userName}
             </p>
+            <p className="comment-date">
+              {each.commDate ? moment(each.commDate).fromNow() : '5 months ago'}
+            </p>
             <p className="comment-text" ref={commentTextRef}>
               {each.comment}
             </p>
@@ -136,6 +151,25 @@ function Comments(props) {
               </div>
               <div className="comm-likereply-text">
                 Reply
+              </div>
+            </div>
+            <div className="comment-popout-container">
+              <div className="comment-likereply-container">
+                <div className="comm-likereply-btn">
+                  <img className="social-icons comment" src={trash} alt="reply" />
+                </div>
+                <div className="comm-likereply-text">
+                  Delete
+                </div>
+              </div>
+
+              <div className="comment-likereply-container">
+                <div className="comm-likereply-btn">
+                  <img className="social-icons comment" src={edit} alt="reply" />
+                </div>
+                <div className="comm-likereply-text">
+                  Edit
+                </div>
               </div>
             </div>
           </div>

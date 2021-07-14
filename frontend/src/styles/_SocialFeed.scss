@@ -246,7 +246,7 @@
 
                     .comment-list {
                         // @include flexCenter(80px, 93%, 20px, center, center, row);
-                        min-height: 120px;
+                        min-height: 125px;
                         width: 95%;
                         border-radius: 13px;
                         display: flex;
@@ -257,11 +257,13 @@
                         box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
 
                         .comment-list-photo {
-                            @include flexCenter(100%, 22%, 0px, center, center, row);
+                            @include flexCenter(100%, 20%, 0px, center, flex-start, row);
+                            padding: 15px 0px 0px 5px;
 
                             .comment-photo-inner {
                                 @include flexCenter(50px, 80%, 50px, center, center, column);
                                 box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+                                
 
                                 .comment-photo-outer {
                                     @include flexCenter(80%, 80%, 50px, center, center, row);
@@ -286,20 +288,31 @@
                             position: relative;
                             
                             .comment-list-outer {
-                                @include flexCenter(55px, 95%, 10px 10px 20px 10px, center, center, column);
+                                @include flexCenter(65px, 95%, 10px 10px 20px 10px, center, center, column);
                                 box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
                                 position: absolute;
                                 top: 8px;
                                 right: 8px;
 
                                 .comment-username {
+                                    height: 15px;
+                                    width: 90%;
                                     color: #ec6aa0;
                                     font-weight: bold;
                                     text-align: start;
+                                    margin-bottom: 3px;
+                                }
+                                .comment-date {
+                                    height: 15px;
                                     width: 90%;
+                                    color: #efbfbf;
+                                    font-size: 12px;
+                                    text-align: start;
+                                    margin-bottom: 10px;
+
                                 }
                                 .comment-text {
-                                    min-height: 30px;
+                                    min-height: 15px;
                                     width: 90%;
                                     text-align: start;
                                     color: white;
@@ -307,6 +320,7 @@
                                     font-size: 14px;
                                     // overflow-y: scroll;
                                     line-height: 1;
+                                    margin-bottom: 5px;
                                 }
                             }
                             
@@ -314,7 +328,11 @@
                                 @include flexCenter(45px, 100%, 50px, flex-start, center, row);
                                 position: absolute;
                                 bottom: 3px;
+                                
+                                .comment-popout-container {
+                                    @include flexCenter(45px, 100%, 50px, flex-start, center, row);
 
+                                }
                                 .comment-likereply-container {
                                     @include flexCenter(100%, 40%, 0px, flex-start, center, row);
 

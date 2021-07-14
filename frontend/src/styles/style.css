@@ -2440,7 +2440,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list {
-  min-height: 120px;
+  min-height: 125px;
   width: 95%;
   border-radius: 13px;
   display: -webkit-box;
@@ -2460,7 +2460,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-photo {
   height: 100%;
-  width: 22%;
+  width: 20%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2468,13 +2468,14 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  padding: 15px 0px 0px 5px;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-photo .comment-photo-inner {
@@ -2567,7 +2568,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer {
-  height: 55px;
+  height: 65px;
   width: 95%;
   border-radius: 10px 10px 20px 10px;
   display: -webkit-box;
@@ -2591,20 +2592,32 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer .comment-username {
+  height: 15px;
+  width: 90%;
   color: #ec6aa0;
   font-weight: bold;
   text-align: start;
+  margin-bottom: 3px;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer .comment-date {
+  height: 15px;
   width: 90%;
+  color: #efbfbf;
+  font-size: 12px;
+  text-align: start;
+  margin-bottom: 10px;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer .comment-text {
-  min-height: 30px;
+  min-height: 15px;
   width: 90%;
   text-align: start;
   color: white;
   word-wrap: break-word;
   font-size: 14px;
   line-height: 1;
+  margin-bottom: 5px;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons {
@@ -2626,6 +2639,25 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: row;
   position: absolute;
   bottom: 3px;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container {
+  height: 45px;
+  width: 100%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container {

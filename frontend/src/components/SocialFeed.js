@@ -295,6 +295,7 @@ function SocialFeed(props) {
         <Comments popUpRef={popUpRef}
                   popUpComments={popUpComments}
                   poppedUp={poppedUp}
+                  menuUp={menuUp}
                   opacityRef1={opacityRef1} 
                   opacityRef2={opacityRef2}
                   />
