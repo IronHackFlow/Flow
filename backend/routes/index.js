@@ -286,8 +286,15 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       console.log(body, 'this is')
       
       let comment = await Comments.create(body);
-      let s = await Songs.findByIdAndUpdate(req.body.songId, {$push: { songComments: comment._id }})
-      res.status(200).json(comment);
+      await Songs.findByIdAndUpdate(body.commSong, {$push: { songComments: comment }}, { new: true })
+        .then((res) => {
+          res.status(200).json(comment);
+          console.log(`ADDED a comment `)
+        })
+        .catch((err) => {
+          next(err)
+        })
+      
     }
   });
 });

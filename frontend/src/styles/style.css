@@ -2210,7 +2210,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com {
-  height: 95%;
+  height: 96%;
   width: 96%;
   border-radius: 25px;
   display: -webkit-box;
@@ -2232,7 +2232,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-1 {
-  height: 20%;
+  height: 15%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -2353,7 +2353,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-2 {
-  height: 80%;
+  height: 85%;
   width: 100%;
   border-radius: 25px;
   display: -webkit-box;
@@ -2435,14 +2435,14 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: column;
   overflow-y: scroll;
   background: #686a6b;
-  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #afafaf;
-          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #afafaf;
+  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9f9f9f;
+          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9f9f9f;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list {
-  min-height: 80px;
-  width: 93%;
-  border-radius: 20px;
+  min-height: 120px;
+  width: 95%;
+  border-radius: 13px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2490,10 +2490,10 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
           box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
 }
@@ -2546,9 +2546,91 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   width: 100%;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-inner {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner {
   height: 100%;
   width: 78%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer {
+  height: 55px;
+  width: 95%;
+  border-radius: 10px 10px 20px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer .comment-username {
+  color: #ec6aa0;
+  font-weight: bold;
+  text-align: start;
+  width: 90%;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-outer .comment-text {
+  min-height: 30px;
+  width: 90%;
+  text-align: start;
+  color: white;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons {
+  height: 45px;
+  width: 100%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  bottom: 3px;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container {
+  height: 100%;
+  width: 40%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2565,10 +2647,10 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: row;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-inner .comment-list-outer {
-  height: 80%;
-  width: 96%;
-  border-radius: 15px;
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2578,41 +2660,29 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+  margin: 0px 8px 0px 8px;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-inner .comment-list-outer .comment-username {
-  color: #ec6aa0;
-  font-weight: bold;
-  text-align: start;
-  width: 90%;
-  margin: auto;
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn .social-icons {
+  height: 1.2em;
+  width: 1.2em;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-inner .comment-list-outer .comment-text {
-  min-height: 30px;
-  width: 90%;
-  text-align: start;
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn .heart {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-text {
+  font-size: 13px;
   color: white;
-  word-wrap: break-word;
-  font-size: 14px;
-  overflow-y: scroll;
-  line-height: 1;
-}
-
-.comment-pop-out .bottom-bar {
-  height: 2%;
-  width: 96%;
-  margin: 2% 0% 0% 0%;
-  border-radius: 20px;
-  background: #ecf0f3;
-  -webkit-box-shadow: inset 2px 2px 3px #bdc0c2, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px #bdc0c2, inset -2px -2px 3px #ffffff;
+  font-weight: bold;
 }
 
 /* ------------------- Comment Pop up (SEARCH RESULTS) ------------------------- */

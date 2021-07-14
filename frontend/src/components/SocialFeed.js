@@ -292,7 +292,9 @@ function SocialFeed(props) {
         <Search popUpSearchRef={popUpSearchRef} 
                 dumbSearchRef={dumbSearchRef} 
                 />
-        <Comments popUpRef={popUpRef} 
+        <Comments popUpRef={popUpRef}
+                  popUpComments={popUpComments}
+                  poppedUp={poppedUp}
                   opacityRef1={opacityRef1} 
                   opacityRef2={opacityRef2}
                   />

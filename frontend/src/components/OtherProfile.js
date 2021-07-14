@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import actions from "../api";
-import axios from "axios";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
 import play from '../images/play.svg'
@@ -13,14 +12,12 @@ import explore from '../images/explore.svg'
 
 
 function OtherProfile(props) {
-  const { user, setUser, userViewed, setUserViewed } = React.useContext(
+  const { user, userViewed } = React.useContext(
     TheContext
   );
 
-  const [posts, setPosts] = useState([]);
   const [thisUserSongs, setThisUserSongs] = useState([]);
   const [thisUser, setThisUser] = useState([userViewed]);
-  const [trigger, setTrigger] = useState(false)
 
   const profileRim = useRef();
   const profileOut = useRef();
@@ -29,7 +26,7 @@ function OtherProfile(props) {
 
   useEffect(() => {
     setThisUser(props.location.profileInfo)
-  }, []);
+  }, [props.location]);
   
   useEffect(() => {
     profileRim.current.style.animation = "rim .5s linear forwards"
@@ -81,7 +78,7 @@ function OtherProfile(props) {
 
           <div className="lyrics-outter-container">
             <div className="nav-buttons-inset play-ur-song">
-              <img className="button-icons bi-play-2" src={play}></img>
+              <img className="button-icons bi-play-2" src={play} alt="play" />
             </div>
           </div>
         </div>
@@ -110,7 +107,7 @@ function OtherProfile(props) {
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
                 <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser?.picture}/>
+                  <img className="profile-pic" src={thisUser?.picture} alt="user's profile" />
                 </div>
               </div>
             </div>
@@ -157,7 +154,7 @@ function OtherProfile(props) {
               <div className="edit-profile-outset">
                 <div className="edit-profile-inset">
                   <div className="edit-profile-button" onClick={followUser}>                  
-                      <img className="button-icons follow-social" src={follow} />
+                      <img className="button-icons follow-social" src={follow} alt="follow" />
                   </div>
                 </div>
               </div>
@@ -167,7 +164,7 @@ function OtherProfile(props) {
               <div className="log-profile-outset">
                 <div className="log-profile-inset">
                   <div className="edit-profile-button" >
-                    <img className="button-icons hearts" src={heart2} />
+                    <img className="button-icons hearts" src={heart2} alt="like" />
                     <h4 style={{color: 'pink'}}>{thisUser?.userFollows?.length}</h4>
                   </div>
                 </div>
@@ -190,46 +187,53 @@ function OtherProfile(props) {
 
       <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
         <div className="nav-list">
-
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                <img className="button-icons bi-record" src={mic}></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic} alt="mic" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to="/explore-feed">
-                <img className="button-icons bi-explore-p" src={explore} alt="explore"></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to="/explore-feed">
+                    <img className="button-icons bi-explore-p" src={explore} alt="explore" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="nav-buttons-rim">
-          <div className="nav-buttons-outset">
-            <div className="nav-buttons-inset">
-              <Link to={user._id ? ("/social-feed") : ("/auth")}>
-                <img className="button-icons bi-social-p" src={social}></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim">
+              <div className="nav-buttons-outset">
+                <div className="nav-buttons-inset">
+                  <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                    <img className="button-icons bi-social-p" src={social} alt="social" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="nav-buttons-rim" ref={profileRim}>
-          <div className="nav-buttons-outset" ref={profileOut}>
-            <div className="nav-buttons-inset" ref={profileIn}>
-              <Link to="/profile">
-                <img className="button-icons bi-profile-o" ref={profileIcon} src={avatar3}></img>
-              </Link>
+          <div className="nav-buttons-containers">
+            <div className="nav-buttons-rim" ref={profileRim}>
+              <div className="nav-buttons-outset" ref={profileOut}>
+                <div className="nav-buttons-inset" ref={profileIn}>
+                  <Link to="/profile">
+                    <img className="button-icons bi-profile-o" ref={profileIcon} src={avatar3} alt="profile" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
