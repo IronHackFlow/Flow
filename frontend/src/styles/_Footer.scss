@@ -105,6 +105,8 @@ footer {
                 .button-title-container {
                     @include flexCenter(15%, 100%, 0px, center, center, column);
                     font-size: 14px;
+                    color: #686a6b;
+                    font-weight: bold;
                 }
             }
         }

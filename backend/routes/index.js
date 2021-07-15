@@ -75,16 +75,15 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
 })
 
 router.post(`/getCommentsRT`, async (req, res, next) => {
-  let body = { id: req.body.id }
-  Songs.findById(body.id)
+  // let body = { id: req.body.id }
+
+  Songs.findById(req.body.id)
     .populate('songComments')
     .populate({ path: 'songComments', populate: 'commUser'})
     .then((song) => {
       res.status(200).json(song);
     })
-    .catch((err) => {
-      next(err)
-    })
+    .catch((err) => res.status(500).json(err));
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
@@ -286,15 +285,45 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       console.log(body, 'this is')
       
       let comment = await Comments.create(body);
+
       await Songs.findByIdAndUpdate(body.commSong, {$push: { songComments: comment }}, { new: true })
         .then((res) => {
-          res.status(200).json(comment);
-          console.log(`ADDED a comment `)
+          console.log(`ADDED a comment: `, comment)
+        })
+        .catch((err) => {
+          next(err)
+        })
+    }
+  });
+});
+
+router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
+    if (err) {
+      res.status(403).json(err);
+    } else {
+      let body = { deleteObj: req.body.deleteObj, songId: req.body.songId }
+      console.log(body, 'this is')
+
+      await Songs.findByIdAndUpdate(
+        body.songId, 
+        {$pull: { songComments: body.deleteObj._id }}, 
+        { new: true }
+      )
+        .then((song) => {
+          res.status(200).json(song);
         })
         .catch((err) => {
           next(err)
         })
       
+      await Comments.findByIdAndDelete(body.deleteObj._id)
+        .then((res) =>  {
+          console.log(`your comment: ${res} has been exterminated`)
+        })
+        .catch((err) => {
+          next(err)
+        })
     }
   });
 });

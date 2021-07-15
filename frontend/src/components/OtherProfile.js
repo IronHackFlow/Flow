@@ -197,6 +197,9 @@ function OtherProfile(props) {
                 </div>
               </div>
             </div>
+            <div className="button-title-container">
+              Record
+            </div>
           </div>
 
           <div className="nav-buttons-containers">
@@ -208,6 +211,9 @@ function OtherProfile(props) {
                   </Link>
                 </div>
               </div>
+            </div>
+            <div className="button-title-container">
+              Explore
             </div>
           </div>
 
@@ -221,6 +227,9 @@ function OtherProfile(props) {
                 </div>
               </div>
             </div>
+            <div className="button-title-container">
+              Following
+            </div>
           </div>
 
           <div className="nav-buttons-containers">
@@ -232,6 +241,9 @@ function OtherProfile(props) {
                   </Link>
                 </div>
               </div>
+            </div>
+            <div className="button-title-container">
+              Profile
             </div>
           </div>
         </div>

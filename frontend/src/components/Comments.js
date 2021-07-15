@@ -12,34 +12,14 @@ import moment from 'moment'
 
 function Comments(props) {
   const {
-    songId
+    user, songId
     } = React.useContext(
     TheContext
   );
 
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([])
-
-
-  // const renderRef = useRef(0)
-  
-  // let commentUsers = []
-  // useEffect(() => {
-  //   commentUsers = []
-
-  //   songComments.map((each) => {
-  //     actions
-  //     .getAUser({id: each.commUser})
-  //     .then((res) => {
-  //       commentUsers.push({ user: res.data, comment: each.comment })
-  //       console.log(commentUsers)
-  //       // setCommState(oldArray =>  [...oldArray, { user: res.data, comment: each.comment }])
-  //       // console.log(commState, 'this prob gonna cause many renderz')
-  //     }).catch((e) => {
-  //       console.log('failed to get name', e)
-  //     })
-  //   })
-  // }, [songComments])
+  const inputRef = useRef();
 
   useEffect(() => {
     actions
@@ -49,17 +29,6 @@ function Comments(props) {
       })
       .catch(console.error)
   }, [songId])
-
-  // const getCommentWriter = (num) => {
-  //   actions
-  //   .getAUser({id: num})
-  //   .then((res) => {
-  //     writerArray.push(res.data.userName)
-  //   }).catch((e) => {
-  //     console.log('failed to get name', e)
-  //   })
-  // }
-
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -71,15 +40,25 @@ function Comments(props) {
         console.log(res, "comment data ")
       })
       .catch(console.error);
+
+    setTimeout(()=> {
+      inputRef.current.value =  ""
+    }, [200])
   }
   
-  const deleteComment = () => {
-    actions
-      .deleteComment({})
+  const deleteComment = (each) => {
+    if (user._id === each.commUser._id) {
+      actions
+      .deleteComment({ deleteObj: each, songId: songId })
       .then((res) => {
-        console.log(`deleted a comment from: `, res.data)
+        console.log(`deleted a comment from song ${res.data.songName}'s songComments:`, res.data.songComments)
+
       })
       .catch(console.error)
+    } 
+    else {
+      console.log("You can't delete others' comments jerk!")
+    }
   }
 
   function GetComments(each) {
@@ -89,27 +68,20 @@ function Comments(props) {
 
     const setCommentListRefs = useCallback(
       (node) => {
-        // commentTextRef.current = node;
         commentListRef.current = node;
-        // commentListRef.current = node;
-        console.log(commentListRef.current, 'number 1')
-        // console.log(commentTextRef.current ? commentTextRef.current.scrollHeight : 'lol')
+
         if (commentTextRef.current !== null && commentListRef.current !== null) {
-          console.log(commentTextRef.current)
           if (commentTextRef.current.scrollHeight > 20) {
-            console.log('YEP', commentTextRef.current.scrollHeight)
             let commentText = commentTextRef.current.scrollHeight
             let commentListOuter = commentText + 47
-            let commentList = commentListOuter + 65
+            let commentList = commentListOuter + 60
             commentTextRef.current.style.height = `${commentText}px`
             commentListOuterRef.current.style.height = `${commentListOuter}px`
             commentListRef.current.style.minHeight = `${commentList}px`
-            console.log(commentListRef.current, 'number 2')
           }
         }
-        console.log(commentTextRef, commentListOuterRef, commentListRef)
       },
-      [props.poppedUp]
+      [props.popUpRef]
     )
 
     return (
@@ -155,7 +127,7 @@ function Comments(props) {
             </div>
             <div className="comment-popout-container">
               <div className="comment-likereply-container">
-                <div className="comm-likereply-btn">
+                <div className="comm-likereply-btn" onClick={() => deleteComment(each)}>
                   <img className="social-icons comment" src={trash} alt="reply" />
                 </div>
                 <div className="comm-likereply-text">
@@ -180,7 +152,6 @@ function Comments(props) {
 
   const renderEachComment = useCallback(() => {
     if (props.poppedUp === true) {
-      console.log(props.poppedUp)
       return commState.map((each, index) => {
         return <GetComments key={each._id + index} {...each} />
       })
@@ -189,81 +160,6 @@ function Comments(props) {
       return null
     }
   }, [props.poppedUp, commState])
-
-  // const renderEachComment = () => {
-  //   return commState.map((each, index) => {
-  //     return (
-  //       <div key={index} className="comment-list" ref={setCommentListRefs}>
-  //         <div className="comment-list-photo">
-  //           <div className="comment-photo-inner">
-  //             <div className="comment-photo-outer">
-  //               <Link to={{pathname: `/profile/other/${each.commUser._id}`, profileInfo: each.commUser}}>
-  //                 <img src={each.commUser.picture} alt="user's profile"></img>
-  //               </Link>
-  //             </div>
-  //           </div>
-  //         </div>
-
-  //         <div className="comment-list-inner">
-  //           <div className="comment-list-outer" ref={commentListOuterRef}>
-  //             <p className="comment-username">
-  //               {each.commUser.userName}
-  //             </p>
-  //             <p className="comment-text" ref={commentTextRef}>
-  //               {each.comment}
-  //             </p>
-  //           </div>
-  //           <div className="comment-list-buttons">
-  //             <div className="comment-likereply-container">
-  //               <div className="comm-likereply-btn">
-  //                 <img className="social-icons heart" src={heart2} alt="like" />
-  //               </div>
-  //               <div className="comm-likereply-text">
-  //                 Like
-  //               </div>
-  //             </div>
-  //             <div className="comment-likereply-container">
-  //               <div className="comm-likereply-btn">
-  //                 <img className="social-icons comment" src={comments} alt="reply" />
-  //               </div>
-  //               <div className="comm-likereply-text">
-  //                 Reply
-  //               </div>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     )
-  //   })
-  // }
-  // const renderEachComment = useCallback(() => {
-  //   return commentUsers.map((each, index) => {
-  //     return (
-  //       <div key={index} className="comment-list">
-  //         <div className="comment-list-photo">
-  //           <div className="comment-photo-inner">
-  //             <div className="comment-photo-outer">
-  //               <Link to={{pathname: `/profile/other/${each.user?._id}`, profileInfo: each.user}}>
-  //                 <img src={each.user?.picture} alt="user's profile"></img>
-  //               </Link>
-  //             </div>
-  //           </div>
-  //         </div>
-
-  //         <div className="comment-list-inner">
-  //           <div className="comment-list-outer">
-  //             <p className="comment-username">
-  //               {each.user.userName}
-  //             </p>
-  //             <p className="comment-text">
-  //               {each.comment}
-  //             </p>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     )
-  //   })
-  // }, [songComments])
 
   return (
     <div ref={props.popUpRef} className="comment-pop-out">
@@ -274,10 +170,11 @@ function Comments(props) {
             <div className="input-inset">
               <form className="social-comment-form" onSubmit={handleSubmit}>
                 <input
-                    className="social-comment-input" 
+                    className="social-comment-input"
+                    ref={inputRef}
                     type='text' 
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder='Add a public comment...' 
+                    placeholder='Make a comment...' 
                     ></input>
               </form>
             </div>
