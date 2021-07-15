@@ -9,7 +9,7 @@ footer {
     background: linear-gradient(90deg, #ec66b7, #40bdac);
 
     .social-buttons {
-        @include flexCenter(40%, 100%, 0px, center, center, row);
+        @include flexCenter(45%, 100%, 0px, center, center, row);
         background: $charcoalBg;
         border-top: 1px solid #adadad;
         border-bottom: 1px solid #616161;
@@ -131,5 +131,51 @@ footer {
     to {
         box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
         inset -2px -2px 3px #ffffff;
+    }
+}
+@keyframes dotMenuOpen {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOutText {
+    0% {
+        opacity: 1;
+        width: initial;
+    }
+    100% {
+        opacity: 0;
+        width: 0;
+    }
+}
+@keyframes moveBtnsLeft {
+    0% {
+        left: 0px;
+    }
+    100% {
+        left: -60px;
+    }
+}
+@keyframes popOutBtns {
+    0% {
+        width: 30px;
+        border-radius: 8px;
+        right: 0px;
+    }
+    100% {
+        width: 195px;
+        border-radius: 30px 15px 15px 30px;
+        right: -51px;
+    }
+}
+@keyframes showDelAndEdit {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

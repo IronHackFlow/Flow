@@ -3,16 +3,14 @@ import { CSSTransition } from "react-transition-group"
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import actions from "../api";
-import TheContext from "../TheContext"
-import Comments from "./Comments"
-import Search from "./Search.js"
-import NavBar from "./NavBar"
+import TheContext from "../TheContext";
+import Comments from "./Comments.js";
+import Search from "./Search.js";
+import NavBar from "./NavBar.js";
 import gradientbg from "../images/gradient-bg-2.png";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg"
 import gifsArr from "../images/gifs.json";
-
-// let SONG = {};
 
 function SocialFeed(props) {
   const { user, setUser, 

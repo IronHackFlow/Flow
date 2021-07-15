@@ -25,6 +25,7 @@ function Comments(props) {
     actions
       .getComments({ id: songId })
       .then((res) => {
+        console.log('Returned these comments from DB: ', res.data.songComments)
         setCommState(res.data.songComments)
       })
       .catch(console.error)
@@ -81,9 +82,25 @@ function Comments(props) {
           }
         }
       },
-      [props.popUpRef]
+      [props.popUpComments]
     )
+    const likeTextRef = useRef()
+    const replyTextRef = useRef()
+    const listBtnsRef = useRef()
+    const clcThree = useRef()
+    const clcFour = useRef()
+    const dotMenuRef  = useRef()
+    const slideOutRef = useRef()
 
+    const buttonAnims = (e) => {
+      likeTextRef.current.style.animation = 'fadeOutText .5s forwards'
+      replyTextRef.current.style.animation = 'fadeOutText .5s forwards'
+      listBtnsRef.current.style.animation = 'moveBtnsLeft .5s forwards'
+      clcThree.current.style.animation = 'showDelAndEdit .5s forwards'
+      clcFour.current.style.animation = 'showDelAndEdit .5s forwards'
+      slideOutRef.current.style.animation = 'popOutBtns .5s forwards'
+    
+    }
     return (
       <div className="comment-list" ref={setCommentListRefs}>
         <div className="comment-list-photo">
@@ -108,26 +125,26 @@ function Comments(props) {
               {each.comment}
             </p>
           </div>
-          <div className="comment-list-buttons">
-            <div className="comment-likereply-container">
-              <div className="comm-likereply-btn">
+          <div className="comment-list-buttons" ref={listBtnsRef}>
+            <div className="comment-likereply-container clc-1">
+              <div className="comm-likereply-btn clb-1">
                 <img className="social-icons heart" src={heart2} alt="like" />
               </div>
-              <div className="comm-likereply-text">
+              <div className="comm-likereply-text" ref={likeTextRef}>
                 Like
               </div>
             </div>
-            <div className="comment-likereply-container">
-              <div className="comm-likereply-btn">
+            <div className="comment-likereply-container clc-2">
+              <div className="comm-likereply-btn clb-2">
                 <img className="social-icons comment" src={comments} alt="reply" />
               </div>
-              <div className="comm-likereply-text">
+              <div className="comm-likereply-text" ref={replyTextRef}>
                 Reply
               </div>
             </div>
-            <div className="comment-popout-container">
-              <div className="comment-likereply-container">
-                <div className="comm-likereply-btn" onClick={() => deleteComment(each)}>
+            <div className="comment-popout-container" ref={slideOutRef}>
+              <div className="comment-likereply-container clc-3" ref={clcThree}>
+                <div className="comm-likereply-btn clb-3" onClick={() => deleteComment(each)}>
                   <img className="social-icons comment" src={trash} alt="reply" />
                 </div>
                 <div className="comm-likereply-text">
@@ -135,13 +152,18 @@ function Comments(props) {
                 </div>
               </div>
 
-              <div className="comment-likereply-container">
-                <div className="comm-likereply-btn">
+              <div className="comment-likereply-container clc-4" ref={clcFour}>
+                <div className="comm-likereply-btn clb-4">
                   <img className="social-icons comment" src={edit} alt="reply" />
                 </div>
                 <div className="comm-likereply-text">
                   Edit
                 </div>
+              </div>
+              <div className="dot-menu" onClick={(e) => buttonAnims(e)} ref={dotMenuRef}>
+                <div className="dots"></div>
+                <div className="dots"></div>
+                <div className="dots"></div>
               </div>
             </div>
           </div>
@@ -152,6 +174,7 @@ function Comments(props) {
 
   const renderEachComment = useCallback(() => {
     if (props.poppedUp === true) {
+      console.log('rendered some comments')
       return commState.map((each, index) => {
         return <GetComments key={each._id + index} {...each} />
       })
