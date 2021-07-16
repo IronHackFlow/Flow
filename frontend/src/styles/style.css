@@ -852,6 +852,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
     opacity: 1;
     width: initial;
   }
+  60% {
+    opacity: 0;
+  }
   100% {
     opacity: 0;
     width: 0;
@@ -862,6 +865,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   0% {
     opacity: 1;
     width: initial;
+  }
+  60% {
+    opacity: 0;
   }
   100% {
     opacity: 0;
@@ -2077,8 +2083,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .social-panel .video-details-container {
   height: 130px;
-  width: 356px;
-  border-radius: 55px;
+  width: 100%;
+  border-radius: 45px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2098,16 +2104,15 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   background-size: cover;
   background-position: center;
   z-index: 10;
-  bottom: 3%;
-  left: 2.5%;
+  bottom: 0%;
   -webkit-box-shadow: 0px 8px 20px 0px #00000099;
           box-shadow: 0px 8px 20px 0px #00000099;
 }
 
 .social-panel .video-details-container .transparent-test {
   height: 90%;
-  width: 96.5%;
-  border-radius: 49px;
+  width: 97%;
+  border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2774,8 +2779,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .clc-3 .clb-3, .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .clc-3 .clb-4, .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .clc-4 .clb-3, .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .clc-4 .clb-4 {
-  height: 27px;
-  width: 27px;
+  height: 26px;
+  width: 26px;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;

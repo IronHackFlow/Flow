@@ -133,7 +133,7 @@ footer {
         inset -2px -2px 3px #ffffff;
     }
 }
-@keyframes dotMenuOpen {
+@keyframes opacityToOne {
     from {
         opacity: 0;
     }
@@ -145,6 +145,9 @@ footer {
     0% {
         opacity: 1;
         width: initial;
+    }
+    60% {
+        opacity: 0;
     }
     100% {
         opacity: 0;
@@ -171,11 +174,24 @@ footer {
         right: -51px;
     }
 }
-@keyframes showDelAndEdit {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
+
+@mixin menuPopout() {
+    @keyframes #{$name} {
+        from {
+            opacity: $opacity;
+            opacity: $opacity2;
+            width: $width;
+            left: $width2;
+            right: $right;
+            border-radius: $borderRadius;
+        }
+        to {
+            opacity: $opacityX;
+            opacity: $opacity2X;
+            width: $widthX;
+            left: $width2X;
+            right: $rightX;
+            border-radius: $borderRadiusX;
+        }
     }
 }

@@ -91,16 +91,29 @@ function Comments(props) {
     const clcFour = useRef()
     const dotMenuRef  = useRef()
     const slideOutRef = useRef()
-
-    const buttonAnims = (e) => {
-      likeTextRef.current.style.animation = 'fadeOutText .5s forwards'
-      replyTextRef.current.style.animation = 'fadeOutText .5s forwards'
-      listBtnsRef.current.style.animation = 'moveBtnsLeft .5s forwards'
-      clcThree.current.style.animation = 'showDelAndEdit .5s forwards'
-      clcFour.current.style.animation = 'showDelAndEdit .5s forwards'
-      slideOutRef.current.style.animation = 'popOutBtns .5s forwards'
-    
+    const [menuBool, setMenuBool] = useState(false)
+ 
+    const menuAnimations = (e) => {
+      if (menuBool === false) {
+        likeTextRef.current.style.animation = 'fadeOutText .3s forwards'
+        replyTextRef.current.style.animation = 'fadeOutText .3s forwards'
+        listBtnsRef.current.style.animation = 'moveBtnsLeft .5s forwards'
+        clcThree.current.style.animation = 'opacityToOne .5s forwards'
+        clcFour.current.style.animation = 'opacityToOne .5s forwards'
+        slideOutRef.current.style.animation = 'popOutBtns .5s forwards'
+        setMenuBool(true)
+      }
+      else {
+        likeTextRef.current.style.animation = 'fadeOutText .3s forwards reverse'
+        replyTextRef.current.style.animation = 'fadeOutText .3s forwards reverse'
+        listBtnsRef.current.style.animation = 'moveBtnsLeft .5s forwards reverse'
+        clcThree.current.style.animation = 'opacityToOne .5s forwards reverse'
+        clcFour.current.style.animation = 'opacityToOne .5s forwards reverse'
+        slideOutRef.current.style.animation = 'popOutBtns .5s forwards reverse'
+        setMenuBool(false)
+      }
     }
+
     return (
       <div className="comment-list" ref={setCommentListRefs}>
         <div className="comment-list-photo">
@@ -160,7 +173,7 @@ function Comments(props) {
                   Edit
                 </div>
               </div>
-              <div className="dot-menu" onClick={(e) => buttonAnims(e)} ref={dotMenuRef}>
+              <div className="dot-menu" onClick={(e) => menuAnimations(e)} ref={dotMenuRef}>
                 <div className="dots"></div>
                 <div className="dots"></div>
                 <div className="dots"></div>
