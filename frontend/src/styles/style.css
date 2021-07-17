@@ -829,7 +829,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   }
 }
 
-@-webkit-keyframes dotMenuOpen {
+@-webkit-keyframes opacityToOne {
   from {
     opacity: 0;
   }
@@ -838,7 +838,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   }
 }
 
-@keyframes dotMenuOpen {
+@keyframes opacityToOne {
   from {
     opacity: 0;
   }
@@ -916,24 +916,6 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
     width: 195px;
     border-radius: 30px 15px 15px 30px;
     right: -51px;
-  }
-}
-
-@-webkit-keyframes showDelAndEdit {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes showDelAndEdit {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
@@ -1975,56 +1957,6 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
 }
 
-@-webkit-keyframes floatText {
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-}
-
-@keyframes floatText {
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-}
-
-@-webkit-keyframes floatStop {
-  to {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-}
-
-@keyframes floatStop {
-  to {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-}
-
-@-webkit-keyframes stopFloat {
-  from {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-}
-
-@keyframes stopFloat {
-  from {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-}
-
 .SocialFeed {
   background: #000000eb;
   position: absolute;
@@ -2865,6 +2797,40 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
           box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
   margin: 0px 8px 0px 8px;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn:active {
+  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
+          box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn .likes-number-container {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  top: -10%;
+  left: 8%;
+  background: none;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn .likes-number-container p {
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn .social-icons {

@@ -1,21 +1,4 @@
-@keyframes floatText {
-    to {
-      transform: translateX(-100%);
-    }
-}
-@keyframes floatStop {
-    to {
-        transform: translateX(0%);
-    }
-}
-@keyframes stopFloat {
-    from {
-        transform: translateX(0%)
-    }
-    to {
-        transform: translateX(-100%)
-    }
-}
+
 .SocialFeed {
     // height: 100%;
     // width: 100%;
@@ -364,10 +347,29 @@
                                         box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
                                         margin: 0px 8px 0px 8px;
 
+                                        &:active {
+                                            box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                                        inset -2px -2px 3px #989898;
+                                        }
+                                        
+                                        .likes-number-container {
+                                            @include flexCenter(30px, 30px, 100%, center, center, row);
+                                            position: absolute;
+                                            top: -10%;
+                                            left: 8%;
+                                            background: none;
+
+                                            p {
+                                                font-size: 13px;
+                                                font-weight: bold;
+                                                color: white;
+                                            }
+                                        }
                                         .social-icons {
                                             height: 1.2em;
                                             width: 1.2em;
                                         }
+
                                         .heart {
                                             height: 1.5em;
                                             width: 1.5em;

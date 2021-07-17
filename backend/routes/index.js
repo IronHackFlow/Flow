@@ -86,6 +86,15 @@ router.post(`/getCommentsRT`, async (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 })
 
+router.post(`/getACommentRT`, async (req, res, next) => {
+  Comments.findById(req.body.id)
+    .populate('commLikes')
+    .then((comm) => {
+      res.status(200).json(comm);
+    })
+    .catch((err) => res.status(500).json(err));
+})
+
 router.post(`/getUserSongsRT`, async (req, res, next) => {
     Songs.find({ songUser: req.body._id})
     .populate('songUser')
@@ -111,27 +120,52 @@ router.post(`/addLikeRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     } 
     else {
-      let body = { 
+      let bodySong = { 
         likeUser: authData.user._id, 
-        likerSong: req.body.likerSong, 
-        likeDate: req.body.likeDate }
-      console.log('DATA received from like button click', body)
+        likerSong: req.body.likerSong,
+        likeDate: req.body.likeDate, 
+      }
+      let bodyComm = {
+        likeUser: authData.user._id,
+        likedComment: req.body.likedComment,
+        likeDate: req.body.likeDate,
+      }
+      let likeCheck = req.body.commLike
 
-      let likedObject = await Likes.create(body)
-      console.log(`CREATED like object: `, likedObject)
+      if (likeCheck === false) {
+        let likedObject = await Likes.create(bodySong)
+        console.log(`CREATED songLike object: `, likedObject)
 
-      await Songs.findByIdAndUpdate(
-        body.likerSong, 
-        {$push: { songLikes: likedObject }},
-        { new: true }
-      )
-        .then((song) => {
-          res.status(200).json(song)
-          console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
-        })
-        .catch((err) => {
-          next(err)
-        })
+        await Songs.findByIdAndUpdate(
+          bodySong.likerSong, 
+          {$push: { songLikes: likedObject }},
+          { new: true }
+        )
+          .then((song) => {
+            res.status(200).json(song)
+            console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
+          })
+          .catch((err) => {
+            next(err)
+          })
+      }
+      else {
+        let likedCommObject = await Likes.create(bodyComm)
+        console.log("CREATED commentLike object: ", likedCommObject)
+
+        await Comments.findByIdAndUpdate(
+          bodyComm.likedComment,
+          {$push: { commLikes: likedCommObject }},
+          { new: true }
+        )
+          .then((comm) => {
+            res.status(200).json(comm)
+            console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
+          })
+          .catch((err) => {
+            next(err)
+          })
+      }
     }
   })
 })
@@ -142,31 +176,61 @@ router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
       res.status(403).json(err);
     }
     else {
-      let body = { 
+      let bodySong = { 
         likeUser: authData.user._id, 
         likerSong: req.body.likerSong,
-        deleteObj: req.body.deleteObj }
+        deleteObj: req.body.deleteObj
+      }
+      let bodyComm = {
+        likeUser: authData.user._id,
+        deleteObj: req.body.deleteObj
+      }
+      let likeCheck = req.body.commLike
 
-      await Songs.findByIdAndUpdate(
-        body.likerSong, 
-        {$pull: { songLikes: body.deleteObj._id }},
-        { new: true }
-      )
-      .then((song) => {
-        res.status(200).json(song)
-        console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
-      })
-      .catch((err) => {
-        next(err)
-      })
-
-      await Likes.findByIdAndDelete(body.deleteObj._id)
-      .then((res) => {
-        console.log('this like has been eliminated!', res)
-      })
-      .catch((err) => {
-        next(err)
-      })
+      if (likeCheck === false) {
+        await Songs.findByIdAndUpdate(
+          bodySong.likerSong, 
+          {$pull: { songLikes: bodySong.deleteObj._id }},
+          { new: true }
+        )
+        .then((song) => {
+          res.status(200).json(song)
+          console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
+        })
+        .catch((err) => {
+          next(err)
+        })
+  
+        await Likes.findByIdAndDelete(bodySong.deleteObj._id)
+        .then((res) => {
+          console.log('this songLike has been eliminated!', res)
+        })
+        .catch((err) => {
+          next(err)
+        })
+      }
+      else {
+        await Comments.findByIdAndUpdate(
+          bodyComm.deleteObj.likedComment, 
+          {$pull: { commLikes: bodyComm.deleteObj._id }},
+          { new: true }
+        )
+        .then((comm) => {
+          res.status(200).json(comm)
+          console.log(`DELETED a like from CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
+        })
+        .catch((err) => {
+          next(err)
+        })
+  
+        await Likes.findByIdAndDelete(bodyComm.deleteObj._id)
+        .then((res) => {
+          console.log('this commentLike has been eliminated!', res)
+        })
+        .catch((err) => {
+          next(err)
+        })
+      }
 
     }
   })
@@ -287,7 +351,8 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
       let comment = await Comments.create(body);
 
       await Songs.findByIdAndUpdate(body.commSong, {$push: { songComments: comment }}, { new: true })
-        .then((res) => {
+        .then((song) => {
+          res.status(200).json(song);
           console.log(`ADDED a comment: `, comment)
         })
         .catch((err) => {
@@ -388,8 +453,8 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", (err, authData) => {
     if (err) {
       res.status(403).json(err);
-    } else {
-
+    }
+    else {
       let song = {
         songURL: req.body.songURL,
         songUser: req.body.songUser,
@@ -404,7 +469,6 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
         songBeatTrack: req.body.songBeatTrack,
       };
 
-     
       Songs.create(song)
         .then((theSong) => {
           res.status(200).json(theSong);

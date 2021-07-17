@@ -9,7 +9,10 @@ import backgroundFrame from '../images/bg-frame-2.png'
 function Home(props) {
     const { user, setUser, userViewed, setUserViewed  } = React.useContext(TheContext)
     
-    user ? setUserViewed(user) : setUser({})
+    useEffect(() => {
+        user ? setUserViewed(user) : setUser({})
+    }, [])
+    // user ? setUserViewed(user) : setUser({})
 
     // setUserViewed(user)  
 

@@ -109,6 +109,10 @@ const actions = {
     return await axios.post(`${baseURL}/getCommentsRT`, dat, resetHead());
   },
 
+  getAComment: async (aComm) => {
+    return await axios.post(`${baseURL}/getACommentRT`, aComm, resetHead());
+  },
+
   addComment: async (addComm) => {
     return await axios.post(`${baseURL}/addCommentRT`, addComm, resetHead());
   },

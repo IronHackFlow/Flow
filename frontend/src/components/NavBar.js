@@ -149,7 +149,7 @@ function NavBar(props) {
 
   const likePost = () => {
     actions
-      .addLike({ likerSong: songId, likeDate: new Date() })
+      .addLike({ likerSong: songId, likeDate: new Date(), commLike: false })
       .then((res) => {
         console.log(`added a like to: `, res.data)
         setTotalLikes(res.data.songLikes.length)

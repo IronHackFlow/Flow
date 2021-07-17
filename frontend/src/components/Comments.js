@@ -19,6 +19,7 @@ function Comments(props) {
 
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([])
+  const [totalComments, setTotalComments] = useState([])
   const inputRef = useRef();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ function Comments(props) {
       .then((res) => {
         console.log('Returned these comments from DB: ', res.data.songComments)
         setCommState(res.data.songComments)
+        setTotalComments(res.data.songComments.length)
       })
       .catch(console.error)
   }, [songId])
@@ -38,7 +40,8 @@ function Comments(props) {
                     commSong: songId,
                     commDate: new Date() })
       .then((res) => {
-        console.log(res, "comment data ")
+        console.log(res.data, "comment data")
+        setTotalComments(res.data.songComments.length)
       })
       .catch(console.error);
 
@@ -46,27 +49,17 @@ function Comments(props) {
       inputRef.current.value =  ""
     }, [200])
   }
-  
-  const deleteComment = (each) => {
-    if (user._id === each.commUser._id) {
-      actions
-      .deleteComment({ deleteObj: each, songId: songId })
-      .then((res) => {
-        console.log(`deleted a comment from song ${res.data.songName}'s songComments:`, res.data.songComments)
-
-      })
-      .catch(console.error)
-    } 
-    else {
-      console.log("You can't delete others' comments jerk!")
-    }
-  }
 
   function GetComments(each) {
+    const [totalCommentLikes, setTotalCommentLikes] = useState();
     const commentListRef = useRef();
     const commentTextRef = useRef();
-    const commentListOuterRef = useRef();  
+    const commentListOuterRef = useRef();
 
+    useEffect(() => {
+      setTotalCommentLikes(each.commLikes.length)
+    }, [])
+  
     const setCommentListRefs = useCallback(
       (node) => {
         commentListRef.current = node;
@@ -84,6 +77,66 @@ function Comments(props) {
       },
       [props.popUpComments]
     )
+
+    const deleteComment = (each) => {
+      if (user._id === each.commUser._id) {
+        actions
+        .deleteComment({ deleteObj: each, songId: songId })
+        .then((res) => {
+          console.log(`deleted a comment from song ${res.data.songName}'s songComments:`, res.data.songComments)
+          commentListRef.current.style.opacity = "0"
+          commentListRef.current.style.transition = "opacity .5s"
+          commentListRef.current.style.display = "none"
+          setTotalComments(res.data.songComments.length)
+        })
+        .catch(console.error)
+      } 
+      else {
+        console.log("You can't delete others' comments jerk!")
+      }
+    }
+
+    const likeCheck = () => {
+      actions
+        .getAComment({ id: each._id })
+        .then((res) => {
+          let deleteObj = null
+  
+          res.data.commLikes.forEach((each) => {
+            if (each.likeUser === user._id) {
+              deleteObj = each
+            }
+          })
+  
+          if (deleteObj === null) {
+            likeComment()
+          }
+          else {
+            unlikeComment(deleteObj)
+          }
+        })
+        .catch(console.error)
+    }
+
+    const likeComment = () => {
+      actions
+        .addLike({ likedComment: each, likeDate: new Date(), commLike: true })
+        .then((res) => {
+          console.log(`added a like to: `, res.data)
+          setTotalCommentLikes(res.data.commLikes.length)
+        })
+        .catch(console.error);
+    }
+    const unlikeComment = (deleteObj) => {
+      actions
+        .deleteLike({ deleteObj: deleteObj, commLike: true })
+        .then((res) => {
+          console.log(`deleted a like from: `, res.data)
+          setTotalCommentLikes(res.data.commLikes.length)
+        })
+        .catch(console.error);
+    }
+
     const likeTextRef = useRef()
     const replyTextRef = useRef()
     const listBtnsRef = useRef()
@@ -140,8 +193,11 @@ function Comments(props) {
           </div>
           <div className="comment-list-buttons" ref={listBtnsRef}>
             <div className="comment-likereply-container clc-1">
-              <div className="comm-likereply-btn clb-1">
+              <div className="comm-likereply-btn clb-1" onClick={likeCheck}>
                 <img className="social-icons heart" src={heart2} alt="like" />
+                <div className="likes-number-container">
+                  <p>{totalCommentLikes}</p>
+                </div>
               </div>
               <div className="comm-likereply-text" ref={likeTextRef}>
                 Like
@@ -187,7 +243,6 @@ function Comments(props) {
 
   const renderEachComment = useCallback(() => {
     if (props.poppedUp === true) {
-      console.log('rendered some comments')
       return commState.map((each, index) => {
         return <GetComments key={each._id + index} {...each} />
       })
@@ -221,7 +276,7 @@ function Comments(props) {
           <div className="comments-title">
             <div className="comments-title-inner">
               <p>
-                Comments - <span style={{color: 'red'}}>{commState.length}</span>
+                Comments - <span style={{color: 'red'}}>{totalComments}</span>
               </p>
             </div>
           </div>
