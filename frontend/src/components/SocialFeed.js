@@ -11,6 +11,7 @@ import gradientbg from "../images/gradient-bg-2.png";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg"
 import gifsArr from "../images/gifs.json";
+import moment from "moment";
 
 function SocialFeed(props) {
   const { user, setUser, 
@@ -36,6 +37,7 @@ function SocialFeed(props) {
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [songLikes, setSongLikes] = useState();
   const [songUserFollowers, setSongUserFollowers] = useState();
+  const [songDate, setSongDate] = useState();
 
   const popUpSearchRef = useRef();
   const popUpRef = useRef();
@@ -193,6 +195,7 @@ function SocialFeed(props) {
       setSongComments(eachSong.song.songComments)
       setSongLikes(eachSong.song.songLikes)
       setSongUserFollowers(eachSong.song.songUser.followers)
+      setSongDate(eachSong.song.songDate)
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
     }
@@ -270,7 +273,8 @@ function SocialFeed(props) {
                     </div>
                     <div className="udt-3-container">
                       <p className="ud-text udt-3">
-                        {getSongCaption ? getSongCaption : "no caption for this flow"}
+                        {songDate ? moment(songDate).fromNow() : '5 months ago 𑁦 '}
+                        {getSongCaption ? getSongCaption : " 𑁦 no caption for this flow"}
                       </p>
                     </div>
                   </div>

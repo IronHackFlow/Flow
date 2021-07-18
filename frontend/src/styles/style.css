@@ -560,16 +560,35 @@ footer .social-buttons .social-list {
           flex-direction: row;
 }
 
-footer .social-buttons .social-list .like-comment-container {
+footer .social-buttons .social-list .individual-container {
   height: 100%;
-  width: initial;
+  width: 25%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+footer .social-buttons .social-list .individual-container .individual-btn-prof {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -577,11 +596,29 @@ footer .social-buttons .social-list .like-comment-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
 }
 
-footer .social-buttons .social-list .individual-btn {
-  height: 40px;
-  width: 40px;
+footer .social-buttons .social-list .individual-container .individual-btn-prof .individual-profile-pic {
+  height: 85%;
+  width: 85%;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+  border-radius: 50px;
+  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+}
+
+footer .social-buttons .social-list .individual-container .individual-btn-prof .individual-profile-pic .prof-pic {
+  height: 100%;
+  width: 100%;
+}
+
+footer .social-buttons .social-list .individual-container .individual-btn {
+  height: 38px;
+  width: 38px;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -599,17 +636,17 @@ footer .social-buttons .social-list .individual-btn {
   position: relative;
   color: #ec6aa0;
   list-style-type: none;
-  margin: 0px 10px 0px 10px;
+  margin-top: 5px;
   -webkit-box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
           box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
 }
 
-footer .social-buttons .social-list .individual-btn:active {
+footer .social-buttons .social-list .individual-container .individual-btn:active {
   -webkit-box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
           box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
 }
 
-footer .social-buttons .social-list .individual-btn .likes-number-container {
+footer .social-buttons .social-list .individual-container .individual-btn .likes-number-container {
   height: 30px;
   width: 30px;
   border-radius: 100%;
@@ -632,26 +669,20 @@ footer .social-buttons .social-list .individual-btn .likes-number-container {
   background: none;
 }
 
-footer .social-buttons .social-list .individual-btn .likes-number-container p {
+footer .social-buttons .social-list .individual-container .individual-btn .likes-number-container p {
   font-size: 15px;
   font-weight: bold;
   color: white;
 }
 
-footer .social-buttons .social-list .individual-btn .individual-profile-pic {
-  height: 85%;
-  width: 85%;
-  background-size: cover;
-  overflow: hidden;
-  background-position: center;
-  border-radius: 50px;
-  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+footer .social-buttons .social-list .individual-container .individual-text {
+  height: 12px;
+  margin-top: 3px;
 }
 
-footer .social-buttons .social-list .individual-btn .individual-profile-pic .prof-pic {
-  height: 100%;
-  width: 100%;
+footer .social-buttons .social-list .individual-container .individual-text p {
+  font-size: 12px;
+  color: white;
 }
 
 footer .nav-buttons {
@@ -2149,7 +2180,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   height: 30%;
   white-space: nowrap;
   text-align: left;
-  color: white;
+  color: #efbfbf;
   font-size: 12px;
 }
 
@@ -4835,8 +4866,6 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .bi-record {
   margin: 5px 0px 0px 0px;
-  -webkit-filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
-          filter: invert(69%) sepia(43%) saturate(437%) hue-rotate(103deg) brightness(91%) contrast(89%);
 }
 
 .bi-profile {

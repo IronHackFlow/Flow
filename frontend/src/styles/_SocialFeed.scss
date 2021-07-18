@@ -64,6 +64,7 @@
                     color: white;
                     border: 2px solid #5a5a5a;
                     box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
+
                     .text-container {
                         @include flexCenter(90%, 100%, 0px, flex-start, flex-start, column);
                         overflow-x: hidden;
@@ -84,31 +85,24 @@
                             height: 30%;
                             white-space: nowrap;
                             text-align: left;
-                            
-                            // transform: translateX(100%);
-                            // animation: floatText 2.2s linear infinite;
                             font-size: 17px;
                             font-weight: bold;
                             line-height: 1;
                         }
+
                         .udt-2 {
                             height: 30%;
                             white-space: nowrap;
                             text-align: left;
-                            
-                            // transform: translateX(100%);
-                            // animation: floatText 2.2s linear infinite;
                             color: white;
                             font-size: 15px;
                         }
+                        
                         .udt-3 {
                             height: 30%;
                             white-space: nowrap;
                             text-align: left;
-                            
-                            // transform: translateX(100%);
-                            // animation: floatText 5.3s linear infinite;
-                            color: white;
+                            color: #efbfbf;
                             font-size: 12px;
                         }
                     }

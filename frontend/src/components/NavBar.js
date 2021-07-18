@@ -159,7 +159,7 @@ function NavBar(props) {
 
   const deleteLike = (deleteObj) => {
     actions
-      .deleteLike({ likerSong: songId, deleteObj: deleteObj })
+      .deleteLike({ likerSong: songId, deleteObj: deleteObj, commLike: false })
       .then((res) => {
         console.log(`deleted a like from: `, res.data)
         setTotalLikes(res.data.songLikes.length)
@@ -171,34 +171,59 @@ function NavBar(props) {
     <footer>
       <div className="social-buttons">
         <div className="social-list">
-          <div className="individual-btn">
-            <div className="individual-profile-pic">
-              <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}}>
-                <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
-              </Link>
-            </div>
-          </div>  
-          <div className="like-comment-container">
-            <div className="individual-btn" onClick={followCheck} ref={followBtn}>
-              <img className="social-icons follow" src={follow} alt="follow user icon"></img>
-              <div className="likes-number-container">
-                  <p>{totalFollowers}</p>
+            <div className="individual-container">
+              <div className="individual-btn-prof">
+                <div className="individual-profile-pic">
+                  <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}}>
+                    <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="individual-btn" onClick={likeCheck}>
-              <img className="social-icons heart" src={heart2} alt="like post icon"></img>
-              <div className="likes-number-container">
-                  <p>{totalLikes}</p>
+
+            <div className="individual-container">
+              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
+                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
+                <div className="likes-number-container">
+                    <p>{totalFollowers}</p>
+                </div>
+              </div>
+              <div className="individual-text">
+                <p>Followers</p>
               </div>
             </div>
-            <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-              <img className="social-icons heart" src={search} alt="search user icon"></img>
+
+            <div className="individual-container">
+              <div className="individual-btn" onClick={likeCheck}>
+                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
+                <div className="likes-number-container">
+                    <p>{totalLikes}</p>
+                </div>
+              </div>
+              <div className="individual-text">
+                <p>Likes</p>
+              </div>
             </div>
-            <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-              <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+
+            <div className="individual-container">
+              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
+                <img className="social-icons heart" src={search} alt="search user icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Search</p>
+              </div>
+            </div>
+
+            <div className="individual-container">
+              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Comments</p>
+              </div>
             </div>
           </div>
-        </div>
+
       </div>
 
       <div className="nav-buttons">

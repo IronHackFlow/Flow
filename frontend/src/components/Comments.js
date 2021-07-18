@@ -17,10 +17,12 @@ function Comments(props) {
     TheContext
   );
 
+
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([])
   const [totalComments, setTotalComments] = useState([])
   const inputRef = useRef();
+  const renderRef = useRef(0)
 
   useEffect(() => {
     actions
@@ -31,7 +33,7 @@ function Comments(props) {
         setTotalComments(res.data.songComments.length)
       })
       .catch(console.error)
-  }, [songId])
+  }, [songId, totalComments])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -44,7 +46,6 @@ function Comments(props) {
         setTotalComments(res.data.songComments.length)
       })
       .catch(console.error);
-
     setTimeout(()=> {
       inputRef.current.value =  ""
     }, [200])
@@ -58,8 +59,8 @@ function Comments(props) {
 
     useEffect(() => {
       setTotalCommentLikes(each.commLikes.length)
-    }, [])
-  
+    }, [totalCommentLikes])
+
     const setCommentListRefs = useCallback(
       (node) => {
         commentListRef.current = node;
@@ -75,7 +76,7 @@ function Comments(props) {
           }
         }
       },
-      [props.popUpComments]
+      [commState]
     )
 
     const deleteComment = (each) => {
@@ -84,15 +85,12 @@ function Comments(props) {
         .deleteComment({ deleteObj: each, songId: songId })
         .then((res) => {
           console.log(`deleted a comment from song ${res.data.songName}'s songComments:`, res.data.songComments)
-          commentListRef.current.style.opacity = "0"
-          commentListRef.current.style.transition = "opacity .5s"
-          commentListRef.current.style.display = "none"
           setTotalComments(res.data.songComments.length)
         })
         .catch(console.error)
       } 
       else {
-        console.log("You can't delete others' comments jerk!")
+        console.log("You can't delete your friend's comments jerk!")
       }
     }
 
@@ -127,6 +125,7 @@ function Comments(props) {
         })
         .catch(console.error);
     }
+
     const unlikeComment = (deleteObj) => {
       actions
         .deleteLike({ deleteObj: deleteObj, commLike: true })
@@ -271,7 +270,7 @@ function Comments(props) {
             </div>
           </div>
         </div>
-
+ 
         <div className="com-cont-2" ref={props.opacityRef2} style={{opacity: '0'}}>
           <div className="comments-title">
             <div className="comments-title-inner">

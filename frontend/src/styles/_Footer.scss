@@ -19,50 +19,66 @@ footer {
         .social-list {
             @include flexCenter(100%, 100%, 0px, space-between, center, row);
     
-            .like-comment-container {
-                @include flexCenter(100%, initial, none, flex-start, center, row);
-            }
-            .individual-btn {
-                @include flexCenter(40px, 40px, 50px, center, center, row);
-                position: relative;
-                color: #ec6aa0;
-                list-style-type: none;
-                margin: 0px 10px 0px 10px;
-                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+            .individual-container {
+                @include flexCenter(100%, 25%, none, center, center, column);
                 
-                &:active {
-                    box-shadow: inset 2px 2px 3px #3d3f3f, 
-                                inset -2px -2px 3px #989898;
+                .individual-btn-prof {
+                    @include flexCenter(50px, 50px, 50px, center, center, row);
+                    box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+
+                    .individual-profile-pic {
+                        height: 85%;
+                        width: 85%;
+                        background-size: cover;
+                        overflow: hidden;
+                        background-position: center;
+                        border-radius: 50px;
+                        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+                        
+                        .prof-pic {
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }
                 }
                 
-                .likes-number-container {
-                    @include flexCenter(30px, 30px, 100%, center, center, row);
+                .individual-btn {
+                    @include flexCenter(38px, 38px, 50px, center, center, row);
+                    position: relative;
+                    color: #ec6aa0;
+                    list-style-type: none;
+                    margin-top: 5px;
+                    box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+                    
+                    &:active {
+                        box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                    inset -2px -2px 3px #989898;
+                    }
+                    
+                    .likes-number-container {
+                        @include flexCenter(30px, 30px, 100%, center, center, row);
 
-                    position: absolute;
-                    top: -20%;
-                    left: 50%;
-                    background: none;
+                        position: absolute;
+                        top: -20%;
+                        left: 50%;
+                        background: none;
+
+                        p {
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: white;
+                        }
+                    }
+                }
+                .individual-text {
+                    height: 12px;
+                    margin-top: 3px;
+
                     p {
-                        font-size: 15px;
-                        font-weight: bold;
+                        font-size: 12px;
+                        // font-weight: bold;
                         color: white;
                     }
-
-                }
-
-                .individual-profile-pic {
-                    height: 85%;
-                    width: 85%;
-                    background-size: cover;
-                    overflow: hidden;
-                    background-position: center;
-                    border-radius: 50px;
-                    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-                    
-                    .prof-pic {
-                        height: 100%;
-                        width: 100%;
-                      }
                 }
             }
         }
