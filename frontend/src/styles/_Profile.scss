@@ -175,86 +175,88 @@
 }
 
 .profile-post-feed {
-    @include flexCenter(39%, 100%, none, center, center, row);
+    @include flexCenter(39%, 100%, none, center, center, column);
     box-shadow: inset 0px 3px 2px 0px #b9b7b7;
     overflow-y: auto;
     background: #ecf0f3;
 
-    .profile-post-inner {
-        @include flexCenter(94%, 94%, 20px, center, center, column);
-        box-shadow: inset 3px 3px 4px #c5c5c5, 
-                    inset -3px -3px 5px #ffffff;
+    .feed-title-container {
+        @include flexCenter(15%, 100%, 20px, center, center, column);
 
-        .profile-post-inner-inner {
-            @include flexCenter(92%, 93%, 18px, center, center, column);
+        .feed-title {
+            @include flexCenter(60%, 94%, 20px, center, center, row);
+            box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+            color: #4f5050;
+            font-weight: bold;
+        }
+    }
+
+    .profile-songs-container {
+        @include flexCenter(85%, 100%, 18px, center, center, column);
+
+        .songs-list-container {
+            @include flexCenter(93%, 94%, 16px, flex-start, center, column);
             box-shadow: inset 3px 3px 4px #c5c5c5, 
                         inset -3px -3px 5px #ffffff;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
 
-            .profile-post-innerest {
-                @include flexCenter(90%, 92%, 16px, flex-start, center, column);
-                // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-                scroll-snap-type: y mandatory;
-                overflow-y: scroll;
-
-                .your-track-container {
-                    @include flexCenter(100%, 100%, 16px, flex-start, stretch, column);
-                    min-height: 100%;
-                    scroll-snap-align: start;
-                    scroll-snap-stop: always;
-
-                    .lyrics-play {
-                        @include flexCenter(25%, 85%, none, flex-start, center, row);
-                        margin-left: 4%;
-                    
-                        .lyrics-outter-container {
-                            @include flexCenter(45px, 45px, 50%, center, center, row);
-                            box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-                    
-                            .play-ur-song {
-                                height: 30px;
-                                width: 30px;
-                                border-radius: 50%;
-                                box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-                    
-                                .bi-play-2 {
-                                    margin: 1px 0px 0px 4px;
-                                    font-size: .7em
-                                }
-                            }
-                        }
-                    
-                        .lyrics-songname-cont {
-                            @include flexCenter(60%, 75%, 20px, center, center, row);
-                            margin-right: 5%;
-                            box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-                            
-                            h4 {
-                                width: 85%;
-                                margin-left: 4%;
-                                text-align: start;
-                                color:rgb(46, 194, 145);
+            .your-track-container {
+                @include flexCenter(100%, 100%, 16px, flex-start, stretch, column);
+                min-height: 100%;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+                .lyrics-play {
+                    @include flexCenter(25%, 85%, none, flex-start, center, row);
+                    margin-left: 4%;
+                
+                    .lyrics-outter-container {
+                        @include flexCenter(45px, 45px, 50%, center, center, row);
+                        box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+                
+                        .play-ur-song {
+                            height: 30px;
+                            width: 30px;
+                            border-radius: 50%;
+                            box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+                
+                            .bi-play-2 {
+                                margin: 1px 0px 0px 4px;
+                                font-size: .7em
                             }
                         }
                     }
-
-                    .lyrics-container {
-                        @include flexCenter(70%, 85%, 20px, center, center, column);
-                        box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-                        margin-left: 4%;
-
-                        .para-container {
-                            height: 90%;
-                            width: 90%;
-                            font-size: 13px;
-                            color: #e24f8c;
-                            overflow-y: scroll;
+                
+                    .lyrics-songname-cont {
+                        @include flexCenter(60%, 75%, 20px, center, center, row);
+                        margin-right: 5%;
+                        box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+                        
+                        h4 {
+                            width: 85%;
+                            margin-left: 4%;
                             text-align: start;
+                            color:rgb(46, 194, 145);
                         }
+                    }
+                }
+                .lyrics-container {
+                    @include flexCenter(70%, 85%, 20px, center, center, column);
+                    box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
+                    margin-left: 4%;
+                    .para-container {
+                        height: 90%;
+                        width: 90%;
+                        font-size: 13px;
+                        color: #e24f8c;
+                        overflow-y: scroll;
+                        text-align: start;
                     }
                 }
             }
         }
     }
+    
 }
 
 .nb-profile {

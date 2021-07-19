@@ -2322,7 +2322,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: row;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form {
   height: 75%;
   width: 93%;
   border-radius: 20px;
@@ -2344,47 +2344,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset {
-  height: 70%;
-  width: 91%;
-  border-radius: 15px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
-          box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
-}
-
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form {
-  height: 100%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input {
   font-family: inherit;
   font-size: 1em;
   height: 50%;
@@ -2397,27 +2357,27 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 2px 2px 3px #4c4c4c, inset -1px -1px 3px #b3b1b1;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input:defined {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input:defined {
   color: pink;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input::-webkit-input-placeholder {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input::-webkit-input-placeholder {
   color: #adadad;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input:-ms-input-placeholder {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input:-ms-input-placeholder {
   color: #adadad;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input::-ms-input-placeholder {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input::-ms-input-placeholder {
   color: #adadad;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input::placeholder {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input::placeholder {
   color: #adadad;
 }
 
-.comment-pop-out .inner-com .com-cont-1 .input-container .input-inset .social-comment-form .social-comment-input:focus {
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input:focus {
   border: 2px solid pink;
   outline: none !important;
   color: white;
@@ -2884,6 +2844,49 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 /* ------------------- Comment Pop up (SEARCH RESULTS) ------------------------- */
+.input-container {
+  height: 75%;
+  width: 93%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #ecf0f3;
+  -webkit-box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+          box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+}
+
+.input-container .input-inset {
+  height: 70%;
+  width: 91%;
+  border-radius: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+          box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+}
+
 .com-list-cont .com-list-search {
   height: 88%;
   width: 93%;
@@ -3616,19 +3619,19 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-shadow: inset 0px 3px 2px 0px #b9b7b7;
           box-shadow: inset 0px 3px 2px 0px #b9b7b7;
   overflow-y: auto;
   background: #ecf0f3;
 }
 
-.profile-post-feed .profile-post-inner {
-  height: 94%;
-  width: 94%;
+.profile-post-feed .feed-title-container {
+  height: 15%;
+  width: 100%;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3643,13 +3646,34 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
-          box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner {
-  height: 92%;
-  width: 93%;
+.profile-post-feed .feed-title-container .feed-title {
+  height: 60%;
+  width: 94%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+          box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+  color: #4f5050;
+  font-weight: bold;
+}
+
+.profile-post-feed .profile-songs-container {
+  height: 85%;
+  width: 100%;
   border-radius: 18px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3664,13 +3688,11 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
-          box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest {
-  height: 90%;
-  width: 92%;
+.profile-post-feed .profile-songs-container .songs-list-container {
+  height: 93%;
+  width: 94%;
   border-radius: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3685,12 +3707,14 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
+          box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
   -ms-scroll-snap-type: y mandatory;
       scroll-snap-type: y mandatory;
   overflow-y: scroll;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container {
   height: 100%;
   width: 100%;
   border-radius: 16px;
@@ -3712,7 +3736,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   scroll-snap-stop: always;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play {
   height: 25%;
   width: 85%;
   border-radius: none;
@@ -3732,7 +3756,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   margin-left: 4%;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play .lyrics-outter-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container {
   height: 45px;
   width: 45px;
   border-radius: 50%;
@@ -3753,7 +3777,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song {
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -3761,12 +3785,12 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song .bi-play-2 {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song .bi-play-2 {
   margin: 1px 0px 0px 4px;
   font-size: .7em;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play .lyrics-songname-cont {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-songname-cont {
   height: 60%;
   width: 75%;
   border-radius: 20px;
@@ -3788,14 +3812,14 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-play .lyrics-songname-cont h4 {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-songname-cont h4 {
   width: 85%;
   margin-left: 4%;
   text-align: start;
   color: #2ec291;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-container {
   height: 70%;
   width: 85%;
   border-radius: 20px;
@@ -3817,7 +3841,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   margin-left: 4%;
 }
 
-.profile-post-feed .profile-post-inner .profile-post-inner-inner .profile-post-innerest .your-track-container .lyrics-container .para-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-container .para-container {
   height: 90%;
   width: 90%;
   font-size: 13px;

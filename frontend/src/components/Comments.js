@@ -256,19 +256,15 @@ function Comments(props) {
       <div className="inner-com">
       {/* {console.log(`checking renders, ${renderRef.current++}`)} */}
         <div ref={props.opacityRef1} style={{opacity: '0'}} className="com-cont-1">
-          <div className="input-container">
-            <div className="input-inset">
-              <form className="social-comment-form" onSubmit={handleSubmit}>
-                <input
-                    className="social-comment-input"
-                    ref={inputRef}
-                    type='text' 
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder='Make a comment...' 
-                    ></input>
-              </form>
-            </div>
-          </div>
+          <form className="social-comment-form" onSubmit={handleSubmit}>
+            <input
+                className="social-comment-input"
+                ref={inputRef}
+                type='text' 
+                onChange={(e) => setComment(e.target.value)}
+                placeholder='Make a comment...' 
+                ></input>
+          </form>
         </div>
  
         <div className="com-cont-2" ref={props.opacityRef2} style={{opacity: '0'}}>

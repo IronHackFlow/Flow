@@ -19,12 +19,14 @@
         scroll-snap-type: y mandatory;
         overflow-y: scroll;
         position: absolute;
+
         .video-pane {
             @include flexCenter(100%, 100%, 0px, flex-start, center, column);
             scroll-snap-align: start;
             scroll-snap-stop: always;
             background-size: cover;
             background-position-x: center;
+            
             .last-div {
                 height: 65%;
                 width: 85%;
@@ -159,45 +161,36 @@
         .com-cont-1 {
             @include flexCenter(15%, 100%, 0px, center, center, row);
 
-            .input-container {
+            .social-comment-form {
                 @include flexCenter(75%, 93%, 20px, center, center, row);
                 background: #ecf0f3;
                 box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
 
-                .input-inset {
-                    @include flexCenter(70%, 91%, 15px, center, center, row);
-                    box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
-
-                    .social-comment-form {
-                        @include flexCenter(100%, 100%, 0px, center, center, row);
-                        
-                        .social-comment-input {
-                            font-family: inherit;
-                            font-size: 1em;
-                            height: 50%;
-                            width: 81%;
-                            border-radius: 20px;
-                            border: 1px solid #686a6b;
-                            padding-left: 5%;
-                            background: #686a6b;
-                            box-shadow: inset 2px 2px 3px #4c4c4c, inset -1px -1px 3px #b3b1b1;
-                        
-                            &:defined {
-                                color: pink;
-                            }
-                            &::placeholder {
-                                color: #adadad;
-                            }
-                            &:focus {
-                                border: 2px solid pink;
-                                outline: none !important;
-                                color: white;
-                                border-radius: 20px;
-                            }
-                        }
-
+                .social-comment-input {
+                    font-family: inherit;
+                    font-size: 1em;
+                    height: 50%;
+                    width: 81%;
+                    border-radius: 20px;
+                    border: 1px solid #686a6b;
+                    padding-left: 5%;
+                    background: #686a6b;
+                    box-shadow: inset 2px 2px 3px #4c4c4c, inset -1px -1px 3px #b3b1b1;
+                
+                    &:defined {
+                        color: pink;
+                    }
+                    &::placeholder {
+                        color: #adadad;
+                    }
+                    &:focus {
+                        border: 2px solid pink;
+                        outline: none !important;
+                        color: white;
+                        border-radius: 20px;
                     }
                 }
+
             }
         }
 
@@ -207,6 +200,7 @@
             .comments-title {
                 height: 8%;
                 width: 90%;
+                
                 .comments-title-inner {
                     @include flexCenter(88%, 100%, 21px, center, center, row);
                     box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
@@ -387,6 +381,16 @@
 }
 
 /* ------------------- Comment Pop up (SEARCH RESULTS) ------------------------- */
+.input-container {
+    @include flexCenter(75%, 93%, 20px, center, center, row);
+    background: #ecf0f3;
+    box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+
+    .input-inset {
+        @include flexCenter(70%, 91%, 15px, center, center, row);
+        box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
+    }
+}
 .com-list-cont {
 
     .com-list-search {

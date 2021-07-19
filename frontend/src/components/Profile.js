@@ -171,7 +171,7 @@ function Profile(props) {
                 <div className="edit-profile-inset">
                   <div className="edit-profile-button">
                     <Link to="/editprofile-screen" className="profile-link">
-                      <img className="button-icons edit" src={editicon} />
+                      <img className="button-icons edit" src={editicon} alt="edit" />
                     </Link>
                   </div>
                 </div>
@@ -182,23 +182,26 @@ function Profile(props) {
               <div className="log-profile-outset">
                 <div className="log-profile-inset">
                   <div className="edit-profile-button" onClick={logout}>
-                    <img className="button-icons logout" src={logouticon} />
+                    <img className="button-icons logout" src={logouticon} alt="log out" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </header>
 
       <div className="profile-post-feed">
-        <div className="profile-post-inner">
-          <div className="profile-post-inner-inner">
-            <ul className="profile-post-innerest">
-              {showSongs()}
-            </ul>
+        <div className="feed-title-container">
+          <div className="feed-title">
+            <p>{`${thisUser.userName}'s Songs: `} <span style={{color: "#e24f8c"}}>{thisUserSongs.length}</span></p>
           </div>
+        </div>
+
+        <div className="profile-songs-container">
+          <ul className="songs-list-container">
+            {showSongs()}
+          </ul>
         </div>
       </div>
 
