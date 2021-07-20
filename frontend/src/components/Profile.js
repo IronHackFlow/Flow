@@ -21,6 +21,8 @@ function Profile(props) {
   );
 
   const [thisUser, setThisUser] = useState([userViewed]);
+  const [thisUserSongs, setThisUserSongs] = useState([]);
+
   const profileRim = useRef();
   const profileOut = useRef();
   const profileIn = useRef();
@@ -50,8 +52,6 @@ function Profile(props) {
     localStorage.clear();
   };
 
-  const [thisUserSongs, setThisUserSongs] = useState([]);
-
   useEffect(() => {
     console.log("profile.js line 53 ", user);
     actions
@@ -80,7 +80,6 @@ function Profile(props) {
    }
   }
 
-
   const showSongs = () => {
     return thisUserSongs.map((eachSong, index) => {
       return (
@@ -96,10 +95,12 @@ function Profile(props) {
             </div>
           </div>
 
-          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-          <div className="lyrics-outter-container">
-            <div className="nav-buttons-inset play-ur-song">
-              <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+          <div className="track-play-cont">
+            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+            <div className="lyrics-outter-container">
+              <div className="nav-buttons-inset play-ur-song">
+                <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+              </div>
             </div>
           </div>
         </div>

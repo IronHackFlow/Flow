@@ -181,10 +181,10 @@
     background: #ecf0f3;
 
     .feed-title-container {
-        @include flexCenter(15%, 100%, 20px, center, center, column);
+        @include flexCenter(12%, 100%, 20px, center, center, column);
 
         .feed-title {
-            @include flexCenter(60%, 94%, 20px, center, center, row);
+            @include flexCenter(60%, 60%, 20px, center, center, row);
             box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
             color: #4f5050;
             font-weight: bold;
@@ -192,18 +192,19 @@
     }
 
     .profile-songs-container {
-        @include flexCenter(85%, 100%, 18px, center, center, row);
+        @include flexCenter(88%, 100%, 18px, center, center, row);
 
         .songs-list-container {
-            @include flexCenter(93%, 94%, 16px, flex-start, center, column);
+            @include flexCenter(98%, 96%, 16px, flex-start, center, column);
             box-shadow: inset 3px 3px 4px #c5c5c5, 
                         inset -3px -3px 5px #ffffff;
             // scroll-snap-type: y mandatory;
             overflow-y: scroll;
+            margin-bottom: 1%;
 
             .your-track-container {
                 // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
-                min-height: 140px;
+                min-height: 150px;
                 width: 95%;
                 margin-top: 2%;
                 display: flex;
@@ -220,47 +221,62 @@
                     // position: relative;
 
                     .lyrics-songname-cont {
-                        @include flexCenter(50%, 100%, 0px, center, center, column);
-                        // position: absolute;
-                        // top: 10px;
-                        // left: 10px;
+                        @include flexCenter(55%, 100%, 0px, space-evenly, center, column);
+                        margin-top: 5%;
+
                         .song-name-cont {
-                            @include flexCenter(25px, 85%, 10px, center, center, column);
+                            // @include flexCenter(20px, 85%, 15px, center, flex-start, column);
                             box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+                            min-height: 15px;
+                            width: 83%;
+                            border-radius: 15px;
+                            margin-bottom: 5px;
+                            padding: 3px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                            flex-direction: column;
 
                             h5 {
-                                color:rgb(46, 194, 145);
+                                color:#e24f8c;
+                                margin-left: 5%;
+                                line-height: 1;
+                                text-align: start;
+                                word-break: break-word;
                             }
                         }
 
                         .song-date-cont {
                             @include flexCenter(35px, 85%, 10px, center, flex-start, column);
                             box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-
+     
                             p {
                                 font-size: 12px;
+                                font-weight: bold;
                                 color: #6d6d6d;
                                 margin-left: 5%;
                             }
                         }
                     }
-                    .lyrics-outter-container {
-                        @include flexCenter(45px, 45px, 50%, center, center, row);
-                        box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-                
-                        .play-ur-song {
-                            height: 30px;
-                            width: 30px;
-                            border-radius: 50%;
-                            box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-                
-                            .bi-play-2 {
-                                margin: 1px 0px 0px 4px;
-                                font-size: .7em
+
+                    .track-play-cont {
+                        @include flexCenter(45%, 100%, 0px, center, center, row);
+
+                        .lyrics-outter-container {
+                            @include flexCenter(45px, 45px, 50%, center, center, row);
+                            box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+                    
+                            .play-ur-song {
+                                @include flexCenter(30px, 30px, 50%, center, center, row);
+                                box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+                    
+                                .bi-play-2 {
+                                    margin: 1px 0px 0px 4px;
+                                    font-size: .7em
+                                }
                             }
                         }
                     }
-
                 }
 
                 .track-play-container {
@@ -268,7 +284,7 @@
                     position: relative;
                     
                     .lyrics-container {
-                        @include flexCenter(100px, 90%, 15px, center, center, column);
+                        @include flexCenter(130px, 90%, 15px, center, center, column);
                         box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
                         position: absolute;
                         top: 10px;
@@ -320,6 +336,7 @@
                     .nav-buttons-inset {
                         @include flexCenter(70%, 70%, 50%, center, center, row);
                         box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
+
                         &:active {
                             box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
                                         inset -2px -2px 3px #ffffff;

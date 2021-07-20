@@ -213,13 +213,12 @@ function SocialFeed(props) {
 
   const showSongs = () => {
     return thisFeedSongs.map((eachSong) => {
-      // eachSong.shorts = getRandomBackground();
       return <DisplaySong key={eachSong.song?._id} {...eachSong} />;
     });
   }
+  
   const showExploreSongs = () => {
     return exploreFeedSongs.map((eachSong, index) => {
-      // eachSong.shorts = getRandomBackground();
       return <DisplaySong key={eachSong.song._id + index} {...eachSong} />
     })
   }

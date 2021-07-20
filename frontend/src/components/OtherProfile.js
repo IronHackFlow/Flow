@@ -9,6 +9,7 @@ import social from '../images/social.svg'
 import follow from '../images/follow.svg'
 import heart2 from '../images/heart2.svg'
 import explore from '../images/explore.svg'
+import moment from "moment";
 
 
 function OtherProfile(props) {
@@ -67,25 +68,46 @@ function OtherProfile(props) {
     })
   }
 
+  const handlePlayPause=(x)=>{
+    const currentPlayer = document.getElementById(`${x}`)
+    if(currentPlayer.paused) {
+      currentPlayer.play()
+    }
+    else {
+      currentPlayer.pause()
+   }
+  }
+
   const showSongs = () => {
     return thisUserSongs.map((eachSong, index) => {
       return (
-      <li key={index} className="your-track-container">
-        <div className="lyrics-play">
+      <li key={`${eachSong._id}_${index}`} className="your-track-container">
+        <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <h4>{eachSong.songName}</h4>
+            <div className="song-name-cont">
+              <h5>{eachSong.songName}</h5>
+            </div>
+            <div className="song-date-cont">
+              <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
+              <p>{eachSong.songLikes.length} Likes</p>
+            </div>
           </div>
 
-          <div className="lyrics-outter-container">
-            <div className="nav-buttons-inset play-ur-song">
-              <img className="button-icons bi-play-2" src={play} alt="play" />
+          <div className="track-play-cont">
+            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+            <div className="lyrics-outter-container">
+              <div className="nav-buttons-inset play-ur-song">
+                <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="lyrics-container">
-          <div className="para-container">
-            {showLyrics(eachSong.songLyricsStr)}
+        <div className="track-play-container">
+          <div className="lyrics-container">
+            <div className="para-container">
+              {showLyrics(eachSong.songLyricsStr)}
+            </div>
           </div>
         </div>
       </li>
@@ -176,12 +198,16 @@ function OtherProfile(props) {
       </header>
 
       <div className="profile-post-feed">
-        <div className="profile-post-inner">
-          <div className="profile-post-inner-inner">
-            <ul className="profile-post-innerest">
-              {showSongs()}
-            </ul>
+        <div className="feed-title-container">
+          <div className="feed-title">
+            <p>{`${thisUser.userName}'s Songs: `} <span style={{color: "#e24f8c"}}>{thisUserSongs.length}</span></p>
           </div>
+        </div>
+
+        <div className="profile-songs-container">
+          <ul className="songs-list-container">
+            {showSongs()}
+          </ul>
         </div>
       </div>
 

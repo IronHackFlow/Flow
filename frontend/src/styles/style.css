@@ -3666,7 +3666,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .profile-post-feed .feed-title-container {
-  height: 15%;
+  height: 12%;
   width: 100%;
   border-radius: 20px;
   display: -webkit-box;
@@ -3686,7 +3686,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .profile-post-feed .feed-title-container .feed-title {
   height: 60%;
-  width: 94%;
+  width: 60%;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3708,7 +3708,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .profile-post-feed .profile-songs-container {
-  height: 85%;
+  height: 88%;
   width: 100%;
   border-radius: 18px;
   display: -webkit-box;
@@ -3727,8 +3727,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container {
-  height: 93%;
-  width: 94%;
+  height: 98%;
+  width: 96%;
   border-radius: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3746,10 +3746,11 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
           box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
   overflow-y: scroll;
+  margin-bottom: 1%;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container {
-  min-height: 140px;
+  min-height: 150px;
   width: 95%;
   margin-top: 2%;
   display: -webkit-box;
@@ -3788,15 +3789,15 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont {
-  height: 50%;
+  height: 55%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3804,31 +3805,38 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-top: 5%;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont {
-  height: 25px;
-  width: 85%;
-  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+  min-height: 15px;
+  width: 83%;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  padding: 3px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont h5 {
-  color: #2ec291;
+  color: #e24f8c;
+  margin-left: 5%;
+  line-height: 1;
+  text-align: start;
+  word-break: break-word;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-date-cont {
@@ -3854,11 +3862,31 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-date-cont p {
   font-size: 12px;
+  font-weight: bold;
   color: #6d6d6d;
   margin-left: 5%;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont {
+  height: 45%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outter-container {
   height: 45px;
   width: 45px;
   border-radius: 50%;
@@ -3879,15 +3907,28 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container .play-ur-song {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outter-container .play-ur-song {
   height: 30px;
   width: 30px;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container .play-ur-song .bi-play-2 {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outter-container .play-ur-song .bi-play-2 {
   margin: 1px 0px 0px 4px;
   font-size: .7em;
 }
@@ -3913,7 +3954,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container .lyrics-container {
-  height: 100px;
+  height: 130px;
   width: 90%;
   border-radius: 15px;
   display: -webkit-box;
@@ -4994,8 +5035,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .bi-explore-p,
 .bi-social-p {
-  height: 2.2em;
-  width: 2.2em;
+  height: 2em;
+  width: 2em;
   margin: 7px 0px 0px 0px;
 }
 
