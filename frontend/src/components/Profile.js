@@ -9,6 +9,7 @@ import editicon from '../images/edit.svg'
 import logouticon from '../images/logout.svg'
 import explore from '../images/explore.svg'
 import play from '../images/play.svg'
+import moment from "moment";
 
 
 function Profile(props) {
@@ -70,7 +71,7 @@ function Profile(props) {
   }
   
   const handlePlayPause=(x)=>{
-    const currentPlayer=document.getElementById(`${x}`)
+    const currentPlayer = document.getElementById(`${x}`)
     if(currentPlayer.paused) {
       currentPlayer.play()
     }
@@ -84,21 +85,30 @@ function Profile(props) {
     return thisUserSongs.map((eachSong, index) => {
       return (
       <li key={`${eachSong._id}_${index}`} className="your-track-container">
-        <div className="lyrics-play">
-          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+        <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <h4>{eachSong.songName}</h4>
+            <div className="song-name-cont">
+              <h5>{eachSong.songName}</h5>
+            </div>
+            <div className="song-date-cont">
+              <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
+              <p>{eachSong.songLikes.length} Likes</p>
+            </div>
           </div>
+
+          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
           <div className="lyrics-outter-container">
             <div className="nav-buttons-inset play-ur-song">
-              <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)}></img>
+              <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
             </div>
           </div>
         </div>
 
-        <div className="lyrics-container">
-          <div className="para-container">
-            {showLyrics(eachSong.songLyricsStr)}
+        <div className="track-play-container">
+          <div className="lyrics-container">
+            <div className="para-container">
+              {showLyrics(eachSong.songLyricsStr)}
+            </div>
           </div>
         </div>
       </li>
@@ -111,13 +121,11 @@ function Profile(props) {
   return (
     <div className="Profile">
       <header className="profile-header">
-
         <div className="upper-filler">
           <div className="inner-filler"></div>
         </div>
 
         <div className="username-pic-container">
-
           <div className="username-pic-outset">
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
@@ -139,7 +147,6 @@ function Profile(props) {
         </div>
 
         <div className="header-bio">
-
           <div className="users-details-container">
             <div className="users-details-outset">
               <div className="users-details-inset">
@@ -165,7 +172,6 @@ function Profile(props) {
           </div>
 
           <div className="edit-logout-container">
-            
             <div className="edit-profile-container">
               <div className="edit-profile-outset">
                 <div className="edit-profile-inset">
@@ -207,7 +213,6 @@ function Profile(props) {
 
       <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
         <div className="nav-list">
-
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">

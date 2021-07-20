@@ -928,11 +928,15 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   0% {
     width: 30px;
     border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+            box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
     right: 0px;
   }
   100% {
     width: 195px;
     border-radius: 30px 15px 15px 30px;
+    -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
     right: -51px;
   }
 }
@@ -941,11 +945,15 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   0% {
     width: 30px;
     border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+            box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
     right: 0px;
   }
   100% {
     width: 195px;
     border-radius: 30px 15px 15px 30px;
+    -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
     right: -51px;
   }
 }
@@ -2329,9 +2337,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2347,8 +2355,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 .comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input {
   font-family: inherit;
   font-size: 1em;
-  height: 50%;
-  width: 81%;
+  height: 60%;
+  width: 73%;
   border-radius: 20px;
   border: 1px solid #686a6b;
   padding-left: 5%;
@@ -2382,6 +2390,29 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   outline: none !important;
   color: white;
   border-radius: 20px;
+}
+
+.comment-pop-out .inner-com .com-cont-1 .social-comment-form .comment-button {
+  height: 27px;
+  width: 40px;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 4px #793c55, -2px -2px 4px #ffffff;
+          box-shadow: 2px 2px 4px #793c55, -2px -2px 4px #ffffff;
+  border: none;
+  background: #ec6aa0;
 }
 
 .comment-pop-out .inner-com .com-cont-2 {
@@ -2427,6 +2458,11 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
           box-shadow: 2px 2px 4px #d0d1d2, -2px -2px 4px #ffffff;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-title .comments-title-inner p {
+  font-weight: bold;
+  color: #686a6b;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container {
@@ -2691,8 +2727,8 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
-          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+  -webkit-box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+          box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
   position: absolute;
   right: 8px;
 }
@@ -3684,10 +3720,10 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container {
@@ -3709,54 +3745,120 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: column;
   -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
           box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
-  -ms-scroll-snap-type: y mandatory;
-      scroll-snap-type: y mandatory;
   overflow-y: scroll;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .your-track-container {
-  height: 100%;
-  width: 100%;
-  border-radius: 16px;
+  min-height: 140px;
+  width: 95%;
+  margin-top: 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  min-height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 16px;
+  -webkit-box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
+          box-shadow: inset 3px 3px 4px #c5c5c5,  inset -3px -3px 5px #ffffff;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play {
-  height: 25%;
-  width: 85%;
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container {
+  height: 100%;
+  width: 45%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-left: 4%;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont {
+  height: 50%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont {
+  height: 25px;
+  width: 85%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont h5 {
+  color: #2ec291;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-date-cont {
+  height: 35px;
+  width: 85%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-date-cont p {
+  font-size: 12px;
+  color: #6d6d6d;
+  margin-left: 5%;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container {
   height: 45px;
   width: 45px;
   border-radius: 50%;
@@ -3777,7 +3879,7 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container .play-ur-song {
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -3785,14 +3887,14 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-outter-container .play-ur-song .bi-play-2 {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-outter-container .play-ur-song .bi-play-2 {
   margin: 1px 0px 0px 4px;
   font-size: .7em;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-songname-cont {
-  height: 60%;
-  width: 75%;
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container {
+  height: 100%;
+  width: 55%;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3803,26 +3905,17 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-right: 5%;
-  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-play .lyrics-songname-cont h4 {
-  width: 85%;
-  margin-left: 4%;
-  text-align: start;
-  color: #2ec291;
-}
-
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-container {
-  height: 70%;
-  width: 85%;
-  border-radius: 20px;
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container .lyrics-container {
+  height: 100px;
+  width: 90%;
+  border-radius: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3838,13 +3931,16 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: column;
   -webkit-box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-  margin-left: 4%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .lyrics-container .para-container {
+.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container .lyrics-container .para-container {
   height: 90%;
   width: 90%;
   font-size: 13px;
+  line-height: 1.2;
   color: #e24f8c;
   overflow-y: scroll;
   text-align: start;
@@ -4948,6 +5044,11 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 
 .follow-social {
   font-size: 2em;
+}
+
+.si-send {
+  -webkit-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
 
 .modal {

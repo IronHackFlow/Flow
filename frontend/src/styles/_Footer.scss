@@ -183,11 +183,13 @@ footer {
     0% {
         width: 30px;
         border-radius: 8px;
+        box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
         right: 0px;
     }
     100% {
         width: 195px;
         border-radius: 30px 15px 15px 30px;
+        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
         right: -51px;
     }
 }

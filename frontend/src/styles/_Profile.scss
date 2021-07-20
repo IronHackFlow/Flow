@@ -192,24 +192,58 @@
     }
 
     .profile-songs-container {
-        @include flexCenter(85%, 100%, 18px, center, center, column);
+        @include flexCenter(85%, 100%, 18px, center, center, row);
 
         .songs-list-container {
             @include flexCenter(93%, 94%, 16px, flex-start, center, column);
             box-shadow: inset 3px 3px 4px #c5c5c5, 
                         inset -3px -3px 5px #ffffff;
-            scroll-snap-type: y mandatory;
+            // scroll-snap-type: y mandatory;
             overflow-y: scroll;
 
             .your-track-container {
-                @include flexCenter(100%, 100%, 16px, flex-start, stretch, column);
-                min-height: 100%;
+                // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
+                min-height: 140px;
+                width: 95%;
+                margin-top: 2%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 16px;
+                box-shadow: inset 3px 3px 4px #c5c5c5, 
+                            inset -3px -3px 5px #ffffff;
                 scroll-snap-align: start;
                 scroll-snap-stop: always;
-                .lyrics-play {
-                    @include flexCenter(25%, 85%, none, flex-start, center, row);
-                    margin-left: 4%;
-                
+
+                .track-details-container {
+                    @include flexCenter(100%, 45%, none, center, center, column);
+                    // position: relative;
+
+                    .lyrics-songname-cont {
+                        @include flexCenter(50%, 100%, 0px, center, center, column);
+                        // position: absolute;
+                        // top: 10px;
+                        // left: 10px;
+                        .song-name-cont {
+                            @include flexCenter(25px, 85%, 10px, center, center, column);
+                            box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+
+                            h5 {
+                                color:rgb(46, 194, 145);
+                            }
+                        }
+
+                        .song-date-cont {
+                            @include flexCenter(35px, 85%, 10px, center, flex-start, column);
+                            box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+
+                            p {
+                                font-size: 12px;
+                                color: #6d6d6d;
+                                margin-left: 5%;
+                            }
+                        }
+                    }
                     .lyrics-outter-container {
                         @include flexCenter(45px, 45px, 50%, center, center, row);
                         box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
@@ -226,31 +260,29 @@
                             }
                         }
                     }
-                
-                    .lyrics-songname-cont {
-                        @include flexCenter(60%, 75%, 20px, center, center, row);
-                        margin-right: 5%;
-                        box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-                        
-                        h4 {
-                            width: 85%;
-                            margin-left: 4%;
-                            text-align: start;
-                            color:rgb(46, 194, 145);
-                        }
-                    }
+
                 }
-                .lyrics-container {
-                    @include flexCenter(70%, 85%, 20px, center, center, column);
-                    box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-                    margin-left: 4%;
-                    .para-container {
-                        height: 90%;
-                        width: 90%;
-                        font-size: 13px;
-                        color: #e24f8c;
-                        overflow-y: scroll;
-                        text-align: start;
+
+                .track-play-container {
+                    @include flexCenter(100%, 55%, 20px, center, center, column);
+                    position: relative;
+                    
+                    .lyrics-container {
+                        @include flexCenter(100px, 90%, 15px, center, center, column);
+                        box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
+                        position: absolute;
+                        top: 10px;
+                        left: 10px;
+
+                        .para-container {
+                            height: 90%;
+                            width: 90%;
+                            font-size: 13px;
+                            line-height: 1.2;
+                            color: #e24f8c;
+                            overflow-y: scroll;
+                            text-align: start;
+                        }
                     }
                 }
             }

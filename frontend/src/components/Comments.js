@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Link } from 'react-router-dom'
-import TheContext from "../TheContext"
-import actions from '../api'
+import { Link } from "react-router-dom";
+import TheContext from "../TheContext";
+import actions from '../api';
 import heart2 from "../images/heart2.svg";
 import comments from "../images/comment.svg";
 import edit from "../images/edit.svg";
 import trash from "../images/trashbin.svg";
-import moment from 'moment'
+import send from "../images/send.svg";
+import share from "../images/share.svg";
+import flag from "../images/flag.svg";
+import moment from "moment";
 
 
 
@@ -19,10 +22,12 @@ function Comments(props) {
 
 
   const [comment, setComment] = useState();
-  const [commState, setCommState] = useState([])
-  const [totalComments, setTotalComments] = useState([])
+  const [commState, setCommState] = useState([]);
+  const [songUser, setSongUser] = useState();
+  const [totalComments, setTotalComments] = useState([]);
+
   const inputRef = useRef();
-  const renderRef = useRef(0)
+  const renderRef = useRef(0);
 
   useEffect(() => {
     actions
@@ -31,12 +36,17 @@ function Comments(props) {
         console.log('Returned these comments from DB: ', res.data.songComments)
         setCommState(res.data.songComments)
         setTotalComments(res.data.songComments.length)
+        setSongUser(res.data.songUser)
       })
       .catch(console.error)
   }, [songId, totalComments])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (comment === undefined) {
+      console.log("please type out your comment")
+      return null
+    }
     actions
       .addComment({ comment: comment, 
                     commSong: songId,
@@ -53,13 +63,32 @@ function Comments(props) {
 
   function GetComments(each) {
     const [totalCommentLikes, setTotalCommentLikes] = useState();
+    const [checkCommUser, setCheckCommUser] = useState();
+    const [menuBool, setMenuBool] = useState(false);
+
     const commentListRef = useRef();
     const commentTextRef = useRef();
-    const commentListOuterRef = useRef();
+    const commentListOuterRef = useRef();    
+    const likeTextRef = useRef();
+    const replyTextRef = useRef();
+    const listBtnsRef = useRef();
+    const clcThree = useRef();
+    const clcFour = useRef();
+    const dotMenuRef  = useRef();
+    const slideOutRef = useRef();
 
     useEffect(() => {
       setTotalCommentLikes(each.commLikes.length)
-    }, [totalCommentLikes])
+    }, [totalCommentLikes, each.commLikes.length])
+
+    useEffect(() => {
+      if (each.commUser._id === user._id) {
+        setCheckCommUser(true)
+      }
+      else {
+        setCheckCommUser(false)
+      }
+    }, [commState])
 
     const setCommentListRefs = useCallback(
       (node) => {
@@ -135,15 +164,6 @@ function Comments(props) {
         })
         .catch(console.error);
     }
-
-    const likeTextRef = useRef()
-    const replyTextRef = useRef()
-    const listBtnsRef = useRef()
-    const clcThree = useRef()
-    const clcFour = useRef()
-    const dotMenuRef  = useRef()
-    const slideOutRef = useRef()
-    const [menuBool, setMenuBool] = useState(false)
  
     const menuAnimations = (e) => {
       if (menuBool === false) {
@@ -182,6 +202,7 @@ function Comments(props) {
           <div className="comment-list-outer" ref={commentListOuterRef}>
             <p className="comment-username">
               {each.commUser.userName}
+              <span style={{color: "white", fontWeight: "bold", fontSize: "12px"}}>{songUser === each.commUser._id ? " 𑁦 song author" : null}</span>
             </p>
             <p className="comment-date">
               {each.commDate ? moment(each.commDate).fromNow() : '5 months ago'}
@@ -190,44 +211,48 @@ function Comments(props) {
               {each.comment}
             </p>
           </div>
+
           <div className="comment-list-buttons" ref={listBtnsRef}>
             <div className="comment-likereply-container clc-1">
-              <div className="comm-likereply-btn clb-1" onClick={likeCheck}>
-                <img className="social-icons heart" src={heart2} alt="like" />
+              <div className="comm-likereply-btn clb-1" onClick={checkCommUser ? () => deleteComment(each) : likeCheck}>
+                <img className="social-icons heart" src={checkCommUser ? trash : heart2 } alt="delete or like" />
                 <div className="likes-number-container">
-                  <p>{totalCommentLikes}</p>
+                  <p>{checkCommUser ? "" : totalCommentLikes}</p>
                 </div>
               </div>
               <div className="comm-likereply-text" ref={likeTextRef}>
-                Like
+                {checkCommUser ? "Delete" : "Like"}
               </div>
             </div>
+
             <div className="comment-likereply-container clc-2">
               <div className="comm-likereply-btn clb-2">
-                <img className="social-icons comment" src={comments} alt="reply" />
+                <img className="social-icons comment" src={checkCommUser ? edit : comments} alt="edit or reply" />
               </div>
               <div className="comm-likereply-text" ref={replyTextRef}>
-                Reply
+                {checkCommUser ? "Edit" : "Reply"}
               </div>
             </div>
+
             <div className="comment-popout-container" ref={slideOutRef}>
               <div className="comment-likereply-container clc-3" ref={clcThree}>
-                <div className="comm-likereply-btn clb-3" onClick={() => deleteComment(each)}>
-                  <img className="social-icons comment" src={trash} alt="reply" />
+                <div className="comm-likereply-btn clb-3">
+                  <img className="social-icons comment" src={share} alt="share" />
                 </div>
                 <div className="comm-likereply-text">
-                  Delete
+                  Share
                 </div>
               </div>
 
               <div className="comment-likereply-container clc-4" ref={clcFour}>
                 <div className="comm-likereply-btn clb-4">
-                  <img className="social-icons comment" src={edit} alt="reply" />
+                  <img className="social-icons comment" src={flag} alt="report flag" />
                 </div>
                 <div className="comm-likereply-text">
-                  Edit
+                  Report
                 </div>
               </div>
+
               <div className="dot-menu" onClick={(e) => menuAnimations(e)} ref={dotMenuRef}>
                 <div className="dots"></div>
                 <div className="dots"></div>
@@ -264,6 +289,9 @@ function Comments(props) {
                 onChange={(e) => setComment(e.target.value)}
                 placeholder='Make a comment...' 
                 ></input>
+            <button className="comment-button">
+              <img className="social-icons si-send" src={send} alt="send" />
+            </button>
           </form>
         </div>
  
@@ -271,7 +299,7 @@ function Comments(props) {
           <div className="comments-title">
             <div className="comments-title-inner">
               <p>
-                Comments - <span style={{color: 'red'}}>{totalComments}</span>
+                Comments - <span style={{color: '#ec6aa0'}}>{totalComments}</span>
               </p>
             </div>
           </div>
