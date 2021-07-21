@@ -12,6 +12,7 @@ import EditProfile from './components/EditProfile'
 import Profile from './components/Profile'
 import OtherProfile from './components/OtherProfile'
 import Notification from './components/Notification'
+import SongScreen from './components/SongScreen'
 
 function App() {
   const [navDisplayed, setNavDisplayed] = useState(false);
@@ -19,7 +20,7 @@ function App() {
   const [userViewed, setUserViewed] = useState({});
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
-  const [songId, setSongId] = useState({})
+  const [songId, setSongId] = useState();
   const [getSongName, setGetSongName] = useState('');
   const [songComments, setSongComments] = useState([]);
 
@@ -133,6 +134,7 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+          <Route exact path="/SongScreen" render={(props) => <SongScreen {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>

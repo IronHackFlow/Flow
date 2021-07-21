@@ -1,0 +1,96 @@
+
+.song-video-frame {
+    @include flexCenter(90%, 100%, 0px, space-evenly, center, column);
+    background: $charcoalBg;
+    background-size: cover;
+    background-position: center;
+
+    .song-video-inner {
+        @include flexCenter(75%, 90%, 50px, center, center, row);
+        box-shadow: inset 0px 3px 5px #a0a0a0, 
+                    inset 1px -3px 5px #525151;
+        border: 10px solid $charcoalBg;
+    }
+
+    .song-details-container {
+        @include flexCenter(20%, 90%, 50px, center, center, row);
+        // background: $charcoalBg;
+        border: 10px solid $charcoalBg;
+    }
+}
+
+.social-buttons {
+    @include flexCenter(9.5%, 100%, 0px, center, center, row);
+    background: $charcoalBg;
+    border-top: 1px solid #adadad;
+    border-bottom: 1px solid #616161;
+    box-shadow: inset 0px 3px 5px #a0a0a0, 
+                inset 1px -3px 5px #525151;
+
+    .social-list {
+        @include flexCenter(100%, 100%, 0px, space-between, center, row);
+
+        .individual-container {
+            @include flexCenter(100%, 25%, none, center, center, column);
+            
+            .individual-btn-prof {
+                @include flexCenter(50px, 50px, 50px, center, center, row);
+                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+
+                .individual-profile-pic {
+                    height: 85%;
+                    width: 85%;
+                    background-size: cover;
+                    overflow: hidden;
+                    background-position: center;
+                    border-radius: 50px;
+                    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+                    
+                    .prof-pic {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+            
+            .individual-btn {
+                @include flexCenter(38px, 38px, 50px, center, center, row);
+                position: relative;
+                color: #ec6aa0;
+                list-style-type: none;
+                margin-top: 5px;
+                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+                
+                &:active {
+                    box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                inset -2px -2px 3px #989898;
+                }
+                
+                .likes-number-container {
+                    @include flexCenter(30px, 30px, 100%, center, center, row);
+
+                    position: absolute;
+                    top: -20%;
+                    left: 50%;
+                    background: none;
+
+                    p {
+                        font-size: 15px;
+                        font-weight: bold;
+                        color: white;
+                    }
+                }
+            }
+            .individual-text {
+                height: 12px;
+                margin-top: 3px;
+
+                p {
+                    font-size: 12px;
+                    // font-weight: bold;
+                    color: white;
+                }
+            }
+        }
+    }
+}

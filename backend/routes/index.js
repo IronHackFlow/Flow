@@ -65,7 +65,7 @@ router.post(`/getSongRT`, async (req, res, next) => {
 });
 
 //search bar bobby
-router.post('/getManyUsersRT', async (req,res,next)=> {
+router.post('/getManyUsersRT', async (req,res,next) => {
       await User.find({userName: {$regex: req.body.search, $options: "$i"}})
       .then((user)=>{
         res.status(200).json(user)
@@ -75,15 +75,16 @@ router.post('/getManyUsersRT', async (req,res,next)=> {
 })
 
 router.post(`/getCommentsRT`, async (req, res, next) => {
-  // let body = { id: req.body.id }
-
-  Songs.findById(req.body.id)
+  let body = { id: req.body.id }
+  console.log(body, 'wtf why')
+  
+  Songs.findById(body.id)
     .populate('songComments')
     .populate({ path: 'songComments', populate: 'commUser'})
-    .then((song) => {
-      res.status(200).json(song);
+    .then((songComments) => {
+      res.status(200).json(songComments);
     })
-    .catch((err) => res.status(500).json(err));
+    .catch((err)=> res.status(500).json(err));
 })
 
 router.post(`/getACommentRT`, async (req, res, next) => {

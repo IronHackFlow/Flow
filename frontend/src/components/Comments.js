@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import TheContext from "../TheContext";
-import actions from '../api';
+import actions from "../api";
 import heart2 from "../images/heart2.svg";
 import comments from "../images/comment.svg";
 import edit from "../images/edit.svg";
@@ -11,15 +11,12 @@ import share from "../images/share.svg";
 import flag from "../images/flag.svg";
 import moment from "moment";
 
-
-
 function Comments(props) {
   const {
     user, songId
     } = React.useContext(
     TheContext
   );
-
 
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([]);
@@ -33,10 +30,10 @@ function Comments(props) {
     actions
       .getComments({ id: songId })
       .then((res) => {
-        console.log('Returned these comments from DB: ', res.data.songComments)
-        setCommState(res.data.songComments)
-        setTotalComments(res.data.songComments.length)
-        setSongUser(res.data.songUser)
+        console.log('Returned these comments from DB: ', res.data)
+        setCommState(res.data.songComments);
+        setTotalComments(res.data.songComments.length);
+        setSongUser(res.data.songUser);
       })
       .catch(console.error)
   }, [songId, totalComments])

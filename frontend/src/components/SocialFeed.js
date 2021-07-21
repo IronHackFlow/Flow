@@ -38,6 +38,7 @@ function SocialFeed(props) {
   const [songLikes, setSongLikes] = useState();
   const [songUserFollowers, setSongUserFollowers] = useState();
   const [songDate, setSongDate] = useState();
+  const [songUserId, setSongUserId] = useState();
 
   const popUpSearchRef = useRef();
   const popUpRef = useRef();
@@ -189,6 +190,7 @@ function SocialFeed(props) {
     if (inView) {
       setUserForSong(eachSong.song.songUser)
       setSongId(eachSong.song._id)
+      setSongUserId(eachSong.song._id)
       setGetSongName(eachSong.song.songName)
       setGetSongCaption(eachSong.song.songCaption)
       setUserViewed(eachSong.song.songUser)
@@ -294,9 +296,9 @@ function SocialFeed(props) {
                 dumbSearchRef={dumbSearchRef} 
                 />
         <Comments popUpRef={popUpRef}
-                  popUpComments={popUpComments}
                   poppedUp={poppedUp}
                   menuUp={menuUp}
+                  songUserId={songUserId}
                   opacityRef1={opacityRef1} 
                   opacityRef2={opacityRef2}
                   />
