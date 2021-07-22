@@ -1,94 +1,139 @@
-
-.song-video-frame {
-    @include flexCenter(90%, 100%, 0px, space-evenly, center, column);
-    background: $charcoalBg;
-    background-size: cover;
+.SongScreen {
+    background-size: 100% 65%;
     background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-    .song-video-inner {
-        @include flexCenter(75%, 90%, 50px, center, center, row);
-        box-shadow: inset 0px 3px 5px #a0a0a0, 
-                    inset 1px -3px 5px #525151;
-        border: 10px solid $charcoalBg;
+    .song-video-frame {
+        @include flexCenter(10%, 100%, 0px, space-evenly, center, column);
+        // position: relative;
+        background: linear-gradient(
+            319deg
+            , #555555, #7a7a7a);
+        // background-size: cover;
+        // background-position: center;
+        // border-radius: 0% 0% 20% 20%;
+        box-shadow: 0px 50px 50px 15px #3d3d3d;
+        border-bottom: 8px solid gray;
+
+        // .song-video-inner {
+        //     @include flexCenter(85%, 80%, 15px, center, center, row);
+        //     box-shadow: 4px 4px 10px 3px #383838, -2px -2px 5px 2px #a9a8a8;
+
+        //     .song-video-outer {
+        //         @include flexCenter(90%, 90%, 15px, center, center, row);
+        //         background-size: cover;
+        //         background-position: center;
+        //     }
+        // }
+
+        .song-video-floater {
+            position: absolute;
+            bottom: 0;
+
+        }
     }
-
     .song-details-container {
-        @include flexCenter(20%, 90%, 50px, center, center, row);
-        // background: $charcoalBg;
-        border: 10px solid $charcoalBg;
-    }
-}
+        @include flexCenter(40%, 100%, 0px, center, center, column);
+        border-top: 8px solid gray;
+        background: linear-gradient(
+            323deg
+            , #333333 0%, #4f4f4f 100%);
 
-.social-buttons {
-    @include flexCenter(9.5%, 100%, 0px, center, center, row);
-    background: $charcoalBg;
-    border-top: 1px solid #adadad;
-    border-bottom: 1px solid #616161;
-    box-shadow: inset 0px 3px 5px #a0a0a0, 
-                inset 1px -3px 5px #525151;
 
-    .social-list {
-        @include flexCenter(100%, 100%, 0px, space-between, center, row);
-
-        .individual-container {
-            @include flexCenter(100%, 25%, none, center, center, column);
+        .song-details {
+            @include flexCenter(80%, 100%, 0px, flex-end, center, column);
+            margin-bottom: 5%;
             
-            .individual-btn-prof {
-                @include flexCenter(50px, 50px, 50px, center, center, row);
-                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+            .song-details-inner {
+                @include flexCenter(50%, 90%, 30px, center, center, column);
+                background: linear-gradient(
+                    315deg
+                    , #383838, #464646);
+                box-shadow: 9px 9px 20px 0px #2b2b2b, -3px -3px 5px #666565;
 
-                .individual-profile-pic {
-                    height: 85%;
-                    width: 85%;
-                    background-size: cover;
-                    overflow: hidden;
-                    background-position: center;
-                    border-radius: 50px;
-                    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-                    
-                    .prof-pic {
-                        height: 100%;
-                        width: 100%;
-                    }
+                .song-details-outer {
+                    @include flexCenter(80%, 92%, 20px, center, center, column);
+                    box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
+
                 }
             }
-            
-            .individual-btn {
-                @include flexCenter(38px, 38px, 50px, center, center, row);
-                position: relative;
-                color: #ec6aa0;
-                list-style-type: none;
-                margin-top: 5px;
-                box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
-                
-                &:active {
-                    box-shadow: inset 2px 2px 3px #3d3f3f, 
-                                inset -2px -2px 3px #989898;
-                }
-                
-                .likes-number-container {
-                    @include flexCenter(30px, 30px, 100%, center, center, row);
+        }
+        .social-buttons {
+            @include flexCenter(20%, 100%, 0px, center, center, row);
+            // border-top: 1px solid #adadad;
+            border-bottom: 1px solid #616161;
+            // box-shadow: inset 0px 3px 5px #a0a0a0, 
+            //             inset 1px -3px 5px #525151;
 
-                    position: absolute;
-                    top: -20%;
-                    left: 50%;
-                    background: none;
+            .social-list {
+                @include flexCenter(100%, 100%, 0px, center, center, row);
 
-                    p {
-                        font-size: 15px;
-                        font-weight: bold;
-                        color: white;
+                .individual-container {
+                    @include flexCenter(100%, 25%, none, center, center, column);
+
+                    .individual-btn-prof {
+                        @include flexCenter(50px, 50px, 50px, center, center, row);
+                        box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
+
+                        .individual-profile-pic {
+                            height: 85%;
+                            width: 85%;
+                            background-size: cover;
+                            overflow: hidden;
+                            background-position: center;
+                            border-radius: 50px;
+                            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+
+                            .prof-pic {
+                                height: 100%;
+                                width: 100%;
+                            }
+                        }
                     }
-                }
-            }
-            .individual-text {
-                height: 12px;
-                margin-top: 3px;
 
-                p {
-                    font-size: 12px;
-                    // font-weight: bold;
-                    color: white;
+                    .individual-btn {
+                        @include flexCenter(40px, 40px, 10px, center, center, row);
+                        position: relative;
+                        color: #ec6aa0;
+                        list-style-type: none;
+                        margin-top: 5px;
+                        background: linear-gradient(
+                            145deg
+                            , #323232, #3b3b3b);
+                                box-shadow: 4px 4px 6px #282828, -4px -4px 6px #4f4f4f;
+
+                        &:active {
+                            box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                        inset -2px -2px 3px #989898;
+                        }
+
+                        .likes-number-container {
+                            @include flexCenter(30px, 30px, 100%, center, center, row);
+
+                            position: absolute;
+                            top: -20%;
+                            left: 50%;
+                            background: none;
+
+                            p {
+                                font-size: 15px;
+                                font-weight: bold;
+                                color: white;
+                            }
+                        }
+                    }
+                    .individual-text {
+                        height: 12px;
+                        margin-top: 3px;
+
+                        p {
+                            font-size: 12px;
+                            // font-weight: bold;
+                            color: white;
+                        }
+                    }
                 }
             }
         }

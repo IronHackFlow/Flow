@@ -18,6 +18,7 @@ function SongScreen(props) {
     } = React.useContext(
     TheContext
   );
+
   let gifsCopy = [...gifsArr]
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
@@ -124,76 +125,60 @@ function SongScreen(props) {
       })
       .catch(console.error);
   };
-
+//style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}
   return (
-    <div className="SongScreen">
-      <div className="song-video-frame"style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}>
+    <div className="SongScreen" style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}>
+      <div className="song-video-frame">
         <div className="song-video-inner">
-
+          <div className="song-video-outer" >
+            
+          </div>
         </div>
-        <div className="song-details-container">
 
+        <div className="song-video-floater">
         </div>
       </div>
 
-      <div className="social-buttons">
-        <div className="social-list">
-          <div className="individual-container">
-            <div className="individual-btn-prof">
-              <div className="individual-profile-pic">
-                <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}}>
-                  <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-            <div className="individual-container">
-                <div className="individual-btn" onClick={followCheck} ref={followBtn}>
-                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
-                <div className="likes-number-container">
-                    <p>{totalFollowers}</p>
-                </div>
-                </div>
-                <div className="individual-text">
-                <p>Followers</p>
-                </div>
-            </div>
-
-            <div className="individual-container">
-                <div className="individual-btn" onClick={likeCheck}>
-                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
-                <div className="likes-number-container">
-                    <p>{totalLikes}</p>
-                </div>
-                </div>
-                <div className="individual-text">
-                <p>Likes</p>
-                </div>
-            </div>
-
-            <div className="individual-container">
-                <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                <img className="social-icons heart" src={search} alt="search user icon"></img>
-                </div>
-                <div className="individual-text">
-                <p>Search</p>
-                </div>
-            </div>
-
-            <div className="individual-container">
-                <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
-                <div className="likes-number-container">
-                    <p>{songComments.length}</p>
-                </div>
-                </div>
-                <div className="individual-text">
-                <p>Comments</p>
-                </div>
+      <div className="song-details-container">
+        <div className="song-details">
+          <div className="song-details-inner">
+            <div className="song-details-outer">
+              
             </div>
           </div>
         </div>
+        
+        <div className="social-buttons">
+          <div className="social-list">
+            <div className="individual-container">
+              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
+                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Follow</p>
+              </div>
+            </div>
+
+            <div className="individual-container">
+              <div className="individual-btn" onClick={likeCheck}>
+                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Like</p>
+              </div>
+            </div>
+
+            <div className="individual-container">
+              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Comment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
