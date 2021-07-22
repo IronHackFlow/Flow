@@ -4,7 +4,7 @@ import actions from "../api";
 import TheContext from "../TheContext";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
-import search from "../images/search.svg";
+import play from "../images/play.svg";
 import heart2 from "../images/heart2.svg";
 import gifsArr from "../images/gifs.json";
 import gradientbg from "../images/gradient-bg-2.png"
@@ -141,9 +141,56 @@ function SongScreen(props) {
 
       <div className="song-details-container">
         <div className="song-details">
-          <div className="song-details-inner">
-            <div className="song-details-outer">
-              
+          <div className="song-play-container">
+            <div className="song-play-outer">
+              <div className="play-buttons-container">
+                <div className="play-buttons-left">
+
+                </div>
+
+                <div className="play-buttons-middle">
+                  <div className="play-outer">
+                    <div className="play-inner">
+                      <div className="play-img-container">
+                        <img src={play} alt="play icon" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="play-buttons-right">
+
+                </div>
+              </div>
+
+              <div className="play-slider-container">
+                <div className="play-slider-outer">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="song-listing-container">
+            <div className="song-listing-outer">
+              <div className="song-listing-inner">
+                <div className="listing-photo-container">
+                  <div className="listing-photo-outer">
+                    <div className="listing-photo-inner">
+                    </div>
+                  </div>
+                </div>
+                <div className="listing-track-container">
+                  <div className="track-title-container">
+                    <div className="track-title-outer">
+                      <p>This is the song</p>
+                    </div>
+                  </div>
+                  <div className="track-details-container">
+                    <p>by: Mikeepizzle</p>
+                    <p>on: 7/22/2021</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
