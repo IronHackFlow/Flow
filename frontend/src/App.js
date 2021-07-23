@@ -134,7 +134,7 @@ function App() {
           <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
-          <Route exact path="/SongScreen" render={(props) => <SongScreen {...props} />} />
+          <Route exact path="/SongScreen/:id" render={(props) => <SongScreen {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>

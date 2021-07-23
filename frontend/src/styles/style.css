@@ -3272,8 +3272,10 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
-          box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
+  -webkit-box-shadow: 20px 19px 30px #313030, -20px -20px 30px 0px #545353;
+          box-shadow: 20px 19px 30px #313030, -20px -20px 30px 0px #545353;
+  border: 1px solid #565656;
+  margin-top: 15%;
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-middle .play-outer .play-inner {
@@ -3321,7 +3323,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-middle .play-outer .play-inner .play-img-container img {
   height: 80%;
   width: 80%;
-  margin-left: 5%;
+  margin-left: 15%;
+  -webkit-filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+          filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-right {
@@ -3504,6 +3508,12 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: row;
   -webkit-box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
           box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
+  overflow: hidden;
+}
+
+.SongScreen .song-details-container .song-details .song-listing-container .song-listing-outer .song-listing-inner .listing-photo-container .listing-photo-outer .listing-photo-inner img {
+  height: 100%;
+  width: 100%;
 }
 
 .SongScreen .song-details-container .song-details .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container {

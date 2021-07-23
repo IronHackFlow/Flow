@@ -28,7 +28,6 @@ function Profile(props) {
   const profileIn = useRef();
   const profileIcon = useRef();
 
-
   useEffect(() => {
     profileRim.current.style.animation = "rim .5s linear forwards"
     profileOut.current.style.animation = "out .5s linear forwards"
@@ -86,7 +85,7 @@ function Profile(props) {
       <li key={`${eachSong._id}_${index}`} className="your-track-container">
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <Link to="/SongScreen" className="song-name-cont">
+            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: eachSong}} className="song-name-cont">
               <h5>{eachSong.songName}</h5>
             </Link>
             <div className="song-date-cont">

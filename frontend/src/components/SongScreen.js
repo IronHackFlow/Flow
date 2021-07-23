@@ -8,6 +8,7 @@ import play from "../images/play.svg";
 import heart2 from "../images/heart2.svg";
 import gifsArr from "../images/gifs.json";
 import gradientbg from "../images/gradient-bg-2.png"
+import moment from "moment";
 
 function SongScreen(props) {
   const {
@@ -22,6 +23,8 @@ function SongScreen(props) {
   let gifsCopy = [...gifsArr]
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
+  const [thisSong, setThisSong] = useState({})
+
   const followBtn = useRef();
 
   useEffect(() => {
@@ -31,6 +34,11 @@ function SongScreen(props) {
   useEffect(() => {
     setTotalLikes(props.songLikes?.length)
   }, [props.songLikes])
+
+  useEffect(() => {
+    setThisSong(props.location.songInfo)
+    console.log(thisSong)
+  }, [props.location]);
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
@@ -176,18 +184,19 @@ function SongScreen(props) {
                 <div className="listing-photo-container">
                   <div className="listing-photo-outer">
                     <div className="listing-photo-inner">
+                      <img src={thisSong.songUser.picture} alt="song user" />
                     </div>
                   </div>
                 </div>
                 <div className="listing-track-container">
                   <div className="track-title-container">
                     <div className="track-title-outer">
-                      <p>This is the song</p>
+                      <p>{thisSong.songName}</p>
                     </div>
                   </div>
                   <div className="track-details-container">
-                    <p>by: Mikeepizzle</p>
-                    <p>on: 7/22/2021</p>
+                    <p>by: {thisSong.songUser.userName}</p>
+                    <p>on: {moment(thisSong.songDate).format('LL')}</p>
                   </div>
                 </div>
               </div>
