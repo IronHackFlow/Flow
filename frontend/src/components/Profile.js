@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import actions from "../api";
 import TheContext from "../TheContext";
@@ -79,13 +79,13 @@ function Profile(props) {
    }
   }
 
-  const showSongs = () => {
-    return thisUserSongs.map((eachSong, index) => {
-      return (
-      <li key={`${eachSong._id}_${index}`} className="your-track-container">
+
+  function ProfileSongs(eachSong) {
+    return (
+      <li className="your-track-container">
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: eachSong}} className="song-name-cont">
+            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
               <h5>{eachSong.songName}</h5>
             </Link>
             <div className="song-date-cont">
@@ -112,11 +112,16 @@ function Profile(props) {
           </div>
         </div>
       </li>
+    )
+  }
+
+  const showProfileSongs = () => {
+    return thisUserSongs.map((eachSong, index) => {
+      return (
+        <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
       )
     })
   }
-
-  
 
   return (
     <div className="Profile">
@@ -130,7 +135,7 @@ function Profile(props) {
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
                 <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser?.picture} alt="prof pic"/>
+                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
                 </div>
               </div>
             </div>
@@ -150,7 +155,6 @@ function Profile(props) {
           <div className="users-details-container">
             <div className="users-details-outset">
               <div className="users-details-inset">
-
                 <div className="users-details-each ude-1">
                   <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
                   <p className="big-p">{thisUser.userAbout}</p>
@@ -206,7 +210,7 @@ function Profile(props) {
 
         <div className="profile-songs-container">
           <ul className="songs-list-container">
-            {showSongs()}
+            {showProfileSongs()}
           </ul>
         </div>
       </div>

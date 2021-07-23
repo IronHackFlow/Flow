@@ -106,7 +106,6 @@ const actions = {
   },
 
   getComments: async (dat) => {
-    console.log(dat, 'i cant understand')
     return await axios.post(`${baseURL}/getCommentsRT`, dat, resetHead());
   },
 

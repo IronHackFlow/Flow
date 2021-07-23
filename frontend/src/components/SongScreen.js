@@ -12,10 +12,7 @@ import moment from "moment";
 
 function SongScreen(props) {
   const {
-    user, userViewed, songId, 
-    toggleSocial, setToggleSocial,
-    toggleExplore, setToggleExplore,
-    songComments
+    user, userViewed, songId
     } = React.useContext(
     TheContext
   );
@@ -23,7 +20,8 @@ function SongScreen(props) {
   let gifsCopy = [...gifsArr]
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
-  const [thisSong, setThisSong] = useState({})
+  const [thisSong, setThisSong] = useState([userViewed]);
+  const [allSongs, setAllSongs] = useState([]);
 
   const followBtn = useRef();
 
@@ -37,8 +35,17 @@ function SongScreen(props) {
 
   useEffect(() => {
     setThisSong(props.location.songInfo)
-    console.log(thisSong)
+    console.log(props.location, 'oh hihihi')
   }, [props.location]);
+
+  useEffect(() => {
+    actions
+      .getUserSongs(props.location.songInfo.songUser)
+      .then((usersSongs) => {
+        setAllSongs(usersSongs.data);
+      })
+      .catch(console.error);
+  }, [props.location])
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
@@ -133,17 +140,14 @@ function SongScreen(props) {
       })
       .catch(console.error);
   };
-//style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}
+
   return (
     <div className="SongScreen" style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}>
       <div className="song-video-frame">
         <div className="song-video-inner">
           <div className="song-video-outer" >
-            
-          </div>
-        </div>
 
-        <div className="song-video-floater">
+          </div>
         </div>
       </div>
 
@@ -184,7 +188,7 @@ function SongScreen(props) {
                 <div className="listing-photo-container">
                   <div className="listing-photo-outer">
                     <div className="listing-photo-inner">
-                      <img src={thisSong.songUser.picture} alt="song user" />
+                      <img src={thisSong.songUser?.picture} alt="song user" />
                     </div>
                   </div>
                 </div>
@@ -195,7 +199,7 @@ function SongScreen(props) {
                     </div>
                   </div>
                   <div className="track-details-container">
-                    <p>by: {thisSong.songUser.userName}</p>
+                    <p>by: <span style={{color: '#b7a2a6'}}>{thisSong.songUser?.userName}</span></p>
                     <p>on: {moment(thisSong.songDate).format('LL')}</p>
                   </div>
                 </div>

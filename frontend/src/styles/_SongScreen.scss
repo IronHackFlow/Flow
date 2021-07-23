@@ -7,39 +7,13 @@
 
     .song-video-frame {
         @include flexCenter(0%, 100%, 0px, space-evenly, center, column);
-        // position: relative;
-        background: linear-gradient(
-            319deg
-            , #555555, #7a7a7a);
-        // background-size: cover;
-        // background-position: center;
-        // border-radius: 0% 0% 20% 20%;
+        background: linear-gradient(319deg, #555555, #7a7a7a);
         box-shadow: 0px 50px 50px 15px #3d3d3d;
-
-
-        // .song-video-inner {
-        //     @include flexCenter(85%, 80%, 15px, center, center, row);
-        //     box-shadow: 4px 4px 10px 3px #383838, -2px -2px 5px 2px #a9a8a8;
-
-        //     .song-video-outer {
-        //         @include flexCenter(90%, 90%, 15px, center, center, row);
-        //         background-size: cover;
-        //         background-position: center;
-        //     }
-        // }
-
-        .song-video-floater {
-            position: absolute;
-            bottom: 0;
-
-        }
     }
+
     .song-details-container {
         @include flexCenter(60%, 100%, 40px 40px 0px 0px, center, center, column);
-        background: linear-gradient(
-            323deg
-            , #333333 0%, #4f4f4f 100%);
-
+        background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
 
         .song-details {
             @include flexCenter(78%, 100%, 0px, center, center, column);
@@ -95,6 +69,7 @@
                         }
 
                     }
+
                     .play-slider-container {
                         @include flexCenter(13%, 100%, 0px, center, flex-start, row);
 
@@ -103,7 +78,6 @@
                             box-shadow: inset 3px 3px 4px #303131, inset -3px -3px 4px 0px #585858;
                         }
                     }
-
                 }
             }
             .song-listing-container {
@@ -111,9 +85,7 @@
 
                 .song-listing-outer {
                     @include flexCenter(88%, 90%, 50px, center, center, column);
-                    background: linear-gradient(
-                        315deg
-                        , #383838, #464646);
+                    background: linear-gradient(315deg, #383838, #464646);
                     box-shadow: 3px 3px 8px 0px #252525, -3px -3px 5px #666565;
 
                     .song-listing-inner {
@@ -140,6 +112,7 @@
                                 }
                             }
                         }
+
                         .listing-track-container {
                             @include flexCenter(100%, 71%, 0px, center, center, column);
 
@@ -177,12 +150,10 @@
                 }
             }
         }
+
         .social-buttons {
             @include flexCenter(22%, 100%, 0px, center, flex-start, row);
-            // border-top: 1px solid #adadad;
             border-bottom: 1px solid #616161;
-            // box-shadow: inset 0px 3px 5px #a0a0a0, 
-            //             inset 1px -3px 5px #525151;
 
             .social-list {
                 @include flexCenter(90%, 100%, 0px, center, center, row);
@@ -191,26 +162,6 @@
                     @include flexCenter(100%, 20%, 10px, space-around, center, column);
                     margin: 0% 2%;
                     box-shadow: 4px 4px 6px #282828, -3px -3px 4px #4f4f4f;
-
-                    .individual-btn-prof {
-                        @include flexCenter(50px, 50px, 50px, center, center, row);
-                        box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
-
-                        .individual-profile-pic {
-                            height: 85%;
-                            width: 85%;
-                            background-size: cover;
-                            overflow: hidden;
-                            background-position: center;
-                            border-radius: 50px;
-                            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-
-                            .prof-pic {
-                                height: 100%;
-                                width: 100%;
-                            }
-                        }
-                    }
 
                     .individual-btn {
                         @include flexCenter(40px, 40px, 50px, center, center, row);
@@ -243,6 +194,7 @@
                             }
                         }
                     }
+                    
                     .individual-text {
                         height: 12px;
                         margin-top: 3px;

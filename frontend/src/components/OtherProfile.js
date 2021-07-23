@@ -27,6 +27,7 @@ function OtherProfile(props) {
 
   useEffect(() => {
     setThisUser(props.location.profileInfo)
+    console.log(thisUser)
   }, [props.location]);
   
   useEffect(() => {
