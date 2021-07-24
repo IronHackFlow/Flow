@@ -3247,9 +3247,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -3257,9 +3257,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-left .play-arrow-container {
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
+  height: 85%;
+  width: 80%;
+  border-radius: 25px 5px 5px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3275,7 +3275,20 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
           flex-direction: column;
   -webkit-box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
           box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
-  color: white;
+}
+
+.SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-left .play-arrow-container img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-left .play-arrow-container:active {
+  background: #e24f8c;
+  border: 1px solid #6f6f6f;
+  -webkit-box-shadow: inset 3px 3px 5px #863054, inset -3px -3px 3px 0px #ef7cab;
+          box-shadow: inset 3px 3px 5px #863054, inset -3px -3px 3px 0px #ef7cab;
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-middle {
@@ -3380,9 +3393,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -3390,9 +3403,9 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-right .play-arrow-container {
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
+  height: 85%;
+  width: 80%;
+  border-radius: 5px 25px 5px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3409,6 +3422,20 @@ footer .nav-buttons .nav-list .nav-buttons-containers .button-title-container {
   -webkit-box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
           box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
   color: white;
+}
+
+.SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-right .play-arrow-container img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-buttons-container .play-buttons-right .play-arrow-container:active {
+  background: #e24f8c;
+  border: 1px solid #6f6f6f;
+  -webkit-box-shadow: inset 3px 3px 5px #863054, inset -3px -3px 3px 0px #ef7cab;
+          box-shadow: inset 3px 3px 5px #863054, inset -3px -3px 3px 0px #ef7cab;
 }
 
 .SongScreen .song-details-container .song-details .song-play-container .song-play-outer .play-slider-container {

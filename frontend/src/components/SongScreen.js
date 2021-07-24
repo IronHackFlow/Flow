@@ -5,6 +5,8 @@ import TheContext from "../TheContext";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
 import play from "../images/play.svg";
+import backward from "../images/backward.svg";
+import forward from "../images/forward.svg";
 import heart2 from "../images/heart2.svg";
 import gifsArr from "../images/gifs.json";
 import gradientbg from "../images/gradient-bg-2.png"
@@ -192,7 +194,7 @@ function SongScreen(props) {
               <div className="play-buttons-container">
                 <div className="play-buttons-left">
                   <div className="play-arrow-container" onClick={() => findCurrentSong("back")}>
-                    back
+                    <img src={backward} alt="go back" />
                   </div>
                 </div>
 
@@ -208,7 +210,7 @@ function SongScreen(props) {
 
                 <div className="play-buttons-right">
                   <div className="play-arrow-container" onClick={() => findCurrentSong("next")}>
-                    next
+                    <img src={forward} alt="go forward" />
                   </div>
                 </div>
               </div>
