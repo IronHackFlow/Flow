@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import actions from "../api";
 import TheContext from "../TheContext";
 import follow from "../images/follow.svg";
@@ -16,11 +16,13 @@ function SongScreen(props) {
     } = React.useContext(
     TheContext
   );
+  
+  let history = useHistory();
 
   let gifsCopy = [...gifsArr]
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
-  const [thisSong, setThisSong] = useState([userViewed]);
+  const [thisSong, setThisSong] = useState({});
   const [allSongs, setAllSongs] = useState([]);
 
   const followBtn = useRef();
@@ -46,6 +48,14 @@ function SongScreen(props) {
       })
       .catch(console.error);
   }, [props.location])
+
+  const closeSongWindow = () => {
+    if (thisSong.songUser._id === user._id)
+      history.push(`/profile/${thisSong.songUser?._id}`)
+    else {
+      history.goBack()
+    }
+  }
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
@@ -141,15 +151,39 @@ function SongScreen(props) {
       .catch(console.error);
   };
 
+  const findCurrentSong = (direction) => {
+      allSongs.filter((each, index) => {
+        if (each._id === thisSong._id) {
+          if (direction === "back") {
+            if (index === 0) {
+              return null
+            }
+            else {
+             setThisSong(allSongs[index - 1])
+            }
+          }
+          else {
+            if (index === allSongs.length - 1) {
+              return null
+            }
+            else {
+              setThisSong(allSongs[index + 1])
+            }
+          }
+        }
+      })
+  }
+
   return (
     <div className="SongScreen" style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}>
       <div className="song-video-frame">
         <div className="song-video-inner">
-          <div className="song-video-outer" >
+          <div className="song-video-outer">
 
           </div>
         </div>
       </div>
+      <div className="close-me" onClick={closeSongWindow}>X</div>
 
       <div className="song-details-container">
         <div className="song-details">
@@ -157,7 +191,9 @@ function SongScreen(props) {
             <div className="song-play-outer">
               <div className="play-buttons-container">
                 <div className="play-buttons-left">
-
+                  <div className="play-arrow-container" onClick={() => findCurrentSong("back")}>
+                    back
+                  </div>
                 </div>
 
                 <div className="play-buttons-middle">
@@ -171,7 +207,9 @@ function SongScreen(props) {
                 </div>
 
                 <div className="play-buttons-right">
-
+                  <div className="play-arrow-container" onClick={() => findCurrentSong("next")}>
+                    next
+                  </div>
                 </div>
               </div>
 

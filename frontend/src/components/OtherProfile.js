@@ -79,15 +79,15 @@ function OtherProfile(props) {
    }
   }
 
-  const showSongs = () => {
-    return thisUserSongs.map((eachSong, index) => {
-      return (
-      <li key={`${eachSong._id}_${index}`} className="your-track-container">
+  function ProfileSongs(eachSong) {
+    return (
+      <li className="your-track-container">
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <div className="song-name-cont">
+            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
               <h5>{eachSong.songName}</h5>
-            </div>
+            </Link>
+
             <div className="song-date-cont">
               <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
               <p>{eachSong.songLikes.length} Likes</p>
@@ -112,6 +112,13 @@ function OtherProfile(props) {
           </div>
         </div>
       </li>
+    )
+  }
+
+  const showProfileSongs = () => {
+    return thisUserSongs.map((eachSong, index) => {
+      return (
+        <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
       )
     })
   }
@@ -207,7 +214,7 @@ function OtherProfile(props) {
 
         <div className="profile-songs-container">
           <ul className="songs-list-container">
-            {showSongs()}
+            {showProfileSongs()}
           </ul>
         </div>
       </div>
