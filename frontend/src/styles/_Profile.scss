@@ -5,10 +5,11 @@
 }
 
 .profile-header {
-    @include flexCenter(49.4%, 100%, none, space-evenly, center, column);
-    background-color: #686a6b;
-    border-bottom: 5px solid #686a6b;
-    box-shadow: inset -1px -3px 5px 0px #8e8b8b;
+    @include flexCenter(50%, 100%, 0px 0px 30px 30px, space-evenly, center, column);
+    background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
+    box-shadow: 0px 20px 50px 10px #656565;
+    position: absolute;
+    z-index: 1;
 
     .upper-filler {
         @include flexCenter(10%, 100%, none, flex-end, center, row);
@@ -16,7 +17,7 @@
 
         .inner-filler {
             @include flexCenter(50%, 70%, 50px, row);
-            box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+            box-shadow: inset 3px 3px 4px #908c8c, inset -3px -3px 4px #d2d2d2;
         }
     }
 
@@ -25,16 +26,14 @@
     
         .username-pic-outset {
             @include flexCenter(90%, 93%, 50px, center, center, row);
-            box-shadow: inset 3px 3px 4px #4f5050, 
-                        inset -3px -3px 4px #8c8f90;
+            box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
     
             .profile-pic-container {
                 @include flexCenter(100%, 30%, none, center, center, row);
     
                 .profile-pic-outset {
                     @include flexCenter(75%, 75%, 100%, center, center, row);
-                    box-shadow: 3px 3px 4px #525252, 
-                                -2px -2px 3px #939597;
+                    box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
     
                     .profile-pic-inset {
                         @include flexCenter(88%, 88%, 100%, center, center, row);
@@ -45,6 +44,7 @@
                             height: 100%;
                             width: 100%;
                             object-fit: cover;
+                            border-radius: 50%;
                         }
                     }
                 }
@@ -55,13 +55,11 @@
 
                 .username-outset {
                     @include flexCenter(80%, 90%, 50px, center, center, row);
-                    box-shadow: inset 3px 3px 4px #4f5050, 
-                                inset -3px -3px 4px #8c8f90;
+                    box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
                 
                     .username-inset {
                         @include flexCenter(70%, 85%, 50px, center, center, row);
-                        box-shadow: 3px 3px 4px #525252, 
-                                    -2px -2px 3px #939597;
+                        box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
                 
                         .username-text-me {
                             width: 75%;
@@ -89,12 +87,11 @@
     
             .users-details-outset {
                 @include flexCenter(90%, 90%, 25px, center, center, row);
-                box-shadow: inset 3px 3px 4px #4f5050, 
-                            inset -3px -3px 4px #8c8f90;
+                box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
 
                 .users-details-inset {
                     @include flexCenter(90%, 90%, 20px, flex-start, center, column);
-                    box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+                    box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
                     overflow-y: scroll;
     
                     .users-details-each {
@@ -102,7 +99,7 @@
                         color: pink;
                         margin-top: 5%;
                         border-radius: 20px;
-                        box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+                        box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
                     }
     
                     .ude-1 {
@@ -151,17 +148,17 @@
                 .edit-profile-outset, 
                 .log-profile-outset {
                     @include flexCenter(80%, 80%, 50%, center, center, row);
-                    box-shadow: 3px 3px 4px #525252, -2px -2px 3px #939597;
+                    box-shadow: 3px 3px 4px #777676, -2px -2px 3px #cfcfcf;
 
                     .edit-profile-inset, 
                     .log-profile-inset {
                         @include flexCenter(90%, 90%, 50%, center, center, row);
-                        box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+                        box-shadow: inset 2px 2px 3px #808080, inset -2px -2px 3px #cccccc;
 
                         .edit-profile-button, 
                         .log-profile-button {
                             @include flexCenter(70%, 70%, 50%, center, center, row);
-                            box-shadow: 3px 3px 4px #525252, -2px -2px 3px #939597;
+                            box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
 
                             .profile-link {
                                 @include flexCenter(100%, 100%, none, center, center, row);
@@ -175,11 +172,11 @@
 }
 
 .profile-post-feed {
-    @include flexCenter(50%, 100%, none, center, center, column);
-    box-shadow: inset 0px 3px 2px 0px #b9b7b7;
-    overflow-y: auto;
-    // background: #ecf0f3;
+    @include flexCenter(53%, 100%, none, center, center, column);
     background: linear-gradient(0deg, #dfdfdf 0%, #ecf0f3 100%);
+    position: absolute;
+    bottom: 0;
+    overflow-y: auto;
 
     .feed-title-container {
         @include flexCenter(10%, 100%, 20px, center, center, column);
@@ -193,15 +190,16 @@
     }
 
     .profile-songs-container {
-        @include flexCenter(60%, 100%, 18px, space-evenly, center, row);
+        @include flexCenter(65%, 100%, 18px, space-evenly, center, row);
 
         .songs-list-container {
             @include flexCenter(90%, 88%, 15px, flex-start, flex-start, column);
             // box-shadow: inset 3px 3px 4px #c5c5c5, 
             //             inset -3px -3px 5px #ffffff;
             // scroll-snap-type: y mandatory;
-            border: 2px solid #ecf0f3;
+            border: 3px solid #ecf0f3;
             overflow-y: scroll;
+            box-shadow: inset 0px -2px 3px #bebebe;
 
             .your-track-container {
                 // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
@@ -320,7 +318,7 @@
     }
 
     .nb-profile {
-        height: 30%;
+        height: 25%;
         // width: 100%;
         // position: fixed;
         // bottom: 0;
@@ -333,7 +331,7 @@
         // box-shadow: inset 1px 5px 4px #ffffff;
     
         .nav-list {
-            @include flexCenter(63%, 92%, 50px, center, center, row);
+            @include flexCenter(80px, 92%, 50px, center, center, row);
             box-shadow: 8px 8px 10px 0px #adadad, -9px -9px 20px #ffffff;
             border: 1px solid #d1d1d1;
             background: #dddddd;

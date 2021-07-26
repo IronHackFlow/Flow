@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import actions from "../api";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
-import avatar3 from '../images/avatar3.svg'
+import avatar from '../images/avatar.svg'
 import social from '../images/social.svg'
 import editicon from '../images/edit.svg'
 import logouticon from '../images/logout.svg'
@@ -23,17 +23,27 @@ function Profile(props) {
   const [thisUser, setThisUser] = useState([userViewed]);
   const [thisUserSongs, setThisUserSongs] = useState([]);
 
+  const profileContainer = useRef();
   const profileRim = useRef();
   const profileOut = useRef();
-  const profileIn = useRef();
   const profileIcon = useRef();
 
-  // useEffect(() => {
+  useEffect(() => {
   //   profileRim.current.style.animation = "rim .5s linear forwards"
   //   profileOut.current.style.animation = "out .5s linear forwards"
   //   profileIn.current.style.animation = "in .5s linear forwards"
   //   profileIcon.current.style.animation = "iconScale .5s linear forwards"
-  // }, [])
+    profileContainer.current.style.background = "#ec6aa0";
+    profileContainer.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+    profileContainer.current.style.border = "1px solid #ec6aa0"
+    profileContainer.current.style.transition = "all .4s"
+    profileRim.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
+    profileRim.current.style.height = "42px"
+    profileRim.current.style.width = "42px"
+    profileRim.current.style.transition = "all .4s"
+    profileOut.current.style.boxShadow = "none"
+    profileIcon.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+  }, [])
 
   useEffect(() => {
     actions
@@ -275,11 +285,11 @@ function Profile(props) {
             </div> */}
           </div>
 
-          <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}}>
+          <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}} ref={profileContainer}>
             <div className="nav-buttons-rim" ref={profileRim}>
               <div className="nav-buttons-outset" ref={profileOut}>
-                <div className="nav-buttons-inset" ref={profileIn}>
-                  <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon} alt="avatar icon"></img>
+                <div className="nav-buttons-inset">
+                  <img className="button-icons bi-profile-p" src={avatar} ref={profileIcon} alt="avatar icon"></img>
                 </div>
               </div>
             </div>

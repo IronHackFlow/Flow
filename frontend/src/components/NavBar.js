@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import actions from "../api"
 import mic from "../images/record2.svg";
-import avatar3 from "../images/avatar3.svg";
+import avatar from "../images/avatar.svg";
 import social from "../images/social.svg";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
@@ -24,10 +24,12 @@ function NavBar(props) {
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
 
+  const socialContainer = useRef();
   const socialRim = useRef();
   const socialOut = useRef();
   const socialIn = useRef();
   const socialIcon = useRef();
+  const exploreContainer = useRef();
   const exploreRim = useRef();
   const exploreOut = useRef();
   const exploreIn = useRef();
@@ -56,24 +58,44 @@ function NavBar(props) {
 
   useEffect(() => {
     if (toggleExplore === true) {
-      exploreRim.current.style.animation = "rim .5s linear forwards"
-      exploreOut.current.style.animation = "out .5s linear forwards"
-      exploreIn.current.style.animation = "in .5s linear forwards"
-      exploreIcon.current.style.animation = "iconScale .5s linear forwards"
-      socialRim.current.style.animation = "none"
-      socialOut.current.style.animation = "none"
-      socialIn.current.style.animation = "none"
-      socialIcon.current.style.animation = "none"
+      exploreContainer.current.style.background = "#ec6aa0";
+      exploreContainer.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+      exploreContainer.current.style.border = "1px solid #ec6aa0"
+      exploreContainer.current.style.transition = "all .4s"
+      exploreRim.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
+      exploreRim.current.style.height = "42px"
+      exploreRim.current.style.width = "42px"
+      exploreRim.current.style.transition = "all .4s"
+      exploreOut.current.style.boxShadow = "none"
+      exploreIcon.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+      socialContainer.current.style.background = "initial"
+      socialContainer.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
+      socialContainer.current.style.border = "none"
+      socialRim.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
+      socialRim.current.style.height = "45px"
+      socialRim.current.style.width = "45px"
+      socialOut.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
+      socialIcon.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
     }
     else {
-      socialRim.current.style.animation = "rim .5s linear forwards"
-      socialOut.current.style.animation = "out .5s linear forwards"
-      socialIn.current.style.animation = "in .5s linear forwards"
-      socialIcon.current.style.animation = "iconScale .5s linear forwards"
-      exploreRim.current.style.animation = "none"
-      exploreOut.current.style.animation = "none"
-      exploreIn.current.style.animation = "none"
-      exploreIcon.current.style.animation = "none"
+      socialContainer.current.style.background = "#ec6aa0";
+      socialContainer.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+      socialContainer.current.style.border = "1px solid #ec6aa0"
+      socialContainer.current.style.transition = "all .4s"
+      socialRim.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
+      socialRim.current.style.height = "42px"
+      socialRim.current.style.width = "42px"
+      socialRim.current.style.transition = "all .4s"
+      socialOut.current.style.boxShadow = "none"
+      socialIcon.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+      exploreContainer.current.style.background = "initial"
+      exploreContainer.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
+      exploreContainer.current.style.border = "none"
+      exploreRim.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
+      exploreRim.current.style.height = "45px"
+      exploreRim.current.style.width = "45px"
+      exploreOut.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
+      exploreIcon.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
     }
   }, [toggleExplore, toggleSocial])
 
@@ -229,22 +251,21 @@ function NavBar(props) {
 
       <div className="nav-buttons">
         <div className="nav-list">
-          <div className="nav-buttons-containers">
+          <div className="nav-list-inner">
+          <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                    <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
-                  </Link>
-                </div>
+                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
+                  <img className="button-icons bi-record" src={mic} alt="record song icon"></img>
+                </Link>
               </div>
             </div>  
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Record
-            </div>
+            </div> */}
           </div>
 
-          <div className="nav-buttons-containers">
+          <div className="nav-buttons-containers" ref={exploreContainer}>
             <div className="nav-buttons-rim" ref={exploreRim}>
               <div className="nav-buttons-outset" ref={exploreOut}>
                 <div className="nav-buttons-inset" ref={exploreIn} onClick={() => { 
@@ -255,12 +276,12 @@ function NavBar(props) {
                 </div>
               </div>
             </div>  
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Explore
-            </div>
+            </div> */}
           </div>
 
-          <div className="nav-buttons-containers">
+          <div className="nav-buttons-containers" ref={socialContainer}>
             <div className="nav-buttons-rim" ref={socialRim}>
               <div className="nav-buttons-outset" ref={socialOut}>
                 <div className="nav-buttons-inset" ref={socialIn}
@@ -272,25 +293,24 @@ function NavBar(props) {
                 </div>
               </div>
             </div>  
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Following
-            </div>
+            </div> */}
           </div>
 
-          <div className="nav-buttons-containers">
+          <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}}>
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={user._id ? ("/profile") : ("/auth")}>
-                    <img className="button-icons bi-profile" src={avatar3} alt="user profile icon"></img>
-                  </Link>
-                </div>
+                <Link to={user._id ? ("/profile") : ("/auth")} className="nav-buttons-inset">
+                  <img className="button-icons bi-profile" src={avatar} alt="user profile icon"></img>
+                </Link>
               </div>
             </div>
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Profile
-            </div>
+            </div> */}
           </div>
+        </div>
         </div>
       </div>
     </footer>
