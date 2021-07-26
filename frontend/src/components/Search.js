@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import actions from "../api";
 import { Link } from "react-router-dom";
+import actions from "../api";
+import send from "../images/send.svg";
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState(
@@ -26,7 +27,6 @@ function Search(props) {
        console.log(ele)
         return (
           <div className="search-results">
-
             <div className="search-username-container">
               <p className="comment-username">{`@${ele.userName}`}</p>
             </div>
@@ -40,11 +40,12 @@ function Search(props) {
                 </div>
               </div>
             </div>
-
           </div>
         );
-      });  ///this part is for cases where the search returns 2-4
-    }else {
+      });
+    }
+    //this part is for cases where the search returns 2-4
+    else {
       return <h4>...thinking</h4>;
     }
   };
@@ -62,22 +63,22 @@ function Search(props) {
   };
 
   return (
-    <div ref={props.popUpSearchRef} className="comment-pop-out">
+    <div className="comment-pop-out" ref={props.popUpSearchRef}>
       <div className="inner-com">
         <div className="com-cont-1">
-          <div className="input-container">
-            <div className="input-inset">
-              <form className="social-comment-form">
-                <input onChange={listUsers}
-                      className="social-comment-input"
-                      style={{opacity: '0'}}
-                      ref={props.dumbSearchRef}
-                      type='text' 
-                      placeholder='Search' 
-                      ></input>
-              </form>
-            </div>
-          </div>
+          <form className="social-comment-form">
+            <input onChange={listUsers}
+                  className="social-comment-input"
+                  style={{opacity: '0'}}
+                  ref={props.dumbSearchRef}
+                  type='text' 
+                  placeholder='Search' 
+                  >
+            </input>
+            <button className="comment-button" ref={props.searchButtonRef} style={{opacity: '0'}}>
+              <img className="social-icons si-send" src={send} alt="send" />
+            </button>
+          </form>
         </div>
 
         <div className="com-cont-2">
@@ -92,7 +93,6 @@ function Search(props) {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

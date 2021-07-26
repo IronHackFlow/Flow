@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 import actions from "../api";
 import TheContext from "../TheContext";
 import follow from "../images/follow.svg";
@@ -7,21 +8,17 @@ import comments from "../images/comment.svg";
 import play from "../images/play.svg";
 import backward from "../images/backward.svg";
 import forward from "../images/forward.svg";
+import close from "../images/close.svg";
 import heart2 from "../images/heart2.svg";
 import gifsArr from "../images/gifs.json";
 import gradientbg from "../images/gradient-bg-2.png"
-import moment from "moment";
 
 function SongScreen(props) {
-  const {
-    user, userViewed, songId
-    } = React.useContext(
-    TheContext
-  );
+  const { user } = React.useContext(TheContext);
   
   let history = useHistory();
+  let gifsCopy = [...gifsArr];
 
-  let gifsCopy = [...gifsArr]
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
   const [thisSong, setThisSong] = useState({});
@@ -30,16 +27,16 @@ function SongScreen(props) {
   const followBtn = useRef();
 
   useEffect(() => {
-    setTotalFollowers(props.songUserFollowers?.length)
-  }, [props.songUserFollowers])
+    setTotalFollowers(thisSong.songUser?.followers?.length)
+  }, [thisSong])
 
   useEffect(() => {
-    setTotalLikes(props.songLikes?.length)
-  }, [props.songLikes])
+    setTotalLikes(thisSong.songLikes?.length)
+  }, [thisSong])
 
   useEffect(() => {
     setThisSong(props.location.songInfo)
-    console.log(props.location, 'oh hihihi')
+    console.log("location info passed from click", props.location)
   }, [props.location]);
 
   useEffect(() => {
@@ -55,7 +52,7 @@ function SongScreen(props) {
     if (thisSong.songUser._id === user._id)
       history.push(`/profile/${thisSong.songUser?._id}`)
     else {
-      history.goBack()
+      history.push({pathname: `/profile/other/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
     }
   }
 
@@ -65,7 +62,7 @@ function SongScreen(props) {
   }
 
   const followCheck = () => {
-    if (user._id === userViewed._id) {
+    if (user._id === thisSong.songUser._id) {
       console.log(`You can't follow yourself lol`)
       return null
     }
@@ -75,7 +72,7 @@ function SongScreen(props) {
         let deleteObj = null
 
         res.data.userFollows.forEach((each) => {
-          if (each.followed === userViewed._id) {
+          if (each.followed === thisSong.songUser._id) {
             deleteObj = each
           }
         })
@@ -92,7 +89,7 @@ function SongScreen(props) {
 
   const likeCheck = () => {
     actions
-      .getSong({ id: songId })
+      .getSong({ id: thisSong._id })
       .then((res) => {
         let deleteObj = null
 
@@ -114,7 +111,7 @@ function SongScreen(props) {
 
   const followUser = () => {
     actions
-      .addFollow({ followedUser: userViewed._id, 
+      .addFollow({ followedUser: thisSong.songUser._id, 
                    followDate: new Date() })
       .then((res) => {
         console.log(`added a follow to: `, res.data)
@@ -125,7 +122,7 @@ function SongScreen(props) {
 
   const deleteFollow = (deleteObj) => {
     actions
-      .deleteFollow({ followedUser: userViewed._id, deleteObj: deleteObj })
+      .deleteFollow({ followedUser: thisSong.songUser._id, deleteObj: deleteObj })
       .then((res) => {
         console.log(`deleted a follow from: `, res.data)
         setTotalFollowers(res.data.followers.length)
@@ -135,7 +132,7 @@ function SongScreen(props) {
 
   const likePost = () => {
     actions
-      .addLike({ likerSong: songId, likeDate: new Date(), commLike: false })
+      .addLike({ likerSong: thisSong._id, likeDate: new Date(), commLike: false })
       .then((res) => {
         console.log(`added a like to: `, res.data)
         setTotalLikes(res.data.songLikes.length)
@@ -145,7 +142,7 @@ function SongScreen(props) {
 
   const deleteLike = (deleteObj) => {
     actions
-      .deleteLike({ likerSong: songId, deleteObj: deleteObj, commLike: false })
+      .deleteLike({ likerSong: thisSong._id, deleteObj: deleteObj, commLike: false })
       .then((res) => {
         console.log(`deleted a like from: `, res.data)
         setTotalLikes(res.data.songLikes.length)
@@ -154,30 +151,38 @@ function SongScreen(props) {
   };
 
   const findCurrentSong = (direction) => {
-      allSongs.filter((each, index) => {
-        if (each._id === thisSong._id) {
-          if (direction === "back") {
-            if (index === 0) {
-              return null
-            }
-            else {
-             setThisSong(allSongs[index - 1])
-            }
+    allSongs.filter((each, index) => {
+      if (each._id === thisSong._id) {
+        if (direction === "back") {
+          if (index === 0) {
+            return null
           }
           else {
-            if (index === allSongs.length - 1) {
-              return null
-            }
-            else {
-              setThisSong(allSongs[index + 1])
-            }
+           setThisSong(allSongs[index - 1])
           }
         }
-      })
+        else {
+          if (index === allSongs.length - 1) {
+            return null
+          }
+          else {
+            setThisSong(allSongs[index + 1])
+          }
+        }
+      }
+    })
   }
 
   return (
     <div className="SongScreen" style={{backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`}}>
+      <div className="close-window-container">
+        <div className="close-window-outer" onClick={closeSongWindow}>
+          <div className="close-window-inner">
+            <img src={close} alt="close window" />
+          </div>
+        </div>
+      </div>
+
       <div className="song-video-frame">
         <div className="song-video-inner">
           <div className="song-video-outer">
@@ -185,7 +190,6 @@ function SongScreen(props) {
           </div>
         </div>
       </div>
-      <div className="close-me" onClick={closeSongWindow}>X</div>
 
       <div className="song-details-container">
         <div className="song-details">
@@ -250,29 +254,32 @@ function SongScreen(props) {
         
         <div className="social-buttons">
           <div className="social-list">
-            <div className="individual-container">
-              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
+            <div className="social-button-container">
+              <div className="social-button" onClick={followCheck} ref={followBtn}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
-              <div className="individual-text">
+              <div className="button-title">
+                <p style={{color: "#ff3b8c"}}>{totalFollowers}</p>
                 <p>Follow</p>
               </div>
             </div>
 
-            <div className="individual-container">
-              <div className="individual-btn" onClick={likeCheck}>
+            <div className="social-button-container">
+              <div className="social-button" onClick={likeCheck}>
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
-              <div className="individual-text">
+              <div className="button-title">
+                <p style={{color: "#ff3b8c"}}>{totalLikes}</p>
                 <p>Like</p>
               </div>
             </div>
 
-            <div className="individual-container">
-              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+            <div className="social-button-container">
+              <div className="social-button" ref={props.commentBtn} onClick={props.popUpComments}>
                 <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
               </div>
-              <div className="individual-text">
+              <div className="button-title">
+                <p style={{color: "#ff3b8c"}}>{thisSong.songComments?.length}</p>
                 <p>Comment</p>
               </div>
             </div>

@@ -49,7 +49,8 @@ function SocialFeed(props) {
   const profilePicRef = useRef();
   const opacityRef1 = useRef();
   const opacityRef2 = useRef();
-  const dumbSearchRef = useRef();  
+  const dumbSearchRef = useRef();
+  const searchButtonRef = useRef();
   const playPauseRef = useRef();
 
   useEffect(() => {
@@ -124,6 +125,7 @@ function SocialFeed(props) {
       popUpSearchRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       dumbSearchRef.current.style.opacity = 0;
+      searchButtonRef.current.style.opacity = 0;
       setSearchPoppedUp(false);
     }
     else if (whichMenu === 'comment') {
@@ -139,6 +141,7 @@ function SocialFeed(props) {
     if (whichMenu === 'search') {
       searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
       dumbSearchRef.current.style.opacity = 1;
+      searchButtonRef.current.style.opacity = 1;
       popUpSearchRef.current.style.height = "50%";
       windowRef.current.style.bottom = "50%";
       setSearchPoppedUp(true);
@@ -294,6 +297,7 @@ function SocialFeed(props) {
         
         <Search popUpSearchRef={popUpSearchRef} 
                 dumbSearchRef={dumbSearchRef} 
+                searchButtonRef={searchButtonRef}
                 />
         <Comments popUpRef={popUpRef}
                   poppedUp={poppedUp}

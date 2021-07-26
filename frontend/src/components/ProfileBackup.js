@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import actions from "../api";
 import TheContext from "../TheContext";
 import mic from '../images/record2.svg'
-import play from '../images/play.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'
-import follow from '../images/follow.svg'
-import heart2 from '../images/heart2.svg'
+import editicon from '../images/edit.svg'
+import logouticon from '../images/logout.svg'
 import explore from '../images/explore.svg'
+import play from '../images/play.svg'
+import moment from "moment";
 
-function OtherProfile(props) {
-  const { user, userViewed } = React.useContext(
+
+function Profile(props) {
+  const { 
+    user, setUser, 
+    userViewed, setUserViewed
+    } = React.useContext(
     TheContext
   );
 
-  const [thisUserSongs, setThisUserSongs] = useState([]);
   const [thisUser, setThisUser] = useState([userViewed]);
+  const [thisUserSongs, setThisUserSongs] = useState([]);
 
   const profileRim = useRef();
   const profileOut = useRef();
   const profileIn = useRef();
   const profileIcon = useRef();
 
-  useEffect(() => {
-    setThisUser(props.location.profileInfo)
-    console.log(thisUser)
-  }, [props.location]);
-  
   useEffect(() => {
     profileRim.current.style.animation = "rim .5s linear forwards"
     profileOut.current.style.animation = "out .5s linear forwards"
@@ -37,37 +36,39 @@ function OtherProfile(props) {
   }, [])
 
   useEffect(() => {
+    actions
+      .getOneUser()
+      .then((res) => {
+        setThisUser(res.data);
+      })
+      .catch(console.error);
+  }, []);
+
+  const logout = () => {
+    setUser({});
+    setThisUser({});
+    setUserViewed({});
+    localStorage.clear();
+  };
+
+  useEffect(() => {
     console.log("profile.js line 53 ", user);
     actions
-      .getUserSongs(props.location.profileInfo)
+      .getUserSongs(user)
       .then((usersSongs) => {
         setThisUserSongs(usersSongs.data);
       })
       .catch(console.error);
   }, []);
-
-  const followUser = () => {
-    console.log(user, userViewed);
-    document.getElementById('notify').click()
-    const followData = { user1: thisUser };
-    console.log("profile follow user function ", followData);
-    actions
-      .addFollow(followData)
-      .then((somethingreturnedfromapi) => {
-        console.log(somethingreturnedfromapi)
-        document.getElementById("notify").click();
-      })
-      .catch(console.error);
-  };
   
   const showLyrics = (lyrics) => {
-    return lyrics.map((eachLine) => {
+    return lyrics.map((eachLine, index) => {
       return (
-        <p>{eachLine}</p>
+        <p key={`${eachLine}_${index}`}>{eachLine}</p>
       )
     })
   }
-
+  
   const handlePlayPause=(x)=>{
     const currentPlayer = document.getElementById(`${x}`)
     if(currentPlayer.paused) {
@@ -79,14 +80,28 @@ function OtherProfile(props) {
   }
 
   function ProfileSongs(eachSong) {
+    const songListRef = useRef();
+  
+    const setFocus = () => {
+      console.log(songListRef.current)
+      songListRef.current.focus()
+    }
+
+    const setSongRefs = useCallback(
+      (node) => {
+        songListRef.current = node;
+      }, 
+      []
+    )
+
     return (
-      <li className="your-track-container">
+      <li className="your-track-container" ref={setSongRefs} onClick={setFocus}>
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
             <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
               <h5>{eachSong.songName}</h5>
             </Link>
-
+            
             <div className="song-date-cont">
               <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
               <p>{eachSong.songLikes.length} Likes</p>
@@ -95,7 +110,7 @@ function OtherProfile(props) {
 
           <div className="track-play-cont">
             <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="lyrics-outter-container">
+            <div className="lyrics-outer-container">
               <div className="nav-buttons-inset play-ur-song">
                 <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
               </div>
@@ -134,7 +149,7 @@ function OtherProfile(props) {
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
                 <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser?.picture} alt="user's profile" />
+                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
                 </div>
               </div>
             </div>
@@ -142,7 +157,8 @@ function OtherProfile(props) {
             <div className="username-container">
               <div className="username-outset">
                 <div className="username-inset">
-                  <h3 className="username-text-me">{thisUser?.userName}</h3>
+                  <h3 className="username-text-me">{thisUser.userName}</h3>
+                  <h3 className="username-follow-me">{thisUser.userFollows?.length}</h3>
                 </div>
               </div>
             </div>
@@ -155,19 +171,19 @@ function OtherProfile(props) {
               <div className="users-details-inset">
                 <div className="users-details-each ude-1">
                   <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
-                  <p className="big-p">{thisUser?.userAbout}</p>
+                  <p className="big-p">{thisUser.userAbout}</p>
                 </div>
 
                 <div className="users-details-each ude-2">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser?.userInstagram}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser.userInstagram}</p>
                 </div>
 
                 <div className="users-details-each ude-3">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser?.userTwitter}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser.userTwitter}</p>
                 </div>
 
                 <div className="users-details-each ude-4">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser?.userSoundCloud}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser.userSoundCloud}</p>
                 </div>
               </div>
             </div>
@@ -177,8 +193,10 @@ function OtherProfile(props) {
             <div className="edit-profile-container">
               <div className="edit-profile-outset">
                 <div className="edit-profile-inset">
-                  <div className="edit-profile-button" onClick={followUser}>                  
-                      <img className="button-icons follow-social" src={follow} alt="follow" />
+                  <div className="edit-profile-button">
+                    <Link to="/editprofile-screen" className="profile-link">
+                      <img className="button-icons edit" src={editicon} alt="edit" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -187,9 +205,8 @@ function OtherProfile(props) {
             <div className="log-profile-container">
               <div className="log-profile-outset">
                 <div className="log-profile-inset">
-                  <div className="edit-profile-button" >
-                    <img className="button-icons hearts" src={heart2} alt="like" />
-                    <h4 style={{color: 'pink'}}>{thisUser?.userFollows?.length}</h4>
+                  <div className="edit-profile-button" onClick={logout}>
+                    <img className="button-icons logout" src={logouticon} alt="log out" />
                   </div>
                 </div>
               </div>
@@ -217,12 +234,13 @@ function OtherProfile(props) {
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
-                  <img className="button-icons bi-record" src={mic} alt="mic" />
-                </Link>
+                <div className="nav-buttons-inset">
+                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                    <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
+                  </Link>
+                </div>
               </div>
             </div>
-
             <div className="button-title-container">
               Record
             </div>
@@ -231,26 +249,28 @@ function OtherProfile(props) {
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <Link to="/explore-feed" className="nav-buttons-inset">
-                  <img className="button-icons bi-explore-p" src={explore} alt="explore" />
-                </Link>
+                <div className="nav-buttons-inset">
+                  <Link to="/explore-feed">
+                    <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
+                  </Link>
+                </div>
               </div>
             </div>
-
             <div className="button-title-container">
               Explore
             </div>
           </div>
-
+          
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <Link to={user._id ? ("/social-feed") : ("/auth")} className="nav-buttons-inset">
-                  <img className="button-icons bi-social-p" src={social} alt="social" />
-                </Link>
+                <div className="nav-buttons-inset">
+                  <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                    <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
+                  </Link>
+                </div>
               </div>
             </div>
-
             <div className="button-title-container">
               Following
             </div>
@@ -259,12 +279,11 @@ function OtherProfile(props) {
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim" ref={profileRim}>
               <div className="nav-buttons-outset" ref={profileOut}>
-                <Link to="/profile" className="nav-buttons-inset" ref={profileIn}>
-                  <img className="button-icons bi-profile-o" ref={profileIcon} src={avatar3} alt="profile" />
-                </Link>
+                <div className="nav-buttons-inset" ref={profileIn}>
+                  <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon} alt="avatar icon"></img>
+                </div>
               </div>
             </div>
-
             <div className="button-title-container">
               Profile
             </div>
@@ -275,4 +294,4 @@ function OtherProfile(props) {
   );
 }
 
-export default OtherProfile;
+export default Profile;

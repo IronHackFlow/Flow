@@ -28,12 +28,12 @@ function Profile(props) {
   const profileIn = useRef();
   const profileIcon = useRef();
 
-  useEffect(() => {
-    profileRim.current.style.animation = "rim .5s linear forwards"
-    profileOut.current.style.animation = "out .5s linear forwards"
-    profileIn.current.style.animation = "in .5s linear forwards"
-    profileIcon.current.style.animation = "iconScale .5s linear forwards"
-  }, [])
+  // useEffect(() => {
+  //   profileRim.current.style.animation = "rim .5s linear forwards"
+  //   profileOut.current.style.animation = "out .5s linear forwards"
+  //   profileIn.current.style.animation = "in .5s linear forwards"
+  //   profileIcon.current.style.animation = "iconScale .5s linear forwards"
+  // }, [])
 
   useEffect(() => {
     actions
@@ -79,27 +79,41 @@ function Profile(props) {
    }
   }
 
-
   function ProfileSongs(eachSong) {
+    const songListRef = useRef();
+  
+    const setFocus = () => {
+      console.log(songListRef.current)
+      songListRef.current.focus()
+    }
+
+    const setSongRefs = useCallback(
+      (node) => {
+        songListRef.current = node;
+      }, 
+      []
+    )
+
     return (
-      <li className="your-track-container">
+      <li className="your-track-container" ref={setSongRefs} onClick={setFocus}>
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
             <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
               <h5>{eachSong.songName}</h5>
             </Link>
-            <div className="song-date-cont">
-              <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
-              <p>{eachSong.songLikes.length} Likes</p>
-            </div>
           </div>
 
           <div className="track-play-cont">
             <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="lyrics-outter-container">
+            <div className="lyrics-outer-container">
               <div className="nav-buttons-inset play-ur-song">
                 <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
               </div>
+            </div>
+
+            <div className="song-date-cont">
+              <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
+              <p>{eachSong.songLikes.length} Likes</p>
             </div>
           </div>
         </div>
@@ -212,57 +226,56 @@ function Profile(props) {
           <ul className="songs-list-container">
             {showProfileSongs()}
           </ul>
-        </div>
-      </div>
+          <div className="songs-slider-container">
+            <div className="songs-slider-outer">
 
+            </div>
+          </div>
+        </div>
+      
       <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
         <div className="nav-list">
-          <div className="nav-buttons-containers">
+          <div className="nav-list-inner">
+          <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
-                    <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
-                  </Link>
-                </div>
+                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
+                  <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
+                </Link>
               </div>
             </div>
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Record
-            </div>
+            </div> */}
           </div>
 
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to="/explore-feed">
-                    <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
-                  </Link>
-                </div>
+                <Link to="/explore-feed" className="nav-buttons-inset">
+                  <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
+                </Link>
               </div>
             </div>
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Explore
-            </div>
+            </div> */}
           </div>
           
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
-                <div className="nav-buttons-inset">
-                  <Link to={user._id ? ("/social-feed") : ("/auth")}>
-                    <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
-                  </Link>
-                </div>
+                <Link to={user._id ? ("/social-feed") : ("/auth")} className="nav-buttons-inset">
+                  <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
+                </Link>
               </div>
             </div>
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Following
-            </div>
+            </div> */}
           </div>
 
-          <div className="nav-buttons-containers">
+          <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}}>
             <div className="nav-buttons-rim" ref={profileRim}>
               <div className="nav-buttons-outset" ref={profileOut}>
                 <div className="nav-buttons-inset" ref={profileIn}>
@@ -270,11 +283,13 @@ function Profile(props) {
                 </div>
               </div>
             </div>
-            <div className="button-title-container">
+            {/* <div className="button-title-container">
               Profile
-            </div>
+            </div> */}
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );

@@ -175,14 +175,13 @@
 }
 
 .profile-post-feed {
-    @include flexCenter(50%, 100%, none, center, center, column);
+    @include flexCenter(39%, 100%, none, center, center, column);
     box-shadow: inset 0px 3px 2px 0px #b9b7b7;
     overflow-y: auto;
-    // background: #ecf0f3;
-    background: linear-gradient(0deg, #dfdfdf 0%, #ecf0f3 100%);
+    background: #ecf0f3;
 
     .feed-title-container {
-        @include flexCenter(10%, 100%, 20px, center, center, column);
+        @include flexCenter(12%, 100%, 20px, center, center, column);
 
         .feed-title {
             @include flexCenter(60%, 60%, 20px, center, center, row);
@@ -193,20 +192,20 @@
     }
 
     .profile-songs-container {
-        @include flexCenter(60%, 100%, 18px, space-evenly, center, row);
+        @include flexCenter(88%, 100%, 18px, center, center, row);
 
         .songs-list-container {
-            @include flexCenter(90%, 88%, 15px, flex-start, flex-start, column);
-            // box-shadow: inset 3px 3px 4px #c5c5c5, 
-            //             inset -3px -3px 5px #ffffff;
+            @include flexCenter(98%, 96%, 16px, flex-start, center, column);
+            box-shadow: inset 3px 3px 4px #c5c5c5, 
+                        inset -3px -3px 5px #ffffff;
             // scroll-snap-type: y mandatory;
-            border: 2px solid #ecf0f3;
             overflow-y: scroll;
+            margin-bottom: 1%;
 
             .your-track-container {
                 // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
                 min-height: 150px;
-                width: 100%;
+                width: 95%;
                 margin-top: 2%;
                 display: flex;
                 align-items: center;
@@ -226,7 +225,8 @@
                     // position: relative;
 
                     .lyrics-songname-cont {
-                        @include flexCenter(20%, 100%, 0px, flex-end, center, column);
+                        @include flexCenter(55%, 100%, 0px, space-evenly, center, column);
+                        margin-top: 5%;
 
                         .song-name-cont {
                             // @include flexCenter(20px, 85%, 15px, center, flex-start, column);
@@ -234,6 +234,7 @@
                             min-height: 15px;
                             width: 83%;
                             border-radius: 15px;
+                            margin-bottom: 5px;
                             padding: 3px;
                             display: flex;
                             justify-content: center;
@@ -249,14 +250,10 @@
                                 word-break: break-word;
                             }
                         }
-                    }
-
-                    .track-play-cont {
-                        @include flexCenter(80%, 100%, 0px, center, center, row);
 
                         .song-date-cont {
-                            @include flexCenter(100%, 30%, 10px, center, flex-start, column);
-                            // box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+                            @include flexCenter(35px, 85%, 10px, center, flex-start, column);
+                            box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
      
                             p {
                                 font-size: 12px;
@@ -265,13 +262,17 @@
                                 margin-left: 5%;
                             }
                         }
+                    }
+
+                    .track-play-cont {
+                        @include flexCenter(45%, 100%, 0px, center, center, row);
 
                         .lyrics-outer-container {
-                            @include flexCenter(80%, 60%, 10% 50% 50% 10%, center, center, row);
+                            @include flexCenter(45px, 45px, 50%, center, center, row);
                             box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
                     
                             .play-ur-song {
-                                @include flexCenter(70%, 70%, 50%, center, center, row);
+                                @include flexCenter(30px, 30px, 50%, center, center, row);
                                 box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
                     
                                 .bi-play-2 {
@@ -307,77 +308,53 @@
                 }
             }
         }
+    }  
+}
 
-        .songs-slider-container {
-            @include flexCenter(90%, 5%, 0px, center, center, row);
-            
-            .songs-slider-outer {
-                @include flexCenter(100%, 80%, 50px, center, center, row);
-                box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+.nb-profile {
+    height: 11%;
+    // width: 100%;
+    // position: fixed;
+    // bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    border: none;
+    background: $lightgrayBg;
+    box-shadow: inset 1px 5px 4px #ffffff;
 
-            }
-        }
-    }
+    .nav-list {
+        @include flexCenter(95%, 100%, 0px, space-evenly, center, row);
+        margin: 0 auto;
 
-    .nb-profile {
-        height: 30%;
-        // width: 100%;
-        // position: fixed;
-        // bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        
-        // background: $lightgrayBg;
-        // box-shadow: inset 1px 5px 4px #ffffff;
+        .nav-buttons-containers {
+            @include flexCenter(95%, 25%, 0px, space-around, center, column);
+
+            .nav-buttons-rim {
+                @include flexCenter(70%, 60%, 50%, center, center, row);
+                box-shadow: 1px 1px 3px 0px #b7b8b9, -2px -2px 3px #ffffff;
     
-        .nav-list {
-            @include flexCenter(63%, 92%, 50px, center, center, row);
-            box-shadow: 8px 8px 10px 0px #adadad, -9px -9px 20px #ffffff;
-            border: 1px solid #d1d1d1;
-            background: #dddddd;
+                .nav-buttons-outset {
+                    @include flexCenter(90%, 92%, 50%, center, center, row);
+                    box-shadow: inset 2px 2px 5px #cacaca, inset -3px -3px 4px #ffffff;
+    
+                    .nav-buttons-inset {
+                        @include flexCenter(70%, 70%, 50%, center, center, row);
+                        box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
 
-            .nav-list-inner {
-                @include flexCenter(88%, 96%, 55px, space-evenly, center, row);
-                box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
-
-                .nav-buttons-containers {
-                    @include flexCenter(52px, 72px, 10px, space-around, center, column);
-                    box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
-        
-                    .nav-buttons-rim {
-                        @include flexCenter(45px, 45px, 50px, center, center, row);
-                        box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
-
-                        .nav-buttons-outset {
-                            @include flexCenter(75%, 75%, 50%, center, center, row);
-                            box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
-
-                            .nav-buttons-inset {
-                                @include flexCenter(80%, 80%, 50%, center, center, row);
- 
-                                img {
-                                    height: 1.5em;
-                                    width: 1.5em;
-                                }
-                                &:active {
-                                    box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
-                                                inset -2px -2px 3px #ffffff;
-                                }
-                            }
+                        &:active {
+                            box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
+                                        inset -2px -2px 3px #ffffff;
                         }
                     }
-        
-                    .button-title-container {
-                        @include flexCenter(15%, 100%, 0px, center, center, column);
-                        font-size: 14px;
-                        color: #686a6b;
-                        font-weight: bold;
-                    }
                 }
+            }
+
+            .button-title-container {
+                @include flexCenter(15%, 100%, 0px, center, center, column);
+                font-size: 14px;
+                color: #686a6b;
+                font-weight: bold;
             }
         }
     }
 }
-
