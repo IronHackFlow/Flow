@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import actions from "../api";
 import TheContext from "../TheContext";
-import mic from '../images/record2.svg'
-import avatar from '../images/avatar.svg'
-import social from '../images/social.svg'
-import editicon from '../images/edit.svg'
-import logouticon from '../images/logout.svg'
-import explore from '../images/explore.svg'
-import play from '../images/play.svg'
-import moment from "moment";
-
+import mic from "../images/record2.svg";
+import avatar from "../images/avatar.svg";
+import social from "../images/social.svg";
+import followers from "../images/followers.svg";
+import heart from "../images/heart2.svg";
+import editicon from "../images/edit.svg";
+import logouticon from "../images/logout2.svg";
+import songs from "../images/music.svg";
+import explore from "../images/explore.svg";
+import play from "../images/play.svg";
 
 function Profile(props) {
   const { 
@@ -150,25 +152,25 @@ function Profile(props) {
   return (
     <div className="Profile">
       <header className="profile-header">
-        <div className="upper-filler">
+        {/* <div className="upper-filler">
           <div className="inner-filler"></div>
-        </div>
+        </div> */}
 
         <div className="username-pic-container">
           <div className="username-pic-outset">
-            <div className="profile-pic-container">
-              <div className="profile-pic-outset">
-                <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
-                </div>
-              </div>
-            </div>
-
             <div className="username-container">
               <div className="username-outset">
                 <div className="username-inset">
                   <h3 className="username-text-me">{thisUser.userName}</h3>
                   <h3 className="username-follow-me">{thisUser.userFollows?.length}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="profile-pic-container">
+              <div className="profile-pic-outset">
+                <div className="profile-pic-inset">
+                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
                 </div>
               </div>
             </div>
@@ -180,46 +182,77 @@ function Profile(props) {
             <div className="users-details-outset">
               <div className="users-details-inset">
                 <div className="users-details-each ude-1">
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Name: </span>{thisUser.family_name}</p>
+                </div>
+
+                <div className="users-details-each ude-2">
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Email: </span>{thisUser.email}</p>
+                </div>
+
+                <div className="users-details-each ude-3">
                   <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
                   <p className="big-p">{thisUser.userAbout}</p>
                 </div>
 
-                <div className="users-details-each ude-2">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser.userInstagram}</p>
-                </div>
-
-                <div className="users-details-each ude-3">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser.userTwitter}</p>
-                </div>
-
                 <div className="users-details-each ude-4">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser.userSoundCloud}</p>
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span>{thisUser.userTwitter}</p>
+                </div>
+
+                <div className="users-details-each ude-5">
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span>{thisUser.userInstagram}</p>
+                </div>
+
+                <div className="users-details-each ude-6">
+                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span>{thisUser.userSoundCloud}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="edit-logout-container">
-            <div className="edit-profile-container">
-              <div className="edit-profile-outset">
-                <div className="edit-profile-inset">
-                  <div className="edit-profile-button">
-                    <Link to="/editprofile-screen" className="profile-link">
-                      <img className="button-icons edit" src={editicon} alt="edit" />
-                    </Link>
-                  </div>
-                </div>
+          <div className="profile-buttons-container">
+            <div className="profile-button-outset pbo-1">
+              <div className="profile-button-inset">
+                <img className="button-icons logout" src={social} alt="following" />
               </div>
             </div>
+            <div className="btn-title bt-1">
+              Following
+            </div>
 
-            <div className="log-profile-container">
-              <div className="log-profile-outset">
-                <div className="log-profile-inset">
-                  <div className="edit-profile-button" onClick={logout}>
-                    <img className="button-icons logout" src={logouticon} alt="log out" />
-                  </div>
-                </div>
+            <div className="profile-button-outset pbo-2">
+              <div className="profile-button-inset">
+                <img className="button-icons logout" src={followers} alt="followers" />
               </div>
+            </div>
+            <div className="btn-title bt-2">
+              Followers
+            </div>
+
+            <div className="profile-button-outset pbo-3">
+              <Link to="/editprofile-screen" className="profile-button-inset">
+                <img className="button-icons edit" src={editicon} alt="edit" />
+              </Link>
+            </div>
+            <div className="btn-title bt-3">
+              Edit
+            </div>
+
+            <div className="profile-button-outset pbo-4">
+              <div className="profile-button-inset">
+                <img className="button-icons logout" src={heart} alt="likes" />
+              </div>
+            </div>
+            <div className="btn-title bt-4">
+              Likes
+            </div>
+
+            <div className="profile-button-outset pbo-5">
+              <div className="profile-button-inset" onClick={logout}>
+                <img className="button-icons logout" src={logouticon} alt="log out" />
+              </div>
+            </div>
+            <div className="btn-title bt-5">
+              Log Out
             </div>
           </div>
         </div>

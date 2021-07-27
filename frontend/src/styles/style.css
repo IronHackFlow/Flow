@@ -3876,8 +3876,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
       -ms-flex-direction: column;
           flex-direction: column;
   background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
-  -webkit-box-shadow: 0px 20px 50px 10px #656565;
-          box-shadow: 0px 20px 50px 10px #656565;
+  -webkit-box-shadow: 0px 20px 50px 10px #595858;
+          box-shadow: 0px 20px 50px 10px #595858;
   position: absolute;
   z-index: 1;
 }
@@ -3924,15 +3924,15 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 }
 
 .profile-header .username-pic-container {
-  height: 25%;
+  height: 20%;
   width: 100%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3940,11 +3940,12 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin-right: 5%;
 }
 
 .profile-header .username-pic-container .username-pic-outset {
-  height: 90%;
-  width: 93%;
+  height: 85%;
+  width: 80%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3983,9 +3984,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset {
-  height: 75%;
-  width: 75%;
-  border-radius: 100%;
+  height: 85%;
+  width: 80%;
+  border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3999,8 +4000,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
-          box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: inset 3px 3px 4px #8e8d8d, inset -3px -3px 4px #d2d2d2;
+          box-shadow: inset 3px 3px 4px #8e8d8d, inset -3px -3px 4px #d2d2d2;
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset .profile-pic-inset {
@@ -4053,6 +4054,25 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 
 .profile-header .username-pic-container .username-pic-outset .username-container .username-outset {
   height: 80%;
+  width: 100%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset {
+  height: 90%;
   width: 90%;
   border-radius: 50px;
   display: -webkit-box;
@@ -4068,29 +4088,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-}
-
-.profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset {
-  height: 70%;
-  width: 85%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
-          box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: 3px 3px 4px #8e8b8b, -3px -3px 4px #d2d2d2;
+          box-shadow: 3px 3px 4px #8e8b8b, -3px -3px 4px #d2d2d2;
 }
 
 .profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset .username-text-me {
@@ -4107,7 +4106,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 }
 
 .profile-header .header-bio {
-  height: 65%;
+  height: 80%;
   width: 100%;
   border-radius: none;
   display: -webkit-box;
@@ -4127,7 +4126,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 
 .profile-header .header-bio .users-details-container {
   height: 100%;
-  width: 70%;
+  width: 90%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4142,12 +4141,13 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  position: relative;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset {
-  height: 90%;
-  width: 90%;
-  border-radius: 25px;
+  height: 300px;
+  width: 255px;
+  border-radius: 20px 180px 180px 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4161,72 +4161,71 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
+          box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
+  position: absolute;
+  left: 15px;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset {
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
   overflow-y: scroll;
+  margin-left: 3%;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each {
+  height: 32px;
   width: 90%;
   color: pink;
-  margin-top: 5%;
-  border-radius: 20px;
-  -webkit-box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
+  border-radius: 40px 100px 100px 40px;
+  -webkit-box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
+          box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1 {
-  height: initial;
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each p {
+  font-size: 12px;
   width: 90%;
-  border-radius: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  min-height: 15%;
-  max-height: 50%;
-  padding: 5px 0px 5px 0px;
-  overflow-y: scroll;
+  text-align: start;
+  margin-left: 5%;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1 .little-p {
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-6 {
+  width: 60%;
+}
+
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-5 {
+  width: 85%;
+}
+
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 {
+  height: 60px;
+  width: 95%;
+  border-radius: 30px 100px 100px 30px;
+}
+
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 .little-p {
   width: 90%;
   font-size: 12px;
   text-align: start;
   border-radius: 10px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1 .big-p {
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 .big-p {
   font-size: 12px;
   text-align: start;
   height: 77%;
@@ -4235,33 +4234,11 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   overflow-y: scroll;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-4 {
-  height: 15%;
-  width: 90%;
-  border-radius: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  padding: 5px 0px 5px 0px;
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-4 {
+  width: 93%;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2 p, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 p, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-4 p {
-  font-size: 12px;
-  width: 90%;
-  text-align: start;
-}
-
-.profile-header .header-bio .edit-logout-container {
+.profile-header .header-bio .profile-buttons-container {
   height: 100%;
   width: 30%;
   border-radius: 0px;
@@ -4278,13 +4255,14 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
+  right: 0px;
 }
 
-.profile-header .header-bio .edit-logout-container .edit-profile-container,
-.profile-header .header-bio .edit-logout-container .log-profile-container {
-  height: 40%;
-  width: 100%;
-  border-radius: none;
+.profile-header .header-bio .profile-buttons-container .profile-button-outset {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4298,128 +4276,86 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
+          box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
+  position: absolute;
 }
 
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset {
-  height: 80%;
+.profile-header .header-bio .profile-buttons-container .profile-button-outset .profile-button-inset {
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
+          box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
+}
+
+.profile-header .header-bio .profile-buttons-container .btn-title {
+  font-size: 11px;
+  position: absolute;
+  font-weight: bold;
+  color: pink;
+}
+
+.profile-header .header-bio .profile-buttons-container .pbo-1 {
+  top: 10px;
+  right: 90px;
+}
+
+.profile-header .header-bio .profile-buttons-container .bt-1 {
+  top: 27px;
+  right: 36px;
+}
+
+.profile-header .header-bio .profile-buttons-container .pbo-2 {
+  top: 70px;
+  right: 55px;
+}
+
+.profile-header .header-bio .profile-buttons-container .bt-2 {
+  top: 87px;
+  right: 3px;
+}
+
+.profile-header .header-bio .profile-buttons-container .pbo-3 {
+  right: 40px;
+}
+
+.profile-header .header-bio .profile-buttons-container .bt-3 {
+  right: 15px;
+}
+
+.profile-header .header-bio .profile-buttons-container .pbo-4 {
+  bottom: 70px;
+  right: 55px;
+}
+
+.profile-header .header-bio .profile-buttons-container .bt-4 {
+  bottom: 84px;
+  right: 28px;
+}
+
+.profile-header .header-bio .profile-buttons-container .pbo-5 {
+  bottom: 10px;
+  right: 90px;
+}
+
+.profile-header .header-bio .profile-buttons-container .bt-5 {
   width: 80%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 3px 3px 4px #777676, -2px -2px 3px #cfcfcf;
-          box-shadow: 3px 3px 4px #777676, -2px -2px 3px #cfcfcf;
-}
-
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .edit-profile-inset,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .log-profile-inset,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .edit-profile-inset,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .log-profile-inset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .edit-profile-inset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .log-profile-inset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .edit-profile-inset,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .log-profile-inset {
-  height: 90%;
-  width: 90%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #808080, inset -2px -2px 3px #cccccc;
-          box-shadow: inset 2px 2px 3px #808080, inset -2px -2px 3px #cccccc;
-}
-
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .edit-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .edit-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .log-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .log-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .edit-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .edit-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .log-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .log-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .edit-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .edit-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .log-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .log-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .edit-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .edit-profile-inset .log-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .log-profile-inset .edit-profile-button,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .log-profile-inset .log-profile-button {
-  height: 70%;
-  width: 70%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
-          box-shadow: 3px 3px 4px #777676, -3px -3px 4px #d2d2d2;
-}
-
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .edit-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .edit-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .log-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .edit-profile-outset .log-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .edit-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .edit-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .log-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .edit-profile-container .log-profile-outset .log-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .edit-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .edit-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .log-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .edit-profile-outset .log-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .edit-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .edit-profile-inset .log-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .log-profile-inset .edit-profile-button .profile-link,
-.profile-header .header-bio .edit-logout-container .log-profile-container .log-profile-outset .log-profile-inset .log-profile-button .profile-link {
-  height: 100%;
-  width: 100%;
-  border-radius: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  bottom: 26px;
+  right: 27px;
 }
 
 .profile-post-feed {
