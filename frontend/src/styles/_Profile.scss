@@ -23,28 +23,29 @@
 
     .username-pic-container {
         @include flexCenter(20%, 100%, none, flex-end, center, row);
-        margin-right: 5%;
+        margin-right: 4%;
     
         .username-pic-outset {
-            @include flexCenter(85%, 80%, 50px, center, center, row);
-            box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
+            @include flexCenter(85%, 80%, 40px 5px 40px 40px, center, center, row);
+            box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 4px #eaeaea;
     
             .profile-pic-container {
-                @include flexCenter(100%, 30%, none, center, center, row);
+                @include flexCenter(100%, 20%, none, flex-end, center, row);
     
                 .profile-pic-outset {
-                    @include flexCenter(85%, 80%, 50px, center, center, row);
-                    box-shadow: inset 3px 3px 4px #8e8d8d, inset -3px -3px 4px #d2d2d2;
-    
+                    @include flexCenter(57px, 57px, 50px, center, center, row);
+                    box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
+
                     .profile-pic-inset {
-                        @include flexCenter(88%, 88%, 100%, center, center, row);
+                        @include flexCenter(90%, 90%, 100%, center, center, row);
+                        box-shadow: inset 2px 2px 5px #737373, inset -3px -3px 4px #dadada;
                         overflow: hidden;
-                        border: 2px solid #e24f8c;
-    
+
                         .profile-pic {
-                            height: 100%;
-                            width: 100%;
+                            height: 80%;
+                            width: 80%;
                             object-fit: cover;
+                            border: 1px solid white;
                             border-radius: 50%;
                         }
                     }
@@ -52,19 +53,21 @@
             }
 
             .username-container {
-                @include flexCenter(100%, 70%, none, center, center, row);
+                @include flexCenter(100%, 77%, none, center, center, row);
 
                 .username-outset {
-                    @include flexCenter(80%, 100%, 50px, center, center, row);
-                    // box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
+                    @include flexCenter(74%, 90%, 40px, center, center, row);
+                    box-shadow: 2px 2px 4px 1px #7b7b7b, -3px -3px 3px #dedcdc;
+                    border: 1px solid #bbbbbb;
+                    margin-left: 5%;
                 
                     .username-inset {
-                        @include flexCenter(90%, 90%, 50px, center, center, row);
-                        box-shadow: 3px 3px 4px #8e8b8b, -3px -3px 4px #d2d2d2;
+                        @include flexCenter(85%, 94%, 45px, center, center, row);
+                        box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 5px #ffffff;
                 
                         .username-text-me {
                             width: 75%;
-                            margin-left: 4%;
+                            font-size: 20px;
                             color: #e24f8c;
                             overflow-x: scroll;
                             white-space: nowrap;
@@ -95,53 +98,57 @@
 
                 .users-details-inset {
                     @include flexCenter(100%, 100%, 20px, space-evenly, flex-start, column);
-                    // box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
                     overflow-y: scroll;
-                    margin-left: 3%;
-    
+                    margin-left: 4%;
+
                     .users-details-each {
-                        height: 32px;
-                        width: 90%;
+                        display: flex;
+                        align-items: center;
+                        height: 20px;
                         color: pink;
-                        border-radius: 40px 100px 100px 40px;
+                        padding: 3px 10px 3px 10px;
+                        border-radius: 60px 100px 100px 60px;
                         box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
 
                         p {
-                            font-size: 12px;
-                            width: 90%;
+                            font-size: 11px;
                             text-align: start;
-                            margin-left: 5%;
                         }
                     }
     
-                    .ude-1, .ude-6 {
-                        width: 60%;
+                    .ude-1 {
+                        width: 50%;
+                        border-radius: 30px 50px 50px 15px;
                     }
-                    .ude-2, .ude-5 {
-                        width: 85%;
+                    .ude-2 {
+                        width: 74%;
+                        border-radius: 15px 50px 50px 15px;
                     }
                     .ude-3 {
+                        width: 86%;
+                        border-radius: 6px 35px 35px 6px;
                         height: 60px;
-                        width: 95%;
-                        border-radius: 30px 100px 100px 30px;
+                        padding: 6px 10px 6px 10px;
+                        align-items: stretch;
 
-                        .little-p {
-                            width: 90%;
-                            font-size: 12px;
-                            text-align: start;
-                            border-radius: 10px;
-                        }
                         .big-p {
-                            font-size: 12px;
-                            text-align: start;
-                            height: 77%;
-                            width: 90%;
-                            border-radius: 10px;
+                            height: 100%;
                             overflow-y: scroll;
+                            line-height: 1.2;
                         }
                     }
                     .ude-4 {
-                        width: 93%;
+                        width: 83%;
+                        border-radius: 15px 50px 50px 15px;
+                    }
+                    .ude-5 {
+                        width: 74%;
+                        border-radius: 15px 50px 50px 15px;
+                    }
+                    .ude-6 {
+                        width: 50%;
+                        border-radius: 15px 50px 50px 30px;
+                        
                     }
                 }
             }
@@ -152,62 +159,49 @@
             position: relative;
             right: 0px;
 
-            .profile-button-outset {
-                @include flexCenter(50px, 50px, 50%, center, center, row);
-                box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
+            .each-button-container {
+                @include flexCenter(50px, 110px, 0px, flex-start, center, row);
                 position: absolute;
 
-                .profile-button-inset {
-                    @include flexCenter(75%, 75%, 50%, center, center, row);
-                    box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
+                .profile-button-outset {
+                    @include flexCenter(50px, 50px, 50%, center, center, row);
+                    box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
+
+                    .profile-button-inset {
+                        @include flexCenter(75%, 75%, 50%, center, center, row);
+                        box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
+                    }
                 }
             }
+
             .btn-title {
                 font-size: 11px;
-                position: absolute;
-                font-weight: bold;
-                color: pink;
-            }
-            .pbo-1 {
-                top: 10px;
-                right: 90px;
-            }
-            .bt-1 {
-                top: 27px;
-                right: 36px;
-            }
-            .pbo-2 {
-                top: 70px;
-                right: 55px;
-            }
-            .bt-2 {
-                top: 87px;
-                right: 3px;
-            }
-            .pbo-3 {
-                right: 40px;
-            }
-            .bt-3 {
-                right: 15px;
-            }
-            .pbo-4 {
-                bottom: 70px;
-                right: 55px;
-            }
-            .bt-4 {
-                bottom: 84px;
-                right: 28px;
-            }
-            .pbo-5 {
-                bottom: 10px;
-                right: 90px;
-            }
-            .bt-5 {
-                width: 80%;
-                bottom: 26px;
-                right: 27px;
+                color: white;
+                margin-left: 5px;
             }
 
+            .ebc-1 {
+                top: 10px;
+                right: 35px;
+            }
+            .ebc-2 {
+                top: 70px;
+                right: 1px;
+                width: 105px;
+            }
+            .ebc-3 {
+                right: 14px;
+                width: 80px;
+            }
+            .ebc-4 {
+                bottom: 70px;
+                right: 27px;
+                width: 80px;
+            }
+            .ebc-5 {
+                bottom: 10px;
+                right: 36px;
+            }
         }
     }
 }
@@ -242,9 +236,9 @@
             overflow-y: scroll;
             box-shadow: inset 0px -2px 3px #bebebe;
 
-            .your-track-container {
+            .each-track-container {
                 // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
-                min-height: 150px;
+                min-height: 140px;
                 width: 100%;
                 margin-top: 2%;
                 display: flex;
@@ -264,10 +258,10 @@
                     @include flexCenter(100%, 45%, none, center, center, column);
                     // position: relative;
 
-                    .lyrics-songname-cont {
-                        @include flexCenter(20%, 100%, 0px, flex-end, center, column);
+                    .song-name-container {
+                        @include flexCenter(23%, 100%, 0px, flex-end, center, column);
 
-                        .song-name-cont {
+                        .song-name-outset {
                             // @include flexCenter(20px, 85%, 15px, center, flex-start, column);
                             box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
                             min-height: 15px;
@@ -280,7 +274,8 @@
                             flex-direction: column;
                             text-decoration: none;
 
-                            h5 {
+                            p {
+                                font-size: 14px;
                                 color:#e24f8c;
                                 margin-left: 5%;
                                 line-height: 1;
@@ -290,55 +285,59 @@
                         }
                     }
 
-                    .track-play-cont {
-                        @include flexCenter(80%, 100%, 0px, center, center, row);
+                    .track-play-container {
+                        @include flexCenter(77%, 100%, 0px, center, center, row);
 
-                        .song-date-cont {
+                        .song-date-container {
                             @include flexCenter(100%, 30%, 10px, center, flex-start, column);
                             // box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
      
                             p {
                                 font-size: 12px;
-                                font-weight: bold;
-                                color: #6d6d6d;
+                                color: #959595;
                                 margin-left: 5%;
                             }
                         }
 
-                        .lyrics-outer-container {
-                            @include flexCenter(80%, 60%, 10% 50% 50% 10%, center, center, row);
+                        .play-container {
+                            @include flexCenter(80%, 60%, 10px 50px 50px 10px, center, center, row);
                             box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
                     
-                            .play-ur-song {
-                                @include flexCenter(70%, 70%, 50%, center, center, row);
+                            .play-outset {
+                                @include flexCenter(65px, 65px, 50%, center, center, row);
                                 box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-                    
-                                .bi-play-2 {
-                                    margin: 1px 0px 0px 4px;
-                                    font-size: .7em
+                                
+                                .play-inset {
+                                    @include flexCenter(80%, 80%, 50%, center, center, row);
+                                    box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+    
+                                    .bi-play-2 {
+                                        margin: 1px 0px 0px 4px;
+                                        font-size: .7em
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
-                .track-play-container {
+                .lyrics-container {
                     @include flexCenter(100%, 55%, 20px, center, center, column);
                     position: relative;
                     
-                    .lyrics-container {
-                        @include flexCenter(130px, 90%, 15px, center, center, column);
+                    .lyrics-outset {
+                        @include flexCenter(120px, 90%, 15px, center, center, column);
                         box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
                         position: absolute;
                         top: 10px;
                         left: 10px;
 
-                        .para-container {
+                        .p-container {
                             height: 90%;
                             width: 90%;
                             font-size: 13px;
                             line-height: 1.2;
-                            color: #e24f8c;
+                            color: pink;
                             overflow-y: scroll;
                             text-align: start;
                         }

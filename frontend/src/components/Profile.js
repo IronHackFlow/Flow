@@ -105,34 +105,52 @@ function Profile(props) {
       }, 
       []
     )
+    const dateGenerator = () => {
+      const songDate = moment(eachSong.songDate).fromNow()
+      let hasNumber = /\d/
+      let oneMonth = "1m"
+      let splitDate = songDate.split(' ')
+      let firstLetter = splitDate[1].slice(0, 1)
+      let combineDate = splitDate[0] + firstLetter
+      if (!hasNumber.test(splitDate)) {
+        return oneMonth
+      }
+      else {
+        return combineDate
+      }
+    }
 
     return (
-      <li className="your-track-container" ref={setSongRefs} onClick={setFocus}>
+      <li className="each-track-container" ref={setSongRefs} onClick={setFocus}>
         <div className="track-details-container">
-          <div className="lyrics-songname-cont">
-            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
-              <h5>{eachSong.songName}</h5>
+          <div className="song-name-container">
+            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-outset">
+              <p>{eachSong.songName}</p>
             </Link>
           </div>
 
-          <div className="track-play-cont">
+          <div className="track-play-container">
             <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="lyrics-outer-container">
-              <div className="nav-buttons-inset play-ur-song">
-                <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+            <div className="play-container">
+              <div className="play-outset">
+                <div className="play-inset">
+                  <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+                </div>
               </div>
             </div>
 
-            <div className="song-date-cont">
-              <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
+            <div className="song-date-container">
+              {/* <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p> */}
+              {/* <p>{moment(eachSong.songDate).format('YYYY M D, h:mm a')}</p> */}
+              <p>{dateGenerator()}</p>
               <p>{eachSong.songLikes.length} Likes</p>
             </div>
           </div>
         </div>
 
-        <div className="track-play-container">
-          <div className="lyrics-container">
-            <div className="para-container">
+        <div className="lyrics-container">
+          <div className="lyrics-outset">
+            <div className="p-container">
               {showLyrics(eachSong.songLyricsStr)}
             </div>
           </div>
@@ -152,25 +170,20 @@ function Profile(props) {
   return (
     <div className="Profile">
       <header className="profile-header">
-        {/* <div className="upper-filler">
-          <div className="inner-filler"></div>
-        </div> */}
-
         <div className="username-pic-container">
           <div className="username-pic-outset">
-            <div className="username-container">
-              <div className="username-outset">
-                <div className="username-inset">
-                  <h3 className="username-text-me">{thisUser.userName}</h3>
-                  <h3 className="username-follow-me">{thisUser.userFollows?.length}</h3>
+            <div div className="profile-pic-container">
+              <div className="profile-pic-outset">
+                <div className="profile-pic-inset">
+                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
                 </div>
               </div>
             </div>
 
-            <div className="profile-pic-container">
-              <div className="profile-pic-outset">
-                <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
+            <div className="username-container">
+              <div className="username-outset">
+                <div className="username-inset">
+                  <p className="username-text-me">{thisUser.userName}</p>
                 </div>
               </div>
             </div>
@@ -182,77 +195,95 @@ function Profile(props) {
             <div className="users-details-outset">
               <div className="users-details-inset">
                 <div className="users-details-each ude-1">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Name: </span>{thisUser.family_name}</p>
+                  <p style={{color: 'white'}}>Name: </p>
+                  <p style={{marginLeft: "4%"}}>{thisUser.family_name}</p>
                 </div>
 
                 <div className="users-details-each ude-2">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Email: </span>{thisUser.email}</p>
+                  <p style={{color: 'white'}}>Email: </p>
+                  <p style={{marginLeft: "4%", overflowX: "scroll"}}>{thisUser.email}</p>
                 </div>
 
                 <div className="users-details-each ude-3">
-                  <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
-                  <p className="big-p">{thisUser.userAbout}</p>
+                  <p style={{color: 'white'}}>About: </p>
+                  <p className="big-p" style={{marginLeft: "4%"}}>{thisUser.userAbout}</p>
                 </div>
 
                 <div className="users-details-each ude-4">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span>{thisUser.userTwitter}</p>
+                  <p style={{color: 'white'}}>Twitter: </p>
+                  <p style={{marginLeft: "4%"}}>{thisUser.userTwitter}</p>
                 </div>
 
                 <div className="users-details-each ude-5">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span>{thisUser.userInstagram}</p>
+                  <p style={{color: 'white'}}>Instagram: </p>
+                  <p style={{marginLeft: "4%"}}>{thisUser.userInstagram}</p>
                 </div>
 
                 <div className="users-details-each ude-6">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span>{thisUser.userSoundCloud}</p>
+                  <p style={{color: 'white'}}>SoundCloud: </p>
+                  <p style={{marginLeft: "4%", overflowX: "scroll"}}>{thisUser.userSoundCloud}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="profile-buttons-container">
-            <div className="profile-button-outset pbo-1">
-              <div className="profile-button-inset">
-                <img className="button-icons logout" src={social} alt="following" />
+            <div div className="each-button-container ebc-1">
+              <div className="profile-button-outset">
+                <div className="profile-button-inset">
+                  <img className="button-icons logout" src={followers} alt="followers" />
+                </div>
+              </div>
+              <div className="btn-title" style={{flexDirection: "column"}}>
+                <p>Followers</p>
+                <p style={{color: "pink"}}>{thisUser.followers?.length}</p>
               </div>
             </div>
-            <div className="btn-title bt-1">
-              Following
-            </div>
 
-            <div className="profile-button-outset pbo-2">
-              <div className="profile-button-inset">
-                <img className="button-icons logout" src={followers} alt="followers" />
+            <div className="each-button-container ebc-2">
+              <div className="profile-button-outset">
+                <div className="profile-button-inset">
+                  <img className="button-icons logout" src={social} alt="following" />
+                </div>
+              </div>
+              <div className="btn-title" style={{flexDirection: "column"}}>
+                <p>Follows</p>
+                <p style={{color: "pink"}}>{thisUser.userFollows?.length}</p>
               </div>
             </div>
-            <div className="btn-title bt-2">
-              Followers
-            </div>
 
-            <div className="profile-button-outset pbo-3">
-              <Link to="/editprofile-screen" className="profile-button-inset">
-                <img className="button-icons edit" src={editicon} alt="edit" />
-              </Link>
-            </div>
-            <div className="btn-title bt-3">
-              Edit
-            </div>
-
-            <div className="profile-button-outset pbo-4">
-              <div className="profile-button-inset">
-                <img className="button-icons logout" src={heart} alt="likes" />
+            <div className="each-button-container ebc-3">
+              <div className="profile-button-outset">
+                <Link to="/editprofile-screen" className="profile-button-inset">
+                  <img className="button-icons edit" src={editicon} alt="edit" />
+                </Link>
+              </div>
+              <div className="btn-title">
+                <p>Edit</p>
               </div>
             </div>
-            <div className="btn-title bt-4">
-              Likes
-            </div>
 
-            <div className="profile-button-outset pbo-5">
-              <div className="profile-button-inset" onClick={logout}>
-                <img className="button-icons logout" src={logouticon} alt="log out" />
+            <div className="each-button-container ebc-4">
+              <div className="profile-button-outset">
+                <div className="profile-button-inset">
+                  <img className="button-icons logout" src={heart} alt="likes" />
+                </div>
+              </div>
+              <div className="btn-title" style={{flexDirection: "column"}}>
+                <p>Likes</p>
+                <p style={{color: "pink"}}>#</p>
               </div>
             </div>
-            <div className="btn-title bt-5">
-              Log Out
+          
+            <div className="each-button-container ebc-5">
+              <div className="profile-button-outset">
+                <div className="profile-button-inset" onClick={logout}>
+                  <img className="button-icons logout" src={logouticon} alt="log out" />
+                </div>
+              </div>
+              <div className="btn-title">
+                Log Out
+              </div>
             </div>
           </div>
         </div>

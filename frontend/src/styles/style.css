@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alatsi&family=Do+Hyeon&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 @-webkit-keyframes iconScale {
   from {
     -webkit-transform: scale(1);
@@ -181,7 +184,7 @@
 html, body, #root, .App {
   height: 100vh;
   width: 100vw;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -214,7 +217,7 @@ footer,
     margin: auto;
     height: 715px;
     width: 375px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
@@ -382,24 +385,42 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .hamburger-button {
-  height: 60px;
-  width: 60px;
+  height: 45px;
+  width: 45px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: fixed;
-  top: 1px;
+  top: 8px;
+  left: 10px;
   z-index: 99;
   background: rgba(255, 255, 255, 0);
+  -webkit-box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #ffffff;
 }
 
 .hamburger-button div {
   display: block;
   width: 25px;
-  height: 5px;
-  margin: 4px;
+  height: 4px;
+  margin: 2px;
   position: relative;
   background: #ec6aa0;
-  border-radius: 3px;
-  -webkit-box-shadow: inset 1px 1px 2px #313232,  inset -1px -1px 1px #aaacad;
-          box-shadow: inset 1px 1px 2px #313232,  inset -1px -1px 1px #aaacad;
+  border-radius: 50px;
+  border: 1px solid #ffabcc;
+  -webkit-box-shadow: 2px 2px 2px #716e6e, -1px -1px 3px #ffffff;
+          box-shadow: 2px 2px 2px #716e6e, -1px -1px 3px #ffffff;
 }
 
 .mo-6, .mo-5, .mo-4, .mo-3, .mo-2, .mo-1 {
@@ -3940,13 +3961,13 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-right: 5%;
+  margin-right: 4%;
 }
 
 .profile-header .username-pic-container .username-pic-outset {
   height: 85%;
   width: 80%;
-  border-radius: 50px;
+  border-radius: 40px 5px 40px 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3960,20 +3981,20 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #808080, inset -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 4px #eaeaea;
+          box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 4px #eaeaea;
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container {
   height: 100%;
-  width: 30%;
+  width: 20%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3984,8 +4005,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset {
-  height: 85%;
-  width: 80%;
+  height: 57px;
+  width: 57px;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4000,13 +4021,13 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #8e8d8d, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #8e8d8d, inset -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
+          box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset .profile-pic-inset {
-  height: 88%;
-  width: 88%;
+  height: 90%;
+  width: 90%;
   border-radius: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4021,21 +4042,23 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 5px #737373, inset -3px -3px 4px #dadada;
+          box-shadow: inset 2px 2px 5px #737373, inset -3px -3px 4px #dadada;
   overflow: hidden;
-  border: 2px solid #e24f8c;
 }
 
 .profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset .profile-pic-inset .profile-pic {
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 80%;
   -o-object-fit: cover;
      object-fit: cover;
+  border: 1px solid white;
   border-radius: 50%;
 }
 
 .profile-header .username-pic-container .username-pic-outset .username-container {
   height: 100%;
-  width: 70%;
+  width: 77%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4053,9 +4076,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 }
 
 .profile-header .username-pic-container .username-pic-outset .username-container .username-outset {
-  height: 80%;
-  width: 100%;
-  border-radius: 50px;
+  height: 74%;
+  width: 90%;
+  border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4069,12 +4092,16 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: 2px 2px 4px 1px #7b7b7b, -3px -3px 3px #dedcdc;
+          box-shadow: 2px 2px 4px 1px #7b7b7b, -3px -3px 3px #dedcdc;
+  border: 1px solid #bbbbbb;
+  margin-left: 5%;
 }
 
 .profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset {
-  height: 90%;
-  width: 90%;
-  border-radius: 50px;
+  height: 85%;
+  width: 94%;
+  border-radius: 45px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4088,13 +4115,13 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 4px #8e8b8b, -3px -3px 4px #d2d2d2;
-          box-shadow: 3px 3px 4px #8e8b8b, -3px -3px 4px #d2d2d2;
+  -webkit-box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 5px #ffffff;
+          box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 5px #ffffff;
 }
 
 .profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset .username-text-me {
   width: 75%;
-  margin-left: 4%;
+  font-size: 20px;
   color: #e24f8c;
   overflow-x: scroll;
   white-space: nowrap;
@@ -4185,57 +4212,68 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
       -ms-flex-direction: column;
           flex-direction: column;
   overflow-y: scroll;
-  margin-left: 3%;
+  margin-left: 4%;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each {
-  height: 32px;
-  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 20px;
   color: pink;
-  border-radius: 40px 100px 100px 40px;
+  padding: 3px 10px 3px 10px;
+  border-radius: 60px 100px 100px 60px;
   -webkit-box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
           box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each p {
-  font-size: 12px;
-  width: 90%;
+  font-size: 11px;
   text-align: start;
-  margin-left: 5%;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-6 {
-  width: 60%;
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1 {
+  width: 50%;
+  border-radius: 30px 50px 50px 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2, .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-5 {
-  width: 85%;
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2 {
+  width: 74%;
+  border-radius: 15px 50px 50px 15px;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 {
+  width: 86%;
+  border-radius: 6px 35px 35px 6px;
   height: 60px;
-  width: 95%;
-  border-radius: 30px 100px 100px 30px;
-}
-
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 .little-p {
-  width: 90%;
-  font-size: 12px;
-  text-align: start;
-  border-radius: 10px;
+  padding: 6px 10px 6px 10px;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 .big-p {
-  font-size: 12px;
-  text-align: start;
-  height: 77%;
-  width: 90%;
-  border-radius: 10px;
+  height: 100%;
   overflow-y: scroll;
+  line-height: 1.2;
 }
 
 .profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-4 {
-  width: 93%;
+  width: 83%;
+  border-radius: 15px 50px 50px 15px;
+}
+
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-5 {
+  width: 74%;
+  border-radius: 15px 50px 50px 15px;
+}
+
+.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-6 {
+  width: 50%;
+  border-radius: 15px 50px 50px 30px;
 }
 
 .profile-header .header-bio .profile-buttons-container {
@@ -4259,7 +4297,27 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   right: 0px;
 }
 
-.profile-header .header-bio .profile-buttons-container .profile-button-outset {
+.profile-header .header-bio .profile-buttons-container .each-button-container {
+  height: 50px;
+  width: 110px;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+}
+
+.profile-header .header-bio .profile-buttons-container .each-button-container .profile-button-outset {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -4278,10 +4336,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
   -webkit-box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
           box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
-  position: absolute;
 }
 
-.profile-header .header-bio .profile-buttons-container .profile-button-outset .profile-button-inset {
+.profile-header .header-bio .profile-buttons-container .each-button-container .profile-button-outset .profile-button-inset {
   height: 75%;
   width: 75%;
   border-radius: 50%;
@@ -4304,58 +4361,35 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
 
 .profile-header .header-bio .profile-buttons-container .btn-title {
   font-size: 11px;
-  position: absolute;
-  font-weight: bold;
-  color: pink;
+  color: white;
+  margin-left: 5px;
 }
 
-.profile-header .header-bio .profile-buttons-container .pbo-1 {
+.profile-header .header-bio .profile-buttons-container .ebc-1 {
   top: 10px;
-  right: 90px;
+  right: 35px;
 }
 
-.profile-header .header-bio .profile-buttons-container .bt-1 {
-  top: 27px;
-  right: 36px;
-}
-
-.profile-header .header-bio .profile-buttons-container .pbo-2 {
+.profile-header .header-bio .profile-buttons-container .ebc-2 {
   top: 70px;
-  right: 55px;
+  right: 1px;
+  width: 105px;
 }
 
-.profile-header .header-bio .profile-buttons-container .bt-2 {
-  top: 87px;
-  right: 3px;
+.profile-header .header-bio .profile-buttons-container .ebc-3 {
+  right: 14px;
+  width: 80px;
 }
 
-.profile-header .header-bio .profile-buttons-container .pbo-3 {
-  right: 40px;
-}
-
-.profile-header .header-bio .profile-buttons-container .bt-3 {
-  right: 15px;
-}
-
-.profile-header .header-bio .profile-buttons-container .pbo-4 {
+.profile-header .header-bio .profile-buttons-container .ebc-4 {
   bottom: 70px;
-  right: 55px;
-}
-
-.profile-header .header-bio .profile-buttons-container .bt-4 {
-  bottom: 84px;
-  right: 28px;
-}
-
-.profile-header .header-bio .profile-buttons-container .pbo-5 {
-  bottom: 10px;
-  right: 90px;
-}
-
-.profile-header .header-bio .profile-buttons-container .bt-5 {
-  width: 80%;
-  bottom: 26px;
   right: 27px;
+  width: 80px;
+}
+
+.profile-header .header-bio .profile-buttons-container .ebc-5 {
+  bottom: 10px;
+  right: 36px;
 }
 
 .profile-post-feed {
@@ -4466,8 +4500,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 0px -2px 3px #bebebe;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container {
-  min-height: 150px;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container {
+  min-height: 140px;
   width: 100%;
   margin-top: 2%;
   display: -webkit-box;
@@ -4486,11 +4520,11 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   scroll-snap-stop: always;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container:focus {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container:focus {
   background: pink;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container {
   height: 100%;
   width: 45%;
   border-radius: none;
@@ -4509,8 +4543,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont {
-  height: 20%;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container {
+  height: 23%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -4528,7 +4562,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container .song-name-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
           box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
   min-height: 15px;
@@ -4551,7 +4585,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   text-decoration: none;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .lyrics-songname-cont .song-name-cont h5 {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container .song-name-outset p {
+  font-size: 14px;
   color: #e24f8c;
   margin-left: 5%;
   line-height: 1;
@@ -4559,8 +4594,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   word-break: break-word;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont {
-  height: 80%;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container {
+  height: 77%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -4578,7 +4613,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .song-date-cont {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .song-date-container {
   height: 100%;
   width: 30%;
   border-radius: 10px;
@@ -4597,17 +4632,16 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .song-date-cont p {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .song-date-container p {
   font-size: 12px;
-  font-weight: bold;
-  color: #6d6d6d;
+  color: #959595;
   margin-left: 5%;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outer-container {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container {
   height: 80%;
   width: 60%;
-  border-radius: 10% 50% 50% 10%;
+  border-radius: 10px 50px 50px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4625,9 +4659,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outer-container .play-ur-song {
-  height: 70%;
-  width: 70%;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset {
+  height: 65px;
+  width: 65px;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4646,12 +4680,33 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-details-container .track-play-cont .lyrics-outer-container .play-ur-song .bi-play-2 {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset {
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+          box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset .bi-play-2 {
   margin: 1px 0px 0px 4px;
   font-size: .7em;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container {
   height: 100%;
   width: 55%;
   border-radius: 20px;
@@ -4671,8 +4726,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: relative;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container .lyrics-container {
-  height: 130px;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container .lyrics-outset {
+  height: 120px;
   width: 90%;
   border-radius: 15px;
   display: -webkit-box;
@@ -4695,12 +4750,12 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   left: 10px;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .your-track-container .track-play-container .lyrics-container .para-container {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container .lyrics-outset .p-container {
   height: 90%;
   width: 90%;
   font-size: 13px;
   line-height: 1.2;
-  color: #e24f8c;
+  color: pink;
   overflow-y: scroll;
   text-align: start;
 }
