@@ -71,40 +71,8 @@ function Profile(props) {
       })
       .catch(console.error);
   }, []);
-  
-  const showLyrics = (lyrics) => {
-    return lyrics.map((eachLine, index) => {
-      return (
-        <p key={`${eachLine}_${index}`}>{eachLine}</p>
-      )
-    })
-  }
-  
-  const handlePlayPause=(x)=>{
-    const currentPlayer = document.getElementById(`${x}`)
-    if(currentPlayer.paused) {
-      currentPlayer.play()
-    }
-    else {
-      currentPlayer.pause()
-   }
-  }
 
-  function ProfileSongs(eachSong) {
-    const songListRef = useRef();
-  
-    const setFocus = () => {
-      console.log(songListRef.current)
-      songListRef.current.focus()
-    }
-
-    const setSongRefs = useCallback(
-      (node) => {
-        songListRef.current = node;
-      }, 
-      []
-    )
-    const dateGenerator = (date) => {
+  const dateFormatHandler = (date) => {
       const getDate = new Date();
       const currentDate = Date.parse(getDate)
       const songDate = Date.parse(date)
@@ -146,8 +114,41 @@ function Profile(props) {
         console.log(Math.round(diffYears), " years ago")
         return `${Math.round(diffYears)}y`
       }
+  }
+
+  const showLyrics = (lyrics) => {
+    return lyrics.map((eachLine, index) => {
+      return (
+        <p key={`${eachLine}_${index}`}>{eachLine}</p>
+      )
+    })
+  }
+  
+  const handlePlayPause=(x)=>{
+    const currentPlayer = document.getElementById(`${x}`)
+    if(currentPlayer.paused) {
+      currentPlayer.play()
+    }
+    else {
+      currentPlayer.pause()
+   }
+  }
+
+  function ProfileSongs(eachSong) {
+    const songListRef = useRef();
+  
+    const setFocus = () => {
+      console.log(songListRef.current)
+      songListRef.current.focus()
     }
 
+    const setSongRefs = useCallback(
+      (node) => {
+        songListRef.current = node;
+      }, 
+      []
+    )
+    
     return (
       <li className="each-track-container" ref={setSongRefs} onClick={setFocus}>
         <div className="track-details-container">
@@ -170,7 +171,7 @@ function Profile(props) {
             <div className="track-data-container">
               
               <p className="tp-1"><div className="shape-wrap"></div>This is a caption for the above song. I'm testing the length</p>
-              <p className="tp-2">{dateGenerator(eachSong.songDate)}</p>
+              <p className="tp-2">{dateFormatHandler(eachSong.songDate)}</p>
               <p className="tp-3">{eachSong.songLikes.length === 1 ? `${eachSong.songLikes.length} Like` : `${eachSong.songLikes.length} Likes`}</p>
               <p className="tp-4">{eachSong.songComments.length === 1 ? `${eachSong.songComments.length} Comment` : `${eachSong.songComments.length} Comments`}</p>
             </div>
