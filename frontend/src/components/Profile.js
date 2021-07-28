@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import actions from "../api";
 import TheContext from "../TheContext";
 import mic from "../images/record2.svg";
@@ -105,18 +104,47 @@ function Profile(props) {
       }, 
       []
     )
-    const dateGenerator = () => {
-      const songDate = moment(eachSong.songDate).fromNow()
-      let hasNumber = /\d/
-      let oneMonth = "1m"
-      let splitDate = songDate.split(' ')
-      let firstLetter = splitDate[1].slice(0, 1)
-      let combineDate = splitDate[0] + firstLetter
-      if (!hasNumber.test(splitDate)) {
-        return oneMonth
+    const dateGenerator = (date) => {
+      const getDate = new Date();
+      const currentDate = Date.parse(getDate)
+      const songDate = Date.parse(date)
+
+      let timeDifference = currentDate - songDate
+      let diffSeconds = (timeDifference / 1000).toFixed(2)
+      let diffMinutes = (diffSeconds / 60).toFixed(2)
+      let diffHours = (diffMinutes / 60).toFixed(2)
+      let diffDays = (diffHours / 24).toFixed(2)
+      let diffWeeks = (diffDays / 7).toFixed(2)
+      let diffMonths = (diffDays / 30).toFixed(2)
+      let diffYears = (diffMonths / 12).toFixed(2)
+
+      if (diffSeconds < 60) {
+        console.log(Math.round(diffSeconds), ' seconds ago')
+        return `${Math.round(diffSeconds)}s`
       }
-      else {
-        return combineDate
+      else if (diffMinutes >= 1 && diffMinutes <= 55) {
+        console.log(Math.round(diffMinutes), " minutes ago")
+        return `${Math.round(diffMinutes)}min`
+      }
+      else if (diffHours >= 1 && diffHours < 24) {
+        console.log(Math.round(diffHours), " hours ago")
+        return `${Math.round(diffHours)}h`
+      }
+      else if (diffDays >= 1 && diffDays < 7) {
+        console.log(Math.round(diffDays), " days ago")
+        return `${Math.round(diffDays)}d`
+      }
+      else if (diffWeeks >= 1 && diffWeeks < 8) {
+        console.log(Math.round(diffWeeks), " weeks ago")
+        return `${Math.round(diffWeeks)}w`
+      }
+      else if (diffWeeks >= 8 || diffMonths >= 2) {
+        console.log(Math.round(diffMonths), " months ago")
+        return `${Math.round(diffMonths)}m`
+      }
+      else if (diffMonths >= 12) {
+        console.log(Math.round(diffYears), " years ago")
+        return `${Math.round(diffYears)}y`
       }
     }
 
@@ -134,16 +162,17 @@ function Profile(props) {
             <div className="play-container">
               <div className="play-outset">
                 <div className="play-inset">
-                  <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+                  <img className="button-icons bi-play-2" src={play} onClick={() => handlePlayPause(eachSong.songName)} alt="play" />
                 </div>
               </div>
             </div>
 
-            <div className="song-date-container">
-              {/* <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p> */}
-              {/* <p>{moment(eachSong.songDate).format('YYYY M D, h:mm a')}</p> */}
-              <p>{dateGenerator()}</p>
-              <p>{eachSong.songLikes.length} Likes</p>
+            <div className="track-data-container">
+              
+              <p className="tp-1"><div className="shape-wrap"></div>This is a caption for the above song. I'm testing the length</p>
+              <p className="tp-2">{dateGenerator(eachSong.songDate)}</p>
+              <p className="tp-3">{eachSong.songLikes.length === 1 ? `${eachSong.songLikes.length} Like` : `${eachSong.songLikes.length} Likes`}</p>
+              <p className="tp-4">{eachSong.songComments.length === 1 ? `${eachSong.songComments.length} Comment` : `${eachSong.songComments.length} Comments`}</p>
             </div>
           </div>
         </div>
@@ -169,7 +198,7 @@ function Profile(props) {
 
   return (
     <div className="Profile">
-      <header className="profile-header">
+      <div className="profile-header">
         <div className="username-pic-container">
           <div className="username-pic-outset">
             <div div className="profile-pic-container">
@@ -287,7 +316,7 @@ function Profile(props) {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
       <div className="profile-post-feed">
         <div className="feed-title-container">
@@ -300,70 +329,71 @@ function Profile(props) {
           <ul className="songs-list-container">
             {showProfileSongs()}
           </ul>
+          
           <div className="songs-slider-container">
             <div className="songs-slider-outer">
 
             </div>
           </div>
         </div>
-      
-      <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
-        <div className="nav-list">
-          <div className="nav-list-inner">
-          <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
-                  <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
-                </Link>
-              </div>
-            </div>
-            {/* <div className="button-title-container">
-              Record
-            </div> */}
-          </div>
-
-          <div className="nav-buttons-containers">
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <Link to="/explore-feed" className="nav-buttons-inset">
-                  <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
-                </Link>
-              </div>
-            </div>
-            {/* <div className="button-title-container">
-              Explore
-            </div> */}
-          </div>
-          
-          <div className="nav-buttons-containers">
-            <div className="nav-buttons-rim">
-              <div className="nav-buttons-outset">
-                <Link to={user._id ? ("/social-feed") : ("/auth")} className="nav-buttons-inset">
-                  <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
-                </Link>
-              </div>
-            </div>
-            {/* <div className="button-title-container">
-              Following
-            </div> */}
-          </div>
-
-          <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}} ref={profileContainer}>
-            <div className="nav-buttons-rim" ref={profileRim}>
-              <div className="nav-buttons-outset" ref={profileOut}>
-                <div className="nav-buttons-inset">
-                  <img className="button-icons bi-profile-p" src={avatar} ref={profileIcon} alt="avatar icon"></img>
+        
+        <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
+          <div className="nav-list">
+            <div className="nav-list-inner">
+              <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
+                <div className="nav-buttons-rim">
+                  <div className="nav-buttons-outset">
+                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
+                      <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
+                    </Link>
+                  </div>
                 </div>
+                {/* <div className="button-title-container">
+                  Record
+                </div> */}
+              </div>
+
+              <div className="nav-buttons-containers">
+                <div className="nav-buttons-rim">
+                  <div className="nav-buttons-outset">
+                    <Link to="/explore-feed" className="nav-buttons-inset">
+                      <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className="button-title-container">
+                  Explore
+                </div> */}
+              </div>
+            
+              <div className="nav-buttons-containers">
+                <div className="nav-buttons-rim">
+                  <div className="nav-buttons-outset">
+                    <Link to={user._id ? ("/social-feed") : ("/auth")} className="nav-buttons-inset">
+                      <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className="button-title-container">
+                  Following
+                </div> */}
+              </div>
+
+              <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}} ref={profileContainer}>
+                <div className="nav-buttons-rim" ref={profileRim}>
+                  <div className="nav-buttons-outset" ref={profileOut}>
+                    <div className="nav-buttons-inset">
+                      <img className="button-icons bi-profile-p" src={avatar} ref={profileIcon} alt="avatar icon"></img>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="button-title-container">
+                  Profile
+                </div> */}
               </div>
             </div>
-            {/* <div className="button-title-container">
-              Profile
-            </div> */}
           </div>
         </div>
-      </div>
-      </div>
       </div>
     </div>
   );

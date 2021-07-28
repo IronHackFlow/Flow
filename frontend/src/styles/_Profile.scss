@@ -288,19 +288,36 @@
                     .track-play-container {
                         @include flexCenter(77%, 100%, 0px, center, center, row);
 
-                        .song-date-container {
-                            @include flexCenter(100%, 30%, 10px, center, flex-start, column);
+                        .track-data-container {
+                            @include flexCenter(100%, 40%, 10px, center, flex-start, column);
                             // box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-     
+                            position: relative;
+                            .shape-wrap {
+                                float: left;
+                                shape-outside: polygon(0 0, 25% 6%, 47% 16%, 66% 31%, 83% 53%, 94% 77%, 100% 100%, 0 100%);
+                            }
                             p {
-                                font-size: 12px;
+                                font-size: 11px;
                                 color: #959595;
-                                margin-left: 5%;
+                                position: absolute;
+                            }
+                            .tp-1 {
+
+                            }
+                            
+                            .tp-2 {
+
+                            }
+                            .tp-3 {
+
+                            }
+                            .tp-4 {
+
                             }
                         }
 
                         .play-container {
-                            @include flexCenter(80%, 60%, 10px 50px 50px 10px, center, center, row);
+                            @include flexCenter(85%, 60%, 5px 50px 50px 5px, center, center, row);
                             box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
                     
                             .play-outset {

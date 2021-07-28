@@ -4613,9 +4613,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .song-date-container {
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container {
   height: 100%;
-  width: 30%;
+  width: 40%;
   border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4630,18 +4630,24 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .song-date-container p {
-  font-size: 12px;
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .shape-wrap {
+  float: left;
+  shape-outside: polygon(0 0, 25% 6%, 47% 16%, 66% 31%, 83% 53%, 94% 77%, 100% 100%, 0 100%);
+}
+
+.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container p {
+  font-size: 11px;
   color: #959595;
-  margin-left: 5%;
+  position: absolute;
 }
 
 .profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container {
-  height: 80%;
+  height: 85%;
   width: 60%;
-  border-radius: 10px 50px 50px 10px;
+  border-radius: 5px 50px 50px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
