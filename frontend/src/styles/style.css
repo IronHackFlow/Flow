@@ -3879,7 +3879,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: absolute;
 }
 
-.profile-header {
+.section-1_profile {
   height: 50%;
   width: 100%;
   border-radius: 0px 0px 30px 30px;
@@ -3903,48 +3903,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   z-index: 1;
 }
 
-.profile-header .upper-filler {
-  height: 10%;
-  width: 100%;
-  border-radius: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-right: 9%;
-}
-
-.profile-header .upper-filler .inner-filler {
-  height: 50%;
-  width: 70%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: row;
-      -ms-flex-pack: row;
-          justify-content: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #908c8c, inset -3px -3px 4px #d2d2d2;
-          box-shadow: inset 3px 3px 4px #908c8c, inset -3px -3px 4px #d2d2d2;
-}
-
-.profile-header .username-pic-container {
+.section-1_profile .section-1a_user-title {
   height: 20%;
   width: 100%;
   border-radius: none;
@@ -3964,7 +3923,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   margin-right: 4%;
 }
 
-.profile-header .username-pic-container .username-pic-outset {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset {
   height: 85%;
   width: 80%;
   border-radius: 40px 5px 40px 40px;
@@ -3985,7 +3944,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 4px #eaeaea;
 }
 
-.profile-header .username-pic-container .username-pic-outset .profile-pic-container {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-pic-container {
   height: 100%;
   width: 20%;
   border-radius: none;
@@ -4004,7 +3963,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-pic-container .user-pic_shadow-div-outset {
   height: 57px;
   width: 57px;
   border-radius: 50px;
@@ -4025,7 +3984,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
 }
 
-.profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset .profile-pic-inset {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-pic-container .user-pic_shadow-div-outset .user-pic_shadow-div-inset {
   height: 90%;
   width: 90%;
   border-radius: 100%;
@@ -4047,7 +4006,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   overflow: hidden;
 }
 
-.profile-header .username-pic-container .username-pic-outset .profile-pic-container .profile-pic-outset .profile-pic-inset .profile-pic {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-pic-container .user-pic_shadow-div-outset .user-pic_shadow-div-inset .profile-pic {
   height: 80%;
   width: 80%;
   -o-object-fit: cover;
@@ -4056,7 +4015,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   border-radius: 50%;
 }
 
-.profile-header .username-pic-container .username-pic-outset .username-container {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container {
   height: 100%;
   width: 77%;
   border-radius: none;
@@ -4075,7 +4034,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-header .username-pic-container .username-pic-outset .username-container .username-outset {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset {
   height: 74%;
   width: 90%;
   border-radius: 40px;
@@ -4098,7 +4057,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   margin-left: 5%;
 }
 
-.profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset .user-name_shadow-div-inset {
   height: 85%;
   width: 94%;
   border-radius: 45px;
@@ -4119,7 +4078,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 5px #ffffff;
 }
 
-.profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset .username-text-me {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset .user-name_shadow-div-inset .username-text-me {
   width: 75%;
   font-size: 20px;
   color: #e24f8c;
@@ -4127,12 +4086,12 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   white-space: nowrap;
 }
 
-.profile-header .username-pic-container .username-pic-outset .username-container .username-outset .username-inset .username-follow-me {
+.section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset .user-name_shadow-div-inset .username-follow-me {
   width: 20%;
   color: pink;
 }
 
-.profile-header .header-bio {
+.section-1_profile .section-1b_user-data {
   height: 80%;
   width: 100%;
   border-radius: none;
@@ -4151,7 +4110,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-header .header-bio .users-details-container {
+.section-1_profile .section-1b_user-data .user-data-1_fields-container {
   height: 100%;
   width: 90%;
   border-radius: none;
@@ -4171,33 +4130,10 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: relative;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset {
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset {
   height: 300px;
   width: 255px;
   border-radius: 20px 180px 180px 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
-          box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
-  position: absolute;
-  left: 15px;
-}
-
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset {
-  height: 100%;
-  width: 100%;
-  border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4211,11 +4147,15 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
+          box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
+  position: absolute;
   overflow-y: scroll;
-  margin-left: 4%;
+  left: 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each {
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .users-details-each {
+  margin-left: 4%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4230,23 +4170,23 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .users-details-each p {
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .users-details-each p {
   font-size: 11px;
   text-align: start;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-1 {
-  width: 50%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-1 {
+  width: 48%;
   border-radius: 30px 50px 50px 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-2 {
-  width: 74%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-2 {
+  width: 72%;
   border-radius: 15px 50px 50px 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 {
-  width: 86%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-3 {
+  width: 84%;
   border-radius: 6px 35px 35px 6px;
   height: 60px;
   padding: 6px 10px 6px 10px;
@@ -4255,28 +4195,28 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           align-items: stretch;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-3 .big-p {
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-3 .big-p {
   height: 100%;
   overflow-y: scroll;
   line-height: 1.2;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-4 {
-  width: 83%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-4 {
+  width: 81%;
   border-radius: 15px 50px 50px 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-5 {
-  width: 74%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-5 {
+  width: 72%;
   border-radius: 15px 50px 50px 15px;
 }
 
-.profile-header .header-bio .users-details-container .users-details-outset .users-details-inset .ude-6 {
-  width: 50%;
+.section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-6 {
+  width: 48%;
   border-radius: 15px 50px 50px 30px;
 }
 
-.profile-header .header-bio .profile-buttons-container {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container {
   height: 100%;
   width: 30%;
   border-radius: 0px;
@@ -4297,7 +4237,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   right: 0px;
 }
 
-.profile-header .header-bio .profile-buttons-container .each-button-container {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .each-button-container {
   height: 50px;
   width: 110px;
   border-radius: 0px;
@@ -4317,7 +4257,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: absolute;
 }
 
-.profile-header .header-bio .profile-buttons-container .each-button-container .profile-button-outset {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .each-button-container .profile-button-outset {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -4338,7 +4278,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
 }
 
-.profile-header .header-bio .profile-buttons-container .each-button-container .profile-button-outset .profile-button-inset {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .each-button-container .profile-button-outset .profile-button-inset {
   height: 75%;
   width: 75%;
   border-radius: 50%;
@@ -4359,40 +4299,40 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
 }
 
-.profile-header .header-bio .profile-buttons-container .btn-title {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .btn-title {
   font-size: 11px;
   color: white;
   margin-left: 5px;
 }
 
-.profile-header .header-bio .profile-buttons-container .ebc-1 {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .ebc-1 {
   top: 10px;
   right: 35px;
 }
 
-.profile-header .header-bio .profile-buttons-container .ebc-2 {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .ebc-2 {
   top: 70px;
   right: 1px;
   width: 105px;
 }
 
-.profile-header .header-bio .profile-buttons-container .ebc-3 {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .ebc-3 {
   right: 14px;
   width: 80px;
 }
 
-.profile-header .header-bio .profile-buttons-container .ebc-4 {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .ebc-4 {
   bottom: 70px;
   right: 27px;
   width: 80px;
 }
 
-.profile-header .header-bio .profile-buttons-container .ebc-5 {
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .ebc-5 {
   bottom: 10px;
   right: 36px;
 }
 
-.profile-post-feed {
+.section-2_profile {
   height: 53%;
   width: 100%;
   border-radius: none;
@@ -4416,7 +4356,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   overflow-y: auto;
 }
 
-.profile-post-feed .feed-title-container {
+.section-2_profile .feed-title-container {
   height: 10%;
   width: 100%;
   border-radius: 20px;
@@ -4435,7 +4375,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .feed-title-container .feed-title {
+.section-2_profile .feed-title-container .feed-title {
   height: 60%;
   width: 60%;
   border-radius: 20px;
@@ -4458,8 +4398,8 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   font-weight: bold;
 }
 
-.profile-post-feed .profile-songs-container {
-  height: 65%;
+.section-2_profile .section-2a_songs {
+  height: 75%;
   width: 100%;
   border-radius: 18px;
   display: -webkit-box;
@@ -4468,18 +4408,18 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container {
-  height: 90%;
-  width: 88%;
+.section-2_profile .section-2a_songs .songs-1_songs-list {
+  height: 80%;
+  width: 86%;
   border-radius: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4500,7 +4440,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 0px -2px 3px #bebebe;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container {
   min-height: 140px;
   width: 100%;
   margin-top: 2%;
@@ -4520,11 +4460,11 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   scroll-snap-stop: always;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container:focus {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:focus {
   background: pink;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container {
   height: 100%;
   width: 45%;
   border-radius: none;
@@ -4543,7 +4483,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container {
   height: 23%;
   width: 100%;
   border-radius: 0px;
@@ -4562,7 +4502,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: column;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container .song-name-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
           box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
   min-height: 15px;
@@ -4585,7 +4525,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   text-decoration: none;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .song-name-container .song-name-outset p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset p {
   font-size: 14px;
   color: #e24f8c;
   margin-left: 5%;
@@ -4594,7 +4534,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   word-break: break-word;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container {
   height: 77%;
   width: 100%;
   border-radius: 0px;
@@ -4613,7 +4553,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container {
   height: 100%;
   width: 40%;
   border-radius: 10px;
@@ -4633,20 +4573,20 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: relative;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .shape-wrap {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container .shape-wrap {
   height: 50px;
   width: 22px;
   float: left;
   shape-outside: polygon(0 0, 25% 6%, 47% 16%, 66% 31%, 83% 53%, 94% 77%, 100% 100%, 0 100%);
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container p {
   font-size: 11px;
   color: #959595;
   position: absolute;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .tp-1 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container .tp-1 {
   width: 93px;
   height: 50px;
   top: 6px;
@@ -4655,24 +4595,24 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   line-height: 1;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .tp-2 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container .tp-2 {
   right: 38px;
   bottom: 37px;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .tp-3 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container .tp-3 {
   bottom: 23px;
   right: 24px;
   overflow: hidden;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .track-data-container .tp-4 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .track-data-container .tp-4 {
   bottom: 10px;
   width: 70px;
   right: 1px;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .play-container {
   height: 85%;
   width: 60%;
   border-radius: 5px 50px 50px 5px;
@@ -4693,7 +4633,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .play-container .play-outset {
   height: 65px;
   width: 65px;
   border-radius: 50%;
@@ -4714,7 +4654,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset {
   height: 80%;
   width: 80%;
   border-radius: 50%;
@@ -4735,12 +4675,12 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset .bi-play-2 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .track-play-container .play-container .play-outset .play-inset .bi-play-2 {
   margin: 1px 0px 0px 4px;
   font-size: .7em;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .lyrics-container {
   height: 100%;
   width: 55%;
   border-radius: 20px;
@@ -4760,7 +4700,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   position: relative;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container .lyrics-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .lyrics-container .lyrics-outset {
   height: 120px;
   width: 90%;
   border-radius: 15px;
@@ -4784,7 +4724,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   left: 10px;
 }
 
-.profile-post-feed .profile-songs-container .songs-list-container .each-track-container .lyrics-container .lyrics-outset .p-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .lyrics-container .lyrics-outset .p-container {
   height: 90%;
   width: 90%;
   font-size: 13px;
@@ -4794,9 +4734,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   text-align: start;
 }
 
-.profile-post-feed .profile-songs-container .songs-slider-container {
-  height: 90%;
-  width: 5%;
+.section-2_profile .section-2a_songs .songs-2_slider-container {
+  height: 80%;
+  width: 6%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4813,7 +4753,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-post-feed .profile-songs-container .songs-slider-container .songs-slider-outer {
+.section-2_profile .section-2a_songs .songs-2_slider-container .songs-slider-outer {
   height: 100%;
   width: 80%;
   border-radius: 50px;
@@ -4834,8 +4774,9 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 
-.profile-post-feed .nb-profile {
+.section-2_profile .section-2b_navbar {
   height: 25%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4848,7 +4789,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   border: none;
 }
 
-.profile-post-feed .nb-profile .nav-list {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset {
   height: 80px;
   width: 92%;
   border-radius: 50px;
@@ -4871,7 +4812,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
   background: #dddddd;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset {
   height: 88%;
   width: 96%;
   border-radius: 55px;
@@ -4892,7 +4833,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers {
   height: 52px;
   width: 72px;
   border-radius: 10px;
@@ -4912,7 +4853,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .nav-buttons-rim {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .nav-buttons-rim {
   height: 45px;
   width: 45px;
   border-radius: 50px;
@@ -4933,7 +4874,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset {
   height: 75%;
   width: 75%;
   border-radius: 50%;
@@ -4954,7 +4895,7 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset {
   height: 80%;
   width: 80%;
   border-radius: 50%;
@@ -4973,17 +4914,17 @@ footer .nav-buttons .nav-list .nav-list-inner .nav-buttons-containers .button-ti
           flex-direction: row;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset img {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset img {
   height: 1.5em;
   width: 1.5em;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset:active {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .nav-buttons-rim .nav-buttons-outset .nav-buttons-inset:active {
   -webkit-box-shadow: inset 2px 2px 3px 0px #b0b1b3,  inset -2px -2px 3px #ffffff;
           box-shadow: inset 2px 2px 3px 0px #b0b1b3,  inset -2px -2px 3px #ffffff;
 }
 
-.profile-post-feed .nb-profile .nav-list .nav-list-inner .nav-buttons-containers .button-title-container {
+.section-2_profile .section-2b_navbar .navbar_shadow-div-outset .navbar_shadow-div-inset .nav-buttons-containers .button-title-container {
   height: 15%;
   width: 100%;
   border-radius: 0px;

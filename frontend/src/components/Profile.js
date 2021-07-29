@@ -30,10 +30,6 @@ function Profile(props) {
   const profileIcon = useRef();
 
   useEffect(() => {
-  //   profileRim.current.style.animation = "rim .5s linear forwards"
-  //   profileOut.current.style.animation = "out .5s linear forwards"
-  //   profileIn.current.style.animation = "in .5s linear forwards"
-  //   profileIcon.current.style.animation = "iconScale .5s linear forwards"
     profileContainer.current.style.background = "#ec6aa0";
     profileContainer.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
     profileContainer.current.style.border = "1px solid #ec6aa0"
@@ -55,13 +51,6 @@ function Profile(props) {
       .catch(console.error);
   }, []);
 
-  const logout = () => {
-    setUser({});
-    setThisUser({});
-    setUserViewed({});
-    localStorage.clear();
-  };
-
   useEffect(() => {
     console.log("profile.js line 53 ", user);
     actions
@@ -72,58 +61,55 @@ function Profile(props) {
       .catch(console.error);
   }, []);
 
+  const logout = () => {
+    setUser({});
+    setThisUser({});
+    setUserViewed({});
+    localStorage.clear();
+  };
+
   const dateFormatHandler = (date) => {
-      const getDate = new Date();
-      const currentDate = Date.parse(getDate)
-      const songDate = Date.parse(date)
-
-      let timeDifference = currentDate - songDate
-      let diffSeconds = (timeDifference / 1000).toFixed(2)
-      let diffMinutes = (diffSeconds / 60).toFixed(2)
-      let diffHours = (diffMinutes / 60).toFixed(2)
-      let diffDays = (diffHours / 24).toFixed(2)
-      let diffWeeks = (diffDays / 7).toFixed(2)
-      let diffMonths = (diffDays / 30).toFixed(2)
-      let diffYears = (diffMonths / 12).toFixed(2)
-
-      if (diffSeconds < 60) {
-        console.log(Math.round(diffSeconds), ' seconds ago')
-        return `${Math.round(diffSeconds)}s`
-      }
-      else if (diffMinutes >= 1 && diffMinutes <= 55) {
-        console.log(Math.round(diffMinutes), " minutes ago")
-        return `${Math.round(diffMinutes)}min`
-      }
-      else if (diffHours >= 1 && diffHours < 24) {
-        console.log(Math.round(diffHours), " hours ago")
-        return `${Math.round(diffHours)}h`
-      }
-      else if (diffDays >= 1 && diffDays < 7) {
-        console.log(Math.round(diffDays), " days ago")
-        return `${Math.round(diffDays)}d`
-      }
-      else if (diffWeeks >= 1 && diffWeeks < 8) {
-        console.log(Math.round(diffWeeks), " weeks ago")
-        return `${Math.round(diffWeeks)}w`
-      }
-      else if (diffWeeks >= 8 || diffMonths >= 2) {
-        console.log(Math.round(diffMonths), " months ago")
-        return `${Math.round(diffMonths)}m`
-      }
-      else if (diffMonths >= 12) {
-        console.log(Math.round(diffYears), " years ago")
-        return `${Math.round(diffYears)}y`
-      }
+    const getDate = new Date();
+    const currentDate = Date.parse(getDate)
+    const songDate = Date.parse(date)
+    let timeDifference = currentDate - songDate
+    let diffSeconds = (timeDifference / 1000).toFixed(2)
+    let diffMinutes = (diffSeconds / 60).toFixed(2)
+    let diffHours = (diffMinutes / 60).toFixed(2)
+    let diffDays = (diffHours / 24).toFixed(2)
+    let diffWeeks = (diffDays / 7).toFixed(2)
+    let diffMonths = (diffDays / 30).toFixed(2)
+    let diffYears = (diffMonths / 12).toFixed(2)
+    if (diffSeconds < 60) {
+      console.log(Math.round(diffSeconds), ' seconds ago')
+      return `${Math.round(diffSeconds)}s`
+    }
+    else if (diffMinutes >= 1 && diffMinutes <= 55) {
+      console.log(Math.round(diffMinutes), " minutes ago")
+      return `${Math.round(diffMinutes)}min`
+    }
+    else if (diffHours >= 1 && diffHours < 24) {
+      console.log(Math.round(diffHours), " hours ago")
+      return `${Math.round(diffHours)}h`
+    }
+    else if (diffDays >= 1 && diffDays < 7) {
+      console.log(Math.round(diffDays), " days ago")
+      return `${Math.round(diffDays)}d`
+    }
+    else if (diffWeeks >= 1 && diffWeeks < 8) {
+      console.log(Math.round(diffWeeks), " weeks ago")
+      return `${Math.round(diffWeeks)}w`
+    }
+    else if (diffWeeks >= 8 || diffMonths >= 2) {
+      console.log(Math.round(diffMonths), " months ago")
+      return `${Math.round(diffMonths)}m`
+    }
+    else if (diffMonths >= 12) {
+      console.log(Math.round(diffYears), " years ago")
+      return `${Math.round(diffYears)}y`
+    }
   }
 
-  const showLyrics = (lyrics) => {
-    return lyrics.map((eachLine, index) => {
-      return (
-        <p key={`${eachLine}_${index}`}>{eachLine}</p>
-      )
-    })
-  }
-  
   const handlePlayPause=(x)=>{
     const currentPlayer = document.getElementById(`${x}`)
     if(currentPlayer.paused) {
@@ -148,6 +134,14 @@ function Profile(props) {
       }, 
       []
     )
+
+    const showLyrics = () => {
+      return eachSong.songLyricsStr.map((eachLine, index) => {
+        return (
+          <p key={`${eachLine}_${index}`}>{eachLine}</p>
+        )
+      })
+    }
     
     return (
       <li className="each-track-container" ref={setSongRefs} onClick={setFocus}>
@@ -181,7 +175,7 @@ function Profile(props) {
         <div className="lyrics-container">
           <div className="lyrics-outset">
             <div className="p-container">
-              {showLyrics(eachSong.songLyricsStr)}
+              {showLyrics()}
             </div>
           </div>
         </div>
@@ -199,20 +193,20 @@ function Profile(props) {
 
   return (
     <div className="Profile">
-      <div className="profile-header">
-        <div className="username-pic-container">
-          <div className="username-pic-outset">
-            <div div className="profile-pic-container">
-              <div className="profile-pic-outset">
-                <div className="profile-pic-inset">
+      <div className="section-1_profile">
+        <div className="section-1a_user-title">
+          <div className="user-title_shadow-div-inset">
+            <div div className="user-pic-container">
+              <div className="user-pic_shadow-div-outset">
+                <div className="user-pic_shadow-div-inset">
                   <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
                 </div>
               </div>
             </div>
 
-            <div className="username-container">
-              <div className="username-outset">
-                <div className="username-inset">
+            <div className="user-name-container">
+              <div className="user-name_shadow-div-outset">
+                <div className="user-name_shadow-div-inset">
                   <p className="username-text-me">{thisUser.userName}</p>
                 </div>
               </div>
@@ -220,44 +214,42 @@ function Profile(props) {
           </div>
         </div>
 
-        <div className="header-bio">
-          <div className="users-details-container">
-            <div className="users-details-outset">
-              <div className="users-details-inset">
-                <div className="users-details-each ude-1">
-                  <p style={{color: 'white'}}>Name: </p>
-                  <p style={{marginLeft: "4%"}}>{thisUser.family_name}</p>
-                </div>
+        <div className="section-1b_user-data">
+          <div className="user-data-1_fields-container">
+            <div className="fields_shadow-div-outset">
+              <div className="users-details-each ude-1">
+                <p style={{color: 'white'}}>Name: </p>
+                <p style={{fontSize: "13px", marginLeft: "4%"}}>{thisUser.family_name}</p>
+              </div>
 
-                <div className="users-details-each ude-2">
-                  <p style={{color: 'white'}}>Email: </p>
-                  <p style={{marginLeft: "4%", overflowX: "scroll"}}>{thisUser.email}</p>
-                </div>
+              <div className="users-details-each ude-2">
+                <p style={{color: 'white'}}>Email: </p>
+                <p style={{fontSize: "13px", marginLeft: "4%", overflowX: "scroll"}}>{thisUser.email}</p>
+              </div>
 
-                <div className="users-details-each ude-3">
-                  <p style={{color: 'white'}}>About: </p>
-                  <p className="big-p" style={{marginLeft: "4%"}}>{thisUser.userAbout}</p>
-                </div>
+              <div className="users-details-each ude-3">
+                <p style={{color: 'white'}}>About: </p>
+                <p className="big-p" style={{fontSize: "13px", marginLeft: "4%"}}>{thisUser.userAbout}</p>
+              </div>
 
-                <div className="users-details-each ude-4">
-                  <p style={{color: 'white'}}>Twitter: </p>
-                  <p style={{marginLeft: "4%"}}>{thisUser.userTwitter}</p>
-                </div>
+              <div className="users-details-each ude-4">
+                <p style={{color: 'white'}}>Twitter: </p>
+                <p style={{fontSize: "13px", marginLeft: "4%"}}>{thisUser.userTwitter}</p>
+              </div>
 
-                <div className="users-details-each ude-5">
-                  <p style={{color: 'white'}}>Instagram: </p>
-                  <p style={{marginLeft: "4%"}}>{thisUser.userInstagram}</p>
-                </div>
+              <div className="users-details-each ude-5">
+                <p style={{color: 'white'}}>Instagram: </p>
+                <p style={{fontSize: "13px", marginLeft: "4%"}}>{thisUser.userInstagram}</p>
+              </div>
 
-                <div className="users-details-each ude-6">
-                  <p style={{color: 'white'}}>SoundCloud: </p>
-                  <p style={{marginLeft: "4%", overflowX: "scroll"}}>{thisUser.userSoundCloud}</p>
-                </div>
+              <div className="users-details-each ude-6">
+                <p style={{color: 'white'}}>SoundCloud: </p>
+                <p style={{fontSize: "13px", marginLeft: "4%", overflowX: "scroll"}}>{thisUser.userSoundCloud}</p>
               </div>
             </div>
           </div>
 
-          <div className="profile-buttons-container">
+          <div className="user-data-2_btns-container">
             <div div className="each-button-container ebc-1">
               <div className="profile-button-outset">
                 <div className="profile-button-inset">
@@ -319,28 +311,22 @@ function Profile(props) {
         </div>
       </div>
 
-      <div className="profile-post-feed">
-        <div className="feed-title-container">
-          <div className="feed-title">
-            <p>{`${thisUser.userName}'s Songs: `} <span style={{color: "#e24f8c"}}>{thisUserSongs.length}</span></p>
-          </div>
-        </div>
-
-        <div className="profile-songs-container">
-          <ul className="songs-list-container">
+      <div className="section-2_profile">
+        <div className="section-2a_songs">
+          <ul className="songs-1_songs-list">
             {showProfileSongs()}
           </ul>
           
-          <div className="songs-slider-container">
+          <div className="songs-2_slider-container">
             <div className="songs-slider-outer">
 
             </div>
           </div>
         </div>
         
-        <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
-          <div className="nav-list">
-            <div className="nav-list-inner">
+        <div className="section-2b_navbar" style={{boxShadow: `${props.shadowDisplay}`}}>
+          <div className="navbar_shadow-div-outset">
+            <div className="navbar_shadow-div-inset">
               <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
                 <div className="nav-buttons-rim">
                   <div className="nav-buttons-outset">
