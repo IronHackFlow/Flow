@@ -293,26 +293,37 @@
                             // box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
                             position: relative;
                             .shape-wrap {
+                                height: 50px;
+                                width: 22px;
                                 float: left;
-                                shape-outside: polygon(0 0, 25% 6%, 47% 16%, 66% 31%, 83% 53%, 94% 77%, 100% 100%, 0 100%);
-                            }
+                                shape-outside: polygon(0 0, 25% 6%, 47% 16%, 66% 31%, 83% 53%, 94% 77%, 100% 100%, 0 100%);                            }
                             p {
                                 font-size: 11px;
                                 color: #959595;
                                 position: absolute;
                             }
                             .tp-1 {
-
+                                width: 93px;
+                                height: 50px;
+                                top: 6px;
+                                right: -4px;
+                                overflow: hidden;
+                                line-height: 1;
                             }
                             
                             .tp-2 {
-
+                                right: 38px;
+                                bottom: 37px;
                             }
                             .tp-3 {
-
+                                bottom: 23px;
+                                right: 24px;
+                                overflow: hidden;
                             }
                             .tp-4 {
-
+                                bottom: 10px;
+                                width: 70px;
+                                right: 1px;
                             }
                         }
 
