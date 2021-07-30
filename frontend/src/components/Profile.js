@@ -71,43 +71,79 @@ function Profile(props) {
   const dateFormatHandler = (date) => {
     const getDate = new Date();
     const currentDate = Date.parse(getDate)
-    const songDate = Date.parse(date)
-    let timeDifference = currentDate - songDate
-    let diffSeconds = (timeDifference / 1000).toFixed(2)
-    let diffMinutes = (diffSeconds / 60).toFixed(2)
-    let diffHours = (diffMinutes / 60).toFixed(2)
-    let diffDays = (diffHours / 24).toFixed(2)
-    let diffWeeks = (diffDays / 7).toFixed(2)
-    let diffMonths = (diffDays / 30).toFixed(2)
-    let diffYears = (diffMonths / 12).toFixed(2)
-    if (diffSeconds < 60) {
-      console.log(Math.round(diffSeconds), ' seconds ago')
-      return `${Math.round(diffSeconds)}s`
+    const objDate = Date.parse(date)
+    const timeDiff = currentDate - objDate
+
+    const year = 31536000000
+    const month = 2592000000
+    const week = 604800000
+    const day = 86400000
+    const hour = 3600000
+    const minute = 60000
+    const second = 1000
+
+    if (timeDiff >= year) {
+      console.log((timeDiff / year), " years ago")
     }
-    else if (diffMinutes >= 1 && diffMinutes <= 55) {
-      console.log(Math.round(diffMinutes), " minutes ago")
-      return `${Math.round(diffMinutes)}min`
+    else if (timeDiff >= month && timeDiff < year) {
+      if (timeDiff / month < 11.5) {
+        return `${Math.round(timeDiff / month)}m`
+      }
+      else {
+        return "1y"
+      }
     }
-    else if (diffHours >= 1 && diffHours < 24) {
-      console.log(Math.round(diffHours), " hours ago")
-      return `${Math.round(diffHours)}h`
+    else if (timeDiff >= week && timeDiff < (month * 2)) {
+      console.log((timeDiff / week), " weeks ago")
     }
-    else if (diffDays >= 1 && diffDays < 7) {
-      console.log(Math.round(diffDays), " days ago")
-      return `${Math.round(diffDays)}d`
+    else if (timeDiff >= day && timeDiff < week) {
+      console.log((timeDiff / day), " days ago")
     }
-    else if (diffWeeks >= 1 && diffWeeks < 8) {
-      console.log(Math.round(diffWeeks), " weeks ago")
-      return `${Math.round(diffWeeks)}w`
+    else if (timeDiff >= hour && timeDiff < day) {
+      console.log((timeDiff / hour), " hours ago")
     }
-    else if (diffWeeks >= 8 || diffMonths >= 2) {
-      console.log(Math.round(diffMonths), " months ago")
-      return `${Math.round(diffMonths)}m`
+    else if (timeDiff >= minute && timeDiff < hour) {
+      console.log((timeDiff / minute), " minutes ago")
     }
-    else if (diffMonths >= 12) {
-      console.log(Math.round(diffYears), " years ago")
-      return `${Math.round(diffYears)}y`
+    else if (timeDiff >= second && timeDiff < minute) {
+      console.log((timeDiff / second), " seconds ago")
     }
+    
+    // let diffSeconds = (timeDifference / 1000).toFixed(2)
+    // let diffMinutes = (diffSeconds / 60).toFixed(2)
+    // let diffHours = (diffMinutes / 60).toFixed(2)
+    // let diffDays = (diffHours / 24).toFixed(2)
+    // let diffWeeks = (diffDays / 7).toFixed(2)
+    // let diffMonths = (diffDays / 30).toFixed(2)
+    // let diffYears = (diffMonths / 12).toFixed(2)
+    // if (diffSeconds < 60) {
+    //   console.log(Math.round(diffSeconds), ' seconds ago')
+    //   return `${Math.round(diffSeconds)}s`
+    // }
+    // else if (diffMinutes >= 1 && diffMinutes <= 55) {
+    //   console.log(Math.round(diffMinutes), " minutes ago")
+    //   return `${Math.round(diffMinutes)}min`
+    // }
+    // else if (diffHours >= 1 && diffHours < 24) {
+    //   console.log(Math.round(diffHours), " hours ago")
+    //   return `${Math.round(diffHours)}h`
+    // }
+    // else if (diffDays >= 1 && diffDays < 7) {
+    //   console.log(Math.round(diffDays), " days ago")
+    //   return `${Math.round(diffDays)}d`
+    // }
+    // else if (diffWeeks >= 1 && diffWeeks < 8) {
+    //   console.log(Math.round(diffWeeks), " weeks ago")
+    //   return `${Math.round(diffWeeks)}w`
+    // }
+    // else if (diffWeeks >= 8 || diffMonths >= 2) {
+    //   console.log(Math.round(diffMonths), " months ago")
+    //   return `${Math.round(diffMonths)}m`
+    // }
+    // else if (diffMonths >= 12) {
+    //   console.log(Math.round(diffYears), " years ago")
+    //   return `${Math.round(diffYears)}y`
+    // }
   }
 
   const handlePlayPause=(x)=>{
