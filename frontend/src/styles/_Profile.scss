@@ -360,7 +360,7 @@
         }
 
         .songs-2_slider-container {
-            @include flexCenter(80%, 6%, 0px, center, center, row);
+            @include flexCenter(82%, 6%, 0px, center, center, row);
             
             .songs-slider-outer {
                 @include flexCenter(100%, 80%, 50px, center, center, row);

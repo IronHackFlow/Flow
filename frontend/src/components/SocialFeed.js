@@ -179,7 +179,7 @@ function SocialFeed(props) {
   function DisplaySong(eachSong) {
     const viewRef = useRef();
     const [inViewRef, inView] = useInView({
-      threshold: 1,
+      threshold: .9,
       root: document.querySelector('.video-scroll-container'),
     });
   

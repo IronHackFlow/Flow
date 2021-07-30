@@ -118,8 +118,7 @@ html, body, #root, .App {
   width: 100vw;
   font-family: 'Roboto', sans-serif;
   // font-family: 'Poppins', sans-serif;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
 }
 
 .Home, 
@@ -131,8 +130,7 @@ html, body, #root, .App {
 .LogIn {
   height: 100vh;
   width: 100vw;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
 }
 
 footer, 
@@ -148,8 +146,7 @@ footer,
     width: 375px;
     font-family: 'Roboto', sans-serif;
     // font-family: 'Poppins', sans-serif;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+
   }
   body, 
   #root, 

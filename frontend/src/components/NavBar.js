@@ -192,58 +192,60 @@ function NavBar(props) {
     <footer>
       <div className="social-buttons">
         <div className="social-list">
-          <div className="individual-container">
+          <div className="individual-container-pic">
             <div className="individual-btn-prof">
-              <div className="individual-profile-pic">
-                <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}}>
-                  <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
-                </Link>
+              <Link to={{pathname: `/profile/other/${props.userForSong?._id}`, profileInfo: props.userForSong}} className="individual-profile-pic">
+                <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="two-btn-container tbc-left">
+            <div className="individual-container">
+              <div className="individual-btn" onClick={followCheck} ref={followBtn}>
+                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
+                <div className="likes-number-container">
+                    <p>{totalFollowers}</p>
+                </div>
+              </div>
+              <div className="individual-text">
+                <p>Follow</p>
+              </div>
+            </div>
+
+            <div className="individual-container">
+              <div className="individual-btn" onClick={likeCheck}>
+                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
+                <div className="likes-number-container">
+                    <p>{totalLikes}</p>
+                </div>
+              </div>
+              <div className="individual-text">
+                <p>Like</p>
               </div>
             </div>
           </div>
 
-          <div className="individual-container">
-            <div className="individual-btn" onClick={followCheck} ref={followBtn}>
-              <img className="social-icons follow" src={follow} alt="follow user icon"></img>
-              <div className="likes-number-container">
-                  <p>{totalFollowers}</p>
+          <div className="two-btn-container tbc-right">
+            <div className="individual-container">
+              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
+                <img className="social-icons heart" src={search} alt="search user icon"></img>
+              </div>
+              <div className="individual-text">
+                <p>Search</p>
               </div>
             </div>
-            <div className="individual-text">
-              <p>Followers</p>
-            </div>
-          </div>
 
-          <div className="individual-container">
-            <div className="individual-btn" onClick={likeCheck}>
-              <img className="social-icons heart" src={heart2} alt="like post icon"></img>
-              <div className="likes-number-container">
-                  <p>{totalLikes}</p>
+            <div className="individual-container">
+              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+                <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
+                <div className="likes-number-container">
+                    <p>{songComments.length}</p>
+                </div>
               </div>
-            </div>
-            <div className="individual-text">
-              <p>Likes</p>
-            </div>
-          </div>
-
-          <div className="individual-container">
-            <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-              <img className="social-icons heart" src={search} alt="search user icon"></img>
-            </div>
-            <div className="individual-text">
-              <p>Search</p>
-            </div>
-          </div>
-
-          <div className="individual-container">
-            <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-              <img className="social-icons comment" src={comments} alt="comment on post icon"></img>
-              <div className="likes-number-container">
-                  <p>{songComments.length}</p>
+              <div className="individual-text">
+                <p>Comment</p>
               </div>
-            </div>
-            <div className="individual-text">
-              <p>Comments</p>
             </div>
           </div>
         </div>

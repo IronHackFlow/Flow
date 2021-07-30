@@ -20,7 +20,7 @@ function App() {
   const [userViewed, setUserViewed] = useState({});
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
-  const [songId, setSongId] = useState();
+  const [songId, setSongId] = useState({});
   const [getSongName, setGetSongName] = useState('');
   const [songComments, setSongComments] = useState([]);
 
