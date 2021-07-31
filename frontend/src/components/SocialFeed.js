@@ -2,29 +2,28 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { CSSTransition } from "react-transition-group"
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import moment from "moment";
 import actions from "../api";
 import TheContext from "../TheContext";
+import gifsArr from "../images/gifs.json";
 import Comments from "./Comments.js";
 import Search from "./Search.js";
 import NavBar from "./NavBar.js";
 import gradientbg from "../images/gradient-bg-2.png";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg"
-import gifsArr from "../images/gifs.json";
-import moment from "moment";
+
+
 
 function SocialFeed(props) {
-  const { user, setUser, 
-          userViewed, setUserViewed, 
-          navDisplayed, setNavDisplayed,
+  const { user, setUser,
+          setUserViewed, navDisplayed,
           toggleSocial, setToggleSocial,
           toggleExplore, setToggleExplore,
           getSongName, setGetSongName,
-          songId, setSongId,
-          songComments, setSongComments
-    } = React.useContext(
-    TheContext
-  );
+          setSongId, setSongComments
+  } = React.useContext(TheContext);
+
   const location = useLocation();
 
   let gifsCopy = [...gifsArr]
@@ -64,11 +63,6 @@ function SocialFeed(props) {
     }
   }, [location, setToggleSocial, setToggleExplore])
 
-  const getRandomBackground = () => {
-    let index = Math.floor(Math.random()*gifsCopy.length)
-    return gifsCopy[index].url
-  }
-
   useEffect(() => {
     actions
       .getMostLikedSongs()
@@ -101,6 +95,11 @@ function SocialFeed(props) {
     }
   }, [navDisplayed])
   
+  const getRandomBackground = () => {
+    let index = Math.floor(Math.random()*gifsCopy.length)
+    return gifsCopy[index].url
+  }
+
   const popUpComments = () => {
     if (poppedUp === false) {
       menuDown('search')
@@ -178,6 +177,7 @@ function SocialFeed(props) {
 
   function DisplaySong(eachSong) {
     const viewRef = useRef();
+
     const [inViewRef, inView] = useInView({
       threshold: .9,
       root: document.querySelector('.video-scroll-container'),
@@ -190,6 +190,7 @@ function SocialFeed(props) {
       },
       [inViewRef],
     )
+
     if (inView) {
       setUserForSong(eachSong.song.songUser)
       setSongId(eachSong.song._id)
@@ -211,7 +212,7 @@ function SocialFeed(props) {
         className="video-pane"
         style={{ backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')` }}
         >
-        <div className="last-div"></div>
+          {/* <div className="last-div"></div> */}
       </li>
     );
   }
@@ -231,7 +232,7 @@ function SocialFeed(props) {
   return (
       <div className="SocialFeed">
         <div ref={windowRef} className="social-panel">
-          <div className="video-scroll-container" style={{width: '99%'}}>
+          <div className="video-scroll-container">
               <CSSTransition
                 in={toggleSocial}
                 key={'key2'}
@@ -264,21 +265,19 @@ function SocialFeed(props) {
                 <div className="user-details-inset">
                   <div className="text-container">
                     <div className="udt-1-container">
-                      <p className="ud-text udt-1"> 
-                        <span style={{ color: "#ec6aa0" }}>
-                          {userForSong?.userName}
-                        </span>
+                      <p className="ud-text udt-1" style={{ color: "#ec6aa0"}}> 
+                        {getSongName} - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}>{userForSong?.userName}</span>
                       </p>
                     </div>
                     <div className="udt-2-container">
                       <p className="ud-text udt-2">
-                        {getSongName}
+                        {/* {userForSong?.userName} */}
+                        {getSongCaption ? getSongCaption : "no caption for this flow"}
                       </p>
                     </div>
                     <div className="udt-3-container">
                       <p className="ud-text udt-3">
                         {songDate ? moment(songDate).fromNow() : '5 months ago 𑁦 '}
-                        {getSongCaption ? getSongCaption : " 𑁦 no caption for this flow"}
                       </p>
                     </div>
                   </div>

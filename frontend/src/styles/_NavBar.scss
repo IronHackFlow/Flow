@@ -70,9 +70,9 @@ nav {
 //   }
 // }
 .hamburger-button {
-  @include flexCenter(45px,45px, 5px, center, center, column);
+  @include flexCenter(50px,45px, 5px, center, center, column);
   position: fixed;
-  top: 8px;
+  top: 7px;
   left: 10px;
   z-index: 99;
   background: rgba(255, 255, 255, 0);

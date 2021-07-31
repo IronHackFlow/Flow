@@ -12,23 +12,24 @@ footer {
     .social-buttons {
         @include flexCenter(63%, 100%, 0px, center, stretch, row);
         position: absolute;
-        background: linear-gradient(
-            174deg
-            , #d8d8d8 0%, #a6a6a6 50%, #707070 100%);
+        background: linear-gradient(153deg, #747474 0%, #4f4f4f 100%);
 
         .social-list {
             @include flexCenter(80%, 100%, 0px, center, center, row);
-            border-top: 5px solid #bebebe;
-            box-shadow: inset 0px 3px 3px grey;
+            border-top: 5px solid #787878;
+            box-shadow: inset 0px 3px 3px #464646;
             
             .two-btn-container {
                 @include flexCenter(80px, 120px, 10px, space-evenly, center, row);
-                box-shadow: inset 2px 2px 3px #7e7d7d, inset -2px -2px 3px #d6d6d6;
+                box-shadow: inset 3px 3px 5px #333333, inset -3px -3px 3px 0px #a2a2a2;
                 position: absolute;
+                background: linear-gradient(
+                    153deg
+                    , #7f7f7f 0%, #4f4f4f 100%);
 
                 .individual-container {
                     @include flexCenter(83%, 41%, 6px, center, center, column);
-                    box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 2px #f5f5f5;
+                    box-shadow: 3px 3px 5px #414141, -2px -2px 3px 0px #a4a4a4;
                     
                     .individual-btn {
                         @include flexCenter(38px, 38px, 50px, center, center, row);
@@ -36,7 +37,7 @@ footer {
                         color: #ec6aa0;
                         list-style-type: none;
                         margin-top: 5px;
-                        box-shadow: 2px 2px 3px #717171, -2px -2px 3px #f5f5f5;
+                        box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6;
                         
                         &:active {
                             box-shadow: inset 2px 2px 3px #3d3f3f, 
@@ -52,8 +53,7 @@ footer {
                             background: none;
     
                             p {
-                                font-size: 15px;
-                                font-weight: bold;
+                                font-size: 14px;
                                 color: white;
                             }
                         }
@@ -64,9 +64,9 @@ footer {
                         margin-top: 3px;
     
                         p {
-                            font-size: 11px;
+                            font-size: 10px;
                             // font-weight: bold;
-                            color: white;
+                            color: #e0bbbb;
                         }
                     }
                 }
@@ -81,33 +81,27 @@ footer {
             }
 
             .individual-container-pic {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
+                @include flexCenter(110px, 110px, 100%, center, center, column);
                 position: absolute;
                 right: 35%;
                 top: 3px;
-                border-radius: 100%;
-                height: 110px;
-                width: 110px;
 
                 .individual-btn-prof {
                     @include flexCenter(83%, 83%, 50px, center, center, row);
-                    box-shadow: inset 3px 3px 5px #6d6d6d, inset -3px -3px 3px #e0e0e0;
+                    box-shadow: inset 2px 2px 3px #333333, inset -2px -2px 3px 0px #979797;
 
                     .individual-profile-pic {
-                        height: 80%;
-                        width: 80%;
+                        @include flexCenter(85%, 85%, 50px, center, center, row);
                         background-size: cover;
                         overflow: hidden;
                         background-position: center;
-                        border-radius: 50px;
-                        box-shadow: 2px 2px 3px #5a5a5a, -2px -2px 3px #989898;
+                        box-shadow: 2px 2px 3px #3c3c3c, -2px -2px 2px #979696;
                         
                         .prof-pic {
-                            height: 100%;
-                            width: 100%;
+                            height: 85%;
+                            width: 85%;
+                            border-radius: 100%;
+                            border: 2px solid #e24f8c;
                         }
                     }
                 }
@@ -123,9 +117,8 @@ footer {
         align-items: center;
         justify-content: center;
         background: linear-gradient(0deg, #dfdfdf 0%, #ecf0f3 100%);
-        border-top: 2px solid #ffffff;
-        border-radius: 25px 25px 0px 0px;
-        box-shadow: 0px -5px 20px 2px #656565;
+        border-radius: 40px 40px 0px 0px;
+        box-shadow: 0px -5px 20px 8px #3a3a3a;
         position: absolute;
         bottom: 0;
         // background: $lightgrayBg;
@@ -134,7 +127,7 @@ footer {
 
         .nav-list {
             @include flexCenter(80px, 92%, 50px, center, center, row);
-            box-shadow: 8px 8px 10px 0px #adadad, -9px -9px 20px #ffffff;
+            box-shadow: 8px 8px 10px 0px #adadad, -3px -3px 9px #ffffff;
             border: 1px solid #d1d1d1;
             background: #dddddd;
 
