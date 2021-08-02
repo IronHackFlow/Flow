@@ -20,6 +20,7 @@ function App() {
   const [userViewed, setUserViewed] = useState({});
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
+  const [toggleProfile, setToggleProfile] = useState();
   const [songId, setSongId] = useState({});
   const [getSongName, setGetSongName] = useState('');
   const [songComments, setSongComments] = useState([]);
@@ -61,6 +62,7 @@ function App() {
         navDisplayed, setNavDisplayed,
         toggleSocial, setToggleSocial,
         toggleExplore, setToggleExplore,
+        toggleProfile, setToggleProfile,
         getSongName, setGetSongName,
         songId, setSongId,
         songComments, setSongComments
@@ -85,7 +87,14 @@ function App() {
               <div className="menu-route mr-3">
                 <div className="menu-outset mo-3">
                   <div className="menu-inset mi-3">
-                    <Link to="/explore-feed" onClick={hideNavBar}>Explore</Link>
+                    <Link 
+                      to="/explore-feed" 
+                      onClick={() => {
+                        hideNavBar()
+                        setToggleProfile(false)
+                      }}>
+                      Explore
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -99,14 +108,28 @@ function App() {
               <div className="menu-route mr-5">
                 <div className="menu-outset mo-5">
                   <div className="menu-inset mi-5">
-                    <Link to={user._id ? `/profile/${user._id}` : `/auth`} onClick={hideNavBar}>Profile</Link>
+                    <Link 
+                      to={user._id ? {pathname: `/profile/${user._id}`, profileInfo: user } : `/auth`} 
+                      onClick={() => {
+                        hideNavBar()
+                        setToggleProfile(true)
+                      }}>
+                        Profile
+                    </Link>
                   </div>
                 </div>
               </div>
               <div className="menu-route mr-6">
                 <div className="menu-outset mo-6">
                   <div className="menu-inset mi-6">
-                    <Link to="/social-feed" onClick={hideNavBar}>Social</Link>
+                    <Link 
+                      to="/social-feed" 
+                      onClick={() => {
+                        hideNavBar()
+                        setToggleProfile(false)
+                      }}>
+                      Social
+                    </Link>
                   </div>
                 </div>
               </div>

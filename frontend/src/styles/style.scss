@@ -16,6 +16,7 @@ $lightgrayBg: #ecf0f3;
     align-items: $align;
     flex-direction: $direction;
 }
+
 @mixin pageIndicator($name, 
                      $bsX1, $bsX1-2, $bsBlur1, $bsColor1, $bsColor2,
                      $bsX2, $bsX2-2, $bsBlur2, $bsColor1-2, $bsColor2-2, 
@@ -63,14 +64,11 @@ $lightgrayBg: #ecf0f3;
     transform: scale(.85)
   }
 }
-// @include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 80%, 80%, 20%, 20%, "x", inset);
-// @include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
-// @include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
 
 @include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 70%, 70%, 60%, 60%, "x", inset);
 @include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
 @include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
-// @include pageIndicator(rim, unset, 2px, 2px, 3px, #b7b8b9, unset)
+
 .fade-appear,
 .fade-enter {
   left: 100vw;
@@ -105,6 +103,7 @@ $lightgrayBg: #ecf0f3;
   left: 100vw;
   transition: left 400ms linear;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -133,12 +132,6 @@ html, body, #root, .App {
 
 }
 
-footer, 
-.nav-buttons,
-.nb-profile {
-  width: 100vw;
-}  
-
 @media screen and (min-width: 800px) {
   html {
     margin: auto;
@@ -159,11 +152,6 @@ footer,
   .EditProfileScreen,
   .LogIn {
     height: 715px;
-    width: 375px;
-  }
-  footer, 
-  .nav-buttons,
-  .nb-profile {
     width: 375px;
   }
   .SocialFeed {
@@ -187,7 +175,7 @@ footer,
 }
 
 @import './NavBar';
-@import './Footer';
+@import './HamburgerMenu';
 @import './Home';
 @import './TestAudio';
 @import './SocialFeed';
@@ -233,29 +221,29 @@ footer,
 }
 @keyframes btnDip {
   0% {
-    box-shadow: inset 0px 0px 0px #686a6b, inset -0px -0px 0px #686a6b;
+    box-shadow: inset 0px 0px 0px #919292, inset -0px -0px 0px #919292;
   }
   100% {
-    box-shadow: inset 4px 4px 5px #505050, inset -4px -4px 5px #7d7f80;
+    box-shadow: inset 3px 3px 3px #737373, inset -2px -2px 3px #e6e6e6;
   }
 }
 @keyframes btnPop {
   0% {
-    box-shadow: 0px 0px 0px #686a6b, -0px -0px 0px #686a6b;
-    background: linear-gradient(139deg, #686a6b, #686a6b);
+    box-shadow: 0px 0px 0px #919292, -0px -0px 0px #919292;
+    background: linear-gradient(139deg, #d9dada, #919292);
   }
   50% {
     background: linear-gradient(139deg, #d9dada, #919292);
-    box-shadow: 1px 1px 8px #2a2a2b, -2px -2px 8px #a6aaab;
-    --link-color-6: #686a6b;
-    --link-color-5: #686a6b;
-    --link-color-4: #686a6b;
-    --link-color-3: #686a6b;
-    --link-color-2: #686a6b;
-    --link-color-1: #686a6b;
+    box-shadow: 3px 3px 3px #727272, -2px -2px 3px #ececec;
+    --link-color-6: #919292;
+    --link-color-5: #919292;
+    --link-color-4: #919292;
+    --link-color-3: #919292;
+    --link-color-2: #919292;
+    --link-color-1: #919292;
   }
   100% {
-    box-shadow: 1px 1px 8px #2a2a2b, -2px -2px 8px #a6aaab;
+    box-shadow: 3px 3px 3px #727272, -2px -2px 3px #ececec;
     background: linear-gradient(139deg, #d9dada, #919292);
     --link-color-6: #ec6aa0;
     --link-color-5: #ec6aa0;

@@ -50,7 +50,7 @@ function SongScreen(props) {
 
   const closeSongWindow = () => {
     if (thisSong.songUser._id === user._id)
-      history.push(`/profile/${thisSong.songUser?._id}`)
+      history.push({pathname: `/profile/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
     else {
       history.push({pathname: `/profile/other/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
     }

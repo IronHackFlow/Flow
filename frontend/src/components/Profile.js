@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import actions from "../api";
 import TheContext from "../TheContext";
+import NavBar from "../components/NavBar";
 import mic from "../images/record2.svg";
 import avatar from "../images/avatar.svg";
 import social from "../images/social.svg";
@@ -16,40 +17,42 @@ import play from "../images/play.svg";
 function Profile(props) {
   const { 
     user, setUser, 
-    userViewed, setUserViewed
+    setUserViewed
     } = React.useContext(
     TheContext
   );
 
-  const [thisUser, setThisUser] = useState([userViewed]);
+  const [thisUser, setThisUser] = useState([]);
   const [thisUserSongs, setThisUserSongs] = useState([]);
 
-  const profileContainer = useRef();
-  const profileRim = useRef();
-  const profileOut = useRef();
-  const profileIcon = useRef();
+  // const profileBtnRef1 = useRef();
+  // const profileBtnRef2 = useRef();
+  // const profileBtnRef3 = useRef();
+  // const profileBtnRef4 = useRef();
+  // const profileBtnRef5 = useRef();
 
-  useEffect(() => {
-    profileContainer.current.style.background = "#ec6aa0";
-    profileContainer.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
-    profileContainer.current.style.border = "1px solid #ec6aa0"
-    profileContainer.current.style.transition = "all .4s"
-    profileRim.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
-    profileRim.current.style.height = "42px"
-    profileRim.current.style.width = "42px"
-    profileRim.current.style.transition = "all .4s"
-    profileOut.current.style.boxShadow = "none"
-    profileIcon.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
-  }, [])
+  // useEffect(() => {
+  //   profileBtnRef1.current.style.background = "#ec6aa0";
+  //   profileBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+  //   profileBtnRef1.current.style.border = "1px solid #ec6aa0"
+  //   profileBtnRef1.current.style.transition = "all .4s"
+  //   profileBtnRef2.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
+  //   profileBtnRef2.current.style.height = "38px"
+  //   profileBtnRef2.current.style.width = "38px"
+  //   profileBtnRef2.current.style.transition = "all .4s"
+  //   profileBtnRef3.current.style.boxShadow = "none"
+  //   profileBtnRef4.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+  //   profileBtnRef5.current.style.color = "white"
+  // }, [])
 
-  useEffect(() => {
-    actions
-      .getOneUser()
-      .then((res) => {
-        setThisUser(res.data);
-      })
-      .catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   actions
+  //     .getOneUser()
+  //     .then((res) => {
+  //       setThisUser(res.data);
+  //     })
+  //     .catch(console.error);
+  // }, []);
 
   useEffect(() => {
     console.log("profile.js line 53 ", user);
@@ -60,6 +63,28 @@ function Profile(props) {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    if (props.location.profileInfo?._id === user._id) {
+      actions
+      .getOneUser()
+      .then((res) => {
+        setThisUser(res.data);
+        console.log('shit son, this may work')
+      })
+      .catch(console.error);
+    }
+    else {
+      actions
+      .getAUser({ id: props.location.profileInfo._id })
+      .then((res) => {
+        setThisUser(res.data);
+        console.log('shit son, this may work')
+      })
+      .catch(console.error);
+    }
+
+  }, [props.location]);
 
   const logout = () => {
     setUser({});
@@ -359,64 +384,8 @@ function Profile(props) {
             </div>
           </div>
         </div>
-        
-        <div className="section-2b_navbar" style={{boxShadow: `${props.shadowDisplay}`}}>
-          <div className="navbar_shadow-div-outset">
-            <div className="navbar_shadow-div-inset">
-              <div className="nav-buttons-containers" style={{borderRadius: "40px 10px 10px 40px"}}>
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")} className="nav-buttons-inset">
-                      <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
-                    </Link>
-                  </div>
-                </div>
-                {/* <div className="button-title-container">
-                  Record
-                </div> */}
-              </div>
 
-              <div className="nav-buttons-containers">
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <Link to="/explore-feed" className="nav-buttons-inset">
-                      <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
-                    </Link>
-                  </div>
-                </div>
-                {/* <div className="button-title-container">
-                  Explore
-                </div> */}
-              </div>
-            
-              <div className="nav-buttons-containers">
-                <div className="nav-buttons-rim">
-                  <div className="nav-buttons-outset">
-                    <Link to={user._id ? ("/social-feed") : ("/auth")} className="nav-buttons-inset">
-                      <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
-                    </Link>
-                  </div>
-                </div>
-                {/* <div className="button-title-container">
-                  Following
-                </div> */}
-              </div>
-
-              <div className="nav-buttons-containers" style={{borderRadius: "10px 40px 40px 10px"}} ref={profileContainer}>
-                <div className="nav-buttons-rim" ref={profileRim}>
-                  <div className="nav-buttons-outset" ref={profileOut}>
-                    <div className="nav-buttons-inset">
-                      <img className="button-icons bi-profile-p" src={avatar} ref={profileIcon} alt="avatar icon"></img>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="button-title-container">
-                  Profile
-                </div> */}
-              </div>
-            </div>
-          </div>
-        </div>
+        <NavBar socialDisplay="none" />
       </div>
     </div>
   );

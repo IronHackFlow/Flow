@@ -1,162 +1,231 @@
-@keyframes followInset {
-  0% {
-    box-shadow: 3px 3px 5px #3d3f3f, -2px -2px 3px #939597;
-  }
-  100% {
-    box-shadow: inset 3px 3px 3px #3d3f3f, inset -2px -2px 3px #939597;
-  }
-}
-nav {
-  height: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background: #686a6b;
-  border-bottom: 5px solid #686a6b;
-  box-shadow: inset -1px -3px 5px 0px #8e8b8b;
-
-  .menu {
-    @include flexCenter(85%, 85%, 20px, space-evenly, center, column);
-    flex-wrap: wrap;
-    background: #686a6b;
-    list-style-type: none;
-    -webkit-font-smoothing: antialiased;
-    box-shadow: inset 3px 3px 4px #484b4c, 
-                inset -3px -3px 4px #8c8f90;
-                
-    .menu-route {
-      @include flexCenter(30%, 50%, none, center, center, row);
-      opacity: var(--menuOpacity);
-
-      .menu-outset {
-        @include flexCenter(100%, 55%, 50px, center, center, row);
-
-        .menu-inset {
-          @include flexCenter(70%, 70%, 50px, center, center, row);
-
-          &:active {
-            box-shadow: inset 2px 2px 3px #484b4c, inset -2px -2px 3px #9fa2a4 !important;
-            background: linear-gradient(315deg, #d9dada, #919292) !important;
-          }
-
-          a {
-            text-decoration: none;
-            font-weight: bold;
-            font-size: .8em;
-          }
-        } 
-      }
-    }
-  }
-}
-// .hamburger-button {
-//   height: 60px;
-//   width: 60px;
-//   position: fixed;
-//   top: 1px;
-//   z-index: 99;
-//   background: rgba(255, 255, 255, 0);
-
-//   div {
-//     display: block;
-//     width: 25px;
-//     height: 5px;
-//     margin: 4px;
-//     position: relative;
-//     background: #ec6aa0;
-//     border-radius: 3px;
-//     box-shadow: inset 1px 1px 2px #313232, 
-//                 inset -1px -1px 1px #aaacad;
-//   }
-// }
-.hamburger-button {
-  @include flexCenter(50px,45px, 5px, center, center, column);
-  position: fixed;
-  top: 7px;
-  left: 10px;
-  z-index: 99;
-  background: rgba(255, 255, 255, 0);
-  box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #ffffff;
-
-  div {
-    display: block;
-    width: 25px;
-    height: 4px;
-    margin: 2px;
+.NavBar {
+    @include flexCenter(28%, 100%, 0px, space-between, stretch, column);
     position: relative;
-    background: #ec6aa0;
-    border-radius: 50px;
-    border: 1px solid #ffabcc;
-    box-shadow: 2px 2px 2px #716e6e, -1px -1px 3px #ffffff;
-  }
+
+    .social-buttons {
+        @include flexCenter(63%, 100%, 0px, center, stretch, row);
+        position: absolute;
+        background: linear-gradient(153deg, #747474 0%, #4f4f4f 100%);
+
+        .social-list {
+            @include flexCenter(80%, 100%, 0px, center, center, row);
+            border-top: 5px solid #787878;
+            box-shadow: inset 0px 3px 3px #464646;
+            
+            .two-btn-container {
+                @include flexCenter(80px, 120px, 10px, space-evenly, center, row);
+                box-shadow: inset 3px 3px 5px #333333, inset -3px -3px 3px 0px #a2a2a2;
+                position: absolute;
+                background: linear-gradient(
+                    153deg
+                    , #7f7f7f 0%, #4f4f4f 100%);
+
+                .individual-container {
+                    @include flexCenter(83%, 41%, 6px, center, center, column);
+                    box-shadow: 3px 3px 5px #414141, -2px -2px 3px 0px #a4a4a4;
+                    
+                    .individual-btn {
+                        @include flexCenter(38px, 38px, 50px, center, center, row);
+                        position: relative;
+                        color: #ec6aa0;
+                        list-style-type: none;
+                        margin-top: 5px;
+                        box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6;
+                        
+                        &:active {
+                            box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                        inset -2px -2px 3px #989898;
+                        }
+                        
+                        .likes-number-container {
+                            @include flexCenter(30px, 30px, 100%, center, center, row);
+    
+                            position: absolute;
+                            top: -20%;
+                            left: 50%;
+                            background: none;
+    
+                            p {
+                                font-size: 14px;
+                                color: white;
+                            }
+                        }
+                    }
+
+                    .individual-text {
+                        height: 10px;
+                        margin-top: 3px;
+    
+                        p {
+                            font-size: 10px;
+                            // font-weight: bold;
+                            color: #e0bbbb;
+                        }
+                    }
+                }
+            }
+            .tbc-left {
+                top: 13px;
+                left: 10px
+            }
+            .tbc-right {
+                top: 13px;
+                right: 10px;
+            }
+
+            .individual-container-pic {
+                @include flexCenter(110px, 110px, 100%, center, center, column);
+                position: absolute;
+                right: 35%;
+                top: 3px;
+
+                .individual-btn-prof {
+                    @include flexCenter(83%, 83%, 50px, center, center, row);
+                    box-shadow: inset 2px 2px 3px #333333, inset -2px -2px 3px 0px #979797;
+
+                    .individual-profile-pic {
+                        @include flexCenter(85%, 85%, 50px, center, center, row);
+                        background-size: cover;
+                        overflow: hidden;
+                        background-position: center;
+                        box-shadow: 2px 2px 3px #3c3c3c, -2px -2px 2px #979696;
+                        
+                        .prof-pic {
+                            height: 85%;
+                            width: 85%;
+                            border-radius: 100%;
+                            border: 2px solid #e24f8c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .navbar_section {
+        @include flexCenter(48%, 100%, 40px 40px 0px 0px, center, center, row);
+        background: linear-gradient(0deg, #dfdfdf 0%, #ecf0f3 100%);
+        box-shadow: 0px -5px 20px 8px #3a3a3a;
+        position: absolute;
+        bottom: 0;
+    }
 }
 
-  .mo-6, .mo-5, .mo-4, .mo-3, .mo-2, .mo-1 {
-    box-shadow: inset 0px 0px 0px #686a6b, inset -0px -0px 0px #686a6b;
-  }
-  .mi-6, .mi-5, .mi-4, .mi-3, .mi-2, .mi-1 {
-    box-shadow: 0px 0px 8px #686a6b, -0px -0px 0px #686a6b;
-    background: linear-gradient(139deg, #686a6b, #686a6b);
-  }
-  .mo-6 {
-    opacity: var(--mo6opacity);
-    animation: var(--anim-dip-6)
-  }
-  .mo-5 {
-    opacity: var(--mo5opacity);
-    animation: var(--anim-dip-5)
-  }
-  .mo-4 {
-    opacity: var(--mo4opacity);
-    animation: var(--anim-dip-4)
-  }
-  .mo-3 {
-    opacity: var(--mo3opacity);
-    animation: var(--anim-dip-3)
-  }
-  .mo-2 {
-    opacity: var(--mo2opacity);
-    animation: var(--anim-dip-2)
-  }
-  .mo-1 {
-    opacity: var(--mo1opacity);
-    animation: var(--anim-dip-1)
-  }
-  .mi-6 {
-    animation: var(--anim-pop-6)
-  }
-  .mi-5 {
-    animation: var(--anim-pop-5)
-  }
-  .mi-4 {
-    animation: var(--anim-pop-4)
-  }
-  .mi-3 {
-    animation: var(--anim-pop-3)
-  }
-  .mi-2 {
-    animation: var(--anim-pop-2)
-  }
-  .mi-1 {
-    animation: var(--anim-pop-1)
-  }
-  .mi-6 a {
-    color: var(--link-color-6);
-  }
-  .mi-5 a {
-    color: var(--link-color-5);
-  }
-  .mi-4 a {
-    color: var(--link-color-4);
-  }
-  .mi-3 a {
-    color: var(--link-color-3);
-  }
-  .mi-2 a {
-    color: var(--link-color-2);
-  }
-  .mi-1 a {
-    color: var(--link-color-1);
-  }
+// navbar styles across multiple components
+.navbar_shadow-div-outset {
+    @include flexCenter(72%, 92%, 50px, center, center, row);
+    box-shadow: 8px 8px 10px 0px #adadad, -3px -3px 9px #ffffff;
+    border: 1px solid #d1d1d1;
+    background: #dddddd;
 
-  
+    .navbar_shadow-div-inset {
+        @include flexCenter(88%, 96%, 55px, space-evenly, center, row);
+        box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
+
+        .navbar-btn-container {
+            @include flexCenter(80%, 22.5%, 5px, center, center, column);
+            box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
+            text-decoration: none;
+            
+            .navbar-btn_shadow-div-inset {
+                @include flexCenter(40px, 40px, 50px, center, center, row);
+                box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
+
+                .navbar-btn_shadow-div-outset {
+                    @include flexCenter(75%, 75%, 50%, center, center, row);
+                    box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
+
+                    img {
+                        height: 1.5em;
+                        width: 1.5em;
+                    }
+                    &:active {
+                        box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
+                                    inset -2px -2px 3px #ffffff;
+                    }
+                }
+            }
+
+            .navbar-btn-text {
+                @include flexCenter(15%, 100%, 0px, center, center, column);
+                font-size: 11px;
+                color: #ff8ebd;
+            }
+        }
+    }
+}
+
+
+@keyframes animatedOutset {
+    from {
+        box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
+    }
+    to {
+        box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
+        inset -2px -2px 3px #ffffff;
+    }
+}
+@keyframes opacityToOne {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOutText {
+    0% {
+        opacity: 1;
+        width: initial;
+    }
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        width: 0;
+    }
+}
+@keyframes moveBtnsLeft {
+    0% {
+        left: 0px;
+    }
+    100% {
+        left: -60px;
+    }
+}
+@keyframes popOutBtns {
+    0% {
+        width: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+        right: 0px;
+    }
+    100% {
+        width: 195px;
+        border-radius: 30px 15px 15px 30px;
+        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+        right: -51px;
+    }
+}
+
+@mixin menuPopout() {
+    @keyframes #{$name} {
+        from {
+            opacity: $opacity;
+            opacity: $opacity2;
+            width: $width;
+            left: $width2;
+            right: $right;
+            border-radius: $borderRadius;
+        }
+        to {
+            opacity: $opacityX;
+            opacity: $opacity2X;
+            width: $widthX;
+            left: $width2X;
+            right: $rightX;
+            border-radius: $borderRadiusX;
+        }
+    }
+}

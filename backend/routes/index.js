@@ -39,13 +39,13 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
         .catch((err) => res.status(500).json(err));
     }
   });
-
 });
 
 router.post(`/getAUserRT`, async (req, res, next) => {
   //GETTING A PARTICULAR USER
   // console.log('hey hey hey hey hey ', req.body)
-      await User.findById(req.body.id)
+  console.log("not sure why this worked lol", req.body)
+      User.findById(req.body.id)
         .populate('followers')
         .populate('userFollows')
         .then((user) => {
@@ -76,8 +76,7 @@ router.post('/getManyUsersRT', async (req,res,next) => {
 
 router.post(`/getCommentsRT`, async (req, res, next) => {
   let body = { id: req.body.id }
-  console.log(body, 'wtf why')
-  
+
   Songs.findById(body.id)
     .populate('songComments')
     .populate({ path: 'songComments', populate: 'commUser'})
