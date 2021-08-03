@@ -211,7 +211,7 @@
     }
 
     .section-2a_songs {
-        @include flexCenter(75%, 100%, 18px, space-evenly, flex-end, row);
+        @include flexCenter(79%, 100%, 18px, space-evenly, flex-end, row);
 
         .songs-1_songs-list {
             @include flexCenter(80%, 86%, 15px, flex-start, flex-start, column);
@@ -372,7 +372,7 @@
     }
 
     .NavBar {
-        height: 25%;
+        height: 21%;
         
         .navbar_section {
             height: 100%;

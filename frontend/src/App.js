@@ -38,11 +38,13 @@ function App() {
   const navDisplayCheck = () => {
     if (navDisplayed === true) {
       navRef.current.style.height = "0px"
+      navRef.current.style.borderBottom = "none"
       navRef.current.style.animation = 'none'
       setNavDisplayed(false)
     }
     else {
       navRef.current.style.height = "325px"
+      navRef.current.style.borderBottom = "5px solid #a6a6a6"
       navRef.current.style.transition = "height .5s"
       navRef.current.style.animation = "massiveMenu .8s linear forwards"
       setNavDisplayed(true)

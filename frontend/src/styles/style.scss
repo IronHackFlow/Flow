@@ -116,8 +116,10 @@ html, body, #root, .App {
   height: 100vh;
   width: 100vw;
   font-family: 'Roboto', sans-serif;
-  // font-family: 'Poppins', sans-serif;
-
+}
+.App {
+  text-align: center;
+  position: relative;
 }
 
 .Home, 
@@ -136,11 +138,10 @@ html, body, #root, .App {
   html {
     margin: auto;
     height: 715px;
-    width: 375px;
+    width: 335px;
     font-family: 'Roboto', sans-serif;
-    // font-family: 'Poppins', sans-serif;
-
   }
+
   body, 
   #root, 
   .App, 
@@ -152,26 +153,8 @@ html, body, #root, .App {
   .EditProfileScreen,
   .LogIn {
     height: 715px;
-    width: 375px;
+    width: 335px;
   }
-  .SocialFeed {
-    .social-panel {
-      .video-scroll-container {
-        .video-pane {
-          .text-container {
-            bottom: -9%;
-          }
-        }
-      }
-    }
-  }
-}
-
-.App {
-  // height: 100%;
-  // width: 100%;
-  margin-top: -5px;
-  text-align: center;
 }
 
 @import './NavBar';

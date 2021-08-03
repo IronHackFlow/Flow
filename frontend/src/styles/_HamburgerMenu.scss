@@ -9,7 +9,6 @@
 nav {
   @include flexCenter(0px, 100%, 0px, flex-end, center, row);
   background: linear-gradient(228deg, rgb(149, 149, 149) 0%, rgb(205, 205, 205) 100%);
-  border-bottom: 5px solid #a6a6a6;
   box-shadow: inset -1px -3px 5px 0px #c4c4c4;
 
   .menu {
@@ -66,13 +65,13 @@ nav {
 //   }
 // }
 .hamburger-button {
-  @include flexCenter(50px,45px, 5px, center, center, column);
-  position: fixed;
-  top: 7px;
-  left: 10px;
+  @include flexCenter(50px,45px, 4px, center, center, column);
+  position: absolute;
+  top: 6px;
+  left: 7px;
   z-index: 99;
   background: rgba(255, 255, 255, 0);
-  box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #ffffff;
+  box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #e2e2e2;
 
   div {
     display: block;

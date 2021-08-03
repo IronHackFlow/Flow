@@ -120,7 +120,7 @@ function SocialFeed(props) {
 
   const menuDown = (whichMenu) => {
     if (whichMenu === 'search') {
-      searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      // searchBtn.current.style.boxShadow = "3px 3px 5px #404040, -2px -2px 3px #c7c7c7"
       popUpSearchRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       dumbSearchRef.current.style.opacity = 0;
@@ -128,7 +128,7 @@ function SocialFeed(props) {
       setSearchPoppedUp(false);
     }
     else if (whichMenu === 'comment') {
-      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
+      commentBtn.current.style.boxShadow = "3px 3px 5px #404040, -2px -2px 3px #c7c7c7"
       popUpRef.current.style.height = "0px";
       windowRef.current.style.bottom = "0";
       opacityRef1.current.style.opacity = 0;
@@ -138,7 +138,7 @@ function SocialFeed(props) {
   }
   const menuUp = (whichMenu) => {
     if (whichMenu === 'search') {
-      searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      // searchBtn.current.style.boxShadow = "inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898"
       dumbSearchRef.current.style.opacity = 1;
       searchButtonRef.current.style.opacity = 1;
       popUpSearchRef.current.style.height = "50%";
@@ -146,7 +146,7 @@ function SocialFeed(props) {
       setSearchPoppedUp(true);
     }
     else if (whichMenu === 'comment') {
-      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
+      commentBtn.current.style.boxShadow = "inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898"
       opacityRef1.current.style.opacity = 1;
       opacityRef2.current.style.opacity = 1;
       popUpRef.current.style.height = "50%";

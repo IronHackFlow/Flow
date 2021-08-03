@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import actions from "../api";
 import TheContext from "../TheContext";
-import mic from "../images/record2.svg";
+import mic from "../images/modern-mic.svg";
 import avatar from "../images/avatar.svg";
 import social from "../images/social.svg";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
 import search from "../images/search.svg";
-import heart2 from "../images/heart2.svg";
+import like from "../images/heart2.svg";
 import explore from "../images/explore.svg";
 
 
@@ -137,19 +137,23 @@ function NavBar(props) {
 
   useEffect(() => {
     setTotalFollowers(props.songUserFollowers?.length)
-    props.songUserFollowers?.forEach((each) => {
-      user.userFollows.forEach((eachUser) => {
-        if(eachUser._id === each) {
-          console.log('lol')
-          followBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #3e3e3e, inset -2px -2px 3px #b7b6b6"
-          followBtnRef1.current.style.background = "#ec6aa0"
-          followBtnRef2.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
-          followBtnRef3.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
-
-        }
-      })
-    })
-    console.log(user.userFollows, props.songUserFollowers)
+    // props.songUserFollowers?.forEach((each) => {
+    //   user.userFollows.forEach((eachUser) => {
+    //     if(eachUser._id === each) {
+    //       console.log('lol')
+    //       followBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #3e3e3e, inset -2px -2px 3px #b7b6b6"
+    //       followBtnRef1.current.style.background = "#ec6aa0"
+    //       followBtnRef2.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+    //       followBtnRef3.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
+    //     }
+    //     else {
+    //       followBtnRef1.current.style.boxShadow = "2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6"
+    //       followBtnRef1.current.style.background = "initial"
+    //       followBtnRef2.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
+    //       followBtnRef3.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
+    //     }
+    //   })
+    // })
   }, [props.songUserFollowers])
 
   useEffect(() => {
@@ -249,7 +253,52 @@ function NavBar(props) {
     <div className="NavBar">
       <div className="social-buttons" style={{display: props.socialDisplay}}>
         <div className="social-list">
-          <div className="individual-container-pic">
+          {/* <div className="two-btn-container">
+            <div className="individual-container">
+              <div className="individual-btn" onClick={followCheck} ref={followBtnRef1}>
+                <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
+              </div>
+
+              <div className="individual-text" ref={followBtnRef3}>
+                <p style={{color: "white"}}>{totalFollowers}</p>
+                <p>Follow</p>
+              </div>
+            </div>
+
+            <div className="individual-container">
+              <div className="individual-btn" onClick={likeCheck}>
+                <img className="social-icons si-like" src={like} alt="like post icon" />
+              </div>
+
+              <div className="individual-text">
+                <p style={{color: "white"}}>{totalLikes}</p>
+                <p>Like</p>
+              </div>
+            </div>
+          </div> */}
+
+
+          <div className="user-details-inset">
+              <div className="text-container">
+                <div className="udt-1-container">
+                  <p className="ud-text udt-1" style={{ color: "#ec6aa0"}}> 
+                    song name - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}></span>
+                  </p>
+                </div>
+                <div className="udt-2-container">
+                  <p className="ud-text udt-2">
+
+                    no caption for this flow
+                  </p>
+                </div>
+                <div className="udt-3-container">
+                  <p className="ud-text udt-3">
+
+                    5 months ago
+                  </p>
+                </div>
+              </div>
+              <div className="individual-container-pic">
             <div className="individual-btn-prof">
               <Link 
                 to={{pathname: `/profile/${props.userForSong?._id}`, profileInfo: props.userForSong}} 
@@ -259,54 +308,54 @@ function NavBar(props) {
               </Link>
             </div>
           </div>
+            </div>
 
-          <div className="two-btn-container tbc-left">
+          <div className="two-btn-container">
+            {/* <div className="individual-container">
+              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
+                <img className="social-icons si-search" src={search} alt="search user icon" />
+              </div>
+              <div className="individual-text" style={{marginTop: "15px"}}>
+                <p>Search</p>
+              </div>
+            </div> */}
             <div className="individual-container">
               <div className="individual-btn" onClick={followCheck} ref={followBtnRef1}>
-                <img className="social-icons follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
-                <div className="likes-number-container">
-                    <p>{totalFollowers}</p>
-                </div>
+                <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
               </div>
+
               <div className="individual-text" ref={followBtnRef3}>
+                <p style={{color: "white"}}>{totalFollowers}</p>
                 <p>Follow</p>
               </div>
             </div>
 
             <div className="individual-container">
               <div className="individual-btn" onClick={likeCheck}>
-                <img className="social-icons heart" src={heart2} alt="like post icon" />
-                <div className="likes-number-container">
-                    <p>{totalLikes}</p>
-                </div>
+                <img className="social-icons si-like" src={like} alt="like post icon" />
               </div>
-              <div className="individual-text">
-                <p>Like</p>
-              </div>
-            </div>
-          </div>
 
-          <div className="two-btn-container tbc-right">
-            <div className="individual-container">
-              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                <img className="social-icons heart" src={search} alt="search user icon" />
-              </div>
               <div className="individual-text">
-                <p>Search</p>
+                <p style={{color: "white"}}>{totalLikes}</p>
+                <p>Like</p>
               </div>
             </div>
 
             <div className="individual-container">
               <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-                <img className="social-icons comment" src={comments} alt="comment on post icon" />
-                <div className="likes-number-container">
-                    <p>{songComments.length}</p>
-                </div>
+                <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
               </div>
+
               <div className="individual-text">
+                <p style={{color: "white"}}>{songComments.length}</p>
                 <p>Comment</p>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="play-container">
+          <div className="play-outset">
+            <div className="playbutton"></div>
           </div>
         </div>
       </div>

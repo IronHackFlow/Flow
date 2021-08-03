@@ -6,7 +6,7 @@
     position: absolute;
 }
 .social-panel {
-    height: 72%;
+    height: 68%;
     width: 100%;
     position: relative;
     bottom: 0;
@@ -40,7 +40,7 @@
 
     .video-details-container {
         @include flexCenter(63px, 100%, 0px, flex-end, center, row);
-        position: fixed;
+        position: absolute;
         z-index: 10;
         background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
         // box-shadow: inset -11px -20px 80px 20px #6f6f6f;
@@ -62,7 +62,7 @@
                 // box-shadow: 6px 6px 20px 0px #444444, -5px -5px 14px #828282;
 
                 .user-details-inset {
-                    @include flexCenter(80%, 92%, 5px 30px 30px 5px, center, center, column);
+                    @include flexCenter(80%, 95%, 5px 30px 30px 5px, center, center, column);
                     color: white;
                     box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
                     // border: 2px solid #5a5a5a;

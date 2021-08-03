@@ -3,28 +3,34 @@
   width: 1.9em;
   filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
-.bi-profile-o {
-  height: 2.2em;
-  width: 2.2em;
-  margin: 8px 0px 0px 0px;
-}
+
 .social-icons {
   height: 1.5em;
   width: 1.5em;
   filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
+.si-follow {
+  height: 2.5em;
+  width: 2.5em;
+  margin: 0px 0px 2px 2px;
+}
+.si-like {
+  height: 1.6em;
+  width: 1.6em;
+}
+.si-comment {
+  height: 1.3em;
+  width: 1.3em;
+  margin-left: 1px;
+}
+
+
 .home-record {
     height: 2.2em;
     width: 2.2em;
     filter: invert(80%) sepia(14%) saturate(1272%) hue-rotate(111deg) brightness(96%) contrast(89%);
 }
-.follow {
-  font-size: 2.3em;
-}
-.heart {
-  height: 1.7em;
-   width: 1.7em;
-}
+
 .bi-play {
   margin-left: 3px;
 }
