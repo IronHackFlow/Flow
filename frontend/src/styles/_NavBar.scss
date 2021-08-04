@@ -1,130 +1,184 @@
 .NavBar {
-    @include flexCenter(32%, 100%, 0px, space-between, stretch, column);
+    @include flexCenter(38%, 100%, 0px, space-between, stretch, column);
     position: relative;
 
     .social-buttons {
-        @include flexCenter(73%, 100%, 0px, center, center, column);
+        @include flexCenter(80%, 100%, 0px, space-evenly, center, column);
         position: absolute;
         background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
         // border-top: 5px solid #8b8b8b;
         // box-shadow: inset 0px 2px 3px #585858;
 
         .play-container {
-            @include flexCenter(36%, 100%, 0px, center, flex-end, row);
+            @include flexCenter(32%, 100%, 0px, center, flex-start, row);
 
             .play-outset{
-                @include flexCenter(86%, 97%, 5px, center, center, row);
-                // box-shadow: inset 2px 2px 3px #4d4d4d, inset -2px -2px 3px 0px #d6d6d6;
+                @include flexCenter(70%, 93%, 30px, center, center, row);
+                box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #cdcdcd;
 
-                .playbutton {
-                    @include flexCenter(50px, 50px, 50px, center, center, row);
-                    box-shadow: 3px 3px 3px #414141, -2px -2px 3px 0px #cbcbcb;
-                }
+
             }
         }
+
         .social-list {
-            @include flexCenter(55%, 97%, 6px, space-evenly, center, row);
-            box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+            @include flexCenter(23%, 100%, 0, center, center, row);
 
-            .user-details-inset {
-                @include flexCenter(90%, 56%, 5px 50px 50px 5px, center, center, column);
-                color: white;
-                box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
-                // border: 2px solid #5a5a5a;
-                // box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
 
-                .individual-container-pic {
-                    @include flexCenter(80%, 24%, 50px, space-evenly, center, row);
-                    box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
+            .social-list-inner {
+                @include flexCenter(75%, 97%, 30px 6px 6px 30px, center, center, row);
+                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+
+                .two-btn-container {
+                    @include flexCenter(85%, 98%, 50px 5px  5px 50px, stretch, center, row);
+                    box-shadow: inset 3px 3px 5px #515151, inset -3px -3px 3px 0px #cbcbcb;
+                    // background: linear-gradient(176deg, #959595 0%, #5b5b5b 100%);
     
-                    .individual-btn-prof {
-                        @include flexCenter(4.4rem, 4.4rem, 50px, center, center, row);
-                        box-shadow: inset 2px 2px 3px #333333, inset -2px -2px 3px 0px #979797;
+                    .two-btn-container2 {
+                        @include flexCenter(100%, 80%, 0px, space-evenly, center, row);
     
-                        .individual-profile-pic {
-                            @include flexCenter(85%, 85%, 50px, center, center, row);
-                            background-size: cover;
-                            overflow: hidden;
-                            background-position: center;
-                            box-shadow: 2px 2px 3px #3c3c3c, -2px -2px 2px #979696;
+                        .individual-container {
+                            @include flexCenter(72%, 27%, 5px, space-evenly, center, row);
+                            box-shadow: 2px 2px 3px #616161, -2px -2px 3px 0px #e1e1e1;
                             
-                            .prof-pic {
-                                height: 85%;
-                                width: 85%;
-                                border-radius: 100%;
-                                border: 2px solid #e24f8c;
+                            .individual-btn {
+                                @include flexCenter(85%, 45%, 5px, center, center, row);
+                                position: relative;
+                                color: #ec6aa0;
+                                list-style-type: none;
+                                // box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6;
+                                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
+        
+                                &:active {
+                                    box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+                                }            
+                            }
+        
+                            .individual-text {
+                                margin-top: 2px;
+            
+                                p {
+                                    font-size: .55rem;
+                                    color: #e0bbbb;
+                                }
                             }
                         }
                     }
                 }
-                .text-container {
-                    @include flexCenter(89%, 90%, 0px, flex-start, flex-start, column);
-                    overflow-x: hidden;
-                    // padding-left: 5px;
-                    // position: relative;
-                    // bottom: -11.5%;
-                    // left: -7%;
-    
-                    // .ud-text {
-                    //     white-space: nowrap;
-                    //     width: 95%;
-                    //     text-align: left;
-                    //     display: inline-block;
-                    //     transform: translateX(110%)
-                    // }
-    
-                    .udt-1 {
-                        white-space: nowrap;
-                        text-align: left;
-                        font-size: 15px;
-                        font-weight: bold;
+            }
+        }
+
+        .user-details-inset {
+            @include flexCenter(76%, 100%, 0px, flex-start, center, column);
+            color: white;
+            // box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
+            // border: 2px solid #5a5a5a;
+            // box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
+
+            .text-container {
+                @include flexCenter(75%, 97%, 5px 5px 50px 50px, space-evenly, center, column);
+                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+                // padding-left: 5px;
+                // position: relative;
+                // bottom: -11.5%;
+                // left: -7%;
+
+                // .ud-text {
+                //     white-space: nowrap;
+                //     width: 95%;
+                //     text-align: left;
+                //     display: inline-block;
+                //     transform: translateX(110%)
+                // }
+
+                .udt-1-container {
+                    @include flexCenter(36%, 97%, 50px, space-evenly, center, row);
+                    box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
+                    white-space: nowrap;
+                    text-align: left;
+                    font-size: 15px;
+                    font-weight: bold;
+
+
+                    .individual-container-pic {
+                        @include flexCenter(100%, 25%, 50px, center, center, row);
+                        // box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
+        
+                        .individual-btn-prof {
+                            @include flexCenter(80%, 99%, 50px 6px 6px 50px, flex-start, center, row);
+                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+        
+                            .individual-profile-pic {
+                                @include flexCenter(93%, 51%, 40px 6px 6px 40px, flex-start, center, row);
+                                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                                margin-left: 2px;
+
+                                .prof-pic {
+                                    height: 77%;
+                                    width: 67%;
+                                    border-radius: 40px;
+                                    margin-left: 3px;
+                                    border: 2px solid #e24f8c;
+                                }
+                            }
+                        }
                     }
-    
-                    .udt-2 {
-                        white-space: nowrap;
-                        text-align: left;
-                        color: #ffe4e4;
-                        font-size: 11px;
-                    }
-                    
-                    .udt-3 {
-                        white-space: nowrap;
-                        text-align: left;
-                        color:#ffe4e4;
-                        font-size: 11px;
+
+                    .song-title {
+                        @include flexCenter(100%, 70%, 50px, center, center, column);
+
+                        .song-title-inner {
+                            @include flexCenter(90%, 90%, 50px, center, center, column);
+                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+                            
+                            .udt-2 {
+                                white-space: nowrap;
+                                text-align: left;
+                                color: #ffe4e4;
+                                font-size: 11px;
+                            }
+                            
+                            .udt-3 {
+                                white-space: nowrap;
+                                text-align: left;
+                                color:#ffe4e4;
+                                font-size: 11px;
+                            }
+                        }
                     }
                 }
-            }
+                .playbutton {
+                    @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
+                    // box-shadow: 3px 3px 3px #414141, -2px -2px 3px 0px #cbcbcb;
+                    .playbar {
+                        @include flexCenter(14%, 100%, 50px, center, center, column);
 
-            .two-btn-container {
-                @include flexCenter(90%, 39%, 5px, space-evenly, center, row);
-                box-shadow: inset 3px 3px 5px #515151, inset -3px -3px 3px 0px #cbcbcb;
-                // background: linear-gradient(176deg, #959595 0%, #5b5b5b 100%);
-
-                .individual-container {
-                    @include flexCenter(85%, 27%, 5px, space-evenly, center, column);
-                    box-shadow: 3px 3px 5px #414141, -2px -2px 3px 0px #cbcbcb;
-                    
-                    .individual-btn {
-                        @include flexCenter(1.8rem, 1.8rem, 50px, center, center, row);
-                        position: relative;
-                        color: #ec6aa0;
-                        list-style-type: none;
-                        margin-top: 4px;
-                        // box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6;
-                        box-shadow: 3px 3px 5px #404040, -2px -2px 3px #c7c7c7;
-
-                        &:active {
-                            box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
-                        }            
+                        .playbarinner {
+                            @include flexCenter(60%, 85%, 50px, center, center, column);
+                            box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
+                        }
                     }
 
-                    .individual-text {
-                        margin-top: 2px;
-    
-                        p {
-                            font-size: .55rem;
-                            color: #e0bbbb;
+                    .playinner {
+                        @include flexCenter(86%, 100%, 50px, center, center, column);
+
+                        .playbuttonactual {
+                            @include flexCenter(100%, 19%, 50px, center, center, column);
+                            
+                            .playinnerest1 {
+                                @include flexCenter(90%, 90%, 50px, center, center, column);
+                                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #bdbcbc;
+
+                                .playinnerest2 {
+                                    @include flexCenter(89%, 89%, 50px, center, center, column);
+                                    box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
+
+                                    .playinnerest3 {
+                                        @include flexCenter(77%, 77%, 50px, center, center, column);
+                                        box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
+                                        background: linear-gradient(145deg, #676767, #7e7e7e)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -133,7 +187,7 @@
     }
 
     .navbar_section {
-        @include flexCenter(35%, 100%, 40px 40px 0px 0px, center, center, row);
+        @include flexCenter(30%, 100%, 40px 40px 0px 0px, center, center, row);
         background: linear-gradient(0deg, #c8c5c5 0%, #ecf0f3 100%);
         box-shadow: 0px -5px 20px 8px #353535;
         position: absolute;
