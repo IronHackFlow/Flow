@@ -263,31 +263,17 @@ function SocialFeed(props) {
             <div className="transparent-test">
               <div className="user-details-container">
                 <div className="user-details-inset">
-                  <div className="text-container">
-                    <div className="udt-1-container">
-                      <p className="ud-text udt-1" style={{ color: "#ec6aa0"}}> 
-                        {getSongName} - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}>{userForSong?.userName}</span>
-                      </p>
-                    </div>
-                    <div className="udt-2-container">
-                      <p className="ud-text udt-2">
-                        {/* {userForSong?.userName} */}
-                        {getSongCaption ? getSongCaption : "no caption for this flow"}
-                      </p>
-                    </div>
-                    <div className="udt-3-container">
-                      <p className="ud-text udt-3">
-                        {songDate ? moment(songDate).fromNow() : '5 months ago 𑁦 '}
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
+
+              <div className="user-profile-mid">
+                <div className="user-profile-inset social-p">
+
+                </div>
+              </div>
+
               <div className="user-profile-image">
                 <div className="user-profile-inset social-p">
-                  <div className="nav-buttons-inset inset-social-p">
-                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause} alt="play button icon" ref={playPauseRef}></img>
-                  </div>
                 </div>
               </div>
             </div>

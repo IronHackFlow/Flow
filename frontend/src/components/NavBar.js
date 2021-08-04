@@ -255,135 +255,106 @@ function NavBar(props) {
       <div className="social-buttons" style={{display: props.socialDisplay}}>
         <div className="social-list">
           <div className="social-list-inner">
-          {/* <div className="two-btn-container">
-            <div className="individual-container">
-              <div className="individual-btn" onClick={followCheck} ref={followBtnRef1}>
-                <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
-              </div>
-
-              <div className="individual-text" ref={followBtnRef3}>
-                <p style={{color: "white"}}>{totalFollowers}</p>
-                <p>Follow</p>
-              </div>
-            </div>
-
-            <div className="individual-container">
-              <div className="individual-btn" onClick={likeCheck}>
-                <img className="social-icons si-like" src={like} alt="like post icon" />
-              </div>
-
-              <div className="individual-text">
-                <p style={{color: "white"}}>{totalLikes}</p>
-                <p>Like</p>
-              </div>
-            </div>
-          </div> */}
-          <div className="two-btn-container">
-          <div className="two-btn-container2">
-            {/* <div className="individual-container">
-              <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                <img className="social-icons si-search" src={search} alt="search user icon" />
-              </div>
-              <div className="individual-text" style={{marginTop: "15px"}}>
-                <p>Search</p>
-              </div>
-            </div> */}
-            <div className="individual-container">
-              <div className="individual-btn" onClick={followCheck} ref={followBtnRef1}>
-                <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
-              </div>
-
-              <div className="individual-text" ref={followBtnRef3}>
-                <p style={{color: "white"}}>{totalFollowers}</p>
-                <p>Follow</p>
-              </div>
-            </div>
-
-            <div className="individual-container">
-              <div className="individual-btn" onClick={likeCheck}>
-                <img className="social-icons si-like" src={like} alt="like post icon" />
-              </div>
-
-              <div className="individual-text">
-                <p style={{color: "white"}}>{totalLikes}</p>
-                <p>Like</p>
-              </div>
-            </div>
-
-            <div className="individual-container">
-              <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
-                <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
-              </div>
-
-              <div className="individual-text">
-                <p style={{color: "white"}}>{songComments.length}</p>
-                <p>Comment</p>
-              </div>
-            </div>
-          </div>
-          </div>
-          </div>
-        </div>
-          <div className="user-details-inset">
-              <div className="text-container">
-                <div className="udt-1-container">
-                  <div className="individual-container-pic">
-                    <div className="individual-btn-prof">
-                      <Link 
-                        to={{pathname: `/profile/${props.userForSong?._id}`, profileInfo: props.userForSong}} 
-                        className="individual-profile-pic"
-                        onClick={() => setToggleProfile(true)}>
-                        <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
-                      </Link>
-                    </div>
+            <div className="two-btn-container">
+              <div className="two-btn-container2">
+                {/* <div className="individual-container">
+                  <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
+                    <img className="social-icons si-search" src={search} alt="search user icon" />
                   </div>
-                  <div className="song-title">
-                    <div className="song-title-inner">
-                    <p className="ud-text udt-1" style={{ color: "#ec6aa0"}}> 
-                      song name - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}></span>
-                    </p>
-                    <div className="udt-2-container">
-                    <p className="ud-text udt-2">
-                      no caption for this flow
-                    </p>
+                  <div className="individual-text" style={{marginTop: "15px"}}>
+                    <p>Search</p>
                   </div>
-                  <div className="udt-3-container">
-                    <p className="ud-text udt-3">
+                </div> */}
+                <div className="individual-container" style={{borderRadius: "50px 5px 5px 50px"}}>
+                  <div className="individual-btn" onClick={followCheck} ref={followBtnRef1} style={{borderRadius: "40px 4px 4px 40px"}}>
+                    <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
+                  </div>
 
-                      5 months ago
-                    </p>
-                  </div>
-                  </div>
+                  <div className="individual-text" ref={followBtnRef3}>
+                    <p style={{color: "white"}}>{totalFollowers}</p>
+                    <p>Follow</p>
                   </div>
                 </div>
 
-                <div className="playbutton">
-                <div className="playbar">
-                    <div className="playbarinner">
-                      
-                    </div>
+                <div className="individual-container">
+                  <div className="individual-btn" onClick={likeCheck}>
+                    <img className="social-icons si-like" src={like} alt="like post icon" />
                   </div>
-                  <div className="playinner">
-                    <div className="playbuttonactual">
-                      <div className="playinnerest1">
-                        <div className="playinnerest2">
-                          <div className="playinnerest3">
-                            <img className="button-icons bi-play" src={play} alt="play" />
-                          </div>
-                        </div>
+
+                  <div className="individual-text">
+                    <p style={{color: "white"}}>{totalLikes}</p>
+                    <p>Like</p>
+                  </div>
+                </div>
+
+                <div className="individual-container">
+                  <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+                    <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
+                  </div>
+
+                  <div className="individual-text">
+                    <p style={{color: "white"}}>{songComments.length}</p>
+                    <p>Comment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="user-details-inset">
+          <div className="text-container">
+            <div className="udt-1-container">
+              <div className="individual-container-pic">
+                <div className="individual-btn-prof">
+                  <Link 
+                    to={{pathname: `/profile/${props.userForSong?._id}`, profileInfo: props.userForSong}} 
+                    className="individual-profile-pic"
+                    onClick={() => setToggleProfile(true)}
+                    >
+                    <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="song-title">
+                <div className="song-title-inner">
+                  <div className="ud-text udt-1"> 
+                    song name - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}></span>
+                  </div>
+
+                  <div className="udt-2-container">
+                    <p className="ud-text udt-2">
+                      no caption for this flow
+                    </p>
+                    <p className="ud-text udt-3">
+                      5 months ago
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="playbutton">
+              <div className="playbar">
+                <div className="playbarinner">
+                </div>
+              </div>
+
+              <div className="playinner">
+                <div className="playbuttonactual">
+                  <div className="playinnerest1">
+                    <div className="playinnerest2">
+                      <div className="playinnerest3">
+                        <img className="button-icons bi-play" src={play} alt="play" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-
+            </div>
           </div>
-          {/* <div className="play-container">
-          <div className="play-outset">
-            
-          </div>
-        </div> */}
+        </div>
       </div>
 
       <div className="navbar_section">
