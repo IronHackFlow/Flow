@@ -65,24 +65,23 @@ nav {
 //   }
 // }
 .hamburger-button {
-  @include flexCenter(30px, 35px, 4px, center, center, column);
+  @include flexCenter(32px, 35px, 3px, center, center, column);
   position: absolute;
   top: 4px;
-  left: 5px;
+  left: 4px;
   z-index: 99;
-  background: rgba(255, 255, 255, 0);
-  box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #e2e2e2;
+  box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #ffffff;
 
   div {
     display: block;
-    width: 20px;
-    height: 2px;
-    margin: 2px;
+    width: 23px;
+    height: 4px;
+    margin: 1px;
     position: relative;
-    background: #ec6aa0;
     border-radius: 50px;
-    border: 1px solid #ffabcc;
-    box-shadow: 2px 2px 2px #716e6e, -1px -1px 3px #ffffff;
+    background: #818181;
+    border: 1px solid #d9d9d9;
+    // box-shadow: 2px 2px 2px #716e6e, -1px -1px 3px #ffffff;
   }
 }
 

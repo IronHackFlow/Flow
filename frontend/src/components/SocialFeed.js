@@ -192,7 +192,7 @@ function SocialFeed(props) {
     )
 
     if (inView) {
-      setUserForSong(eachSong.song.songUser)
+      setUserForSong(eachSong.song)
       setSongId(eachSong.song._id)
       setSongUserId(eachSong.song._id)
       setGetSongName(eachSong.song.songName)
@@ -231,7 +231,7 @@ function SocialFeed(props) {
 
   return (
       <div className="SocialFeed">
-        <div ref={windowRef} className="social-panel">
+        <div ref={windowRef} className="section-1_feed">
           <div className="video-scroll-container">
               <CSSTransition
                 in={toggleSocial}
@@ -259,21 +259,29 @@ function SocialFeed(props) {
               </CSSTransition>
           </div>
 
-          <div className="video-details-container">
-            <div className="transparent-test">
-              <div className="user-details-container">
-                <div className="user-details-inset">
+          <div className="section-1a_toggle-feed">
+            <div className="toggle-feed-container">
+              <div className="each-feed_shadow-div-inset">
+                <div className="each-feed_shadow-div-outset">
+                  <div className="each-feed_shadow-div-inset-2">
+                  Feed
+                  </div>
                 </div>
               </div>
 
-              <div className="user-profile-mid">
-                <div className="user-profile-inset social-p">
-
+              <div className="each-feed_shadow-div-inset" style={{borderRadius: "50px"}}>
+                <div className="each-feed_shadow-div-outset">
+                  <div className="each-feed_shadow-div-inset-2">
+                  Trending
+                  </div>
                 </div>
               </div>
-
-              <div className="user-profile-image">
-                <div className="user-profile-inset social-p">
+              
+              <div className="each-feed_shadow-div-inset" style={{borderRadius: "50px 5px 5px 50px"}}>
+                <div className="each-feed_shadow-div-outset">
+                  <div className="each-feed_shadow-div-inset-2">
+                  Following
+                  </div>
                 </div>
               </div>
             </div>

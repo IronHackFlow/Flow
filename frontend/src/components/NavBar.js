@@ -8,6 +8,8 @@ import social from "../images/social.svg";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
 import play from "../images/play.svg";
+import bullet from "../images/bullet-point.svg";
+import home from "../images/home.svg";
 import search from "../images/search.svg";
 import like from "../images/heart2.svg";
 import explore from "../images/explore.svg";
@@ -250,6 +252,48 @@ function NavBar(props) {
       .catch(console.error);
   };
 
+  const dateFormatHandler = (date) => {
+    const getDate = new Date();
+    const currentDate = Date.parse(getDate)
+    const objDate = Date.parse(date)
+    const timeDiff = currentDate - objDate
+
+    const year = 31536000000
+    const month = 2592000000
+    const week = 604800000
+    const day = 86400000
+    const hour = 3600000
+    const minute = 60000
+    const second = 1000
+
+    if (timeDiff >= year) {
+      console.log((timeDiff / year), " years ago")
+    }
+    else if (timeDiff >= month && timeDiff < year) {
+      if (timeDiff / month < 11.5) {
+        return `${Math.round(timeDiff / month)}m`
+      }
+      else {
+        return "1y"
+      }
+    }
+    else if (timeDiff >= week && timeDiff < (month * 2)) {
+      console.log((timeDiff / week), " weeks ago")
+    }
+    else if (timeDiff >= day && timeDiff < week) {
+      console.log((timeDiff / day), " days ago")
+    }
+    else if (timeDiff >= hour && timeDiff < day) {
+      console.log((timeDiff / hour), " hours ago")
+    }
+    else if (timeDiff >= minute && timeDiff < hour) {
+      console.log((timeDiff / minute), " minutes ago")
+    }
+    else if (timeDiff >= second && timeDiff < minute) {
+      console.log((timeDiff / second), " seconds ago")
+    }
+  }
+
   return (
     <div className="NavBar">
       <div className="social-buttons" style={{display: props.socialDisplay}}>
@@ -308,11 +352,11 @@ function NavBar(props) {
               <div className="individual-container-pic">
                 <div className="individual-btn-prof">
                   <Link 
-                    to={{pathname: `/profile/${props.userForSong?._id}`, profileInfo: props.userForSong}} 
+                    to={{pathname: `/profile/${props.userForSong?.songUser?._id}`, profileInfo: props.userForSong?.songUser}} 
                     className="individual-profile-pic"
                     onClick={() => setToggleProfile(true)}
                     >
-                    <img className="prof-pic" src={props.userForSong?.picture} alt="user in view profile" ref={props.profilePicRef} />
+                    <img className="prof-pic" src={props.userForSong?.songUser?.picture} alt="user in view profile" ref={props.profilePicRef} />
                   </Link>
                 </div>
               </div>
@@ -320,15 +364,19 @@ function NavBar(props) {
               <div className="song-title">
                 <div className="song-title-inner">
                   <div className="ud-text udt-1"> 
-                    song name - <span style={{color: "white", fontSize: "13px", fontWeight: "normal"}}></span>
+                    <p id="one">{props.userForSong?.songName} <img src={bullet} alt="bullet point" />
+                    </p>
+                    <p id="two">
+                      {props.userForSong?.songUser?.userName}
+                    </p>
                   </div>
 
                   <div className="udt-2-container">
                     <p className="ud-text udt-2">
-                      no caption for this flow
+                      {dateFormatHandler(props.userForSong?.songDate)} <img src={bullet} alt="bullet point" />
                     </p>
                     <p className="ud-text udt-3">
-                      5 months ago
+                      {props.userForSong?.songCaption ? props.userForSong?.songCaption : "no caption for this song"}
                     </p>
                   </div>
                 </div>

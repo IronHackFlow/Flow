@@ -5,7 +5,7 @@
     background: #000000eb;
     position: absolute;
 }
-.social-panel {
+.section-1_feed {
     height: 62%;
     width: 100%;
     position: relative;
@@ -38,7 +38,7 @@
         }
     }
 
-    .video-details-container {
+    .section-1a_toggle-feed {
         @include flexCenter(40px, 100%, 0px, flex-end, center, row);
         position: absolute;
         z-index: 10;
@@ -50,39 +50,27 @@
         // background-position: center;
         // bottom: 0%;
 
-        .transparent-test {
+        .toggle-feed-container {
             @include flexCenter(100%, 88%, 0px, space-around, center, row);
             // box-shadow: inset 3px 3px 6px #353535, inset -2px -2px 3px #8c8f90;
             margin-right: 1px;
 
-            .user-details-container {
+            .each-feed_shadow-div-inset {
                 @include flexCenter(81%, 32%, 5px 50px 50px 5px, center, center, row);
                 box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
 
-                .user-details-inset {
+                .each-feed_shadow-div-outset {
                     @include flexCenter(65%, 89%, 40px, center, center, column);
                     color: white;
                     box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
-                }
-            }
-
-            .user-profile-mid {
-                @include flexCenter(81%, 32%, 50px, center, center, row);
-                box-shadow: inset 2px 2px 3px #5a5a5a, inset -2px -2px 4px #ffffff;
-
-                .social-p {
-                    @include flexCenter(65%, 89%, 50px, center, center, row);
-                    box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
-                }
-            }
-
-            .user-profile-image {
-                @include flexCenter(81%, 32%, 50px 5px 5px 50px, center, center, row);
-                box-shadow: inset 2px 2px 3px #5a5a5a, inset -2px -2px 4px #ffffff;
-
-                .social-p {
-                    @include flexCenter(65%, 89%, 40px, center, center, row);
-                    box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
+                    
+                    .each-feed_shadow-div-inset-2 {
+                        @include flexCenter(90%, 96%, 35px, center, center, column);
+                        box-shadow: inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff;
+                        font-size: 14px;
+                        color: #ec6aa0;
+                        font-weight: bolder;
+                    }
                 }
             }
         }
