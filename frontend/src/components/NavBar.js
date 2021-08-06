@@ -296,11 +296,11 @@ function NavBar(props) {
 
   return (
     <div className="NavBar">
-      <div className="social-buttons" style={{display: props.socialDisplay}}>
-        <div className="social-list">
-          <div className="social-list-inner">
-            <div className="two-btn-container">
-              <div className="two-btn-container2">
+      <div className="social-buttons section-1c_song-details" style={{display: props.socialDisplay}}>
+        <div className="social-list song-details-1_actions">
+          <div className="social-list-inner actions_shadow-div-outset">
+            <div className="two-btn-container actions_shadow-div-inset">
+              <div className="two-btn-container2 action-btns-container">
                 {/* <div className="individual-container">
                   <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
                     <img className="social-icons si-search" src={search} alt="search user icon" />
@@ -309,34 +309,34 @@ function NavBar(props) {
                     <p>Search</p>
                   </div>
                 </div> */}
-                <div className="individual-container" style={{borderRadius: "50px 5px 5px 50px"}}>
-                  <div className="individual-btn" onClick={followCheck} ref={followBtnRef1} style={{borderRadius: "40px 4px 4px 40px"}}>
+                <div className="individual-container action-btn_shadow-div-outset" style={{borderRadius: "50px 5px 5px 50px"}}>
+                  <div className="individual-btn action-btn-icon_shadow-div-inset" onClick={followCheck} ref={followBtnRef1} style={{borderRadius: "40px 4px 4px 40px"}}>
                     <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
                   </div>
 
-                  <div className="individual-text" ref={followBtnRef3}>
+                  <div className="individual-text action-btn-text" ref={followBtnRef3}>
                     <p style={{color: "white"}}>{totalFollowers}</p>
                     <p>Follow</p>
                   </div>
                 </div>
 
-                <div className="individual-container">
-                  <div className="individual-btn" onClick={likeCheck}>
+                <div className="individual-container action-btn_shadow-div-outset">
+                  <div className="individual-btn action-btn-icon_shadow-div-inset" onClick={likeCheck}>
                     <img className="social-icons si-like" src={like} alt="like post icon" />
                   </div>
 
-                  <div className="individual-text">
+                  <div className="individual-text action-btn-text">
                     <p style={{color: "white"}}>{totalLikes}</p>
                     <p>Like</p>
                   </div>
                 </div>
 
-                <div className="individual-container">
-                  <div className="individual-btn" ref={props.commentBtn} onClick={props.popUpComments}>
+                <div className="individual-container action-btn_shadow-div-outset">
+                  <div className="individual-btn action-btn-icon_shadow-div-inset" ref={props.commentBtn} onClick={props.popUpComments}>
                     <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
                   </div>
 
-                  <div className="individual-text">
+                  <div className="individual-text action-btn-text">
                     <p style={{color: "white"}}>{songComments.length}</p>
                     <p>Comment</p>
                   </div>
@@ -346,24 +346,24 @@ function NavBar(props) {
           </div>
         </div>
 
-        <div className="user-details-inset">
-          <div className="text-container">
-            <div className="udt-1-container">
-              <div className="individual-container-pic">
-                <div className="individual-btn-prof">
+        <div className="user-details-inset song-details-2_song-data">
+          <div className="text-container song-data-container">
+            <div className="udt-1-container song-user-section">
+              <div className="individual-container-pic user-pic-container">
+                <div className="individual-btn-prof user-pic_shadow-div-outset">
                   <Link 
                     to={{pathname: `/profile/${props.userForSong?.songUser?._id}`, profileInfo: props.userForSong?.songUser}} 
-                    className="individual-profile-pic"
+                    className="individual-profile-pic user-pic_shadow-div-inset"
                     onClick={() => setToggleProfile(true)}
                     >
-                    <img className="prof-pic" src={props.userForSong?.songUser?.picture} alt="user in view profile" ref={props.profilePicRef} />
+                    <img src={props.userForSong?.songUser?.picture} alt="user in view profile" ref={props.profilePicRef} />
                   </Link>
                 </div>
               </div>
 
-              <div className="song-title">
-                <div className="song-title-inner">
-                  <div className="ud-text udt-1"> 
+              <div className="song-title song-title-container">
+                <div className="song-title-inner song-title_shadow-div-outset">
+                  <div className="ud-text udt-1 song-title_shadow-div-inset"> 
                     <p id="one">{props.userForSong?.songName} <img src={bullet} alt="bullet point" />
                     </p>
                     <p id="two">
@@ -371,11 +371,11 @@ function NavBar(props) {
                     </p>
                   </div>
 
-                  <div className="udt-2-container">
-                    <p className="ud-text udt-2">
+                  <div className="udt-2-container song-caption-container">
+                    <p className="ud-text udt-2 song-date">
                       {dateFormatHandler(props.userForSong?.songDate)} <img src={bullet} alt="bullet point" />
                     </p>
-                    <p className="ud-text udt-3">
+                    <p className="ud-text udt-3 song-caption">
                       {props.userForSong?.songCaption ? props.userForSong?.songCaption : "no caption for this song"}
                     </p>
                   </div>
@@ -383,17 +383,17 @@ function NavBar(props) {
               </div>
             </div>
 
-            <div className="playbutton">
-              <div className="playbar">
-                <div className="playbarinner">
+            <div className="song-play-section">
+              <div className="play-bar-container">
+                <div className="play-bar_shadow-div-inset">
                 </div>
               </div>
 
-              <div className="playinner">
-                <div className="playbuttonactual">
-                  <div className="playinnerest1">
-                    <div className="playinnerest2">
-                      <div className="playinnerest3">
+              <div className="play-song-container">
+                <div className="play-btn-container">
+                  <div className="play-btn_shadow-div-outset">
+                    <div className="play-btn_shadow-div-inset">
+                      <div className="play-btn_shadow-div-outset-2">
                         <img className="button-icons bi-play" src={play} alt="play" />
                       </div>
                     </div>

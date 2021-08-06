@@ -245,7 +245,7 @@ html, body, #root, .App {
   position: relative;
 }
 
-.NavBar .social-buttons {
+.NavBar .section-1c_song-details {
   height: 80%;
   width: 100%;
   border-radius: 0px;
@@ -266,47 +266,7 @@ html, body, #root, .App {
   background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
 }
 
-.NavBar .social-buttons .play-container {
-  height: 32%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.NavBar .social-buttons .play-container .play-outset {
-  height: 70%;
-  width: 93%;
-  border-radius: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #cdcdcd;
-          box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #cdcdcd;
-}
-
-.NavBar .social-buttons .social-list {
+.NavBar .section-1c_song-details .song-details-1_actions {
   height: 23%;
   width: 100%;
   border-radius: 0;
@@ -325,7 +285,7 @@ html, body, #root, .App {
           flex-direction: row;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset {
   height: 75%;
   width: 97%;
   border-radius: 30px 6px 6px 30px;
@@ -346,7 +306,7 @@ html, body, #root, .App {
           box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset {
   height: 85%;
   width: 98%;
   border-radius: 50px 5px 5px 50px;
@@ -367,7 +327,7 @@ html, body, #root, .App {
           box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container {
   height: 100%;
   width: 80%;
   border-radius: 0px;
@@ -386,7 +346,7 @@ html, body, #root, .App {
           flex-direction: row;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 .individual-container {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset {
   height: 72%;
   width: 30%;
   border-radius: 5px;
@@ -407,7 +367,7 @@ html, body, #root, .App {
           box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 .individual-container .individual-btn {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset {
   height: 85%;
   width: 35%;
   border-radius: 5px;
@@ -431,21 +391,21 @@ html, body, #root, .App {
           box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 .individual-container .individual-btn:active {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset:active {
   -webkit-box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
           box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 .individual-container .individual-text {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-text {
   width: 58%;
 }
 
-.NavBar .social-buttons .social-list .social-list-inner .two-btn-container .two-btn-container2 .individual-container .individual-text p {
+.NavBar .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-text p {
   font-size: 11px;
   color: #e0bbbb;
 }
 
-.NavBar .social-buttons .user-details-inset {
+.NavBar .section-1c_song-details .song-details-2_song-data {
   height: 76%;
   width: 100%;
   border-radius: 0px;
@@ -465,7 +425,7 @@ html, body, #root, .App {
   color: white;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container {
   height: 75%;
   width: 97%;
   border-radius: 5px 5px 50px 50px;
@@ -486,10 +446,10 @@ html, body, #root, .App {
           box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section {
   height: 36%;
-  width: 97%;
-  border-radius: 50px;
+  width: 98%;
+  border-radius: 5px 5px 25px 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -507,7 +467,7 @@ html, body, #root, .App {
           box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .individual-container-pic {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .user-pic-container {
   height: 100%;
   width: 24%;
   border-radius: 50px;
@@ -526,7 +486,7 @@ html, body, #root, .App {
           flex-direction: row;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .individual-container-pic .individual-btn-prof {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .user-pic-container .user-pic_shadow-div-outset {
   height: 80%;
   width: 99%;
   border-radius: 50px 6px 6px 50px;
@@ -543,11 +503,11 @@ html, body, #root, .App {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
-          box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+  -webkit-box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
+          box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .individual-container-pic .individual-btn-prof .individual-profile-pic {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .user-pic-container .user-pic_shadow-div-outset .user-pic_shadow-div-inset {
   height: 93%;
   width: 55%;
   border-radius: 40px 6px 6px 40px;
@@ -569,7 +529,7 @@ html, body, #root, .App {
   margin-left: 2px;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .individual-container-pic .individual-btn-prof .individual-profile-pic .prof-pic {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .user-pic-container .user-pic_shadow-div-outset .user-pic_shadow-div-inset img {
   height: 77%;
   width: 67%;
   border-radius: 40px;
@@ -577,7 +537,7 @@ html, body, #root, .App {
   border: 2px solid #e24f8c;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container {
   height: 100%;
   width: 71%;
   border-radius: 50px;
@@ -596,7 +556,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset {
   height: 80%;
   width: 99%;
   border-radius: 5px 50px 50px 5px;
@@ -617,7 +577,7 @@ html, body, #root, .App {
           box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-1 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset {
   height: 50%;
   width: 94%;
   border-radius: 4px 50px 50px 4px;
@@ -640,7 +600,7 @@ html, body, #root, .App {
   overflow-x: scroll;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-1 #one {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #one {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -653,7 +613,7 @@ html, body, #root, .App {
   font-weight: bold;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-1 #one img {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #one img {
   height: 5px;
   width: 5px;
   margin-left: 5px;
@@ -661,13 +621,13 @@ html, body, #root, .App {
           filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-1 #two {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #two {
   padding-left: 6px;
   font-size: 14px;
   color: #e0bbbb;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-2-container {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container {
   height: 35%;
   width: 100%;
   border-radius: 50px;
@@ -686,7 +646,7 @@ html, body, #root, .App {
           flex-direction: row;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-2-container .udt-2 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date {
   margin-left: 7px;
   white-space: nowrap;
   text-align: left;
@@ -694,7 +654,7 @@ html, body, #root, .App {
   font-size: 11px;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-2-container .udt-2 img {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date img {
   height: 5px;
   width: 5px;
   margin-left: 3px;
@@ -702,7 +662,7 @@ html, body, #root, .App {
           filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .udt-1-container .song-title .song-title-inner .udt-2-container .udt-3 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container .song-caption {
   white-space: nowrap;
   text-align: left;
   color: #e0bbbb;
@@ -710,7 +670,7 @@ html, body, #root, .App {
   padding-left: 8px;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section {
   height: 57%;
   width: 100%;
   border-radius: 50px;
@@ -729,7 +689,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playbar {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container {
   height: 14%;
   width: 100%;
   border-radius: 50px;
@@ -748,7 +708,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playbar .playbarinner {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-bar_shadow-div-inset {
   height: 60%;
   width: 85%;
   border-radius: 50px;
@@ -769,7 +729,7 @@ html, body, #root, .App {
           box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playinner {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container {
   height: 86%;
   width: 100%;
   border-radius: 50px;
@@ -788,7 +748,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playinner .playbuttonactual {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container {
   height: 100%;
   width: 19%;
   border-radius: 50px;
@@ -807,7 +767,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playinner .playbuttonactual .playinnerest1 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn_shadow-div-outset {
   height: 90%;
   width: 90%;
   border-radius: 50px;
@@ -824,11 +784,11 @@ html, body, #root, .App {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #bdbcbc;
-          box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #bdbcbc;
+  -webkit-box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
+          box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playinner .playbuttonactual .playinnerest1 .playinnerest2 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn_shadow-div-outset .play-btn_shadow-div-inset {
   height: 89%;
   width: 89%;
   border-radius: 50px;
@@ -849,7 +809,7 @@ html, body, #root, .App {
           box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
 }
 
-.NavBar .social-buttons .user-details-inset .text-container .playbutton .playinner .playbuttonactual .playinnerest1 .playinnerest2 .playinnerest3 {
+.NavBar .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn_shadow-div-outset .play-btn_shadow-div-inset .play-btn_shadow-div-outset-2 {
   height: 77%;
   width: 77%;
   border-radius: 50px;
@@ -2599,8 +2559,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
       -ms-flex-direction: column;
           flex-direction: column;
   color: white;
-  -webkit-box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
-          box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
+  -webkit-box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
 }
 
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container .each-feed_shadow-div-inset .each-feed_shadow-div-outset .each-feed_shadow-div-inset-2 {

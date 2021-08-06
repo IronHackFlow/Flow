@@ -62,7 +62,7 @@
                 .each-feed_shadow-div-outset {
                     @include flexCenter(65%, 89%, 40px, center, center, column);
                     color: white;
-                    box-shadow: 2px 2px 4px #505050, -2px -2px 3px #e3e2e2;
+                    box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
                     
                     .each-feed_shadow-div-inset-2 {
                         @include flexCenter(90%, 96%, 35px, center, center, column);

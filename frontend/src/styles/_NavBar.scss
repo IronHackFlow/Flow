@@ -2,50 +2,35 @@
     @include flexCenter(38%, 100%, 0px, space-between, stretch, column);
     position: relative;
 
-    .social-buttons {
+    .section-1c_song-details {
         @include flexCenter(80%, 100%, 0px, space-evenly, center, column);
         position: absolute;
         background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
-        // border-top: 5px solid #8b8b8b;
-        // box-shadow: inset 0px 2px 3px #585858;
 
-        .play-container {
-            @include flexCenter(32%, 100%, 0px, center, flex-start, row);
-
-            .play-outset{
-                @include flexCenter(70%, 93%, 30px, center, center, row);
-                box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #cdcdcd;
-
-
-            }
-        }
-
-        .social-list {
+        .song-details-1_actions {
             @include flexCenter(23%, 100%, 0, center, center, row);
 
 
-            .social-list-inner {
+            .actions_shadow-div-outset {
                 @include flexCenter(75%, 97%, 30px 6px 6px 30px, center, center, row);
                 box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
 
-                .two-btn-container {
+                .actions_shadow-div-inset {
                     @include flexCenter(85%, 98%, 50px 5px  5px 50px, stretch, center, row);
                     box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
-                    // background: linear-gradient(176deg, #959595 0%, #5b5b5b 100%);
     
-                    .two-btn-container2 {
+                    .action-btns-container {
                         @include flexCenter(100%, 80%, 0px, space-evenly, center, row);
     
-                        .individual-container {
+                        .action-btn_shadow-div-outset {
                             @include flexCenter(72%, 30%, 5px, space-evenly, center, row);
                             box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
                             
-                            .individual-btn {
+                            .action-btn-icon_shadow-div-inset {
                                 @include flexCenter(85%, 35%, 5px, center, center, row);
                                 position: relative;
                                 color: #ec6aa0;
                                 list-style-type: none;
-                                // box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #b7b6b6;
                                 box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
         
                                 &:active {
@@ -53,7 +38,7 @@
                                 }            
                             }
         
-                            .individual-text {
+                            .action-btn-text {
                                 width: 58%;
 
                                 p {
@@ -67,47 +52,31 @@
             }
         }
 
-        .user-details-inset {
+        .song-details-2_song-data {
             @include flexCenter(76%, 100%, 0px, flex-start, center, column);
             color: white;
-            // box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
-            // border: 2px solid #5a5a5a;
-            // box-shadow: inset 3px 3px 4px #2d2d2d, inset -2px -2px 3px #8c8f90;
 
-            .text-container {
+            .song-data-container {
                 @include flexCenter(75%, 97%, 5px 5px 50px 50px, space-evenly, center, column);
                 box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
-                // padding-left: 5px;
-                // position: relative;
-                // bottom: -11.5%;
-                // left: -7%;
 
-                // .ud-text {
-                //     white-space: nowrap;
-                //     width: 95%;
-                //     text-align: left;
-                //     display: inline-block;
-                //     transform: translateX(110%)
-                // }
-
-                .udt-1-container {
-                    @include flexCenter(36%, 97%, 50px, space-evenly, center, row);
+                .song-user-section {
+                    @include flexCenter(36%, 98%, 5px 5px 25px 25px, space-evenly, center, row);
                     box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
 
-                    .individual-container-pic {
+                    .user-pic-container {
                         @include flexCenter(100%, 24%, 50px, center, center, row);
-                        // box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
         
-                        .individual-btn-prof {
+                        .user-pic_shadow-div-outset {
                             @include flexCenter(80%, 99%, 50px 6px 6px 50px, flex-start, center, row);
-                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
         
-                            .individual-profile-pic {
+                            .user-pic_shadow-div-inset {
                                 @include flexCenter(93%, 55%, 40px 6px 6px 40px, flex-start, center, row);
                                 box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
                                 margin-left: 2px;
 
-                                .prof-pic {
+                                img {
                                     height: 77%;
                                     width: 67%;
                                     border-radius: 40px;
@@ -118,14 +87,14 @@
                         }
                     }
 
-                    .song-title {
+                    .song-title-container {
                         @include flexCenter(100%, 71%, 50px, center, center, column);
 
-                        .song-title-inner {
+                        .song-title_shadow-div-outset {
                             @include flexCenter(80%, 99%, 5px 50px 50px 5px, center, flex-start, column);
                             box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
                             
-                            .udt-1 {
+                            .song-title_shadow-div-inset {
                                 @include flexCenter(50%, 94%, 4px 50px 50px 4px, flex-start, center, row);
                                 box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
                                 margin-left: 3px;
@@ -146,6 +115,7 @@
                                         filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
                                     }
                                 }
+                            
                                 #two {
                                     padding-left: 6px;
                                     font-size: 14px;
@@ -154,10 +124,10 @@
 
                             }
 
-                            .udt-2-container {
+                            .song-caption-container {
                                 @include flexCenter(35%, 100%, 50px, flex-start, center, row);
 
-                                .udt-2 {
+                                .song-date {
                                     margin-left: 7px;
                                     white-space: nowrap;
                                     text-align: left;
@@ -172,7 +142,7 @@
                                     }
                                 }
                                 
-                                .udt-3 {
+                                .song-caption {
                                     white-space: nowrap;
                                     text-align: left;
                                     color: #e0bbbb;
@@ -183,33 +153,34 @@
                         }
                     }
                 }
-                .playbutton {
+
+                .song-play-section {
                     @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
-                    // box-shadow: 3px 3px 3px #414141, -2px -2px 3px 0px #cbcbcb;
-                    .playbar {
+
+                    .play-bar-container {
                         @include flexCenter(14%, 100%, 50px, center, center, column);
 
-                        .playbarinner {
+                        .play-bar_shadow-div-inset {
                             @include flexCenter(60%, 85%, 50px, center, center, column);
                             box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
                         }
                     }
 
-                    .playinner {
+                    .play-song-container {
                         @include flexCenter(86%, 100%, 50px, center, center, column);
 
-                        .playbuttonactual {
+                        .play-btn-container {
                             @include flexCenter(100%, 19%, 50px, center, center, column);
                             
-                            .playinnerest1 {
+                            .play-btn_shadow-div-outset {
                                 @include flexCenter(90%, 90%, 50px, center, center, column);
-                                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #bdbcbc;
+                                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
 
-                                .playinnerest2 {
+                                .play-btn_shadow-div-inset {
                                     @include flexCenter(89%, 89%, 50px, center, center, column);
                                     box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
 
-                                    .playinnerest3 {
+                                    .play-btn_shadow-div-outset-2 {
                                         @include flexCenter(77%, 77%, 50px, center, center, column);
                                         box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
                                         background: linear-gradient(145deg, #676767, #7e7e7e)
