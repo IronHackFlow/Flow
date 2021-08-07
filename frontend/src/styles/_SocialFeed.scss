@@ -6,20 +6,24 @@
     position: absolute;
 }
 .section-1_feed {
-    height: 62%;
+    // height: 62%;
+    height: 93%;
     width: 100%;
     position: relative;
-    bottom: 0;
+    // bottom: 0;
     transition: bottom .5s;
     overflow-y: hidden;
 
     .video-scroll-container {
-        height: 100%; 
+        // height: 100%;
+        height: 67%; 
         width: 100%;
         scroll-snap-type: y mandatory;
         overflow-y: scroll;
-        position: absolute;
-
+        // position: absolute;
+        .video-scroll-container {
+            height: 100%;
+        }
         .video-pane {
             @include flexCenter(100%, 100%, 0px, flex-start, center, column);
             scroll-snap-align: start;
@@ -41,6 +45,7 @@
     .section-1a_toggle-feed {
         @include flexCenter(40px, 100%, 0px, flex-end, center, row);
         position: absolute;
+        top: 0;
         z-index: 10;
         background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
         // box-shadow: inset -11px -20px 80px 20px #6f6f6f;
@@ -70,6 +75,199 @@
                         font-size: 14px;
                         color: #ec6aa0;
                         font-weight: bolder;
+                    }
+                }
+            }
+        }
+    }
+
+    .section-1c_song-details {
+        // height: 80%;
+        @include flexCenter(33%, 100%, 0px, space-evenly, center, column);
+        // position: absolute;
+        background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
+
+        .song-details-1_actions {
+            @include flexCenter(23%, 100%, 0, center, center, row);
+
+
+            .actions_shadow-div-outset {
+                @include flexCenter(75%, 97%, 30px 6px 6px 30px, center, center, row);
+                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+
+                .actions_shadow-div-inset {
+                    @include flexCenter(85%, 98%, 50px 5px  5px 50px, stretch, center, row);
+                    box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
+    
+                    .action-btns-container {
+                        @include flexCenter(100%, 80%, 0px, space-evenly, center, row);
+    
+                        .action-btn_shadow-div-outset {
+                            @include flexCenter(72%, 30%, 5px, space-evenly, center, row);
+                            box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
+                            
+                            .action-btn-icon_shadow-div-inset {
+                                @include flexCenter(85%, 35%, 5px, center, center, row);
+                                position: relative;
+                                color: #ec6aa0;
+                                list-style-type: none;
+                                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
+        
+                                &:active {
+                                    box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+                                }            
+                            }
+        
+                            .action-btn-text {
+                                width: 58%;
+
+                                p {
+                                    font-size: 11px;
+                                    color: #e0bbbb;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .song-details-2_song-data {
+            @include flexCenter(76%, 100%, 0px, flex-start, center, column);
+            color: white;
+
+            .song-data-container {
+                @include flexCenter(75%, 97%, 5px 5px 50px 50px, space-evenly, center, column);
+                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+
+                .song-user-section {
+                    @include flexCenter(36%, 98%, 5px 5px 25px 25px, space-evenly, center, row);
+                    box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
+
+                    .user-pic-container {
+                        @include flexCenter(100%, 24%, 50px, center, center, row);
+        
+                        .user-pic_shadow-div-outset {
+                            @include flexCenter(80%, 99%, 50px 6px 6px 50px, flex-start, center, row);
+                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
+        
+                            .user-pic_shadow-div-inset {
+                                @include flexCenter(93%, 55%, 40px 6px 6px 40px, flex-start, center, row);
+                                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                                margin-left: 2px;
+
+                                img {
+                                    height: 77%;
+                                    width: 67%;
+                                    border-radius: 40px;
+                                    margin-left: 3px;
+                                    border: 2px solid #e24f8c;
+                                }
+                            }
+                        }
+                    }
+
+                    .song-title-container {
+                        @include flexCenter(100%, 71%, 50px, center, center, column);
+
+                        .song-title_shadow-div-outset {
+                            @include flexCenter(80%, 99%, 5px 50px 50px 5px, center, flex-start, column);
+                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+                            
+                            .song-title_shadow-div-inset {
+                                @include flexCenter(50%, 94%, 4px 50px 50px 4px, flex-start, center, row);
+                                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                                margin-left: 3px;
+                                overflow-x: scroll;
+                                
+                                #one {
+                                    display: flex;
+                                    align-items: center;
+                                    margin-left: 5px;
+                                    font-size: 16px;
+                                    color: white;
+                                    font-weight: bold;
+
+                                    img {
+                                        height: 5px;
+                                        width: 5px;
+                                        margin-left: 5px;
+                                        filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
+                                    }
+                                }
+                            
+                                #two {
+                                    padding-left: 6px;
+                                    font-size: 14px;
+                                    color: #e0bbbb;
+                                }
+
+                            }
+
+                            .song-caption-container {
+                                @include flexCenter(35%, 100%, 50px, flex-start, center, row);
+
+                                .song-date {
+                                    margin-left: 7px;
+                                    white-space: nowrap;
+                                    text-align: left;
+                                    color: #e0bbbb;
+                                    font-size: 11px;
+
+                                    img {
+                                        height: 5px;
+                                        width: 5px;
+                                        margin-left: 3px;
+                                        filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
+                                    }
+                                }
+                                
+                                .song-caption {
+                                    white-space: nowrap;
+                                    text-align: left;
+                                    color: #e0bbbb;
+                                    font-size: 11px;
+                                    padding-left: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .song-play-section {
+                    @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
+
+                    .play-bar-container {
+                        @include flexCenter(14%, 100%, 50px, center, center, column);
+
+                        .play-bar_shadow-div-inset {
+                            @include flexCenter(60%, 85%, 50px, center, center, column);
+                            box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
+                        }
+                    }
+
+                    .play-song-container {
+                        @include flexCenter(86%, 100%, 50px, center, center, column);
+
+                        .play-btn-container {
+                            @include flexCenter(100%, 19%, 50px, center, center, column);
+                            
+                            .play-btn_shadow-div-outset {
+                                @include flexCenter(90%, 90%, 50px, center, center, column);
+                                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
+
+                                .play-btn_shadow-div-inset {
+                                    @include flexCenter(89%, 89%, 50px, center, center, column);
+                                    box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
+
+                                    .play-btn_shadow-div-outset-2 {
+                                        @include flexCenter(77%, 77%, 50px, center, center, column);
+                                        box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
+                                        background: linear-gradient(145deg, #676767, #7e7e7e)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

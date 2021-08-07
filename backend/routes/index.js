@@ -330,6 +330,7 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   Songs.find({})
   .populate('songUser')
   .populate('songComments')
+  .populate({ path: 'songUser', populate: 'followers'})
   .then(songs => {
     res.status(200).json(songs)
 
@@ -431,23 +432,6 @@ router.get(`/getUserLikedSongsRT`, verifyToken, async (req, res, next) => {
     }
   })
 })
-
-router.post(`/getMostLikedSongsRT`, (req, res, next) => {
-  // Songs.find({$sort: {"songTotLikes": -1}})
-  Songs.find({})
-  .then(songs => {
-    res.status(200).json(songs)
-
-  })
-  .catch(err => res.status(500).json(err))
-
-    // if (err) {
-    //   res.status(403).json(err);
-    // } else {
-    //   let songPosts = await Songs.find({$sort: {"songTotLikes": -1}});
-    //   res.status(200).json(songPosts)
-    // }
-  });
 
 router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", (err, authData) => {

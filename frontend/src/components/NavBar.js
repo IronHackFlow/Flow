@@ -296,11 +296,6 @@ function NavBar(props) {
 
   return (
     <div className="NavBar">
-      <div className="social-buttons section-1c_song-details" style={{display: props.socialDisplay}}>
-        <div className="social-list song-details-1_actions">
-          <div className="social-list-inner actions_shadow-div-outset">
-            <div className="two-btn-container actions_shadow-div-inset">
-              <div className="two-btn-container2 action-btns-container">
                 {/* <div className="individual-container">
                   <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
                     <img className="social-icons si-search" src={search} alt="search user icon" />
@@ -309,102 +304,6 @@ function NavBar(props) {
                     <p>Search</p>
                   </div>
                 </div> */}
-                <div className="individual-container action-btn_shadow-div-outset" style={{borderRadius: "50px 5px 5px 50px"}}>
-                  <div className="individual-btn action-btn-icon_shadow-div-inset" onClick={followCheck} ref={followBtnRef1} style={{borderRadius: "40px 4px 4px 40px"}}>
-                    <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
-                  </div>
-
-                  <div className="individual-text action-btn-text" ref={followBtnRef3}>
-                    <p style={{color: "white"}}>{totalFollowers}</p>
-                    <p>Follow</p>
-                  </div>
-                </div>
-
-                <div className="individual-container action-btn_shadow-div-outset">
-                  <div className="individual-btn action-btn-icon_shadow-div-inset" onClick={likeCheck}>
-                    <img className="social-icons si-like" src={like} alt="like post icon" />
-                  </div>
-
-                  <div className="individual-text action-btn-text">
-                    <p style={{color: "white"}}>{totalLikes}</p>
-                    <p>Like</p>
-                  </div>
-                </div>
-
-                <div className="individual-container action-btn_shadow-div-outset">
-                  <div className="individual-btn action-btn-icon_shadow-div-inset" ref={props.commentBtn} onClick={props.popUpComments}>
-                    <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
-                  </div>
-
-                  <div className="individual-text action-btn-text">
-                    <p style={{color: "white"}}>{songComments.length}</p>
-                    <p>Comment</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="user-details-inset song-details-2_song-data">
-          <div className="text-container song-data-container">
-            <div className="udt-1-container song-user-section">
-              <div className="individual-container-pic user-pic-container">
-                <div className="individual-btn-prof user-pic_shadow-div-outset">
-                  <Link 
-                    to={{pathname: `/profile/${props.userForSong?.songUser?._id}`, profileInfo: props.userForSong?.songUser}} 
-                    className="individual-profile-pic user-pic_shadow-div-inset"
-                    onClick={() => setToggleProfile(true)}
-                    >
-                    <img src={props.userForSong?.songUser?.picture} alt="user in view profile" ref={props.profilePicRef} />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="song-title song-title-container">
-                <div className="song-title-inner song-title_shadow-div-outset">
-                  <div className="ud-text udt-1 song-title_shadow-div-inset"> 
-                    <p id="one">{props.userForSong?.songName} <img src={bullet} alt="bullet point" />
-                    </p>
-                    <p id="two">
-                      {props.userForSong?.songUser?.userName}
-                    </p>
-                  </div>
-
-                  <div className="udt-2-container song-caption-container">
-                    <p className="ud-text udt-2 song-date">
-                      {dateFormatHandler(props.userForSong?.songDate)} <img src={bullet} alt="bullet point" />
-                    </p>
-                    <p className="ud-text udt-3 song-caption">
-                      {props.userForSong?.songCaption ? props.userForSong?.songCaption : "no caption for this song"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="song-play-section">
-              <div className="play-bar-container">
-                <div className="play-bar_shadow-div-inset">
-                </div>
-              </div>
-
-              <div className="play-song-container">
-                <div className="play-btn-container">
-                  <div className="play-btn_shadow-div-outset">
-                    <div className="play-btn_shadow-div-inset">
-                      <div className="play-btn_shadow-div-outset-2">
-                        <img className="button-icons bi-play" src={play} alt="play" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="navbar_section">
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
@@ -423,7 +322,7 @@ function NavBar(props) {
               </div>
             </Link>
 
-            <Link 
+            {/* <Link 
               to="/explore-feed"
               className="navbar-btn-container" 
               ref={exploreBtnRef1}
@@ -440,7 +339,22 @@ function NavBar(props) {
               <div className="navbar-btn-text" ref={exploreBtnRef5}>
                 Explore
               </div>
-            </Link>
+            </Link> */}
+            
+            <div 
+              className="navbar-btn-container" 
+              ref={exploreBtnRef1}
+              onClick={props.popUpSearch}
+              >
+              <div className="navbar-btn_shadow-div-inset" ref={exploreBtnRef2}>
+                <div className="navbar-btn_shadow-div-outset" ref={exploreBtnRef3}>
+                  <img className="button-icons" src={search} ref={exploreBtnRef4} alt="search" />
+                </div>
+              </div>  
+              <div className="navbar-btn-text" ref={exploreBtnRef5}>
+                Search
+              </div>
+            </div>
 
             <Link 
               to={user._id ? ("/social-feed") : ("/auth")}

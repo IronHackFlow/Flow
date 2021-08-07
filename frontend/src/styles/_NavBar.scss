@@ -1,6 +1,8 @@
 .NavBar {
-    @include flexCenter(38%, 100%, 0px, space-between, stretch, column);
-    position: relative;
+    @include flexCenter(11%, 100%, 0px, space-between, stretch, column);
+    // position: relative;
+    position: absolute;
+    bottom: 0;
 
     .section-1c_song-details {
         @include flexCenter(80%, 100%, 0px, space-evenly, center, column);
@@ -195,7 +197,7 @@
     }
 
     .navbar_section {
-        @include flexCenter(30%, 100%, 40px 40px 0px 0px, center, center, row);
+        @include flexCenter(100%, 100%, 40px 40px 0px 0px, center, center, row);
         background: linear-gradient(0deg, #c8c5c5 0%, #ecf0f3 100%);
         box-shadow: 0px -5px 20px 8px #353535;
         position: absolute;
@@ -208,6 +210,7 @@
     @include flexCenter(76%, 93%, 50px, center, center, row);
     box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
     border: 1px solid #d1d1d1;
+
     // background: #dddddd;
 
     .navbar_shadow-div-inset {
