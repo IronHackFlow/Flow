@@ -1,9 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
+import TheViewContext from "../TheViewContext";
 import { Link } from "react-router-dom";
 import actions from "../api";
 import send from "../images/send.svg";
 
 function Search(props) {
+  const { songUserFollowers, songLikes, songDate} = React.useContext(TheViewContext);
+
   const [suggestions, setSuggestions] = useState(
     <h4>Find Friends & Artists</h4>
   );
@@ -64,6 +67,7 @@ function Search(props) {
 
   return (
     <div className="comment-pop-out" ref={props.popUpSearchRef}>
+      {console.log(songLikes, "WHAT?!")}
       <div className="inner-com">
         <div className="com-cont-1">
           <form className="social-comment-form">

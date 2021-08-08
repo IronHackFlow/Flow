@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from "react";
 import { Switch, Route, Link } from 'react-router-dom'
 import './styles/style.css'
-import actions from './api'
 import TheContext from './TheContext'
-import Home from './components/Home'
+import actions from './api'
 import Auth from './components/Auth'
-import SocialFeed from './components/SocialFeed'
+import Home from './components/Home'
 import TestAudio from './components/TestAudio'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
@@ -21,11 +20,14 @@ function App() {
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
   const [toggleProfile, setToggleProfile] = useState();
-  const [songId, setSongId] = useState({});
-  const [getSongName, setGetSongName] = useState('');
-  const [songComments, setSongComments] = useState([]);
 
   const navRef = useRef();
+
+  useEffect(() => {
+    user ? setUserViewed(user) : setUser({})
+    console.log(user, "you're the user")
+    console.log(userViewed, "but what's userViewed?")
+  }, [])
 
   useEffect(() => {
     actions
@@ -65,9 +67,6 @@ function App() {
         toggleSocial, setToggleSocial,
         toggleExplore, setToggleExplore,
         toggleProfile, setToggleProfile,
-        getSongName, setGetSongName,
-        songId, setSongId,
-        songComments, setSongComments
     }}>
       <div className="App">
         <nav ref={navRef}>
@@ -151,14 +150,10 @@ function App() {
           <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
           <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
           <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
-          {/* <Route exact path="/uploadFile" render={(props) => <UploadFile {...props} kind='song' />} />
-          <Route exact path="/uploadProfilePic" render={(props) => <UploadFile {...props} kind='profilePic' />} />
-          <Route exact path="/uploadBeatTrack" render={(props) => <UploadFile {...props} kind='beatTrack' />} /> */}
           <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
           <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
-          <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
-          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} />
-          <Route exact path="/profile/other/:id" render={(props) => <OtherProfile {...props} />} />
+          {/* <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
+          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} /> */}
           <Route exact path="/SongScreen/:id" render={(props) => <SongScreen {...props} />} />
         </Switch>
       </div>

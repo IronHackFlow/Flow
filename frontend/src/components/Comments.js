@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import TheContext from "../TheContext";
+import TheViewContext from "../TheViewContext";
 import actions from "../api";
 import heart2 from "../images/heart2.svg";
 import comments from "../images/comment.svg";
@@ -12,15 +13,16 @@ import flag from "../images/flag.svg";
 import moment from "moment";
 
 function Comments(props) {
+  const { songId, songUserFollowers, songLikes, songDate} = React.useContext(TheViewContext);
   const {
-    user, songId
+    user
     } = React.useContext(
     TheContext
   );
-
+  
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([]);
-  const [songUser, setSongUser] = useState();
+  const [songCommUser, setSongCommUser] = useState();
   const [totalComments, setTotalComments] = useState([]);
 
   const inputRef = useRef();
@@ -33,7 +35,7 @@ function Comments(props) {
         console.log('Returned these comments from DB: ', res.data)
         setCommState(res.data.songComments);
         setTotalComments(res.data.songComments.length);
-        setSongUser(res.data.songUser);
+        setSongCommUser(res.data.songUser);
       })
       .catch(console.error)
   }, [songId, totalComments])
@@ -199,7 +201,7 @@ function Comments(props) {
           <div className="comment-list-outer" ref={commentListOuterRef}>
             <p className="comment-username">
               {each.commUser.userName}
-              <span style={{color: "white", fontWeight: "bold", fontSize: "12px"}}>{songUser === each.commUser._id ? " 𑁦 song author" : null}</span>
+              <span style={{color: "white", fontWeight: "bold", fontSize: "12px"}}>{songCommUser === each.commUser._id ? " 𑁦 song author" : null}</span>
             </p>
             <p className="comment-date">
               {each.commDate ? moment(each.commDate).fromNow() : '5 months ago'}

@@ -5,15 +5,8 @@ import TheContext from "../TheContext";
 import mic from "../images/modern-mic.svg";
 import avatar from "../images/avatar.svg";
 import social from "../images/social.svg";
-import follow from "../images/follow.svg";
-import comments from "../images/comment.svg";
-import play from "../images/play.svg";
-import bullet from "../images/bullet-point.svg";
 import home from "../images/home.svg";
 import search from "../images/search.svg";
-import like from "../images/heart2.svg";
-import explore from "../images/explore.svg";
-
 
 function NavBar(props) {
   const {
@@ -357,7 +350,7 @@ function NavBar(props) {
             </div>
 
             <Link 
-              to={user._id ? ("/social-feed") : ("/auth")}
+              to={user._id ? ("/") : ("/auth")}
               className="navbar-btn-container" 
               ref={socialBtnRef1}
               onClick={() => {                       
@@ -367,11 +360,11 @@ function NavBar(props) {
               }}>
               <div className="navbar-btn_shadow-div-inset" ref={socialBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={socialBtnRef3}>
-                  <img className="button-icons bi-social" src={social} ref={socialBtnRef4} alt="social feed icon" />
+                  <img className="button-icons bi-social" src={home} ref={socialBtnRef4} alt="social feed icon" />
                 </div>
               </div>  
               <div className="navbar-btn-text" ref={socialBtnRef5}>
-                Following
+                Home
               </div>
             </Link>
 
