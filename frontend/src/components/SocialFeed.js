@@ -38,15 +38,15 @@ function SocialFeed(props) {
   const [thisFeedSongs, setThisFeedSongs] = useState([]);
   const [exploreFeedSongs, setExploreFeedSongs] = useState([])
   const [userForSong, setUserForSong] = useState({});
-  const [getSongCaption, setGetSongCaption] = useState()
+  const [anotherSongId, setAnotherSongId] = useState();
+  const [getSongCaption, setGetSongCaption] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [songLikes, setSongLikes] = useState();
   const [songUserFollowers, setSongUserFollowers] = useState();
   const [songDate, setSongDate] = useState();
-  const [songUserId, setSongUserId] = useState();
-  const [totalFollowers, setTotalFollowers] = useState(0);
-  const [totalLikes, setTotalLikes] = useState(0);
+  const [totalFollowers, setTotalFollowers] = useState();
+  const [totalLikes, setTotalLikes] = useState();
 
   const popUpSearchRef = useRef();
   const popUpRef = useRef();
@@ -64,6 +64,73 @@ function SocialFeed(props) {
   const followBtnRef2 = useRef();
   const followBtnRef3 = useRef();
 
+  useEffect(() => {
+    if (location.pathname === "/explore-feed") {
+      setToggleExplore(true)
+      setToggleSocial(false)
+    }
+    if (location.pathname === "/social-feed") {
+      setToggleSocial(true)
+      setToggleExplore(false)
+    }
+  }, [location, setToggleSocial, setToggleExplore])
+
+  useEffect(() => {
+    actions
+      .getMostLikedSongs()
+      .then((usersSongs) => {
+        const songsArray = usersSongs.data.map((each) => {
+          return {song: each, songVideo: getRandomBackground()}
+        })
+        setThisFeedSongs(songsArray);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    actions
+      .getMostLikedSongs()
+      .then((exploreSongs) => {
+        exploreSongs.data.reverse()
+        const exploreSongsArray = exploreSongs.data.map((each) => {
+          return {song: each, songVideo: getRandomBackground()}
+        })
+        setExploreFeedSongs(exploreSongsArray)
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (navDisplayed === true) {
+      menuDown('search')
+      menuDown('comment')
+    }
+  }, [navDisplayed])
+  
+  useEffect(() => {
+    actions
+      .getAUser({ id: userViewed._id })
+      .then((res) => {
+        console.log('getting users followers', res.data.followers)
+        setTotalFollowers(res.data.followers.length)
+      })
+      .catch(console.error)
+  }, [totalFollowers, userViewed])
+
+  useEffect(() => {
+    actions
+      .getSong({ id: anotherSongId })
+      .then((res) => {
+        console.log('getting songs total likes', res.data.songLikes)
+        setTotalLikes(res.data.songLikes.length)
+      })
+      .catch(console.error)
+  }, [totalLikes, anotherSongId])
+
+  const getRandomBackground = () => {
+    let index = Math.floor(Math.random()*gifsCopy.length)
+    return gifsCopy[index].url
+  }
 
   const followCheck = () => {
     if (user._id === userViewed._id) {
@@ -89,7 +156,7 @@ function SocialFeed(props) {
         }
       })
       .catch(console.error)
-  }
+  };
   
   const postFollow = () => {
     actions
@@ -111,10 +178,11 @@ function SocialFeed(props) {
       })
       .catch(console.error)
   };
+  
 
   const likeCheck = () => {
     actions
-      .getSong({ id: songId })
+      .getSong({ id: anotherSongId })
       .then((res) => {
         let deleteObj = null
 
@@ -136,7 +204,7 @@ function SocialFeed(props) {
 
   const postLike = () => {
     actions
-      .addLike({ likerSong: songId, likeDate: new Date(), commLike: false })
+      .addLike({ likerSong: anotherSongId, likeDate: new Date(), commLike: false })
       .then((res) => {
         console.log(`added a like to: `, res.data)
         setTotalLikes(res.data.songLikes.length)
@@ -146,7 +214,7 @@ function SocialFeed(props) {
 
   const deleteLike = (deleteObj) => {
     actions
-      .deleteLike({ likerSong: songId, deleteObj: deleteObj, commLike: false })
+      .deleteLike({ likerSong: anotherSongId, deleteObj: deleteObj, commLike: false })
       .then((res) => {
         console.log(`deleted a like from: `, res.data)
         setTotalLikes(res.data.songLikes.length)
@@ -196,53 +264,6 @@ function SocialFeed(props) {
     }
   }
 
-  useEffect(() => {
-    if (location.pathname === "/explore-feed") {
-      setToggleExplore(true)
-      setToggleSocial(false)
-    }
-    if (location.pathname === "/social-feed") {
-      setToggleSocial(true)
-      setToggleExplore(false)
-    }
-  }, [location, setToggleSocial, setToggleExplore])
-
-  useEffect(() => {
-    actions
-      .getMostLikedSongs()
-      .then((usersSongs) => {
-        const songsArray = usersSongs.data.map((each) => {
-          return {song: each, songVideo: getRandomBackground()}
-        })
-        setThisFeedSongs(songsArray);
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    actions
-      .getMostLikedSongs()
-      .then((exploreSongs) => {
-        exploreSongs.data.reverse()
-        const exploreSongsArray = exploreSongs.data.map((each) => {
-          return {song: each, songVideo: getRandomBackground()}
-        })
-        setExploreFeedSongs(exploreSongsArray)
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    if (navDisplayed === true) {
-      menuDown('search')
-      menuDown('comment')
-    }
-  }, [navDisplayed])
-  
-  const getRandomBackground = () => {
-    let index = Math.floor(Math.random()*gifsCopy.length)
-    return gifsCopy[index].url
-  }
 
   const popUpComments = () => {
     if (poppedUp === false) {
@@ -338,7 +359,7 @@ function SocialFeed(props) {
     if (inView) {
       setUserForSong(eachSong.song)
       setSongId(eachSong.song._id)
-      setSongUserId(eachSong.song._id)
+      setAnotherSongId(eachSong.song._id)
       setGetSongName(eachSong.song.songName)
       setGetSongCaption(eachSong.song.songCaption)
       setUserViewed(eachSong.song.songUser)
@@ -346,8 +367,8 @@ function SocialFeed(props) {
       setSongLikes(eachSong.song.songLikes)
       setSongUserFollowers(eachSong.song.songUser.followers)
       setSongDate(eachSong.song.songDate)
-      setTotalLikes(eachSong.song.songLikes.length)
-      setTotalFollowers(eachSong.song.songUser.followers.length)
+      // setTotalLikes(eachSong.song.songLikes.length)
+      // setTotalFollowers(eachSong.song.songUser.followers.length)
       console.log(eachSong.song)
       audioRef.current.src = eachSong.song.songURL
     }
@@ -459,7 +480,7 @@ function SocialFeed(props) {
                     </div>
 
                     <div className="action-btn_shadow-div-outset">
-                      <div className="action-btn-icon_shadow-div-inset" ref={props.commentBtn} onClick={props.popUpComments}>
+                      <div className="action-btn-icon_shadow-div-inset" ref={commentBtn} onClick={popUpComments}>
                         <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
                       </div>
                       <div className="action-btn-text">
@@ -539,7 +560,6 @@ function SocialFeed(props) {
         <Comments popUpRef={popUpRef}
                   poppedUp={poppedUp}
                   menuUp={menuUp}
-                  songUserId={songUserId}
                   opacityRef1={opacityRef1} 
                   opacityRef2={opacityRef2}
                   />

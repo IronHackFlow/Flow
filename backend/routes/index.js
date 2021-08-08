@@ -42,18 +42,20 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
 });
 
 router.post(`/getAUserRT`, async (req, res, next) => {
-  //GETTING A PARTICULAR USER
-  // console.log('hey hey hey hey hey ', req.body)
-  console.log("not sure why this worked lol", req.body)
-      User.findById(req.body.id)
-        .populate('followers')
-        .populate('userFollows')
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((err) => res.status(500).json(err));
-}); 
+  console.log("Grabbing a user: ", req.body)
+  await User.findById(req.body.id)
+    .populate('followers')
+    .populate('userFollows')
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((err) => res.status(500).json(err));
+});
 
+router.get(`/getUserFollowsRT`, async (req, res, next) => {
+  await User.findById(req.body.id)
+    .populate('follows')
+})
 router.post(`/getSongRT`, async (req, res, next) => {
     await Songs.findById(req.body.id)
       .populate('songUser')
