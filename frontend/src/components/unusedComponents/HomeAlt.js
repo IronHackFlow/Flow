@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import TheContext from "../TheContext";
+import TheContext from "../../TheContext";
 import heart from "../images/heart.svg";
 import mic from "../images/record2.svg";
 import avatar3 from "../images/avatar3.svg";

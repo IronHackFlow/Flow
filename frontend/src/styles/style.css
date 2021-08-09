@@ -1393,8 +1393,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   height: 93%;
   width: 100%;
   position: relative;
-  -webkit-transition: bottom .5s;
-  transition: bottom .5s;
   overflow-y: hidden;
 }
 
@@ -1404,6 +1402,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -ms-scroll-snap-type: y mandatory;
       scroll-snap-type: y mandatory;
   overflow-y: scroll;
+  position: relative;
+  -webkit-transition: bottom .5s;
+  transition: bottom .5s;
 }
 
 .section-1_feed .video-scroll-container .video-scroll-container {
@@ -1672,6 +1673,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
 }
 
+.section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset:active {
+  -webkit-box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+          box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+}
+
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset {
   height: 85%;
   width: 35%;
@@ -1694,11 +1700,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   list-style-type: none;
   -webkit-box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
           box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
-}
-
-.section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset:active {
-  -webkit-box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
-          box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-text {
@@ -2154,7 +2155,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   height: 0px;
   width: 100%;
   position: absolute;
-  bottom: 28%;
+  bottom: 33%;
   background: #ecf0f3;
   border-radius: 30px 30px 0px 0px;
   -webkit-transition: height .5s;
@@ -2225,6 +2226,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .comment-pop-out .inner-com .com-cont-1 .social-comment-form .social-comment-input {
+  opacity: 0;
   font-family: inherit;
   font-size: 1em;
   height: 60%;
@@ -2283,6 +2285,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 4px #793c55, -2px -2px 4px #ffffff;
           box-shadow: 2px 2px 4px #793c55, -2px -2px 4px #ffffff;
+  opacity: 0;
   border: none;
   background: #ec6aa0;
 }
@@ -4350,8 +4353,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-pic-container .user-pic_shadow-div-outset {
-  height: 57px;
-  width: 57px;
+  height: 82%;
+  width: 95%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4517,8 +4520,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset {
-  height: 300px;
-  width: 255px;
+  height: 92%;
+  width: 91%;
   border-radius: 20px 180px 180px 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6272,78 +6275,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 2px 2px 4px #283e35, -1px -1px 2px #d1ffe6;
 }
 
-.notification {
-  height: 60px;
-  width: 120px;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  z-index: 200;
-  position: fixed;
-  margin-left: 100vw;
-  margin-top: 0vh;
-  background: #ecf0f3;
-}
-
-.notification .notification-inset {
-  height: 80%;
-  width: 90%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #c7c7c7, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px #c7c7c7, inset -2px -2px 3px #ffffff;
-}
-
-.notification .notification-inset .notification-outset {
-  height: 65%;
-  width: 85%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #cbcbcb, -2px -2px 3px #ffffff;
-          box-shadow: 2px 2px 3px 0px #cbcbcb, -2px -2px 3px #ffffff;
-}
-
-.notification .notification-inset .notification-outset p {
-  color: #ec6aa0;
-  font-weight: bold;
-  font-size: 14px;
-}
-
 :root {
   --routedi2bg: #ecf0f3;
   --menuOpacity: 0;
@@ -6543,48 +6474,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
     --mo3opacity: 1;
     --mo2opacity: 1;
     --mo1opacity: 1;
-  }
-}
-
-@-webkit-keyframes notify {
-  0% {
-    margin-left: 100vw;
-  }
-  50% {
-    margin-left: 65vw;
-  }
-  100% {
-    margin-left: 100vw;
-  }
-}
-
-@keyframes notify {
-  0% {
-    margin-left: 100vw;
-  }
-  50% {
-    margin-left: 65vw;
-  }
-  100% {
-    margin-left: 100vw;
-  }
-}
-
-@-webkit-keyframes hideNotify {
-  from {
-    width: 25vw;
-  }
-  to {
-    width: 0vw;
-  }
-}
-
-@keyframes hideNotify {
-  from {
-    width: 25vw;
-  }
-  to {
-    width: 0vw;
   }
 }
 /*# sourceMappingURL=style.css.map */

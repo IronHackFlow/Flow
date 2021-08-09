@@ -164,7 +164,7 @@ html, body, #root, .App {
 @import './AuthLogin';
 @import './EditProfile';
 @import './Buttons';
-@import './ModalAndNotifications';
+@import './Modal';
 
 
 :root {
@@ -276,21 +276,4 @@ html, body, #root, .App {
     --mo2opacity: 1;
     --mo1opacity: 1;
   }
-}
-
-@keyframes notify {
-    0% {
-        margin-left: 100vw;}
-    50% {
-        margin-left:65vw}
-    100%{
-        margin-left: 100vw;}
-}
-@keyframes hideNotify {
-    from {
-      width:25vw
-    }
-    to {
-      width:0vw
-    }
 }

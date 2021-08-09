@@ -15,7 +15,8 @@ router.get(`/user`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", (err, authData) => {
     if (err) {
       res.status(403).json(err);
-    } else {
+    } 
+    else {
       User.findById(authData.user._id)
         .populate('userFollows')
         .then((user) => {
@@ -31,7 +32,8 @@ router.get(`/getOneUserRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, "secretkey", (err, authData) => {
     if (err) {
       res.status(403).json(err);
-    } else {
+    } 
+    else {
       User.findById(authData.user._id)
         .then((user) => {
           res.status(200).json(user);
@@ -52,10 +54,6 @@ router.post(`/getAUserRT`, async (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 });
 
-router.get(`/getUserFollowsRT`, async (req, res, next) => {
-  await User.findById(req.body.id)
-    .populate('follows')
-})
 router.post(`/getSongRT`, async (req, res, next) => {
     await Songs.findById(req.body.id)
       .populate('songUser')
@@ -98,7 +96,9 @@ router.post(`/getACommentRT`, async (req, res, next) => {
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
-    Songs.find({ songUser: req.body._id})
+  console.log(req.body, "wha")
+  let body = req.body
+    await Songs.find({ songUser: body.songUser })
     .populate('songUser')
     .populate('songComments')
     .then((songs) => {
@@ -211,6 +211,7 @@ router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
           next(err)
         })
       }
+
       else {
         await Comments.findByIdAndUpdate(
           bodyComm.deleteObj.likedComment, 
@@ -335,7 +336,6 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   .populate({ path: 'songUser', populate: 'followers'})
   .then(songs => {
     res.status(200).json(songs)
-
   })
   .catch(err => res.status(500).json(err))
   });

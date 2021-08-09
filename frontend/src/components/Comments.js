@@ -13,24 +13,24 @@ import flag from "../images/flag.svg";
 import moment from "moment";
 
 function Comments(props) {
-  const { songId, songUserFollowers, songLikes, songDate} = React.useContext(TheViewContext);
+  const {
+    songInView, totalComments, setTotalComments
+  } = React.useContext(TheViewContext);
+
   const {
     user
-    } = React.useContext(
-    TheContext
-  );
+  } = React.useContext(TheContext);
   
   const [comment, setComment] = useState();
   const [commState, setCommState] = useState([]);
   const [songCommUser, setSongCommUser] = useState();
-  const [totalComments, setTotalComments] = useState([]);
+  // const [totalComments, setTotalComments] = useState([]);
 
-  const inputRef = useRef();
   const renderRef = useRef(0);
 
   useEffect(() => {
     actions
-      .getComments({ id: songId })
+      .getComments({ id: songInView._id })
       .then((res) => {
         console.log('Returned these comments from DB: ', res.data)
         setCommState(res.data.songComments);
@@ -38,7 +38,7 @@ function Comments(props) {
         setSongCommUser(res.data.songUser);
       })
       .catch(console.error)
-  }, [songId, totalComments])
+  }, [songInView, totalComments])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -48,15 +48,16 @@ function Comments(props) {
     }
     actions
       .addComment({ comment: comment, 
-                    commSong: songId,
+                    commSong: songInView._id,
                     commDate: new Date() })
       .then((res) => {
         console.log(res.data, "comment data")
         setTotalComments(res.data.songComments.length)
       })
       .catch(console.error);
+
     setTimeout(()=> {
-      inputRef.current.value =  ""
+      props.commentInputRef.current.value =  ""
     }, [200])
   }
 
@@ -78,7 +79,7 @@ function Comments(props) {
 
     useEffect(() => {
       setTotalCommentLikes(each.commLikes.length)
-    }, [totalCommentLikes, each.commLikes.length])
+    }, [])
 
     useEffect(() => {
       if (each.commUser._id === user._id) {
@@ -110,7 +111,7 @@ function Comments(props) {
     const deleteComment = (each) => {
       if (user._id === each.commUser._id) {
         actions
-        .deleteComment({ deleteObj: each, songId: songId })
+        .deleteComment({ deleteObj: each, songId: songInView._id })
         .then((res) => {
           console.log(`deleted a comment from song ${res.data.songName}'s songComments:`, res.data.songComments)
           setTotalComments(res.data.songComments.length)
@@ -276,19 +277,19 @@ function Comments(props) {
   }, [props.poppedUp, commState])
 
   return (
-    <div ref={props.popUpRef} className="comment-pop-out">
+    <div ref={props.commentPopUpRef} className="comment-pop-out">
       <div className="inner-com">
       {/* {console.log(`checking renders, ${renderRef.current++}`)} */}
         <div ref={props.opacityRef1} style={{opacity: '0'}} className="com-cont-1">
           <form className="social-comment-form" onSubmit={handleSubmit}>
             <input
                 className="social-comment-input"
-                ref={inputRef}
-                type='text' 
+                ref={props.commentInputRef}
                 onChange={(e) => setComment(e.target.value)}
+                type='text' 
                 placeholder='Make a comment...' 
                 ></input>
-            <button className="comment-button">
+            <button className="comment-button" ref={props.commentButtonRef}>
               <img className="social-icons si-send" src={send} alt="send" />
             </button>
           </form>

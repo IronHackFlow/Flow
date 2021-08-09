@@ -1,6 +1,4 @@
 .Profile {
-    // height: 100%;
-    // width: 100%;
     position: absolute;
 }
 
@@ -23,7 +21,8 @@
                 @include flexCenter(100%, 20%, none, flex-end, center, row);
     
                 .user-pic_shadow-div-outset {
-                    @include flexCenter(57px, 57px, 50px, center, center, row);
+                    //57px 57px
+                    @include flexCenter(82%, 95%, 50px, center, center, row);
                     box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
 
                     .user-pic_shadow-div-inset {
@@ -81,7 +80,8 @@
             position: relative;
 
             .fields_shadow-div-outset {
-                @include flexCenter(300px, 255px, 20px 180px 180px 20px, space-evenly, flex-start, column);
+                //300px 255px
+                @include flexCenter(92%, 91%, 20px 180px 180px 20px, space-evenly, flex-start, column);
                 box-shadow: 2px 3px 5px 0px #838282, -3px -3px 5px 0px #e0e0e0;
                 position: absolute;
                 overflow-y: scroll;

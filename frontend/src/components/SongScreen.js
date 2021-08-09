@@ -6,6 +6,7 @@ import TheContext from "../TheContext";
 import follow from "../images/follow.svg";
 import comments from "../images/comment.svg";
 import play from "../images/play.svg";
+import pause from "../images/pause.svg";
 import backward from "../images/backward.svg";
 import forward from "../images/forward.svg";
 import close from "../images/close.svg";
@@ -16,15 +17,16 @@ import gradientbg from "../images/gradient-bg-2.png"
 function SongScreen(props) {
   const { user } = React.useContext(TheContext);
   
-  let history = useHistory();
-  let gifsCopy = [...gifsArr];
-
+  const history = useHistory();
+  const gifsCopy = [...gifsArr];
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
   const [thisSong, setThisSong] = useState({});
   const [allSongs, setAllSongs] = useState([]);
 
   const followBtn = useRef();
+  const audioRef = useRef();
+  const playPauseRef = useRef();
 
   useEffect(() => {
     setTotalFollowers(thisSong.songUser?.followers?.length)
@@ -48,12 +50,19 @@ function SongScreen(props) {
       .catch(console.error);
   }, [props.location])
 
-  const closeSongWindow = () => {
-    if (thisSong.songUser._id === user._id)
-      history.push({pathname: `/profile/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
-    else {
-      history.push({pathname: `/profile/other/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
+  const handlePlayPause = () => {
+    if (audioRef.current.paused) {
+     audioRef.current.play()
+     playPauseRef.current.src = pause
     }
+    else {
+     audioRef.current.pause()
+     playPauseRef.current.src = play
+   }
+  }
+
+  const closeSongWindow = () => {
+    history.push({pathname: `/profile/${thisSong.songUser?._id}`, profileInfo: thisSong.songUser})
   }
 
   const getRandomBackground = () => {
@@ -204,9 +213,10 @@ function SongScreen(props) {
 
                 <div className="play-buttons-middle">
                   <div className="play-outer">
-                    <div className="play-inner">
+                    <div className="play-inner" onClick={handlePlayPause}>
                       <div className="play-img-container">
-                        <img src={play} alt="play icon" />
+                        <img src={play} ref={playPauseRef} alt="play icon" />
+                        <audio ref={audioRef} src={thisSong.songURL}></audio>
                       </div>
                     </div>
                   </div>

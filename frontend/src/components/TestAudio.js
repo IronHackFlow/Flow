@@ -15,7 +15,6 @@ import stop from "../images/stop.svg";
 import trashbin from "../images/delete2.svg";
 import save from "../images/save.svg";
 import help from "../images/help2.svg";
-import replay from "../images/replay.svg";
 import AudioCanvas from "./AudioCanvas";
 import TheContext from "../TheContext";
 import actions from "../api";
@@ -339,13 +338,10 @@ function TestAudio(props) {
     }
   };
 
-
-
-
   const saveFile = () => {
     if (allTakes.length === 0) {
-    } else {
-
+    } 
+    else {
       let selUpload = allTakes[theTakes.current.selectedIndex];
       selUpload.setName();
 
@@ -380,7 +376,6 @@ function TestAudio(props) {
   const deleteTake=()=>{
    setLine([])
    setRhymes([])
-
   }
 
   return (
@@ -488,7 +483,7 @@ function TestAudio(props) {
               </div>
               <div className="selected-container" onClick={modalPopup}>
                 <div>
-                  <img className="button-icons" src={help}></img>
+                  <img className="button-icons" src={help} alt="help icon" />
                 </div>
               </div>
               <div className="tracks-container">
@@ -520,7 +515,8 @@ function TestAudio(props) {
                   className="button-icons bi-record"
                   id="record-stop-img"
                   src={mic}
-                ></img>
+                  alt="record icon"
+                 />
               </div>
             </div>
             <div className="button-icons-inset">
@@ -533,17 +529,18 @@ function TestAudio(props) {
                   className="button-icons bi-play"
                   id="play-stop-img"
                   src={play}
-                ></img>
+                  alt="play icon"
+                 />
               </div>
             </div>
             <div className="button-icons-inset">
               <div className="button-icons-outset" onClick={deleteTake}>
-                <img className="button-icons bi-play" src={trashbin}></img>
+                <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
               </div>
             </div>
             <div className="button-icons-inset">
               <div className="button-icons-outset" onClick={saveFile}>
-                <img className="button-icons bi-help" src={save}></img>
+                <img className="button-icons bi-help" src={save} alt="save icon" />
               </div>
             </div>
           </div>

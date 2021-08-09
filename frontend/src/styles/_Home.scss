@@ -1,4 +1,3 @@
-
 .Home {
     // height: 100%;
     // width: 100%;
@@ -11,7 +10,7 @@
     width: 100%;
     position: relative;
     // bottom: 0;
-    transition: bottom .5s;
+
     overflow-y: hidden;
 
     .video-scroll-container {
@@ -20,10 +19,14 @@
         width: 100%;
         scroll-snap-type: y mandatory;
         overflow-y: scroll;
+        position: relative;
+        transition: bottom .5s;
         // position: absolute;
+
         .video-scroll-container {
             height: 100%;
         }
+
         .video-pane {
             @include flexCenter(100%, 100%, 0px, flex-start, center, column);
             scroll-snap-align: start;
@@ -105,17 +108,17 @@
                         .action-btn_shadow-div-outset {
                             @include flexCenter(72%, 30%, 5px, space-evenly, center, row);
                             box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
-                            
+
+                            &:active {
+                                box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+                            }
+
                             .action-btn-icon_shadow-div-inset {
                                 @include flexCenter(85%, 35%, 5px, center, center, row);
                                 position: relative;
                                 color: #ec6aa0;
                                 list-style-type: none;
-                                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
-        
-                                &:active {
-                                    box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
-                                }            
+                                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;      
                             }
         
                             .action-btn-text {
@@ -284,7 +287,7 @@
     width: 100%;
     // z-index: -1;
     position: absolute;
-    bottom: 28%;
+    bottom: 33%;
     background: #ecf0f3;
     border-radius: 30px 30px 0px 0px;
     transition: height .5s;
@@ -304,6 +307,8 @@
                 box-shadow: inset 2px 2px 4px #d0d1d2, inset -2px -2px 7px #ffffff;
 
                 .social-comment-input {
+                    opacity: 0;
+                    // display: none;
                     font-family: inherit;
                     font-size: 1em;
                     height: 60%;
@@ -330,6 +335,7 @@
                 .comment-button {
                     @include flexCenter(27px, 40px, 30px, center, center, row);
                     box-shadow: 2px 2px 4px #793c55, -2px -2px 4px #ffffff;
+                    opacity: 0;
                     border: none;
                     background: #ec6aa0;
                 }

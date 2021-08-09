@@ -9,14 +9,12 @@ import TestAudio from './components/TestAudio'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
 import Profile from './components/Profile'
-import OtherProfile from './components/OtherProfile'
-import Notification from './components/Notification'
 import SongScreen from './components/SongScreen'
 
 function App() {
-  const [navDisplayed, setNavDisplayed] = useState(false);
   const [user, setUser] = useState({});
   const [userViewed, setUserViewed] = useState({});
+  const [navDisplayed, setNavDisplayed] = useState(false);
   const [toggleExplore, setToggleExplore] = useState();
   const [toggleSocial, setToggleSocial] = useState();
   const [toggleProfile, setToggleProfile] = useState();
@@ -24,16 +22,11 @@ function App() {
   const navRef = useRef();
 
   useEffect(() => {
-    user ? setUserViewed(user) : setUser({})
-    console.log(user, "you're the user")
-    console.log(userViewed, "but what's userViewed?")
-  }, [])
-
-  useEffect(() => {
     actions
     .getUser()
     .then((res) => {
       setUser(res.data)
+      console.log("user is logged in", user)
     }).catch(console.error)
   }, [])
 
@@ -143,7 +136,6 @@ function App() {
           <div></div>
         </div>
 
-        <Notification/>
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />

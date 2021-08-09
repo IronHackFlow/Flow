@@ -57,12 +57,13 @@ function Profile(props) {
   useEffect(() => {
     console.log("profile.js line 53 ", user);
     actions
-      .getUserSongs(user)
-      .then((usersSongs) => {
-        setThisUserSongs(usersSongs.data);
+      .getUserSongs({ songUser: props.location.profileInfo._id })
+      .then((res) => {
+        setThisUserSongs(res.data);
+        console.log(res.data, "lol")
       })
       .catch(console.error);
-  }, []);
+  }, [props.location]);
 
   useEffect(() => {
     if (props.location.profileInfo?._id === user._id) {

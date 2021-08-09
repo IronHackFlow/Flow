@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import actions from "../api";
-import TheContext from "../TheContext";
+import actions from "../../api";
+import TheContext from "../../TheContext";
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'

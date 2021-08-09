@@ -1,12 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import TheViewContext from "../TheViewContext";
 import { Link } from "react-router-dom";
 import actions from "../api";
 import send from "../images/send.svg";
 
 function Search(props) {
-  const { songUserFollowers, songLikes, songDate} = React.useContext(TheViewContext);
-
   const [suggestions, setSuggestions] = useState(
     <h4>Find Friends & Artists</h4>
   );
@@ -14,7 +11,8 @@ function Search(props) {
   const listUsers = (e) => {
     if (e.target.value.length > 0) {
       grabUsers(e.target.value);
-    }else{
+    }
+    else {
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
   };
@@ -37,7 +35,7 @@ function Search(props) {
             <div className="search-prof-container">
               <div className="search-prof-inset">
                 <div className="search-prof-outset">
-                  <Link to={{pathname:`/profile/other/${ele.profile._id}`, profileInfo: ele.profile}} className="search-results-link">
+                  <Link to={{pathname:`/profile/${ele.profile._id}`, profileInfo: ele.profile}} className="search-results-link">
                     <img className="prof-pic" src={ele.picture} alt=""></img>
                   </Link>
                 </div>
@@ -57,7 +55,7 @@ function Search(props) {
     actions
       .getManyUsers({ search: theQuery })
       .then((res) => {
-       console.log(res)
+        console.log(res)
         setSuggestions(suggestionBox(res));
       })
       .catch((e) => {
@@ -67,19 +65,18 @@ function Search(props) {
 
   return (
     <div className="comment-pop-out" ref={props.popUpSearchRef}>
-      {console.log(songLikes, "WHAT?!")}
       <div className="inner-com">
         <div className="com-cont-1">
           <form className="social-comment-form">
-            <input onChange={listUsers}
-                  className="social-comment-input"
-                  style={{opacity: '0'}}
-                  ref={props.dumbSearchRef}
-                  type='text' 
-                  placeholder='Search' 
-                  >
+            <input 
+              className="social-comment-input"
+              ref={props.searchInputRef}
+              onChange={listUsers}
+              type='text' 
+              placeholder='Search for a user' 
+              >
             </input>
-            <button className="comment-button" ref={props.searchButtonRef} style={{opacity: '0'}}>
+            <button className="comment-button" ref={props.searchButtonRef}>
               <img className="social-icons si-send" src={send} alt="send" />
             </button>
           </form>
