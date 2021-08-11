@@ -70,21 +70,21 @@ function Home(props) {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    const followingArray = user.userFollows.map((each) => {
-      actions
-      .getUserSongs({ songUser: each.followed })
-      .then((res) => {
-        // const songsArray = res.data.map((each) => {
-        //   return {song: each, songVideo: getRandomBackground()}
-        // })
-        // setTheFeedSongs(songsArray);
-        return res.data
-      })
-      .catch(console.error)
-    })
-    console.log(followingArray)
-  }, []);
+  // useEffect(() => {
+  //   const followingArray = user.userFollows.map((each) => {
+  //     actions
+  //     .getUserSongs({ songUser: each.followed })
+  //     .then((res) => {
+  //       // const songsArray = res.data.map((each) => {
+  //       //   return {song: each, songVideo: getRandomBackground()}
+  //       // })
+  //       // setTheFeedSongs(songsArray);
+  //       return res.data
+  //     })
+  //     .catch(console.error)
+  //   })
+  //   console.log(followingArray)
+  // }, []);
 
   useEffect(() => {
     if (location.pathname === "/explore-feed") {
@@ -117,7 +117,15 @@ function Home(props) {
   }, [])
 
   const toggleFeed = () => {
-    console.log("lol")
+    const followedIds = user.userFollows.map((each) => {
+      return { songUser: each }
+    })
+    actions
+      .getUserFollowsSongs(followedIds)
+      .then((res) => {
+        console.log(res.data, "please work lol")
+      })
+      .catch(console.error)
   }
 
   const showSongs = () => {

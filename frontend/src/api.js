@@ -35,6 +35,9 @@ const actions = {
   getUserSongs: async (theUser) => {
     return await axios.post(`${baseURL}/getUserSongsRT`, theUser, resetHead());
   },
+  getUserFollowsSongs: async (userFollows) => {
+    return await axios.post(`${baseURL}/getUserFollowsSongsRT`, userFollows, resetHead());
+  },
   //search bar bobby
   getManyUsers: async (searchStr)=> {
     return await axios.post(`${baseURL}/getManyUsersRT`, searchStr, resetHead());

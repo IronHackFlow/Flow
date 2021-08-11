@@ -55,7 +55,7 @@ function Profile(props) {
   // }, []);
 
   useEffect(() => {
-    console.log("profile.js line 53 ", user);
+    console.log("profile.js line 53 ", props.location.profileInfo);
     actions
       .getUserSongs({ songUser: props.location.profileInfo._id })
       .then((res) => {

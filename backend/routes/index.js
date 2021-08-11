@@ -106,6 +106,25 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
     })
     .catch((err) => res.status(500).json(err))
 })
+// model.find({
+//   '_id': { $in: [
+//       mongoose.Types.ObjectId('4ed3ede8844f0f351100000c'),
+//       mongoose.Types.ObjectId('4ed3f117a844e0471100000d'), 
+//       mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
+//   ]}
+router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
+  console.log(req.body, "wha")
+  let body = req.body
+    await Songs.find({ songUser: { $in: [req.body.followed]}})
+    .then((songs) => {
+      console.log(songs, "come on man")
+      res.status(200).json(songs);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+})
 
 router.post(`/getSongLikesRT`, async (req, res, next) => {
   Songs.findById({ SongTotLikes: req.body._id})
