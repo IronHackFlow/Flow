@@ -9,6 +9,7 @@ const Likes = require("../models/Likes");
 const Follows = require("../models/Follows");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose")
 
 router.get(`/user`, verifyToken, async (req, res, next) => {
   //GETTING OUR USER
@@ -113,17 +114,15 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 //       mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
 //   ]}
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  console.log(req.body, "wha")
-  let body = req.body
-    await Songs.find({ songUser: { $in: [req.body.followed]}})
-    .then((songs) => {
-      console.log(songs, "come on man")
-      res.status(200).json(songs);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    })
+    console.log(req.body, "array of songUser ids")
+    await Songs.find({ songUser: req.body })
+      .then((songs) => {
+        songs.forEach(each => console.log(each.songName))
+        res.status(200).json(songs);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      })
 })
 
 router.post(`/getSongLikesRT`, async (req, res, next) => {
