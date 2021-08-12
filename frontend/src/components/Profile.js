@@ -25,35 +25,6 @@ function Profile(props) {
   const [thisUser, setThisUser] = useState([]);
   const [thisUserSongs, setThisUserSongs] = useState([]);
 
-  // const profileBtnRef1 = useRef();
-  // const profileBtnRef2 = useRef();
-  // const profileBtnRef3 = useRef();
-  // const profileBtnRef4 = useRef();
-  // const profileBtnRef5 = useRef();
-
-  // useEffect(() => {
-  //   profileBtnRef1.current.style.background = "#ec6aa0";
-  //   profileBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
-  //   profileBtnRef1.current.style.border = "1px solid #ec6aa0"
-  //   profileBtnRef1.current.style.transition = "all .4s"
-  //   profileBtnRef2.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
-  //   profileBtnRef2.current.style.height = "38px"
-  //   profileBtnRef2.current.style.width = "38px"
-  //   profileBtnRef2.current.style.transition = "all .4s"
-  //   profileBtnRef3.current.style.boxShadow = "none"
-  //   profileBtnRef4.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
-  //   profileBtnRef5.current.style.color = "white"
-  // }, [])
-
-  // useEffect(() => {
-  //   actions
-  //     .getOneUser()
-  //     .then((res) => {
-  //       setThisUser(res.data);
-  //     })
-  //     .catch(console.error);
-  // }, []);
-
   useEffect(() => {
     console.log("profile.js line 53 ", props.location.profileInfo);
     actions

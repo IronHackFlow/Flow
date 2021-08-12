@@ -15,9 +15,9 @@ function App() {
   const [user, setUser] = useState({});
   const [userViewed, setUserViewed] = useState({});
   const [navDisplayed, setNavDisplayed] = useState(false);
-  const [toggleExplore, setToggleExplore] = useState();
-  const [toggleSocial, setToggleSocial] = useState();
-  const [toggleProfile, setToggleProfile] = useState();
+  const [toggleFeed, setToggleFeed] = useState(true);
+  const [toggleRecord, setToggleRecord] = useState(false);
+  const [toggleProfile, setToggleProfile] = useState(false);
 
   const navRef = useRef();
 
@@ -57,85 +57,11 @@ function App() {
         user, setUser, 
         userViewed, setUserViewed, 
         navDisplayed, setNavDisplayed,
-        toggleSocial, setToggleSocial,
-        toggleExplore, setToggleExplore,
+        toggleRecord, setToggleRecord,
+        toggleFeed, setToggleFeed,
         toggleProfile, setToggleProfile,
     }}>
       <div className="App">
-        <nav ref={navRef}>
-            <div className="menu">
-              <div className="menu-route mr-1">
-                <div className="menu-outset mo-1">
-                  <div className="menu-inset mi-1">
-                    <Link to="/" onClick={hideNavBar}>Home</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-route mr-2">
-                <div className="menu-outset mo-2">
-                  <div className="menu-inset mi-2">
-                    <Link to="/auth" onClick={hideNavBar}>Log in</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-route mr-3">
-                <div className="menu-outset mo-3">
-                  <div className="menu-inset mi-3">
-                    <Link 
-                      to="/explore-feed" 
-                      onClick={() => {
-                        hideNavBar()
-                        setToggleProfile(false)
-                      }}>
-                      Explore
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-route mr-4">
-                <div className="menu-outset mo-4">
-                  <div className="menu-inset mi-4">
-                    <Link to="/recordingBooth" onClick={hideNavBar}>Record</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-route mr-5">
-                <div className="menu-outset mo-5">
-                  <div className="menu-inset mi-5">
-                    <Link 
-                      to={user._id ? {pathname: `/profile/${user._id}`, profileInfo: user } : `/auth`} 
-                      onClick={() => {
-                        hideNavBar()
-                        setToggleProfile(true)
-                      }}>
-                        Profile
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-route mr-6">
-                <div className="menu-outset mo-6">
-                  <div className="menu-inset mi-6">
-                    <Link 
-                      to="/social-feed" 
-                      onClick={() => {
-                        hideNavBar()
-                        setToggleProfile(false)
-                      }}>
-                      Social
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </nav>
-
-        <div className="hamburger-button" onClick={navDisplayCheck}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />

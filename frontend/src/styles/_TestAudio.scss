@@ -3,7 +3,7 @@
 }
 
 .scroll-rhymes-outer {
-    @include flexCenter(40%, 100%, 0px, center, center, column);
+    @include flexCenter(37%, 100%, 0px, center, center, column);
     background-image: url('../images/turnt-bg-image.jpg');
     background-size: 104%;
     background-position-x: 50%;
@@ -45,14 +45,14 @@
 
 /* --------------------- Controls panel --------------------- */
 .nav-buttons-play {
-    height: 57.3%;
-    padding-top: 10px;
+    height: 56%;
+    // padding-top: 10px;
     background: $lightgrayBg;
-    border-top: 5px solid $lightgrayBg;
+    // border-top: 5px solid $lightgrayBg;
     box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
-        @include flexCenter(40%, 100%, 0px, center, center, column);
+        @include flexCenter(35%, 100%, 0px, center, center, column);
         background: $lightgrayBg;
 
         .suggestions {
@@ -91,7 +91,7 @@
 
     
     .canvas-anim-box {
-        @include flexCenter(25%, 100%, 0px, center, stretch, row);
+        @include flexCenter(20%, 100%, 0px, center, stretch, row);
         background: $lightgrayBg;
         border-bottom: 5px solid $lightgrayBg;
         box-shadow: inset 0 -5px 4px #d8d8d8;
@@ -121,7 +121,7 @@
     }
 
     .playback-controls-panel {
-        height: 35%;
+        height: 45%;
         background: $charcoalBg;
         border-top: 2px solid #8a8c8e;
         box-shadow: inset 1px 3px 4px 0px #adadad;
@@ -189,18 +189,18 @@
         }
     
         .nav-list-play {
-            @include flexCenter(55%, 100%, 0px, space-evenly, center, row);
+            @include flexCenter(38%, 100%, 0px, space-evenly, center, row);
             border-top: 1px solid $charcoalBg;
 
             .button-icons-inset {
-                @include flexCenter(70px, 70px, 50%, center, center, row);
+                @include flexCenter(60px, 60px, 50%, center, center, row);
                 padding: 3px;
                 background: $charcoalBg;
                 box-shadow: inset 5px 5px 15px #313232, 
                             inset -5px -5px 15px #9fa2a4;
             
                 .button-icons-outset {
-                    @include flexCenter(50px, 50px, 50%, center, center,row);
+                    @include flexCenter(80%, 80%, 50%, center, center,row);
                     text-align: center;
                     font-weight: bold;
                     background: $charcoalBg;

@@ -18,6 +18,7 @@ import help from "../images/help2.svg";
 import AudioCanvas from "./AudioCanvas";
 import TheContext from "../TheContext";
 import actions from "../api";
+import NavBar from "./NavBar";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext);
@@ -545,6 +546,7 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
+        <NavBar />
       </div>
       {recordings}
     </div>

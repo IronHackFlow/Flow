@@ -42,10 +42,11 @@ function SongScreen(props) {
   }, [props.location]);
 
   useEffect(() => {
+    console.log(props.location.songInfo.songUser, "i don't know")
     actions
-      .getUserSongs(props.location.songInfo.songUser)
-      .then((usersSongs) => {
-        setAllSongs(usersSongs.data);
+      .getUserSongs({ songUser: props.location.songInfo.songUser })
+      .then((res) => {
+        setAllSongs(res.data);
       })
       .catch(console.error);
   }, [props.location])

@@ -103,6 +103,7 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
     .populate('songUser')
     .populate('songComments')
     .then((songs) => {
+        console.log(songs, 'alsdfja;lsdfkj')
         res.status(200).json(songs);
     })
     .catch((err) => res.status(500).json(err))
@@ -121,6 +122,7 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
   console.log(followedIds)
   console.log(req.body, "array of songUser ids")
   await Songs.find({ songUser: followedIds })
+    .populate('songUser')
     .then((songs) => {
       songs.forEach(each => console.log(each.songName))
       res.status(200).json(songs);
