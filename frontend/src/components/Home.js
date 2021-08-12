@@ -122,17 +122,6 @@ function Home(props) {
   // }, []);
 
   useEffect(() => {
-    if (location.pathname === "/explore-feed") {
-      setToggleExplore(true)
-      setToggleSocial(false)
-    }
-    if (location.pathname === "/social-feed") {
-      setToggleSocial(true)
-      setToggleExplore(false)
-    }
-  }, [location, setToggleSocial, setToggleExplore]);
-
-  useEffect(() => {
     if (navDisplayed === true) {
       menuDown('search')
       menuDown('comment')
@@ -150,29 +139,28 @@ function Home(props) {
   useEffect(() => {
     setTotalComments(commentsInView?.length)
   }, [])
+
   const [theFeedBool, setTheFeedBool] = useState(true)
   const [trendingBool, setTrendingBool] = useState(false)
   const [followingBool, setFollowingBool] = useState(false)
 
   const showSongs = useCallback(() => {
-    if (theFeedBool === true || trendingBool === false || followingBool === false) {
-      return theFeedSongs.map((eachSong) => {
-        return <DisplaySong key={eachSong.song?._id} {...eachSong} />;
+    if (theFeedBool === true) {
+      return theFeedSongs.map((eachSong, index) => {
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
       });
     }
-    else if (trendingBool === true || followingBool === false || theFeedBool === false) {
-      return trendingSongsFeed.map((eachSong) => {
-        return <DisplaySong key={eachSong.song?._id} {...eachSong} />;
+    else if (trendingBool === true) {
+      return trendingSongsFeed.map((eachSong, index) => {
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
       });
     }
-    else if (followingBool === true || trendingBool === false || theFeedBool === false) {
-      return followingSongsFeed.map((eachSong) => {
-        return <DisplaySong key={eachSong.song?._id} {...eachSong} />;
+    else if (followingBool === true) {
+      return followingSongsFeed.map((eachSong, index) => {
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
       });
     }
   }, [theFeedBool, trendingBool, followingBool])
-
-
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)

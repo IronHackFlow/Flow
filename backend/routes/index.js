@@ -114,15 +114,20 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 //       mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
 //   ]}
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-    console.log(req.body, "array of songUser ids")
-    await Songs.find({ songUser: req.body })
-      .then((songs) => {
-        songs.forEach(each => console.log(each.songName))
-        res.status(200).json(songs);
-      })
-      .catch((err) => {
-        res.status(500).json(err);
-      })
+  console.log(req.body, 'what the fuuuuck')
+  const followedIds = req.body.map((each) => {
+    return each.followed
+  })
+  console.log(followedIds)
+  console.log(req.body, "array of songUser ids")
+  await Songs.find({ songUser: followedIds })
+    .then((songs) => {
+      songs.forEach(each => console.log(each.songName))
+      res.status(200).json(songs);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    })
 })
 
 router.post(`/getSongLikesRT`, async (req, res, next) => {
