@@ -268,7 +268,8 @@ function TestAudio(props) {
     if (document.getElementById("userRecording").paused) {
       document.getElementById("play-stop-img").src = pause;
       document.getElementById("userRecording").play();
-    } else {
+    } 
+    else {
       document.getElementById("play-stop-img").src = play;
       document.getElementById("userRecording").pause();
     }
@@ -314,13 +315,14 @@ function TestAudio(props) {
   }
   const displayTake = () => {
     if (takes.length === 0) {
-    } else {
+    } 
+    else {
       let selectedTake = document.getElementById("takes");
       selectedTake.selectedIndex = takes.length - 1;
       const freshTrack = allTakes[takes.length - 1];
-      if(freshTrack){
-      freshTrack.setDate();
-      freshTrack.setLyrics();
+      if (freshTrack) {
+        freshTrack.setDate();
+        freshTrack.setLyrics();
       }
     }
   };
@@ -330,7 +332,8 @@ function TestAudio(props) {
 
     if (takes.length === 0) {
       return <option>No record</option>;
-    } else {
+    } 
+    else {
       const takesHolder = takes.map((element, index) => {
         return <option value={element}>Take {index + 1}</option>;
       });

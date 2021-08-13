@@ -73,6 +73,7 @@ function Home(props) {
     actions
       .getMostLikedSongs()
       .then((res) => {
+        console.log(res)
         const songsArray = res.data.map((each) => {
           return { song: each, songVideo: getRandomBackground() }
         })
