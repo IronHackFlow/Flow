@@ -103,19 +103,13 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
     .populate('songUser')
     .populate('songComments')
     .then((songs) => {
-        console.log(songs, 'alsdfja;lsdfkj')
         res.status(200).json(songs);
     })
     .catch((err) => res.status(500).json(err))
 })
-// model.find({
-//   '_id': { $in: [
-//       mongoose.Types.ObjectId('4ed3ede8844f0f351100000c'),
-//       mongoose.Types.ObjectId('4ed3f117a844e0471100000d'), 
-//       mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
-//   ]}
+
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  console.log(req.body, 'what the fuuuuck')
+  console.log(req.body, "is this an array?")
   const followedIds = req.body.map((each) => {
     return each.followed
   })

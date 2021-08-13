@@ -43,6 +43,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState([]);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();
@@ -85,20 +86,6 @@ function Home(props) {
 
   useEffect(() => {
     actions
-      .getUserFollowsSongs(user?.userFollows)
-      .then((res) => {
-        const songsArray = res.data.map((each) => {
-          return { song: each, songVideo: getRandomBackground() }
-        })
-        console.log(res.data, "all songs by users you're following")
-        setFollowingSongsFeed(songsArray.reverse())
-        console.log(followingSongsFeed)
-      })
-      .catch(console.error)
-  }, [user]);
-
-  useEffect(() => {
-    actions
       .getMostLikedSongs()
       .then((res) => {
         const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
@@ -109,6 +96,21 @@ function Home(props) {
       })
       .catch(console.error)
   }, [])
+
+  useEffect(() => {
+    actions
+      .getUserFollowsSongs(user?.userFollows)
+      .then((res) => {
+        const songsArray = res.data.map((each) => {
+          return { song: each, songVideo: getRandomBackground() }
+        })
+        console.log(res.data, "all songs by users you're following")
+        setFollowingSongsFeed(songsArray.reverse())
+        console.log(followingSongsFeed)
+      })
+      .catch(console.error)
+    setUpdateFollowFeed(false)
+  }, [user, updateFollowFeed]);
 
   useEffect(() => {
     if (navDisplayed === true) {
@@ -259,6 +261,7 @@ function Home(props) {
       .then((res) => {
         console.log(`added a follow to: `, res.data)
         setTotalFollowers(res.data.followers.length)
+        setUpdateFollowFeed(res.data.followers)
       })
       .catch(console.error);
   };
@@ -269,10 +272,12 @@ function Home(props) {
       .then((res) => {
         console.log(`deleted a follow from: `, res.data)
         setTotalFollowers(res.data.followers.length)
+        setUpdateFollowFeed(res.data.followers)
       })
       .catch(console.error)
+
   };
-  
+
   const likeCheck = () => {
     actions
       .getSong({ id: songInView._id })
