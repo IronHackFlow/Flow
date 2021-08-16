@@ -113,8 +113,8 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
   const followedIds = req.body.map((each) => {
     return each.followed
   })
-  console.log(followedIds)
-  console.log(req.body, "array of songUser ids")
+  console.log("this an array?", followedIds)
+
   await Songs.find({ songUser: followedIds })
     .populate('songUser')
     .then((songs) => {
@@ -272,14 +272,17 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
 
       let followedObject = await Follows.create(body)
       console.log(`CREATED follow object: `, followedObject)
+      let resData = { followerData: "", followedData: ""}
 
       await User.findByIdAndUpdate(
         body.follower, 
         {$push: { userFollows: followedObject }}, 
         { new: true }
       )
-        .then((res) => {
-          console.log(`ADDED a follow to User: ${res.userName}'s userFollows: `, res.userFollows)
+        .populate('userFollows')
+        .then((authUser) => {
+          resData.followerData = {...authUser}
+          console.log(`ADDED a follow to User: ${authUser.userName}'s userFollows: `, authUser.userFollows)
         })
         .catch((err) => {
           next(err)
@@ -291,12 +294,14 @@ router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
         { new: true }
       )
         .then((user) => {
-          res.status(200).json(user)
+          resData.followedData = {...user}
           console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
         })
         .catch((err) => {
           next(err)
         })
+      console.log("what the fuccck", resData)
+      res.status(200).json(resData)
     }
   });
 });
@@ -311,13 +316,17 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
                    followed: req.body.followedUser,
                    deleteObj: req.body.deleteObj }
                    
+      let resData = { followerData: "", followedData: ""}
+
       await User.findByIdAndUpdate(
         body.follower, 
         {$pull: { userFollows: body.deleteObj._id }}, 
         { new: true }
       )
-      .then((res) => {
-        console.log(`DELETED a follow from User: ${res.userName}'s userFollows: `, res.userFollows)
+      .populate('userFollows')
+      .then((authUser) => {
+        resData.followerData = {...authUser}
+        console.log(`DELETED a follow from User: ${authUser.userName}'s userFollows: `, authUser.userFollows)
       })
       .catch((err) => {
         next(err)
@@ -329,7 +338,7 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
         { new: true }
       )
         .then((user) => {
-          res.status(200).json(user)
+          resData.followedData = {...user}
           console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)
         })
         .catch((err) => {
@@ -343,6 +352,8 @@ router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
         .catch((err) => {
           next(err)
         })
+
+      res.status(200).json(resData)
     }
   })
 })

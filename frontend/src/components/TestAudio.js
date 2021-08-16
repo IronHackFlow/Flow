@@ -419,13 +419,13 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
-        <div className="canvas-anim-box">
+        {/* <div className="canvas-anim-box">
           <div className="canvas-outset">
             <div className="canvas-inset">
               <AudioCanvas />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="playback-controls-panel">
           <div className="playback-container">
             <div className="playback-wrapper">

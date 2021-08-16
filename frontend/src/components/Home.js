@@ -43,7 +43,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState([]);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();
@@ -82,7 +82,7 @@ function Home(props) {
         console.log(songsArray)
       })
       .catch(console.error);
-  }, []);
+  }, [theFeedBool]);
 
   useEffect(() => {
     actions
@@ -95,21 +95,20 @@ function Home(props) {
         setTrendingSongsFeed(songsArray)
       })
       .catch(console.error)
-  }, [])
+  }, [trendingBool])
 
   useEffect(() => {
+    console.log(updateFollowFeed, "aldsf")
     actions
-      .getUserFollowsSongs(user?.userFollows)
+      .getUserFollowsSongs(updateFollowFeed)
       .then((res) => {
         const songsArray = res.data.map((each) => {
           return { song: each, songVideo: getRandomBackground() }
         })
         console.log(res.data, "all songs by users you're following")
         setFollowingSongsFeed(songsArray.reverse())
-        console.log(followingSongsFeed)
       })
       .catch(console.error)
-    setUpdateFollowFeed(false)
   }, [user, updateFollowFeed]);
 
   useEffect(() => {
@@ -121,11 +120,11 @@ function Home(props) {
 
   useEffect(() => {
     setTotalFollowers(followersInView?.length)
-  }, [followersInView])
+  }, [followersInView, theFeedBool, trendingBool, followingBool])
 
   useEffect(() => {
     setTotalLikes(likesInView?.length)
-  }, [likesInView])
+  }, [likesInView, theFeedBool, trendingBool, followingBool])
 
   useEffect(() => {
     feedRef1.current.style.boxShadow = "inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd"
@@ -168,7 +167,7 @@ function Home(props) {
         return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
       });
     }
-  }, [theFeedBool, trendingBool, followingBool, theFeedSongs, trendingSongsFeed, followingSongsFeed])
+  }, [theFeedSongs, trendingSongsFeed, followingSongsFeed, theFeedBool, trendingBool, followingBool])
 
   const getRandomBackground = () => {
     let index = Math.floor(Math.random()*gifsCopy.length)
@@ -259,9 +258,9 @@ function Home(props) {
       .addFollow({ followedUser: songUserInView._id, 
                    followDate: new Date() })
       .then((res) => {
-        console.log(`added a follow to: `, res.data)
-        setTotalFollowers(res.data.followers.length)
-        setUpdateFollowFeed(res.data.followers)
+        console.log(`added a follow to: `, res.data.followedData._doc)
+        setTotalFollowers(res.data.followedData._doc.followers.length)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
       })
       .catch(console.error);
   };
@@ -271,11 +270,10 @@ function Home(props) {
       .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
       .then((res) => {
         console.log(`deleted a follow from: `, res.data)
-        setTotalFollowers(res.data.followers.length)
-        setUpdateFollowFeed(res.data.followers)
+        setTotalFollowers(res.data.followedData._doc.followers.length)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
       })
       .catch(console.error)
-
   };
 
   const likeCheck = () => {
