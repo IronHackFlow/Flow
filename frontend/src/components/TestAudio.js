@@ -426,6 +426,11 @@ function TestAudio(props) {
             </div>
           </div>
         </div> */}
+    {/* <div className="selected-container" onClick={modalPopup}>
+          <div>
+            <img className="button-icons" src={help} alt="help icon" />
+          </div>
+        </div> */}
         <div className="playback-controls-panel">
           <div className="playback-container">
             <div className="playback-wrapper">
@@ -460,60 +465,68 @@ function TestAudio(props) {
               </div>
               <div className="playback-wrapper-inner">
                 <div className="playback-wrapper-inner-inner">
-              {/* <div className="tracks-container">
-                <div className="tracks-inset">
-                  <div className="tracks-onset">
-                    <select id="selectBox" className="track-select" onChange={loadTrack}>
-                      {chooseTrack()}
-                    </select>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="selected-container" onClick={modalPopup}>
-                <div>
-                  <img className="button-icons" src={help} alt="help icon" />
-                </div>
-              </div> */}
-              
-  
-                  <div className="tracks-actions">
-                    <div className="tracks-container">
-                      <div className="tracks-inset">
-                        <div className="tracks-onset">
-                          <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
-                            {chooseTake()}
-                          </select>
+                  <div className="playback-wrapper-innerest">
+                    <div className="tracks-actions">
+                      <div className="tracks-container">
+                        <div className="tracks-inset">
+                          <div className="tracks-onset">
+                            <div className="tracks-onset-again">
+                              <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
+                                {chooseTake()}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="tracks-onset-title">
+                            Username's Takes
+                          </div>
+                        </div>
+                      </div>
+                      <div className="track-buttons-container">
+                        <div className="button-icons-inset">
+                          <div className="button-icons-outset" onClick={deleteTake}>
+                            <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
+                          </div>
+                        </div>
+                        <div className="button-icons-inset">
+                          <div className="button-icons-outset" onClick={saveFile}>
+                            <img className="button-icons bi-help" src={save} alt="save icon" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="nav-list-play">
+                      <div className="nav-list-play-inner">
+                        <div className="tracks-container">
+                          <div className="tracks-inset">
+                            <div className="tracks-onset">
+                              <select id="selectBox" className="track-select" onChange={loadTrack}>
+                                {chooseTrack()}
+                              </select>
+                            </div>
+                            <div className="beat-text">
+                            Select A Beat
+                          </div>
+                          </div>
+                        </div>
+
+                        <div className="button-icons-inset floating-mic">
+                          <div
+                            className="button-icons-outset floating-mic-2"
+                            onClick={handleRecStop}
+                            id="record-stop"
+                            >
+                            <img
+                              className="button-icons bi-record bi-record-float"
+                              id="record-stop-img"
+                              src={mic}
+                              alt="record icon"
+                              />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="nav-list-play">
-            <div className="button-icons-inset">
-              <div
-                className="button-icons-outset"
-                onClick={handleRecStop}
-                id="record-stop"
-              >
-                <img
-                  className="button-icons bi-record"
-                  id="record-stop-img"
-                  src={mic}
-                  alt="record icon"
-                 />
-              </div>
-            </div>
-
-            <div className="button-icons-inset">
-              <div className="button-icons-outset" onClick={deleteTake}>
-                <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
-              </div>
-            </div>
-            <div className="button-icons-inset">
-              <div className="button-icons-outset" onClick={saveFile}>
-                <img className="button-icons bi-help" src={save} alt="save icon" />
-              </div>
-            </div>
-          </div>
                 </div>
               </div>
             </div>

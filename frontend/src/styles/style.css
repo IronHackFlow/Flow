@@ -3338,8 +3338,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   font-weight: bold;
   background: #686a6b;
   margin-left: 8%;
-  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
-          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #878787;
+          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #878787;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset:active {
@@ -3434,8 +3434,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
           box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
-  position: absolute;
-  bottom: -122%;
   background: #6b6b6b;
 }
 
@@ -3508,8 +3506,29 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions {
-  height: 70%;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest {
+  height: 94%;
+  width: 97%;
+  border-radius: 35px 35px 5px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+          box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions {
+  height: 45%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3527,8 +3546,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container {
-  height: 80%;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container {
+  height: 100%;
   width: 60%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3546,8 +3565,49 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset {
-  height: 90%;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset {
+  height: 79%;
+  width: 94%;
+  border-radius: 40px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+          box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset {
+  height: 60%;
+  width: 90%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-left: 2%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again {
+  height: 83%;
   width: 90%;
   border-radius: 50px;
   display: -webkit-box;
@@ -3563,38 +3623,274 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
-          box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+          box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset {
-  height: 65%;
-  width: 90%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  background: #383838;
-}
-
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset .track-select {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select {
   background-color: #383838;
   color: white;
   border-color: #383838;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset .track-select:focus {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select:focus {
   outline: none !important;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset-title {
+  height: 40%;
+  width: 100%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: pink;
+  font-size: 14px;
+  margin-left: 8%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container {
+  height: 100%;
+  width: 40%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .button-icons-inset {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
+          box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .button-icons-inset .button-icons-outset {
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  font-weight: bold;
+  background: #686a6b;
+  -webkit-box-shadow: 4px 4px 10px #3d3f3f, -4px -4px 10px #939597;
+          box-shadow: 4px 4px 10px #3d3f3f, -4px -4px 10px #939597;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .button-icons-inset .button-icons-outset:active {
+  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play {
+  height: 55%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner {
+  height: 92%;
+  width: 96%;
+  border-radius: 10px 50px 50px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+          box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container {
+  height: 100%;
+  width: 55%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset {
+  height: 83%;
+  width: 93%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset {
+  height: 44%;
+  width: 86%;
+  border-radius: 10px 50px 50px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #3c3b3b, -2px -2px 4px #8e8b8b;
+          box-shadow: 2px 2px 3px 0px #3c3b3b, -2px -2px 4px #8e8b8b;
+  margin-left: 4%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset .track-select {
+  background-color: #626262;
+  color: white;
+  border-color: #626262;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset .track-select:focus {
+  outline: none !important;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .beat-text {
+  color: pink;
+  font-size: 14px;
+  margin-left: 4%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic {
+  height: 100%;
+  width: 45%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic .floating-mic-2 {
+  height: 80%;
+  width: 40%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #ec6aa0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin-right: 6%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic .floating-mic-2 .bi-record-float {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .selected-container {
@@ -3637,76 +3933,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   padding: 1px;
   -webkit-box-shadow: 4px 4px 7px #3d3f3f, -4px -4px 5px #939597;
           box-shadow: 4px 4px 7px #3d3f3f, -4px -4px 5px #939597;
-}
-
-.nav-buttons-play .playback-controls-panel .nav-list-play {
-  height: 38%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.nav-buttons-play .playback-controls-panel .nav-list-play .button-icons-inset {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  padding: 3px;
-  -webkit-box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
-          box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
-}
-
-.nav-buttons-play .playback-controls-panel .nav-list-play .button-icons-inset .button-icons-outset {
-  height: 80%;
-  width: 80%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  text-align: center;
-  font-weight: bold;
-  background: #686a6b;
-  -webkit-box-shadow: 4px 4px 10px #3d3f3f, -4px -4px 10px #939597;
-          box-shadow: 4px 4px 10px #3d3f3f, -4px -4px 10px #939597;
-}
-
-.nav-buttons-play .playback-controls-panel .nav-list-play .button-icons-inset .button-icons-outset:active {
-  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
-          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
 }
 
 .nav-buttons-play .NavBar .navbar_section {
