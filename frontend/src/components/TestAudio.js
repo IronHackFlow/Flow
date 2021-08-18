@@ -429,7 +429,38 @@ function TestAudio(props) {
         <div className="playback-controls-panel">
           <div className="playback-container">
             <div className="playback-wrapper">
-              <div className="tracks-container">
+              <div className="duration-container">
+                <div className="duration-play">
+                  <div className="duration-play-outset">
+                    <div className="button-play-inset">
+                      <div
+                        className="button-play-outset"
+                        id="playPause"
+                        onClick={handlePlayPause}
+                      >
+                        <img
+                          className="button-icons bi-play"
+                          id="play-stop-img"
+                          src={play}
+                          alt="play icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="dur-container">
+                  <div className="dur-inset">
+                    <div className="dur-inset-inset">
+                      <div className="dur-onset" id="duration">
+                        {/* <TimeSlider /> */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="playback-wrapper-inner">
+                <div className="playback-wrapper-inner-inner">
+              {/* <div className="tracks-container">
                 <div className="tracks-inset">
                   <div className="tracks-onset">
                     <select id="selectBox" className="track-select" onChange={loadTrack}>
@@ -437,31 +468,26 @@ function TestAudio(props) {
                     </select>
                   </div>
                 </div>
-              </div>
-              <div className="selected-container" onClick={modalPopup}>
+              </div> */}
+              {/* <div className="selected-container" onClick={modalPopup}>
                 <div>
                   <img className="button-icons" src={help} alt="help icon" />
                 </div>
-              </div>
-              <div className="tracks-container">
-                <div className="tracks-inset">
-                  <div className="tracks-onset">
-                    <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
-                      {chooseTake()}
-                    </select>
+              </div> */}
+              
+  
+                  <div className="tracks-actions">
+                    <div className="tracks-container">
+                      <div className="tracks-inset">
+                        <div className="tracks-onset">
+                          <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
+                            {chooseTake()}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="duration-container">
-            <div className="dur-inset">
-              <div className="dur-onset" id="duration">
-                {/* <TimeSlider /> */}
-              </div>
-            </div>
-          </div>
-          <div className="nav-list-play">
+                  <div className="nav-list-play">
             <div className="button-icons-inset">
               <div
                 className="button-icons-outset"
@@ -476,20 +502,7 @@ function TestAudio(props) {
                  />
               </div>
             </div>
-            <div className="button-icons-inset">
-              <div
-                className="button-icons-outset"
-                id="playPause"
-                onClick={handlePlayPause}
-              >
-                <img
-                  className="button-icons bi-play"
-                  id="play-stop-img"
-                  src={play}
-                  alt="play icon"
-                 />
-              </div>
-            </div>
+
             <div className="button-icons-inset">
               <div className="button-icons-outset" onClick={deleteTake}>
                 <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
@@ -501,6 +514,11 @@ function TestAudio(props) {
               </div>
             </div>
           </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <NavBar />
       </div>

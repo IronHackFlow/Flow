@@ -45,15 +45,15 @@
 
 /* --------------------- Controls panel --------------------- */
 .nav-buttons-play {
-    height: 56%;
+    height: 63%;
     // padding-top: 10px;
-    background: $lightgrayBg;
+    background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
     // border-top: 5px solid $lightgrayBg;
-    box-shadow: inset 0px 3px 5px #cecece;
+    // box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
         @include flexCenter(35%, 100%, 0px, center, center, column);
-        background: $lightgrayBg;
+        // background: $lightgrayBg;
 
         .suggestions {
             @include flexCenter(45%, 95%, 50px, center, center, column);
@@ -66,7 +66,7 @@
 
                 .custom-rhyme-inner {
                     @include flexCenter(65%, 93%, 50px, center, stretch, row);
-                    background: $charcoalBg;
+                    // background: $charcoalBg;
                     overflow-x: scroll;
                     box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
 
@@ -122,80 +122,152 @@
 
     .playback-controls-panel {
         height: 45%;
-        background: $charcoalBg;
-        border-top: 2px solid #8a8c8e;
-        box-shadow: inset 1px 3px 4px 0px #adadad;
+        // background: $charcoalBg;
+        // border-top: 2px solid #8a8c8e;
+        // box-shadow: inset 1px 3px 4px 0px #adadad;
     
         .playback-container {
-            @include flexCenter(33%, 100%, 0px, center, stretch, row);
+            @include flexCenter(95%, 100%, 0px, center, stretch, row);
     
             .playback-wrapper {
-                @include flexCenter(100%, 95%, 0px, flex-start, center, row);
-    
-                .tracks-container {
-                    @include flexCenter(80%, 60%, 0px, center, center, row);
-    
-                    .tracks-inset {
-                        @include flexCenter(90%, 90%, 50px, center, center, row);
-                        box-shadow: inset 5px 5px 15px #313232,
-                                    inset -5px -5px 5px #9fa2a4;
-    
-                        .tracks-onset {
-                            @include flexCenter(65%, 90%, 50px, center, center, row);
-                            background: #383838;
-    
-                            .track-select {
-                                background-color: #383838;
-                                color: white;
-                                border-color: #383838;
+                @include flexCenter(100%, 95%, 10px, center, center, column);
+                box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
                 
-                                &:focus {
-                                    outline: none !important;
+                .duration-container {
+                    @include flexCenter(30%, 100%, 0px, center, flex-end, row);
+                    position: relative;
+
+                    .duration-play {
+                        @include flexCenter(100%, 25%, 50px, center, flex-end, row);
+
+                        .duration-play-outset {
+                            @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
+                            box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+
+                            .button-play-inset {
+                                @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
+                                box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+
+                                .button-play-outset {
+                                    @include flexCenter(83%, 66%, 50%, center, center,row);
+                                    text-align: center;
+                                    font-weight: bold;
+                                    background: #686a6b;
+                                    margin-left: 8%;
+                                    box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+        
+                                    &:active {
+                                        box-shadow: inset 2px 2px 3px #313232, 
+                                                    inset -2px -2px 3px #9fa2a4;
+                                    }
                                 }
                             }
                         }
                     }
+
+                    .dur-container {
+                        @include flexCenter(100%, 75%, 0px, flex-start, flex-end, row);
+
+                        .dur-inset {
+                            @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+                            box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
+
+                            .dur-inset-inset {
+                                @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+                                box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+
+                                .dur-onset {
+                                    height: 25%;
+                                    width: 85%;
+                                    border-radius: 50px;
+                                    background: #63DEBC;
+                                  }
+                            }
+                        }
+                    }
+
+                    .button-icons-inset {
+                        @include flexCenter(55px, 55px, 50%, center, center, row);
+                        box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
+                        position: absolute;
+                        bottom: -122%;
+                        background: #6b6b6b;
+
+                        .button-icons-outset {
+                            @include flexCenter(80%, 80%, 50%, center, center,row);
+                            text-align: center;
+                            font-weight: bold;
+                            background: #686a6b;
+                            box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+
+                            &:active {
+                                box-shadow: inset 2px 2px 3px #313232, 
+                                            inset -2px -2px 3px #9fa2a4;
+                            }
+                        }
+                    }
                 }
+                .playback-wrapper-inner {
+                    @include flexCenter(70%, 100%, 0px, center, center, column);
 
-                .selected-container {
-                    @include flexCenter(100%, 20%, 0px, center, center, row);
+                    .playback-wrapper-inner-inner {
+                        @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
+                        box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
 
-                    div {
-                        @include flexCenter(30px, 30px, 50px, center, center, row);
-                        font-size: .7em;
-                        padding: 1px;
-                        box-shadow: 4px 4px 7px #3d3f3f,
-                                 -4px -4px 5px #939597;
+                        .tracks-actions {
+                            @include flexCenter(70%, 100%, 0px, center, center, row);
+    
+    
+                            .tracks-container {
+                                @include flexCenter(80%, 60%, 0px, center, center, row);
+                
+                                .tracks-inset {
+                                    @include flexCenter(90%, 90%, 50px, center, center, row);
+                                    box-shadow: inset 5px 5px 15px #313232,
+                                                inset -5px -5px 5px #9fa2a4;
+                
+                                    .tracks-onset {
+                                        @include flexCenter(65%, 90%, 50px, center, center, row);
+                                        background: #383838;
+                
+                                        .track-select {
+                                            background-color: #383838;
+                                            color: white;
+                                            border-color: #383838;
+                            
+                                            &:focus {
+                                                outline: none !important;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .selected-container {
+                        @include flexCenter(100%, 20%, 0px, center, center, row);
+
+                        div {
+                            @include flexCenter(30px, 30px, 50px, center, center, row);
+                            font-size: .7em;
+                            padding: 1px;
+                            box-shadow: 4px 4px 7px #3d3f3f,
+                                    -4px -4px 5px #939597;
+                        }
                     }
                 }
             }
         }
     
-        .duration-container {
-            @include flexCenter(12%, 100%, 0px, center, center, row);
-    
-            .dur-inset {
-                @include flexCenter(100%, 90%, 50px, center, center, row);
-                box-shadow: inset 5px 5px 15px #313232,
-                            inset -5px -5px 5px #9fa2a4;
-    
-                .dur-onset {
-                  height: 40%;
-                  width: 95%;
-                  border-radius: 50px;
-                  background: #63DEBC;
-                }
-            }   
-        }
-    
         .nav-list-play {
             @include flexCenter(38%, 100%, 0px, space-evenly, center, row);
-            border-top: 1px solid $charcoalBg;
+            // border-top: 1px solid $charcoalBg;
 
             .button-icons-inset {
                 @include flexCenter(60px, 60px, 50%, center, center, row);
                 padding: 3px;
-                background: $charcoalBg;
+                // background: $charcoalBg;
                 box-shadow: inset 5px 5px 15px #313232, 
                             inset -5px -5px 15px #9fa2a4;
             
@@ -214,6 +286,33 @@
             }
         }
     }
-}
+    .NavBar {
 
+        .navbar_section {
+            background: none;
+
+            .navbar_shadow-div-outset {
+                box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+                border: none;
+
+                .navbar_shadow-div-inset {
+                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
+
+                    .navbar-btn-container {
+                        box-shadow:  2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+
+                        .navbar-btn_shadow-div-inset {
+                            box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
+
+                            .navbar-btn_shadow-div-outset {
+                                box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// box-shadow: #523c45 2px 2px 3px inset, #fab1cf -2px -2px 3px inset
   

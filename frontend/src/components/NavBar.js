@@ -45,7 +45,7 @@ function NavBar(props) {
   useEffect(() => {
     if (props.searchPoppedUp === true) {
       searchBtnRef1.current.style.background = "#ec6aa0";
-      searchBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+      searchBtnRef1.current.style.boxShadow = "#523c45 2px 2px 3px inset, #fab1cf -2px -2px 3px inset"
       searchBtnRef1.current.style.border = "1px solid #ec6aa0"
       searchBtnRef1.current.style.transition = "all .4s"
       searchBtnRef2.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
@@ -55,6 +55,19 @@ function NavBar(props) {
       searchBtnRef3.current.style.boxShadow = "none"
       searchBtnRef4.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
       searchBtnRef5.current.style.color = "white"
+    }
+    else if (toggleRecord === true) {
+      searchBtnRef1.current.style.background = "initial"
+      searchBtnRef1.current.style.boxShadow = "2px 2px 3px 0px #353535, -3px -3px 4px #787878"
+      searchBtnRef1.current.style.border = "none"
+      searchBtnRef1.current.style.transition = "all .4s"
+      searchBtnRef2.current.style.boxShadow = "#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset"
+      searchBtnRef2.current.style.height = "40px"
+      searchBtnRef2.current.style.width = "40px"
+      searchBtnRef2.current.style.transition = "all .4s"
+      searchBtnRef3.current.style.boxShadow = "#333333 2px 2px 3px 0px, #838383 -2px -2px 3px"
+      searchBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
+      searchBtnRef5.current.style.color = "#ff8ebd"
     }
     else {
       searchBtnRef1.current.style.background = "initial"
@@ -161,26 +174,26 @@ function NavBar(props) {
       recordBtnRef5.current.style.color = "white" 
 
       profileBtnRef1.current.style.background = "initial"
-      profileBtnRef1.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
+      profileBtnRef1.current.style.boxShadow = "2px 2px 3px 0px #353535, -3px -3px 4px #787878"
       profileBtnRef1.current.style.border = "none"
       profileBtnRef1.current.style.transition = "all .4s"
-      profileBtnRef2.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
+      profileBtnRef2.current.style.boxShadow = "#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset"
       profileBtnRef2.current.style.height = "40px"
       profileBtnRef2.current.style.width = "40px"
       profileBtnRef2.current.style.transition = "all .4s"
-      profileBtnRef3.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
+      profileBtnRef3.current.style.boxShadow = "#333333 2px 2px 3px 0px, #838383 -2px -2px 3px"
       profileBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
       profileBtnRef5.current.style.color = "#ff8ebd"
 
       socialBtnRef1.current.style.background = "initial"
-      socialBtnRef1.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
+      socialBtnRef1.current.style.boxShadow = "2px 2px 3px 0px #353535, -3px -3px 4px #787878"
       socialBtnRef1.current.style.border = "none"
       socialBtnRef1.current.style.transition = "all .4s"
-      socialBtnRef2.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
+      socialBtnRef2.current.style.boxShadow = "#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset"
       socialBtnRef2.current.style.height = "40px"
       socialBtnRef2.current.style.width = "40px"
       socialBtnRef2.current.style.transition = "all .4s"
-      socialBtnRef3.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
+      socialBtnRef3.current.style.boxShadow = "#333333 2px 2px 3px 0px, #838383 -2px -2px 3px"
       socialBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
       socialBtnRef5.current.style.color = "#ff8ebd"
     }

@@ -43,7 +43,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState([user?.userFollows]);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();
@@ -98,7 +98,6 @@ function Home(props) {
   }, [trendingBool])
 
   useEffect(() => {
-    console.log(updateFollowFeed, "aldsf")
     actions
       .getUserFollowsSongs(updateFollowFeed)
       .then((res) => {
@@ -110,13 +109,6 @@ function Home(props) {
       })
       .catch(console.error)
   }, [user, updateFollowFeed]);
-
-  useEffect(() => {
-    if (navDisplayed === true) {
-      menuDown('search')
-      menuDown('comment')
-    }
-  }, [navDisplayed]);
 
   useEffect(() => {
     setTotalFollowers(followersInView?.length)
@@ -260,7 +252,7 @@ function Home(props) {
       .then((res) => {
         console.log(`added a follow to: `, res.data.followedData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
       .catch(console.error);
   };
@@ -269,9 +261,9 @@ function Home(props) {
     actions
       .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
       .then((res) => {
-        console.log(`deleted a follow from: `, res.data)
+        console.log(`deleted a follow from: `, res.data.followerData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
       .catch(console.error)
   };
@@ -489,7 +481,7 @@ function Home(props) {
             searchInputRef={searchInputRef} 
             searchButtonRef={searchButtonRef}
             />
-
+            
           <div className="section-1c_song-details" style={{display: props.socialDisplay}}>
             <div className="song-details-1_actions">
               <div className="actions_shadow-div-outset">

@@ -24,6 +24,7 @@ function DisplaySong(eachSong) {
     },
     [inViewRef],
   )
+  
   if (inView) {
     setSongInView(eachSong.song)
     setSongUserInView(eachSong.song.songUser)

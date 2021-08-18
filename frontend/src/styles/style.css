@@ -3008,10 +3008,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 /* --------------------- Controls panel --------------------- */
 .nav-buttons-play {
-  height: 56%;
-  background: #ecf0f3;
-  -webkit-box-shadow: inset 0px 3px 5px #cecece;
-          box-shadow: inset 0px 3px 5px #cecece;
+  height: 63%;
+  background: -webkit-gradient(linear, left bottom, left top, from(#4f4f4f), to(#8d8d8d));
+  background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
 }
 
 .nav-buttons-play .suggestions-container {
@@ -3031,7 +3030,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #ecf0f3;
 }
 
 .nav-buttons-play .suggestions-container .suggestions {
@@ -3094,7 +3092,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background: #686a6b;
   overflow-x: scroll;
   -webkit-box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
           box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
@@ -3197,14 +3194,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .nav-buttons-play .playback-controls-panel {
   height: 45%;
-  background: #686a6b;
-  border-top: 2px solid #8a8c8e;
-  -webkit-box-shadow: inset 1px 3px 4px 0px #adadad;
-          box-shadow: inset 1px 3px 4px 0px #adadad;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container {
-  height: 33%;
+  height: 95%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3225,7 +3218,88 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper {
   height: 100%;
   width: 95%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
+          box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container {
+  height: 30%;
+  width: 100%;
   border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play {
+  height: 100%;
+  width: 25%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset {
+  height: 87%;
+  width: 84%;
+  border-radius: 50px 8px 8px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+          box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset {
+  height: 85%;
+  width: 87%;
+  border-radius: 50px 8px 8px 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3239,9 +3313,221 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+          box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .tracks-container {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset {
+  height: 83%;
+  width: 66%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  font-weight: bold;
+  background: #686a6b;
+  margin-left: 8%;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset:active {
+  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container {
+  height: 100%;
+  width: 75%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset {
+  height: 87%;
+  width: 97%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
+          box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset .dur-inset-inset {
+  height: 87%;
+  width: 97%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+          box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset .dur-inset-inset .dur-onset {
+  height: 25%;
+  width: 85%;
+  border-radius: 50px;
+  background: #63DEBC;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .button-icons-inset {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
+          box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
+  position: absolute;
+  bottom: -122%;
+  background: #6b6b6b;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .button-icons-inset .button-icons-outset {
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  font-weight: bold;
+  background: #686a6b;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .button-icons-inset .button-icons-outset:active {
+  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner {
+  height: 70%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner {
+  height: 90%;
+  width: 96%;
+  border-radius: 40px 40px 5px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+          box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions {
+  height: 70%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container {
   height: 80%;
   width: 60%;
   border-radius: 0px;
@@ -3260,7 +3546,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .tracks-container .tracks-inset {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset {
   height: 90%;
   width: 90%;
   border-radius: 50px;
@@ -3281,7 +3567,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .tracks-container .tracks-inset .tracks-onset {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset {
   height: 65%;
   width: 90%;
   border-radius: 50px;
@@ -3301,17 +3587,17 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: #383838;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .tracks-container .tracks-inset .tracks-onset .track-select {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset .track-select {
   background-color: #383838;
   color: white;
   border-color: #383838;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .tracks-container .tracks-inset .tracks-onset .track-select:focus {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .tracks-actions .tracks-container .tracks-inset .tracks-onset .track-select:focus {
   outline: none !important;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .selected-container {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .selected-container {
   height: 100%;
   width: 20%;
   border-radius: 0px;
@@ -3330,7 +3616,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .selected-container div {
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .selected-container div {
   height: 30px;
   width: 30px;
   border-radius: 50px;
@@ -3353,53 +3639,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 4px 4px 7px #3d3f3f, -4px -4px 5px #939597;
 }
 
-.nav-buttons-play .playback-controls-panel .duration-container {
-  height: 12%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.nav-buttons-play .playback-controls-panel .duration-container .dur-inset {
-  height: 100%;
-  width: 90%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
-          box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
-}
-
-.nav-buttons-play .playback-controls-panel .duration-container .dur-inset .dur-onset {
-  height: 40%;
-  width: 95%;
-  border-radius: 50px;
-  background: #63DEBC;
-}
-
 .nav-buttons-play .playback-controls-panel .nav-list-play {
   height: 38%;
   width: 100%;
@@ -3417,7 +3656,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  border-top: 1px solid #686a6b;
 }
 
 .nav-buttons-play .playback-controls-panel .nav-list-play .button-icons-inset {
@@ -3438,7 +3676,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
       -ms-flex-direction: row;
           flex-direction: row;
   padding: 3px;
-  background: #686a6b;
   -webkit-box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
           box-shadow: inset 5px 5px 15px #313232,  inset -5px -5px 15px #9fa2a4;
 }
@@ -3470,6 +3707,36 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 .nav-buttons-play .playback-controls-panel .nav-list-play .button-icons-inset .button-icons-outset:active {
   -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
           box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
+.nav-buttons-play .NavBar .navbar_section {
+  background: none;
+}
+
+.nav-buttons-play .NavBar .navbar_section .navbar_shadow-div-outset {
+  -webkit-box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+          box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+  border: none;
+}
+
+.nav-buttons-play .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset {
+  -webkit-box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
+          box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
+}
+
+.nav-buttons-play .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container {
+  -webkit-box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+          box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+}
+
+.nav-buttons-play .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset {
+  -webkit-box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
+          box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
+}
+
+.nav-buttons-play .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
+  -webkit-box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
+          box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
 }
 
 .SongScreen {
