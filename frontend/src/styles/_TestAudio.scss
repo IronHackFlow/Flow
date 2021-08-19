@@ -52,7 +52,7 @@
     // box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
-        @include flexCenter(35%, 100%, 0px, space-evenly, center, column);
+        @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
         // background: $lightgrayBg;
 
         .suggestions {
@@ -120,7 +120,7 @@
     }
 
     .playback-controls-panel {
-        height: 45%;
+        height: 50%;
         // background: $charcoalBg;
         // border-top: 2px solid #8a8c8e;
         // box-shadow: inset 1px 3px 4px 0px #adadad;
@@ -130,10 +130,10 @@
     
             .playback-wrapper {
                 @include flexCenter(100%, 95%, 10px, center, center, column);
-                box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
+                box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
                 
                 .duration-container {
-                    @include flexCenter(30%, 100%, 0px, center, flex-end, row);
+                    @include flexCenter(25%, 100%, 0px, center, flex-end, row);
                     position: relative;
 
                     .duration-play {
@@ -141,20 +141,20 @@
 
                         .duration-play-outset {
                             @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
-                            box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
 
                             .button-play-inset {
                                 @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
-                                box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+                                box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
 
                                 .button-play-outset {
-                                    @include flexCenter(83%, 66%, 50%, center, center,row);
+                                    @include flexCenter(80%, 59%, 50%, center, center,row);
                                     text-align: center;
                                     font-weight: bold;
                                     background: #686a6b;
                                     margin-left: 8%;
-                                    box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #878787;
-        
+                                    box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
+                                    
                                     &:active {
                                         box-shadow: inset 2px 2px 3px #313232, 
                                                     inset -2px -2px 3px #9fa2a4;
@@ -169,11 +169,11 @@
 
                         .dur-inset {
                             @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                            box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
+                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
                             .dur-inset-inset {
                                 @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                                box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+                                box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
 
                                 .dur-onset {
                                     height: 25%;
@@ -197,6 +197,7 @@
                             background: #686a6b;
                             box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
 
+
                             &:active {
                                 box-shadow: inset 2px 2px 3px #313232, 
                                             inset -2px -2px 3px #9fa2a4;
@@ -206,11 +207,11 @@
                 }
 
                 .playback-wrapper-inner {
-                    @include flexCenter(70%, 100%, 0px, center, center, column);
+                    @include flexCenter(75%, 100%, 0px, center, center, column);
 
                     .playback-wrapper-inner-inner {
                         @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
-                        box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
                         .playback-wrapper-innerest {
                             @include flexCenter(94%, 97%, 35px 35px 5px 5px, center, center, column);
@@ -223,16 +224,21 @@
                                     @include flexCenter(100%, 70%, 0px, center, center, row);
                     
                                     .tracks-inset {
-                                        @include flexCenter(79%, 94%, 40px 30px 30px 5px, center, flex-start, column);
-                                        box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+                                        @include flexCenter(79%, 94%, 40px 30px 30px 5px, center, center, row);
+                                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
                                         .tracks-onset {
-                                            @include flexCenter(60%, 90%, 50px, center, flex-end, row);
-                                            margin-left: 2%;
+                                            @include flexCenter(81%, 100%, 50px, space-evenly, center, row);
                                             
                                             .tracks-onset-again {
-                                                @include flexCenter(83%, 90%, 50px, center, center, row);
+                                                @include flexCenter(100%, 75%, 56px 40px 40px 10px, center, center, row);
                                                 box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+                                                .tracks-onset-title {
+                                                    @include flexCenter(100%, 30%, 50px, flex-start, center, row);
+                                                    color: pink;
+                                                    font-size: 12px;
+                                                }
 
                                                 .track-select {
                                                     background-color: #696969;
@@ -244,12 +250,21 @@
                                                     }
                                                 }
                                             }
-                                        }
-                                        .tracks-onset-title {
-                                            @include flexCenter(40%, 100%, 50px, flex-start, center, row);
-                                            color: pink;
-                                            font-size: 14px;
-                                            margin-left: 8%;
+
+                                            .tracks-edit-button {
+                                                @include flexCenter(100%, 18%, 50px, center, center, row);
+                                                box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+                                                .tracks-edit-inner {
+                                                    @include flexCenter(70%, 70%, 50px, center, center, row);
+                                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+                                                    img {
+                                                        height: 1.5em;
+                                                        width: 1.5em;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -258,7 +273,7 @@
                                     @include flexCenter(100%, 30%, 50px, flex-start, center, row);
 
                                     .track-buttons-cont-inner {
-                                        @include flexCenter(80%, 90%, 50px, space-evenly, center, row);
+                                        @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
                                         box-shadow: inset 3px 3px 3px #515050, inset -2px -2px 3px #848484;
 
                                         .button-icons-inset {
@@ -274,6 +289,12 @@
                                                 background: $charcoalBg;
                                                 box-shadow:  2px 2px 3px #3d3f3f,
                                                             -2px -2px 3px #939597;
+
+                                                img {
+                                                    height: 1.5em;
+                                                    width: 1.5em;
+                                                }
+
                                                 &:active {
                                                     box-shadow: inset 2px 2px 3px #313232, 
                                                                 inset -2px -2px 3px #9fa2a4;
@@ -290,7 +311,7 @@
                     
                                 .nav-list-play-inner {
                                     @include flexCenter(92%, 96%, 10px 50px 50px 10px, space-between, center, row);
-                                    box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
                     
                                     .tracks-container {
                                         @include flexCenter(100%, 55%, 0px, center, center, column);
@@ -328,7 +349,7 @@
                                         
                                         .floating-mic-2 {
                                             @include flexCenter(90%, 40%, 50%, center, center, row);
-                                            box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+                                            box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
                                             margin-right: 4%;
 
                                             .floating-mic-3 {

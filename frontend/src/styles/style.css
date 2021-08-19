@@ -3014,7 +3014,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .suggestions-container {
-  height: 35%;
+  height: 30%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3190,7 +3190,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .playback-controls-panel {
-  height: 45%;
+  height: 50%;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container {
@@ -3229,12 +3229,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
-          box-shadow: inset 2px 2px 3px 0px #4a4949, inset -3px -3px 4px #9c9c9c;
+  -webkit-box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
+          box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container {
-  height: 30%;
+  height: 25%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3289,8 +3289,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
-          box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset {
@@ -3310,13 +3310,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
-          box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+          box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset {
-  height: 83%;
-  width: 66%;
+  height: 80%;
+  width: 59%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3335,8 +3335,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   font-weight: bold;
   background: #686a6b;
   margin-left: 8%;
-  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #878787;
-          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #878787;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
+          box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset:active {
@@ -3380,8 +3380,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
-          box-shadow: 3px 3px 3px #565656, -3px -3px 3px #8e8e8e;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset .dur-inset-inset {
@@ -3401,8 +3401,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
-          box-shadow: inset 2px 2px 3px 0px #585858, inset -3px -3px 4px #848484;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+          box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset .dur-inset-inset .dur-onset {
@@ -3464,7 +3464,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner {
-  height: 70%;
+  height: 75%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3499,8 +3499,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
-          box-shadow: 2px 2px 3px 0px #4c4b4b, -3px -3px 4px #929191;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest {
@@ -3572,40 +3572,91 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: vertical;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
-          box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset {
-  height: 60%;
-  width: 90%;
+  height: 81%;
+  width: 100%;
   border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again {
+  height: 100%;
+  width: 75%;
+  border-radius: 56px 40px 40px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-left: 2%;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+          box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again {
-  height: 83%;
-  width: 90%;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .tracks-onset-title {
+  height: 100%;
+  width: 30%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: pink;
+  font-size: 12px;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select {
+  background-color: #696969;
+  color: white;
+  border-color: #696969;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select:focus {
+  outline: none !important;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-edit-button {
+  height: 100%;
+  width: 18%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3624,26 +3675,16 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select {
-  background-color: #696969;
-  color: white;
-  border-color: #696969;
-}
-
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select:focus {
-  outline: none !important;
-}
-
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset-title {
-  height: 40%;
-  width: 100%;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-edit-button .tracks-edit-inner {
+  height: 70%;
+  width: 70%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3651,9 +3692,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  color: pink;
-  font-size: 14px;
-  margin-left: 8%;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-edit-button .tracks-edit-inner img {
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container {
@@ -3676,7 +3721,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner {
-  height: 80%;
+  height: 77%;
   width: 90%;
   border-radius: 50px;
   display: -webkit-box;
@@ -3739,6 +3784,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
 }
 
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner .button-icons-inset .button-icons-outset img {
+  height: 1.5em;
+  width: 1.5em;
+}
+
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner .button-icons-inset .button-icons-outset:active {
   -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
           box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
@@ -3780,8 +3830,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
-          box-shadow: 3px 3px 3px #515050, -2px -2px 3px #848484;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container {
@@ -3898,8 +3948,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
-          box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+          box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
   margin-right: 4%;
 }
 

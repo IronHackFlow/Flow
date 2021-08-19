@@ -8,14 +8,14 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import datamuse from "datamuse";
-import mic from "../images/record2.svg";
+import mic from "../images/modern-mic.svg";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import stop from "../images/stop.svg";
 import trashbin from "../images/delete2.svg";
 import save from "../images/save.svg";
+import edit from "../images/edit.svg";
 import help from "../images/help2.svg";
-import AudioCanvas from "./AudioCanvas";
 import TheContext from "../TheContext";
 import Modal from "./ModalMenu";
 import actions from "../api";
@@ -471,13 +471,18 @@ function TestAudio(props) {
                         <div className="tracks-inset">
                           <div className="tracks-onset">
                             <div className="tracks-onset-again">
+                              <div className="tracks-onset-title">
+                                Your Takes :
+                              </div>
                               <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
                                 {chooseTake()}
                               </select>
                             </div>
-                          </div>
-                          <div className="tracks-onset-title">
-                            Username's Takes
+                            <div className="tracks-edit-button">
+                              <div className="tracks-edit-inner">
+                                <img className="button-icons" src={edit} alt="edit" />
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
