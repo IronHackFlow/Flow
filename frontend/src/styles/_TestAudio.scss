@@ -52,23 +52,22 @@
     // box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
-        @include flexCenter(35%, 100%, 0px, center, center, column);
+        @include flexCenter(35%, 100%, 0px, space-evenly, center, column);
         // background: $lightgrayBg;
 
         .suggestions {
-            @include flexCenter(45%, 95%, 50px, center, center, column);
-            margin: 5px;
-            box-shadow: inset 2px 2px 3px 0px #d0d2d4, inset -2px -2px 3px #ffffff;
+            @include flexCenter(43%, 95%, 12px 50px 50px 12px, center, flex-start, column);
+            box-shadow: inset 2px 2px 3px 0px #4c4c4c, inset -2px -2px 3px #9c9c9c;
 
             .custom-rhyme {
-                @include flexCenter(74%, 94%, 50px, center, center, row);
-                box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
+                @include flexCenter(74%, 84%, 50px, center, center, row);
+                // box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
 
                 .custom-rhyme-inner {
                     @include flexCenter(65%, 93%, 50px, center, stretch, row);
                     // background: $charcoalBg;
                     overflow-x: scroll;
-                    box-shadow: inset 4px 4px 3px #4a4a4a, inset -3px -3px 3px #a7a7a7;
+                    box-shadow: inset 3px 3px 3px #5d5d5d, inset -3px -3px 3px #a7a7a7;
 
                     .transcript-line-3 {
                         color: #ff95da;
@@ -221,7 +220,7 @@
                                 @include flexCenter(45%, 100%, 0px, center, center, row);
         
                                 .tracks-container {
-                                    @include flexCenter(100%, 60%, 0px, center, center, row);
+                                    @include flexCenter(100%, 70%, 0px, center, center, row);
                     
                                     .tracks-inset {
                                         @include flexCenter(79%, 94%, 40px 30px 30px 5px, center, flex-start, column);
@@ -236,9 +235,9 @@
                                                 box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 
                                                 .track-select {
-                                                    background-color: #383838;
+                                                    background-color: #696969;
                                                     color: white;
-                                                    border-color: #383838;
+                                                    border-color: #696969;
                                     
                                                     &:focus {
                                                         outline: none !important;
@@ -254,25 +253,31 @@
                                         }
                                     }
                                 }
-                                .track-buttons-container {
-                                    @include flexCenter(100%, 40%, 50px, center, center, row);
 
-                                    .button-icons-inset {
-                                        @include flexCenter(60px, 60px, 50%, center, center, row);
-                                        // background: $charcoalBg;
-                                        box-shadow: inset 5px 5px 15px #313232, 
-                                                    inset -5px -5px 15px #9fa2a4;
-                                    
-                                        .button-icons-outset {
-                                            @include flexCenter(80%, 80%, 50%, center, center,row);
-                                            text-align: center;
-                                            font-weight: bold;
-                                            background: $charcoalBg;
-                                            box-shadow:  4px 4px 10px #3d3f3f,
-                                                        -4px -4px 10px #939597;
-                                            &:active {
-                                                box-shadow: inset 2px 2px 3px #313232, 
-                                                            inset -2px -2px 3px #9fa2a4;
+                                .track-buttons-container {
+                                    @include flexCenter(100%, 30%, 50px, flex-start, center, row);
+
+                                    .track-buttons-cont-inner {
+                                        @include flexCenter(80%, 90%, 50px, space-evenly, center, row);
+                                        box-shadow: inset 3px 3px 3px #515050, inset -2px -2px 3px #848484;
+
+                                        .button-icons-inset {
+                                            @include flexCenter(40px, 40px, 50%, center, center, row);
+                                            // background: $charcoalBg;
+                                            // box-shadow: inset 5px 5px 15px #313232, 
+                                            //             inset -5px -5px 15px #9fa2a4;
+                                        
+                                            .button-icons-outset {
+                                                @include flexCenter(80%, 80%, 50%, center, center,row);
+                                                text-align: center;
+                                                font-weight: bold;
+                                                background: $charcoalBg;
+                                                box-shadow:  2px 2px 3px #3d3f3f,
+                                                            -2px -2px 3px #939597;
+                                                &:active {
+                                                    box-shadow: inset 2px 2px 3px #313232, 
+                                                                inset -2px -2px 3px #9fa2a4;
+                                                }
                                             }
                                         }
                                     }
@@ -320,15 +325,20 @@
                         
                                     .floating-mic {
                                         @include flexCenter(100%, 45%, 50%, flex-end, center, row);
-                        
+                                        
                                         .floating-mic-2 {
-                                            @include flexCenter(80%, 40%, 50%, center, center, row);
-                                            background: #ec6aa0;
-                                            box-shadow: none;
-                                            margin-right: 6%;
+                                            @include flexCenter(90%, 40%, 50%, center, center, row);
+                                            box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+                                            margin-right: 4%;
 
-                                            .bi-record-float {
-                                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                            .floating-mic-3 {
+                                                @include flexCenter(75%, 75%, 50%, center, center, row);
+                                                background: #ec6aa0;
+                                                box-shadow: none;
+    
+                                                .bi-record-float {
+                                                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                                }
                                             }
                                         }
                                     }

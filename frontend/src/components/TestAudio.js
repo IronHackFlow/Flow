@@ -482,14 +482,16 @@ function TestAudio(props) {
                         </div>
                       </div>
                       <div className="track-buttons-container">
-                        <div className="button-icons-inset">
-                          <div className="button-icons-outset" onClick={deleteTake}>
-                            <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
+                        <div className="track-buttons-cont-inner">
+                          <div className="button-icons-inset">
+                            <div className="button-icons-outset" onClick={deleteTake}>
+                              <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
+                            </div>
                           </div>
-                        </div>
-                        <div className="button-icons-inset">
-                          <div className="button-icons-outset" onClick={saveFile}>
-                            <img className="button-icons bi-help" src={save} alt="save icon" />
+                          <div className="button-icons-inset">
+                            <div className="button-icons-outset" onClick={saveFile}>
+                              <img className="button-icons bi-help" src={save} alt="save icon" />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -511,17 +513,19 @@ function TestAudio(props) {
                         </div>
 
                         <div className="button-icons-inset floating-mic">
-                          <div
-                            className="button-icons-outset floating-mic-2"
-                            onClick={handleRecStop}
-                            id="record-stop"
-                            >
-                            <img
-                              className="button-icons bi-record bi-record-float"
-                              id="record-stop-img"
-                              src={mic}
-                              alt="record icon"
-                              />
+                          <div className="floating-mic-2">
+                            <div
+                              className="button-icons-outset floating-mic-3"
+                              onClick={handleRecStop}
+                              id="record-stop"
+                              >
+                              <img
+                                className="button-icons bi-record bi-record-float"
+                                id="record-stop-img"
+                                src={mic}
+                                alt="record icon"
+                                />
+                            </div>
                           </div>
                         </div>
                       </div>
