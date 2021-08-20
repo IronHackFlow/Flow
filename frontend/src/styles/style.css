@@ -3110,85 +3110,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   text-shadow: 3px 4px 5px #494848;
 }
 
-.nav-buttons-play .canvas-anim-box {
-  height: 20%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  background: #ecf0f3;
-  border-bottom: 5px solid #ecf0f3;
-  -webkit-box-shadow: inset 0 -5px 4px #d8d8d8;
-          box-shadow: inset 0 -5px 4px #d8d8d8;
-}
-
-.nav-buttons-play .canvas-anim-box .canvas-outset {
-  height: 85%;
-  width: 93%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  background: #ecf0f3;
-  margin-top: 2%;
-  -webkit-box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
-          box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
-}
-
-.nav-buttons-play .canvas-anim-box .canvas-outset .canvas-inset {
-  height: 80%;
-  width: 94%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
-          box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
-}
-
-.nav-buttons-play .canvas-anim-box .canvas-outset .canvas-inset .canvas-container {
-  height: 70%;
-  width: 91%;
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.nav-buttons-play .canvas-anim-box .canvas-outset .canvas-inset .canvas-container canvas {
-  position: relative;
-  bottom: 80%;
-}
-
 .nav-buttons-play .playback-controls-panel {
   height: 50%;
 }
@@ -3310,8 +3231,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
-          box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+  background: #5d5d5d;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+          box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset {
@@ -3333,10 +3255,15 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   text-align: center;
   font-weight: bold;
-  background: #686a6b;
+  background: #e24f8c;
   margin-left: 8%;
   -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
           box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .duration-play .duration-play-outset .button-play-inset .button-play-outset:active {
@@ -3401,8 +3328,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
-          box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+  background: #5d5d5d;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+          box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .duration-container .dur-container .dur-inset .dur-inset-inset .dur-onset {
@@ -3545,7 +3473,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container {
   height: 100%;
-  width: 70%;
+  width: 65%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3604,14 +3532,33 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again {
   height: 100%;
-  width: 75%;
+  width: 70%;
   border-radius: 56px 40px 40px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .tracks-again-inner {
+  height: 64%;
+  width: 97%;
+  border-radius: 70px 40px 40px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3623,9 +3570,38 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 }
 
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .tracks-again-inner .track-select {
+  height: 60%;
+  width: 84%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+          box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+  background-color: #6B6B6B;
+  border-color: #6B6B6B;
+  color: white;
+  margin-right: 5%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .tracks-again-inner .track-select:focus {
+  outline: none !important;
+}
+
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .tracks-onset-title {
-  height: 100%;
-  width: 30%;
+  height: 30%;
+  width: 100%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3642,21 +3618,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   color: pink;
   font-size: 12px;
-}
-
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select {
-  background-color: #696969;
-  color: white;
-  border-color: #696969;
-}
-
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-onset-again .track-select:focus {
-  outline: none !important;
+  margin-left: 4%;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .tracks-container .tracks-inset .tracks-onset .tracks-edit-button {
   height: 100%;
-  width: 18%;
+  width: 22%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3703,7 +3670,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container {
   height: 100%;
-  width: 30%;
+  width: 35%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3737,13 +3704,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 3px #515050, inset -2px -2px 3px #848484;
-          box-shadow: inset 3px 3px 3px #515050, inset -2px -2px 3px #848484;
+  -webkit-box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+          box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+  background: #5d5d5d;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner .button-icons-inset {
-  height: 40px;
-  width: 40px;
+  height: 90%;
+  width: 46%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3785,8 +3753,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner .button-icons-inset .button-icons-outset img {
-  height: 1.5em;
-  width: 1.5em;
+  height: 1.7em;
+  width: 1.7em;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .tracks-actions .track-buttons-container .track-buttons-cont-inner .button-icons-inset .button-icons-outset:active {
@@ -3816,7 +3784,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner {
   height: 92%;
   width: 96%;
-  border-radius: 10px 50px 50px 10px;
+  border-radius: 5px 50px 50px 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3836,14 +3804,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container {
   height: 100%;
-  width: 55%;
+  width: 65%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3853,10 +3821,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: column;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset {
-  height: 83%;
-  width: 93%;
-  border-radius: 8px 50px 50px 8px;
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .beat-text {
+  height: 20%;
+  width: 100%;
+  border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3870,14 +3838,36 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
-          box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+  color: pink;
+  font-size: 14px;
+  margin-left: 8%;
+}
+
+.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset {
+  height: 65%;
+  width: 96%;
+  border-radius: 8px 40px 40px 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+          box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset {
-  height: 44%;
-  width: 86%;
-  border-radius: 10px 50px 50px 10px;
+  height: 75%;
+  width: 88%;
+  border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3891,30 +3881,26 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #3c3b3b, -2px -2px 4px #8e8b8b;
-          box-shadow: 2px 2px 3px 0px #3c3b3b, -2px -2px 4px #8e8b8b;
-  margin-left: 4%;
+  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+  margin-right: 4%;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset .track-select {
   background-color: #626262;
   color: white;
   border-color: #626262;
+  height: 80%;
+  width: 90%;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .tracks-onset .track-select:focus {
   outline: none !important;
 }
 
-.nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .tracks-container .tracks-inset .beat-text {
-  color: pink;
-  font-size: 14px;
-  margin-left: 4%;
-}
-
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic {
   height: 100%;
-  width: 45%;
+  width: 35%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3932,8 +3918,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic .floating-mic-2 {
-  height: 90%;
-  width: 40%;
+  height: 87%;
+  width: 63%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3950,7 +3936,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
           box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-  margin-right: 4%;
+  margin-right: 5%;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic .floating-mic-2 .floating-mic-3 {
@@ -3970,9 +3956,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background: #ec6aa0;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  background: #e24f8c;
+  -webkit-box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+          box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
 }
 
 .nav-buttons-play .playback-controls-panel .playback-container .playback-wrapper .playback-wrapper-inner .playback-wrapper-inner-inner .playback-wrapper-innerest .nav-list-play .nav-list-play-inner .floating-mic .floating-mic-2 .floating-mic-3 .bi-record-float {

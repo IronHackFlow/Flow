@@ -12,8 +12,8 @@ import mic from "../images/modern-mic.svg";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import stop from "../images/stop.svg";
-import trashbin from "../images/delete2.svg";
-import save from "../images/save.svg";
+import xExit from "../images/exit-x-2.svg";
+import save from "../images/save-disk.svg";
 import edit from "../images/edit.svg";
 import help from "../images/help2.svg";
 import TheContext from "../TheContext";
@@ -471,12 +471,14 @@ function TestAudio(props) {
                         <div className="tracks-inset">
                           <div className="tracks-onset">
                             <div className="tracks-onset-again">
-                              <div className="tracks-onset-title">
-                                Your Takes :
+                              <div className="tracks-again-inner">
+                                <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
+                                  {chooseTake()}
+                                </select>
                               </div>
-                              <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
-                                {chooseTake()}
-                              </select>
+                              <div className="tracks-onset-title">
+                                {user.userName}'s Takes
+                              </div>
                             </div>
                             <div className="tracks-edit-button">
                               <div className="tracks-edit-inner">
@@ -489,13 +491,13 @@ function TestAudio(props) {
                       <div className="track-buttons-container">
                         <div className="track-buttons-cont-inner">
                           <div className="button-icons-inset">
-                            <div className="button-icons-outset" onClick={deleteTake}>
-                              <img className="button-icons bi-play" src={trashbin} alt="delete bin icon" />
+                            <div className="button-icons-outset" onClick={saveFile}>
+                              <img className="button-icons bi-help" src={save} alt="save icon" />
                             </div>
                           </div>
                           <div className="button-icons-inset">
-                            <div className="button-icons-outset" onClick={saveFile}>
-                              <img className="button-icons bi-help" src={save} alt="save icon" />
+                            <div className="button-icons-outset" onClick={deleteTake}>
+                              <img className="button-icons" src={xExit} alt="delete bin icon" />
                             </div>
                           </div>
                         </div>
@@ -505,15 +507,15 @@ function TestAudio(props) {
                     <div className="nav-list-play">
                       <div className="nav-list-play-inner">
                         <div className="tracks-container">
+                          <div className="beat-text">
+                            Select A Beat :
+                          </div>
                           <div className="tracks-inset">
                             <div className="tracks-onset">
                               <select id="selectBox" className="track-select" onChange={loadTrack}>
                                 {chooseTrack()}
                               </select>
                             </div>
-                            <div className="beat-text">
-                            Select A Beat
-                          </div>
                           </div>
                         </div>
 

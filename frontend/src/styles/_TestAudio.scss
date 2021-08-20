@@ -88,42 +88,8 @@
         }
     }
 
-    
-    .canvas-anim-box {
-        @include flexCenter(20%, 100%, 0px, center, stretch, row);
-        background: $lightgrayBg;
-        border-bottom: 5px solid $lightgrayBg;
-        box-shadow: inset 0 -5px 4px #d8d8d8;
-
-        .canvas-outset {
-            @include flexCenter(85%, 93%, 50px, center, center, row);
-            background: $lightgrayBg;
-            margin-top: 2%;
-            box-shadow: 3px 3px 5px 0px #d0d2d4, -2px -2px 3px #ffffff;
-
-            .canvas-inset {
-                @include flexCenter(80%, 94%, 50px, center, center, row);
-                box-shadow: inset 2px 2px 5px #999c9e, inset -3px -3px 4px #ecebeb;
-
-                .canvas-container {
-                    height: 70%;
-                    width: 91%;
-                    border-radius: 50px;
-                    overflow: hidden;
-                    canvas {
-                      position: relative;
-                      bottom: 80%;
-                    }
-                }
-            }
-        }
-    }
-
     .playback-controls-panel {
         height: 50%;
-        // background: $charcoalBg;
-        // border-top: 2px solid #8a8c8e;
-        // box-shadow: inset 1px 3px 4px 0px #adadad;
     
         .playback-container {
             @include flexCenter(95%, 100%, 0px, center, stretch, row);
@@ -145,16 +111,22 @@
 
                             .button-play-inset {
                                 @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
-                                box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+                                background: #5d5d5d;
+                                box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                                 .button-play-outset {
                                     @include flexCenter(80%, 59%, 50%, center, center,row);
                                     text-align: center;
                                     font-weight: bold;
-                                    background: #686a6b;
+                                    background: #e24f8c;
                                     margin-left: 8%;
                                     box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
                                     
+                                    img {
+                                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(
+                                            293deg
+                                            ) brightness(107%) contrast(103%);
+                                    }
                                     &:active {
                                         box-shadow: inset 2px 2px 3px #313232, 
                                                     inset -2px -2px 3px #9fa2a4;
@@ -173,7 +145,8 @@
 
                             .dur-inset-inset {
                                 @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                                box-shadow: inset 2px 2px 3px 0px #4d4d4d, inset -3px -3px 4px #9c9a9a;
+                                background: #5d5d5d;
+                                box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                                 .dur-onset {
                                     height: 25%;
@@ -221,7 +194,7 @@
                                 @include flexCenter(45%, 100%, 0px, center, center, row);
         
                                 .tracks-container {
-                                    @include flexCenter(100%, 70%, 0px, center, center, row);
+                                    @include flexCenter(100%, 65%, 0px, center, center, row);
                     
                                     .tracks-inset {
                                         @include flexCenter(79%, 94%, 40px 30px 30px 5px, center, center, row);
@@ -231,28 +204,37 @@
                                             @include flexCenter(81%, 100%, 50px, space-evenly, center, row);
                                             
                                             .tracks-onset-again {
-                                                @include flexCenter(100%, 75%, 56px 40px 40px 10px, center, center, row);
-                                                box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+                                                @include flexCenter(100%, 70%, 56px 40px 40px 10px, space-between, center, column);
+                                                // box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 
-                                                .tracks-onset-title {
-                                                    @include flexCenter(100%, 30%, 50px, flex-start, center, row);
-                                                    color: pink;
-                                                    font-size: 12px;
+                                                .tracks-again-inner {
+                                                    @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
+                                                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+                                                    
+                                                    .track-select {
+                                                        @include flexCenter(60%, 84%, 30px, center, center, column);
+                                                        box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+                                                        background-color: #6B6B6B;
+                                                        border-color: #6B6B6B;
+                                                        color: white;
+                                                        margin-right: 5%;
+
+                                                        &:focus {
+                                                            outline: none !important;
+                                                        }
+                                                    }
                                                 }
 
-                                                .track-select {
-                                                    background-color: #696969;
-                                                    color: white;
-                                                    border-color: #696969;
-                                    
-                                                    &:focus {
-                                                        outline: none !important;
-                                                    }
+                                                .tracks-onset-title {
+                                                    @include flexCenter(30%, 100%, 50px, flex-start, center, row);
+                                                    color: pink;
+                                                    font-size: 12px;
+                                                    margin-left: 4%;
                                                 }
                                             }
 
                                             .tracks-edit-button {
-                                                @include flexCenter(100%, 18%, 50px, center, center, row);
+                                                @include flexCenter(100%, 22%, 50px, center, center, row);
                                                 box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 
                                                 .tracks-edit-inner {
@@ -270,14 +252,15 @@
                                 }
 
                                 .track-buttons-container {
-                                    @include flexCenter(100%, 30%, 50px, flex-start, center, row);
+                                    @include flexCenter(100%, 35%, 50px, flex-start, center, row);
 
                                     .track-buttons-cont-inner {
                                         @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
-                                        box-shadow: inset 3px 3px 3px #515050, inset -2px -2px 3px #848484;
+                                        box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+                                        background: #5d5d5d;
 
                                         .button-icons-inset {
-                                            @include flexCenter(40px, 40px, 50%, center, center, row);
+                                            @include flexCenter(90%, 46%, 50%, center, center, row);
                                             // background: $charcoalBg;
                                             // box-shadow: inset 5px 5px 15px #313232, 
                                             //             inset -5px -5px 15px #9fa2a4;
@@ -291,8 +274,8 @@
                                                             -2px -2px 3px #939597;
 
                                                 img {
-                                                    height: 1.5em;
-                                                    width: 1.5em;
+                                                    height: 1.7em;
+                                                    width: 1.7em;
                                                 }
 
                                                 &:active {
@@ -310,52 +293,57 @@
                                 // border-top: 1px solid $charcoalBg;
                     
                                 .nav-list-play-inner {
-                                    @include flexCenter(92%, 96%, 10px 50px 50px 10px, space-between, center, row);
+                                    @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
                                     box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
                     
                                     .tracks-container {
-                                        @include flexCenter(100%, 55%, 0px, center, center, column);
-                        
+                                        @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
+                                        
+                                        .beat-text {
+                                            @include flexCenter(20%, 100%, 0px, center, flex-start, column);
+                                            color: pink;
+                                            font-size: 14px;
+                                            margin-left: 8%;
+                                        }
+                                        
                                         .tracks-inset {
-                                            @include flexCenter(83%, 93%, 8px 50px 50px 8px, center, flex-start, column);
-                                            box-shadow: inset 2px 2px 3px #434343, inset -2px -2px 3px #9fa2a4;
+                                            @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
+                                            box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
                         
                                             .tracks-onset {
-                                                @include flexCenter(44%, 86%, 10px 50px 50px 10px, center, center, row);
-                                                box-shadow: 2px 2px 3px 0px #3c3b3b, -2px -2px 4px #8e8b8b;
-                                                margin-left: 4%;
-
+                                                @include flexCenter(75%, 88%, 50px, center, center, row);
+                                                box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+                                                margin-right: 4%;
+                                                
                                                 .track-select {
                                                     background-color: #626262;
                                                     color: white;
                                                     border-color: #626262;
-                                    
+                                                    height: 80%;
+                                                    width: 90%;
+
                                                     &:focus {
                                                         outline: none !important;
                                                     }
                                                 }
                                             }
 
-                                            .beat-text {
-                                                color: pink;
-                                                font-size: 14px;
-                                                margin-left: 4%;
-                                            }
+
                                         }
                                     }
                         
                                     .floating-mic {
-                                        @include flexCenter(100%, 45%, 50%, flex-end, center, row);
+                                        @include flexCenter(100%, 35%, 50%, flex-end, center, row);
                                         
                                         .floating-mic-2 {
-                                            @include flexCenter(90%, 40%, 50%, center, center, row);
+                                            @include flexCenter(87%, 63%, 50%, center, center, row);
                                             box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-                                            margin-right: 4%;
+                                            margin-right: 5%;
 
                                             .floating-mic-3 {
                                                 @include flexCenter(75%, 75%, 50%, center, center, row);
-                                                background: #ec6aa0;
-                                                box-shadow: none;
+                                                background: #e24f8c;
+                                                box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
     
                                                 .bi-record-float {
                                                     filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
