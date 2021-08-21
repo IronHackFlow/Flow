@@ -387,19 +387,23 @@ function TestAudio(props) {
     <div className="TestAudio">
       <audio id="song" src={beat1} loop={true}></audio>
       <p id="fixer"></p>
-      <div className="scroll-rhymes-outer">
+
+      <div className="scroll-rhymes-outer section-1_speech">
         <div className="scroll-rhymes-container" id="currentTranscript">
           {line}
           {/* <p className="transcript-line-2">{transcript}</p> */}
         </div>
         <div className="scroll-rhymes-line">
           <p className="transcript-line-2">
-            {transcript}</p>
+            {transcript}
+          </p>
         </div>
       </div>
+
       <Modal />
-      <div className="nav-buttons-play">
-        <div className="suggestions-container">
+
+      <div className="nav-buttons-play section-2_control-panel">
+        <div className="suggestions-container section-2a_flow-suggestions">
           <div className="suggestions sug-1">
             <div className="custom-rhyme">
               <div
@@ -419,6 +423,7 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
+
         {/* <div className="canvas-anim-box">
           <div className="canvas-outset">
             <div className="canvas-inset">
@@ -431,15 +436,17 @@ function TestAudio(props) {
             <img className="button-icons" src={help} alt="help icon" />
           </div>
         </div> */}
-        <div className="playback-controls-panel">
-          <div className="playback-container">
-            <div className="playback-wrapper">
-              <div className="duration-container">
-                <div className="duration-play">
-                  <div className="duration-play-outset">
-                    <div className="button-play-inset">
+
+        <div className="playback-controls-panel section-2b_flow-controls">
+          <div className="playback-container flow-controls-container">
+            <div className="playback-wrapper flow-controls-container-2">
+
+              <div className="duration-container flow-controls-1_playback-display">
+                <div className="duration-play play-btn-container">
+                  <div className="duration-play-outset play-btn-container_shadow-div-outset">
+                    <div className="button-play-inset play-btn-container_shadow-div-inset">
                       <div
-                        className="button-play-outset"
+                        className="button-play-outset play-btn_shadow-div-outset"
                         id="playPause"
                         onClick={handlePlayPause}
                       >
@@ -453,9 +460,10 @@ function TestAudio(props) {
                     </div>
                   </div>
                 </div>
-                <div className="dur-container">
-                  <div className="dur-inset">
-                    <div className="dur-inset-inset">
+
+                <div className="dur-container play-slider-container">
+                  <div className="dur-inset play-slider-container_shadow-div-outset">
+                    <div className="dur-inset-inset play-slider-container_shadow-div-inset">">
                       <div className="dur-onset" id="duration">
                         {/* <TimeSlider /> */}
                       </div>
@@ -463,9 +471,11 @@ function TestAudio(props) {
                   </div>
                 </div>
               </div>
-              <div className="playback-wrapper-inner">
-                <div className="playback-wrapper-inner-inner">
-                  <div className="playback-wrapper-innerest">
+
+              <div className="playback-wrapper-inner flow-controls-2_actions">
+                <div className="playback-wrapper-inner-inner actions-container">
+                  <div className="playback-wrapper-innerest actions-container-2">
+
                     <div className="tracks-actions">
                       <div className="tracks-container">
                         <div className="tracks-inset">
@@ -537,13 +547,14 @@ function TestAudio(props) {
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+
         <NavBar />
       </div>
       {recordings}
