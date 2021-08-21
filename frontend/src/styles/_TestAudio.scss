@@ -46,26 +46,20 @@
 /* --------------------- Controls panel --------------------- */
 .nav-buttons-play {
     height: 63%;
-    // padding-top: 10px;
     background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
-    // border-top: 5px solid $lightgrayBg;
-    // box-shadow: inset 0px 3px 5px #cecece;
 
     .suggestions-container {
         @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
-        // background: $lightgrayBg;
 
         .suggestions {
-            @include flexCenter(43%, 95%, 12px 50px 50px 12px, center, flex-start, column);
-            box-shadow: inset 2px 2px 3px 0px #4c4c4c, inset -2px -2px 3px #9c9c9c;
+            @include flexCenter(41%, 95%, 12px 50px 50px 12px, center, flex-start, row);
+            box-shadow: 3px 3px 5px 0px #4c4c4c, -2px -2px 3px #d0d0d0;
 
             .custom-rhyme {
-                @include flexCenter(74%, 84%, 50px, center, center, row);
-                // box-shadow: 2px 2px 3px #bdbdbd, -2px -2px 3px #ffffff;
+                @include flexCenter(100%, 80%, 50px, space-evenly, center, column);
 
                 .custom-rhyme-inner {
-                    @include flexCenter(65%, 93%, 50px, center, stretch, row);
-                    // background: $charcoalBg;
+                    @include flexCenter(50%, 93%, 50px, center, stretch, row);
                     overflow-x: scroll;
                     box-shadow: inset 3px 3px 3px #5d5d5d, inset -3px -3px 3px #a7a7a7;
 
@@ -76,6 +70,7 @@
                         font-weight: bold;
                         text-shadow: 3px 4px 5px #494848;
                     }
+
                     .transcript-line-4 {
                         color:#ecf9b5;
                         font-size: 16px;
@@ -83,6 +78,46 @@
                         font-weight: bold;
                         text-shadow: 3px 4px 5px #494848;
                     }
+                }
+
+                .custom-rhyme-title {
+                    @include flexCenter(20%, 93%, 50px, flex-start, flex-end, row);
+                    font-size: 14px;
+                    color: pink;
+                    margin-left: 4%;
+                }
+            }
+
+            .rhyme-lock-container {
+                @include flexCenter(100%, 20%, 50px, center, center, column);
+
+                .rhyme-lock-button {
+                    @include flexCenter(90%, 100%, 50px, center, center, row);
+
+                    .rhyme-lock-outset {
+                        @include flexCenter(95%, 77%, 50px, center, center, row);
+                        box-shadow: inset 3px 3px 3px #5a5a5a, inset -3px -3px 3px #b7b7b7;
+
+                        .rhyme-lock-btn {
+                            @include flexCenter(70%, 70%, 50px, center, center, row);
+                            border: none;
+                            background-color: #ec6aa0;
+                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+                            
+                            img {
+                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                            }
+                            
+                            &:active {
+                                box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
+                            }
+                        }
+                    }
+                }
+
+                .rhyme-title-container {
+                    @include flexCenter(25%, 100%, 50px, center, center, row);
+
                 }
             }
         }
@@ -123,10 +158,9 @@
                                     box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
                                     
                                     img {
-                                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(
-                                            293deg
-                                            ) brightness(107%) contrast(103%);
+                                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                                     }
+                                    
                                     &:active {
                                         box-shadow: inset 2px 2px 3px #313232, 
                                                     inset -2px -2px 3px #9fa2a4;
@@ -149,11 +183,11 @@
                                 box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                                 .dur-onset {
-                                    height: 25%;
-                                    width: 85%;
+                                    height: 15%;
+                                    width: 90%;
                                     border-radius: 50px;
                                     background: #63DEBC;
-                                  }
+                                }
                             }
                         }
                     }
@@ -205,7 +239,6 @@
                                             
                                             .tracks-onset-again {
                                                 @include flexCenter(100%, 70%, 56px 40px 40px 10px, space-between, center, column);
-                                                // box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 
                                                 .tracks-again-inner {
                                                     @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
@@ -261,9 +294,6 @@
 
                                         .button-icons-inset {
                                             @include flexCenter(90%, 46%, 50%, center, center, row);
-                                            // background: $charcoalBg;
-                                            // box-shadow: inset 5px 5px 15px #313232, 
-                                            //             inset -5px -5px 15px #9fa2a4;
                                         
                                             .button-icons-outset {
                                                 @include flexCenter(80%, 80%, 50%, center, center,row);
@@ -290,7 +320,6 @@
 
                             .nav-list-play {
                                 @include flexCenter(55%, 100%, 0px, center, flex-start, row);
-                                // border-top: 1px solid $charcoalBg;
                     
                                 .nav-list-play-inner {
                                     @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
@@ -327,8 +356,6 @@
                                                     }
                                                 }
                                             }
-
-
                                         }
                                     }
                         
@@ -371,6 +398,7 @@
             }
         }
     }
+
     .NavBar {
 
         .navbar_section {
@@ -399,5 +427,4 @@
         }
     }
 }
-// box-shadow: #523c45 2px 2px 3px inset, #fab1cf -2px -2px 3px inset
   

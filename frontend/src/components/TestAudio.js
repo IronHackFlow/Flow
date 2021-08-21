@@ -14,6 +14,7 @@ import pause from "../images/pause.svg";
 import stop from "../images/stop.svg";
 import xExit from "../images/exit-x-2.svg";
 import save from "../images/save-disk.svg";
+import locked from "../images/locked.svg";
 import edit from "../images/edit.svg";
 import help from "../images/help2.svg";
 import TheContext from "../TheContext";
@@ -394,7 +395,8 @@ function TestAudio(props) {
         </div>
         <div className="scroll-rhymes-line">
           <p className="transcript-line-2">
-            {transcript}</p>
+            {transcript}
+          </p>
         </div>
       </div>
       <Modal />
@@ -407,8 +409,25 @@ function TestAudio(props) {
                 id="suggestion"
                 onClick={lockSuggestion}
               >
-                <p className="transcript-line-3">{rhymes}</p>
+                <p className="transcript-line-3">
+                  {rhymes}
+                </p>
               </div>
+              <div className="custom-rhyme-title">
+                Flyest Rhyme Suggestions 1
+              </div>
+            </div>
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn" onClick={lockSuggestion}>
+                    <img className="button-icons" src={locked} alt="lock" />
+                  </button>
+                </div>
+              </div>
+              {/* <div className="rhyme-title-container">
+                Lock Rhymes
+              </div> */}
             </div>
           </div>
           <div className="suggestions sug-2">
@@ -416,16 +435,21 @@ function TestAudio(props) {
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <p className="transcript-line-4">{lock}</p>
               </div>
+              <div className="custom-rhyme-title" style={{color: "#f9f9bb"}}>
+                Flyest Rhyme Suggestions 2
+              </div>
+            </div>
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn">
+                    <img className="button-icons" src={locked} alt="lock" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        {/* <div className="canvas-anim-box">
-          <div className="canvas-outset">
-            <div className="canvas-inset">
-              <AudioCanvas />
-            </div>
-          </div>
-        </div> */}
     {/* <div className="selected-container" onClick={modalPopup}>
           <div>
             <img className="button-icons" src={help} alt="help icon" />

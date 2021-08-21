@@ -78,7 +78,7 @@ function Home(props) {
         const songsArray = res.data.map((each) => {
           return { song: each, songVideo: getRandomBackground() }
         })
-        setTheFeedSongs(songsArray);
+        setTheFeedSongs(songsArray.reverse());
         console.log(songsArray)
       })
       .catch(console.error);
@@ -193,6 +193,7 @@ function Home(props) {
 
     if (timeDiff >= year) {
       console.log((timeDiff / year), " years ago")
+      return `${Math.round(timeDiff / year)}y`
     }
     else if (timeDiff >= month && timeDiff < year) {
       if (timeDiff / month < 11.5) {
@@ -204,18 +205,23 @@ function Home(props) {
     }
     else if (timeDiff >= week && timeDiff < (month * 2)) {
       console.log((timeDiff / week), " weeks ago")
+      return `${Math.round(timeDiff / week)}w`
     }
     else if (timeDiff >= day && timeDiff < week) {
       console.log((timeDiff / day), " days ago")
+      return `${Math.round(timeDiff / day)}d`
     }
     else if (timeDiff >= hour && timeDiff < day) {
       console.log((timeDiff / hour), " hours ago")
+      return `${Math.round(timeDiff / hour)}h`
     }
     else if (timeDiff >= minute && timeDiff < hour) {
       console.log((timeDiff / minute), " minutes ago")
+      return `${Math.round(timeDiff / minute)}m`
     }
     else if (timeDiff >= second && timeDiff < minute) {
       console.log((timeDiff / second), " seconds ago")
+      return `${Math.round(timeDiff / second)}s`
     }
   }
 
