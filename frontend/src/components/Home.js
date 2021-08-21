@@ -43,7 +43,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState([user?.userFollows]);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();

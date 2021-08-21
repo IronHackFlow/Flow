@@ -2,7 +2,7 @@
     position: absolute;
 }
 
-.scroll-rhymes-outer {
+.section-1_speech {
     @include flexCenter(37%, 100%, 0px, center, center, column);
     background-image: url('../images/turnt-bg-image.jpg');
     background-size: 104%;
@@ -20,7 +20,6 @@
             font-size: 16px;
             width: 95%;
             font-weight: bold;
-            text-shadow: 3px 4px 5px #494848;
         }
     }
 
@@ -38,17 +37,15 @@
           color: #01fff3;
           font-size: 14px;
           font-weight: bold;
-          text-shadow: 3px 4px 5px #494848;
         }
     }
 }
 
-/* --------------------- Controls panel --------------------- */
-.nav-buttons-play {
+.section-2_control-panel {
     height: 63%;
     background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
 
-    .suggestions-container {
+    .section-2a_flow-suggestions {
         @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
 
         .suggestions {
@@ -68,7 +65,6 @@
                         font-size: 16px;
                         width: 95%;
                         font-weight: bold;
-                        text-shadow: 3px 4px 5px #494848;
                     }
 
                     .transcript-line-4 {
@@ -76,7 +72,6 @@
                         font-size: 16px;
                         width: 95%;
                         font-weight: bold;
-                        text-shadow: 3px 4px 5px #494848;
                     }
                 }
 
@@ -123,279 +118,248 @@
         }
     }
 
-    .playback-controls-panel {
-        height: 50%;
+    .section-2b_flow-controls {
+        @include flexCenter(50%, 100%, 0px, center, stretch, row);
     
-        .playback-container {
-            @include flexCenter(95%, 100%, 0px, center, stretch, row);
-    
-            .playback-wrapper {
-                @include flexCenter(100%, 95%, 10px, center, center, column);
-                box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
-                
-                .duration-container {
-                    @include flexCenter(25%, 100%, 0px, center, flex-end, row);
-                    position: relative;
+        .flow-controls-container {
+            @include flexCenter(95%, 95%, 10px, center, center, column);
+            box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
 
-                    .duration-play {
-                        @include flexCenter(100%, 25%, 50px, center, flex-end, row);
+            .flow-controls-1_playback-display {
+                @include flexCenter(25%, 100%, 0px, center, flex-end, row);
+                position: relative;
 
-                        .duration-play-outset {
-                            @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
-                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+                .play-btn-container {
+                    @include flexCenter(100%, 25%, 50px, center, flex-end, row);
 
-                            .button-play-inset {
-                                @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
-                                background: #5d5d5d;
-                                box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+                    .play-btn-container_shadow-div-outset {
+                        @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
+                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
 
-                                .button-play-outset {
-                                    @include flexCenter(80%, 59%, 50%, center, center,row);
-                                    text-align: center;
-                                    font-weight: bold;
-                                    background: #e24f8c;
-                                    margin-left: 8%;
-                                    box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
-                                    
-                                    img {
-                                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                    }
-                                    
-                                    &:active {
-                                        box-shadow: inset 2px 2px 3px #313232, 
-                                                    inset -2px -2px 3px #9fa2a4;
-                                    }
+                        .play-btn-container_shadow-div-inset {
+                            @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
+                            background: #5d5d5d;
+                            box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+                            .play-btn_shadow-div-outset {
+                                @include flexCenter(80%, 59%, 50%, center, center,row);
+                                text-align: center;
+                                font-weight: bold;
+                                background: #e24f8c;
+                                margin-left: 8%;
+                                box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
+                                
+                                img {
+                                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                                 }
-                            }
-                        }
-                    }
-
-                    .dur-container {
-                        @include flexCenter(100%, 75%, 0px, flex-start, flex-end, row);
-
-                        .dur-inset {
-                            @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-
-                            .dur-inset-inset {
-                                @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                                background: #5d5d5d;
-                                box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
-
-                                .dur-onset {
-                                    height: 15%;
-                                    width: 90%;
-                                    border-radius: 50px;
-                                    background: #63DEBC;
+                                
+                                &:active {
+                                    box-shadow: inset 2px 2px 3px #313232, 
+                                                inset -2px -2px 3px #9fa2a4;
                                 }
-                            }
-                        }
-                    }
-
-                    .button-icons-inset {
-                        @include flexCenter(55px, 55px, 50%, center, center, row);
-                        box-shadow: inset 2px 2px 4px #4e4e4e, inset -2px -2px 4px #9fa2a4;
-                        background: #6b6b6b;
-
-                        .button-icons-outset {
-                            @include flexCenter(80%, 80%, 50%, center, center,row);
-                            text-align: center;
-                            font-weight: bold;
-                            background: #686a6b;
-                            box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #939597;
-
-
-                            &:active {
-                                box-shadow: inset 2px 2px 3px #313232, 
-                                            inset -2px -2px 3px #9fa2a4;
                             }
                         }
                     }
                 }
 
-                .playback-wrapper-inner {
-                    @include flexCenter(75%, 100%, 0px, center, center, column);
+                .play-slider-container {
+                    @include flexCenter(100%, 75%, 0px, flex-start, flex-end, row);
 
-                    .playback-wrapper-inner-inner {
-                        @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
+                    .play-slider-container_shadow-div-outset {
+                        @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
                         box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
-                        .playback-wrapper-innerest {
-                            @include flexCenter(94%, 97%, 35px 35px 5px 5px, center, center, column);
-                            box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                        
-                            .tracks-actions {
-                                @include flexCenter(45%, 100%, 0px, center, center, row);
-        
-                                .tracks-container {
-                                    @include flexCenter(100%, 65%, 0px, center, center, row);
-                    
-                                    .tracks-inset {
-                                        @include flexCenter(79%, 94%, 40px 30px 30px 5px, center, center, row);
-                                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+                        .play-slider-container_shadow-div-inset {
+                            @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+                            background: #5d5d5d;
+                            box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
-                                        .tracks-onset {
-                                            @include flexCenter(81%, 100%, 50px, space-evenly, center, row);
-                                            
-                                            .tracks-onset-again {
-                                                @include flexCenter(100%, 70%, 56px 40px 40px 10px, space-between, center, column);
-
-                                                .tracks-again-inner {
-                                                    @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
-                                                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                                                    
-                                                    .track-select {
-                                                        @include flexCenter(60%, 84%, 30px, center, center, column);
-                                                        box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
-                                                        background-color: #6B6B6B;
-                                                        border-color: #6B6B6B;
-                                                        color: white;
-                                                        margin-right: 5%;
-
-                                                        &:focus {
-                                                            outline: none !important;
-                                                        }
-                                                    }
-                                                }
-
-                                                .tracks-onset-title {
-                                                    @include flexCenter(30%, 100%, 50px, flex-start, center, row);
-                                                    color: pink;
-                                                    font-size: 12px;
-                                                    margin-left: 4%;
-                                                }
-                                            }
-
-                                            .tracks-edit-button {
-                                                @include flexCenter(100%, 22%, 50px, center, center, row);
-                                                box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-
-                                                .tracks-edit-inner {
-                                                    @include flexCenter(70%, 70%, 50px, center, center, row);
-                                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-
-                                                    img {
-                                                        height: 1.5em;
-                                                        width: 1.5em;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .track-buttons-container {
-                                    @include flexCenter(100%, 35%, 50px, flex-start, center, row);
-
-                                    .track-buttons-cont-inner {
-                                        @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
-                                        box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
-                                        background: #5d5d5d;
-
-                                        .button-icons-inset {
-                                            @include flexCenter(90%, 46%, 50%, center, center, row);
-                                        
-                                            .button-icons-outset {
-                                                @include flexCenter(80%, 80%, 50%, center, center,row);
-                                                text-align: center;
-                                                font-weight: bold;
-                                                background: $charcoalBg;
-                                                box-shadow:  2px 2px 3px #3d3f3f,
-                                                            -2px -2px 3px #939597;
-
-                                                img {
-                                                    height: 1.7em;
-                                                    width: 1.7em;
-                                                }
-
-                                                &:active {
-                                                    box-shadow: inset 2px 2px 3px #313232, 
-                                                                inset -2px -2px 3px #9fa2a4;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                            .dur-onset {
+                                height: 15%;
+                                width: 90%;
+                                border-radius: 50px;
+                                background: #63DEBC;
                             }
-
-                            .nav-list-play {
-                                @include flexCenter(55%, 100%, 0px, center, flex-start, row);
-                    
-                                .nav-list-play-inner {
-                                    @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
-                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-                    
-                                    .tracks-container {
-                                        @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
-                                        
-                                        .beat-text {
-                                            @include flexCenter(20%, 100%, 0px, center, flex-start, column);
-                                            color: pink;
-                                            font-size: 14px;
-                                            margin-left: 8%;
-                                        }
-                                        
-                                        .tracks-inset {
-                                            @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
-                                            box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
-                        
-                                            .tracks-onset {
-                                                @include flexCenter(75%, 88%, 50px, center, center, row);
-                                                box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
-                                                margin-right: 4%;
-                                                
-                                                .track-select {
-                                                    background-color: #626262;
-                                                    color: white;
-                                                    border-color: #626262;
-                                                    height: 80%;
-                                                    width: 90%;
-
-                                                    &:focus {
-                                                        outline: none !important;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                        
-                                    .floating-mic {
-                                        @include flexCenter(100%, 35%, 50%, flex-end, center, row);
-                                        
-                                        .floating-mic-2 {
-                                            @include flexCenter(87%, 63%, 50%, center, center, row);
-                                            box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-                                            margin-right: 5%;
-
-                                            .floating-mic-3 {
-                                                @include flexCenter(75%, 75%, 50%, center, center, row);
-                                                background: #e24f8c;
-                                                box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
-    
-                                                .bi-record-float {
-                                                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    .selected-container {
-                        @include flexCenter(100%, 20%, 0px, center, center, row);
-
-                        div {
-                            @include flexCenter(30px, 30px, 50px, center, center, row);
-                            font-size: .7em;
-                            padding: 1px;
-                            box-shadow: 4px 4px 7px #3d3f3f,
-                                    -4px -4px 5px #939597;
                         }
                     }
                 }
             }
+
+            .flow-controls-2_actions {
+                @include flexCenter(75%, 100%, 0px, center, center, column);
+
+                .actions-container_shadow-div-outset {
+                    @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
+                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+                    .actions-container_shadow-div-inset {
+                        @include flexCenter(94%, 97%, 35px 35px 5px 5px, center, center, column);
+                        box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+                    
+                        .actions-1_flow-takes {
+                            @include flexCenter(45%, 100%, 0px, center, center, row);
+    
+                            .flow-takes-1_select-takes {
+                                @include flexCenter(100%, 65%, 0px, center, center, row);
+                
+                                .select-takes-container_shadow-div-outset {
+                                    @include flexCenter(79%, 94%, 40px 30px 30px 5px, space-evenly, center, row);
+                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+                                    
+                                    .select-takes-container {
+                                        @include flexCenter(81%, 70%, 56px 40px 40px 10px, space-between, center, column);
+                                        
+                                        .select-takes_shadow-div-inset {
+                                            @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
+                                            box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+                                            
+                                            .select-takes_shadow-div-outset {
+                                                @include flexCenter(60%, 84%, 30px, center, center, column);
+                                                box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+                                                background-color: #6B6B6B;
+                                                border-color: #6B6B6B;
+                                                color: white;
+                                                margin-right: 5%;
+                                                &:focus {
+                                                    outline: none !important;
+                                                }
+                                            }
+                                        }
+
+                                        .select-takes-title {
+                                            @include flexCenter(30%, 100%, 50px, flex-start, center, row);
+                                            color: pink;
+                                            font-size: 12px;
+                                            margin-left: 4%;
+                                        }
+                                    }
+
+                                    .edit-takes-container_shadow-div-inset {
+                                        @include flexCenter(81%, 22%, 50px, center, center, row);
+                                        box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+                                        
+                                        .edit-takes-btn_shadow-div-outset {
+                                            @include flexCenter(70%, 70%, 50px, center, center, row);
+                                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+                                            
+                                            img {
+                                                height: 1.5em;
+                                                width: 1.5em;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .flow-takes-2_takes-actions {
+                                @include flexCenter(100%, 35%, 50px, flex-start, center, row);
+
+                                .takes-actions-container {
+                                    @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
+                                    box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+                                    background: #5d5d5d;
+
+                                    .actions-btn-container {
+                                        @include flexCenter(90%, 46%, 50%, center, center, row);
+                                    
+                                        .actions-btn_shadow-div-outset {
+                                            @include flexCenter(80%, 80%, 50%, center, center,row);
+                                            text-align: center;
+                                            font-weight: bold;
+                                            background: $charcoalBg;
+                                            box-shadow:  2px 2px 3px #3d3f3f,
+                                                        -2px -2px 3px #939597;
+                                            img {
+                                                height: 1.7em;
+                                                width: 1.7em;
+                                            }
+
+                                            &:active {
+                                                box-shadow: inset 2px 2px 3px #313232, 
+                                                            inset -2px -2px 3px #9fa2a4;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .actions-2_record {
+                            @include flexCenter(55%, 100%, 0px, center, flex-start, row);
+                
+                            .record-container {
+                                @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
+                                box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+                
+                                .record-1_select-beat {
+                                    @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
+                                    
+                                    .select-beat-title {
+                                        @include flexCenter(20%, 100%, 0px, center, flex-start, column);
+                                        color: pink;
+                                        font-size: 14px;
+                                        margin-left: 8%;
+                                    }
+                                    
+                                    .select-beat_shadow-div-inset {
+                                        @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
+                                        box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+                    
+                                        .select-beat_shadow-div-outset {
+                                            @include flexCenter(75%, 88%, 50px, center, center, row);
+                                            box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+                                            margin-right: 4%;
+                                            
+                                            .track-select {
+                                                background-color: #626262;
+                                                color: white;
+                                                border-color: #626262;
+                                                height: 80%;
+                                                width: 90%;
+                                                &:focus {
+                                                    outline: none !important;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                    
+                                .record-2_record-btn {
+                                    @include flexCenter(100%, 35%, 50%, flex-end, center, row);
+                                    
+                                    .record-btn_shadow-div-inset {
+                                        @include flexCenter(87%, 63%, 50%, center, center, row);
+                                        box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+                                        margin-right: 5%;
+
+                                        .record-btn_shadow-div-outset {
+                                            @include flexCenter(75%, 75%, 50%, center, center, row);
+                                            background: #63DEBC;
+                                            box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+
+                                            .bi-record-float {
+                                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                .selected-container {
+                    @include flexCenter(100%, 20%, 0px, center, center, row);
+                    div {
+                        @include flexCenter(30px, 30px, 50px, center, center, row);
+                        font-size: .7em;
+                        padding: 1px;
+                        box-shadow: 4px 4px 7px #3d3f3f,
+                                -4px -4px 5px #939597;
+                    }
+                }
+            }
+            
         }
     }
 
