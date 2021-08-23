@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
 import beat3 from "../assets/beatsTrack3.m4a";
@@ -16,6 +16,7 @@ import xExit from "../images/exit-x-2.svg";
 import save from "../images/save-disk.svg";
 import locked from "../images/locked.svg";
 import edit from "../images/edit.svg";
+import send from "../images/send.svg";
 import help from "../images/help2.svg";
 import TheContext from "../TheContext";
 import Modal from "./ModalMenu";
@@ -95,13 +96,6 @@ function TestAudio(props) {
     let selectBox = document.getElementById("selectBox");
     let selectedValue = selectBox.options[selectBox.selectedIndex].value;
     document.getElementById("song").src = selectedValue;
-  };
-
-  const loadTake = () => {
-    let selectedTake = document.getElementById("takes");
-    let selectedTakeValue =
-      selectedTake.options[selectedTake.selectedIndex].value;
-    document.getElementById("userRecording").src = selectedTakeValue;
   };
 
   const chooseTrack = () => {
@@ -255,7 +249,7 @@ function TestAudio(props) {
     autoScroll()
   };
 
-  const autoScroll=()=>{
+  const autoScroll = () => {
     let scrollLyrics= document.getElementById('currentTranscript')
     scrollLyrics.scrollTop
     = scrollLyrics.scrollHeight
@@ -319,7 +313,14 @@ function TestAudio(props) {
       </section>
     );
   }
-  
+
+  const loadTake = () => {
+    let selectedTake = document.getElementById("takes");
+    let selectedTakeValue =
+      selectedTake.options[selectedTake.selectedIndex].value;
+    document.getElementById("userRecording").src = selectedTakeValue;
+  };
+
   const displayTake = () => {
     if (takes.length === 0) {
     } 
@@ -327,6 +328,8 @@ function TestAudio(props) {
       let selectedTake = document.getElementById("takes");
       selectedTake.selectedIndex = takes.length - 1;
       const freshTrack = allTakes[takes.length - 1];
+      console.log(freshTrack, allTakes, 'waht?')
+
       if (freshTrack) {
         freshTrack.setDate();
         freshTrack.setLyrics();
@@ -335,29 +338,30 @@ function TestAudio(props) {
   };
 
   const chooseTake = () => {
-    // //map through takes,
-
     if (takes.length === 0) {
       return <option>No record</option>;
     } 
     else {
       const takesHolder = takes.map((element, index) => {
-        return <option value={element}>Take {index + 1}</option>;
+        return <option value={element}>Take {index + 1}</option>
       });
       displayTake();
+      console.log(takesHolder)
       return takesHolder;
     }
   };
 
   const saveFile = () => {
     if (allTakes.length === 0) {
+      console.log('no takes')
     } 
     else {
+      console.log("this is what you're uploading", allTakes)
       let selUpload = allTakes[theTakes.current.selectedIndex];
       selUpload.setName();
 
       let chosenFile = selUpload.user._id + selUpload.name.replaceAll(" ", "-");
-
+      console.log(chosenFile, 'and this is?')
       actions
         .uploadFile(
           {
@@ -368,23 +372,95 @@ function TestAudio(props) {
           },
           selUpload
         )
-        .then(console.log)
-        .catch(console.log);
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch(console.error);
     }
   };
+  const [songNameInput, setSongNameInput] = useState();
+  const [songCaptionInput, setSongCaptionInput] = useState();
+  const saveSongPopUpRef = useRef();
+  const songNameInputRef = useRef();
+  const songCaptionInputRef = useRef();
+  const [saveSongMenu, setSaveSongMenu] = useState(false);
+
+  const toggleSaveSongMenu = () => {
+    if (saveSongMenu === false) {
+      menuDown()
+    } 
+    else {
+      menuUp()
+    }
+  }
+
+  const menuUp = () => {
+      songNameInputRef.current.focus()
+      songNameInputRef.current.style.opacity = 1;
+      songCaptionInputRef.current.style.opacity = 1;
+      songNameInputRef.current.style.transition = "opacity .5s";
+      songCaptionInputRef.current.style.transition = "opacity .5s";
+      saveSongPopUpRef.current.style.height = "50%";
+      // windowRef.current.style.bottom = "50%";
+      setSaveSongMenu(false)
+  }
+
+  const menuDown = () => {
+      saveSongPopUpRef.current.style.height = "0px";
+      // windowRef.current.style.bottom = "0";
+      songNameInputRef.current.style.opacity = 0;
+      songCaptionInputRef.current.style.opacity = 0;
+      songNameInputRef.current.style.transition = "opacity .5s";
+      songCaptionInputRef.current.style.transition = "opacity .5s";
+      setSaveSongMenu(true)
+  }
+
+
+  function SaveSongDisplay(props) {
+    return (
+      <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
+        <form className="section-1_song-name">
+          <input 
+            className="song-name-input" 
+            ref={songNameInputRef}
+            type="text" 
+            placeholder="Name this flow.."
+            onChange={(e) => setSongNameInput(e.target.value)}
+            ></input>
+          {/* <button className="song-name-button">
+            <img className="social-icons si-send" src={send} alt="send" />
+          </button> */}
+        </form>
+
+        <form className="section-2_song-caption">
+          <input 
+            className="song-caption-input"
+            ref={songCaptionInputRef}
+            type="text" 
+            placeholder="Add a caption to this flow.."
+            onChange={(e) => setSongCaptionInput(e.target.value)}
+            ></input>
+          {/* <button className="song-caption-button">
+            <img className="social-icons si-send" src={send} alt="send" />
+          </button> */}
+        </form>
+      </div>
+    )
+  }
 
   const modalPopup = () => {
     const modal = document.querySelector(".modal");
     modal.style.bottom = "0vh"
     modal.style.transition = "bottom .5s"
     const closeBtn = document.querySelector(".close-btn");
+
     closeBtn.addEventListener("click", () => {
       modal.style.bottom = "-65vh"
       modal.style.transition = "bottom .5s"
     });
   };
 
-  const deleteTake=()=>{
+  const deleteTake = () => {
    setLine([])
    setRhymes([])
   }
@@ -436,7 +512,6 @@ function TestAudio(props) {
               </div> */}
             </div>
           </div>
-
           <div className="suggestions sug-2">
             <div className="custom-rhyme">
               <div className="custom-rhyme-inner" id="lockedRhyme">
@@ -524,7 +599,10 @@ function TestAudio(props) {
                     <div className="flow-takes-2_takes-actions">
                       <div className="takes-actions-container">
                         <div className="actions-btn-container">
-                          <div className="actions-btn_shadow-div-outset" onClick={saveFile}>
+                        {/* onClick={saveFile} */}
+                          <div 
+                            className="actions-btn_shadow-div-outset" 
+                            onClick={toggleSaveSongMenu}>
                             <img className="button-icons bi-help" src={save} alt="save icon" />
                           </div>
                         </div>
@@ -575,6 +653,7 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
+        <SaveSongDisplay />
         <NavBar />
       </div>
       {recordings}
