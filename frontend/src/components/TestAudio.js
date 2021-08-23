@@ -29,6 +29,8 @@ function TestAudio(props) {
   const [recordings, setRecordings] = useState(
     <audio id="userRecording"></audio>
   );
+  const [audioSrc, setAudioSrc] = useState(null);
+
   const [rhymes, setRhymes] = useState([]);
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [silent, setSilent] = useState(false);
@@ -37,7 +39,6 @@ function TestAudio(props) {
   const [takes, setTakes] = useState([]);
   const [allTakes, setAllTakes] = useState([]);
   let [fullTranscript, setFullTranscript] = useState("");
-  const theTakes=useRef()
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
     { song: beat2, name: "Futurology" },
@@ -46,7 +47,9 @@ function TestAudio(props) {
     { song: beat5, name: "Drained" },
   ]);
 
-  //const [words,setWords] =useState()
+  const takeAudioRef = useRef();
+  const theTakes = useRef();
+
   class SongData {
     constructor(songmix) {
       this.date = null;
@@ -170,7 +173,7 @@ function TestAudio(props) {
   //add recording to list
   const addRec = (blobby, name, blobFile) => {
     const copyRec = (
-      <audio src={blobby} id={"userRecording"} key={name}></audio>
+      <audio src={blobby} id={"userRecording"} key={name} ref={takeAudioRef}></audio>
     );
     const songObject = new SongData(blobby);
     allTakes.push(songObject);
@@ -264,16 +267,16 @@ function TestAudio(props) {
     setLock([])
   }
 
-  const handlePlayPause = () => {
-    if (document.getElementById("userRecording").paused) {
-      document.getElementById("play-stop-img").src = pause;
-      document.getElementById("userRecording").play();
-    } 
-    else {
-      document.getElementById("play-stop-img").src = play;
-      document.getElementById("userRecording").pause();
-    }
-  };
+  // const handlePlayPause = () => {
+  //   if (document.getElementById("userRecording").paused) {
+  //     document.getElementById("play-stop-img").src = pause;
+  //     document.getElementById("userRecording").play();
+  //   } 
+  //   else {
+  //     document.getElementById("play-stop-img").src = play;
+  //     document.getElementById("userRecording").pause();
+  //   }
+  // };
 
   const handleRecStop = () => {
     if (document.getElementById("song").paused) {
@@ -313,12 +316,35 @@ function TestAudio(props) {
       </section>
     );
   }
+  const [optionValue, setOptionValue] = useState();
+  const takeRef = useRef();
+  const buttonCloseRef = useRef();
 
-  const loadTake = () => {
-    let selectedTake = document.getElementById("takes");
-    let selectedTakeValue =
-      selectedTake.options[selectedTake.selectedIndex].value;
-    document.getElementById("userRecording").src = selectedTakeValue;
+  const handlePlayPause = () => {
+    if (takeAudioRef.current.paused) {
+      document.getElementById("play-stop-img").src = pause;
+      takeAudioRef.current.play();
+    } 
+    else {
+      document.getElementById("play-stop-img").src = play;
+      takeAudioRef.current.pause();
+    }
+  };
+
+  useEffect(() => {
+    takeAudioRef.current.src = audioSrc
+  }, [audioSrc])
+
+  const loadTake = (e) => {
+    console.log(e.target.selectedOptions[0], "dkfdkfjdkf", e.target.value)
+    setOptionValue(e.target.selectedOptions[0].value)
+    setAudioSrc(e.target.value)
+
+    console.log(audioSrc, 'what dis?')
+    // let selectedTake = document.getElementById("takes");
+    // let selectedTakeValue =
+    //   selectedTake.options[selectedTake.selectedIndex].value;
+    // document.getElementById("userRecording").src = selectedTakeValue;
   };
 
   const displayTake = () => {
@@ -328,7 +354,7 @@ function TestAudio(props) {
       let selectedTake = document.getElementById("takes");
       selectedTake.selectedIndex = takes.length - 1;
       const freshTrack = allTakes[takes.length - 1];
-      console.log(freshTrack, allTakes, 'waht?')
+      // console.log(freshTrack, allTakes, 'waht?')
 
       if (freshTrack) {
         freshTrack.setDate();
@@ -343,9 +369,13 @@ function TestAudio(props) {
     } 
     else {
       const takesHolder = takes.map((element, index) => {
-        return <option value={element}>Take {index + 1}</option>
+        return (
+          <option value={element} ref={takeRef} key={index}>
+            Take {index + 1}
+          </option>
+        )
       });
-      displayTake();
+      // displayTake();
       console.log(takesHolder)
       return takesHolder;
     }
@@ -380,41 +410,79 @@ function TestAudio(props) {
   };
   const [songNameInput, setSongNameInput] = useState();
   const [songCaptionInput, setSongCaptionInput] = useState();
+
   const saveSongPopUpRef = useRef();
+  const section2aRef = useRef();
+  const section2bRef = useRef();
   const songNameInputRef = useRef();
   const songCaptionInputRef = useRef();
   const [saveSongMenu, setSaveSongMenu] = useState(false);
 
   const toggleSaveSongMenu = () => {
     if (saveSongMenu === false) {
-      menuDown()
+      setSaveSongMenu(true)
     } 
     else {
-      menuUp()
+      setSaveSongMenu(false)
     }
   }
+  const s2aSuggestions1Ref = useRef();
+  const s2aSuggestions2Ref = useRef();
+  const s2aCustomRhymeRef = useRef();
+  const s2aRhymeLockRef = useRef();
 
-  const menuUp = () => {
+  useEffect(() => {
+    if (saveSongMenu === true) {
       songNameInputRef.current.focus()
+      section2aRef.current.style.height = "5%";
+      section2aRef.current.style.transition = "height .3s";
+      s2aSuggestions1Ref.current.style.display = "none"
+      s2aSuggestions2Ref.current.style.height = "50%"
+      s2aCustomRhymeRef.current.style.opacity = 0;
+      s2aRhymeLockRef.current.style.opacity = 0;
+      buttonCloseRef.current.style.opacity = 1
+      section2bRef.current.style.height = "5%";
+      section2bRef.current.style.transition = "height .5s .3s";
+      saveSongPopUpRef.current.style.height = "100%";
+      saveSongPopUpRef.current.style.transition = "height .5s .3s";
+
+      // section2aRef.current.style.opacity = "0";
+      // section2bRef.current.style.opacity = "0";
+      // section2aRef.current.style.transition = "opacity .5";
+      // section2bRef.current.style.transition = "opacity .3s";
+
+
       songNameInputRef.current.style.opacity = 1;
       songCaptionInputRef.current.style.opacity = 1;
       songNameInputRef.current.style.transition = "opacity .5s";
       songCaptionInputRef.current.style.transition = "opacity .5s";
-      saveSongPopUpRef.current.style.height = "50%";
       // windowRef.current.style.bottom = "50%";
-      setSaveSongMenu(false)
-  }
-
-  const menuDown = () => {
+    }
+    else {
       saveSongPopUpRef.current.style.height = "0px";
+      saveSongPopUpRef.current.style.transition = "height .5s";
+      section2aRef.current.style.height = "30%";
+      section2aRef.current.style.transition = "height .5s";
+      s2aSuggestions1Ref.current.style.display = "flex"
+      s2aSuggestions2Ref.current.style.height = "41%"
+      s2aCustomRhymeRef.current.style.opacity = 1
+      s2aRhymeLockRef.current.style.opacity = 1
+      buttonCloseRef.current.style.opacity = 0
+
+      section2bRef.current.style.height = "50%";
+      section2bRef.current.style.transition = "height .5s";
+      // section2aRef.current.style.opacity = "1";
+      // // section2bRef.current.style.opacity = "1";
+      // section2aRef.current.style.transition = "opacity .5s";
+      // section2bRef.current.style.transition = "opacity .5s";
+      saveSongPopUpRef.current.style.transition = "height .5s";
       // windowRef.current.style.bottom = "0";
       songNameInputRef.current.style.opacity = 0;
       songCaptionInputRef.current.style.opacity = 0;
       songNameInputRef.current.style.transition = "opacity .5s";
       songCaptionInputRef.current.style.transition = "opacity .5s";
-      setSaveSongMenu(true)
-  }
-
+    }
+  }, [saveSongMenu])
 
   function SaveSongDisplay(props) {
     return (
@@ -444,6 +512,9 @@ function TestAudio(props) {
             <img className="social-icons si-send" src={send} alt="send" />
           </button> */}
         </form>
+        <button ref={buttonCloseRef} onClick={toggleSaveSongMenu}>
+          close Window
+        </button>
       </div>
     )
   }
@@ -483,8 +554,8 @@ function TestAudio(props) {
       </div>
 
       <div className="section-2_control-panel">
-        <div className="section-2a_flow-suggestions">
-          <div className="suggestions sug-1">
+        <div className="section-2a_flow-suggestions" ref={section2aRef}>
+          <div className="suggestions sug-1" ref={s2aSuggestions1Ref}>
             <div className="custom-rhyme">
               <div
                 className="custom-rhyme-inner"
@@ -512,8 +583,8 @@ function TestAudio(props) {
               </div> */}
             </div>
           </div>
-          <div className="suggestions sug-2">
-            <div className="custom-rhyme">
+          <div className="suggestions sug-2" ref={s2aSuggestions2Ref}>
+            <div className="custom-rhyme" ref={s2aCustomRhymeRef}>
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <p className="transcript-line-4">{lock}</p>
               </div>
@@ -521,7 +592,7 @@ function TestAudio(props) {
                 Locked Rhyme Suggestions
               </div>
             </div>
-            <div className="rhyme-lock-container">
+            <div className="rhyme-lock-container" ref={s2aRhymeLockRef}>
               <div className="rhyme-lock-button">
                 <div className="rhyme-lock-outset">
                   <button className="rhyme-lock-btn" onClick={clearLockSuggestions}>
@@ -533,7 +604,7 @@ function TestAudio(props) {
           </div>
         </div>
 
-        <div className="section-2b_flow-controls">
+        <div className="section-2b_flow-controls" ref={section2bRef}>
           <div className="flow-controls-container">
             <div className="flow-controls-1_playback-display">
               <div className="play-btn-container">
@@ -550,6 +621,7 @@ function TestAudio(props) {
                         src={play}
                         alt="play icon"
                       />
+                      <audio ref={takeAudioRef} src={audioSrc} />
                     </div>
                   </div>
                 </div>
@@ -578,9 +650,10 @@ function TestAudio(props) {
                               id="takes" 
                               className="select-takes_shadow-div-outset"
                               ref={theTakes} 
-                              onChange={loadTake}
+                              onChange={(e) => loadTake(e)}
                               >
                                 {chooseTake()}
+                                
                             </select>
                           </div>
                           <div className="select-takes-title">
