@@ -12,11 +12,11 @@ mongoose
     .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
     .catch((err) => console.error('Error connecting to mongo', err));
-
+// "https://iron-flow.netlify.app"
 app.use(
     cors({
         credentials: true,
-        origin: ["http://localhost:3000", "https://iron-flow.netlify.app"] //Swap this with the client url 
+        origin: ["http://localhost:3000", "https://iron-flow.herokuapp.com"] //Swap this with the client url 
     })
 );
 

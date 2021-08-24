@@ -392,16 +392,15 @@
     }
 }
 
-.saveSongDisplay {
+.SaveSongDisplay {
     height: 0px;
-
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     
     .section-1_song-name {
-        @include flexCenter(10%, 100%, 50px, center, center, row);
+        @include flexCenter(10%, 90%, 50px, center, center, row);
         box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
         .song-name-input {
@@ -415,8 +414,9 @@
         }
 
     }
+
     .section-2_song-caption {
-        @include flexCenter(10%, 100%, 50px, center, center, row);
+        @include flexCenter(10%, 90%, 50px, center, center, row);
         box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
         .song-caption-input {
