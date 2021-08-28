@@ -487,31 +487,33 @@ function TestAudio(props) {
   function SaveSongDisplay(props) {
     return (
       <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
-        <form className="section-1_song-name">
-          <input 
-            className="song-name-input" 
-            ref={songNameInputRef}
-            type="text" 
-            placeholder="Name this flow.."
-            onChange={(e) => setSongNameInput(e.target.value)}
-            ></input>
-          {/* <button className="song-name-button">
-            <img className="social-icons si-send" src={send} alt="send" />
-          </button> */}
-        </form>
+        <div className="song-inputs-container">
+          <form className="section-1_song-name">
+            <input 
+              className="song-name-input" 
+              ref={songNameInputRef}
+              type="text" 
+              placeholder="Name this flow.."
+              onChange={(e) => setSongNameInput(e.target.value)}
+              ></input>
+            {/* <button className="song-name-button">
+              <img className="social-icons si-send" src={send} alt="send" />
+            </button> */}
+          </form>
 
-        <form className="section-2_song-caption">
-          <input 
-            className="song-caption-input"
-            ref={songCaptionInputRef}
-            type="text" 
-            placeholder="Add a caption to this flow.."
-            onChange={(e) => setSongCaptionInput(e.target.value)}
-            ></input>
-          {/* <button className="song-caption-button">
-            <img className="social-icons si-send" src={send} alt="send" />
-          </button> */}
-        </form>
+          <form className="section-2_song-caption">
+            <input 
+              className="song-caption-input"
+              ref={songCaptionInputRef}
+              type="text" 
+              placeholder="Add a caption to this flow.."
+              onChange={(e) => setSongCaptionInput(e.target.value)}
+              ></input>
+            {/* <button className="song-caption-button">
+              <img className="social-icons si-send" src={send} alt="send" />
+            </button> */}
+          </form>
+        </div>
         <button ref={buttonCloseRef} onClick={toggleSaveSongMenu}>
           close Window
         </button>
