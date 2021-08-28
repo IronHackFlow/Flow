@@ -557,7 +557,6 @@ router.post(`/logMeIn`, async (req, res, next) => {
   if (!tokenId) {
     res.status(401).json({ msg: "Mising Google JWT" });
   }
-
   const googleResponse = await axios.get(
     `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${encodeURI(
       tokenId

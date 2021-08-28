@@ -5,14 +5,20 @@ import actions from '../api'
 import TheContext from '../TheContext'
 
 const Auth = (props) => {
-    const { user } = React.useContext(TheContext)
+    const { 
+        user, setUser, setToggleFeed, 
+        setToggleProfile, setToggleRecord 
+    } = React.useContext(TheContext)
 
     const onResponse = (response) => {
         actions
             .logIn(response)
             .then(res => {
                 console.log("THIS", props)
-                props.setUser(res.data)
+                setUser(res.data)
+                setToggleFeed(true)
+                setToggleProfile(false)
+                setToggleRecord(false)
                 props.history.push('/')
             })
             .catch(console.error)
@@ -46,9 +52,16 @@ const Auth = (props) => {
                                     <div className="user-input ui-login-i">
                                         <input className="user-text ui-login-t" type="text" placeholder="DO NOT USE"></input>
                                     </div>
-                                    <Link to ="/" className="login-link">
+                                    <Link 
+                                        to ="/" 
+                                        className="login-link"
+                                        onClick={() => {                       
+                                            setToggleRecord(false)
+                                            setToggleProfile(false)
+                                            setToggleFeed(true)
+                                          }}>
                                         <div className="login-button">
-                                                <h4>Enter</h4>
+                                            <h4>Enter</h4>
                                         </div>
                                     </Link>
                                     <GoogleLogin 

@@ -5,7 +5,9 @@ import actions from "../api";
 import back from "../images/back.svg"
 
 function EditProfile(props) {
-  const { user } = React.useContext(TheContext);
+  const { 
+    user, setToggleFeed, setToggleRecord, setToggleProfile
+  } = React.useContext(TheContext);
 
   const [thisUser, setThisUser] = useState([user]);
   const [thisUsersSongs, setThisUsersSongs] = useState([])
@@ -210,7 +212,14 @@ function EditProfile(props) {
               <div className="save-back-container">
                 <div className="back-container">
                   <div className="back-inner">
-                    <Link to={`/profile/${user._id}`} style={{height: '100%'}}>
+                    <Link 
+                      to={{pathname: `/profile/${user._id}`, profileInfo: user }} 
+                      style={{height: '100%'}}
+                      onClick={() => {
+                        setToggleFeed(false)
+                        setToggleRecord(false)
+                        setToggleProfile(true)
+                      }}>
                       <img className="button-icons bi-back" src={back} alt="back button icon"></img>
                     </Link>
                   </div>
