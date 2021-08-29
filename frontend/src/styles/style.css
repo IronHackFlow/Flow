@@ -3511,9 +3511,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3816,210 +3816,6 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
 }
 
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record {
-  height: 55%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container {
-  height: 92%;
-  width: 96%;
-  border-radius: 5px 50px 50px 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat {
-  height: 100%;
-  width: 65%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat .select-beat-title {
-  height: 20%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  color: pink;
-  font-size: 14px;
-  margin-left: 8%;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset {
-  height: 65%;
-  width: 96%;
-  border-radius: 8px 40px 40px 55px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
-          box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
-  height: 75%;
-  width: 88%;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
-          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
-  margin-right: 4%;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select {
-  background-color: #626262;
-  color: white;
-  border-color: #626262;
-  height: 80%;
-  width: 90%;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select:focus {
-  outline: none !important;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-2_record-btn {
-  height: 100%;
-  width: 35%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset {
-  height: 87%;
-  width: 63%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-          box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-  margin-right: 5%;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset .record-btn_shadow-div-outset {
-  height: 75%;
-  width: 75%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  background: #63DEBC;
-  -webkit-box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
-          box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
-}
-
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset .record-btn_shadow-div-outset .bi-record-float {
-  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-}
-
 .section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .selected-container {
   height: 100%;
   width: 20%;
@@ -4093,7 +3889,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .SaveSongDisplay {
-  height: 0px;
+  height: 72%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4110,15 +3907,15 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .SaveSongDisplay .song-inputs-container {
-  height: 50%;
-  width: 96%;
-  border-radius: 10px;
+  height: 96%;
+  width: 95%;
+  border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -4126,14 +3923,21 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-  margin-top: 2%;
+  -webkit-box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
+          box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
+}
+
+.SaveSongDisplay .song-inputs-container .section-title {
+  height: 10%;
+  width: 100%;
+  text-align: start;
+  text-indent: 5%;
+  color: pink;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name {
-  height: 10%;
-  width: 90%;
+  height: 25%;
+  width: 92%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4154,7 +3958,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input {
   height: 80%;
-  width: 90%;
+  width: 96%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4169,17 +3973,36 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  opacity: 0;
   border: none;
   outline: none;
-  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-  background: #8d8d8d;
+  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+  background: #797979;
+}
+
+.SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::-webkit-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input:-ms-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::-ms-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::placeholder {
+  color: white;
+  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption {
-  height: 10%;
-  width: 90%;
+  height: 25%;
+  width: 92%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4200,7 +4023,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input {
   height: 80%;
-  width: 90%;
+  width: 96%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4215,11 +4038,269 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-  background: #8d8d8d;
-  opacity: 0;
+  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+  background: #797979;
   border: none;
+}
+
+.SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::-webkit-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input:-ms-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::-ms-input-placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::placeholder {
+  color: white;
+  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .buttons-container {
+  height: 20%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.SaveSongDisplay .song-inputs-container .buttons-container .cancel-save-button {
+  -webkit-box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+  border-radius: 30px;
+  color: white;
+  background: #797979;
+}
+
+.SaveSongDisplay .song-inputs-container .buttons-container .save-song-button {
+  -webkit-box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+  border-radius: 30px;
+  color: white;
+  background: #797979;
+}
+
+.actions-2_record {
+  height: 55%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.actions-2_record .record-container {
+  height: 92%;
+  width: 96%;
+  border-radius: 5px 50px 50px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+}
+
+.actions-2_record .record-container .record-1_select-beat {
+  height: 100%;
+  width: 65%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat-title {
+  height: 20%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: pink;
+  font-size: 14px;
+  margin-left: 8%;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset {
+  height: 65%;
+  width: 96%;
+  border-radius: 8px 40px 40px 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+          box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
+  height: 75%;
+  width: 88%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+  margin-right: 4%;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select {
+  background-color: #626262;
+  color: white;
+  border-color: #626262;
+  height: 80%;
+  width: 90%;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select:focus {
+  outline: none !important;
+}
+
+.actions-2_record .record-container .record-2_record-btn {
+  height: 100%;
+  width: 35%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset {
+  height: 87%;
+  width: 63%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+          box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+  margin-right: 5%;
+}
+
+.actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset .record-btn_shadow-div-outset {
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #63DEBC;
+  -webkit-box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+          box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+}
+
+.actions-2_record .record-container .record-2_record-btn .record-btn_shadow-div-inset .record-btn_shadow-div-outset .bi-record-float {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .SongScreen {

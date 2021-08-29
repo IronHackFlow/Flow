@@ -193,7 +193,7 @@
                     box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
                     .actions-container_shadow-div-inset {
-                        @include flexCenter(94%, 97%, 35px 35px 5px 5px, center, center, column);
+                        @include flexCenter(94%, 97%, 35px 35px 5px 5px, space-evenly, center, column);
                         box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
                     
                         .actions-1_flow-takes {
@@ -283,68 +283,6 @@
                                 }
                             }
                         }
-
-                        .actions-2_record {
-                            @include flexCenter(55%, 100%, 0px, center, flex-start, row);
-                
-                            .record-container {
-                                @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
-                                box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-                
-                                .record-1_select-beat {
-                                    @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
-                                    
-                                    .select-beat-title {
-                                        @include flexCenter(20%, 100%, 0px, center, flex-start, column);
-                                        color: pink;
-                                        font-size: 14px;
-                                        margin-left: 8%;
-                                    }
-                                    
-                                    .select-beat_shadow-div-inset {
-                                        @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
-                                        box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
-                    
-                                        .select-beat_shadow-div-outset {
-                                            @include flexCenter(75%, 88%, 50px, center, center, row);
-                                            box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
-                                            margin-right: 4%;
-                                            
-                                            .track-select {
-                                                background-color: #626262;
-                                                color: white;
-                                                border-color: #626262;
-                                                height: 80%;
-                                                width: 90%;
-                                                &:focus {
-                                                    outline: none !important;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                    
-                                .record-2_record-btn {
-                                    @include flexCenter(100%, 35%, 50%, flex-end, center, row);
-                                    
-                                    .record-btn_shadow-div-inset {
-                                        @include flexCenter(87%, 63%, 50%, center, center, row);
-                                        box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-                                        margin-right: 5%;
-
-                                        .record-btn_shadow-div-outset {
-                                            @include flexCenter(75%, 75%, 50%, center, center, row);
-                                            background: #63DEBC;
-                                            box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
-
-                                            .bi-record-float {
-                                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
                 
@@ -393,43 +331,138 @@
 }
 
 .SaveSongDisplay {
-    height: 0px;
+    height: 72%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     
     .song-inputs-container {
-        @include flexCenter(50%, 96%, 10px, center, center, column);
-        box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-        margin-top: 2%;
+        @include flexCenter(96%, 95%, 8px, space-evenly, center, column);
+        box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
+
+        .section-title {
+            height: 10%;
+            width: 100%;
+            text-align: start;
+            text-indent: 5%;
+            color: pink;
+        }
 
         .section-1_song-name {
-            @include flexCenter(10%, 90%, 50px, center, center, row);
+            @include flexCenter(25%, 92%, 50px, center, center, row);
             box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
     
             .song-name-input {
-                @include flexCenter(80%, 90%, 50px, center, center, row);
-                opacity: 0;
+                @include flexCenter(80%, 96%, 50px, center, center, row);
+                // opacity: 0;
                 border: none;
                 outline: none;
-                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-                background: #8d8d8d;
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+                background: #797979;
+                
+                &::placeholder {
+                    color: white;
+                    text-indent: 4%;
+                }
             }
         }
     
         .section-2_song-caption {
-            @include flexCenter(10%, 90%, 50px, center, center, row);
+            @include flexCenter(25%, 92%, 50px, center, center, row);
             box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
     
             .song-caption-input {
-                @include flexCenter(80%, 90%, 50px, center, center, row);
-                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #d8d5d5;
-                background: #8d8d8d;
-                opacity: 0;
+                @include flexCenter(80%, 96%, 50px, center, center, row);
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+                background: #797979;
                 border: none;
-    
+                
+                &::placeholder {
+                    color: white;
+                    text-indent: 4%;
+                }
+            }
+        }
+        .buttons-container {
+            @include flexCenter(20%, 100%, 0px, flex-end, center, row);
+
+            .cancel-save-button {
+                box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+                border-radius: 30px;
+                color: white;
+                background: #797979;
+            }
+            .save-song-button {
+                box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+                border-radius: 30px;
+                color: white;
+                background: #797979;
             }
         }
     }
 }
+
+.actions-2_record {
+    @include flexCenter(55%, 100%, 0px, center, flex-start, row);
+
+    .record-container {
+        @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
+        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+        .record-1_select-beat {
+            @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
+            
+            .select-beat-title {
+                @include flexCenter(20%, 100%, 0px, center, flex-start, column);
+                color: pink;
+                font-size: 14px;
+                margin-left: 8%;
+            }
+            
+            .select-beat_shadow-div-inset {
+                @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
+                box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+
+                .select-beat_shadow-div-outset {
+                    @include flexCenter(75%, 88%, 50px, center, center, row);
+                    box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+                    margin-right: 4%;
+                    
+                    .track-select {
+                        background-color: #626262;
+                        color: white;
+                        border-color: #626262;
+                        height: 80%;
+                        width: 90%;
+                        &:focus {
+                            outline: none !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .record-2_record-btn {
+            @include flexCenter(100%, 35%, 50%, flex-end, center, row);
+            
+            .record-btn_shadow-div-inset {
+                @include flexCenter(87%, 63%, 50%, center, center, row);
+                box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+                margin-right: 5%;
+
+                .record-btn_shadow-div-outset {
+                    @include flexCenter(75%, 75%, 50%, center, center, row);
+                    background: #63DEBC;
+                    box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+
+                    .bi-record-float {
+                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                    }
+                }
+            }
+        }
+    }
+}
+

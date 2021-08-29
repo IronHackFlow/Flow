@@ -283,12 +283,12 @@ function Comments(props) {
         <div ref={props.opacityRef1} style={{opacity: '0'}} className="com-cont-1">
           <form className="social-comment-form" onSubmit={handleSubmit}>
             <input
-                className="social-comment-input"
-                ref={props.commentInputRef}
-                onChange={(e) => setComment(e.target.value)}
-                type='text' 
-                placeholder='Make a comment...' 
-                ></input>
+              className="social-comment-input"
+              ref={props.commentInputRef}
+              onChange={(e) => setComment(e.target.value)}
+              type='text' 
+              placeholder='Make a comment...' 
+              ></input>
             <button className="comment-button" ref={props.commentButtonRef}>
               <img className="social-icons si-send" src={send} alt="send" />
             </button>

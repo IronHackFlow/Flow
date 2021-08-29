@@ -290,6 +290,7 @@ function TestAudio(props) {
       document.getElementById("fixer").click();
     }
   };
+  const [savePoppedUp, setSavedPoppedUp] = useState(false);
 
   // //make a time slider
   function TimeSlider() {
@@ -380,7 +381,10 @@ function TestAudio(props) {
       return takesHolder;
     }
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("submitting")
+  }
   const saveFile = () => {
     if (allTakes.length === 0) {
       console.log('no takes')
@@ -430,6 +434,17 @@ function TestAudio(props) {
   const s2aSuggestions2Ref = useRef();
   const s2aCustomRhymeRef = useRef();
   const s2aRhymeLockRef = useRef();
+  const saveOutRef1 = useRef();
+  const saveOutRef2 = useRef();
+  const saveOutRef3 = useRef();
+  const saveOutRef4 = useRef();
+  const saveOutRef5 = useRef();
+  const saveOutRef6 = useRef();
+  const saveOutRef7 = useRef();
+  const saveOutRef8 = useRef();
+  const saveOutRef9 = useRef();
+  const saveOutRef10 = useRef();
+  const saveOutRef11 = useRef();
 
   useEffect(() => {
     if (saveSongMenu === true) {
@@ -441,10 +456,34 @@ function TestAudio(props) {
       s2aCustomRhymeRef.current.style.opacity = 0;
       s2aRhymeLockRef.current.style.opacity = 0;
       buttonCloseRef.current.style.opacity = 1
-      section2bRef.current.style.height = "5%";
-      section2bRef.current.style.transition = "height .5s .3s";
-      saveSongPopUpRef.current.style.height = "100%";
-      saveSongPopUpRef.current.style.transition = "height .5s .3s";
+      saveOutRef1.current.style.height = "70%"
+      saveOutRef1.current.style.transition = "height .5s"
+      saveOutRef2.current.style.height = "18%"
+      saveOutRef2.current.style.transition = "height .5s"
+      saveOutRef3.current.style.height = "81%"
+      saveOutRef3.current.style.transition = "height .5s"
+      saveOutRef4.current.style.height = "94%"
+      saveOutRef4.current.style.transition = "height .5s"
+      saveOutRef5.current.style.height = "96%"
+      saveOutRef5.current.style.transition = "height .5s"
+      saveOutRef6.current.style.height = "24%"
+      saveOutRef6.current.style.transition = "height .5s"
+      saveOutRef7.current.style.width = "100%"
+      saveOutRef7.current.style.transition = "width .5s"
+      saveOutRef8.current.style.width = "97%"
+      saveOutRef8.current.style.transition = "width .5s"
+      saveOutRef9.current.style.opacity = 0
+      saveOutRef9.current.style.width = "0"
+      saveOutRef9.current.style.transition = "all .5s"
+      saveOutRef10.current.style.opacity = 0
+      saveOutRef10.current.style.width = "0"
+      saveOutRef11.current.style.width = "95%"
+      theTakes.current.style.width = "88%"
+
+      // section2bRef.current.style.height = "5%";
+      // section2bRef.current.style.transition = "height .5s .3s";
+      // saveSongPopUpRef.current.style.height = "100%";
+      // saveSongPopUpRef.current.style.transition = "height .5s .3s";
 
       // section2aRef.current.style.opacity = "0";
       // section2bRef.current.style.opacity = "0";
@@ -452,73 +491,135 @@ function TestAudio(props) {
       // section2bRef.current.style.transition = "opacity .3s";
 
 
-      songNameInputRef.current.style.opacity = 1;
-      songCaptionInputRef.current.style.opacity = 1;
-      songNameInputRef.current.style.transition = "opacity .5s";
-      songCaptionInputRef.current.style.transition = "opacity .5s";
+      // songNameInputRef.current.style.opacity = 1;
+      // songCaptionInputRef.current.style.opacity = 1;
+      // songNameInputRef.current.style.transition = "opacity .5s";
+      // songCaptionInputRef.current.style.transition = "opacity .5s";
       // windowRef.current.style.bottom = "50%";
     }
     else {
-      saveSongPopUpRef.current.style.height = "0px";
-      saveSongPopUpRef.current.style.transition = "height .5s";
+      // saveSongPopUpRef.current.style.height = "0px";
+      // saveSongPopUpRef.current.style.transition = "height .5s";
       section2aRef.current.style.height = "30%";
       section2aRef.current.style.transition = "height .5s";
       s2aSuggestions1Ref.current.style.display = "flex"
       s2aSuggestions2Ref.current.style.height = "41%"
       s2aCustomRhymeRef.current.style.opacity = 1
       s2aRhymeLockRef.current.style.opacity = 1
-      buttonCloseRef.current.style.opacity = 0
+      saveOutRef1.current.style.height = "50%"
+      saveOutRef2.current.style.height = "25%"
+      saveOutRef3.current.style.height = "75%"
+      saveOutRef4.current.style.height = "90%"
+      saveOutRef5.current.style.height = "94%"
+      saveOutRef6.current.style.height = "45%"
+      saveOutRef7.current.style.width = "65%"
+      saveOutRef8.current.style.width = "97%"
+      saveOutRef9.current.style.opacity = 1
+      saveOutRef9.current.style.width = "35%"
+      saveOutRef10.current.style.opacity = 1
+      saveOutRef10.current.style.width = "22%"
+      saveOutRef11.current.style.width = "70%"
+      theTakes.current.style.width = "84%"
 
-      section2bRef.current.style.height = "50%";
-      section2bRef.current.style.transition = "height .5s";
-      // section2aRef.current.style.opacity = "1";
-      // // section2bRef.current.style.opacity = "1";
-      // section2aRef.current.style.transition = "opacity .5s";
-      // section2bRef.current.style.transition = "opacity .5s";
-      saveSongPopUpRef.current.style.transition = "height .5s";
-      // windowRef.current.style.bottom = "0";
-      songNameInputRef.current.style.opacity = 0;
-      songCaptionInputRef.current.style.opacity = 0;
-      songNameInputRef.current.style.transition = "opacity .5s";
-      songCaptionInputRef.current.style.transition = "opacity .5s";
+
+      // buttonCloseRef.current.style.opacity = 0
+      // section2bRef.current.style.height = "50%";
+      // section2bRef.current.style.transition = "height .5s";
+      // // section2aRef.current.style.opacity = "1";
+      // // // section2bRef.current.style.opacity = "1";
+      // // section2aRef.current.style.transition = "opacity .5s";
+      // // section2bRef.current.style.transition = "opacity .5s";
+      // saveSongPopUpRef.current.style.transition = "height .5s";
+      // // windowRef.current.style.bottom = "0";
+      // songNameInputRef.current.style.opacity = 0;
+      // songCaptionInputRef.current.style.opacity = 0;
+      // songNameInputRef.current.style.transition = "opacity .5s";
+      // songCaptionInputRef.current.style.transition = "opacity .5s";
     }
   }, [saveSongMenu])
-
-  function SaveSongDisplay(props) {
-    return (
-      <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
-        <div className="song-inputs-container">
-          <form className="section-1_song-name">
-            <input 
-              className="song-name-input" 
-              ref={songNameInputRef}
-              type="text" 
-              placeholder="Name this flow.."
-              onChange={(e) => setSongNameInput(e.target.value)}
-              ></input>
-            {/* <button className="song-name-button">
-              <img className="social-icons si-send" src={send} alt="send" />
-            </button> */}
-          </form>
-
-          <form className="section-2_song-caption">
-            <input 
-              className="song-caption-input"
-              ref={songCaptionInputRef}
-              type="text" 
-              placeholder="Add a caption to this flow.."
-              onChange={(e) => setSongCaptionInput(e.target.value)}
-              ></input>
-            {/* <button className="song-caption-button">
-              <img className="social-icons si-send" src={send} alt="send" />
-            </button> */}
+  
+  const saveSongDisplay = () => {
+    if (saveSongMenu === true) {
+      return (
+        <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
+          <form className="song-inputs-container" onSubmit={handleSubmit}>
+            <div className="section-title">
+              Add A Track Title And Caption
+            </div>
+            <div className="section-1_song-name">
+              <input 
+                className="song-name-input" 
+                ref={songNameInputRef}
+                type="text" 
+                placeholder="Name this flow.."
+                onChange={(e) => setSongNameInput(e.target.value)}
+                ></input>
+              {/* <button className="song-name-button">
+                <img className="social-icons si-send" src={send} alt="send" />
+              </button> */}
+            </div>
+  
+            <div className="section-2_song-caption">
+              <input 
+                className="song-caption-input"
+                ref={songCaptionInputRef}
+                type="text" 
+                placeholder="Caption this flow.."
+                onChange={(e) => setSongCaptionInput(e.target.value)}
+                ></input>
+              {/* <button className="song-caption-button">
+                <img className="social-icons si-send" src={send} alt="send" />
+              </button> */}
+            </div>
+            <div className="buttons-container">
+              <button className="cancel-save-button" ref={buttonCloseRef} onClick={toggleSaveSongMenu}>
+                Cancel
+              </button>
+              <button className="save-song-button">
+                Save
+              </button>
+            </div>
           </form>
         </div>
-        <button ref={buttonCloseRef} onClick={toggleSaveSongMenu}>
-          close Window
-        </button>
+      )
+    }
+    else {
+      return (
+        <div className="actions-2_record">
+        <div className="record-container">
+          <div className="record-1_select-beat">
+            <div className="select-beat-title">
+              Select A Beat :
+            </div>
+            <div className="select-beat_shadow-div-inset">
+              <div className="select-beat_shadow-div-outset">
+                <select id="selectBox" className="track-select" onChange={loadTrack}>
+                  {chooseTrack()}
+                </select>
+              </div>
+            </div>
+          </div>
+  
+          <div className="record-2_record-btn">
+            <div className="record-btn_shadow-div-inset">
+              <div
+                className="record-btn_shadow-div-outset"
+                onClick={handleRecStop}
+                id="record-stop"
+                >
+                <img
+                  className="button-icons bi-record bi-record-float"
+                  id="record-stop-img"
+                  src={mic}
+                  alt="record icon"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    )
+      )
+    }
   }
 
   const modalPopup = () => {
@@ -563,7 +664,7 @@ function TestAudio(props) {
                 className="custom-rhyme-inner"
                 id="suggestion"
                 onClick={lockSuggestion}
-              >
+                >
                 <p className="transcript-line-3">
                   {rhymes}
                 </p>
@@ -606,9 +707,9 @@ function TestAudio(props) {
           </div>
         </div>
 
-        <div className="section-2b_flow-controls" ref={section2bRef}>
+        <div className="section-2b_flow-controls" ref={saveOutRef1}> {/*height: 70% */}
           <div className="flow-controls-container">
-            <div className="flow-controls-1_playback-display">
+            <div className="flow-controls-1_playback-display" ref={saveOutRef2}> {/*height: 18% */}
               <div className="play-btn-container">
                 <div className="play-btn-container_shadow-div-outset">
                   <div className="play-btn-container_shadow-div-inset">
@@ -640,30 +741,29 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className="flow-controls-2_actions">
-              <div className="actions-container_shadow-div-outset">
-                <div className="actions-container_shadow-div-inset">
-                  <div className="actions-1_flow-takes">
-                    <div className="flow-takes-1_select-takes">
+            <div className="flow-controls-2_actions" ref={saveOutRef3}> {/*height: 81% */}
+              <div className="actions-container_shadow-div-outset" ref={saveOutRef4}> {/*height: 94% */}
+                <div className="actions-container_shadow-div-inset" ref={saveOutRef5}> {/*height: 96% */}
+                  <div className="actions-1_flow-takes" ref={saveOutRef6}> {/*height: 24% */}
+                    <div className="flow-takes-1_select-takes" ref={saveOutRef7}> {/* width: 100% */}
                       <div className="select-takes-container_shadow-div-outset">
-                        <div className="select-takes-container">
-                          <div className="select-takes_shadow-div-inset">
+                        <div className="select-takes-container" ref={saveOutRef11}>
+                          <div className="select-takes_shadow-div-inset" ref={saveOutRef8}>  {/* width: 97% */}
                             <select 
                               id="takes" 
-                              className="select-takes_shadow-div-outset"
+                              className="select-takes_shadow-div-outset" 
                               ref={theTakes} 
                               onChange={(e) => loadTake(e)}
-                              >
+                              > 
                                 {chooseTake()}
-                                
-                            </select>
+                            </select> {/* width: 89% */}
                           </div>
                           <div className="select-takes-title">
                             {user.userName}'s Takes
                           </div>
                         </div>
 
-                        <div className="edit-takes-container_shadow-div-inset">
+                        <div className="edit-takes-container_shadow-div-inset" ref={saveOutRef10}>
                           <div className="edit-takes-btn_shadow-div-outset">
                             <img className="button-icons" src={edit} alt="edit" />
                           </div>
@@ -671,7 +771,7 @@ function TestAudio(props) {
                       </div>
                     </div>
 
-                    <div className="flow-takes-2_takes-actions">
+                    <div className="flow-takes-2_takes-actions" ref={saveOutRef9}> {/* opacity: 0, width: 0 */}
                       <div className="takes-actions-container">
                         <div className="actions-btn-container">
                         {/* onClick={saveFile} */}
@@ -690,45 +790,13 @@ function TestAudio(props) {
                     </div>
                   </div>
 
-                  <div className="actions-2_record">
-                    <div className="record-container">
-                      <div className="record-1_select-beat">
-                        <div className="select-beat-title">
-                          Select A Beat :
-                        </div>
-                        <div className="select-beat_shadow-div-inset">
-                          <div className="select-beat_shadow-div-outset">
-                            <select id="selectBox" className="track-select" onChange={loadTrack}>
-                              {chooseTrack()}
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="record-2_record-btn">
-                        <div className="record-btn_shadow-div-inset">
-                          <div
-                            className="record-btn_shadow-div-outset"
-                            onClick={handleRecStop}
-                            id="record-stop"
-                            >
-                            <img
-                              className="button-icons bi-record bi-record-float"
-                              id="record-stop-img"
-                              src={mic}
-                              alt="record icon"
-                              />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {saveSongDisplay()}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <SaveSongDisplay />
+
         <NavBar />
       </div>
       {recordings}
