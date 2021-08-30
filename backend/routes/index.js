@@ -485,6 +485,7 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
         songBeatTrack: req.body.songBeatTrack,
       };
       console.log(req.body, "add song here")
+      
       Songs.create(song)
         .then((theSong) => {
           res.status(200).json(theSong);

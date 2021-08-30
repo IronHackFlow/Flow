@@ -54,7 +54,7 @@ function TestAudio(props) {
   const theTakes = useRef();
 
   class SongData {
-    constructor(songmix) {
+    constructor(songmix, name, blobFile) {
       this.songName = null;
       this.songCaption = null;
       this.date = null;
@@ -62,8 +62,8 @@ function TestAudio(props) {
       this.songmix = songmix;
       this.lyrics = null;
       this.background = null;
-      this.name = null;
-      this.songBlob = null;
+      this.name = name;
+      this.songBlob = blobFile;
     }
     setLyrics() {
       this.lyrics = lyricsArr;
@@ -96,6 +96,10 @@ function TestAudio(props) {
       }
     });
   }, [silent]);
+
+  useEffect(() => {
+    takeAudioRef.current.src = audioSrc
+  }, [audioSrc])
 
   let myReq; //animation frame ID
 
@@ -179,10 +183,12 @@ function TestAudio(props) {
     const copyRec = (
       <audio src={blobby} id={"userRecording"} key={name} ref={takeAudioRef}></audio>
     );
-    const songObject = new SongData(blobby);
-    allTakes.push(songObject);
+    const songObject = new SongData(blobby, name, blobFile);
+    // allTakes.push(songObject);
+    setAllTakes(eachTake => [...eachTake, songObject])
+    console.log(allTakes, "this should be solid")
     setCurrentTake(songObject)
-    allTakes[allTakes.length - 1].songBlob = blobFile;
+
     setRecordings(copyRec);
     takes.push(blobby);
   };
@@ -217,15 +223,14 @@ function TestAudio(props) {
       //console.log('stopped recording')
     };
   }
-  let key = 0;
+
+  let keyRef = useRef(0)
 
   function go(blob) {
     let mpegBlob = new Blob(blob, { type: "audio/mpeg-3" });
     const url = window.URL.createObjectURL(mpegBlob);
-
-    key++;
-
-    addRec(url, `take ${key}`, mpegBlob);
+    keyRef.current++
+    addRec(url, `take ${keyRef.current}`, mpegBlob);
   }
 
   const stopRecording = () => {
@@ -272,17 +277,6 @@ function TestAudio(props) {
     setLock([])
   }
 
-  // const handlePlayPause = () => {
-  //   if (document.getElementById("userRecording").paused) {
-  //     document.getElementById("play-stop-img").src = pause;
-  //     document.getElementById("userRecording").play();
-  //   } 
-  //   else {
-  //     document.getElementById("play-stop-img").src = play;
-  //     document.getElementById("userRecording").pause();
-  //   }
-  // };
-
   const handleRecStop = () => {
     if (document.getElementById("song").paused) {
       // document.getElementById('record-stop').setAttribute('class', 'button-icons bi-stop')
@@ -295,8 +289,7 @@ function TestAudio(props) {
       document.getElementById("fixer").click();
     }
   };
-  const [savePoppedUp, setSavedPoppedUp] = useState(false);
-
+ 
   // //make a time slider
   function TimeSlider() {
     const [time, setTime] = useState(0);
@@ -327,7 +320,6 @@ function TestAudio(props) {
   const buttonCloseRef = useRef();
 
   const handlePlayPause = () => {
-    console.log(audioSrc, 'which is it?')
     if (takeAudioRef.current.paused) {
       document.getElementById("play-stop-img").src = pause;
       takeAudioRef.current.play();
@@ -338,26 +330,20 @@ function TestAudio(props) {
     }
   };
 
-  useEffect(() => {
-    takeAudioRef.current.src = audioSrc
-  }, [audioSrc])
+
 
   const [songUploadObject, setSongUploadObject] = useState([]);
   const [optionIndex, setOptionIndex] = useState();
-  const [optionInnerHtml, setOptionInnerHtml] = useState();
-  const [optionRef, setOptionRef] = useState();
+  const [selectedOption, setSelectedOption] = useState();
+  const [songNameUpdate, setSongNameUpdate] = useState();
 
   const loadTake = (e) => {
+    setSelectedOption(e.target.value)
+    console.log(selectedOption, 'hmm??')
     setOptionValue(e.target.selectedOptions[0].value)
-    setOptionRef(e.target.selectedOptions[0])
     setOptionIndex(e.target.selectedIndex)
-    setOptionInnerHtml(e.target.selectedOptions[0].innerHTML)
-
     setAudioSrc(e.target.value)
-    // let selectedTake = document.getElementById("takes");
-    // let selectedTakeValue =
-    //   selectedTake.options[selectedTake.selectedIndex].value;
-    // document.getElementById("userRecording").src = selectedTakeValue;
+    setSongUploadObject(allTakes[e.target.selectedIndex])
   };
 
   const displayTake = () => {
@@ -376,47 +362,32 @@ function TestAudio(props) {
     }
   };
 
-  const [nameForTrack, setNameForTrack] = useState([]);
-
-  const chooseTake = () => {
+  const chooseTake = useCallback(() => {
     if (allTakes.length === 0) {
-      return <option>You Have No Takes</option>;
+      return <option>Your Takes</option>;
     } 
     else {
-      return takes.map((element, index) => {
-        console.log(element)
+      return allTakes.map((element, index) => {
         return (
-          <option value={element} key={index}>
-            take {index + 1}
+          <option value={element.songmix} key={index}>
+            {element.songName ? element.songName : element.name}
           </option>
         )
       });
-      // displayTake();
-      // console.log(takesHolder)
-      // return takesHolder;
     }
-  }
-
+  }, [allTakes, songNameUpdate])
 
   const handleSaveSubmit = (e) => {
     e.preventDefault()
-
     if (allTakes.length === 0) {
       console.log('no takes')
     } 
     else {
-      console.log(optionIndex, "what is it at in submit?")
-      setSongUploadObject(allTakes[optionIndex])
-
-      console.log(songUploadObject, 'is this right?')
-      console.log(songUploadObject, allTakes, 'waiting on this')
-
       const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.date = new Date()
-      console.log(optionIndex, allTakes, 'this is .')
-      
+
       actions
         .uploadFile(
           {
@@ -432,42 +403,14 @@ function TestAudio(props) {
         })
         .catch(console.error);
     }
-    setOptionInnerHtml(`${songUploadObject.songName}`)
-    console.log(optionInnerHtml, '??')
+    setSongNameUpdate(songUploadObject.songName)
+    
     setTimeout(()=> {
       songNameInputRef.current.value =  ""
       songCaptionInputRef.current.value =  ""
     }, [200])
   }
 
-  // const saveFile = (e) => {
-  //   e.preventDefault()
-  //   if (allTakes.length === 0) {
-  //     console.log('no takes')
-  //   } 
-  //   else {
-  //     console.log("this is what you're uploading", allTakes)
-  //     let selUpload = allTakes[theTakes.current.selectedIndex];
-  //     selUpload.setName();
-
-  //     let chosenFile = selUpload.user._id + selUpload.name.replaceAll(" ", "-");
-  //     console.log(chosenFile, 'and this is?')
-  //     // actions
-  //     //   .uploadFile(
-  //     //     {
-  //     //       fileName: chosenFile,
-  //     //       fileType: "audio/mpeg-3",
-  //     //       file: selUpload.songBlob,
-  //     //       kind: "song",
-  //     //     },
-  //     //     selUpload
-  //     //   )
-  //     //   .then((res) => {
-  //     //     console.log(res.data)
-  //     //   })
-  //     //   .catch(console.error);
-  //   }
-  // };
   const [songNameInput, setSongNameInput] = useState();
   const [songCaptionInput, setSongCaptionInput] = useState();
 
@@ -485,6 +428,7 @@ function TestAudio(props) {
       setSaveSongMenu(false)
     }
   }
+  
   const s2aSuggestions1Ref = useRef();
   const s2aSuggestions2Ref = useRef();
   const s2aCustomRhymeRef = useRef();
@@ -680,7 +624,7 @@ function TestAudio(props) {
           </p>
         </div>
       </div>
-      {console.log(optionIndex, 'ok this should be updated')}
+      {console.log(allTakes, "this should be solid")}
       <div className="section-2_control-panel">
         <div className="section-2a_flow-suggestions" ref={section2aRef}>
           <div className="suggestions sug-1" ref={s2aSuggestions1Ref}>
@@ -774,10 +718,12 @@ function TestAudio(props) {
                             <select 
                               id="takes" 
                               className="select-takes_shadow-div-outset" 
+                              value={selectedOption}
                               ref={theTakes} 
                               onChange={(e) => loadTake(e)}
                               > 
                                 {chooseTake()}
+                                {console.log(selectedOption, 'hmm??')}
                             </select>
                           </div>
                           <div className="select-takes-title">
