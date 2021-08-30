@@ -156,7 +156,7 @@ const actions = {
     return resFromOurDB;
   },
 
-  uploadFile: async ({ fileName, fileType, file, kind },songData) => {
+  uploadFile: async ({ fileName, fileType, file, kind }, songData) => {
     console.log(songData)
     axios
       .post(
@@ -187,8 +187,8 @@ const actions = {
             if (kind === "song") {
               return await axios.post(
                 `${baseURL}/addSongRT`,
-                { songName: songData.name,
-                  songCaption: null,
+                { songName: songData.songName,
+                  songCaption: songData.songCaption,
                   songBG: null,
                   songLyricsAudio: null,
                   songLyricsStr: songData.lyrics,

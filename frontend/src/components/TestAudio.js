@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
 import beat3 from "../assets/beatsTrack3.m4a";
@@ -22,15 +23,16 @@ import TheContext from "../TheContext";
 import Modal from "./ModalMenu";
 import actions from "../api";
 import NavBar from "./NavBar";
+import e from "cors";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext);
 
+  const location = useLocation();
   const [recordings, setRecordings] = useState(
     <audio id="userRecording"></audio>
   );
   const [audioSrc, setAudioSrc] = useState(null);
-
   const [rhymes, setRhymes] = useState([]);
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [silent, setSilent] = useState(false);
@@ -38,6 +40,7 @@ function TestAudio(props) {
   const [keyCounter, setKeyCounter] = useState(0);
   const [takes, setTakes] = useState([]);
   const [allTakes, setAllTakes] = useState([]);
+  const [currentTake, setCurrentTake] = useState();
   let [fullTranscript, setFullTranscript] = useState("");
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
@@ -52,6 +55,8 @@ function TestAudio(props) {
 
   class SongData {
     constructor(songmix) {
+      this.songName = null;
+      this.songCaption = null;
       this.date = null;
       this.user = user;
       this.songmix = songmix;
@@ -65,7 +70,6 @@ function TestAudio(props) {
     }
     setDate() {
       var today = new Date();
-
       this.date = today;
     }
     setName() {
@@ -177,6 +181,7 @@ function TestAudio(props) {
     );
     const songObject = new SongData(blobby);
     allTakes.push(songObject);
+    setCurrentTake(songObject)
     allTakes[allTakes.length - 1].songBlob = blobFile;
     setRecordings(copyRec);
     takes.push(blobby);
@@ -322,6 +327,7 @@ function TestAudio(props) {
   const buttonCloseRef = useRef();
 
   const handlePlayPause = () => {
+    console.log(audioSrc, 'which is it?')
     if (takeAudioRef.current.paused) {
       document.getElementById("play-stop-img").src = pause;
       takeAudioRef.current.play();
@@ -336,12 +342,18 @@ function TestAudio(props) {
     takeAudioRef.current.src = audioSrc
   }, [audioSrc])
 
-  const loadTake = (e) => {
-    console.log(e.target.selectedOptions[0], "dkfdkfjdkf", e.target.value)
-    setOptionValue(e.target.selectedOptions[0].value)
-    setAudioSrc(e.target.value)
+  const [songUploadObject, setSongUploadObject] = useState([]);
+  const [optionIndex, setOptionIndex] = useState();
+  const [optionInnerHtml, setOptionInnerHtml] = useState();
+  const [optionRef, setOptionRef] = useState();
 
-    console.log(audioSrc, 'what dis?')
+  const loadTake = (e) => {
+    setOptionValue(e.target.selectedOptions[0].value)
+    setOptionRef(e.target.selectedOptions[0])
+    setOptionIndex(e.target.selectedIndex)
+    setOptionInnerHtml(e.target.selectedOptions[0].innerHTML)
+
+    setAudioSrc(e.target.value)
     // let selectedTake = document.getElementById("takes");
     // let selectedTakeValue =
     //   selectedTake.options[selectedTake.selectedIndex].value;
@@ -364,60 +376,103 @@ function TestAudio(props) {
     }
   };
 
+  const [nameForTrack, setNameForTrack] = useState([]);
+
   const chooseTake = () => {
-    if (takes.length === 0) {
-      return <option>No record</option>;
+    if (allTakes.length === 0) {
+      return <option>You Have No Takes</option>;
     } 
     else {
-      const takesHolder = takes.map((element, index) => {
+      return takes.map((element, index) => {
+        console.log(element)
         return (
-          <option value={element} ref={takeRef} key={index}>
-            Take {index + 1}
+          <option value={element} key={index}>
+            take {index + 1}
           </option>
         )
       });
       // displayTake();
-      console.log(takesHolder)
-      return takesHolder;
+      // console.log(takesHolder)
+      // return takesHolder;
     }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("submitting")
   }
-  const saveFile = () => {
+
+
+  const handleSaveSubmit = (e) => {
+    e.preventDefault()
+
     if (allTakes.length === 0) {
       console.log('no takes')
     } 
     else {
-      console.log("this is what you're uploading", allTakes)
-      let selUpload = allTakes[theTakes.current.selectedIndex];
-      selUpload.setName();
+      console.log(optionIndex, "what is it at in submit?")
+      setSongUploadObject(allTakes[optionIndex])
 
-      let chosenFile = selUpload.user._id + selUpload.name.replaceAll(" ", "-");
-      console.log(chosenFile, 'and this is?')
+      console.log(songUploadObject, 'is this right?')
+      console.log(songUploadObject, allTakes, 'waiting on this')
+
+      const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
+      songUploadObject.songName = songNameInput
+      songUploadObject.songCaption = songCaptionInput
+      songUploadObject.date = new Date()
+      console.log(optionIndex, allTakes, 'this is .')
+      
       actions
         .uploadFile(
           {
-            fileName: chosenFile,
+            fileName: fileName,
             fileType: "audio/mpeg-3",
-            file: selUpload.songBlob,
+            file: songUploadObject.songBlob,
             kind: "song",
           },
-          selUpload
+          songUploadObject
         )
         .then((res) => {
-          console.log(res.data)
+          console.log(res)
         })
         .catch(console.error);
     }
-  };
+    setOptionInnerHtml(`${songUploadObject.songName}`)
+    console.log(optionInnerHtml, '??')
+    setTimeout(()=> {
+      songNameInputRef.current.value =  ""
+      songCaptionInputRef.current.value =  ""
+    }, [200])
+  }
+
+  // const saveFile = (e) => {
+  //   e.preventDefault()
+  //   if (allTakes.length === 0) {
+  //     console.log('no takes')
+  //   } 
+  //   else {
+  //     console.log("this is what you're uploading", allTakes)
+  //     let selUpload = allTakes[theTakes.current.selectedIndex];
+  //     selUpload.setName();
+
+  //     let chosenFile = selUpload.user._id + selUpload.name.replaceAll(" ", "-");
+  //     console.log(chosenFile, 'and this is?')
+  //     // actions
+  //     //   .uploadFile(
+  //     //     {
+  //     //       fileName: chosenFile,
+  //     //       fileType: "audio/mpeg-3",
+  //     //       file: selUpload.songBlob,
+  //     //       kind: "song",
+  //     //     },
+  //     //     selUpload
+  //     //   )
+  //     //   .then((res) => {
+  //     //     console.log(res.data)
+  //     //   })
+  //     //   .catch(console.error);
+  //   }
+  // };
   const [songNameInput, setSongNameInput] = useState();
   const [songCaptionInput, setSongCaptionInput] = useState();
 
   const saveSongPopUpRef = useRef();
   const section2aRef = useRef();
-  const section2bRef = useRef();
   const songNameInputRef = useRef();
   const songCaptionInputRef = useRef();
   const [saveSongMenu, setSaveSongMenu] = useState(false);
@@ -479,27 +534,8 @@ function TestAudio(props) {
       saveOutRef10.current.style.width = "0"
       saveOutRef11.current.style.width = "95%"
       theTakes.current.style.width = "88%"
-
-      // section2bRef.current.style.height = "5%";
-      // section2bRef.current.style.transition = "height .5s .3s";
-      // saveSongPopUpRef.current.style.height = "100%";
-      // saveSongPopUpRef.current.style.transition = "height .5s .3s";
-
-      // section2aRef.current.style.opacity = "0";
-      // section2bRef.current.style.opacity = "0";
-      // section2aRef.current.style.transition = "opacity .5";
-      // section2bRef.current.style.transition = "opacity .3s";
-
-
-      // songNameInputRef.current.style.opacity = 1;
-      // songCaptionInputRef.current.style.opacity = 1;
-      // songNameInputRef.current.style.transition = "opacity .5s";
-      // songCaptionInputRef.current.style.transition = "opacity .5s";
-      // windowRef.current.style.bottom = "50%";
     }
     else {
-      // saveSongPopUpRef.current.style.height = "0px";
-      // saveSongPopUpRef.current.style.transition = "height .5s";
       section2aRef.current.style.height = "30%";
       section2aRef.current.style.transition = "height .5s";
       s2aSuggestions1Ref.current.style.display = "flex"
@@ -520,21 +556,6 @@ function TestAudio(props) {
       saveOutRef10.current.style.width = "22%"
       saveOutRef11.current.style.width = "70%"
       theTakes.current.style.width = "84%"
-
-
-      // buttonCloseRef.current.style.opacity = 0
-      // section2bRef.current.style.height = "50%";
-      // section2bRef.current.style.transition = "height .5s";
-      // // section2aRef.current.style.opacity = "1";
-      // // // section2bRef.current.style.opacity = "1";
-      // // section2aRef.current.style.transition = "opacity .5s";
-      // // section2bRef.current.style.transition = "opacity .5s";
-      // saveSongPopUpRef.current.style.transition = "height .5s";
-      // // windowRef.current.style.bottom = "0";
-      // songNameInputRef.current.style.opacity = 0;
-      // songCaptionInputRef.current.style.opacity = 0;
-      // songNameInputRef.current.style.transition = "opacity .5s";
-      // songCaptionInputRef.current.style.transition = "opacity .5s";
     }
   }, [saveSongMenu])
   
@@ -542,10 +563,11 @@ function TestAudio(props) {
     if (saveSongMenu === true) {
       return (
         <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
-          <form className="song-inputs-container" onSubmit={handleSubmit}>
+          <form className="song-inputs-container" onSubmit={handleSaveSubmit}>
             <div className="section-title">
-              Add A Track Title And Caption
+              Upload A Take
             </div>
+
             <div className="section-1_song-name">
               <input 
                 className="song-name-input" 
@@ -554,9 +576,6 @@ function TestAudio(props) {
                 placeholder="Name this flow.."
                 onChange={(e) => setSongNameInput(e.target.value)}
                 ></input>
-              {/* <button className="song-name-button">
-                <img className="social-icons si-send" src={send} alt="send" />
-              </button> */}
             </div>
   
             <div className="section-2_song-caption">
@@ -567,17 +586,23 @@ function TestAudio(props) {
                 placeholder="Caption this flow.."
                 onChange={(e) => setSongCaptionInput(e.target.value)}
                 ></input>
-              {/* <button className="song-caption-button">
-                <img className="social-icons si-send" src={send} alt="send" />
-              </button> */}
             </div>
+
             <div className="buttons-container">
-              <button className="cancel-save-button" ref={buttonCloseRef} onClick={toggleSaveSongMenu}>
-                Cancel
-              </button>
-              <button className="save-song-button">
-                Save
-              </button>
+              <div className="buttons-container_shadow-div-inset">
+                <button 
+                  className="cancel-save-button" 
+                  ref={buttonCloseRef}
+                  type="button"
+                  onClick={toggleSaveSongMenu}
+                  >
+                  <img className="button-icons" src={xExit} alt="exit" />
+                </button>
+
+                <button className="save-song-button" type="submit">
+                  Save
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -586,38 +611,38 @@ function TestAudio(props) {
     else {
       return (
         <div className="actions-2_record">
-        <div className="record-container">
-          <div className="record-1_select-beat">
-            <div className="select-beat-title">
-              Select A Beat :
-            </div>
-            <div className="select-beat_shadow-div-inset">
-              <div className="select-beat_shadow-div-outset">
-                <select id="selectBox" className="track-select" onChange={loadTrack}>
-                  {chooseTrack()}
-                </select>
+          <div className="record-container">
+            <div className="record-1_select-beat">
+              <div className="select-beat-title">
+                Select A Beat :
+              </div>
+              <div className="select-beat_shadow-div-inset">
+                <div className="select-beat_shadow-div-outset">
+                  <select id="selectBox" className="track-select" onChange={loadTrack}>
+                    {chooseTrack()}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-  
-          <div className="record-2_record-btn">
-            <div className="record-btn_shadow-div-inset">
-              <div
-                className="record-btn_shadow-div-outset"
-                onClick={handleRecStop}
-                id="record-stop"
-                >
-                <img
-                  className="button-icons bi-record bi-record-float"
-                  id="record-stop-img"
-                  src={mic}
-                  alt="record icon"
-                  />
+
+            <div className="record-2_record-btn">
+              <div className="record-btn_shadow-div-inset">
+                <div
+                  className="record-btn_shadow-div-outset"
+                  onClick={handleRecStop}
+                  id="record-stop"
+                  >
+                  <img
+                    className="button-icons bi-record bi-record-float"
+                    id="record-stop-img"
+                    src={mic}
+                    alt="record icon"
+                    />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       )
     }
   }
@@ -655,7 +680,7 @@ function TestAudio(props) {
           </p>
         </div>
       </div>
-
+      {console.log(optionIndex, 'ok this should be updated')}
       <div className="section-2_control-panel">
         <div className="section-2a_flow-suggestions" ref={section2aRef}>
           <div className="suggestions sug-1" ref={s2aSuggestions1Ref}>
@@ -681,9 +706,6 @@ function TestAudio(props) {
                   </button>
                 </div>
               </div>
-              {/* <div className="rhyme-title-container">
-                Lock Rhymes
-              </div> */}
             </div>
           </div>
           <div className="suggestions sug-2" ref={s2aSuggestions2Ref}>
@@ -707,9 +729,9 @@ function TestAudio(props) {
           </div>
         </div>
 
-        <div className="section-2b_flow-controls" ref={saveOutRef1}> {/*height: 70% */}
+        <div className="section-2b_flow-controls" ref={saveOutRef1}> 
           <div className="flow-controls-container">
-            <div className="flow-controls-1_playback-display" ref={saveOutRef2}> {/*height: 18% */}
+            <div className="flow-controls-1_playback-display" ref={saveOutRef2}>
               <div className="play-btn-container">
                 <div className="play-btn-container_shadow-div-outset">
                   <div className="play-btn-container_shadow-div-inset">
@@ -741,14 +763,14 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className="flow-controls-2_actions" ref={saveOutRef3}> {/*height: 81% */}
-              <div className="actions-container_shadow-div-outset" ref={saveOutRef4}> {/*height: 94% */}
-                <div className="actions-container_shadow-div-inset" ref={saveOutRef5}> {/*height: 96% */}
-                  <div className="actions-1_flow-takes" ref={saveOutRef6}> {/*height: 24% */}
-                    <div className="flow-takes-1_select-takes" ref={saveOutRef7}> {/* width: 100% */}
+            <div className="flow-controls-2_actions" ref={saveOutRef3}>
+              <div className="actions-container_shadow-div-outset" ref={saveOutRef4}>
+                <div className="actions-container_shadow-div-inset" ref={saveOutRef5}>
+                  <div className="actions-1_flow-takes" ref={saveOutRef6}>
+                    <div className="flow-takes-1_select-takes" ref={saveOutRef7}>
                       <div className="select-takes-container_shadow-div-outset">
                         <div className="select-takes-container" ref={saveOutRef11}>
-                          <div className="select-takes_shadow-div-inset" ref={saveOutRef8}>  {/* width: 97% */}
+                          <div className="select-takes_shadow-div-inset" ref={saveOutRef8}>
                             <select 
                               id="takes" 
                               className="select-takes_shadow-div-outset" 
@@ -756,7 +778,7 @@ function TestAudio(props) {
                               onChange={(e) => loadTake(e)}
                               > 
                                 {chooseTake()}
-                            </select> {/* width: 89% */}
+                            </select>
                           </div>
                           <div className="select-takes-title">
                             {user.userName}'s Takes
@@ -771,7 +793,7 @@ function TestAudio(props) {
                       </div>
                     </div>
 
-                    <div className="flow-takes-2_takes-actions" ref={saveOutRef9}> {/* opacity: 0, width: 0 */}
+                    <div className="flow-takes-2_takes-actions" ref={saveOutRef9}>
                       <div className="takes-actions-container">
                         <div className="actions-btn-container">
                         {/* onClick={saveFile} */}

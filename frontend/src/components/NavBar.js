@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import TheContext from "../TheContext";
-import actions from "../api";
 import mic from "../images/modern-mic.svg";
 import avatar from "../images/avatar.svg";
 import home from "../images/home.svg";
@@ -9,13 +8,10 @@ import search from "../images/search.svg";
 
 function NavBar(props) {
   const {
-    user, setUser, userViewed, setUserViewed,
-    toggleRecord, setToggleRecord,
-    toggleFeed, setToggleFeed,
-    toggleProfile, setToggleProfile,
-  } = React.useContext(
-    TheContext
-  );
+    user, setUser, 
+    setUserViewed,
+    locationIndicator
+  } = React.useContext(TheContext);
 
   const socialBtnRef1= useRef();
   const socialBtnRef2 = useRef();
@@ -56,36 +52,36 @@ function NavBar(props) {
       searchBtnRef4.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
       searchBtnRef5.current.style.color = "white"
     }
-    else if (toggleRecord === true) {
-      searchBtnRef1.current.style.background = "initial"
-      searchBtnRef1.current.style.boxShadow = "2px 2px 3px 0px #353535, -3px -3px 4px #787878"
-      searchBtnRef1.current.style.border = "none"
-      searchBtnRef1.current.style.transition = "all .4s"
-      searchBtnRef2.current.style.boxShadow = "#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset"
-      searchBtnRef2.current.style.height = "40px"
-      searchBtnRef2.current.style.width = "40px"
-      searchBtnRef2.current.style.transition = "all .4s"
-      searchBtnRef3.current.style.boxShadow = "#333333 2px 2px 3px 0px, #838383 -2px -2px 3px"
-      searchBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
-      searchBtnRef5.current.style.color = "#ff8ebd"
+    else if (props.searchPoppedUp === false) {
+      if (locationIndicator?.pathname === "/recordingBooth") {
+        searchBtnRef1.current.style.background = "initial"
+        searchBtnRef1.current.style.boxShadow = "2px 2px 3px 0px #353535, -3px -3px 4px #787878"
+        searchBtnRef1.current.style.border = "none"
+        searchBtnRef1.current.style.transition = "all .4s"
+        searchBtnRef2.current.style.boxShadow = "#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset"
+        searchBtnRef2.current.style.height = "40px"
+        searchBtnRef2.current.style.width = "40px"
+        searchBtnRef2.current.style.transition = "all .4s"
+        searchBtnRef3.current.style.boxShadow = "#333333 2px 2px 3px 0px, #838383 -2px -2px 3px"
+        searchBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
+        searchBtnRef5.current.style.color = "#ff8ebd"
+      }
+      else {
+        searchBtnRef1.current.style.background = "initial"
+        searchBtnRef1.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
+        searchBtnRef1.current.style.border = "none"
+        searchBtnRef1.current.style.transition = "all .4s"
+        searchBtnRef2.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
+        searchBtnRef2.current.style.height = "40px"
+        searchBtnRef2.current.style.width = "40px"
+        searchBtnRef2.current.style.transition = "all .4s"
+        searchBtnRef3.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
+        searchBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
+        searchBtnRef5.current.style.color = "#ff8ebd"
+      }
     }
-    else {
-      searchBtnRef1.current.style.background = "initial"
-      searchBtnRef1.current.style.boxShadow = "2px 2px 5px #888888, -3px -3px 3px #ffffff"
-      searchBtnRef1.current.style.border = "none"
-      searchBtnRef1.current.style.transition = "all .4s"
-      searchBtnRef2.current.style.boxShadow = "inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff"
-      searchBtnRef2.current.style.height = "40px"
-      searchBtnRef2.current.style.width = "40px"
-      searchBtnRef2.current.style.transition = "all .4s"
-      searchBtnRef3.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
-      searchBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
-      searchBtnRef5.current.style.color = "#ff8ebd"
-    }
-  }, [props.searchPoppedUp])
 
-  useEffect(() => {
-    if (toggleProfile === true) {
+    if (locationIndicator?.pathname.slice(0, 8) === "/profile") {
       profileBtnRef1.current.style.background = "#ec6aa0";
       profileBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
       profileBtnRef1.current.style.border = "1px solid #ec6aa0"
@@ -122,8 +118,7 @@ function NavBar(props) {
       recordBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
       recordBtnRef5.current.style.color = "#ff8ebd"
     }
-    
-    else if (toggleFeed === true) {
+    else if (locationIndicator?.pathname === "/") {
       socialBtnRef1.current.style.background = "#ec6aa0";
       socialBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
       socialBtnRef1.current.style.border = "1px solid #ec6aa0"
@@ -159,8 +154,9 @@ function NavBar(props) {
       recordBtnRef3.current.style.boxShadow = "2px 2px 3px 0px #929292, -2px -2px 3px #ffffff"
       recordBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
       recordBtnRef5.current.style.color = "#ff8ebd"
+
     }
-    else if (toggleRecord === true) {
+    else if (locationIndicator?.pathname === "/recordingBooth") {
       recordBtnRef1.current.style.background = "#ec6aa0";
       recordBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
       recordBtnRef1.current.style.border = "1px solid #ec6aa0"
@@ -197,7 +193,7 @@ function NavBar(props) {
       socialBtnRef4.current.style.filter = "invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)"
       socialBtnRef5.current.style.color = "#ff8ebd"
     }
-  }, [toggleRecord, toggleFeed, toggleProfile])
+  }, [locationIndicator, props.searchPoppedUp])
 
   return (
     <div className="NavBar">
@@ -217,11 +213,7 @@ function NavBar(props) {
               className="navbar-btn-container" 
               ref={socialBtnRef1}
               style={{borderRadius: "40px 8px 8px 40px"}}
-              onClick={() => {                       
-                setToggleRecord(false)
-                setToggleProfile(false)
-                setToggleFeed(true)
-              }}>
+              >
               <div className="navbar-btn_shadow-div-inset" ref={socialBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={socialBtnRef3}>
                   <img className="button-icons bi-social" src={home} ref={socialBtnRef4} alt="social feed icon" />
@@ -236,11 +228,7 @@ function NavBar(props) {
               to={user._id ? ("/recordingBooth") : ("/auth")}
               ref={recordBtnRef1}
               className="navbar-btn-container"
-              onClick={() => {                       
-                setToggleRecord(true)
-                setToggleProfile(false)
-                setToggleFeed(false)
-              }}>
+              >
               <div className="navbar-btn_shadow-div-inset" ref={recordBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={recordBtnRef3}>
                   <img className="button-icons bi-record" src={mic} ref={recordBtnRef4} alt="record song icon" />
@@ -270,11 +258,7 @@ function NavBar(props) {
               className="navbar-btn-container" 
               ref={profileBtnRef1} 
               style={{borderRadius: "8px 40px 40px 8px"}}
-              onClick={() => {
-                setToggleProfile(true)
-                setToggleFeed(false)
-                setToggleRecord(false)
-              }}>
+              >
               <div className="navbar-btn_shadow-div-inset" ref={profileBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={profileBtnRef3}>
                   <img className="button-icons bi-profile" src={avatar} ref={profileBtnRef4} alt="user profile icon" />

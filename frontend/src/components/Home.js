@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { CSSTransition } from "react-transition-group"
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import actions from "../api";
@@ -18,12 +18,9 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   const { 
-    user, 
-    navDisplayed, toggleSocial, 
-    setToggleProfile
+    user
   } = React.useContext(TheContext);
 
-  const location = useLocation();
   const gifsCopy = [...gifsArr];
   const [theFeedBool, setTheFeedBool] = useState(true);
   const [trendingBool, setTrendingBool] = useState(false);
@@ -379,15 +376,6 @@ function Home(props) {
     }
   }
 
-  const transClass = () => {
-    if (toggleSocial === true) {
-      return "fadeRight"
-    }
-    else {
-      return "fade"
-    }
-  }
-
   return (
     <TheViewContext.Provider value={{
       songInView, setSongInView,
@@ -414,7 +402,7 @@ function Home(props) {
                   </div>
                 </div>
               </div>
-              {console.log(howManyRendersRef.current++)}
+              {/* {console.log(howManyRendersRef.current++)} */}
               <div className="each-feed_shadow-div-inset" style={{borderRadius: "50px"}}>
                 <div className="each-feed_shadow-div-outset" ref={trendingRef1} onClick={() => {
                   setFeedToggleRefs(trendingRef1, trendingRef2, feedRef1, feedRef2, followingRef1, followingRef2)
@@ -535,9 +523,8 @@ function Home(props) {
                       <Link 
                         to={{pathname: `/profile/${songUserInView._id}`, profileInfo: songUserInView}} 
                         className="user-pic_shadow-div-inset"
-                        onClick={() => setToggleProfile(true)}
                         >
-                        <img src={songUserInView.picture} alt="user in view profile" ref={props.profilePicRef} />
+                        <img src={songUserInView?.picture} alt="user in view profile" ref={props.profilePicRef} />
                       </Link>
                     </div>
                   </div>

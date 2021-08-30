@@ -3908,8 +3908,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .SaveSongDisplay .song-inputs-container {
   height: 96%;
-  width: 95%;
-  border-radius: 8px;
+  width: 94%;
+  border-radius: 5px 20px 20px 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3928,17 +3928,18 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .SaveSongDisplay .song-inputs-container .section-title {
-  height: 10%;
+  height: 9%;
   width: 100%;
   text-align: start;
-  text-indent: 5%;
+  text-indent: 3%;
   color: pink;
+  font-size: 14px;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name {
   height: 25%;
-  width: 92%;
-  border-radius: 50px;
+  width: 94%;
+  border-radius: 5px 50px 50px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3958,8 +3959,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input {
   height: 80%;
-  width: 96%;
-  border-radius: 50px;
+  width: 92%;
+  border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3978,32 +3979,35 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
           box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
   background: #797979;
+  padding-left: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::-webkit-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input:-ms-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::-ms-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input::placeholder {
   color: white;
-  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-1_song-name .song-name-input:focus {
+  color: white;
+  border: 2px solid pink;
+  outline: none !important;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption {
   height: 25%;
-  width: 92%;
-  border-radius: 50px;
+  width: 94%;
+  border-radius: 5px 50px 50px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4023,8 +4027,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input {
   height: 80%;
-  width: 96%;
-  border-radius: 50px;
+  width: 92%;
+  border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4042,26 +4046,29 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
   background: #797979;
   border: none;
+  padding-left: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::-webkit-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input:-ms-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::-ms-input-placeholder {
   color: white;
-  text-indent: 4%;
 }
 
 .SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input::placeholder {
   color: white;
-  text-indent: 4%;
+}
+
+.SaveSongDisplay .song-inputs-container .section-2_song-caption .song-caption-input:focus {
+  color: white;
+  border: 2px solid pink;
+  outline: none !important;
 }
 
 .SaveSongDisplay .song-inputs-container .buttons-container {
@@ -4071,9 +4078,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -4083,20 +4090,80 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.SaveSongDisplay .song-inputs-container .buttons-container .cancel-save-button {
-  -webkit-box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
-          box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
-  border-radius: 30px;
-  color: white;
-  background: #797979;
+.SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset {
+  height: 100%;
+  width: 90%;
+  border-radius: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+          box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+  padding: 0% 2%;
 }
 
-.SaveSongDisplay .song-inputs-container .buttons-container .save-song-button {
-  -webkit-box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
-          box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
+.SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .cancel-save-button {
+  height: 60%;
+  width: 8%;
   border-radius: 30px;
-  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
+          box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
   background: #797979;
+  border: none;
+  color: white;
+}
+
+.SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .cancel-save-button:active {
+  -webkit-box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
+          box-shadow: inset 2px 2px 3px #3d3f3f,  inset -2px -2px 3px #989898;
+}
+
+.SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .save-song-button {
+  height: 60%;
+  width: 50%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
+          box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
+  background: #63debc;
+  border: 1px solid #e0fff6;
+  color: #676767;
+  font-weight: bold;
 }
 
 .actions-2_record {

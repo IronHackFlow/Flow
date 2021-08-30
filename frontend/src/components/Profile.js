@@ -28,7 +28,7 @@ function Profile(props) {
   useEffect(() => {
     console.log("profile.js line 53 ", props.location.profileInfo);
     actions
-      .getUserSongs({ songUser: props.location.profileInfo._id })
+      .getUserSongs({ songUser: props.location.profileInfo?._id })
       .then((res) => {
         setThisUserSongs(res.data);
         console.log(res.data, "lol")

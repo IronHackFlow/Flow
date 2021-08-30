@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import actions from './api'
@@ -12,14 +12,10 @@ import Profile from './components/Profile'
 import SongScreen from './components/SongScreen'
 
 function App() {
+  const location = useLocation();
   const [user, setUser] = useState({});
   const [userViewed, setUserViewed] = useState({});
-  const [navDisplayed, setNavDisplayed] = useState(false);
-  const [toggleFeed, setToggleFeed] = useState(true);
-  const [toggleRecord, setToggleRecord] = useState(false);
-  const [toggleProfile, setToggleProfile] = useState(false);
-
-  const navRef = useRef();
+  const [locationIndicator, setLocationIndicator] = useState();
 
   useEffect(() => {
     actions
@@ -30,36 +26,15 @@ function App() {
     }).catch(console.error)
   }, [])
 
-  const navDisplayCheck = () => {
-    if (navDisplayed === true) {
-      navRef.current.style.height = "0px"
-      navRef.current.style.borderBottom = "none"
-      navRef.current.style.animation = 'none'
-      setNavDisplayed(false)
-    }
-    else {
-      navRef.current.style.height = "325px"
-      navRef.current.style.borderBottom = "5px solid #a6a6a6"
-      navRef.current.style.transition = "height .5s"
-      navRef.current.style.animation = "massiveMenu .8s linear forwards"
-      setNavDisplayed(true)
-    }
-  }
-  const hideNavBar = () => {
-    if (navDisplayed === true) {
-      navRef.current.style.height = "0px"
-      navRef.current.style.animation = 'none'
-      setNavDisplayed(false)
-    }    
-  }
+  useEffect(() => {
+    setLocationIndicator(location)
+  }, [location])
+
   return (
     <TheContext.Provider value={{
         user, setUser, 
         userViewed, setUserViewed, 
-        navDisplayed, setNavDisplayed,
-        toggleRecord, setToggleRecord,
-        toggleFeed, setToggleFeed,
-        toggleProfile, setToggleProfile,
+        locationIndicator, setLocationIndicator
     }}>
       <div className="App">
         <Switch>

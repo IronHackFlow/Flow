@@ -339,66 +339,92 @@
     align-items: center;
     
     .song-inputs-container {
-        @include flexCenter(96%, 95%, 8px, space-evenly, center, column);
+        @include flexCenter(96%, 94%, 5px 20px 20px 20px, space-evenly, center, column);
         box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
 
         .section-title {
-            height: 10%;
+            height: 9%;
             width: 100%;
             text-align: start;
-            text-indent: 5%;
+            text-indent: 3%;
             color: pink;
+            font-size: 14px;
         }
 
         .section-1_song-name {
-            @include flexCenter(25%, 92%, 50px, center, center, row);
+            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
             box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
     
             .song-name-input {
-                @include flexCenter(80%, 96%, 50px, center, center, row);
+                @include flexCenter(80%, 92%, 40px, center, center, row);
                 // opacity: 0;
                 border: none;
                 outline: none;
                 box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
                 background: #797979;
-                
+                padding-left: 4%;
+
                 &::placeholder {
                     color: white;
-                    text-indent: 4%;
+                }
+                &:focus {
+                    color: white;
+                    border: 2px solid pink;
+                    outline: none !important;
                 }
             }
         }
     
         .section-2_song-caption {
-            @include flexCenter(25%, 92%, 50px, center, center, row);
+            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
             box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
     
             .song-caption-input {
-                @include flexCenter(80%, 96%, 50px, center, center, row);
+                @include flexCenter(80%, 92%, 40px, center, center, row);
                 box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
                 background: #797979;
                 border: none;
-                
+                padding-left: 4%;
+
                 &::placeholder {
+                    color: white;   
+                }
+                &:focus {
                     color: white;
-                    text-indent: 4%;
+                    border: 2px solid pink;
+                    outline: none !important;
                 }
             }
         }
         .buttons-container {
-            @include flexCenter(20%, 100%, 0px, flex-end, center, row);
+            @include flexCenter(20%, 100%, 0px, center, center, row);
 
-            .cancel-save-button {
-                box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
-                border-radius: 30px;
-                color: white;
-                background: #797979;
-            }
-            .save-song-button {
-                box-shadow: 3px 3px 3px #464545, -2px -2px 3px #aeaeae;
-                border-radius: 30px;
-                color: white;
-                background: #797979;
+            .buttons-container_shadow-div-inset {
+                @include flexCenter(100%, 90%, 40px, space-between, center, row);
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+                padding: 0% 2%;
+
+                .cancel-save-button {
+                    @include flexCenter(60%, 8%, 30px, center, center, row);
+                    box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
+                    background: #797979;
+                    border: none;
+                    color: white;
+                    
+                    &:active {
+                        box-shadow: inset 2px 2px 3px #3d3f3f, 
+                                    inset -2px -2px 3px #989898;
+                    }
+                }
+
+                .save-song-button {
+                    @include flexCenter(60%, 50%, 30px, center, center, row);
+                    box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
+                    background: #63debc;
+                    border: 1px solid #e0fff6;
+                    color: #676767;
+                    font-weight: bold;
+                }
             }
         }
     }
