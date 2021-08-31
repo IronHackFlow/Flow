@@ -130,7 +130,7 @@
                 position: relative;
 
                 .play-btn-container {
-                    @include flexCenter(100%, 25%, 50px, center, flex-end, row);
+                    @include flexCenter(100%, 17%, 50px, center, flex-end, row);
 
                     .play-btn-container_shadow-div-outset {
                         @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
@@ -142,11 +142,12 @@
                             box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                             .play-btn_shadow-div-outset {
-                                @include flexCenter(80%, 59%, 50%, center, center,row);
+                                @include flexCenter(80%, 79%, 50%, center, center,row);
                                 text-align: center;
                                 font-weight: bold;
                                 background: #e24f8c;
-                                margin-left: 8%;
+                                margin-left: 9%;
+                                border: none;
                                 box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
                                 
                                 img {
@@ -163,7 +164,7 @@
                 }
 
                 .play-slider-container {
-                    @include flexCenter(100%, 75%, 0px, flex-start, flex-end, row);
+                    @include flexCenter(100%, 80%, 0px, center, flex-end, row);
 
                     .play-slider-container_shadow-div-outset {
                         @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
@@ -171,14 +172,52 @@
 
                         .play-slider-container_shadow-div-inset {
                             @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                            background: #5d5d5d;
+                            // background: #5d5d5d;
                             box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
-                            .dur-onset {
-                                height: 15%;
-                                width: 90%;
-                                border-radius: 50px;
-                                background: #63DEBC;
+                            .play-slider_shadow-div-outset {
+                                @include flexCenter(75%, 96%, 8px 50px 50px 8px, center, center, column);
+                                box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
+
+                                .play-slider_shadow-div-inset {
+                                    @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
+                                    // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+                                    input[type="range"] {
+                                        appearance: none;
+                                        height: 46%;
+                                        width: 94%;
+                                        margin-left: 1%;
+                                        border-radius: 50px;
+                                        // background: #63DEBC;
+                                        box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
+                                    }
+                                    input[type="range"]::-webkit-slider-thumb {
+                                        appearance: none;
+                                        height: 20px;
+                                        width: 20px;
+                                        border-radius: 50px;
+                                        cursor: pointer;
+                                        background: #6f6f6f;
+                                        transition: background-color 1s ease;
+                                        box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
+
+                                    }
+
+                                    .time-text-container {
+                                        @include flexCenter(25%, 90%, 8px, space-between, center, row);
+                                        padding: 0% 3%;
+        
+                                        .time-text-start {
+                                            font-size: 11px;
+                                            color: white;
+                                        }
+                                        .time-text-end {
+                                            font-size: 11px;
+                                            color: white;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

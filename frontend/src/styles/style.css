@@ -3300,7 +3300,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-btn-container {
   height: 100%;
-  width: 25%;
+  width: 17%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3362,7 +3362,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset {
   height: 80%;
-  width: 59%;
+  width: 79%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3380,7 +3380,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   text-align: center;
   font-weight: bold;
   background: #e24f8c;
-  margin-left: 8%;
+  margin-left: 9%;
+  border: none;
   -webkit-box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
           box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
 }
@@ -3397,14 +3398,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container {
   height: 100%;
-  width: 75%;
+  width: 80%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
@@ -3452,16 +3453,104 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background: #5d5d5d;
   -webkit-box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
           box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 }
 
-.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .dur-onset {
-  height: 15%;
-  width: 90%;
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset {
+  height: 75%;
+  width: 96%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
+          box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 46%;
+  width: 94%;
+  margin-left: 1%;
   border-radius: 50px;
-  background: #63DEBC;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
+          box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #6f6f6f;
+  -webkit-transition: background-color 1s ease;
+  transition: background-color 1s ease;
+  -webkit-box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
+          box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container {
+  height: 25%;
+  width: 90%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 0% 3%;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container .time-text-start {
+  font-size: 11px;
+  color: white;
+}
+
+.section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container .time-text-end {
+  font-size: 11px;
+  color: white;
 }
 
 .section-2_control-panel .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions {

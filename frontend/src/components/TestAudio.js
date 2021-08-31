@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
 import beat3 from "../assets/beatsTrack3.m4a";
@@ -23,25 +22,13 @@ import TheContext from "../TheContext";
 import Modal from "./ModalMenu";
 import actions from "../api";
 import NavBar from "./NavBar";
-import e from "cors";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext);
 
-  const location = useLocation();
   const [recordings, setRecordings] = useState(
     <audio id="userRecording"></audio>
   );
-  const [audioSrc, setAudioSrc] = useState(null);
-  const [rhymes, setRhymes] = useState([]);
-  const { transcript, resetTranscript } = useSpeechRecognition();
-  const [silent, setSilent] = useState(false);
-  const [lock, setLock] = useState([]);
-  const [keyCounter, setKeyCounter] = useState(0);
-  const [takes, setTakes] = useState([]);
-  const [allTakes, setAllTakes] = useState([]);
-  const [currentTake, setCurrentTake] = useState();
-  let [fullTranscript, setFullTranscript] = useState("");
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
     { song: beat2, name: "Futurology" },
@@ -49,9 +36,44 @@ function TestAudio(props) {
     { song: beat4, name: "Callback" },
     { song: beat5, name: "Drained" },
   ]);
+  const [audioSrc, setAudioSrc] = useState(null);
+  const [rhymes, setRhymes] = useState([]);
+  const [silent, setSilent] = useState(false);
+  const [lock, setLock] = useState([]);
+  const [keyCounter, setKeyCounter] = useState(0);
+  const [takes, setTakes] = useState([]);
+  const [allTakes, setAllTakes] = useState([]);
+  const [songUploadObject, setSongUploadObject] = useState([]);
+  const [selectedOption, setSelectedOption] = useState();
+  const [songNameUpdate, setSongNameUpdate] = useState();
+  const [songNameInput, setSongNameInput] = useState();
+  const [songCaptionInput, setSongCaptionInput] = useState();
+  const [saveSongMenu, setSaveSongMenu] = useState(false);
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
-  const takeAudioRef = useRef();
-  const theTakes = useRef();
+  const saveSongPopUpRef = useRef();
+  const section2aRef = useRef();
+  const songNameInputRef = useRef();
+  const songCaptionInputRef = useRef();
+  const buttonCloseRef = useRef();
+  const takeAudioRef = useRef('');
+  const selectTakesRef = useRef();
+  const s2aSuggestions1Ref = useRef();
+  const s2aSuggestions2Ref = useRef();
+  const s2aCustomRhymeRef = useRef();
+  const s2aRhymeLockRef = useRef();
+  const saveOutRef1 = useRef();
+  const saveOutRef2 = useRef();
+  const saveOutRef3 = useRef();
+  const saveOutRef4 = useRef();
+  const saveOutRef5 = useRef();
+  const saveOutRef6 = useRef();
+  const saveOutRef7 = useRef();
+  const saveOutRef8 = useRef();
+  const saveOutRef9 = useRef();
+  const saveOutRef10 = useRef();
+  const saveOutRef11 = useRef();
+  const keyRef = useRef(0);
 
   class SongData {
     constructor(songmix, name, blobFile) {
@@ -180,16 +202,13 @@ function TestAudio(props) {
 
   //add recording to list
   const addRec = (blobby, name, blobFile) => {
-    const copyRec = (
-      <audio src={blobby} id={"userRecording"} key={name} ref={takeAudioRef}></audio>
-    );
+    // const copyRec = (
+    //   <audio src={blobby} id={"userRecording"} key={name} ref={takeAudioRef}></audio>
+    // );
     const songObject = new SongData(blobby, name, blobFile);
-    // allTakes.push(songObject);
     setAllTakes(eachTake => [...eachTake, songObject])
     console.log(allTakes, "this should be solid")
-    setCurrentTake(songObject)
-
-    setRecordings(copyRec);
+    // setRecordings(copyRec);
     takes.push(blobby);
   };
 
@@ -223,8 +242,6 @@ function TestAudio(props) {
       //console.log('stopped recording')
     };
   }
-
-  let keyRef = useRef(0)
 
   function go(blob) {
     let mpegBlob = new Blob(blob, { type: "audio/mpeg-3" });
@@ -315,9 +332,6 @@ function TestAudio(props) {
       </section>
     );
   }
-  const [optionValue, setOptionValue] = useState();
-  const takeRef = useRef();
-  const buttonCloseRef = useRef();
 
   const handlePlayPause = () => {
     if (takeAudioRef.current.paused) {
@@ -330,21 +344,16 @@ function TestAudio(props) {
     }
   };
 
-
-
-  const [songUploadObject, setSongUploadObject] = useState([]);
-  const [optionIndex, setOptionIndex] = useState();
-  const [selectedOption, setSelectedOption] = useState();
-  const [songNameUpdate, setSongNameUpdate] = useState();
-
   const loadTake = (e) => {
+    console.log(e.target, 'loaded take target')
     setSelectedOption(e.target.value)
-    console.log(selectedOption, 'hmm??')
-    setOptionValue(e.target.selectedOptions[0].value)
-    setOptionIndex(e.target.selectedIndex)
     setAudioSrc(e.target.value)
     setSongUploadObject(allTakes[e.target.selectedIndex])
   };
+
+  const deleteOneTake = () => {
+    setAllTakes(eachTake => eachTake.filter(item => item.songmix !== selectedOption))
+  }
 
   const displayTake = () => {
     if (takes.length === 0) {
@@ -411,15 +420,6 @@ function TestAudio(props) {
     }, [200])
   }
 
-  const [songNameInput, setSongNameInput] = useState();
-  const [songCaptionInput, setSongCaptionInput] = useState();
-
-  const saveSongPopUpRef = useRef();
-  const section2aRef = useRef();
-  const songNameInputRef = useRef();
-  const songCaptionInputRef = useRef();
-  const [saveSongMenu, setSaveSongMenu] = useState(false);
-
   const toggleSaveSongMenu = () => {
     if (saveSongMenu === false) {
       setSaveSongMenu(true)
@@ -429,22 +429,6 @@ function TestAudio(props) {
     }
   }
   
-  const s2aSuggestions1Ref = useRef();
-  const s2aSuggestions2Ref = useRef();
-  const s2aCustomRhymeRef = useRef();
-  const s2aRhymeLockRef = useRef();
-  const saveOutRef1 = useRef();
-  const saveOutRef2 = useRef();
-  const saveOutRef3 = useRef();
-  const saveOutRef4 = useRef();
-  const saveOutRef5 = useRef();
-  const saveOutRef6 = useRef();
-  const saveOutRef7 = useRef();
-  const saveOutRef8 = useRef();
-  const saveOutRef9 = useRef();
-  const saveOutRef10 = useRef();
-  const saveOutRef11 = useRef();
-
   useEffect(() => {
     if (saveSongMenu === true) {
       songNameInputRef.current.focus()
@@ -477,7 +461,7 @@ function TestAudio(props) {
       saveOutRef10.current.style.opacity = 0
       saveOutRef10.current.style.width = "0"
       saveOutRef11.current.style.width = "95%"
-      theTakes.current.style.width = "88%"
+      selectTakesRef.current.style.width = "88%"
     }
     else {
       section2aRef.current.style.height = "30%";
@@ -499,7 +483,7 @@ function TestAudio(props) {
       saveOutRef10.current.style.opacity = 1
       saveOutRef10.current.style.width = "22%"
       saveOutRef11.current.style.width = "70%"
-      theTakes.current.style.width = "84%"
+      selectTakesRef.current.style.width = "84%"
     }
   }, [saveSongMenu])
   
@@ -608,6 +592,82 @@ function TestAudio(props) {
    setRhymes([])
   }
 
+  const audioRef = useRef(new Audio(audioSrc))
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [trackProgress, setTrackProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { duration } = audioRef.current;
+  const intervalRef = useRef();
+  const isReady = useRef(false);
+
+  useEffect(() => {
+    if (isPlaying) {
+      console.log(audioRef.current, "what?")
+      audioRef.current.play()
+      startTimer();
+    }
+    else {
+      clearInterval(intervalRef.current);
+      audioRef.current.pause();
+    }
+  }, [isPlaying])
+
+  useEffect(() => {
+    return () => {
+      audioRef.current.pause();
+      clearInterval(intervalRef.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    audioRef.current.pause();
+
+    audioRef.current = new Audio(audioSrc);
+    setTrackProgress(audioRef.current.currentTime);
+
+    // if (isReady.current) {
+    //   audioRef.current.play();
+    //   setIsPlaying(true);
+    //   startTimer();
+    // }
+    // else {
+    //   isReady.current = true
+    // }
+  }, [selectedOption, audioSrc])
+
+  const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : '0%';
+  const trackStyling = `
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #63DEBC), color-stop(${currentPercentage}, #555555))
+  `;
+
+  const startTimer = () => {
+    clearInterval(intervalRef.current)
+
+    intervalRef.current = setInterval(() => {
+      if (audioRef.current.ended) {
+        setIsPlaying(false)
+      } else {
+        setTrackProgress(audioRef.current.currentTime)
+        console.log("audioRef current time: ", audioRef.current.currentTime)
+      }
+    }, [1000])
+  }
+  
+  const onScrub = (value) => {
+    clearInterval(intervalRef.current)
+    audioRef.current.currentTime = value;
+    setTrackProgress(audioRef.current.currentTime)
+  }
+
+  const onScrubEnd = () => {
+    console.log('what happens here?')
+    if (!isPlaying) {
+      setIsPlaying(true)
+    }
+    startTimer()
+  }
+
+
   return (
     <div className="TestAudio">
       <audio id="song" src={beat1} loop={true}></audio>
@@ -624,7 +684,7 @@ function TestAudio(props) {
           </p>
         </div>
       </div>
-      {console.log(allTakes, "this should be solid")}
+
       <div className="section-2_control-panel">
         <div className="section-2a_flow-suggestions" ref={section2aRef}>
           <div className="suggestions sug-1" ref={s2aSuggestions1Ref}>
@@ -679,10 +739,24 @@ function TestAudio(props) {
               <div className="play-btn-container">
                 <div className="play-btn-container_shadow-div-outset">
                   <div className="play-btn-container_shadow-div-inset">
-                    <div
-                      className="play-btn_shadow-div-outset"
-                      id="playPause"
-                      onClick={handlePlayPause}
+                    {isPlaying ? (
+                      <button
+                        className="play-btn_shadow-div-outset play"
+                        aria-label="Pause"
+                        onClick={() => setIsPlaying(false)}
+                      >
+                        <img
+                          className="button-icons bi-pause"
+                          id="play-stop-img"
+                          src={pause}
+                          alt="pause icon"
+                        />
+                      </button>
+                    ) : (
+                      <button
+                      className="play-btn_shadow-div-outset pause"
+                      aria-label="Play"
+                      onClick={() => setIsPlaying(true)}
                     >
                       <img
                         className="button-icons bi-play"
@@ -690,8 +764,10 @@ function TestAudio(props) {
                         src={play}
                         alt="play icon"
                       />
+                    </button>
+                    )
+                  }
                       <audio ref={takeAudioRef} src={audioSrc} />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -699,8 +775,30 @@ function TestAudio(props) {
               <div className="play-slider-container">
                 <div className="play-slider-container_shadow-div-outset">
                   <div className="play-slider-container_shadow-div-inset">
-                    <div className="dur-onset" id="duration">
-                      {/* <TimeSlider /> */}
+                    <div className="play-slider_shadow-div-outset">
+                      <div className="play-slider_shadow-div-inset">
+                        <input 
+                          className="dur-onset progress"
+                          type="range"
+                          value={trackProgress}
+                          step="1"
+                          min="0"
+                          max={duration ? duration : `${duration}`}
+                          onChange={(e) => onScrub(e.target.value)}
+                          onMouseUp={onScrubEnd}
+                          onKeyUp={onScrubEnd}
+                          style={{background: trackStyling}}
+                          > 
+                        </input>
+                        <div className="time-text-container">
+                          <div className="time-text-start">
+                            {trackProgress}
+                          </div>
+                          <div className="time-text-end">
+                            {audioRef.current.duration}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -719,11 +817,10 @@ function TestAudio(props) {
                               id="takes" 
                               className="select-takes_shadow-div-outset" 
                               value={selectedOption}
-                              ref={theTakes} 
+                              ref={selectTakesRef} 
                               onChange={(e) => loadTake(e)}
                               > 
                                 {chooseTake()}
-                                {console.log(selectedOption, 'hmm??')}
                             </select>
                           </div>
                           <div className="select-takes-title">
@@ -750,7 +847,7 @@ function TestAudio(props) {
                           </div>
                         </div>
                         <div className="actions-btn-container">
-                          <div className="actions-btn_shadow-div-outset" onClick={deleteTake}>
+                          <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>
                             <img className="button-icons" src={xExit} alt="delete bin icon" />
                           </div>
                         </div>
