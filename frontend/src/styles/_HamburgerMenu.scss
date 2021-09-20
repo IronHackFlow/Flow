@@ -18,7 +18,7 @@ nav {
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     box-shadow: inset 3px 3px 4px #6b6b6b, inset -3px -3px 4px #dcdcdc;
-                
+
     .menu-route {
       @include flexCenter(33%, 50%, none, center, center, row);
       opacity: var(--menuOpacity);
@@ -37,9 +37,9 @@ nav {
           a {
             text-decoration: none;
             font-weight: bold;
-            font-size: .8em;
+            font-size: 0.8em;
           }
-        } 
+        }
       }
     }
   }
@@ -60,7 +60,7 @@ nav {
 //     position: relative;
 //     background: #ec6aa0;
 //     border-radius: 3px;
-//     box-shadow: inset 1px 1px 2px #313232, 
+//     box-shadow: inset 1px 1px 2px #313232,
 //                 inset -1px -1px 1px #aaacad;
 //   }
 // }
@@ -85,69 +85,72 @@ nav {
   }
 }
 
-  .mo-6, .mo-5, .mo-4, .mo-3, .mo-2, .mo-1 {
-    box-shadow: inset 0px 0px 0px #959595, inset -0px -0px 0px #959595;
-  }
+.mo-6,
+.mo-5,
+.mo-4,
+.mo-3,
+.mo-2,
+.mo-1 {
+  box-shadow: inset 0px 0px 0px #959595, inset -0px -0px 0px #959595;
+}
 
-  .mo-6 {
-    opacity: var(--mo6opacity);
-    animation: var(--anim-dip-6)
-  }
-  .mo-5 {
-    opacity: var(--mo5opacity);
-    animation: var(--anim-dip-5)
-  }
-  .mo-4 {
-    opacity: var(--mo4opacity);
-    animation: var(--anim-dip-4)
-  }
-  .mo-3 {
-    opacity: var(--mo3opacity);
-    animation: var(--anim-dip-3)
-  }
-  .mo-2 {
-    opacity: var(--mo2opacity);
-    animation: var(--anim-dip-2)
-  }
-  .mo-1 {
-    opacity: var(--mo1opacity);
-    animation: var(--anim-dip-1)
-  }
-  .mi-6 {
-    animation: var(--anim-pop-6)
-  }
-  .mi-5 {
-    animation: var(--anim-pop-5)
-  }
-  .mi-4 {
-    animation: var(--anim-pop-4)
-  }
-  .mi-3 {
-    animation: var(--anim-pop-3)
-  }
-  .mi-2 {
-    animation: var(--anim-pop-2)
-  }
-  .mi-1 {
-    animation: var(--anim-pop-1)
-  }
-  .mi-6 a {
-    color: var(--link-color-6);
-  }
-  .mi-5 a {
-    color: var(--link-color-5);
-  }
-  .mi-4 a {
-    color: var(--link-color-4);
-  }
-  .mi-3 a {
-    color: var(--link-color-3);
-  }
-  .mi-2 a {
-    color: var(--link-color-2);
-  }
-  .mi-1 a {
-    color: var(--link-color-1);
-  }
-
-  
+.mo-6 {
+  opacity: var(--mo6opacity);
+  animation: var(--anim-dip-6);
+}
+.mo-5 {
+  opacity: var(--mo5opacity);
+  animation: var(--anim-dip-5);
+}
+.mo-4 {
+  opacity: var(--mo4opacity);
+  animation: var(--anim-dip-4);
+}
+.mo-3 {
+  opacity: var(--mo3opacity);
+  animation: var(--anim-dip-3);
+}
+.mo-2 {
+  opacity: var(--mo2opacity);
+  animation: var(--anim-dip-2);
+}
+.mo-1 {
+  opacity: var(--mo1opacity);
+  animation: var(--anim-dip-1);
+}
+.mi-6 {
+  animation: var(--anim-pop-6);
+}
+.mi-5 {
+  animation: var(--anim-pop-5);
+}
+.mi-4 {
+  animation: var(--anim-pop-4);
+}
+.mi-3 {
+  animation: var(--anim-pop-3);
+}
+.mi-2 {
+  animation: var(--anim-pop-2);
+}
+.mi-1 {
+  animation: var(--anim-pop-1);
+}
+.mi-6 a {
+  color: var(--link-color-6);
+}
+.mi-5 a {
+  color: var(--link-color-5);
+}
+.mi-4 a {
+  color: var(--link-color-4);
+}
+.mi-3 a {
+  color: var(--link-color-3);
+}
+.mi-2 a {
+  color: var(--link-color-2);
+}
+.mi-1 a {
+  color: var(--link-color-1);
+}

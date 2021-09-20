@@ -1,326 +1,323 @@
 .NavBar {
-    @include flexCenter(11%, 100%, 0px, space-between, stretch, column);
-    // position: relative;
+  @include flexCenter(11%, 100%, 0px, space-between, stretch, column);
+  // position: relative;
+  position: absolute;
+  bottom: 0;
+
+  .section-1c_song-details {
+    @include flexCenter(80%, 100%, 0px, space-evenly, center, column);
+    position: absolute;
+    background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
+
+    .song-details-1_actions {
+      @include flexCenter(23%, 100%, 0, center, center, row);
+
+      .actions_shadow-div-outset {
+        @include flexCenter(75%, 97%, 30px 6px 6px 30px, center, center, row);
+        box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+
+        .actions_shadow-div-inset {
+          @include flexCenter(85%, 98%, 50px 5px 5px 50px, stretch, center, row);
+          box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
+
+          .action-btns-container {
+            @include flexCenter(100%, 80%, 0px, space-evenly, center, row);
+
+            .action-btn_shadow-div-outset {
+              @include flexCenter(72%, 30%, 5px, space-evenly, center, row);
+              box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
+
+              .action-btn-icon_shadow-div-inset {
+                @include flexCenter(85%, 35%, 5px, center, center, row);
+                position: relative;
+                color: #ec6aa0;
+                list-style-type: none;
+                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
+
+                &:active {
+                  box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+                }
+              }
+
+              .action-btn-text {
+                width: 58%;
+
+                p {
+                  font-size: 11px;
+                  color: #e0bbbb;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .song-details-2_song-data {
+      @include flexCenter(76%, 100%, 0px, flex-start, center, column);
+      color: white;
+
+      .song-data-container {
+        @include flexCenter(75%, 97%, 5px 5px 50px 50px, space-evenly, center, column);
+        box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
+
+        .song-user-section {
+          @include flexCenter(36%, 98%, 5px 5px 25px 25px, space-evenly, center, row);
+          box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
+
+          .user-pic-container {
+            @include flexCenter(100%, 24%, 50px, center, center, row);
+
+            .user-pic_shadow-div-outset {
+              @include flexCenter(80%, 99%, 50px 6px 6px 50px, flex-start, center, row);
+              box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
+
+              .user-pic_shadow-div-inset {
+                @include flexCenter(93%, 55%, 40px 6px 6px 40px, flex-start, center, row);
+                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                margin-left: 2px;
+
+                img {
+                  height: 77%;
+                  width: 67%;
+                  border-radius: 40px;
+                  margin-left: 3px;
+                  border: 2px solid #e24f8c;
+                }
+              }
+            }
+          }
+
+          .song-title-container {
+            @include flexCenter(100%, 71%, 50px, center, center, column);
+
+            .song-title_shadow-div-outset {
+              @include flexCenter(80%, 99%, 5px 50px 50px 5px, center, flex-start, column);
+              box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
+
+              .song-title_shadow-div-inset {
+                @include flexCenter(50%, 94%, 4px 50px 50px 4px, flex-start, center, row);
+                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                margin-left: 3px;
+                overflow-x: scroll;
+
+                #one {
+                  display: flex;
+                  align-items: center;
+                  margin-left: 5px;
+                  font-size: 16px;
+                  color: white;
+                  font-weight: bold;
+
+                  img {
+                    height: 5px;
+                    width: 5px;
+                    margin-left: 5px;
+                    filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%)
+                      contrast(76%);
+                  }
+                }
+
+                #two {
+                  padding-left: 6px;
+                  font-size: 14px;
+                  color: #e0bbbb;
+                }
+              }
+
+              .song-caption-container {
+                @include flexCenter(35%, 100%, 50px, flex-start, center, row);
+
+                .song-date {
+                  margin-left: 7px;
+                  white-space: nowrap;
+                  text-align: left;
+                  color: #e0bbbb;
+                  font-size: 11px;
+
+                  img {
+                    height: 5px;
+                    width: 5px;
+                    margin-left: 3px;
+                    filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%)
+                      contrast(76%);
+                  }
+                }
+
+                .song-caption {
+                  white-space: nowrap;
+                  text-align: left;
+                  color: #e0bbbb;
+                  font-size: 11px;
+                  padding-left: 8px;
+                }
+              }
+            }
+          }
+        }
+
+        .song-play-section {
+          @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
+
+          .play-bar-container {
+            @include flexCenter(14%, 100%, 50px, center, center, column);
+
+            .play-bar_shadow-div-inset {
+              @include flexCenter(60%, 85%, 50px, center, center, column);
+              box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
+            }
+          }
+
+          .play-song-container {
+            @include flexCenter(86%, 100%, 50px, center, center, column);
+
+            .play-btn-container {
+              @include flexCenter(100%, 19%, 50px, center, center, column);
+
+              .play-btn_shadow-div-outset {
+                @include flexCenter(90%, 90%, 50px, center, center, column);
+                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
+
+                .play-btn_shadow-div-inset {
+                  @include flexCenter(89%, 89%, 50px, center, center, column);
+                  box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
+
+                  .play-btn_shadow-div-outset-2 {
+                    @include flexCenter(77%, 77%, 50px, center, center, column);
+                    box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
+                    background: linear-gradient(145deg, #676767, #7e7e7e);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navbar_section {
+    @include flexCenter(100%, 100%, 40px 40px 0px 0px, center, center, row);
+    background: linear-gradient(0deg, #c8c5c5 0%, #ecf0f3 100%);
+    box-shadow: 0px -5px 20px 8px #353535;
     position: absolute;
     bottom: 0;
-
-    .section-1c_song-details {
-        @include flexCenter(80%, 100%, 0px, space-evenly, center, column);
-        position: absolute;
-        background: linear-gradient(161deg, #b1b1b1 0%, #4f4f4f 100%);
-
-        .song-details-1_actions {
-            @include flexCenter(23%, 100%, 0, center, center, row);
-
-
-            .actions_shadow-div-outset {
-                @include flexCenter(75%, 97%, 30px 6px 6px 30px, center, center, row);
-                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
-
-                .actions_shadow-div-inset {
-                    @include flexCenter(85%, 98%, 50px 5px  5px 50px, stretch, center, row);
-                    box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
-    
-                    .action-btns-container {
-                        @include flexCenter(100%, 80%, 0px, space-evenly, center, row);
-    
-                        .action-btn_shadow-div-outset {
-                            @include flexCenter(72%, 30%, 5px, space-evenly, center, row);
-                            box-shadow: 2px 2px 3px #4f4f4f, -2px -2px 2px 0px #ffffff;
-                            
-                            .action-btn-icon_shadow-div-inset {
-                                @include flexCenter(85%, 35%, 5px, center, center, row);
-                                position: relative;
-                                color: #ec6aa0;
-                                list-style-type: none;
-                                box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
-        
-                                &:active {
-                                    box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
-                                }            
-                            }
-        
-                            .action-btn-text {
-                                width: 58%;
-
-                                p {
-                                    font-size: 11px;
-                                    color: #e0bbbb;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        .song-details-2_song-data {
-            @include flexCenter(76%, 100%, 0px, flex-start, center, column);
-            color: white;
-
-            .song-data-container {
-                @include flexCenter(75%, 97%, 5px 5px 50px 50px, space-evenly, center, column);
-                box-shadow: 2px 2px 3px #494949, -2px -2px 3px 0px #e9e9e9;
-
-                .song-user-section {
-                    @include flexCenter(36%, 98%, 5px 5px 25px 25px, space-evenly, center, row);
-                    box-shadow: inset 2px 2px 3px #494949, inset -2px -2px 3px 0px #e9e9e9;
-
-                    .user-pic-container {
-                        @include flexCenter(100%, 24%, 50px, center, center, row);
-        
-                        .user-pic_shadow-div-outset {
-                            @include flexCenter(80%, 99%, 50px 6px 6px 50px, flex-start, center, row);
-                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #ffffff;
-        
-                            .user-pic_shadow-div-inset {
-                                @include flexCenter(93%, 55%, 40px 6px 6px 40px, flex-start, center, row);
-                                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
-                                margin-left: 2px;
-
-                                img {
-                                    height: 77%;
-                                    width: 67%;
-                                    border-radius: 40px;
-                                    margin-left: 3px;
-                                    border: 2px solid #e24f8c;
-                                }
-                            }
-                        }
-                    }
-
-                    .song-title-container {
-                        @include flexCenter(100%, 71%, 50px, center, center, column);
-
-                        .song-title_shadow-div-outset {
-                            @include flexCenter(80%, 99%, 5px 50px 50px 5px, center, flex-start, column);
-                            box-shadow: 2px 2px 3px #494949, -2px -2px 2px 0px #e9e9e9;
-                            
-                            .song-title_shadow-div-inset {
-                                @include flexCenter(50%, 94%, 4px 50px 50px 4px, flex-start, center, row);
-                                box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
-                                margin-left: 3px;
-                                overflow-x: scroll;
-                                
-                                #one {
-                                    display: flex;
-                                    align-items: center;
-                                    margin-left: 5px;
-                                    font-size: 16px;
-                                    color: white;
-                                    font-weight: bold;
-
-                                    img {
-                                        height: 5px;
-                                        width: 5px;
-                                        margin-left: 5px;
-                                        filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
-                                    }
-                                }
-                            
-                                #two {
-                                    padding-left: 6px;
-                                    font-size: 14px;
-                                    color: #e0bbbb;
-                                }
-
-                            }
-
-                            .song-caption-container {
-                                @include flexCenter(35%, 100%, 50px, flex-start, center, row);
-
-                                .song-date {
-                                    margin-left: 7px;
-                                    white-space: nowrap;
-                                    text-align: left;
-                                    color: #e0bbbb;
-                                    font-size: 11px;
-
-                                    img {
-                                        height: 5px;
-                                        width: 5px;
-                                        margin-left: 3px;
-                                        filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
-                                    }
-                                }
-                                
-                                .song-caption {
-                                    white-space: nowrap;
-                                    text-align: left;
-                                    color: #e0bbbb;
-                                    font-size: 11px;
-                                    padding-left: 8px;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .song-play-section {
-                    @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
-
-                    .play-bar-container {
-                        @include flexCenter(14%, 100%, 50px, center, center, column);
-
-                        .play-bar_shadow-div-inset {
-                            @include flexCenter(60%, 85%, 50px, center, center, column);
-                            box-shadow: inset 3px 3px 3px #5d5d5d, inset -2px -2px 3px 0px #cbcbcb;
-                        }
-                    }
-
-                    .play-song-container {
-                        @include flexCenter(86%, 100%, 50px, center, center, column);
-
-                        .play-btn-container {
-                            @include flexCenter(100%, 19%, 50px, center, center, column);
-                            
-                            .play-btn_shadow-div-outset {
-                                @include flexCenter(90%, 90%, 50px, center, center, column);
-                                box-shadow: 3px 3px 6px #575757, -2px -2px 5px 0px #dfdfdf;
-
-                                .play-btn_shadow-div-inset {
-                                    @include flexCenter(89%, 89%, 50px, center, center, column);
-                                    box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 3px 0px #a9a9a9;
-
-                                    .play-btn_shadow-div-outset-2 {
-                                        @include flexCenter(77%, 77%, 50px, center, center, column);
-                                        box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
-                                        background: linear-gradient(145deg, #676767, #7e7e7e)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .navbar_section {
-        @include flexCenter(100%, 100%, 40px 40px 0px 0px, center, center, row);
-        background: linear-gradient(0deg, #c8c5c5 0%, #ecf0f3 100%);
-        box-shadow: 0px -5px 20px 8px #353535;
-        position: absolute;
-        bottom: 0;
-    }
+  }
 }
 
 // navbar styles across multiple components
 .navbar_shadow-div-outset {
-    @include flexCenter(76%, 93%, 50px, center, center, row);
-    box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
-    border: 1px solid #d1d1d1;
+  @include flexCenter(76%, 93%, 50px, center, center, row);
+  box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
+  border: 1px solid #d1d1d1;
 
-    // background: #dddddd;
+  // background: #dddddd;
 
-    .navbar_shadow-div-inset {
-        @include flexCenter(84%, 97%, 55px, space-evenly, center, row);
-        box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
+  .navbar_shadow-div-inset {
+    @include flexCenter(84%, 97%, 55px, space-evenly, center, row);
+    box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
 
-        .navbar-btn-container {
-            @include flexCenter(80%, 22.5%, 5px, center, center, column);
-            box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
-            text-decoration: none;
-            
-            .navbar-btn_shadow-div-inset {
-                @include flexCenter(40px, 40px, 50px, center, center, row);
-                box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
+    .navbar-btn-container {
+      @include flexCenter(80%, 22.5%, 5px, center, center, column);
+      box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
+      text-decoration: none;
 
-                .navbar-btn_shadow-div-outset {
-                    @include flexCenter(75%, 75%, 50%, center, center, row);
-                    box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
+      .navbar-btn_shadow-div-inset {
+        @include flexCenter(40px, 40px, 50px, center, center, row);
+        box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
 
-                    img {
-                        height: 1.5em;
-                        width: 1.5em;
-                    }
-                    &:active {
-                        box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
-                                    inset -2px -2px 3px #ffffff;
-                    }
-                }
-            }
+        .navbar-btn_shadow-div-outset {
+          @include flexCenter(75%, 75%, 50%, center, center, row);
+          box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
 
-            .navbar-btn-text {
-                @include flexCenter(15%, 100%, 0px, center, center, column);
-                font-size: 11px;
-                color: #ff8ebd;
-            }
+          img {
+            height: 1.5em;
+            width: 1.5em;
+          }
+          &:active {
+            box-shadow: inset 2px 2px 3px 0px #b0b1b3, inset -2px -2px 3px #ffffff;
+          }
         }
-    }
-}
+      }
 
+      .navbar-btn-text {
+        @include flexCenter(15%, 100%, 0px, center, center, column);
+        font-size: 11px;
+        color: #ff8ebd;
+      }
+    }
+  }
+}
 
 @keyframes animatedOutset {
-    from {
-        box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
-    }
-    to {
-        box-shadow: inset 2px 2px 3px 0px #b0b1b3, 
-        inset -2px -2px 3px #ffffff;
-    }
+  from {
+    box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
+  }
+  to {
+    box-shadow: inset 2px 2px 3px 0px #b0b1b3, inset -2px -2px 3px #ffffff;
+  }
 }
 @keyframes opacityToOne {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes fadeOutText {
-    0% {
-        opacity: 1;
-        width: initial;
-    }
-    60% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-        width: 0;
-    }
+  0% {
+    opacity: 1;
+    width: initial;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+  }
 }
 @keyframes moveBtnsLeft {
-    0% {
-        left: 0px;
-    }
-    100% {
-        left: -60px;
-    }
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -60px;
+  }
 }
 @keyframes popOutBtns {
-    0% {
-        width: 30px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-        right: 0px;
-    }
-    100% {
-        width: 195px;
-        border-radius: 30px 15px 15px 30px;
-        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
-        right: -51px;
-    }
+  0% {
+    width: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+    right: 0px;
+  }
+  100% {
+    width: 195px;
+    border-radius: 30px 15px 15px 30px;
+    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+    right: -51px;
+  }
 }
 
 @mixin menuPopout() {
-    @keyframes #{$name} {
-        from {
-            opacity: $opacity;
-            opacity: $opacity2;
-            width: $width;
-            left: $width2;
-            right: $right;
-            border-radius: $borderRadius;
-        }
-        to {
-            opacity: $opacityX;
-            opacity: $opacity2X;
-            width: $widthX;
-            left: $width2X;
-            right: $rightX;
-            border-radius: $borderRadiusX;
-        }
+  @keyframes #{$name} {
+    from {
+      opacity: $opacity;
+      opacity: $opacity2;
+      width: $width;
+      left: $width2;
+      right: $right;
+      border-radius: $borderRadius;
     }
+    to {
+      opacity: $opacityX;
+      opacity: $opacity2X;
+      width: $widthX;
+      left: $width2X;
+      right: $rightX;
+      border-radius: $borderRadiusX;
+    }
+  }
 }

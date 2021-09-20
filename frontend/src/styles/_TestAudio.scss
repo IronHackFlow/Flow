@@ -1,533 +1,540 @@
 .TestAudio {
-    position: absolute;
+  position: absolute;
 }
 
 .section-1_speech {
-    @include flexCenter(37%, 100%, 0px, center, center, column);
-    background-image: url('../images/turnt-bg-image.jpg');
-    background-size: 104%;
-    background-position-x: 50%;
-    background-position-y: 10%;
+  @include flexCenter(37%, 100%, 0px, center, center, column);
+  background-image: url('../images/turnt-bg-image.jpg');
+  background-size: 104%;
+  background-position-x: 50%;
+  background-position-y: 10%;
 
-    .scroll-rhymes-container {
-        @include flexCenter(70%, 87%, 20px, flex-start, stretch, column);
-        margin-top: 3%;
-        overflow-y: scroll;
-        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+  .scroll-rhymes-container {
+    @include flexCenter(70%, 87%, 20px, flex-start, stretch, column);
+    margin-top: 3%;
+    overflow-y: scroll;
+    box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
 
-        .transcript-line-1 {
-            color: white;
-            font-size: 16px;
-            width: 95%;
-            font-weight: bold;
-        }
+    .transcript-line-1 {
+      color: white;
+      font-size: 16px;
+      width: 95%;
+      font-weight: bold;
     }
+  }
 
-    .scroll-rhymes-line {
-        @include flexCenter(15%, 88%, 15px, center, center, row);
-        margin-top: 4%;
-        box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
-        overflow-x: scroll;
+  .scroll-rhymes-line {
+    @include flexCenter(15%, 88%, 15px, center, center, row);
+    margin-top: 4%;
+    box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+    overflow-x: scroll;
 
-        .transcript-line-2 {
-          height: 90%;
-          width: 93%;
-          text-align: start;
-          overflow-y: scroll;
-          color: #01fff3;
-          font-size: 14px;
-          font-weight: bold;
-        }
+    .transcript-line-2 {
+      height: 90%;
+      width: 93%;
+      text-align: start;
+      overflow-y: scroll;
+      color: #01fff3;
+      font-size: 14px;
+      font-weight: bold;
     }
+  }
 }
 
 .section-2_control-panel {
-    height: 63%;
-    background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
+  height: 63%;
+  background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
 
-    .section-2a_flow-suggestions {
-        @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
+  .section-2a_flow-suggestions {
+    @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
 
-        .suggestions {
-            @include flexCenter(41%, 95%, 12px 50px 50px 12px, center, flex-start, row);
-            box-shadow: 3px 3px 5px 0px #4c4c4c, -2px -2px 3px #d0d0d0;
+    .suggestions {
+      @include flexCenter(41%, 95%, 12px 50px 50px 12px, center, flex-start, row);
+      box-shadow: 3px 3px 5px 0px #4c4c4c, -2px -2px 3px #d0d0d0;
 
-            .custom-rhyme {
-                @include flexCenter(100%, 80%, 50px, space-evenly, center, column);
+      .custom-rhyme {
+        @include flexCenter(100%, 80%, 50px, space-evenly, center, column);
 
-                .custom-rhyme-inner {
-                    @include flexCenter(50%, 93%, 50px, center, stretch, row);
-                    overflow-x: scroll;
-                    box-shadow: inset 3px 3px 3px #5d5d5d, inset -3px -3px 3px #a7a7a7;
+        .custom-rhyme-inner {
+          @include flexCenter(50%, 93%, 50px, center, stretch, row);
+          overflow-x: scroll;
+          box-shadow: inset 3px 3px 3px #5d5d5d, inset -3px -3px 3px #a7a7a7;
 
-                    .transcript-line-3 {
-                        color: #ff95da;
-                        font-size: 16px;
-                        width: 95%;
-                        font-weight: bold;
-                    }
+          .transcript-line-3 {
+            color: #ff95da;
+            font-size: 16px;
+            width: 95%;
+            font-weight: bold;
+          }
 
-                    .transcript-line-4 {
-                        color:#ecf9b5;
-                        font-size: 16px;
-                        width: 95%;
-                        font-weight: bold;
-                    }
-                }
-
-                .custom-rhyme-title {
-                    @include flexCenter(20%, 93%, 50px, flex-start, flex-end, row);
-                    font-size: 14px;
-                    color: pink;
-                    margin-left: 4%;
-                }
-            }
-
-            .rhyme-lock-container {
-                @include flexCenter(100%, 20%, 50px, center, center, column);
-
-                .rhyme-lock-button {
-                    @include flexCenter(90%, 100%, 50px, center, center, row);
-
-                    .rhyme-lock-outset {
-                        @include flexCenter(95%, 77%, 50px, center, center, row);
-                        box-shadow: inset 3px 3px 3px #5a5a5a, inset -3px -3px 3px #b7b7b7;
-
-                        .rhyme-lock-btn {
-                            @include flexCenter(70%, 70%, 50px, center, center, row);
-                            border: none;
-                            background-color: #ec6aa0;
-                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
-                            
-                            img {
-                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                            }
-                            
-                            &:active {
-                                box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
-                            }
-                        }
-                    }
-                }
-
-                .rhyme-title-container {
-                    @include flexCenter(25%, 100%, 50px, center, center, row);
-
-                }
-            }
+          .transcript-line-4 {
+            color: #ecf9b5;
+            font-size: 16px;
+            width: 95%;
+            font-weight: bold;
+          }
         }
-    }
 
-    .section-2b_flow-controls {
-        @include flexCenter(50%, 100%, 0px, center, stretch, row);
-    
-        .flow-controls-container {
-            @include flexCenter(95%, 95%, 10px, center, center, column);
-            box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
-
-            .flow-controls-1_playback-display {
-                @include flexCenter(25%, 100%, 0px, center, flex-end, row);
-                position: relative;
-
-                .play-btn-container {
-                    @include flexCenter(100%, 17%, 50px, center, flex-end, row);
-
-                    .play-btn-container_shadow-div-outset {
-                        @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
-                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
-
-                        .play-btn-container_shadow-div-inset {
-                            @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
-                            background: #5d5d5d;
-                            box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
-
-                            .play-btn_shadow-div-outset {
-                                @include flexCenter(80%, 79%, 50%, center, center,row);
-                                text-align: center;
-                                font-weight: bold;
-                                background: #e24f8c;
-                                margin-left: 9%;
-                                border: none;
-                                box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
-                                
-                                img {
-                                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                }
-                                
-                                &:active {
-                                    box-shadow: inset 2px 2px 3px #313232, 
-                                                inset -2px -2px 3px #9fa2a4;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .play-slider-container {
-                    @include flexCenter(100%, 80%, 0px, center, flex-end, row);
-
-                    .play-slider-container_shadow-div-outset {
-                        @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-
-                        .play-slider-container_shadow-div-inset {
-                            @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                            // background: #5d5d5d;
-                            box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
-
-                            .play-slider_shadow-div-outset {
-                                @include flexCenter(75%, 96%, 8px 50px 50px 8px, center, center, column);
-                                box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
-
-                                .play-slider_shadow-div-inset {
-                                    @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
-                                    // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
-
-                                    input[type="range"] {
-                                        appearance: none;
-                                        height: 46%;
-                                        width: 94%;
-                                        margin-left: 1%;
-                                        border-radius: 50px;
-                                        // background: #63DEBC;
-                                        box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
-                                    }
-                                    input[type="range"]::-webkit-slider-thumb {
-                                        appearance: none;
-                                        height: 20px;
-                                        width: 20px;
-                                        border-radius: 50px;
-                                        cursor: pointer;
-                                        background: #6f6f6f;
-                                        transition: background-color 1s ease;
-                                        box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
-
-                                    }
-
-                                    .time-text-container {
-                                        @include flexCenter(25%, 90%, 8px, space-between, center, row);
-                                        padding: 0% 3%;
-        
-                                        .time-text-start {
-                                            font-size: 11px;
-                                            color: white;
-                                        }
-                                        .time-text-end {
-                                            font-size: 11px;
-                                            color: white;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .flow-controls-2_actions {
-                @include flexCenter(75%, 100%, 0px, center, center, column);
-
-                .actions-container_shadow-div-outset {
-                    @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
-                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-
-                    .actions-container_shadow-div-inset {
-                        @include flexCenter(94%, 97%, 35px 35px 5px 5px, space-evenly, center, column);
-                        box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                    
-                        .actions-1_flow-takes {
-                            @include flexCenter(45%, 100%, 0px, center, center, row);
-    
-                            .flow-takes-1_select-takes {
-                                @include flexCenter(100%, 65%, 0px, center, center, row);
-                
-                                .select-takes-container_shadow-div-outset {
-                                    @include flexCenter(79%, 94%, 40px 30px 30px 5px, space-evenly, center, row);
-                                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-                                    
-                                    .select-takes-container {
-                                        @include flexCenter(81%, 70%, 56px 40px 40px 10px, space-between, center, column);
-                                        
-                                        .select-takes_shadow-div-inset {
-                                            @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
-                                            box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                                            
-                                            .select-takes_shadow-div-outset {
-                                                @include flexCenter(60%, 84%, 30px, center, center, column);
-                                                box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
-                                                background-color: #6B6B6B;
-                                                border-color: #6B6B6B;
-                                                color: white;
-                                                margin-right: 5%;
-                                                &:focus {
-                                                    outline: none !important;
-                                                }
-                                            }
-                                        }
-
-                                        .select-takes-title {
-                                            @include flexCenter(30%, 100%, 50px, flex-start, center, row);
-                                            color: pink;
-                                            font-size: 12px;
-                                            margin-left: 4%;
-                                        }
-                                    }
-
-                                    .edit-takes-container_shadow-div-inset {
-                                        @include flexCenter(81%, 22%, 50px, center, center, row);
-                                        box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                                        
-                                        .edit-takes-btn_shadow-div-outset {
-                                            @include flexCenter(70%, 70%, 50px, center, center, row);
-                                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-                                            
-                                            img {
-                                                height: 1.5em;
-                                                width: 1.5em;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .flow-takes-2_takes-actions {
-                                @include flexCenter(100%, 35%, 50px, flex-start, center, row);
-
-                                .takes-actions-container {
-                                    @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
-                                    box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
-                                    background: #5d5d5d;
-
-                                    .actions-btn-container {
-                                        @include flexCenter(90%, 46%, 50%, center, center, row);
-                                    
-                                        .actions-btn_shadow-div-outset {
-                                            @include flexCenter(80%, 80%, 50%, center, center,row);
-                                            text-align: center;
-                                            font-weight: bold;
-                                            background: $charcoalBg;
-                                            box-shadow:  2px 2px 3px #3d3f3f,
-                                                        -2px -2px 3px #939597;
-                                            img {
-                                                height: 1.7em;
-                                                width: 1.7em;
-                                            }
-
-                                            &:active {
-                                                box-shadow: inset 2px 2px 3px #313232, 
-                                                            inset -2px -2px 3px #9fa2a4;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                .selected-container {
-                    @include flexCenter(100%, 20%, 0px, center, center, row);
-                    div {
-                        @include flexCenter(30px, 30px, 50px, center, center, row);
-                        font-size: .7em;
-                        padding: 1px;
-                        box-shadow: 4px 4px 7px #3d3f3f,
-                                -4px -4px 5px #939597;
-                    }
-                }
-            }
-            
+        .custom-rhyme-title {
+          @include flexCenter(20%, 93%, 50px, flex-start, flex-end, row);
+          font-size: 14px;
+          color: pink;
+          margin-left: 4%;
         }
+      }
+
+      .rhyme-lock-container {
+        @include flexCenter(100%, 20%, 50px, center, center, column);
+
+        .rhyme-lock-button {
+          @include flexCenter(90%, 100%, 50px, center, center, row);
+
+          .rhyme-lock-outset {
+            @include flexCenter(95%, 77%, 50px, center, center, row);
+            box-shadow: inset 3px 3px 3px #5a5a5a, inset -3px -3px 3px #b7b7b7;
+
+            .rhyme-lock-btn {
+              @include flexCenter(70%, 70%, 50px, center, center, row);
+              border: none;
+              background-color: #ec6aa0;
+              box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+
+              img {
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
+              }
+
+              &:active {
+                box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
+              }
+            }
+          }
+        }
+
+        .rhyme-title-container {
+          @include flexCenter(25%, 100%, 50px, center, center, row);
+        }
+      }
     }
+  }
 
-    .NavBar {
+  .section-2b_flow-controls {
+    @include flexCenter(50%, 100%, 0px, center, stretch, row);
 
-        .navbar_section {
-            background: none;
+    .flow-controls-container {
+      @include flexCenter(95%, 95%, 10px, center, center, column);
+      box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
 
-            .navbar_shadow-div-outset {
-                box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+      .flow-controls-1_playback-display {
+        @include flexCenter(25%, 100%, 0px, center, flex-end, row);
+        position: relative;
+
+        .play-btn-container {
+          @include flexCenter(100%, 17%, 50px, center, flex-end, row);
+
+          .play-btn-container_shadow-div-outset {
+            @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
+            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+
+            .play-btn-container_shadow-div-inset {
+              @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
+              background: #5d5d5d;
+              box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+              .play-btn_shadow-div-outset {
+                @include flexCenter(80%, 79%, 50%, center, center, row);
+                text-align: center;
+                font-weight: bold;
+                background: #e24f8c;
+                margin-left: 9%;
                 border: none;
+                box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
 
-                .navbar_shadow-div-inset {
-                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
-
-                    .navbar-btn-container {
-                        box-shadow:  2px 2px 3px 0px #353535, -3px -3px 4px #787878;
-
-                        .navbar-btn_shadow-div-inset {
-                            box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
-
-                            .navbar-btn_shadow-div-outset {
-                                box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
-                            }
-                        }
-                    }
+                img {
+                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                    contrast(103%);
                 }
+
+                &:active {
+                  box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+                }
+              }
             }
+          }
         }
+
+        .play-slider-container {
+          @include flexCenter(100%, 80%, 0px, center, flex-end, row);
+
+          .play-slider-container_shadow-div-outset {
+            @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+            .play-slider-container_shadow-div-inset {
+              @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+              // background: #5d5d5d;
+              box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+              .play-slider_shadow-div-outset {
+                @include flexCenter(75%, 96%, 8px 50px 50px 8px, center, center, column);
+                box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
+
+                .play-slider_shadow-div-inset {
+                  @include flexCenter(
+                    100%,
+                    100%,
+                    8px 50px 50px 8px,
+                    space-evenly,
+                    flex-start,
+                    column
+                  );
+                  // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+                  input[type='range'] {
+                    appearance: none;
+                    height: 46%;
+                    width: 94%;
+                    margin-left: 1%;
+                    border-radius: 50px;
+                    // background: #63DEBC;
+                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
+                  }
+                  input[type='range']::-webkit-slider-thumb {
+                    appearance: none;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    background: #6f6f6f;
+                    transition: background-color 1s ease;
+                    box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
+                  }
+
+                  .time-text-container {
+                    @include flexCenter(25%, 90%, 8px, space-between, center, row);
+                    padding: 0% 3%;
+
+                    .time-text-start {
+                      font-size: 11px;
+                      color: white;
+                    }
+                    .time-text-end {
+                      font-size: 11px;
+                      color: white;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .flow-controls-2_actions {
+        @include flexCenter(75%, 100%, 0px, center, center, column);
+
+        .actions-container_shadow-div-outset {
+          @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
+          box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+          .actions-container_shadow-div-inset {
+            @include flexCenter(94%, 97%, 35px 35px 5px 5px, space-evenly, center, column);
+            box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+            .actions-1_flow-takes {
+              @include flexCenter(45%, 100%, 0px, center, center, row);
+
+              .flow-takes-1_select-takes {
+                @include flexCenter(100%, 65%, 0px, center, center, row);
+
+                .select-takes-container_shadow-div-outset {
+                  @include flexCenter(79%, 94%, 40px 30px 30px 5px, space-evenly, center, row);
+                  box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+                  .select-takes-container {
+                    @include flexCenter(
+                      81%,
+                      70%,
+                      56px 40px 40px 10px,
+                      space-between,
+                      center,
+                      column
+                    );
+
+                    .select-takes_shadow-div-inset {
+                      @include flexCenter(64%, 97%, 70px 40px 40px 8px, flex-end, center, row);
+                      box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+                      .select-takes_shadow-div-outset {
+                        @include flexCenter(60%, 84%, 30px, center, center, column);
+                        box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+                        background-color: #6b6b6b;
+                        border-color: #6b6b6b;
+                        color: white;
+                        margin-right: 5%;
+                        &:focus {
+                          outline: none !important;
+                        }
+                      }
+                    }
+
+                    .select-takes-title {
+                      @include flexCenter(30%, 100%, 50px, flex-start, center, row);
+                      color: pink;
+                      font-size: 12px;
+                      margin-left: 4%;
+                    }
+                  }
+
+                  .edit-takes-container_shadow-div-inset {
+                    @include flexCenter(81%, 22%, 50px, center, center, row);
+                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+                    .edit-takes-btn_shadow-div-outset {
+                      @include flexCenter(70%, 70%, 50px, center, center, row);
+                      box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+                      img {
+                        height: 1.5em;
+                        width: 1.5em;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .flow-takes-2_takes-actions {
+                @include flexCenter(100%, 35%, 50px, flex-start, center, row);
+
+                .takes-actions-container {
+                  @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
+                  box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+                  background: #5d5d5d;
+
+                  .actions-btn-container {
+                    @include flexCenter(90%, 46%, 50%, center, center, row);
+
+                    .actions-btn_shadow-div-outset {
+                      @include flexCenter(80%, 80%, 50%, center, center, row);
+                      text-align: center;
+                      font-weight: bold;
+                      background: $charcoalBg;
+                      box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+                      img {
+                        height: 1.7em;
+                        width: 1.7em;
+                      }
+
+                      &:active {
+                        box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .selected-container {
+          @include flexCenter(100%, 20%, 0px, center, center, row);
+          div {
+            @include flexCenter(30px, 30px, 50px, center, center, row);
+            font-size: 0.7em;
+            padding: 1px;
+            box-shadow: 4px 4px 7px #3d3f3f, -4px -4px 5px #939597;
+          }
+        }
+      }
     }
+  }
+
+  .NavBar {
+    .navbar_section {
+      background: none;
+
+      .navbar_shadow-div-outset {
+        box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+        border: none;
+
+        .navbar_shadow-div-inset {
+          box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
+
+          .navbar-btn-container {
+            box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
+
+            .navbar-btn_shadow-div-inset {
+              box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
+
+              .navbar-btn_shadow-div-outset {
+                box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .SaveSongDisplay {
-    height: 72%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    
-    .song-inputs-container {
-        @include flexCenter(96%, 94%, 5px 20px 20px 20px, space-evenly, center, column);
-        box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
+  height: 72%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
-        .section-title {
-            height: 9%;
-            width: 100%;
-            text-align: start;
-            text-indent: 3%;
-            color: pink;
-            font-size: 14px;
-        }
+  .song-inputs-container {
+    @include flexCenter(96%, 94%, 5px 20px 20px 20px, space-evenly, center, column);
+    box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
 
-        .section-1_song-name {
-            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-    
-            .song-name-input {
-                @include flexCenter(80%, 92%, 40px, center, center, row);
-                // opacity: 0;
-                border: none;
-                outline: none;
-                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
-                background: #797979;
-                padding-left: 4%;
-
-                &::placeholder {
-                    color: white;
-                }
-                &:focus {
-                    color: white;
-                    border: 2px solid pink;
-                    outline: none !important;
-                }
-            }
-        }
-    
-        .section-2_song-caption {
-            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-    
-            .song-caption-input {
-                @include flexCenter(80%, 92%, 40px, center, center, row);
-                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
-                background: #797979;
-                border: none;
-                padding-left: 4%;
-
-                &::placeholder {
-                    color: white;   
-                }
-                &:focus {
-                    color: white;
-                    border: 2px solid pink;
-                    outline: none !important;
-                }
-            }
-        }
-        .buttons-container {
-            @include flexCenter(20%, 100%, 0px, center, center, row);
-
-            .buttons-container_shadow-div-inset {
-                @include flexCenter(100%, 90%, 40px, space-between, center, row);
-                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
-                padding: 0% 2%;
-
-                .cancel-save-button {
-                    @include flexCenter(60%, 8%, 30px, center, center, row);
-                    box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
-                    background: #797979;
-                    border: none;
-                    color: white;
-                    
-                    &:active {
-                        box-shadow: inset 2px 2px 3px #3d3f3f, 
-                                    inset -2px -2px 3px #989898;
-                    }
-                }
-
-                .save-song-button {
-                    @include flexCenter(60%, 50%, 30px, center, center, row);
-                    box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
-                    background: #63debc;
-                    border: 1px solid #e0fff6;
-                    color: #676767;
-                    font-weight: bold;
-                }
-            }
-        }
+    .section-title {
+      height: 9%;
+      width: 100%;
+      text-align: start;
+      text-indent: 3%;
+      color: pink;
+      font-size: 14px;
     }
+
+    .section-1_song-name {
+      @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
+      box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+      .song-name-input {
+        @include flexCenter(80%, 92%, 40px, center, center, row);
+        // opacity: 0;
+        border: none;
+        outline: none;
+        box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+        background: #797979;
+        padding-left: 4%;
+
+        &::placeholder {
+          color: white;
+        }
+        &:focus {
+          color: white;
+          border: 2px solid pink;
+          outline: none !important;
+        }
+      }
+    }
+
+    .section-2_song-caption {
+      @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
+      box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+      .song-caption-input {
+        @include flexCenter(80%, 92%, 40px, center, center, row);
+        box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+        background: #797979;
+        border: none;
+        padding-left: 4%;
+
+        &::placeholder {
+          color: white;
+        }
+        &:focus {
+          color: white;
+          border: 2px solid pink;
+          outline: none !important;
+        }
+      }
+    }
+    .buttons-container {
+      @include flexCenter(20%, 100%, 0px, center, center, row);
+
+      .buttons-container_shadow-div-inset {
+        @include flexCenter(100%, 90%, 40px, space-between, center, row);
+        box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+        padding: 0% 2%;
+
+        .cancel-save-button {
+          @include flexCenter(60%, 8%, 30px, center, center, row);
+          box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
+          background: #797979;
+          border: none;
+          color: white;
+
+          &:active {
+            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+          }
+        }
+
+        .save-song-button {
+          @include flexCenter(60%, 50%, 30px, center, center, row);
+          box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
+          background: #63debc;
+          border: 1px solid #e0fff6;
+          color: #676767;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 
 .actions-2_record {
-    @include flexCenter(55%, 100%, 0px, center, flex-start, row);
+  @include flexCenter(55%, 100%, 0px, center, flex-start, row);
 
-    .record-container {
-        @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
-        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+  .record-container {
+    @include flexCenter(92%, 96%, 5px 50px 50px 50px, space-between, center, row);
+    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
-        .record-1_select-beat {
-            @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
-            
-            .select-beat-title {
-                @include flexCenter(20%, 100%, 0px, center, flex-start, column);
-                color: pink;
-                font-size: 14px;
-                margin-left: 8%;
+    .record-1_select-beat {
+      @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
+
+      .select-beat-title {
+        @include flexCenter(20%, 100%, 0px, center, flex-start, column);
+        color: pink;
+        font-size: 14px;
+        margin-left: 8%;
+      }
+
+      .select-beat_shadow-div-inset {
+        @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
+        box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
+
+        .select-beat_shadow-div-outset {
+          @include flexCenter(75%, 88%, 50px, center, center, row);
+          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+          margin-right: 4%;
+
+          .track-select {
+            background-color: #626262;
+            color: white;
+            border-color: #626262;
+            height: 80%;
+            width: 90%;
+            &:focus {
+              outline: none !important;
             }
-            
-            .select-beat_shadow-div-inset {
-                @include flexCenter(65%, 96%, 8px 40px 40px 55px, flex-end, center, row);
-                box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
-
-                .select-beat_shadow-div-outset {
-                    @include flexCenter(75%, 88%, 50px, center, center, row);
-                    box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
-                    margin-right: 4%;
-                    
-                    .track-select {
-                        background-color: #626262;
-                        color: white;
-                        border-color: #626262;
-                        height: 80%;
-                        width: 90%;
-                        &:focus {
-                            outline: none !important;
-                        }
-                    }
-                }
-            }
+          }
         }
-
-        .record-2_record-btn {
-            @include flexCenter(100%, 35%, 50%, flex-end, center, row);
-            
-            .record-btn_shadow-div-inset {
-                @include flexCenter(87%, 63%, 50%, center, center, row);
-                box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
-                margin-right: 5%;
-
-                .record-btn_shadow-div-outset {
-                    @include flexCenter(75%, 75%, 50%, center, center, row);
-                    background: #63DEBC;
-                    box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
-
-                    .bi-record-float {
-                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                    }
-                }
-            }
-        }
+      }
     }
-}
 
+    .record-2_record-btn {
+      @include flexCenter(100%, 35%, 50%, flex-end, center, row);
+
+      .record-btn_shadow-div-inset {
+        @include flexCenter(87%, 63%, 50%, center, center, row);
+        box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+        margin-right: 5%;
+
+        .record-btn_shadow-div-outset {
+          @include flexCenter(75%, 75%, 50%, center, center, row);
+          background: #63debc;
+          box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
+
+          .bi-record-float {
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+              contrast(103%);
+          }
+        }
+      }
+    }
+  }
+}
