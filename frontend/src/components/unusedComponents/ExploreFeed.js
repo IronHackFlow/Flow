@@ -1,61 +1,60 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
-import axios from "axios";
-import TheContext from "../TheContext";
-import actions from "../api";
-import gradientbg from "../images/gradient-bg-2.png";
-import play from "../images/play.svg";
-import mic from "../images/record2.svg";
-import avatar3 from "../images/avatar3.svg";
-import social from "../images/social.svg";
-import follow from "../images/follow.svg";
-import comments from "../images/comment.svg";
-import search from "../images/search.svg";
-import heart2 from "../images/heart2.svg";
-import explore from "../images/explore.svg";
-import Search from "../components/Search";
-import gifsArr from "../images/gifs.json"
+import React, { useState, useEffect, useRef, useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import { useInView } from 'react-intersection-observer'
+import axios from 'axios'
+import TheContext from '../TheContext'
+import actions from '../api'
+import gradientbg from '../images/gradient-bg-2.png'
+import play from '../images/play.svg'
+import mic from '../images/record2.svg'
+import avatar3 from '../images/avatar3.svg'
+import social from '../images/social.svg'
+import follow from '../images/follow.svg'
+import comments from '../images/comment.svg'
+import search from '../images/search.svg'
+import heart2 from '../images/heart2.svg'
+import explore from '../images/explore.svg'
+import Search from '../components/Search'
+import gifsArr from '../images/gifs.json'
 
-let SONG = {};
+let SONG = {}
 let songLikez = ''
 
 function SocialFeed({ toggleExplore }) {
-  const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed  } = React.useContext(
-    TheContext
-  );
+  const { user, setUser, userViewed, setUserViewed, navDisplayed, setNavDisplayed } =
+    React.useContext(TheContext)
 
   // axios.get();
-  let page = 1;
-  let userUser = "";
-  let songUsersArr = [];
+  let page = 1
+  let userUser = ''
+  let songUsersArr = []
 
-  const [thisFeedSongs, setThisFeedSongs] = useState([]);
+  const [thisFeedSongs, setThisFeedSongs] = useState([])
   const [userForSong, setUserForSong] = useState({})
-  const [activeSong,setActiveSong]=useState({})
-  const [writer,setWriter]=useState()
-  const [comment, setComment] = useState();
-  const [poppedUp, setPoppedUp] = useState(false);
-  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
+  const [activeSong, setActiveSong] = useState({})
+  const [writer, setWriter] = useState()
+  const [comment, setComment] = useState()
+  const [poppedUp, setPoppedUp] = useState(false)
+  const [searchPoppedUp, setSearchPoppedUp] = useState(false)
   const [likes, setLikes] = useState(0)
 
-  const audioRef = useRef();
-  const windowRef = useRef();
-  const popUpRef = useRef();
-  const opacityRef1 = useRef();
-  const opacityRef2 = useRef();
-  const opacityRef3 = useRef();
-  const popUpSearchRef = useRef();
-  const opacitySearchRef3 = useRef();
-  const dumbSearchRef = useRef();
-  const searchBtn = useRef();
-  const commentBtn = useRef();
-  const exploreRim = useRef();
-  const exploreOut = useRef();
-  const exploreIn = useRef();
-  const exploreIcon = useRef();
-  const profilePicRef = useRef();
-  const songLikesRef = useRef();
+  const audioRef = useRef()
+  const windowRef = useRef()
+  const popUpRef = useRef()
+  const opacityRef1 = useRef()
+  const opacityRef2 = useRef()
+  const opacityRef3 = useRef()
+  const popUpSearchRef = useRef()
+  const opacitySearchRef3 = useRef()
+  const dumbSearchRef = useRef()
+  const searchBtn = useRef()
+  const commentBtn = useRef()
+  const exploreRim = useRef()
+  const exploreOut = useRef()
+  const exploreIn = useRef()
+  const exploreIcon = useRef()
+  const profilePicRef = useRef()
+  const songLikesRef = useRef()
 
   // useEffect(() => {
   //   exploreRim.current.style.animation = "rim .5s linear forwards"
@@ -63,43 +62,41 @@ function SocialFeed({ toggleExplore }) {
   //   exploreIn.current.style.animation = "in .5s linear forwards"
   //   exploreIcon.current.style.animation = "iconScale .5s linear forwards"
   // }, [])
-  
-  const menuDown = (whichMenu) => {
+
+  const menuDown = whichMenu => {
     if (whichMenu == 'search') {
-    searchBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-    popUpSearchRef.current.style.height = "0px";
-    windowRef.current.style.bottom = "0";
-    opacitySearchRef3.current.style.opacity = 0;
-    dumbSearchRef.current.style.opacity = 0;
-    setSearchPoppedUp(false);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "3px 3px 5px #3d3f3f, -2px -2px 3px #939597"
-      popUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      opacityRef1.current.style.opacity = 0;
-      opacityRef2.current.style.opacity = 0;
-      opacityRef3.current.style.opacity = 0;
-      setPoppedUp(false);
+      searchBtn.current.style.boxShadow = '3px 3px 5px #3d3f3f, -2px -2px 3px #939597'
+      popUpSearchRef.current.style.height = '0px'
+      windowRef.current.style.bottom = '0'
+      opacitySearchRef3.current.style.opacity = 0
+      dumbSearchRef.current.style.opacity = 0
+      setSearchPoppedUp(false)
+    } else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = '3px 3px 5px #3d3f3f, -2px -2px 3px #939597'
+      popUpRef.current.style.height = '0px'
+      windowRef.current.style.bottom = '0'
+      opacityRef1.current.style.opacity = 0
+      opacityRef2.current.style.opacity = 0
+      opacityRef3.current.style.opacity = 0
+      setPoppedUp(false)
     }
   }
-  const menuUp = (whichMenu) => {
+  const menuUp = whichMenu => {
     if (whichMenu == 'search') {
-    searchBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-    opacitySearchRef3.current.style.opacity = 1;
-    dumbSearchRef.current.style.opacity = 1;
-    popUpSearchRef.current.style.height = "50%";
-    windowRef.current.style.bottom = "50%";
-    setSearchPoppedUp(true);
-    }
-    else if (whichMenu == 'comment') {
-      commentBtn.current.style.boxShadow = "inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898"
-      opacityRef1.current.style.opacity = 1;
-      opacityRef2.current.style.opacity = 1;
-      opacityRef3.current.style.opacity = 1;
-      popUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setPoppedUp(true);
+      searchBtn.current.style.boxShadow = 'inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898'
+      opacitySearchRef3.current.style.opacity = 1
+      dumbSearchRef.current.style.opacity = 1
+      popUpSearchRef.current.style.height = '50%'
+      windowRef.current.style.bottom = '50%'
+      setSearchPoppedUp(true)
+    } else if (whichMenu == 'comment') {
+      commentBtn.current.style.boxShadow = 'inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898'
+      opacityRef1.current.style.opacity = 1
+      opacityRef2.current.style.opacity = 1
+      opacityRef3.current.style.opacity = 1
+      popUpRef.current.style.height = '50%'
+      windowRef.current.style.bottom = '50%'
+      setPoppedUp(true)
     }
   }
 
@@ -110,7 +107,7 @@ function SocialFeed({ toggleExplore }) {
     } else {
       menuDown('comment')
     }
-  };
+  }
 
   const popUpSearch = () => {
     if (searchPoppedUp == false) {
@@ -119,8 +116,8 @@ function SocialFeed({ toggleExplore }) {
     } else {
       menuDown('search')
     }
-  };
-  
+  }
+
   useEffect(() => {
     if (navDisplayed == true) {
       menuDown('search')
@@ -131,34 +128,32 @@ function SocialFeed({ toggleExplore }) {
   useEffect(() => {
     actions
       .getMostLikedSongs()
-      .then((usersSongs) => {
+      .then(usersSongs => {
         usersSongs.data.reverse()
-        setThisFeedSongs(usersSongs.data);
-        console.log("inside useffect", thisFeedSongs);
+        setThisFeedSongs(usersSongs.data)
+        console.log('inside useffect', thisFeedSongs)
       })
-      .catch(console.error);
-  }, [page]);
+      .catch(console.error)
+  }, [page])
 
-// const getSongUsers = (theUserId) => {
-//     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
-//     actions
-//     .getAUser(theUserId)
-//     .then((useUser) => {
-//         setUserForSong(useUser.data)
-//     })
-//     .catch(console.error)
-// }git add
+  // const getSongUsers = (theUserId) => {
+  //     console.log('HEY HEY HEY HEY HEY HEY', theUserId )
+  //     actions
+  //     .getAUser(theUserId)
+  //     .then((useUser) => {
+  //         setUserForSong(useUser.data)
+  //     })
+  //     .catch(console.error)
+  // }git add
 
-// useEffect(() => {
-//     actions
-//     .getAUser(userUser)
-//     .then((useUser) => {
-//         setUserForSong(useUser.data)
-//     })
-//     .catch(console.error)
-// }, [userUser]);
-
-
+  // useEffect(() => {
+  //     actions
+  //     .getAUser(userUser)
+  //     .then((useUser) => {
+  //         setUserForSong(useUser.data)
+  //     })
+  //     .catch(console.error)
+  // }, [userUser]);
 
   // const [userForSong, setUserForSong] = useState({});
 
@@ -176,66 +171,57 @@ function SocialFeed({ toggleExplore }) {
   let gifsCopy = [...gifsArr]
 
   const getRandomBackground = () => {
-    let index = Math.floor(Math.random()*gifsCopy.length)
+    let index = Math.floor(Math.random() * gifsCopy.length)
     // gifsCopy.splice(index, 1)
     // while (!gifsCopy.includes(gifsCopy[index])) {
-      return gifsCopy[index].url
+    return gifsCopy[index].url
     // }
   }
 
-  const handlePlayPause=()=>{
-    if(audioRef.current.paused) {
-     audioRef.current.play()
-    }
-    else {
-     audioRef.current.pause()
+  const handlePlayPause = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play()
+    } else {
+      audioRef.current.pause()
     }
   }
 
   function DisplaySong(eachSong) {
     const [ref, inView] = useInView({
       threshold: 0.5,
-    });
+    })
     if (inView) {
       // eachSong.setActiveSong(eachSong)
-      SONG = eachSong;
-      audioRef.current.src=eachSong.songURL
+      SONG = eachSong
+      audioRef.current.src = eachSong.songURL
       // profilePicRef.current.src=eachSong.songUser.picture
       // songLikesRef.current.innerHTML = eachSong.songLikes.length
       songLikez = eachSong.songLikes?.length
       console.log(songLikez, '>>>>>>>><<<<<<<<<', eachSong.songLikes)
+    } else {
     }
-    else {}
     // console.log("scrolling", inView, eachSong);
     return (
       <li
         ref={ref}
         className="video-pane"
         style={{
-          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`
+          backgroundImage: `url('${gradientbg}'), url('${eachSong.shorts}')`,
         }}
       >
         <div className="last-div"></div>
 
         <div className="text-container">
           <p className="ud-text udt-1">
-            <span style={{ color: "#ec6aa0" }}>
-              {eachSong.songUser.userName}
-            </span>{" "}
+            <span style={{ color: '#ec6aa0' }}>{eachSong.songUser.userName}</span>{' '}
           </p>
-          <p className="ud-text udt-2">
-            {eachSong.songName}
-          </p>
+          <p className="ud-text udt-2">{eachSong.songName}</p>
           <p className="ud-text udt-3">
-            {eachSong.caption ? (
-              <p>{eachSong.caption}</p>
-            ) : (
-              <p>NO CAPTION FOR THIS FLOW</p>
-            )}
+            {eachSong.caption ? <p>{eachSong.caption}</p> : <p>NO CAPTION FOR THIS FLOW</p>}
           </p>
         </div>
       </li>
-    );
+    )
   }
 
   const showSongs = () => {
@@ -243,15 +229,14 @@ function SocialFeed({ toggleExplore }) {
       eachSong.shorts = getRandomBackground()
       // setUserUser(eachSong)
       // console.log(userForSong)
-      return <DisplaySong i={i} {...eachSong} />;
-    });
-  };
-
+      return <DisplaySong i={i} {...eachSong} />
+    })
+  }
 
   const getSocialFeed = () => {
-    page === 1 ? (page = 0) : (page = 1);
-    console.log("GET SOCIAL FEED SONGS FUNCTION");
-  };
+    page === 1 ? (page = 0) : (page = 1)
+    console.log('GET SOCIAL FEED SONGS FUNCTION')
+  }
 
   // const followUser = () => {
   //   console.log(user, userViewed);
@@ -367,7 +352,7 @@ function SocialFeed({ toggleExplore }) {
 
   // const handleSubmit = (e) => {
   //   e.preventDefault()
-  //   actions.addComment({comment, SONG}) 
+  //   actions.addComment({comment, SONG})
   // }
 
   // const getCommentWriter = (num) => {
@@ -375,7 +360,7 @@ function SocialFeed({ toggleExplore }) {
   //   .getAUser({id: num})
   //   .then((res)=>{
   //     setWriter( `@${res.data.userName}`)
-      
+
   //   }).catch((e)=>{
   //     console.log('failed to get name')
   //   })
@@ -414,10 +399,10 @@ function SocialFeed({ toggleExplore }) {
   //           <div className="input-inset">
   //             <form className="social-comment-form" onSubmit={handleSubmit}>
   //               <input
-  //                   className="social-comment-input" 
-  //                   type='text' 
+  //                   className="social-comment-input"
+  //                   type='text'
   //                   onChange={(e)=>setComment(e.target.value)}
-  //                   placeholder='Drop yo comment' 
+  //                   placeholder='Drop yo comment'
   //                   ></input>
   //                 <button></button>
   //             </form>
@@ -444,32 +429,32 @@ function SocialFeed({ toggleExplore }) {
 
   return (
     // <div className="SocialFeed">
-      <div ref={windowRef} className="social-panel">
-        <ul className="video-scroll-container">
-          {showSongs()}
-          <div className="video-details-container">
-            <div className="transparent-test">
-              <div className="user-details-container">
-                <div className="user-details-inset"></div>
-              </div>
-              <div className="user-profile-image">
-                <div className="user-profile-inset social-p">
-                  <div className="nav-buttons-inset inset-social-p">
-                    <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
-                  </div>
+    <div ref={windowRef} className="social-panel">
+      <ul className="video-scroll-container">
+        {showSongs()}
+        <div className="video-details-container">
+          <div className="transparent-test">
+            <div className="user-details-container">
+              <div className="user-details-inset"></div>
+            </div>
+            <div className="user-profile-image">
+              <div className="user-profile-inset social-p">
+                <div className="nav-buttons-inset inset-social-p">
+                  <img className="button-icons bi-play" src={play} onClick={handlePlayPause}></img>
                 </div>
               </div>
             </div>
           </div>
-        </ul>
+        </div>
+      </ul>
       {/* </div> */}
-{/*       
+      {/*       
     {displayComments()}
     {displaySearch()}
     {showNavBar()} */}
-    <audio ref={audioRef} id='damn'></audio>
+      <audio ref={audioRef} id="damn"></audio>
     </div>
   )
 }
 
-export default SocialFeed;
+export default SocialFeed

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react'
 import { Switch, Route, Link, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
@@ -12,18 +12,19 @@ import Profile from './components/Profile'
 import SongScreen from './components/SongScreen'
 
 function App() {
-  const location = useLocation();
-  const [user, setUser] = useState({});
-  const [userViewed, setUserViewed] = useState({});
-  const [locationIndicator, setLocationIndicator] = useState();
+  const location = useLocation()
+  const [user, setUser] = useState({})
+  const [userViewed, setUserViewed] = useState({})
+  const [locationIndicator, setLocationIndicator] = useState()
 
   useEffect(() => {
     actions
-    .getUser()
-    .then((res) => {
-      setUser(res.data)
-      console.log("user is logged in", user)
-    }).catch(console.error)
+      .getUser()
+      .then(res => {
+        setUser(res.data)
+        console.log('user is logged in', user)
+      })
+      .catch(console.error)
   }, [])
 
   useEffect(() => {
@@ -31,27 +32,36 @@ function App() {
   }, [location])
 
   return (
-    <TheContext.Provider value={{
-        user, setUser, 
-        userViewed, setUserViewed, 
-        locationIndicator, setLocationIndicator
-    }}>
+    <TheContext.Provider
+      value={{
+        user,
+        setUser,
+        userViewed,
+        setUserViewed,
+        locationIndicator,
+        setLocationIndicator,
+      }}
+    >
       <div className="App">
         <Switch>
-          <Route exact path="/" render={(props) => <Home {...props} />} />
-          <Route exact path="/auth" render={(props) => <Auth setUser={setUser} {...props} />} />
-          <Route exact path="/profile/:id" render={(props) => <Profile user={user} {...props} />} />
-          <Route exact path="/profile" render={(props) => <Profile user={user} {...props} />} />
-          <Route exact path="/recordingBooth" render={(props) => <TestAudio {...props} />} />
-          <Route exact path="/editprofile-screen" render={(props) => <EditProfileScreen {...props} />} />
-          <Route exact path="/editprofile" render={(props) => <EditProfile {...props} />} />
+          <Route exact path="/" render={props => <Home {...props} />} />
+          <Route exact path="/auth" render={props => <Auth setUser={setUser} {...props} />} />
+          <Route exact path="/profile/:id" render={props => <Profile user={user} {...props} />} />
+          <Route exact path="/profile" render={props => <Profile user={user} {...props} />} />
+          <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
+          <Route
+            exact
+            path="/editprofile-screen"
+            render={props => <EditProfileScreen {...props} />}
+          />
+          <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
           {/* <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
           <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} /> */}
-          <Route exact path="/SongScreen/:id" render={(props) => <SongScreen {...props} />} />
+          <Route exact path="/SongScreen/:id" render={props => <SongScreen {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App

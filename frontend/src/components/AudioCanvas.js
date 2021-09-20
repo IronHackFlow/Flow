@@ -1,67 +1,64 @@
-import React from 'react';
+import React from 'react'
 
 function AudioCanvas(props) {
+  function displayCanvas() {
+    navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+      })
+      .then(stream => {
+        var context = new AudioContext()
+        var src = context.createMediaStreamSource(stream)
+        var analyser = context.createAnalyser()
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
 
-  function displayCanvas(){
+        src.connect(analyser)
 
-    navigator.mediaDevices.getUserMedia({
-      audio: true
-    })
-    .then(stream => {
-      var context = new AudioContext();
-      var src = context.createMediaStreamSource(stream);
-      var analyser = context.createAnalyser();
-      var canvas = document.getElementById('canvas')
-      var ctx = canvas.getContext("2d");
-  
-      src.connect(analyser);
-  
-      analyser.fftSize = 256;
-  
-      var bufferLength = analyser.frequencyBinCount;
-      var dataArray = new Uint8Array(bufferLength);
-      var WIDTH = canvas.width;
-      var HEIGHT = canvas.height;
-      var barWidth = (WIDTH / bufferLength) * 2.5;
-      var barHeight;
-      var x = 0;
-  
-      function renderFrame() {
+        analyser.fftSize = 256
 
-        requestAnimationFrame(renderFrame);
-        x = 0;
+        var bufferLength = analyser.frequencyBinCount
+        var dataArray = new Uint8Array(bufferLength)
+        var WIDTH = canvas.width
+        var HEIGHT = canvas.height
+        var barWidth = (WIDTH / bufferLength) * 2.5
+        var barHeight
+        var x = 0
 
-        analyser.getByteFrequencyData(dataArray);
-  
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, WIDTH, HEIGHT);
-        
-        for (var i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i]*0.3;
-          ///topcanvas
-          // barHeight + (10 * (i/bufferLength));
-          var b = 50 + (2 * (i/bufferLength))
-          var g = 150 * (3 * (i/bufferLength));
-          var r = 150;
-        
-          ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-          ctx.fillRect(x, (HEIGHT - barHeight)*0.5, barWidth, barHeight);
-  
-          x += barWidth + 1;
+        function renderFrame() {
+          requestAnimationFrame(renderFrame)
+          x = 0
+
+          analyser.getByteFrequencyData(dataArray)
+
+          ctx.fillStyle = '#000'
+          ctx.fillRect(0, 0, WIDTH, HEIGHT)
+
+          for (var i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i] * 0.3
+            ///topcanvas
+            // barHeight + (10 * (i/bufferLength));
+            var b = 50 + 2 * (i / bufferLength)
+            var g = 150 * (3 * (i / bufferLength))
+            var r = 150
+
+            ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')'
+            ctx.fillRect(x, (HEIGHT - barHeight) * 0.5, barWidth, barHeight)
+
+            x += barWidth + 1
+          }
         }
-      }
-      renderFrame();
-    })
+        renderFrame()
+      })
   }
 
   displayCanvas()
-  
+
   return (
     <div className="canvas-container">
-      <canvas id="canvas" >
-      </canvas>
+      <canvas id="canvas"></canvas>
     </div>
   )
 }
 
-export default React.memo(AudioCanvas);
+export default React.memo(AudioCanvas)

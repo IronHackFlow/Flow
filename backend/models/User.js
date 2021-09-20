@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
-const User = model('User', new Schema({
-
+const User = model(
+  'User',
+  new Schema({
     email: String,
     googleId: String,
     picture: String,
@@ -15,7 +16,7 @@ const User = model('User', new Schema({
     userInstagram: String,
     userSoundCloud: String,
     followers: [{ type: Schema.Types.ObjectId, ref: 'Follows' }],
-    userFollows: [{ type: Schema.Types.ObjectId, ref: 'Follows' }]
-
-}))
-module.exports = User 
+    userFollows: [{ type: Schema.Types.ObjectId, ref: 'Follows' }],
+  }),
+)
+module.exports = User

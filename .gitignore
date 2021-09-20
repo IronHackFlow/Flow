@@ -10,3 +10,10 @@ frontend/.env
 **/.env
 
 
+# Misc
+.DS_Store
+.vscode
+.idea
+.history
+
+
