@@ -1,40 +1,32 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import { v4 as uuidv4 } from "uuid";
+import datamuse from "datamuse";
+import TheContext from "../TheContext";
+import UseAudioPlayer from "./UseAudioPlayer";
+import actions from "../api";
+import NavBar from "./NavBar";
+import Modal from "./ModalMenu";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
 import beat3 from "../assets/beatsTrack3.m4a";
 import beat4 from "../assets/beatsTrack4.m4a";
 import beat5 from "../assets/beatsTrack5.m4a";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
-import datamuse from "datamuse";
-import mic from "../images/record2.svg";
+import mic from "../images/modern-mic.svg";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import stop from "../images/stop.svg";
-import trashbin from "../images/delete2.svg";
-import save from "../images/save.svg";
+import xExit from "../images/exit-x-2.svg";
+import save from "../images/save-disk.svg";
+import locked from "../images/locked.svg";
+import edit from "../images/edit.svg";
+import shuffle from "../images/shuffle.svg";
+import send from "../images/send.svg";
 import help from "../images/help2.svg";
-import replay from "../images/replay.svg";
-import AudioCanvas from "./AudioCanvas";
-import TheContext from "../TheContext";
-import actions from "../api";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext);
 
-  const [recordings, setRecordings] = useState(
-    <audio id="userRecording"></audio>
-  );
-  const [rhymes, setRhymes] = useState([]);
-  const { transcript, resetTranscript } = useSpeechRecognition();
-  const [silent, setSilent] = useState(false);
-  const [lock, setLock] = useState([]);
-  const [keyCounter, setKeyCounter] = useState(0);
-  const [takes, setTakes] = useState([]);
-  const [allTakes, setAllTakes] = useState([]);
-  let [fullTranscript, setFullTranscript] = useState("");
-  const theTakes=useRef()
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
     { song: beat2, name: "Futurology" },
@@ -42,80 +34,296 @@ function TestAudio(props) {
     { song: beat4, name: "Callback" },
     { song: beat5, name: "Drained" },
   ]);
+  const { transcript, resetTranscript } = useSpeechRecognition();
+  const [filteredTranscript, setFilteredTranscript] = useState([]);
 
-  //const [words,setWords] =useState()
+  const [audioSrc, setAudioSrc] = useState(null);
+  const [silent, setSilent] = useState(false);
+  const [saveSongMenu, setSaveSongMenu] = useState(false);
+  const [recordingDisplay, setRecordingDisplay] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [lock, setLock] = useState([]);
+  const [allTakes, setAllTakes] = useState([]);
+  const [songUploadObject, setSongUploadObject] = useState([]);
+  const [selectedOption, setSelectedOption] = useState();
+  const [songNameUpdate, setSongNameUpdate] = useState();
+  const [songNameInput, setSongNameInput] = useState();
+  const [songCaptionInput, setSongCaptionInput] = useState();
+  const [lyricsArr, setLyricsArr] = useState([]);
+  const [lastWordHolder, setLastWordHolder] = useState([]);
+  const [retrievedRhymes, setRetrievedRhymes] = useState([]);
+  const [retrievedSelectedRhymes, setRetrievedSelectedRhymes] = useState([]);
+  const [selectedRhymeNo, setSelectedRhymeNo] = useState(3);
+  const [selectedWord, setSelectedWord] = useState();
+  const [topRhymes, setTopRhymes] = useState();
+  const [selectedRhymes, setSelectedRhymes] = useState();
+  const [loadSelectedTake, setLoadSelectedTake] = useState();
+  const [showLyricsLine, setShowLyricsLine] = useState([]);
+  const [blobData, setBlobData] = useState({})
+  const [dateBefore, setDateBefore] = useState();
+  const [dateAfter, setDateAfter] = useState();
+
+  const recordAudioRef = useRef();
+  const scrollRef = useRef();
+  const saveSongPopUpRef = useRef();
+  const songNameInputRef = useRef();
+  const songCaptionInputRef = useRef();
+  const buttonCloseRef = useRef();
+  const selectTakesRef = useRef();
+  const keyRef = useRef(0);
+
   class SongData {
-    constructor(songmix) {
-      this.date = null;
-      this.user = user;
+    constructor(name, blobFile, songmix, lyrics, date, songDuration) {
+      this.name = name;
+      this.blobFile = blobFile;
       this.songmix = songmix;
-      this.lyrics = null;
+      this.lyrics = lyrics;
+      this.date = date;
+      this.songDuration = songDuration
+      this.user = user;
+      this.songName = null;
+      this.songCaption = null;
       this.background = null;
-      this.name = null;
-      this.songBlob = null;
-    }
-    setLyrics() {
-      this.lyrics = lyricsArr;
-    }
-    setDate() {
-      var today = new Date();
-
-      this.date = today;
-    }
-    setName() {
-      this.name = prompt("What's the name of your song?", "song name");
     }
   }
 
   useEffect(() => {
-    const lastWord = transcript.split(" ")[transcript.split(" ").length - 1];
-    let retrievedRhymes = [];
-    let retHolder = [];
-    datamuse.request(`words?rel_rhy=${lastWord}&max=5`).then((res) => {
-      if (res.length !== 0) {
-        for (let i = 0; i < 3; i++) {
-          retHolder.push(res[Math.floor(Math.random() * res.length)].word);
-        }
-        retHolder.forEach((element) => {
-          retrievedRhymes.push(` ${element} `);
-        });
-        if (retrievedRhymes.length !== 0) {
-          setRhymes(retrievedRhymes);
-        }
-        addSongLine();
+    if (silent) {
+      const splitTranscript = transcript.split(" ")
+      setFilteredTranscript(splitTranscript.filter(each => each.length > 0))
+      getDatamuseRhymes()
+      setLyricsHandler()
+      // const filteredTranscript = splitTranscript.filter(each => each.length > 0)
+      if (filteredTranscript.length !== 0) {
+        setShowLyricsLine(oldLine => [...oldLine, createLyricLine()])
       }
-    });
-  }, [silent]);
+      console.log(showLyricsLine, "lets just see what's going on here")
+      resetTranscript()
+      autoScroll()
+      setRetrievedRhymes([])
+    }
+  }, [silent])
 
-  let myReq; //animation frame ID
+  useEffect(() => {
+    if (Object.keys(blobData).length !== 0) {
+      const songDuration = (dateAfter - dateBefore) - 200
+      pushRecordTake(blobData.name, blobData.blob, blobData.url, songDuration)
+      setBlobData({})
+    }
+    console.log('Check out the updated AllTakes: ', allTakes)
+  }, [blobData])
 
-  const loadTrack = () => {
-    let selectBox = document.getElementById("selectBox");
-    let selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    document.getElementById("song").src = selectedValue;
+  useEffect(() => {
+    setRetrievedSelectedRhymes([])
+    let selectedHolder = []
+
+    if (selectedWord !== undefined) {
+      datamuse.request(`words?rel_rhy=${selectedWord}&max=20`)
+        .then((res) => {
+          if (res.length !== 0) {
+            res.forEach((each) => {
+              setRetrievedSelectedRhymes(oldRhymes => [...oldRhymes, each.word])
+            })
+            for (let i = 1; i <= selectedRhymeNo; i++) {
+              selectedHolder.push(res[i].word)
+            }
+            if (selectedHolder.length !== 0) {
+              setSelectedRhymes(selectedHolder)
+            }
+          }
+        })
+    }
+  }, [selectedWord])
+
+  useEffect(() => {
+    setSelectedRhymes([...retrievedSelectedRhymes].slice(0, selectedRhymeNo))
+  }, [retrievedSelectedRhymes, selectedRhymeNo])
+  
+  useEffect(() => {
+    setLastWordHolder(transcript.split(" ")[transcript.split(" ").length - 1])    
+  }, [resetTranscript])
+
+  useEffect(() => {
+    if (isRecording) {
+      setRecordingDisplay(true)
+      setFilteredTranscript([])
+      setLyricsArr([])
+      setShowLyricsLine([])
+      recordAudio();
+    } 
+    else {
+      setSilent(true)
+      stopRecording();
+    }
+  }, [isRecording])
+
+  const getDatamuseRhymes = () => {
+    const lastWord = transcript.split(" ")[transcript.split(" ").length - 1]
+    let retrievedRhymesHolder = []
+
+    datamuse.request(`words?rel_rhy=${lastWord}&max=20`)
+      .then((res) => {
+        if (res.length !== 0) {
+          res.forEach((each) => {
+            setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
+          })
+          for (let i = 1; i <= selectedRhymeNo; i++) {
+            retrievedRhymesHolder.push(res[i].word)
+          }
+          if (retrievedRhymesHolder.length !== 0) {
+            setTopRhymes(retrievedRhymesHolder)
+          }
+        }
+      })
+  }
+
+  const setLyricsHandler = () => {
+    const copyTranscript = transcript
+    if (copyTranscript !== "") {
+      setLyricsArr(oldArr => [...oldArr, copyTranscript])
+    }
+  }
+
+  const barNoRef = useRef(0)
+  const takesBarNoRef = useRef(0)
+
+  useEffect(() => {
+    if (!isRecording)
+    console.log(barNoRef.current)
+    barNoRef.current = 1
+  }, [isRecording])
+
+  const createLyricLine = () => {
+    return (
+      <div className="prev-transcript-container">
+        <div className="transcript-bar-no">
+          {`${barNoRef.current++}`}
+        </div>
+        <div className="transcript-word-container">
+          {filteredTranscript.map((each, index) => {
+            return (
+              <p 
+                className="prev-transcript-word" 
+                key={`transcript${uuidv4()}and${index}`}
+                onClick={(e) => setSelectedWordHandler(e)}
+                >
+                  {each}
+              </p>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  const autoScroll = () => {
+    let scrollLyrics= document.getElementById('currentTranscript')
+    scrollLyrics.scrollTop = scrollLyrics.scrollHeight
+  }
+
+  const showTopRhymes = () => {
+    return topRhymes.map((each, index) => {
+      return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
+    })
+  }
+  const showSelectedRhymes = () => {
+    return selectedRhymes.map((each, index) => {
+      return <p className="each-selected-rhyme" key={`${uuidv4()}selectedrhymes${index}`}>{each}</p>
+    })
+  }
+  const showLockedRhymes = () => {
+    return lock.map((each, index) => {
+      return <p className="each-selected-rhyme" key={`${uuidv4()}lockedrhymes${index}`}>{each}</p>
+    })
+  }
+
+  const setSelectedWordHandler = (e) => {
+    setSelectedWord(e.target.innerText)
+  }
+
+  const changeRhymeNo = (e) => {
+    setSelectedRhymeNo(e.target.value)
+  }
+
+  const rhymeOptionNoHandler = useCallback(() => {
+    let optionHolder = []
+    for (let i = 1; i <= 8; i++) {
+      optionHolder.push(i)
+    }
+    return optionHolder.map((each, index) => {
+      return (
+        <option value={each} key={`${each}-options-${index}`}>
+          {index === 0 ? `${each} - rhyme` : `${each} - rhymes`}
+        </option>
+      )
+    })
+  }, [selectedRhymeNo])
+
+  const displayTakeLyrics = useCallback(() => {
+    if (allTakes.length === 0) {
+      return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
+    }
+    else {
+      return (
+        <>
+          {loadSelectedTake?.lyrics.map((each, index) => {
+            return (
+              <div className="take-lyrics-container" key={`${uuidv4()}_${index}`}>
+                <p className="take-bar-no">{`${index + 1}`}</p>
+                <p className="take-lyrics-line">
+                  {each}
+                </p>
+              </div>
+            )
+          })}
+        </>
+      )
+    }
+  }, [allTakes, loadSelectedTake])
+
+  const shuffleRhymeHandler = (array, theState) => {
+    let randomRhymeArr = []
+    for (let i = 1; i <= selectedRhymeNo; i++) {
+      randomRhymeArr.push(array[Math.floor(Math.random(0, 20))])
+    }
+    console.log('whats in this randomRhymeArr: ', randomRhymeArr)
+    theState(randomRhymeArr)
+  }
+
+  const lockSuggestion = () => {
+    if (topRhymes) {
+      setIsLocked(true)
+      const copyRhyme = [...topRhymes];
+      setLock(copyRhyme);
+    }
   };
 
-  const loadTake = () => {
-    let selectedTake = document.getElementById("takes");
-    let selectedTakeValue =
-      selectedTake.options[selectedTake.selectedIndex].value;
-    document.getElementById("userRecording").src = selectedTakeValue;
+  const loadTrack = () => {
+    if (!isRecording) {
+      let selectBox = document.getElementById("selectBox");
+      let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      document.getElementById("song").src = selectedValue;      
+    }
   };
 
   const chooseTrack = () => {
-    return tracks.map((element) => {
-      return <option value={element.song}>{element.name} </option>;
+    return tracks.map((element, index) => {
+      return <option key={`${element}_${index}`} value={element.song}>{element.name} </option>;
     });
   };
-
-  function recordAudio() {
-    function detectSilence(
+  
+  let myReq; //animation frame ID
+  
+  const recordAudio = () => {
+    const detectSilence = (
       stream,
       onSoundEnd = (_) => {},
       onSoundStart = (_) => {},
       silence_delay = 50,
       min_decibels = -80
-    ) {
+    ) => {
       const ctx = new AudioContext();
       const analyser = ctx.createAnalyser();
       const streamNode = ctx.createMediaStreamSource(stream);
@@ -126,10 +334,11 @@ function TestAudio(props) {
       const data = new Uint8Array(analyser.frequencyBinCount); // will hold our data
       let silence_start = performance.now();
       let triggered = false; // trigger only once per silence event
-
-      function loop(time) {
+      
+      const loop = (time) => {
         myReq = requestAnimationFrame(loop); // we'll loop every 60th of a second to check
         analyser.getByteFrequencyData(data); // get current data
+
         if (data.some((v) => v)) {
           // if there is data above the given db limit
           if (triggered) {
@@ -146,12 +355,12 @@ function TestAudio(props) {
       loop();
     }
 
-    function onSilence() {
-      ////console.log('silence')
+    const onSilence = () => {
+      console.log('silence')
       setSilent(true);
     }
-    function onSpeak() {
-      //console.log('speaking');
+    const onSpeak = () => {
+      console.log('speaking');
       setSilent(false);
     }
 
@@ -162,28 +371,18 @@ function TestAudio(props) {
       .then((stream) => {
         detectSilence(stream, onSilence, onSpeak);
 
-        var audio = document.getElementById("song").captureStream();
+        var audio = recordAudioRef.current.captureStream();
         document.getElementById("song").play();
 
         mergeStreams(stream, audio);
         SpeechRecognition.startListening({ continuous: true });
+
       })
       .catch(console.error);
+
   }
 
-  //add recording to list
-  const addRec = (blobby, name, blobFile) => {
-    const copyRec = (
-      <audio src={blobby} id={"userRecording"} key={name}></audio>
-    );
-    const songObject = new SongData(blobby);
-    allTakes.push(songObject);
-    allTakes[allTakes.length - 1].songBlob = blobFile;
-    setRecordings(copyRec);
-    takes.push(blobby);
-  };
-
-  function mergeStreams(stream1, stream2) {
+  const mergeStreams = (stream1, stream2) => {
     const audioContext = new AudioContext();
 
     let audioIn_01 = audioContext.createMediaStreamSource(stream1);
@@ -195,361 +394,468 @@ function TestAudio(props) {
     audioIn_02.connect(dest);
 
     const recorder = new MediaRecorder(dest.stream);
-    recorder.start();
-    //console.log('started recording')
 
+    recorder.start(); //console.log('started recording')
+    setDateBefore(Date.now())
     let chunks = [];
 
     recorder.ondataavailable = (event) => {
       chunks.push(event.data);
-      //console.log(chunks)
-      go(chunks);
-      SpeechRecognition.stopListening();
+      createBlob(chunks);
+      // SpeechRecognition.stopListening();
+      console.log('oooooo an event with tasty data!', event)
     };
 
     document.getElementById("fixer").onclick = () => {
+      setDateAfter(Date.now())
+      SpeechRecognition.stopListening();
       recorder.stop();
       cancelAnimationFrame(myReq);
-      //console.log('stopped recording')
     };
   }
-  let key = 0;
 
-  function go(blob) {
+  const pushRecordTake = (name, blob, audioUrl, songDuration) => {
+    createLyricLine()
+    const songDate = new Date()
+    const songObject = new SongData(name, blob, audioUrl, [...lyricsArr], songDate, songDuration);
+    setAudioSrc(songObject.songmix)
+    setSelectedOption(songObject.songmix)
+    setAllTakes(eachTake => [...eachTake, songObject])
+  };
+
+  const createBlob = (blob) => {
     let mpegBlob = new Blob(blob, { type: "audio/mpeg-3" });
     const url = window.URL.createObjectURL(mpegBlob);
-
-    key++;
-
-    addRec(url, `take ${key}`, mpegBlob);
+    keyRef.current++
+    setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
   }
 
   const stopRecording = () => {
-    document.getElementById("song").pause();
-    document.getElementById("song").currentTime = 0;
+    document.getElementById("fixer").click();
+    recordAudioRef.current.pause();
+    recordAudioRef.current.currentTime = 0;
   };
-  //currently there exists a delay that needs to be offset when merged.!!!!!!!
-  let [lyricsArr, setLyricsArr] = useState([]);
-
-  const songLine = () => {
-    const lastLine = transcript;
-    lyricsArr.push(lastLine);
-    setLyricsArr(lyricsArr);
-    setKeyCounter(keyCounter + 1);
-    return (
-      <p className="transcript-line-1" key={keyCounter}>
-        {lastLine}.
-      </p>
-    );
-  };
-
-  let [line, setLine] = useState([]);
-
-  const addSongLine = () => {
-    const copyLine = [...line];
-    copyLine.push(songLine());
-    resetTranscript();
-    setLine(copyLine);
-    autoScroll()
-  };
-
-  const autoScroll=()=>{
-    let scrollLyrics= document.getElementById('currentTranscript')
-    scrollLyrics.scrollTop
-    =scrollLyrics.scrollHeight
-  }
-
-  const lockSuggestion = () => {
-    const copyRhyme = [...rhymes];
-    setLock(copyRhyme);
-  };
-
-  const handlePlayPause = () => {
-    if (document.getElementById("userRecording").paused) {
-      document.getElementById("play-stop-img").src = pause;
-      document.getElementById("userRecording").play();
-    } else {
-      document.getElementById("play-stop-img").src = play;
-      document.getElementById("userRecording").pause();
-    }
-  };
-
-  const handleRecStop = () => {
-    if (document.getElementById("song").paused) {
-      // document.getElementById('record-stop').setAttribute('class', 'button-icons bi-stop')
-      document.getElementById("record-stop-img").src = stop;
-      recordAudio();
-    } else {
-      // document.getElementById('record-stop').setAttribute('class', 'button-icons bi-record')
-      document.getElementById("record-stop-img").src = mic;
-      stopRecording();
-      document.getElementById("fixer").click();
-    }
-  };
-
-  // //make a time slider
-  function TimeSlider() {
-    const [time, setTime] = useState(0);
-
-    useEffect(() => {
-      document.getElementById("userRecording").currentTime = time;
-    }, [time]);
-    //change stuff here
-
-    return (
-      <section>
-        <input
-          id="timeSlider"
-          type="range"
-          min={0}
-          max={30}
-          step={0.02}
-          value={time}
-          onChange={(event) => {
-            setTime(event.target.valueAsNumber);
-          }}
-        />
-      </section>
-    );
-  }
-  const displayTake = () => {
-    if (takes.length === 0) {
-    } else {
-      let selectedTake = document.getElementById("takes");
-      selectedTake.selectedIndex = takes.length - 1;
-      const freshTrack = allTakes[takes.length - 1];
-      if(freshTrack){
-      freshTrack.setDate();
-      freshTrack.setLyrics();
+ 
+  const handlePlayPause = (bool) => {
+    if ((allTakes.length !== 0) && !isRecording) {
+      if (bool === true) {
+        setIsPlaying(true)
+      }
+      else {
+        setIsPlaying(false)
       }
     }
+  }
+
+  const loadTake = (e) => {
+    console.log('allTakes index log:', allTakes[e.target.selectedIndex])
+    setSelectedOption(e.target.value)
+    setLoadSelectedTake(allTakes[e.target.selectedIndex])
+    setAudioSrc(e.target.value)
+    setSongUploadObject(allTakes[e.target.selectedIndex])
+    setRecordingDisplay(false)
   };
 
-  const chooseTake = () => {
-    // //map through takes,
-
-    if (takes.length === 0) {
-      return <option>No record</option>;
-    } else {
-      const takesHolder = takes.map((element, index) => {
-        return <option value={element}>Take {index + 1}</option>;
-      });
-      displayTake();
-      return takesHolder;
-    }
-  };
-
-
-
-
-  const saveFile = () => {
+  const chooseTake = useCallback(() => {
     if (allTakes.length === 0) {
-    } else {
+      return <option>Your Takes</option>;
+    } 
+    else {
+      return allTakes.map((element, index) => {
+        return (
+          <option value={element.songmix} key={`${index}_${element.songmix}`}>
+            {element.songName ? element.songName : element.name}
+          </option>
+        )
+      });
+    }
+  }, [allTakes, songNameUpdate])
 
-      let selUpload = allTakes[theTakes.current.selectedIndex];
-      selUpload.setName();
+  const deleteOneTake = () => {
+    setAllTakes(eachTake => eachTake.filter(item => item.songmix !== selectedOption))
+  }
 
-      let chosenFile = selUpload.user._id + selUpload.name.replaceAll(" ", "-");
+  const handleSaveSong = (e) => {
+    e.preventDefault()
+    if (allTakes.length === 0) {
+      console.log('no takes')
+    } 
+    else {
+      const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
+      songUploadObject.songName = songNameInput
+      songUploadObject.songCaption = songCaptionInput
+      songUploadObject.date = new Date()
 
       actions
         .uploadFile(
           {
-            fileName: chosenFile,
+            fileName: fileName,
             fileType: "audio/mpeg-3",
-            file: selUpload.songBlob,
+            file: songUploadObject.songBlob,
             kind: "song",
           },
-          selUpload
+          songUploadObject
         )
-        .then(console.log)
-        .catch(console.log);
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(console.error);
     }
-  };
-
-  const modalPopup = () => {
-    const modal = document.querySelector(".modal");
-    modal.style.bottom = "0vh"
-    modal.style.transition = "bottom .5s"
-    const closeBtn = document.querySelector(".close-btn");
-    closeBtn.addEventListener("click", () => {
-      modal.style.bottom = "-65vh"
-      modal.style.transition = "bottom .5s"
-    });
-  };
-
-  const deleteTake=()=>{
-   setLine([])
-   setRhymes([])
-
+    setSongNameUpdate(songUploadObject.songName)
+    songNameInputRef.current.value =  ""
+    songCaptionInputRef.current.value =  ""
   }
+  const slideOutMicRef = useRef();
 
+  const toggleSaveSongMenu = () => {
+    if (saveSongMenu === false) {
+      setSaveSongMenu(true)
+      slideOutMicRef.current.className = "record-2_record-btn slideOut"
+
+    } 
+    else {
+      setSaveSongMenu(false)
+      slideOutMicRef.current.className = "record-2_record-btn slideIn"
+
+    }
+  }
+  
+  const saveSongDisplay = () => {
+    if (saveSongMenu === true) {
+      return (
+        <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
+          <form className="song-inputs-container" onSubmit={(e) => handleSaveSong(e)}>
+            <div className="section-title">
+              Upload A Take
+            </div>
+
+            <div className="section-1_song-name">
+              <input 
+                className="song-name-input" 
+                ref={songNameInputRef}
+                type="text" 
+                placeholder="Name this flow.."
+                onChange={(e) => setSongNameInput(e.target.value)}
+                autoFocus
+                />
+            </div>
+  
+            <div className="section-2_song-caption">
+              <input 
+                className="song-caption-input"
+                ref={songCaptionInputRef}
+                type="text" 
+                placeholder="Caption this flow.."
+                onChange={(e) => setSongCaptionInput(e.target.value)}
+                ></input>
+            </div>
+
+            <div className="buttons-container">
+              <div className="buttons-container_shadow-div-inset">
+                <button 
+                  className="cancel-save-button" 
+                  ref={buttonCloseRef}
+                  type="button"
+                  onClick={toggleSaveSongMenu}
+                  >
+                  <img className="button-icons" src={xExit} alt="exit" />
+                </button>
+                <button className="save-song-button" type="submit">
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="actions-2_record">
+          <div className="record-container">
+            <div className="record-1_select-beat">
+              <div className="select-beat_shadow-div-inset">
+                <div className="select-beat_shadow-div-outset">
+                  <div className="select-beat-title">
+                    Select A Beat :
+                  </div>
+                  <select id="selectBox" className="track-select" onChange={() => loadTrack()}>
+                    {chooseTrack()}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+  
   return (
     <div className="TestAudio">
-      <audio id="song" src={beat1} loop={true}></audio>
+      <audio id="song" src={beat1} loop={true} ref={recordAudioRef}></audio>
       <p id="fixer"></p>
-      <div className="scroll-rhymes-outer">
-        <div className="scroll-rhymes-container" id="currentTranscript">
-          {line}
-          {/* <p className="transcript-line-2">{transcript}</p> */}
+
+      <div className="section-1_speech">
+        <div className="scroll-rhymes-container" id="currentTranscript" ref={scrollRef}>
+          {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
         </div>
         <div className="scroll-rhymes-line">
           <p className="transcript-line-2">
-            {transcript}</p>
+            {transcript}
+          </p>
         </div>
       </div>
-      {/* --- MODAL CODE BEGINS HERE --- */}
-      <div className="modal">
-        <div className="modal-info">
-          <div className="modal-info-inset">
-            <div className="modal-info-outset">
-              <ol className="modal-directions">
-                <li className="modal-list-items">
-                  <p style={{color: 'black', fontWeight: 'bold'}}>1.</p>
-                  <p>
-                    Hit the mic button to begin recording your track.
-                  </p>
-                </li>
-                <li className="modal-list-items">
-                  <p style={{color: 'black', fontWeight: 'bold'}}>2.</p>
-                  <p>
-                    The lyrics you rap will populate the top of the screen.
-                  </p>
-                </li>
-                <li className="modal-list-items">
-                  <p style={{color: 'black', fontWeight: 'bold'}}>3.</p>
-                  <p>
-                    You will receive suggestions in the first of the two boxes
-                    located at the center. Tap on a set of lyrics to pin them
-                    to the second box for later or to mix up the rhyme scheme.
-                  </p>
-                </li>
-                <li className="modal-list-items">
-                  <p style={{color: 'black', fontWeight: 'bold'}}>4.</p>
-                  <p>
-                    After recording your song, you can hit the play button to play it
-                    back, or the trash button to trash it and start over.
-                  </p>
-                </li>
-                <li className="modal-list-items">
-                  <p style={{color: 'black', fontWeight: 'bold'}}>5.</p>
-                  <p>
-                    Finally, you can hit the download button to save your track to
-                    your device. Happy sharing!
-                  </p>
-                </li>
-              </ol>
-              <button className="close-btn" type="button">
-                Close
-              </button>
+
+      <div className={saveSongMenu ? "section-2_control-panel save-menu-active" : "section-2_control-panel"}>
+        <div className="section-2a_flow-suggestions">
+          <div className="next-bar-container">
+            <div className="custom-rhyme">
+              <div className="custom-rhyme-inner">
+                <div className="custom-rhyme_shadow-div-inset">
+                  <div className="top-rhymes-container">
+                    <p className="inital-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/* --- MODAL CODE ENDS HERE --- */}
-      <div className="nav-buttons-play">
-        <div className="suggestions-container">
+
           <div className="suggestions sug-1">
             <div className="custom-rhyme">
-              <div
-                className="custom-rhyme-inner"
-                id="suggestion"
-                onClick={lockSuggestion}
-              >
-                <p className="transcript-line-3">{rhymes}</p>
+              <div className="rhymed-word_shadow-div-inset">
+                {lastWordHolder ? lastWordHolder : <p>Top Rhymes</p>}
+              </div>
+              <div className="custom-rhyme-inner">
+                <div className="custom-rhyme_shadow-div-inset">
+                  <div className="top-rhymes-container">
+                    {topRhymes ? showTopRhymes() : <p className="inital-prompt">Start recording to see your top rhymes.</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedRhymes, setTopRhymes)}>
+                    <img className="button-icons" src={shuffle} alt="shuffle" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
           <div className="suggestions sug-2">
             <div className="custom-rhyme">
+              <div className="rhymed-word_shadow-div-inset rw-two">
+                  {isLocked ? lastWordHolder : <p>Locked Rhymes</p>}
+                </div>
               <div className="custom-rhyme-inner" id="lockedRhyme">
-                <p className="transcript-line-4">{lock}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="canvas-anim-box">
-          <div className="canvas-outset">
-            <div className="canvas-inset">
-              <AudioCanvas />
-            </div>
-          </div>
-        </div>
-        <div className="playback-controls-panel">
-          <div className="playback-container">
-            <div className="playback-wrapper">
-              <div className="tracks-container">
-                <div className="tracks-inset">
-                  <div className="tracks-onset">
-                    <select id="selectBox" className="track-select" onChange={loadTrack}>
-                      {chooseTrack()}
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="selected-container" onClick={modalPopup}>
-                <div>
-                  <img className="button-icons" src={help}></img>
-                </div>
-              </div>
-              <div className="tracks-container">
-                <div className="tracks-inset">
-                  <div className="tracks-onset">
-                    <select ref={theTakes} id="takes" className="track-select" onChange={loadTake}>
-                      {chooseTake()}
-                    </select>
+                <div className="custom-rhyme_shadow-div-inset">
+                  <div className="top-rhymes-container">
+                    {isLocked ? showLockedRhymes() : <p className="inital-prompt">Click lock button above to save top rhymes here.</p>}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="duration-container">
-            <div className="dur-inset">
-              <div className="dur-onset" id="duration">
-                {/* <TimeSlider /> */}
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn" onClick={lockSuggestion}>
+                    <img className="button-icons" src={locked} alt="lock" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          <div className="nav-list-play">
-            <div className="button-icons-inset">
-              <div
-                className="button-icons-outset"
-                onClick={handleRecStop}
-                id="record-stop"
-              >
-                <img
-                  className="button-icons bi-record"
-                  id="record-stop-img"
-                  src={mic}
-                ></img>
+
+          <div className="suggestions sug-3">
+            <div className="custom-rhyme">
+              <div className="rhymed-word_shadow-div-inset rw-three">
+                {selectedWord !== undefined ? selectedWord : <p>Selected Rhymes</p>}
+              </div>
+              <div className="custom-rhyme-inner" id="lockedRhyme">
+                <div className="custom-rhyme_shadow-div-inset">
+                  <div className="top-rhymes-container">
+                    {selectedRhymes !== undefined ? showSelectedRhymes() : <p className="inital-prompt">Click any flowed lyric to generate rhymes here.</p>}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="button-icons-inset">
-              <div
-                className="button-icons-outset"
-                id="playPause"
-                onClick={handlePlayPause}
-              >
-                <img
-                  className="button-icons bi-play"
-                  id="play-stop-img"
-                  src={play}
-                ></img>
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, selectedRhymes)}>
+                    <img className="button-icons" src={shuffle} alt="shuffle" />
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="button-icons-inset">
-              <div className="button-icons-outset" onClick={deleteTake}>
-                <img className="button-icons bi-play" src={trashbin}></img>
+          </div>
+
+          <div className="suggestion-button-container">
+            <div className="rhyme-lock-container">
+              <div className="rhyme-lock-button rlb-1">
+                <div className="rhyme-lock-outset">
+                  <select 
+                    className="rhyme-lock-btn select-no" 
+                    value={selectedRhymeNo}
+                    onChange={(e) => changeRhymeNo(e)}
+                    >
+                      {rhymeOptionNoHandler()}
+                  </select>
+                </div>
               </div>
-            </div>
-            <div className="button-icons-inset">
-              <div className="button-icons-outset" onClick={saveFile}>
-                <img className="button-icons bi-help" src={save}></img>
+              <div className="rhyme-lock-button rlb-2">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, selectedRhymes)}>
+                    <img className="button-icons" src={shuffle} alt="shuffle" />
+                  </button>
+                </div>
+              </div>
+              <div className="rhyme-lock-button rlb-3">
+                <div className="rhyme-lock-outset">
+                  <button className="rhyme-lock-btn">
+                    Edit Lyrics
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="section-2b_flow-controls"> 
+          <div className="flow-controls-container">
+            <div className="flow-controls-1_playback-display">
+              <div className="play-btn-container">
+                <div className="play-btn-container_shadow-div-outset">
+                  <div className="play-btn-container_shadow-div-inset">
+                    {isPlaying ? (
+                      <button
+                        className="play-btn_shadow-div-outset play"
+                        aria-label="Pause"
+                        onClick={() => handlePlayPause(false)}
+                      >
+                        <img
+                          className="button-icons bi-pause"
+                          id="play-stop-img"
+                          src={pause}
+                          alt="pause icon"
+                        />
+                      </button>
+                    ) : (
+                      <button
+                      className="play-btn_shadow-div-outset pause"
+                      aria-label="Play"
+                      onClick={() => handlePlayPause(true)}
+                    >
+                      <img
+                        className="button-icons bi-play"
+                        id="play-stop-img"
+                        src={play}
+                        alt="play icon"
+                      />
+                    </button>
+                    )
+                  }
+                  </div>
+                </div>
+              </div>
+
+              <div className="play-slider-container">
+                <div className="play-slider-container_shadow-div-outset">
+                  <div className="play-slider-container_shadow-div-inset">
+                    <div className="play-slider_shadow-div-outset">
+                      <UseAudioPlayer 
+                        isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
+                        audioSrc={audioSrc}
+                        setAudioSrc={setAudioSrc}
+                        allTakes={allTakes}
+                        />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flow-controls-2_actions">
+              <div className="actions-container_shadow-div-outset">
+                <div className="actions-container_shadow-div-inset">
+                  <div className="actions-1_flow-takes">
+                    <div className="flow-takes-1_select-takes">
+                      <div className="select-takes-container_shadow-div-outset">
+                        <div className="select-takes-container">
+                          <div className="select-takes_shadow-div-inset">
+                            <select 
+                              id="takes" 
+                              className="select-takes_shadow-div-outset" 
+                              value={selectedOption}
+                              ref={selectTakesRef} 
+                              onChange={(e) => loadTake(e)}
+                              > 
+                                {chooseTake()}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flow-takes-2_takes-actions">
+                      <div className="takes-actions-container">
+                        <div className="actions-btn-container">
+                          <div 
+                            className="actions-btn_shadow-div-outset ab-save" 
+                            onClick={toggleSaveSongMenu}>
+                            <img className="button-icons bi-help" src={save} alt="save icon" />
+                          </div>
+                        </div>
+                        <div className="actions-btn-container">
+                          <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>
+                            <img className="button-icons" src={xExit} alt="delete bin icon" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {saveSongDisplay()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="record-2_record-btn" ref={slideOutMicRef}>
+            <div className="record-btn_shadow-div-inset">
+              {isRecording ? (
+                <button
+                  className="record-btn_shadow-div-outset"
+                  onClick={() => setIsRecording(false)}
+                >
+                  <img
+                    className="button-icons"
+                    id="record-stop-img"
+                    src={stop}
+                    alt="record stop icon"
+                    />
+                </button>
+              ) : (
+                <button
+                  className="record-btn_shadow-div-outset"
+                  onClick={() => setIsRecording(true)}
+                >
+                  <img
+                    className="button-icons"
+                    id="record-stop-img"
+                    src={mic}
+                    alt="record mic icon"
+                    />
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+        <NavBar />
       </div>
-      {recordings}
     </div>
   );
 }
