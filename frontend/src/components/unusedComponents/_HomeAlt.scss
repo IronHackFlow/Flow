@@ -1,24 +1,22 @@
 @keyframes insetButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: inset 5px 5px 5px #505050, 
-                inset -2px -2px 5px #9fa2a4;
+    box-shadow: inset 5px 5px 5px #505050, inset -2px -2px 5px #9fa2a4;
   }
 }
 @keyframes outsetButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: 3px 3px 5px #abacad, 
-               -3px -3px 4px #ffffff;
+    box-shadow: 3px 3px 5px #abacad, -3px -3px 4px #ffffff;
   }
 }
 @keyframes outsetButtonsException {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
     box-shadow: inset 2px 2px 3px #abacad, inset -2px -2px 3px #ffffff;
@@ -27,17 +25,15 @@
 
 @keyframes iconButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: 1px 1px 4px #353535, 
-                -1px -1px 3px #bbbcbd;
+    box-shadow: 1px 1px 4px #353535, -1px -1px 3px #bbbcbd;
   }
 }
 @keyframes buttonOpacity {
   0% {
     --btnOpacity: 0;
-
   }
   25% {
     --btnOpacity: 0.25;
@@ -46,11 +42,10 @@
     --btnOpacity: 0.5;
   }
   75% {
-    --btnOpacity: 0.75
+    --btnOpacity: 0.75;
   }
   100% {
     --btnOpacity: 1;
-
   }
 }
 @keyframes flowColor {
@@ -65,10 +60,10 @@
   }
 }
 .Home {
-    // height: 100%;
-    // width: 100%;
-    position: absolute;
-  }
+  // height: 100%;
+  // width: 100%;
+  position: absolute;
+}
 /*------------------------------HOME HOME HOME HOME HOME HOME HOME HOME PAGE----------------------------*/
 .img-panel-container {
   height: 60%;
@@ -86,7 +81,7 @@
         @include flexCenter(84.9%, 84.9%, 45px, flex-end, center, column);
         margin: auto;
         box-shadow: inset 3px 3px 2px #0000007a, inset -2px -2px 5px #ffffff61;
-        
+
         h5 {
           color: white;
           // position: relative;
@@ -94,83 +89,82 @@
           // left: 25%;
         }
       }
-      
     }
   }
 }
 
 .bottom-directories {
-    height: 40%;
-    background: #686a6b;
-    box-shadow: inset -1px 3px 5px 0px #8c8c8c;
-    font-family: 'Major Mono Display', monospace;
-    color: white;
+  height: 40%;
+  background: #686a6b;
+  box-shadow: inset -1px 3px 5px 0px #8c8c8c;
+  font-family: 'Major Mono Display', monospace;
+  color: white;
 
-    .bm-dir-container {
-      height: 33%;
-      display: flex;
+  .bm-dir-container {
+    height: 33%;
+    display: flex;
 
-      .dir-icon {
-        @include flexCenter(100%, 30%, 0px, center, center, row);
+    .dir-icon {
+      @include flexCenter(100%, 30%, 0px, center, center, row);
 
-        .icon-outset {
-          @include flexCenter(80px, 80px, 50px, center, center, row);
+      .icon-outset {
+        @include flexCenter(80px, 80px, 50px, center, center, row);
 
-          .icon-inset {
-            @include flexCenter(75%, 75%, 50px, center, center, row);
+        .icon-inset {
+          @include flexCenter(75%, 75%, 50px, center, center, row);
 
-            .icon-double-inset {
-              @include flexCenter(60%, 60%, 50px, center, center, row);
-
-            }
+          .icon-double-inset {
+            @include flexCenter(60%, 60%, 50px, center, center, row);
           }
         }
       }
+    }
 
-      .dir-route {
-        @include flexCenter(100%, 70%, 0px, center, center, row);
+    .dir-route {
+      @include flexCenter(100%, 70%, 0px, center, center, row);
 
-        .route-outset {
-          @include flexCenter(85%, 90%, 50px, center, center, row);
+      .route-outset {
+        @include flexCenter(85%, 90%, 50px, center, center, row);
 
-          .route-inset {
-            @include flexCenter(70%, 85%, 50px, center, center, row);
+        .route-inset {
+          @include flexCenter(70%, 85%, 50px, center, center, row);
 
-            .route-double-inset {
-              @include flexCenter(55%, 80%, 50px, center, center, row);
+          .route-double-inset {
+            @include flexCenter(55%, 80%, 50px, center, center, row);
 
-              a {
-                text-decoration: none;
-                color: white;
+            a {
+              text-decoration: none;
+              color: white;
 
-                h4 {
-                  opacity: var(--btnOpacity);
-                  animation: buttonOpacity .3s .8s linear forwards;
-                }
+              h4 {
+                opacity: var(--btnOpacity);
+                animation: buttonOpacity 0.3s 0.8s linear forwards;
               }
             }
           }
         }
       }
     }
+  }
 }
 
-
-.home-record, .home-heart, .home-avatar {
-  font-size: .7em;
+.home-record,
+.home-heart,
+.home-avatar {
+  font-size: 0.7em;
   opacity: var(--btnOpacity);
 }
 .dr-1 .route-outset,
 .dr-3 .route-outset {
-  animation: insetButtons .3s linear forwards;
+  animation: insetButtons 0.3s linear forwards;
 }
 .dr-1 .route-inset,
 .dr-3 .route-inset {
-  animation: insetButtons .3s .3s linear forwards;
+  animation: insetButtons 0.3s 0.3s linear forwards;
 }
 .dr-1 .route-double-inset,
-.dr-3 .route-double-inset  {
-  animation: insetButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+.dr-3 .route-double-inset {
+  animation: insetButtons 0.3s 0.6s linear forwards, buttonOpacity 0.3s 0.8s linear forwards;
 }
 .bdc-1 {
   border-bottom: 1px solid #686a6b;
@@ -184,33 +178,34 @@
   box-shadow: inset -1px 5px 5px 0px #8c8c8c;
 }
 .route-o2 {
-  animation: outsetButtons .3s linear forwards;
+  animation: outsetButtons 0.3s linear forwards;
 }
 .route-i2 {
-  animation: outsetButtons .3s .3s linear forwards;
+  animation: outsetButtons 0.3s 0.3s linear forwards;
 }
 .route-di2 {
   background: var(--routedi2bg);
-  animation: outsetButtons .3s .6s linear forwards, flowColor 1s .5s linear forwards;
+  animation: outsetButtons 0.3s 0.6s linear forwards, flowColor 1s 0.5s linear forwards;
 }
 .di-1 .icon-outset,
 .di-3 .icon-outset {
-  animation: insetButtons .3s linear forwards;
+  animation: insetButtons 0.3s linear forwards;
 }
 .di-1 .icon-inset,
 .di-3 .icon-inset {
-  animation: insetButtons .3s .3s linear forwards;
+  animation: insetButtons 0.3s 0.3s linear forwards;
 }
 .di-1 .icon-double-inset,
-.di-3 .icon-double-inset  {
-  animation: iconButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+.di-3 .icon-double-inset {
+  animation: iconButtons 0.3s 0.6s linear forwards, buttonOpacity 0.3s 0.8s linear forwards;
 }
 .io-2 {
-  animation: outsetButtons .3s linear forwards;
+  animation: outsetButtons 0.3s linear forwards;
 }
 .ii-2 {
-  animation: outsetButtons .3s .3s linear forwards;
+  animation: outsetButtons 0.3s 0.3s linear forwards;
 }
 .idi-2 {
-  animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+  animation: outsetButtonsException 0.3s 0.6s linear forwards,
+    buttonOpacity 0.3s 0.8s linear forwards;
 }

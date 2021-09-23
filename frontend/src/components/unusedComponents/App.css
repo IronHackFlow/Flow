@@ -19,18 +19,18 @@
   --link-color-2: #686a6b;
   --link-color-1: #686a6b;
 
-  --anim-dip-6: btnDip .3s forwards;
-  --anim-pop-6: btnPop .3s .3s forwards;
-  --anim-dip-5: btnDip .3s forwards;
-  --anim-pop-5: btnPop .3s .3s forwards;
-  --anim-dip-4: btnDip .3s forwards;
-  --anim-pop-4: btnPop .3s .3s forwards;
-  --anim-dip-3: btnDip .3s forwards;
-  --anim-pop-3: btnPop .3s .3s forwards;
-  --anim-dip-2: btnDip .3s forwards;
-  --anim-pop-2: btnPop .3s .3s forwards;
-  --anim-dip-1: btnDip .3s forwards;
-  --anim-pop-1: btnPop .3s .3s forwards;
+  --anim-dip-6: btnDip 0.3s forwards;
+  --anim-pop-6: btnPop 0.3s 0.3s forwards;
+  --anim-dip-5: btnDip 0.3s forwards;
+  --anim-pop-5: btnPop 0.3s 0.3s forwards;
+  --anim-dip-4: btnDip 0.3s forwards;
+  --anim-pop-4: btnPop 0.3s 0.3s forwards;
+  --anim-dip-3: btnDip 0.3s forwards;
+  --anim-pop-3: btnPop 0.3s 0.3s forwards;
+  --anim-dip-2: btnDip 0.3s forwards;
+  --anim-pop-2: btnPop 0.3s 0.3s forwards;
+  --anim-dip-1: btnDip 0.3s forwards;
+  --anim-pop-1: btnPop 0.3s 0.3s forwards;
 }
 @keyframes btnDip {
   0% {
@@ -72,33 +72,33 @@
   }
   14% {
     --mo6opacity: 1;
-    --anim-dip-6: btnDip .3s forwards;
-    --anim-pop-6: btnPop .3s .35s forwards;
+    --anim-dip-6: btnDip 0.3s forwards;
+    --anim-pop-6: btnPop 0.3s 0.35s forwards;
   }
   28% {
     --mo3opacity: 1;
-    --anim-dip-3: btnDip .3s forwards;
-    --anim-pop-3: btnPop .3s .3s forwards;
+    --anim-dip-3: btnDip 0.3s forwards;
+    --anim-pop-3: btnPop 0.3s 0.3s forwards;
   }
   44% {
     --mo5opacity: 1;
-    --anim-dip-5: btnDip .3s forwards;
-    --anim-pop-5: btnPop .3s .3s forwards;
+    --anim-dip-5: btnDip 0.3s forwards;
+    --anim-pop-5: btnPop 0.3s 0.3s forwards;
   }
   58% {
     --mo2opacity: 1;
-    --anim-dip-2: btnDip .3s forwards;
-    --anim-pop-2: btnPop .3s .3s forwards;
+    --anim-dip-2: btnDip 0.3s forwards;
+    --anim-pop-2: btnPop 0.3s 0.3s forwards;
   }
   72% {
     --mo4opacity: 1;
-    --anim-dip-4: btnDip .3s forwards;
-    --anim-pop-4: btnPop .3s .3s forwards;
+    --anim-dip-4: btnDip 0.3s forwards;
+    --anim-pop-4: btnPop 0.3s 0.3s forwards;
   }
   86% {
     --mo1opacity: 1;
-    --anim-dip-1: btnDip .3s forwards;
-    --anim-pop-1: btnPop .3s .3s forwards;
+    --anim-dip-1: btnDip 0.3s forwards;
+    --anim-pop-1: btnPop 0.3s 0.3s forwards;
   }
   100% {
     --menuOpacity: 1;
@@ -114,7 +114,9 @@
   margin: 0;
   padding: 0;
 }
-html, body, #root {
+html,
+body,
+#root {
   height: 100vh;
   width: 100vw;
   font-family: 'Poppins', sans-serif;
@@ -125,20 +127,23 @@ html, body, #root {
   margin-top: -5px;
   text-align: center;
 }
-@keyframes notify{
+@keyframes notify {
   0% {
-      margin-left: 100vw;}
+    margin-left: 100vw;
+  }
   50% {
-      margin-left:65vw}
-  100%{
-      margin-left: 100vw;}
+    margin-left: 65vw;
+  }
+  100% {
+    margin-left: 100vw;
+  }
 }
-@keyframes hideNotify{
+@keyframes hideNotify {
   from {
-    width:25vw
+    width: 25vw;
   }
   to {
-    width:0vw
+    width: 0vw;
   }
 }
 .help-btn {
@@ -157,14 +162,14 @@ html, body, #root {
 .modal {
   height: 61vh;
   width: 100vw;
-  background:#ecf0f3;
+  background: #ecf0f3;
   z-index: 100;
   display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
   border-top: 5px solid #ecf0f3;
-  box-shadow: inset 0px 4px 5px #cacaca
+  box-shadow: inset 0px 4px 5px #cacaca;
 }
 .modal-info {
   height: 95%;
@@ -218,7 +223,7 @@ html, body, #root {
 .modal-list-items p {
   width: 90%;
   font-size: 13px;
-  line-height: .8;
+  line-height: 0.8;
   color: rgb(228, 121, 139);
 }
 .close-btn {
@@ -290,19 +295,26 @@ html, body, #root {
   height: 100%;
   width: 100%;
 }
-#timeSlider{
-  width:90vw;
-  height:2vh;
+#timeSlider {
+  width: 90vw;
+  height: 2vh;
 }
 .prof-pic {
   height: 100%;
   width: 100%;
 }
 /* ------------------------------FOOOTER FOOOTER NAV NAV NAV BAR--------------------------------------------------- */
-.nav-buttons-outset, .nav-buttons-inset, .social-buttons, .individual-btn, .com-cont-1, .comments-container, .input-container, .input-inset {
-display: flex;
-justify-content: center;
-align-items: center;
+.nav-buttons-outset,
+.nav-buttons-inset,
+.social-buttons,
+.individual-btn,
+.com-cont-1,
+.comments-container,
+.input-container,
+.input-inset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 footer {
   height: 20%;
@@ -358,7 +370,8 @@ footer {
 .button-icons {
   height: 2.3em;
   width: 2.3em;
-  filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);}
+  filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+}
 .social-icons {
   height: 1.5em;
   width: 1.5em;
@@ -416,7 +429,6 @@ footer {
   background: #686a6b;
   border-top: 1px solid #adadad;
   box-shadow: inset 0px 3px 5px #bfbfbf, inset 1px -3px 5px #525151;
-
 }
 .nav-buttons {
   width: 100%;
@@ -426,7 +438,8 @@ footer {
   border-top: 1px solid #a9a9a9;
   box-shadow: inset 1px 5px 4px #ffffff;
 }
-.like-comment-container, .profile-container {
+.like-comment-container,
+.profile-container {
   display: flex;
   align-items: center;
   height: 100%;
@@ -459,8 +472,7 @@ footer {
   box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
 }
 .inset-social-p:active {
-  box-shadow: inset 2px 2px 3px #313232, 
-  inset -2px -2px 3px #9fa2a4;
+  box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
 }
 
 .comment-pop-out {
@@ -473,7 +485,7 @@ footer {
   bottom: 20%;
   background: #ecf0f3;
   border-radius: 30px 30px 0px 0px;
-  transition: height .5s;
+  transition: height 0.5s;
 }
 .inner-com {
   height: 90%;
@@ -565,7 +577,7 @@ footer {
   margin: auto;
 }
 .comment-date {
-  color:#63d8a7;
+  color: #63d8a7;
   font-size: 12px;
   position: absolute;
   top: 5px;
@@ -616,11 +628,11 @@ footer {
   box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
 }
 .search-prof-container {
- height: 100%;
- width: 50%;
- display: flex;
- justify-content: center;
- align-items: center;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .search-prof-inset {
   height: 80%;
@@ -658,11 +670,11 @@ footer {
   height: 80%;
   position: relative;
   bottom: 0;
-  transition: bottom .5s;
+  transition: bottom 0.5s;
   overflow-y: hidden;
 }
 .video-scroll-container {
-  height: 100%; 
+  height: 100%;
   width: 100%;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -752,20 +764,19 @@ footer {
   text-align: left;
   display: inline-block;
 
- 
-  transform: translateX(110%)
+  transform: translateX(110%);
 }
 .udt-1 {
-  animation: floatText 5s linear infinite
+  animation: floatText 5s linear infinite;
 }
 .udt-2 {
   color: white;
-  animation: floatText 5s linear infinite
+  animation: floatText 5s linear infinite;
 }
 .udt-3 {
   color: white;
   font-size: 12px;
-  animation: floatText 5s linear infinite
+  animation: floatText 5s linear infinite;
 }
 @keyframes floatText {
   to {
@@ -791,7 +802,6 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .inset-social-p {
   box-shadow: 2px 2px 5px #2a2a2b, -2px -2px 3px #7b7b7b;
@@ -823,7 +833,7 @@ footer {
   text-shadow: 3px 4px 5px #494848;
 }
 .transcript-line-4 {
-  color:#ecf9b5;
+  color: #ecf9b5;
   font-size: 16px;
   width: 95%;
   font-weight: bold;
@@ -974,8 +984,7 @@ canvas {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  box-shadow: inset 5px 5px 15px #313232,
-              inset -5px -5px 5px #9fa2a4;
+  box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
 }
 .tracks-onset {
   height: 65%;
@@ -995,7 +1004,7 @@ canvas {
   outline: none !important;
 }
 
-#takes{
+#takes {
   background-color: #383838;
   color: white;
   border-color: #383838;
@@ -1013,13 +1022,12 @@ canvas {
   height: 30px;
   width: 30px;
   border-radius: 50px;
-  font-size: .7em;
+  font-size: 0.7em;
   padding: 1px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 4px 4px 7px #3d3f3f,
-             -4px -4px 5px #939597;
+  box-shadow: 4px 4px 7px #3d3f3f, -4px -4px 5px #939597;
 }
 .duration-container {
   height: 12%;
@@ -1034,14 +1042,13 @@ canvas {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  box-shadow: inset 5px 5px 15px #313232,
-              inset -5px -5px 5px #9fa2a4;
+  box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 5px #9fa2a4;
 }
 .dur-onset {
   height: 40%;
   width: 95%;
   border-radius: 50px;
-  background: #63DEBC;
+  background: #63debc;
 }
 /* -----------Play Studio Buttons (TESTAUDIO)------------- */
 .button-icons-inset {
@@ -1052,18 +1059,15 @@ canvas {
   align-items: center;
   border-radius: 50%;
   background: #686a6b;
-  box-shadow: inset 5px 5px 15px #313232, 
-              inset -5px -5px 15px #9fa2a4;
-  transition: box-shadow .5s;
+  box-shadow: inset 5px 5px 15px #313232, inset -5px -5px 15px #9fa2a4;
+  transition: box-shadow 0.5s;
 }
 .button-icons-outset:active {
-  box-shadow: inset 2px 2px 3px #313232, 
-              inset -2px -2px 3px #9fa2a4;
+  box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
 }
 .icon-double-inset.idi-1:active {
   animation: none;
-  box-shadow: inset 2px 2px 3px #313232, 
-              inset -2px -2px 3px #9fa2a4;
+  box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
 }
 .button-icons-outset {
   height: 40px;
@@ -1076,10 +1080,9 @@ canvas {
   justify-content: center;
   align-items: center;
   background: #686a6b;
-  box-shadow:  4px 4px 10px #3d3f3f,
-              -4px -4px 10px #939597;
+  box-shadow: 4px 4px 10px #3d3f3f, -4px -4px 10px #939597;
 }
-.nav-list-play{
+.nav-list-play {
   display: flex;
   height: 55%;
   width: 100%;
@@ -1096,7 +1099,7 @@ canvas {
   box-shadow: inset 0px 3px 5px #cecece;
 }
 .bi-play {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 /*-----------------------------HAMBURGER HAMBURGER HAMBURGER MENU MENU MENU-------------------------*/
@@ -1125,8 +1128,7 @@ nav {
   position: relative;
   background: #ec6aa0;
   border-radius: 3px;
-  box-shadow: inset 1px 1px 2px #313232, 
-              inset -1px -1px 1px #aaacad;
+  box-shadow: inset 1px 1px 2px #313232, inset -1px -1px 1px #aaacad;
 }
 .menu {
   height: 85%;
@@ -1140,13 +1142,12 @@ nav {
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   border-radius: 20px;
-  box-shadow: inset 3px 3px 4px #484b4c, 
-              inset -3px -3px 4px #8c8f90;
+  box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
 }
 .menu-route {
   height: 30%;
   width: 50%;
-  opacity: var(--menuOpacity)
+  opacity: var(--menuOpacity);
 }
 .menu-outset {
   height: 100%;
@@ -1162,59 +1163,71 @@ nav {
   box-shadow: inset 2px 2px 3px #484b4c, inset -2px -2px 3px #9fa2a4 !important;
   background: linear-gradient(315deg, #d9dada, #919292) !important;
 }
-.menu-route, .menu-outset, .menu-inset {
+.menu-route,
+.menu-outset,
+.menu-inset {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.mo-6, .mo-5, .mo-4, .mo-3, .mo-2, .mo-1 {
+.mo-6,
+.mo-5,
+.mo-4,
+.mo-3,
+.mo-2,
+.mo-1 {
   box-shadow: inset 0px 0px 0px #686a6b, inset -0px -0px 0px #686a6b;
 }
-.mi-6, .mi-5, .mi-4, .mi-3, .mi-2, .mi-1 {
+.mi-6,
+.mi-5,
+.mi-4,
+.mi-3,
+.mi-2,
+.mi-1 {
   box-shadow: 0px 0px 8px #686a6b, -0px -0px 0px #686a6b;
   background: linear-gradient(139deg, #686a6b, #686a6b);
 }
 .mo-6 {
   opacity: var(--mo6opacity);
-  animation: var(--anim-dip-6)
+  animation: var(--anim-dip-6);
 }
 .mo-5 {
   opacity: var(--mo5opacity);
-  animation: var(--anim-dip-5)
+  animation: var(--anim-dip-5);
 }
 .mo-4 {
   opacity: var(--mo4opacity);
-  animation: var(--anim-dip-4)
+  animation: var(--anim-dip-4);
 }
 .mo-3 {
   opacity: var(--mo3opacity);
-  animation: var(--anim-dip-3)
+  animation: var(--anim-dip-3);
 }
 .mo-2 {
   opacity: var(--mo2opacity);
-  animation: var(--anim-dip-2)
+  animation: var(--anim-dip-2);
 }
 .mo-1 {
   opacity: var(--mo1opacity);
-  animation: var(--anim-dip-1)
+  animation: var(--anim-dip-1);
 }
 .mi-6 {
-  animation: var(--anim-pop-6)
+  animation: var(--anim-pop-6);
 }
 .mi-5 {
-  animation: var(--anim-pop-5)
+  animation: var(--anim-pop-5);
 }
 .mi-4 {
-  animation: var(--anim-pop-4)
+  animation: var(--anim-pop-4);
 }
 .mi-3 {
-  animation: var(--anim-pop-3)
+  animation: var(--anim-pop-3);
 }
 .mi-2 {
-  animation: var(--anim-pop-2)
+  animation: var(--anim-pop-2);
 }
 .mi-1 {
-  animation: var(--anim-pop-1)
+  animation: var(--anim-pop-1);
 }
 .mi-6 a {
   color: var(--link-color-6);
@@ -1237,7 +1250,7 @@ nav {
 .menu a {
   text-decoration: none;
   font-weight: bold;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 /*------------------------------HOME HOME HOME HOME HOME HOME HOME HOME PAGE----------------------------*/
@@ -1301,39 +1314,44 @@ nav {
 }
 .bottom-directories h4 {
   opacity: var(--btnOpacity);
-  animation: buttonOpacity .3s .8s linear forwards;
+  animation: buttonOpacity 0.3s 0.8s linear forwards;
 }
-.route-outset, .route-inset, .route-double-inset, .icon-outset, .icon-inset, .icon-double-inset {
+.route-outset,
+.route-inset,
+.route-double-inset,
+.icon-outset,
+.icon-inset,
+.icon-double-inset {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
 }
-.home-record, .home-heart, .home-avatar {
-  font-size: .7em;
+.home-record,
+.home-heart,
+.home-avatar {
+  font-size: 0.7em;
   opacity: var(--btnOpacity);
 }
 @keyframes insetButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: inset 5px 5px 5px #505050, 
-                inset -2px -2px 5px #9fa2a4;
+    box-shadow: inset 5px 5px 5px #505050, inset -2px -2px 5px #9fa2a4;
   }
 }
 @keyframes outsetButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: 3px 3px 5px #abacad, 
-               -3px -3px 4px #ffffff;
+    box-shadow: 3px 3px 5px #abacad, -3px -3px 4px #ffffff;
   }
 }
 @keyframes outsetButtonsException {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
     box-shadow: inset 2px 2px 3px #abacad, inset -2px -2px 3px #ffffff;
@@ -1342,17 +1360,15 @@ nav {
 
 @keyframes iconButtons {
   from {
-    box-shadow: none
+    box-shadow: none;
   }
   to {
-    box-shadow: 1px 1px 4px #353535, 
-                -1px -1px 3px #bbbcbd;
+    box-shadow: 1px 1px 4px #353535, -1px -1px 3px #bbbcbd;
   }
 }
 @keyframes buttonOpacity {
   0% {
     --btnOpacity: 0;
-
   }
   25% {
     --btnOpacity: 0.25;
@@ -1361,11 +1377,10 @@ nav {
     --btnOpacity: 0.5;
   }
   75% {
-    --btnOpacity: 0.75
+    --btnOpacity: 0.75;
   }
   100% {
     --btnOpacity: 1;
-
   }
 }
 @keyframes flowColor {
@@ -1383,19 +1398,19 @@ nav {
 .dr-3 .route-outset {
   height: 85%;
   width: 90%;
-  animation: insetButtons .3s linear forwards;
+  animation: insetButtons 0.3s linear forwards;
 }
 .dr-1 .route-inset,
 .dr-3 .route-inset {
   height: 70%;
   width: 85%;
-  animation: insetButtons .3s .3s linear forwards;
+  animation: insetButtons 0.3s 0.3s linear forwards;
 }
 .dr-1 .route-double-inset,
-.dr-3 .route-double-inset  {
+.dr-3 .route-double-inset {
   height: 55%;
   width: 80%;
-  animation: insetButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+  animation: insetButtons 0.3s 0.6s linear forwards, buttonOpacity 0.3s 0.8s linear forwards;
 }
 .bdc-1 {
   border-bottom: 1px solid #686a6b;
@@ -1410,52 +1425,53 @@ nav {
 .route-o2 {
   height: 85%;
   width: 90%;
-  animation: outsetButtons .3s linear forwards;
+  animation: outsetButtons 0.3s linear forwards;
 }
 .route-i2 {
   height: 70%;
   width: 85%;
-  animation: outsetButtons .3s .3s linear forwards;
+  animation: outsetButtons 0.3s 0.3s linear forwards;
 }
 .route-di2 {
   height: 55%;
   width: 80%;
   background: var(--routedi2bg);
-  animation: outsetButtons .3s .6s linear forwards, flowColor 1s .5s linear forwards;
+  animation: outsetButtons 0.3s 0.6s linear forwards, flowColor 1s 0.5s linear forwards;
 }
 
 .di-1 .icon-outset,
 .di-3 .icon-outset {
   height: 70%;
   width: 70%;
-  animation: insetButtons .3s linear forwards;
+  animation: insetButtons 0.3s linear forwards;
 }
 .di-1 .icon-inset,
 .di-3 .icon-inset {
   height: 75%;
   width: 75%;
-  animation: insetButtons .3s .3s linear forwards;
+  animation: insetButtons 0.3s 0.3s linear forwards;
 }
 .di-1 .icon-double-inset,
-.di-3 .icon-double-inset  {
+.di-3 .icon-double-inset {
   height: 60%;
   width: 60%;
-  animation: iconButtons .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+  animation: iconButtons 0.3s 0.6s linear forwards, buttonOpacity 0.3s 0.8s linear forwards;
 }
 .io-2 {
   height: 70%;
   width: 70%;
-  animation: outsetButtons .3s linear forwards;
+  animation: outsetButtons 0.3s linear forwards;
 }
 .ii-2 {
   height: 75%;
   width: 75%;
-  animation: outsetButtons .3s .3s linear forwards;
+  animation: outsetButtons 0.3s 0.3s linear forwards;
 }
 .idi-2 {
   height: 60%;
   width: 60%;
-  animation: outsetButtonsException .3s .6s linear forwards, buttonOpacity .3s .8s linear forwards;
+  animation: outsetButtonsException 0.3s 0.6s linear forwards,
+    buttonOpacity 0.3s 0.8s linear forwards;
 }
 /* ----------------------------AUTH AUTH AUTH AUTH LOG IN LOG IN LOG IN LOG IN ------------------------------------------------*/
 .page-container {
@@ -1570,7 +1586,7 @@ nav {
   width: 80%;
   padding: 5px;
   border-radius: 20px;
-  box-shadow: inset 2px 2px 3px #bbbaba, inset -2px -2px 3px #ffffff
+  box-shadow: inset 2px 2px 3px #bbbaba, inset -2px -2px 3px #ffffff;
 }
 .login-button {
   height: 100%;
@@ -1586,7 +1602,7 @@ nav {
   text-decoration: none;
   color: white;
   height: 15%;
-  width: 85%
+  width: 85%;
 }
 .user-text {
   height: 100%;
@@ -1637,7 +1653,11 @@ nav {
   box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 }
 /*-----------------------------EDIT PROFILE EDIT EDIT EDIT PROFILE PROFILE EDIT EDIT ----------------------------------------------*/
-.profile-pc, .profile-uo, .profile-mc, .profile-mi, .profile-lc {
+.profile-pc,
+.profile-uo,
+.profile-mc,
+.profile-mi,
+.profile-lc {
   background: #686a6b;
 }
 .profile-ui div {
@@ -1657,7 +1677,9 @@ nav {
   height: 85%;
   box-shadow: 3px 3px 4px #525252, -2px -2px 3px #939597;
 }
-.profile-uo, .profile-ui, .profile-ub {
+.profile-uo,
+.profile-ui,
+.profile-ub {
   box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
 }
 .profile-uo {
@@ -1672,7 +1694,7 @@ nav {
 }
 .profile-mo {
   border: 1px solid rgb(105 105 105);
-  background-image: url('https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif')
+  background-image: url('https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif');
 }
 .profile-mi {
   box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
@@ -1692,7 +1714,8 @@ nav {
   padding-left: 12%;
   /* overflow-x: scroll; */
 }
-.profile-user-t:defined, .social-comment-input:defined {
+.profile-user-t:defined,
+.social-comment-input:defined {
   color: pink;
 }
 .social-comment-input {
@@ -1709,7 +1732,8 @@ nav {
 .social-comment-input::placeholder {
   color: #adadad;
 }
-.profile-user-t:focus, .social-comment-input:focus {
+.profile-user-t:focus,
+.social-comment-input:focus {
   border: 2px solid pink;
   outline: none !important;
   color: white;
@@ -1776,7 +1800,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-right: 9%
+  margin-right: 9%;
 }
 .inner-filler {
   height: 50%;
@@ -1784,19 +1808,34 @@ nav {
   border-radius: 50px;
   box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
 }
-.username-pic-container, .username-pic-outset, .profile-pic-container, .profile-post-feed,
-.username-container, .username-outset, .username-inset, .users-details-container, .users-details-outset,
-.edit-profile-container, .log-profile-container, .edit-profile-outset,
-.edit-profile-inset, .log-profile-outset, .log-profile-inset, .edit-profile-button, 
-.log-profile-button, .profile-post-inner, .profile-post-inner-inner,
-.profile-pic-inset, .profile-pic-outset {
+.username-pic-container,
+.username-pic-outset,
+.profile-pic-container,
+.profile-post-feed,
+.username-container,
+.username-outset,
+.username-inset,
+.users-details-container,
+.users-details-outset,
+.edit-profile-container,
+.log-profile-container,
+.edit-profile-outset,
+.edit-profile-inset,
+.log-profile-outset,
+.log-profile-inset,
+.edit-profile-button,
+.log-profile-button,
+.profile-post-inner,
+.profile-post-inner-inner,
+.profile-pic-inset,
+.profile-pic-outset {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .username-pic-container {
   height: 25%;
-  width: 100%;  
+  width: 100%;
 }
 .username-pic-outset {
   height: 90%;
@@ -1870,23 +1909,27 @@ nav {
   justify-content: center;
   align-items: center;
 }
-.edit-profile-container, .log-profile-container {
+.edit-profile-container,
+.log-profile-container {
   height: 40%;
   width: 100%;
 }
-.edit-profile-outset, .log-profile-outset {
+.edit-profile-outset,
+.log-profile-outset {
   height: 80%;
   width: 80%;
   border-radius: 50%;
   box-shadow: 3px 3px 4px #525252, -2px -2px 3px #939597;
 }
-.edit-profile-inset, .log-profile-inset {
+.edit-profile-inset,
+.log-profile-inset {
   height: 90%;
   width: 90%;
   border-radius: 50%;
   box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
 }
-.edit-profile-button, .log-profile-button {
+.edit-profile-button,
+.log-profile-button {
   height: 70%;
   width: 70%;
   border-radius: 50%;
@@ -1939,13 +1982,17 @@ nav {
   border-radius: 10px;
   overflow-y: scroll;
 }
-.ude-2, .ude-3, .ude-4 {
+.ude-2,
+.ude-3,
+.ude-4 {
   display: flex;
   justify-content: center;
   height: 15%;
   padding: 5px 0px 5px 0px;
 }
-.ude-2 p, .ude-3 p, .ude-4 p {
+.ude-2 p,
+.ude-3 p,
+.ude-4 p {
   font-size: 12px;
   width: 90%;
   text-align: start;
@@ -2002,7 +2049,7 @@ nav {
   width: 85%;
   margin-left: 4%;
   text-align: start;
-  color:rgb(46, 194, 145);
+  color: rgb(46, 194, 145);
 }
 .lyrics-outter-container {
   height: 45px;
@@ -2037,7 +2084,7 @@ nav {
 }
 .bi-play-2 {
   margin-left: 5px;
-  font-size: .8em
+  font-size: 0.8em;
 }
 .lyrics-container {
   font-size: 12px;

@@ -1,44 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import actions from '../api'
 import NavBar from './NavBar.js'
 
 function AddPost(props) {
+  let [post, setPost] = useState('')
 
-    let [post, setPost] = useState('')
+  const handleSubmit = event => {
+    //Send it to the server!
+    event.preventDefault()
 
-    const handleSubmit = (event) => {
-        //Send it to the server! 
-        event.preventDefault()
+    actions
+      .addPost(post)
+      .then(newPost => {
+        console.log('new post!', newPost)
+        //Redirect to all-posts page
+        props.history.push(`all-posts`)
+      })
+      .catch(console.error)
+  }
 
-        actions.addPost(post)
-            .then(newPost => {
-                console.log('new post!', newPost)
-                //Redirect to all-posts page
-                props.history.push(`all-posts`)
-            }).catch(console.error)
-    }
+  const handleChange = event => {
+    //On typing setPost
+    setPost(event.target.value)
+  }
 
-    const handleChange = (event) => {
-        //On typing setPost 
-        setPost(event.target.value)
-    }
+  return (
+    <>
+      <h3>Make a AddPost</h3>
 
-    return (
-        <>
-            <h3>Make a AddPost</h3>
-
-            <form onSubmit={handleSubmit}>
-                <input onChange={handleChange} type="text" name="post" placeholder="Make a post..." />
-                <input onChange={handleChange} type="text" name="name" placeholder="Make a post..." />
-                <button>📬</button>
-            </form>
-        <NavBar height = '8vh'
-                row = 'row'
-                display = 'none'
-                shadowDisplay = 'none'
-                 />
-        </>
-    );
+      <form onSubmit={handleSubmit}>
+        <input onChange={handleChange} type="text" name="post" placeholder="Make a post..." />
+        <input onChange={handleChange} type="text" name="name" placeholder="Make a post..." />
+        <button>📬</button>
+      </form>
+      <NavBar height="8vh" row="row" display="none" shadowDisplay="none" />
+    </>
+  )
 }
 
-export default AddPost;
+export default AddPost

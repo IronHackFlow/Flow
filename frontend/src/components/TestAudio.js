@@ -25,7 +25,7 @@ import send from "../images/send.svg";
 import help from "../images/help2.svg";
 
 function TestAudio(props) {
-  const { user } = React.useContext(TheContext);
+  const { user } = React.useContext(TheContext)
 
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
@@ -357,8 +357,8 @@ function TestAudio(props) {
   const recordAudio = () => {
     const detectSilence = (
       stream,
-      onSoundEnd = (_) => {},
-      onSoundStart = (_) => {},
+      onSoundEnd = _ => {},
+      onSoundStart = _ => {},
       silence_delay = 50,
       min_decibels = -80
     ) => {
@@ -366,8 +366,8 @@ function TestAudio(props) {
       const analyser = ctx.createAnalyser();
       const streamNode = ctx.createMediaStreamSource(stream);
 
-      streamNode.connect(analyser);
-      analyser.minDecibels = min_decibels;
+      streamNode.connect(analyser)
+      analyser.minDecibels = min_decibels
 
       const data = new Uint8Array(analyser.frequencyBinCount); // will hold our data
       let silence_start = performance.now();
@@ -380,17 +380,17 @@ function TestAudio(props) {
         if (data.some((v) => v)) {
           // if there is data above the given db limit
           if (triggered) {
-            triggered = false;
-            onSoundStart();
+            triggered = false
+            onSoundStart()
           }
-          silence_start = time; // set it to now
+          silence_start = time // set it to now
         }
         if (!triggered && time - silence_start > silence_delay) {
-          onSoundEnd();
-          triggered = true;
+          onSoundEnd()
+          triggered = true
         }
       }
-      loop();
+      loop()
     }
 
     const onSilence = () => {
@@ -406,8 +406,8 @@ function TestAudio(props) {
       .getUserMedia({
         audio: true,
       })
-      .then((stream) => {
-        detectSilence(stream, onSilence, onSpeak);
+      .then(stream => {
+        detectSilence(stream, onSilence, onSpeak)
 
         var audio = recordAudioRef.current.captureStream();
         document.getElementById("song").play();
@@ -423,13 +423,13 @@ function TestAudio(props) {
   const mergeStreams = (stream1, stream2) => {
     const audioContext = new AudioContext();
 
-    let audioIn_01 = audioContext.createMediaStreamSource(stream1);
-    let audioIn_02 = audioContext.createMediaStreamSource(stream2);
+    let audioIn_01 = audioContext.createMediaStreamSource(stream1)
+    let audioIn_02 = audioContext.createMediaStreamSource(stream2)
 
-    let dest = audioContext.createMediaStreamDestination();
+    let dest = audioContext.createMediaStreamDestination()
 
-    audioIn_01.connect(dest);
-    audioIn_02.connect(dest);
+    audioIn_01.connect(dest)
+    audioIn_02.connect(dest)
 
     const recorder = new MediaRecorder(dest.stream);
 
@@ -497,16 +497,15 @@ function TestAudio(props) {
 
   const chooseTake = useCallback(() => {
     if (allTakes.length === 0) {
-      return <option>Your Takes</option>;
-    } 
-    else {
+      return <option>Your Takes</option>
+    } else {
       return allTakes.map((element, index) => {
         return (
           <option value={element.songmix} key={`${index}_${element.songmix}`}>
             {element.songName ? element.songName : element.name}
           </option>
         )
-      });
+      })
     }
   }, [allTakes, songNameUpdate])
 
@@ -529,16 +528,16 @@ function TestAudio(props) {
         .uploadFile(
           {
             fileName: fileName,
-            fileType: "audio/mpeg-3",
+            fileType: 'audio/mpeg-3',
             file: songUploadObject.songBlob,
-            kind: "song",
+            kind: 'song',
           },
-          songUploadObject
+          songUploadObject,
         )
-        .then((res) => {
+        .then(res => {
           console.log(res)
         })
-        .catch(console.error);
+        .catch(console.error)
     }
     setSongNameUpdate(songUploadObject.songName)
     songNameInputRef.current.value =  ""
@@ -569,34 +568,34 @@ function TestAudio(props) {
             </div>
 
             <div className="section-1_song-name">
-              <input 
-                className="song-name-input" 
+              <input
+                className="song-name-input"
                 ref={songNameInputRef}
-                type="text" 
+                type="text"
                 placeholder="Name this flow.."
                 onChange={(e) => setSongNameInput(e.target.value)}
                 autoFocus
                 />
             </div>
-  
+
             <div className="section-2_song-caption">
-              <input 
+              <input
                 className="song-caption-input"
                 ref={songCaptionInputRef}
-                type="text" 
+                type="text"
                 placeholder="Caption this flow.."
-                onChange={(e) => setSongCaptionInput(e.target.value)}
-                ></input>
+                onChange={e => setSongCaptionInput(e.target.value)}
+              ></input>
             </div>
 
             <div className="buttons-container">
               <div className="buttons-container_shadow-div-inset">
-                <button 
-                  className="cancel-save-button" 
+                <button
+                  className="cancel-save-button"
                   ref={buttonCloseRef}
                   type="button"
                   onClick={toggleSaveSongMenu}
-                  >
+                >
                   <img className="button-icons" src={xExit} alt="exit" />
                 </button>
                 <button className="save-song-button" type="submit">
@@ -607,8 +606,7 @@ function TestAudio(props) {
           </form>
         </div>
       )
-    }
-    else {
+    } else {
       return (
         <div className="actions-2_record">
           <div className="record-container">
@@ -640,9 +638,7 @@ function TestAudio(props) {
           {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
         </div>
         <div className="scroll-rhymes-line">
-          <p className="transcript-line-2">
-            {transcript}
-          </p>
+          <p className="transcript-line-2">{transcript}</p>
         </div>
       </div>
 
@@ -696,6 +692,7 @@ function TestAudio(props) {
                   </div>
                 </div>
               </div>
+              <div className="custom-rhyme-title">Flyest Rhyme Suggestions</div>
             </div>
             <div className="rhyme-lock-container">
               <div className="rhyme-lock-button">
@@ -830,10 +827,10 @@ function TestAudio(props) {
                               id="takes" 
                               className="select-takes_shadow-div-outset" 
                               value={selectedOption}
-                              ref={selectTakesRef} 
-                              onChange={(e) => loadTake(e)}
-                              > 
-                                {chooseTake()}
+                              ref={selectTakesRef}
+                              onChange={e => loadTake(e)}
+                            >
+                              {chooseTake()}
                             </select>
                           </div>
                         </div>
@@ -896,6 +893,6 @@ function TestAudio(props) {
         <NavBar />
       </div>
     </div>
-  );
+  )
 }
 export default TestAudio;

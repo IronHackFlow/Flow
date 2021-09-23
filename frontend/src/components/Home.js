@@ -72,23 +72,23 @@ function Home(props) {
   useEffect(() => {
     actions
       .getMostLikedSongs()
-      .then((res) => {
+      .then(res => {
         console.log(res)
-        const songsArray = res.data.map((each) => {
+        const songsArray = res.data.map(each => {
           return { song: each, songVideo: getRandomBackground() }
         })
-        setTheFeedSongs(songsArray.reverse());
+        setTheFeedSongs(songsArray.reverse())
         console.log(songsArray)
       })
-      .catch(console.error);
-  }, [theFeedBool]);
+      .catch(console.error)
+  }, [theFeedBool])
 
   useEffect(() => {
     actions
       .getMostLikedSongs()
-      .then((res) => {
+      .then(res => {
         const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const songsArray = sortByLikes.map((each) => {
+        const songsArray = sortByLikes.map(each => {
           return { song: each, songVideo: getRandomBackground() }
         })
         setTrendingSongsFeed(songsArray)
@@ -99,15 +99,15 @@ function Home(props) {
   useEffect(() => {
     actions
       .getUserFollowsSongs(updateFollowFeed)
-      .then((res) => {
-        const songsArray = res.data.map((each) => {
+      .then(res => {
+        const songsArray = res.data.map(each => {
           return { song: each, songVideo: getRandomBackground() }
         })
         console.log(res.data, "all songs by users you're following")
         setFollowingSongsFeed(songsArray.reverse())
       })
       .catch(console.error)
-  }, [user, updateFollowFeed]);
+  }, [user, updateFollowFeed])
 
   useEffect(() => {
     setTotalFollowers(followersInView?.length)
@@ -118,65 +118,69 @@ function Home(props) {
   }, [likesInView, theFeedBool, trendingBool, followingBool])
 
   useEffect(() => {
-    feedRef1.current.style.boxShadow = "inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd"
-    feedRef1.current.style.background = "#e24f8c"
-    feedRef2.current.style.boxShadow = "none"
-    feedRef2.current.style.color = "white"
+    feedRef1.current.style.boxShadow = 'inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd'
+    feedRef1.current.style.background = '#e24f8c'
+    feedRef2.current.style.boxShadow = 'none'
+    feedRef2.current.style.color = 'white'
     setTotalComments(commentsInView?.length)
   }, [])
 
   const setFeedToggleRefs = (ref1, ref2, ref3, ref4, ref5, ref6) => {
-    ref1.current.style.boxShadow = "inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd"
-    ref1.current.style.background = "#e24f8c"
-    ref2.current.style.boxShadow = "none"
-    ref2.current.style.color = "white"
+    ref1.current.style.boxShadow = 'inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd'
+    ref1.current.style.background = '#e24f8c'
+    ref2.current.style.boxShadow = 'none'
+    ref2.current.style.color = 'white'
 
-    ref3.current.style.boxShadow = "2px 2px 4px #505050, -2px -2px 2px #ffffff"
-    ref3.current.style.background = "none"
-    ref4.current.style.boxShadow = "inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff"
-    ref4.current.style.color = "#ec6aa0"
+    ref3.current.style.boxShadow = '2px 2px 4px #505050, -2px -2px 2px #ffffff'
+    ref3.current.style.background = 'none'
+    ref4.current.style.boxShadow = 'inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff'
+    ref4.current.style.color = '#ec6aa0'
 
-    ref5.current.style.boxShadow = "2px 2px 4px #505050, -2px -2px 2px #ffffff"
-    ref5.current.style.background = "none"
-    ref6.current.style.boxShadow = "inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff"
-    ref6.current.style.color = "#ec6aa0"
+    ref5.current.style.boxShadow = '2px 2px 4px #505050, -2px -2px 2px #ffffff'
+    ref5.current.style.background = 'none'
+    ref6.current.style.boxShadow = 'inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff'
+    ref6.current.style.color = '#ec6aa0'
   }
 
   const showSongs = useCallback(() => {
     if (theFeedBool === true && trendingBool === false && followingBool === false) {
       return theFeedSongs.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
-      });
-    }
-    else if (trendingBool === true && theFeedBool === false && followingBool === false) {
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+      })
+    } else if (trendingBool === true && theFeedBool === false && followingBool === false) {
       return trendingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
-      });
-    }
-    else if (followingBool === true && trendingBool === false && theFeedBool === false) {
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+      })
+    } else if (followingBool === true && trendingBool === false && theFeedBool === false) {
       return followingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />;
-      });
+        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+      })
     }
-  }, [theFeedSongs, trendingSongsFeed, followingSongsFeed, theFeedBool, trendingBool, followingBool])
+  }, [
+    theFeedSongs,
+    trendingSongsFeed,
+    followingSongsFeed,
+    theFeedBool,
+    trendingBool,
+    followingBool,
+  ])
 
   const getRandomBackground = () => {
-    let index = Math.floor(Math.random()*gifsCopy.length)
+    let index = Math.floor(Math.random() * gifsCopy.length)
     return gifsCopy[index].url
-  };
+  }
 
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
-     audioRef.current.play()
-     playPauseRef.current.src = pause
+      audioRef.current.play()
+      playPauseRef.current.src = pause
+    } else {
+      audioRef.current.pause()
+      playPauseRef.current.src = play
     }
-    else {
-     audioRef.current.pause()
-     playPauseRef.current.src = play
-   }
   }
 
-  const dateFormatHandler = (date) => {
+  const dateFormatHandler = date => {
     const getDate = new Date()
     const currentDate = Date.parse(getDate)
     const objDate = Date.parse(date)
@@ -193,32 +197,25 @@ function Home(props) {
     if (timeDiff >= year) {
       // console.log((timeDiff / year), " years ago")
       return `${Math.round(timeDiff / year)}y`
-    }
-    else if (timeDiff >= month && timeDiff < year) {
+    } else if (timeDiff >= month && timeDiff < year) {
       if (timeDiff / month < 11.5) {
         return `${Math.round(timeDiff / month)}m`
+      } else {
+        return '1y'
       }
-      else {
-        return "1y"
-      }
-    }
-    else if (timeDiff >= week && timeDiff < (month * 2)) {
+    } else if (timeDiff >= week && timeDiff < month * 2) {
       // console.log((timeDiff / week), " weeks ago")
       return `${Math.round(timeDiff / week)}w`
-    }
-    else if (timeDiff >= day && timeDiff < week) {
+    } else if (timeDiff >= day && timeDiff < week) {
       // console.log((timeDiff / day), " days ago")
       return `${Math.round(timeDiff / day)}d`
-    }
-    else if (timeDiff >= hour && timeDiff < day) {
+    } else if (timeDiff >= hour && timeDiff < day) {
       // console.log((timeDiff / hour), " hours ago")
       return `${Math.round(timeDiff / hour)}h`
-    }
-    else if (timeDiff >= minute && timeDiff < hour) {
+    } else if (timeDiff >= minute && timeDiff < hour) {
       // console.log((timeDiff / minute), " minutes ago")
       return `${Math.round(timeDiff / minute)}m`
-    }
-    else if (timeDiff >= second && timeDiff < minute) {
+    } else if (timeDiff >= second && timeDiff < minute) {
       // console.log((timeDiff / second), " seconds ago")
       return `${Math.round(timeDiff / second)}s`
     }
@@ -231,10 +228,10 @@ function Home(props) {
     }
     actions
       .getAUser({ id: songUserInView._id })
-      .then((res) => {
+      .then(res => {
         let deleteObj = null
 
-        res.data.followers.forEach((each) => {
+        res.data.followers.forEach(each => {
           if (each.follower === user._id) {
             deleteObj = each
           }
@@ -242,44 +239,42 @@ function Home(props) {
 
         if (deleteObj === null) {
           postFollow()
-        }
-        else {
+        } else {
           deleteFollow(deleteObj)
         }
       })
       .catch(console.error)
-  };
-  
+  }
+
   const postFollow = () => {
     actions
-      .addFollow({ followedUser: songUserInView._id, 
-                   followDate: new Date() })
-      .then((res) => {
+      .addFollow({ followedUser: songUserInView._id, followDate: new Date() })
+      .then(res => {
         console.log(`added a follow to: `, res.data.followedData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
         setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
-      .catch(console.error);
-  };
+      .catch(console.error)
+  }
 
-  const deleteFollow = (deleteObj) => {
+  const deleteFollow = deleteObj => {
     actions
       .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
-      .then((res) => {
+      .then(res => {
         console.log(`deleted a follow from: `, res.data.followerData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
         setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
       .catch(console.error)
-  };
+  }
 
   const likeCheck = () => {
     actions
       .getSong({ id: songInView._id })
-      .then((res) => {
+      .then(res => {
         let deleteObj = null
 
-        res.data.songLikes.forEach((each) => {
+        res.data.songLikes.forEach(each => {
           if (each.likeUser === user._id) {
             deleteObj = each
           }
@@ -287,34 +282,41 @@ function Home(props) {
 
         if (deleteObj === null) {
           postLike()
-        }
-        else {
+        } else {
           deleteLike(deleteObj)
         }
       })
       .catch(console.error)
-  };
+  }
 
   const postLike = () => {
     actions
-      .addLike({ likerSong: songInView._id, likeDate: new Date(), commLike: false })
-      .then((res) => {
+      .addLike({
+        likerSong: songInView._id,
+        likeDate: new Date(),
+        commLike: false,
+      })
+      .then(res => {
         console.log(`added a like to: `, res.data)
         setUserLiked(true)
         setTotalLikes(res.data.songLikes.length)
       })
-      .catch(console.error);
-  };
+      .catch(console.error)
+  }
 
-  const deleteLike = (deleteObj) => {
+  const deleteLike = deleteObj => {
     actions
-      .deleteLike({ likerSong: songInView._id, deleteObj: deleteObj, commLike: false })
-      .then((res) => {
+      .deleteLike({
+        likerSong: songInView._id,
+        deleteObj: deleteObj,
+        commLike: false,
+      })
+      .then(res => {
         console.log(`deleted a like from: `, res.data)
         setTotalLikes(res.data.songLikes.length)
       })
-      .catch(console.error);
-  };
+      .catch(console.error)
+  }
 
   const popUpComments = () => {
     if (poppedUp === false) {
@@ -323,7 +325,7 @@ function Home(props) {
     } else {
       menuDown('comment')
     }
-  };
+  }
 
   const popUpSearch = () => {
     if (searchPoppedUp === false) {
@@ -332,99 +334,142 @@ function Home(props) {
     } else {
       menuDown('search')
     }
-  };
+  }
 
-  const menuDown = (whichMenu) => {
+  const menuDown = whichMenu => {
     if (whichMenu === 'search') {
-      popUpSearchRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      searchInputRef.current.style.opacity = 0;
-      searchButtonRef.current.style.opacity = 0;
-      searchButtonRef.current.style.transition = "opacity .5s";
-      setSearchPoppedUp(false);
+      popUpSearchRef.current.style.height = '0px'
+      windowRef.current.style.bottom = '0'
+      searchInputRef.current.style.opacity = 0
+      searchButtonRef.current.style.opacity = 0
+      searchButtonRef.current.style.transition = 'opacity .5s'
+      setSearchPoppedUp(false)
+    } else if (whichMenu === 'comment') {
+      commentPopUpRef.current.style.height = '0px'
+      windowRef.current.style.bottom = '0'
+      commentInputRef.current.style.opacity = 0
+      commentButtonRef.current.style.opacity = '0'
+      commentButtonRef.current.style.transition = 'opacity .5s'
+      opacityRef1.current.style.opacity = 0
+      opacityRef2.current.style.opacity = 0
+      setPoppedUp(false)
     }
-    else if (whichMenu === 'comment') {
-      commentPopUpRef.current.style.height = "0px";
-      windowRef.current.style.bottom = "0";
-      commentInputRef.current.style.opacity = 0;
-      commentButtonRef.current.style.opacity = "0";
-      commentButtonRef.current.style.transition = "opacity .5s";
-      opacityRef1.current.style.opacity = 0;
-      opacityRef2.current.style.opacity = 0;
-      setPoppedUp(false);
-    }
-  };
+  }
 
-  const menuUp = (whichMenu) => {
+  const menuUp = whichMenu => {
     if (whichMenu === 'search') {
       searchInputRef.current.focus()
-      searchInputRef.current.style.opacity = 1;
-      searchButtonRef.current.style.opacity = 1;
-      searchButtonRef.current.style.transition = "opacity .5s";
-      popUpSearchRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setSearchPoppedUp(true);
-    }
-    else if (whichMenu === 'comment') {
+      searchInputRef.current.style.opacity = 1
+      searchButtonRef.current.style.opacity = 1
+      searchButtonRef.current.style.transition = 'opacity .5s'
+      popUpSearchRef.current.style.height = '50%'
+      windowRef.current.style.bottom = '50%'
+      setSearchPoppedUp(true)
+    } else if (whichMenu === 'comment') {
       commentInputRef.current.focus()
-      commentInputRef.current.style.opacity = 1;
-      commentButtonRef.current.style.opacity = "1";
-      commentButtonRef.current.style.transition = "opacity .5s";
-      opacityRef1.current.style.opacity = 1;
-      opacityRef2.current.style.opacity = 1;
-      commentPopUpRef.current.style.height = "50%";
-      windowRef.current.style.bottom = "50%";
-      setPoppedUp(true);
+      commentInputRef.current.style.opacity = 1
+      commentButtonRef.current.style.opacity = '1'
+      commentButtonRef.current.style.transition = 'opacity .5s'
+      opacityRef1.current.style.opacity = 1
+      opacityRef2.current.style.opacity = 1
+      commentPopUpRef.current.style.height = '50%'
+      windowRef.current.style.bottom = '50%'
+      setPoppedUp(true)
     }
   }
 
   return (
-    <TheViewContext.Provider value={{
-      songInView, setSongInView,
-      songUserInView, setSongUserInView,
-      commentsInView, setCommentsInView,
-      likesInView, setLikesInView,
-      followersInView, setFollowersInView,
-      audioInView, setAudioInView,
-      totalComments, setTotalComments
-    }}>
+    <TheViewContext.Provider
+      value={{
+        songInView,
+        setSongInView,
+        songUserInView,
+        setSongUserInView,
+        commentsInView,
+        setCommentsInView,
+        likesInView,
+        setLikesInView,
+        followersInView,
+        setFollowersInView,
+        audioInView,
+        setAudioInView,
+        totalComments,
+        setTotalComments,
+      }}
+    >
       <div className="Home">
         <div className="section-1_feed">
           <div div className="section-1a_toggle-feed">
             <div className="toggle-feed-container">
               <div className="each-feed_shadow-div-inset">
-                <div className="each-feed_shadow-div-outset" ref={feedRef1} onClick={() => {
-                  setFeedToggleRefs(feedRef1, feedRef2, trendingRef1, trendingRef2, followingRef1, followingRef2)
-                  setTheFeedBool(true)
-                  setTrendingBool(false)
-                  setFollowingBool(false)
-                }}>
+                <div
+                  className="each-feed_shadow-div-outset"
+                  ref={feedRef1}
+                  onClick={() => {
+                    setFeedToggleRefs(
+                      feedRef1,
+                      feedRef2,
+                      trendingRef1,
+                      trendingRef2,
+                      followingRef1,
+                      followingRef2,
+                    )
+                    setTheFeedBool(true)
+                    setTrendingBool(false)
+                    setFollowingBool(false)
+                  }}
+                >
                   <div className="each-feed_shadow-div-inset-2" ref={feedRef2}>
                     Feed
                   </div>
                 </div>
               </div>
               {/* {console.log(howManyRendersRef.current++)} */}
-              <div className="each-feed_shadow-div-inset" style={{borderRadius: "50px"}}>
-                <div className="each-feed_shadow-div-outset" ref={trendingRef1} onClick={() => {
-                  setFeedToggleRefs(trendingRef1, trendingRef2, feedRef1, feedRef2, followingRef1, followingRef2)
-                  setTrendingBool(true)
-                  setTheFeedBool(false)
-                  setFollowingBool(false)
-                }}>
+              <div className="each-feed_shadow-div-inset" style={{ borderRadius: '50px' }}>
+                <div
+                  className="each-feed_shadow-div-outset"
+                  ref={trendingRef1}
+                  onClick={() => {
+                    setFeedToggleRefs(
+                      trendingRef1,
+                      trendingRef2,
+                      feedRef1,
+                      feedRef2,
+                      followingRef1,
+                      followingRef2,
+                    )
+                    setTrendingBool(true)
+                    setTheFeedBool(false)
+                    setFollowingBool(false)
+                  }}
+                >
                   <div className="each-feed_shadow-div-inset-2" ref={trendingRef2}>
                     Trending
                   </div>
                 </div>
               </div>
-              
-              <div className="each-feed_shadow-div-inset" style={{borderRadius: "50px 5px 5px 50px"}}>
-                <div className="each-feed_shadow-div-outset" ref={followingRef1} onClick={() => {
-                  setFeedToggleRefs(followingRef1, followingRef2, trendingRef1, trendingRef2, feedRef1, feedRef2)
-                  setFollowingBool(true)
-                  setTrendingBool(false)
-                  setTheFeedBool(false)
-                }}>
+
+              <div
+                className="each-feed_shadow-div-inset"
+                style={{ borderRadius: '50px 5px 5px 50px' }}
+              >
+                <div
+                  className="each-feed_shadow-div-outset"
+                  ref={followingRef1}
+                  onClick={() => {
+                    setFeedToggleRefs(
+                      followingRef1,
+                      followingRef2,
+                      trendingRef1,
+                      trendingRef2,
+                      feedRef1,
+                      feedRef2,
+                    )
+                    setFollowingBool(true)
+                    setTrendingBool(false)
+                    setTheFeedBool(false)
+                  }}
+                >
                   <div className="each-feed_shadow-div-inset-2" ref={followingRef2}>
                     Following
                   </div>
@@ -434,10 +479,8 @@ function Home(props) {
           </div>
 
           <div className="video-scroll-container" ref={windowRef}>
-            <ul className="video-scroll-container">
-              {showSongs()}
-            </ul>
-              {/* <CSSTransition
+            <ul className="video-scroll-container">{showSongs()}</ul>
+            {/* <CSSTransition
                 in={toggleSocial}
                 key={'key2'}
                 classNames={transClass()}
@@ -463,32 +506,45 @@ function Home(props) {
               </CSSTransition> */}
           </div>
 
-          <Comments 
+          <Comments
             commentPopUpRef={commentPopUpRef}
             commentInputRef={commentInputRef}
             commentButtonRef={commentButtonRef}
             poppedUp={poppedUp}
             menuUp={menuUp}
-            opacityRef1={opacityRef1} 
+            opacityRef1={opacityRef1}
             opacityRef2={opacityRef2}
-            />
-          <Search 
-            popUpSearchRef={popUpSearchRef} 
-            searchInputRef={searchInputRef} 
+          />
+          <Search
+            popUpSearchRef={popUpSearchRef}
+            searchInputRef={searchInputRef}
             searchButtonRef={searchButtonRef}
-            />
-            
-          <div className="section-1c_song-details" style={{display: props.socialDisplay}}>
+          />
+
+          <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
             <div className="song-details-1_actions">
               <div className="actions_shadow-div-outset">
                 <div className="actions_shadow-div-inset">
                   <div className="action-btns-container">
-                    <div className="action-btn_shadow-div-outset" onClick={followCheck} style={{borderRadius: "50px 5px 5px 50px"}}>
-                      <div className="action-btn-icon_shadow-div-inset" ref={followBtnRef1} style={{borderRadius: "40px 4px 4px 40px"}}>
-                        <img className="social-icons si-follow" src={follow} ref={followBtnRef2} alt="follow user icon" />
+                    <div
+                      className="action-btn_shadow-div-outset"
+                      onClick={followCheck}
+                      style={{ borderRadius: '50px 5px 5px 50px' }}
+                    >
+                      <div
+                        className="action-btn-icon_shadow-div-inset"
+                        ref={followBtnRef1}
+                        style={{ borderRadius: '40px 4px 4px 40px' }}
+                      >
+                        <img
+                          className="social-icons si-follow"
+                          src={follow}
+                          ref={followBtnRef2}
+                          alt="follow user icon"
+                        />
                       </div>
                       <div className="action-btn-text" ref={followBtnRef3}>
-                        <p style={{color: "white"}}>{totalFollowers}</p>
+                        <p style={{ color: 'white' }}>{totalFollowers}</p>
                         <p>Follow</p>
                       </div>
                     </div>
@@ -498,17 +554,21 @@ function Home(props) {
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{color: "white"}}>{totalLikes}</p>
+                        <p style={{ color: 'white' }}>{totalLikes}</p>
                         <p>Like</p>
                       </div>
                     </div>
 
                     <div className="action-btn_shadow-div-outset" onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset" ref={commentBtn}>
-                        <img className="social-icons si-comment" src={comments} alt="comment on post icon" />
+                        <img
+                          className="social-icons si-comment"
+                          src={comments}
+                          alt="comment on post icon"
+                        />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{color: "white"}}>{totalComments}</p>
+                        <p style={{ color: 'white' }}>{totalComments}</p>
                         <p>Comment</p>
                       </div>
                     </div>
@@ -522,31 +582,40 @@ function Home(props) {
                 <div className="song-user-section">
                   <div className="user-pic-container">
                     <div className="user-pic_shadow-div-outset">
-                      <Link 
-                        to={{pathname: `/profile/${songUserInView._id}`, profileInfo: songUserInView}} 
+                      <Link
+                        to={{
+                          pathname: `/profile/${songUserInView._id}`,
+                          profileInfo: songUserInView,
+                        }}
                         className="user-pic_shadow-div-inset"
-                        >
-                        <img src={songUserInView?.picture} alt="user in view profile" ref={props.profilePicRef} />
+                      >
+                        <img
+                          src={songUserInView?.picture}
+                          alt="user in view profile"
+                          ref={props.profilePicRef}
+                        />
                       </Link>
                     </div>
                   </div>
 
                   <div className="song-title-container">
                     <div className="song-title_shadow-div-outset">
-                      <div className="song-title_shadow-div-inset"> 
-                        <p id="one">{songInView.songName} <img src={bullet} alt="bullet point" />
+                      <div className="song-title_shadow-div-inset">
+                        <p id="one">
+                          {songInView.songName} <img src={bullet} alt="bullet point" />
                         </p>
-                        <p id="two">
-                          {songUserInView.userName}
-                        </p>
+                        <p id="two">{songUserInView.userName}</p>
                       </div>
 
                       <div className="song-caption-container">
                         <p className="song-date">
-                          {dateFormatHandler(songInView.songDate)} <img src={bullet} alt="bullet point" />
+                          {dateFormatHandler(songInView.songDate)}{' '}
+                          <img src={bullet} alt="bullet point" />
                         </p>
                         <p className="song-caption">
-                          {songInView.songCaption ? songInView.songCaption : "no caption for this song"}
+                          {songInView.songCaption
+                            ? songInView.songCaption
+                            : 'no caption for this song'}
                         </p>
                       </div>
                     </div>
@@ -568,8 +637,13 @@ function Home(props) {
                       <div className="play-btn_shadow-div-outset">
                         <div className="play-btn_shadow-div-inset">
                           <div className="play-btn_shadow-div-outset-2" onClick={handlePlayPause}>
-                            <img className="button-icons bi-play" src={play} ref={playPauseRef} alt="play" />
-                            <audio ref={audioRef} src={audioInView} id='damn'></audio>
+                            <img
+                              className="button-icons bi-play"
+                              src={play}
+                              ref={playPauseRef}
+                              alt="play"
+                            />
+                            <audio ref={audioRef} src={audioInView} id="damn"></audio>
                           </div>
                         </div>
                       </div>
@@ -580,16 +654,16 @@ function Home(props) {
             </div>
           </div>
         </div>
-        
-        <NavBar 
+
+        <NavBar
           popUpSearch={popUpSearch}
           searchPoppedUp={searchPoppedUp}
-          searchBtn={searchBtn} 
+          searchBtn={searchBtn}
           profilePicRef={profilePicRef}
-          />
+        />
       </div>
     </TheViewContext.Provider>
   )
 }
 
-export default Home;
+export default Home

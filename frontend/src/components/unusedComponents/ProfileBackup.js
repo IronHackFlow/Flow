@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
-import actions from "../../api";
-import TheContext from "../../TheContext";
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import actions from '../../api'
+import TheContext from '../../TheContext'
 import mic from '../images/record2.svg'
 import avatar3 from '../images/avatar3.svg'
 import social from '../images/social.svg'
@@ -9,99 +9,93 @@ import editicon from '../images/edit.svg'
 import logouticon from '../images/logout.svg'
 import explore from '../images/explore.svg'
 import play from '../images/play.svg'
-import moment from "moment";
-
+import moment from 'moment'
 
 function Profile(props) {
-  const { 
-    user, setUser, 
-    userViewed, setUserViewed
-    } = React.useContext(
-    TheContext
-  );
+  const { user, setUser, userViewed, setUserViewed } = React.useContext(TheContext)
 
-  const [thisUser, setThisUser] = useState([userViewed]);
-  const [thisUserSongs, setThisUserSongs] = useState([]);
+  const [thisUser, setThisUser] = useState([userViewed])
+  const [thisUserSongs, setThisUserSongs] = useState([])
 
-  const profileRim = useRef();
-  const profileOut = useRef();
-  const profileIn = useRef();
-  const profileIcon = useRef();
+  const profileRim = useRef()
+  const profileOut = useRef()
+  const profileIn = useRef()
+  const profileIcon = useRef()
 
   useEffect(() => {
-    profileRim.current.style.animation = "rim .5s linear forwards"
-    profileOut.current.style.animation = "out .5s linear forwards"
-    profileIn.current.style.animation = "in .5s linear forwards"
-    profileIcon.current.style.animation = "iconScale .5s linear forwards"
+    profileRim.current.style.animation = 'rim .5s linear forwards'
+    profileOut.current.style.animation = 'out .5s linear forwards'
+    profileIn.current.style.animation = 'in .5s linear forwards'
+    profileIcon.current.style.animation = 'iconScale .5s linear forwards'
   }, [])
 
   useEffect(() => {
     actions
       .getOneUser()
-      .then((res) => {
-        setThisUser(res.data);
+      .then(res => {
+        setThisUser(res.data)
       })
-      .catch(console.error);
-  }, []);
+      .catch(console.error)
+  }, [])
 
   const logout = () => {
-    setUser({});
-    setThisUser({});
-    setUserViewed({});
-    localStorage.clear();
-  };
+    setUser({})
+    setThisUser({})
+    setUserViewed({})
+    localStorage.clear()
+  }
 
   useEffect(() => {
-    console.log("profile.js line 53 ", user);
+    console.log('profile.js line 53 ', user)
     actions
       .getUserSongs(user)
-      .then((usersSongs) => {
-        setThisUserSongs(usersSongs.data);
+      .then(usersSongs => {
+        setThisUserSongs(usersSongs.data)
       })
-      .catch(console.error);
-  }, []);
-  
-  const showLyrics = (lyrics) => {
+      .catch(console.error)
+  }, [])
+
+  const showLyrics = lyrics => {
     return lyrics.map((eachLine, index) => {
-      return (
-        <p key={`${eachLine}_${index}`}>{eachLine}</p>
-      )
+      return <p key={`${eachLine}_${index}`}>{eachLine}</p>
     })
   }
-  
-  const handlePlayPause=(x)=>{
+
+  const handlePlayPause = x => {
     const currentPlayer = document.getElementById(`${x}`)
-    if(currentPlayer.paused) {
+    if (currentPlayer.paused) {
       currentPlayer.play()
-    }
-    else {
+    } else {
       currentPlayer.pause()
-   }
+    }
   }
 
   function ProfileSongs(eachSong) {
-    const songListRef = useRef();
-  
+    const songListRef = useRef()
+
     const setFocus = () => {
       console.log(songListRef.current)
       songListRef.current.focus()
     }
 
-    const setSongRefs = useCallback(
-      (node) => {
-        songListRef.current = node;
-      }, 
-      []
-    )
+    const setSongRefs = useCallback(node => {
+      songListRef.current = node
+    }, [])
 
     return (
       <li className="your-track-container" ref={setSongRefs} onClick={setFocus}>
         <div className="track-details-container">
           <div className="lyrics-songname-cont">
-            <Link to={{pathname: `/SongScreen/${eachSong._id}`, songInfo: {...eachSong}}} className="song-name-cont">
+            <Link
+              to={{
+                pathname: `/SongScreen/${eachSong._id}`,
+                songInfo: { ...eachSong },
+              }}
+              className="song-name-cont"
+            >
               <h5>{eachSong.songName}</h5>
             </Link>
-            
+
             <div className="song-date-cont">
               <p>{eachSong.songDate ? moment(eachSong.songDate).fromNow() : '5 months ago'}</p>
               <p>{eachSong.songLikes.length} Likes</p>
@@ -112,7 +106,12 @@ function Profile(props) {
             <audio id={eachSong.songName} src={eachSong.songURL}></audio>
             <div className="lyrics-outer-container">
               <div className="nav-buttons-inset play-ur-song">
-                <img className="button-icons bi-play-2" src={play} onClick={()=>handlePlayPause(eachSong.songName)} alt="play" />
+                <img
+                  className="button-icons bi-play-2"
+                  src={play}
+                  onClick={() => handlePlayPause(eachSong.songName)}
+                  alt="play"
+                />
               </div>
             </div>
           </div>
@@ -120,9 +119,7 @@ function Profile(props) {
 
         <div className="track-play-container">
           <div className="lyrics-container">
-            <div className="para-container">
-              {showLyrics(eachSong.songLyricsStr)}
-            </div>
+            <div className="para-container">{showLyrics(eachSong.songLyricsStr)}</div>
           </div>
         </div>
       </li>
@@ -131,9 +128,7 @@ function Profile(props) {
 
   const showProfileSongs = () => {
     return thisUserSongs.map((eachSong, index) => {
-      return (
-        <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
-      )
+      return <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
     })
   }
 
@@ -149,7 +144,7 @@ function Profile(props) {
             <div className="profile-pic-container">
               <div className="profile-pic-outset">
                 <div className="profile-pic-inset">
-                  <img className="profile-pic" src={thisUser.picture} alt="prof pic"/>
+                  <img className="profile-pic" src={thisUser.picture} alt="prof pic" />
                 </div>
               </div>
             </div>
@@ -170,20 +165,31 @@ function Profile(props) {
             <div className="users-details-outset">
               <div className="users-details-inset">
                 <div className="users-details-each ude-1">
-                  <p className="little-p"><span style={{color: 'white', fontWeight: 'bold'}}>About: </span></p>
+                  <p className="little-p">
+                    <span style={{ color: 'white', fontWeight: 'bold' }}>About: </span>
+                  </p>
                   <p className="big-p">{thisUser.userAbout}</p>
                 </div>
 
                 <div className="users-details-each ude-2">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Instagram: </span> {thisUser.userInstagram}</p>
+                  <p>
+                    <span style={{ color: 'white', fontWeight: 'bold' }}>Instagram: </span>{' '}
+                    {thisUser.userInstagram}
+                  </p>
                 </div>
 
                 <div className="users-details-each ude-3">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>Twitter: </span> {thisUser.userTwitter}</p>
+                  <p>
+                    <span style={{ color: 'white', fontWeight: 'bold' }}>Twitter: </span>{' '}
+                    {thisUser.userTwitter}
+                  </p>
                 </div>
 
                 <div className="users-details-each ude-4">
-                  <p><span style={{color: 'white', fontWeight: 'bold'}}>SoundCloud: </span> {thisUser.userSoundCloud}</p>
+                  <p>
+                    <span style={{ color: 'white', fontWeight: 'bold' }}>SoundCloud: </span>{' '}
+                    {thisUser.userSoundCloud}
+                  </p>
                 </div>
               </div>
             </div>
@@ -218,32 +224,31 @@ function Profile(props) {
       <div className="profile-post-feed">
         <div className="feed-title-container">
           <div className="feed-title">
-            <p>{`${thisUser.userName}'s Songs: `} <span style={{color: "#e24f8c"}}>{thisUserSongs.length}</span></p>
+            <p>
+              {`${thisUser.userName}'s Songs: `}{' '}
+              <span style={{ color: '#e24f8c' }}>{thisUserSongs.length}</span>
+            </p>
           </div>
         </div>
 
         <div className="profile-songs-container">
-          <ul className="songs-list-container">
-            {showProfileSongs()}
-          </ul>
+          <ul className="songs-list-container">{showProfileSongs()}</ul>
         </div>
       </div>
 
-      <div className="nav-buttons nb-profile" style={{boxShadow: `${props.shadowDisplay}`}}>
+      <div className="nav-buttons nb-profile" style={{ boxShadow: `${props.shadowDisplay}` }}>
         <div className="nav-list">
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  <Link to={userViewed._id ? ("/recordingBooth") : ("/auth")}>
+                  <Link to={userViewed._id ? '/recordingBooth' : '/auth'}>
                     <img className="button-icons bi-record" src={mic} alt="mic icon"></img>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="button-title-container">
-              Record
-            </div>
+            <div className="button-title-container">Record</div>
           </div>
 
           <div className="nav-buttons-containers">
@@ -251,47 +256,50 @@ function Profile(props) {
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
                   <Link to="/explore-feed">
-                    <img className="button-icons bi-explore-p" src={explore} alt="explore icon"></img>
+                    <img
+                      className="button-icons bi-explore-p"
+                      src={explore}
+                      alt="explore icon"
+                    ></img>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="button-title-container">
-              Explore
-            </div>
+            <div className="button-title-container">Explore</div>
           </div>
-          
+
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim">
               <div className="nav-buttons-outset">
                 <div className="nav-buttons-inset">
-                  <Link to={user._id ? ("/social-feed") : ("/auth")}>
+                  <Link to={user._id ? '/social-feed' : '/auth'}>
                     <img className="button-icons bi-social-p" src={social} alt="social icon"></img>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="button-title-container">
-              Following
-            </div>
+            <div className="button-title-container">Following</div>
           </div>
 
           <div className="nav-buttons-containers">
             <div className="nav-buttons-rim" ref={profileRim}>
               <div className="nav-buttons-outset" ref={profileOut}>
                 <div className="nav-buttons-inset" ref={profileIn}>
-                  <img className="button-icons bi-profile-p" src={avatar3} ref={profileIcon} alt="avatar icon"></img>
+                  <img
+                    className="button-icons bi-profile-p"
+                    src={avatar3}
+                    ref={profileIcon}
+                    alt="avatar icon"
+                  ></img>
                 </div>
               </div>
             </div>
-            <div className="button-title-container">
-              Profile
-            </div>
+            <div className="button-title-container">Profile</div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

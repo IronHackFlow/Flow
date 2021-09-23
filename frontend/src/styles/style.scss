@@ -7,23 +7,45 @@
 $charcoalBg: #686a6b;
 $lightgrayBg: #ecf0f3;
 
-@mixin flexCenter($height: 100%, $width: 100%, $border-radius: none, $justify: center, $align: center, $direction: row) {
-    height: $height;
-    width: $width;
-    border-radius: $border-radius;
-    display: flex;
-    justify-content: $justify;
-    align-items: $align;
-    flex-direction: $direction;
+@mixin flexCenter(
+  $height: 100%,
+  $width: 100%,
+  $border-radius: none,
+  $justify: center,
+  $align: center,
+  $direction: row
+) {
+  height: $height;
+  width: $width;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
 }
 
-@mixin pageIndicator($name, 
-                     $bsX1, $bsX1-2, $bsBlur1, $bsColor1, $bsColor2,
-                     $bsX2, $bsX2-2, $bsBlur2, $bsColor1-2, $bsColor2-2, 
-                     $background, $background2, 
-                     $height, $height2,
-                     $width, $width2, $bsSetCheck: "", $bsSet2: inset) {
-  @if $bsSetCheck != "" {
+@mixin pageIndicator(
+  $name,
+  $bsX1,
+  $bsX1-2,
+  $bsBlur1,
+  $bsColor1,
+  $bsColor2,
+  $bsX2,
+  $bsX2-2,
+  $bsBlur2,
+  $bsColor1-2,
+  $bsColor2-2,
+  $background,
+  $background2,
+  $height,
+  $height2,
+  $width,
+  $width2,
+  $bsSetCheck: '',
+  $bsSet2: inset
+) {
+  @if $bsSetCheck != '' {
     @keyframes #{$name} {
       from {
         box-shadow: $bsX1 $bsX1 $bsBlur1 $bsColor1, $bsX1-2 $bsX1-2 $bsBlur1 $bsColor2;
@@ -32,17 +54,18 @@ $lightgrayBg: #ecf0f3;
         width: $width;
       }
       to {
-        box-shadow: $bsSet2 $bsX2 $bsX2 $bsBlur2 $bsColor1-2, $bsSet2 $bsX2-2 $bsX2-2 $bsBlur2 $bsColor2-2;
+        box-shadow: $bsSet2 $bsX2 $bsX2 $bsBlur2 $bsColor1-2,
+          $bsSet2 $bsX2-2 $bsX2-2 $bsBlur2 $bsColor2-2;
         background: $background2;
         height: $height2;
         width: $width2;
       }
     }
-  }
-  @else {
+  } @else {
     @keyframes #{$name} {
       from {
-        box-shadow: $bsSet2 $bsX1 $bsX1 $bsBlur1 $bsColor1, $bsSet2 $bsX1-2 $bsX1-2 $bsBlur1 $bsColor2;
+        box-shadow: $bsSet2 $bsX1 $bsX1 $bsBlur1 $bsColor1,
+          $bsSet2 $bsX1-2 $bsX1-2 $bsBlur1 $bsColor2;
         background: $background;
         height: $height;
         width: $width;
@@ -58,16 +81,76 @@ $lightgrayBg: #ecf0f3;
 }
 @keyframes iconScale {
   from {
-    transform: scale(1)
+    transform: scale(1);
   }
   to {
-    transform: scale(.85)
+    transform: scale(0.85);
   }
 }
 
-@include pageIndicator(rim, 2px, -2px, 3px,#b7b8b9, #ffffff, 2px, -2px, 3px,#3c3c3c,#b2b2b2, #ecf0f3, #686a6b, 70%, 70%, 60%, 60%, "x", inset);
-@include pageIndicator(out, 2px, -2px, 4px,#cacaca,#ffffff, 1px, -1px, 3px, #353535, #afafaf, #ecf0f3, #686a6b, 90%, 77%, 92%, 77%, "", inset);
-@include pageIndicator(in, 2px, -2px, 3px,#b0b1b3, #ffffff, 2px, -2px, 3px,#3f4040, #a7a7a7, #ecf0f3, #686a6b, 70%, 75%, 70%, 75%, "x", inset);
+@include pageIndicator(
+  rim,
+  2px,
+  -2px,
+  3px,
+  #b7b8b9,
+  #ffffff,
+  2px,
+  -2px,
+  3px,
+  #3c3c3c,
+  #b2b2b2,
+  #ecf0f3,
+  #686a6b,
+  70%,
+  70%,
+  60%,
+  60%,
+  'x',
+  inset
+);
+@include pageIndicator(
+  out,
+  2px,
+  -2px,
+  4px,
+  #cacaca,
+  #ffffff,
+  1px,
+  -1px,
+  3px,
+  #353535,
+  #afafaf,
+  #ecf0f3,
+  #686a6b,
+  90%,
+  77%,
+  92%,
+  77%,
+  '',
+  inset
+);
+@include pageIndicator(
+  in,
+  2px,
+  -2px,
+  3px,
+  #b0b1b3,
+  #ffffff,
+  2px,
+  -2px,
+  3px,
+  #3f4040,
+  #a7a7a7,
+  #ecf0f3,
+  #686a6b,
+  70%,
+  75%,
+  70%,
+  75%,
+  'x',
+  inset
+);
 
 .fade-appear,
 .fade-enter {
@@ -77,7 +160,7 @@ $lightgrayBg: #ecf0f3;
 .fade-appear-active,
 .fade-enter.fade-enter-active {
   left: 0;
-  transition: left 400ms linear
+  transition: left 400ms linear;
 }
 .fade-exit {
   left: 0;
@@ -94,7 +177,7 @@ $lightgrayBg: #ecf0f3;
 .fadeRight-appear-active,
 .fadeRight-enter.fadeRight-enter-active {
   left: 0;
-  transition: left 400ms linear
+  transition: left 400ms linear;
 }
 .fadeRight-exit {
   left: 0;
@@ -112,7 +195,10 @@ $lightgrayBg: #ecf0f3;
   display: none;
 }
 
-html, body, #root, .App {
+html,
+body,
+#root,
+.App {
   height: 100vh;
   width: 100vw;
   font-family: 'Roboto', sans-serif;
@@ -122,15 +208,14 @@ html, body, #root, .App {
   position: relative;
 }
 
-.Home, 
-.TestAudio,  
-.Profile, 
-.EditProfileScreen, 
+.Home,
+.TestAudio,
+.Profile,
+.EditProfileScreen,
 .SongScreen,
 .LogIn {
   height: 100vh;
   width: 100vw;
-
 }
 
 @media screen and (min-width: 800px) {
@@ -141,13 +226,13 @@ html, body, #root, .App {
     font-family: 'Roboto', sans-serif;
   }
 
-  body, 
-  #root, 
-  .App, 
-  .Home, 
+  body,
+  #root,
+  .App,
+  .Home,
   .TestAudio,
   .SongScreen,
-  .Profile, 
+  .Profile,
   .EditProfileScreen,
   .LogIn {
     height: 715px;
@@ -165,7 +250,6 @@ html, body, #root, .App {
 @import './EditProfile';
 @import './Buttons';
 @import './Modal';
-
 
 :root {
   --routedi2bg: #ecf0f3;
@@ -186,18 +270,18 @@ html, body, #root, .App {
   --link-color-2: #686a6b;
   --link-color-1: #686a6b;
 
-  --anim-dip-6: btnDip .3s forwards;
-  --anim-pop-6: btnPop .3s .3s forwards;
-  --anim-dip-5: btnDip .3s forwards;
-  --anim-pop-5: btnPop .3s .3s forwards;
-  --anim-dip-4: btnDip .3s forwards;
-  --anim-pop-4: btnPop .3s .3s forwards;
-  --anim-dip-3: btnDip .3s forwards;
-  --anim-pop-3: btnPop .3s .3s forwards;
-  --anim-dip-2: btnDip .3s forwards;
-  --anim-pop-2: btnPop .3s .3s forwards;
-  --anim-dip-1: btnDip .3s forwards;
-  --anim-pop-1: btnPop .3s .3s forwards;
+  --anim-dip-6: btnDip 0.3s forwards;
+  --anim-pop-6: btnPop 0.3s 0.3s forwards;
+  --anim-dip-5: btnDip 0.3s forwards;
+  --anim-pop-5: btnPop 0.3s 0.3s forwards;
+  --anim-dip-4: btnDip 0.3s forwards;
+  --anim-pop-4: btnPop 0.3s 0.3s forwards;
+  --anim-dip-3: btnDip 0.3s forwards;
+  --anim-pop-3: btnPop 0.3s 0.3s forwards;
+  --anim-dip-2: btnDip 0.3s forwards;
+  --anim-pop-2: btnPop 0.3s 0.3s forwards;
+  --anim-dip-1: btnDip 0.3s forwards;
+  --anim-pop-1: btnPop 0.3s 0.3s forwards;
 }
 @keyframes btnDip {
   0% {
@@ -239,33 +323,33 @@ html, body, #root, .App {
   }
   14% {
     --mo6opacity: 1;
-    --anim-dip-6: btnDip .3s forwards;
-    --anim-pop-6: btnPop .3s .35s forwards;
+    --anim-dip-6: btnDip 0.3s forwards;
+    --anim-pop-6: btnPop 0.3s 0.35s forwards;
   }
   28% {
     --mo3opacity: 1;
-    --anim-dip-3: btnDip .3s forwards;
-    --anim-pop-3: btnPop .3s .3s forwards;
+    --anim-dip-3: btnDip 0.3s forwards;
+    --anim-pop-3: btnPop 0.3s 0.3s forwards;
   }
   44% {
     --mo5opacity: 1;
-    --anim-dip-5: btnDip .3s forwards;
-    --anim-pop-5: btnPop .3s .3s forwards;
+    --anim-dip-5: btnDip 0.3s forwards;
+    --anim-pop-5: btnPop 0.3s 0.3s forwards;
   }
   58% {
     --mo2opacity: 1;
-    --anim-dip-2: btnDip .3s forwards;
-    --anim-pop-2: btnPop .3s .3s forwards;
+    --anim-dip-2: btnDip 0.3s forwards;
+    --anim-pop-2: btnPop 0.3s 0.3s forwards;
   }
   72% {
     --mo4opacity: 1;
-    --anim-dip-4: btnDip .3s forwards;
-    --anim-pop-4: btnPop .3s .3s forwards;
+    --anim-dip-4: btnDip 0.3s forwards;
+    --anim-pop-4: btnPop 0.3s 0.3s forwards;
   }
   86% {
     --mo1opacity: 1;
-    --anim-dip-1: btnDip .3s forwards;
-    --anim-pop-1: btnPop .3s .3s forwards;
+    --anim-dip-1: btnDip 0.3s forwards;
+    --anim-pop-1: btnPop 0.3s 0.3s forwards;
   }
   100% {
     --menuOpacity: 1;

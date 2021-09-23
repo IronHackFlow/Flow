@@ -1,263 +1,251 @@
 .EditProfileScreen {
-    // height: 100%;
-    // width: 100%;
-    position: absolute;
+  // height: 100%;
+  // width: 100%;
+  position: absolute;
 }
 
 .profile-pc {
+  background: #686a6b;
+
+  .profile-uc {
+    .profile-uo {
+      background: #686a6b;
+      width: 70%;
+      box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
+
+      .profile-ui {
+        width: 92.5%;
+
+        color: #ec6aa0;
+        box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
+      }
+    }
+  }
+
+  .profile-mc {
+    height: 85%;
     background: #686a6b;
+    box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
 
-    .profile-uc {
+    .profile-mo {
+      border: 1px solid rgb(105, 105, 105);
+      background-image: url('https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif');
 
-        .profile-uo {
-            background: #686a6b;
-            width: 70%;
-            box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-    
-            .profile-ui {
-                width: 92.5%;
-                
-                color: #ec6aa0;
-                box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-              }
-        }
-    }
-
-    .profile-mc {
-        height: 85%;
+      .profile-mi {
+        height: 94%;
+        width: 90%;
         background: #686a6b;
-        box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+        box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
 
-        .profile-mo {
-            border: 1px solid rgb(105, 105, 105);
-            background-image: url('https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif');
-            
-            .profile-mi {
-                height: 94%;
-                width: 90%;
-                background: #686a6b;
-                box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
+        .profile-lc {
+          background: #686a6b;
+          display: flex;
+          justify-content: flex-start;
+          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
 
-                .profile-lc {
-                    background: #686a6b;
-                    display: flex;
-                    justify-content: flex-start;
-                    box-shadow: inset 3px 3px 4px #4f5050, 
-                                inset -3px -3px 4px #8c8f90;
+          .input-sections-container {
+            @include flexCenter(90%, 100%, 0px, flex-start, center, column);
 
-                    .input-sections-container {
-                        @include flexCenter(90%, 100%, 0px, flex-start, center, column);
-                        
-                        .public-section-container {
-                            @include flexCenter(70%, 90%, 20px, center, center, column);
-                            box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-                            margin: 5% 0% 5% 0%;
+            .public-section-container {
+              @include flexCenter(70%, 90%, 20px, center, center, column);
+              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+              margin: 5% 0% 5% 0%;
 
-                            .public-input-container {
-                                display: flex;
-                                .edit-photo-section {
-                                    @include flexCenter(30%, 100%, 0px, center, center, row);
+              .public-input-container {
+                display: flex;
+                .edit-photo-section {
+                  @include flexCenter(30%, 100%, 0px, center, center, row);
 
-                                    .edit-photo-inner {
-                                        @include flexCenter(90px, 90px, 100px, center, center, column);
-                                        box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+                  .edit-photo-inner {
+                    @include flexCenter(90px, 90px, 100px, center, center, column);
+                    box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
 
-                                        .edit-photo-outer {
-                                            @include flexCenter(80%, 80%, 100px, center, center, column);
-                                            overflow: hidden;
-                                            box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+                    .edit-photo-outer {
+                      @include flexCenter(80%, 80%, 100px, center, center, column);
+                      overflow: hidden;
+                      box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
 
-                                            img {
-                                                height: 100%;
-                                                width: 100%;
-                                                object-fit: cover;
-                                            }
-                                        }
-                                    }
-                                }
-                                .public-sections {
-                                    @include flexCenter(70%, 100%, 0px, center, center, column);
-                                    .input-sections {
-
-                                    }
-                                }
-                            }
-                        }
-                        .personal-section-container {
-                            @include flexCenter(5%, 90%, 20px, center, center, column);
-                            box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-                            margin-bottom: 5%;
-                            color: white;
-                            .public-input-container {
-                                height: 0;
-                                opacity: 0;
-                                display: none
-                            }
-                        }
-                        .social-section-container {
-                            @include flexCenter(5%, 90%, 20px, center, center, column);
-                            box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-                            margin-bottom: 5%;
-                            color: white;
-                            .public-input-container {
-                                height: 0;
-                                opacity: 0;
-                                display: none
-                            }
-                        }
-                        .songs-section-container {
-                            @include flexCenter(5%, 90%, 20px, center, center, column);
-                            box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-                            margin-bottom: 5%;
-                            color: white;
-                            .public-input-container {
-                                height: 0;
-                                opacity: 0;
-                                display: none
-                            }
-                        }
-
+                      img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                      }
                     }
+                  }
                 }
-                .save-back-container {
-                    @include flexCenter(10%, 100%, 0px, space-between, center, row);
-
-                    .back-container {
-                        @include flexCenter(40px, 40px, 100px, center, center, row);
-                        box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-                        margin-left: 4%;
-
-                        .back-inner {
-                            @include flexCenter(70%, 70%, 100px, center, center, row);
-                            box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-
-                            img {
-                                height: 1.7em;
-                                width: 1.7em;
-                            }
-                        }
-                    }
-                    .submit-button-edit {
-                        border: none;
-                        border-radius: 20px;
-                        background: rgb(46, 194, 145);
-                        width: 70px;
-                        height: 40px;
-                        margin-right: 4%;
-                        color: white;
-                        box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-                    
-                        &:active {
-                            outline: none !important;
-                            border: 2px solid white;
-                        }
-                    }
+                .public-sections {
+                  @include flexCenter(70%, 100%, 0px, center, center, column);
+                  .input-sections {
+                  }
                 }
+              }
             }
+            .personal-section-container {
+              @include flexCenter(5%, 90%, 20px, center, center, column);
+              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+              margin-bottom: 5%;
+              color: white;
+              .public-input-container {
+                height: 0;
+                opacity: 0;
+                display: none;
+              }
+            }
+            .social-section-container {
+              @include flexCenter(5%, 90%, 20px, center, center, column);
+              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+              margin-bottom: 5%;
+              color: white;
+              .public-input-container {
+                height: 0;
+                opacity: 0;
+                display: none;
+              }
+            }
+            .songs-section-container {
+              @include flexCenter(5%, 90%, 20px, center, center, column);
+              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+              margin-bottom: 5%;
+              color: white;
+              .public-input-container {
+                height: 0;
+                opacity: 0;
+                display: none;
+              }
+            }
+          }
         }
-    }
+        .save-back-container {
+          @include flexCenter(10%, 100%, 0px, space-between, center, row);
 
-    .profile-bc {
-        height: 5%;   
-         
-        .profile-ub {
-            height: 30%;
-            width: 100%;
-            box-shadow: inset 3px 3px 4px #484b4c, 
-                        inset -3px -3px 4px #8c8f90;
+          .back-container {
+            @include flexCenter(40px, 40px, 100px, center, center, row);
+            box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
+            margin-left: 4%;
+
+            .back-inner {
+              @include flexCenter(70%, 70%, 100px, center, center, row);
+              box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+
+              img {
+                height: 1.7em;
+                width: 1.7em;
+              }
+            }
+          }
+          .submit-button-edit {
+            border: none;
+            border-radius: 20px;
+            background: rgb(46, 194, 145);
+            width: 70px;
+            height: 40px;
+            margin-right: 4%;
+            color: white;
+            box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+
+            &:active {
+              outline: none !important;
+              border: 2px solid white;
+            }
+          }
         }
+      }
     }
+  }
+
+  .profile-bc {
+    height: 5%;
+
+    .profile-ub {
+      height: 30%;
+      width: 100%;
+      box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
+    }
+  }
 }
 
-
-
 .section-header {
-    @include flexCenter(10%, 100%, 0px, center, center, row);
-    .section-header-inner {
-        @include flexCenter(90%, 100%, 0px, center, center, row);
-        color: white;
-
-    }
-    .expand-toggle {
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        left: 73%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  @include flexCenter(10%, 100%, 0px, center, center, row);
+  .section-header-inner {
+    @include flexCenter(90%, 100%, 0px, center, center, row);
+    color: white;
+  }
+  .expand-toggle {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 73%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .public-input-container {
-    @include flexCenter(90%, 100%, 0px, flex-start, center, column);
-
+  @include flexCenter(90%, 100%, 0px, flex-start, center, column);
 }
 
 .input-sections {
-    @include flexCenter(50px, 90%, 0px, space-between, stretch, column);
-    font-size: 12px;
-    color: white;
+  @include flexCenter(50px, 90%, 0px, space-between, stretch, column);
+  font-size: 12px;
+  color: white;
 
-    p {
-        text-align: start;
-        padding-left: 2%;
-    }
-    
-    .profile-user-i {
-        height: 100%;
-        width: 100%;
-        padding: 0px;
+  p {
+    text-align: start;
+    padding-left: 2%;
+  }
+
+  .profile-user-i {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    border-radius: 20px;
+    box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+
+    .profile-user-t {
+      background: none;
+      border: none;
+      height: 95%;
+      width: 87%;
+      border-radius: 20px;
+      padding-left: 12%;
+
+      &::placeholder {
+        color: rgb(165, 164, 164);
+      }
+      &:defined {
+        color: pink;
+      }
+      &:focus {
+        border: 2px solid pink;
+        outline: none !important;
+        color: white;
         border-radius: 20px;
-        box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-    
-        .profile-user-t {
-            background: none;
-            border: none;
-            height: 95%;
-            width: 87%;
-            border-radius: 20px;
-            padding-left: 12%;
-
-            &::placeholder {
-                color: rgb(165, 164, 164);
-            }
-            &:defined {
-                color: pink;
-            }
-            &:focus {
-                border: 2px solid pink;
-                outline: none !important;
-                color: white;
-                border-radius: 20px;
-            }
-        }
+      }
     }
+  }
 }
 @keyframes editOpacityIn {
-    0% {
-        height: 90%;
-        opacity: 0;
-    } 
-    50% {
-
-    }
-    100% {
-        height: 90%;
-        opacity: 1;
-
-    }
+  0% {
+    height: 90%;
+    opacity: 0;
+  }
+  50% {
+  }
+  100% {
+    height: 90%;
+    opacity: 1;
+  }
 }
 @keyframes editOpacityOut {
-    0% {
-        height: 90%;
-        opacity: 1;
-    } 
-    50% {
-
-    }
-    100% {
-        height: 0%;
-        opacity: 0;
-    }
+  0% {
+    height: 90%;
+    opacity: 1;
+  }
+  50% {
+  }
+  100% {
+    height: 0%;
+    opacity: 0;
+  }
 }

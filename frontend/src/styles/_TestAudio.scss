@@ -1,5 +1,5 @@
 .TestAudio {
-    position: absolute;
+  position: absolute;
 }
 
 .section-1_speech {
@@ -49,7 +49,7 @@
             font-size: 15px;
         }
     }
-
+    
     .scroll-rhymes-line {
         @include flexCenter(15%, 96%, 25px, center, center, row);
         // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
@@ -180,13 +180,6 @@
                         }
                     }
                 }
-
-                .custom-rhyme-title {
-                    @include flexCenter(20%, 93%, 50px, flex-start, flex-end, row);
-                    font-size: 14px;
-                    color: pink;
-                    margin-left: 4%;
-                }
             }
 
             .rhyme-lock-container {
@@ -268,6 +261,7 @@
                         }
                     }
                 }
+
                 .rlb-1 {
                     width: 25%;
                     .rhyme-lock-outset {
@@ -599,7 +593,7 @@
             opacity: 0;
             animation: opacityTransition 1s forwards;
         }
-
+      
         .section-1_song-name {
             @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
             box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
@@ -640,7 +634,7 @@
                 padding-left: 4%;
 
                 &::placeholder {
-                    color: white;   
+                    color: white;
                 }
                 &:focus {
                     color: white;
@@ -649,6 +643,7 @@
                 }
             }
         }
+
         .buttons-container {
             @include flexCenter(20%, 100%, 0px, center, center, row);
             opacity: 0;
@@ -682,7 +677,7 @@
                 }
             }
         }
-    }
+    } 
 }
 
 @keyframes opacityTransition {
