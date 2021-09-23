@@ -364,7 +364,7 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   .populate('songUser')
   .populate('songComments')
   .populate({ path: 'songUser', populate: 'followers'})
-  .then(songs => {
+  .then((songs) => {
     res.status(200).json(songs)
   })
   .catch(err => res.status(500).json(err))

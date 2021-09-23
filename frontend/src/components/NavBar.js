@@ -158,10 +158,10 @@ function NavBar(props) {
     }
     else if (locationIndicator?.pathname === "/recordingBooth") {
       recordBtnRef1.current.style.background = "#ec6aa0";
-      recordBtnRef1.current.style.boxShadow = "inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8"
+      recordBtnRef1.current.style.boxShadow = "rgb(91 55 70) 2px 2px 3px inset, rgb(244 196 216) -2px -2px 3px inset"
       recordBtnRef1.current.style.border = "1px solid #ec6aa0"
       recordBtnRef1.current.style.transition = "all .4s"
-      recordBtnRef2.current.style.boxShadow = "rgb(164 65 106) 3px 3px 5px 0px inset, rgb(244 196 216) -3px -3px 5px inset"
+      recordBtnRef2.current.style.boxShadow = "rgb(91 55 70) 2px 2px 3px inset, rgb(244 196 216) -2px -2px 3px inset"
       recordBtnRef2.current.style.height = "32px"
       recordBtnRef2.current.style.width = "32px"
       recordBtnRef2.current.style.transition = "all .4s"
@@ -223,9 +223,10 @@ function NavBar(props) {
                 Home
               </div>
             </Link>
+            {/* to={user._id ? ("/recordingBooth") : ("/auth")} */}
 
             <Link
-              to={user._id ? ("/recordingBooth") : ("/auth")}
+              to={"/recordingBooth"}
               ref={recordBtnRef1}
               className="navbar-btn-container"
               >

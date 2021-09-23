@@ -19,7 +19,8 @@
     "ffmpeg": "0.0.4",
     "jsonwebtoken": "^8.5.1",
     "mic-recorder-to-mp3": "^2.2.2",
-    "mongoose": "^5.11.18",
+    "mongoose": "^5.13.9",
+    "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2"
   }
 }

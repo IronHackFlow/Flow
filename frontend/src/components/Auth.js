@@ -1,13 +1,13 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login'
+
 import { Link } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 
 const Auth = (props) => {
     const { 
-        user, setUser, setToggleFeed, 
-        setToggleProfile, setToggleRecord 
+        user, setUser
     } = React.useContext(TheContext)
 
     const onResponse = (response) => {
@@ -16,10 +16,6 @@ const Auth = (props) => {
             .then(res => {
                 console.log("THIS", props)
                 setUser(res.data)
-                setToggleFeed(true)
-                setToggleProfile(false)
-                setToggleRecord(false)
-                props.history.push('/')
             })
             .catch(console.error)
     }
@@ -54,12 +50,7 @@ const Auth = (props) => {
                                     </div>
                                     <Link 
                                         to ="/" 
-                                        className="login-link"
-                                        onClick={() => {                       
-                                            setToggleRecord(false)
-                                            setToggleProfile(false)
-                                            setToggleFeed(true)
-                                          }}>
+                                        className="login-link">
                                         <div className="login-button">
                                             <h4>Enter</h4>
                                         </div>

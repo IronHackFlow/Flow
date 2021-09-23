@@ -3,44 +3,45 @@
 }
 
 .section-1_speech {
-    @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
+    @include flexCenter(30%, 100%, 0px, center, center, column);
     // background-image: url('../images/turnt-bg-image.jpg');
     // background-size: 104%;
     // background-position-x: 50%;
     // background-position-y: 10%;
-    background: linear-gradient(323deg, #262626 0%, #474646 100%);
+    background: linear-gradient(
+        344deg, #1f1f1f, #434343);
 
     .scroll-rhymes-container {
-        @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
+        @include flexCenter(70%, 94%, 20px, flex-start, stretch, column);
+        margin-top: 3%;
         overflow-y: scroll;
         // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
         box-shadow: inset 2px 2px 3px #272727fc, inset -2px -2px 3px #5d5d5ddb;
 
         .prev-transcript-container {
             @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
+            flex-wrap: wrap;
+            // min-height: 16px;
             padding-left: 2%;
+            margin-top: 3%;
+            
+            p {
+                @include flexCenter(11px, initial, 0px, center, center, row);
+                color: white;
+                font-size: 15px;
+                padding: 1px 2px 1px 2px;
+            }
+        }
+
+        .take-lyrics-container {
+            @include flexCenter(initial, initial, 0px, center, flex-start, column);
+            padding-left: 3%;
             margin-top: 2%;
 
-            .transcript-bar-no {
-                height: 10px;
-                width: 10px;
-                font-size: 10px;
-                color: #7d7d7d;
-                position: relative;
-                bottom: -5px;
-                margin-right: 1%;
-            }
-
-            .transcript-word-container {
-                @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
-                flex-wrap: wrap;
-
-                .prev-transcript-word {
-                    @include flexCenter(11px, initial, 0px, center, center, row);
-                    color: white;
-                    font-size: 14px;
-                    padding: 1px 2px 1px 2px;
-                }
+            p {
+                color: white;
+                font-size: 15px;
+                text-align: start;
             }
         }
 
@@ -51,9 +52,10 @@
     }
 
     .scroll-rhymes-line {
-        @include flexCenter(15%, 96%, 25px, center, center, row);
+        @include flexCenter(15%, 94%, 25px, center, center, row);
+        margin-top: 4%;
         // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
-        box-shadow: inset 2px 2px 3px #222222fc, inset -2px -2px 3px #5d5d5ddb;
+        box-shadow: inset 2px 2px 3px #1d1d1dfc, inset -2px -2px 3px #5d5d5ddb;
         overflow-x: scroll;
 
         .transcript-line-2 {
@@ -71,66 +73,63 @@
 .section-2_control-panel {
     height: 70%;
     // background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
-    background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
 
     .section-2a_flow-suggestions {
         //height:49%
-        @include flexCenter(35%, 100%, 0px 0px 29px 29px, space-evenly, center, column);
+        @include flexCenter(35%, 100%, 0px, space-evenly, center, column);
+        transition: height .5s;
         position: absolute;
-        background: linear-gradient(314deg, #5a5a5a 0%, #8d8d8d 100%);
+        background: linear-gradient(0deg, #5a5a5a 0%, #8d8d8d 100%);
         z-index: 1;
         box-shadow: 0px 12px 30px 10px #2a2a2a;
-        border-top: 1px solid #c4c4c4;
-        transition: height .5s;
-
-        .next-bar-container {
-            @include flexCenter(8%, 96%, 20px, flex-start, flex-start, row);
-            box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
-        }
 
         .suggestions {
-            @include flexCenter(22%, 96%, 10px 50px 50px 10px, center, flex-start, row);
-            box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+            @include flexCenter(23%, 95%, 12px 50px 50px 12px, center, flex-start, row);
+            box-shadow: 3px 3px 5px 0px #4c4c4c, -2px -2px 3px #d0d0d0;
             transition: height .5s;
 
             .custom-rhyme {
-                @include flexCenter(100%, 100%, 50px, space-evenly, flex-start, column);
+                @include flexCenter(100%, 76%, 50px, space-evenly, center, column);
 
                 .rhymed-word_shadow-div-inset {
-                    @include flexCenter(35%, 55%, 5px 0px 22px 0px, flex-start, center, row);
-                    box-shadow: inset 2px 2px 2px #565656, inset -2px -2px 2px #ababab;
-                    
-                    p {
-                        color: white;
-                        margin-left: 6%;
-                        font-size: 13px;
-                    }
-                    .last-word-holder {
-                        color: #f2bed3;
-                    }
-                    .locked-word-holder {
-                        color: #ff9fc8;
-                    }
-                    .select-word-holder {
-                        color: #83e3e3;
-                    }
+                    @include flexCenter(30%, 93%, 15px, flex-start, center, row);
+                    color: white;
+                    font-size: 12px;
                 }
 
                 .custom-rhyme-inner {
-                    @include flexCenter(65%, 100%, 5px 20px 20px 5px, center, flex-start, row);
+                    @include flexCenter(70%, 100%, 5px 20px 20px 5px, center, flex-start, row);
                     overflow-x: scroll;
 
+                    // .rhymed-word-container {
+                    //     @include flexCenter(100%, 36%, 5px, center, center, row);
+
+                    //     .rhymed-word_shadow-div-outset {
+                    //         @include flexCenter(70%, 90%, 3px, center, center, row);
+                    //         box-shadow: 2px 2px 3px 0px #4c4c4c, -2px -2px 3px #d0d0d0;
+
+                    //         .rhymed-word_shadow-div-inset {
+                    //             @include flexCenter(80%, 93%, 15px, center, center, row);
+                    //             box-shadow: inset 2px 2px 3px #4a4a4a, inset -2px -2px 3px #d2d2d2;
+                    //             color: white;
+                    //             font-size: 12px;
+
+                    //         }
+                    //     }
+                    // }
                     .custom-rhyme_shadow-div-inset {
-                        @include flexCenter(90%, 97%, 5px 20px 20px 5px, center, center, row);
+                        @include flexCenter(88%, 97%, 5px 20px 20px 5px, center, center, row);
+                        box-shadow: inset 3px 3px 3px #4c4c4c, inset -3px -3px 3px #c3c3c3;
 
                         .top-rhymes-container {
                             @include flexCenter(94%, 100%, 0px, flex-start, center, row);
                             flex-wrap: wrap;
+                            // padding: 3% 3% 3% 0%;
                             position: relative;
     
                             .each-top-rhyme {
                                 @include flexCenter(10px, initial, 0px, center, center, row);
-                                color: #ff8ebd;
+                                color: #e24f8c;
                                 font-size: 15px;
                                 font-weight: bold;
                                 padding: 1px 3px 1px 3px;
@@ -164,14 +163,14 @@
                                         box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
                                     }
                                 }
+                                .select-no {
+                                    font-size: 17px;
+                                    border: white;
+                                    color: white;
+                                }
                             }
                         }
-                        .each-locked-rhyme {
-                            @include flexCenter(10px, initial, 0px, center, center, row);
-                            color: #f14a8f;
-                            font-size: 15px;
-                            padding: 1px 3px 1px 3px;
-                        }
+    
                         .each-selected-rhyme {
                             @include flexCenter(10px, initial, 0px, center, center, row);
                             color: #00ffff;
@@ -190,32 +189,29 @@
             }
 
             .rhyme-lock-container {
-                @include flexCenter(100%, 24%, 50px, flex-end, center, row);
+                @include flexCenter(100%, 24%, 50px, flex-start, center, row);
 
                 .rhyme-lock-button {
-                    @include flexCenter(78%, 66%, 50px, center, center, row);
-                    box-shadow: 3px 3px 3px #4c4c4c, -2px -2px 2px #b7b7b7;
-                    margin-right: 10%;
+                    @include flexCenter(80%, 96%, 50px, center, center, row);
+                    box-shadow: inset 3px 3px 3px #5a5a5a, inset -3px -3px 3px #b7b7b7;
 
                     .rhyme-lock-outset {
-                        @include flexCenter(90%, 90%, 50px, center, center, row);
-                        box-shadow: inset 3px 3px 5px 0px #464545, inset -2px -2px 3px #a6a6a6;
-                    
+                        @include flexCenter(90%, 45%, 50px, center, center, row);
+
                         .rhyme-lock-btn {
-                            @include flexCenter(75%, 75%, 50px, center, center, row);
+                            @include flexCenter(75%, 85%, 50px, center, center, row);
                             border: none;
-                            background-color: initial;
+                            background-color: #ec6aa0;
                             box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
                             
                             img {
-                                height: 1.7em;
-                                width: 1.7em;
-                                filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+                                height: 1.6em;
+                                width: 1.6em;
+                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                             }
                             
                             &:active {
-                                box-shadow: none;
-                                // box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
+                                box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
                             }
                         }
                     }
@@ -224,28 +220,25 @@
         }
 
         .suggestion-button-container {
-            @include flexCenter(17%, 97%, 50px, center, center, row);
+            @include flexCenter(17%, 95%, 50px, center, flex-start, row);
             box-shadow: inset 3px 3px 5px 0px #4c4c4c, inset -2px -2px 3px #d0d0d0;
 
             .rhyme-lock-container {
-                @include flexCenter(75%, 96%, 50px, flex-start, center, row);
-                box-shadow: 3px 3px 3px #404040, -2px -2px 2px #a5a5a5;
+                @include flexCenter(100%, 24%, 50px, flex-start, center, row);
 
                 .rhyme-lock-button {
-                    @include flexCenter(100%, 30%, 50px, center, center, row);
+                    @include flexCenter(80%, 96%, 50px, center, center, row);
+                    box-shadow: 3px 3px 3px #5a5a5a, -3px -3px 3px #b7b7b7;
 
                     .rhyme-lock-outset {
-                        @include flexCenter(70%, 45%, 50px, center, center, row);
-                        margin-bottom: 1%;
-                        box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
+                        @include flexCenter(90%, 45%, 50px, center, center, row);
 
                         .rhyme-lock-btn {
-                            @include flexCenter(100%, 100%, 50px, center, center, row);
+                            @include flexCenter(75%, 85%, 50px, center, center, row);
+                            border: none;
                             background-color: #ec6aa0;
-                            box-shadow: inset 2px 2px 5px 0px #b74b78, inset -2px -2px 5px #ffcfe3;
-                            border: 1px solid #ec6aa0;
-                            color: white;
-
+                            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
+                            
                             img {
                                 height: 1.6em;
                                 width: 1.6em;
@@ -253,38 +246,9 @@
                             }
                             
                             &:active {
-                                box-shadow: none;
+                                box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
                             }
                         }
-                        .select-no {
-                            font-size: 10px;
-                            font-weight: bold;
-                            color: white;
-
-                            &:focus{
-                                outline: none !important;
-                                border: 1px solid white;
-                            }
-                        }
-                    }
-                }
-                .rlb-1 {
-                    width: 25%;
-                    .rhyme-lock-outset {
-                        width: 90%;
-                    }
-                }
-                .rlb-2 {
-                    width: 35%;
-                    .rhyme-lock-outset {
-                        width: 94%;
-                    }
-                }
-                .rlb-3 {
-                    width: 40%;
-
-                    .rhyme-lock-outset {
-                        width: 91%;
                     }
                 }
             }
@@ -292,7 +256,7 @@
     }
 
     .NavBar {
-        background: linear-gradient(358deg, #3e3e3e, #5a5a5a);
+        background: #4f4f4f;
         box-shadow: 0px -5px 10px 8px #323232;
         border-radius: 40px 40px 0px 0px;
 
@@ -305,10 +269,10 @@
                 border: none;
 
                 .navbar_shadow-div-inset {
-                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #676767;
+                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #888888;
 
                     .navbar-btn-container {
-                        box-shadow:  #5b3746 2px 2px 3px 0px, #6d6d6d -3px -3px 4px;
+                        box-shadow:  2px 2px 3px 0px #353535, -3px -3px 4px #787878;
 
                         .navbar-btn_shadow-div-inset {
                             box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
@@ -326,19 +290,15 @@
 
 .section-2b_flow-controls {
     //height 35%
-    @include flexCenter(39%, 100%, 0px, center, flex-start, row);
+    @include flexCenter(37%, 100%, 0px, center, stretch, row);
     transition: height .5s;
-
+    background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
     position: absolute;
     bottom: 0;
 
     .flow-controls-container {
-        @include flexCenter(55%, 96%, 10px, center, center, column);
+        @include flexCenter(95%, 95%, 10px, center, center, column);
         // box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
-        box-shadow: inset 3px 3px 3px 0px #2b2b2b, inset -3px -3px 4px #686868;
-        position: absolute;
-        bottom: 100px;
-        transition: height .5s;
 
         .flow-controls-1_playback-display {
             @include flexCenter(30%, 100%, 0px, center, flex-end, row);
@@ -350,20 +310,21 @@
 
                 .play-btn-container_shadow-div-outset {
                     @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #7f7f7f;
+                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #a6a6a6;
 
                     .play-btn-container_shadow-div-inset {
                         @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
-                        box-shadow: inset 2px 2px 3px 0px #282828, inset -2px -2px 5px #7d7d7d;
+                        background: #5d5d5d;
+                        box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                         .play-btn_shadow-div-outset {
                             @include flexCenter(80%, 79%, 50%, center, center,row);
                             text-align: center;
                             font-weight: bold;
                             background: #e24f8c;
-                            margin-left: 12%;
+                            margin-left: 9%;
                             border: none;
-                            box-shadow: 2px 2px 4px #232323, -2px -2px 2px #8f8f8f;
+                            box-shadow: 2px 2px 3px #4e4e4e, -2px -2px 3px #a2a2a2;
                             
                             img {
                                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
@@ -383,16 +344,16 @@
 
                 .play-slider-container_shadow-div-outset {
                     @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -1px -2px 3px 0px #9a9a9a;
+                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
                     .play-slider-container_shadow-div-inset {
                         @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
                         // background: #5d5d5d;
-                        box-shadow: inset 2px 2px 3px 0px #232323, inset -2px -2px 3px #7b7b7b;
+                        box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
                         .play-slider_shadow-div-outset {
                             @include flexCenter(75%, 96%, 8px 50px 50px 8px, center, center, column);
-                            box-shadow: 3px 3px 3px #282828, -2px -2px 2px 0px #838383;
+                            box-shadow: 3px 3px 3px 0px #464545, -2px -2px 3px #c5c5c5;
 
                             .play-slider_shadow-div-inset {
                                 @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
@@ -405,7 +366,7 @@
                                     margin-left: 1%;
                                     border-radius: 50px;
                                     // background: #63DEBC;
-                                    box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+                                    box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #b3b3b3;
                                 }
                                 input[type="range"]::-webkit-slider-thumb {
                                     appearance: none;
@@ -413,9 +374,9 @@
                                     width: 20px;
                                     border-radius: 50px;
                                     cursor: pointer;
-                                    background: #4b4b4b;
+                                    background: #6f6f6f;
                                     transition: background-color 1s ease;
-                                    box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+                                    box-shadow: inset 1px 1px 1px 0px #a4a4a4, inset -1px -1px 1px #3d3d3d;
 
                                 }
 
@@ -424,7 +385,7 @@
                                     padding: 0% 3%;
     
                                     .time-text-start {
-                                        font-size: 10px;
+                                        font-size: 11px;
                                         color: white;
                                     }
                                     .time-text-end {
@@ -444,44 +405,43 @@
             transition: height .5s;
 
             .actions-container_shadow-div-outset {
-                @include flexCenter(88%, 96%, 40px 40px 5px 5px, center, center, column);
-                box-shadow: 3px 3px 5px #222222, -2px -2px 2px 0px #6b6b6b;
+                @include flexCenter(90%, 96%, 40px 40px 5px 5px, center, center, column);
+                box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
                 transition: height .5s;
 
                 .actions-container_shadow-div-inset {
-                    @include flexCenter(94%, 99%, 37px 38px 5px 5px, space-evenly, center, column);
-                    box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #636363;
+                    @include flexCenter(94%, 97%, 35px 35px 5px 5px, space-evenly, center, column);
+                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
                     transition: height .5s;
 
                     .actions-1_flow-takes {
-                        @include flexCenter(50%, 100%, 0px, space-between, center, row);
+                        @include flexCenter(50%, 100%, 0px, center, center, row);
                         transition: height .5s;
 
                         .flow-takes-1_select-takes {
-                            @include flexCenter(96%, 65%, 0px, center, center, row);
+                            @include flexCenter(100%, 65%, 0px, center, center, row);
                             transition: width .5s;
             
                             .select-takes-container_shadow-div-outset {
-                                @include flexCenter(79%, 94%, 48px 30px 30px 5px, center, center, row);
-                                box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
+                                @include flexCenter(79%, 94%, 40px 30px 30px 5px, space-evenly, center, row);
+                                box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
                                 
                                 .select-takes-container {
-                                    @include flexCenter(80%, 96%, 63px 38px 38px 10px, center, flex-end, column);
+                                    @include flexCenter(80%, 95%, 52px 40px 40px 10px, center, center, column);
                                     transition: width .5s;
-                                    box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 4px #686868;
+                                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
 
                                     .select-takes_shadow-div-inset {
-                                        @include flexCenter(69%, 90%, 40px, center, center, column);
-                                        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-                                        margin-right: 3%;
+                                        @include flexCenter(70%, 91%, 40px, center, center, column);
+                                        box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
 
                                         .select-takes_shadow-div-outset {
-                                            @include flexCenter(60%, 91%, 30px, center, center, column);
+                                            @include flexCenter(60%, 84%, 30px, center, center, column);
                                             // box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
-                                            background-color: #3c3c3c;
-                                            border: none;
+                                            background-color: #6B6B6B;
+                                            border-color: #6B6B6B;
                                             color: white;
-
+                                            margin-right: 5%;
                                             &:focus {
                                                 outline: none !important;
                                             }
@@ -514,36 +474,31 @@
                         }
 
                         .flow-takes-2_takes-actions {
-                            @include flexCenter(100%, 33%, 50px, flex-start, center, row);
-                            margin-right: 1%;
+                            @include flexCenter(100%, 35%, 50px, flex-start, center, row);
 
                             .takes-actions-container {
-                                @include flexCenter(83%, 90%, 50px, space-evenly, center, row);
-                                
-                                .actions-btn-container {
-                                    @include flexCenter(95%, 40%, 50%, center, center, row);
-                                    box-shadow: inset 2px 2px 3px 0px #242424, inset -3px -3px 4px #5f5f5f;
+                                @include flexCenter(77%, 90%, 50px, space-evenly, center, row);
+                                box-shadow: inset 3px 3px 3px #414141, inset -2px -2px 3px #9c9c9c;
+                                background: #5d5d5d;
 
+                                .actions-btn-container {
+                                    @include flexCenter(90%, 46%, 50%, center, center, row);
+                                
                                     .actions-btn_shadow-div-outset {
-                                        @include flexCenter(73%, 73%, 50%, center, center,row);
+                                        @include flexCenter(80%, 80%, 50%, center, center,row);
                                         text-align: center;
                                         font-weight: bold;
-                                        box-shadow: 2px 2px 3px #252525, -2px -2px 3px #616161;
-
+                                        background: $charcoalBg;
+                                        box-shadow:  2px 2px 3px #3d3f3f,
+                                                    -2px -2px 3px #939597;
                                         img {
-                                            height: 1.5em;
-                                            width: 1.5em;
+                                            height: 1.7em;
+                                            width: 1.7em;
                                         }
 
                                         &:active {
-                                            box-shadow: none;
-                                        }
-                                    }
-                                    .ab-save {
-                                        background: #e24f8c;
-
-                                        img {
-                                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                            box-shadow: inset 2px 2px 3px #313232, 
+                                                        inset -2px -2px 3px #9fa2a4;
                                         }
                                     }
                                 }
@@ -554,27 +509,78 @@
             }
         } 
     }
-    
-    .record-2_record-btn {
-        @include flexCenter(50px, 50px, 50%, flex-end, center, row);
-        position: fixed;
-        right: 9%;
-        bottom: 13%;
-        box-shadow: -2px 5px 10px #292828;
+}
+// when save menu clicked adds this class to animate menu
+.save-menu-active {
+    .section-2a_flow-suggestions {
+        height: 10%;
+        transition: height .5s;
 
-        .record-btn_shadow-div-inset {
-            @include flexCenter(100%, 100%, 50%, center, center, row);
+        .suggestions {
+           height: 20%;
+            transition: height .5s;
 
-            .record-btn_shadow-div-outset {
-                @include flexCenter(98%, 98%, 50%, center, center, row);
-                background: #63DEBC;
-                box-shadow: inset 2px 2px 2px 0px #baf9e9, inset -1px -1px 2px #216c56;
-                border: 1px solid #4b9c86;
+            .custom-rhyme {
+                opacity: 0;
+            }
+            .rhyme-lock-container {
+                opacity: 0;
+            }
+        }
+    }
 
-                img {
-                    height: 2.1em;
-                    width: 2.1em;
-                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+    .section-2b_flow-controls {
+        height: 74%;
+        transition: height .5s;
+
+        .flow-controls-container {
+            .flow-controls-1_playback-display {
+                height: 16%;
+                transition: height .5s;
+            }
+
+            .flow-controls-2_actions {
+                height: 84%;
+                transition: height .5s;
+
+                .actions-container_shadow-div-outset {
+                    height: 94%;
+                    transition: height .5s;
+
+                    .actions-container_shadow-div-inset {
+                        height: 97.5%;
+                        transition: height .5s;
+
+                        .actions-1_flow-takes {
+                            height: 24%;
+                            transition: height .5s;
+                            
+                            .flow-takes-1_select-takes {
+                                width: 100%;
+                                transition: width .5s;
+
+                                .select-takes-container_shadow-div-outset {  
+                                    .select-takes-container {
+                                        .select-takes_shadow-div-inset {
+                                            width: 94%;
+                                            transition: width .5s;
+
+                                            .select-takes_shadow-div-outset {
+                                                background-color: #797979;
+                                                border-color: #797979;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .flow-takes-2_takes-actions {
+                                @include flexCenter(100%, 0px, 50px, flex-start, center, row);
+                                opacity: 0;
+                                transition: all .5s;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -582,12 +588,16 @@
 }
 
 .SaveSongDisplay {
-    @include flexCenter(80%, 100%, 0px, flex-start, center, column);
-    transition: height .5s;
-
+    height: 75%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
     .song-inputs-container {
-        @include flexCenter(97%, 95%, 5px 25px 25px 25px, space-evenly, center, column);
-        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
+        @include flexCenter(96%, 94%, 5px 20px 20px 20px, space-evenly, center, column);
+        box-shadow: 2px 2px 3px #3e3e3e, -2px -2px 3px #a3a3a3;
 
         .section-title {
             height: 9%;
@@ -596,23 +606,19 @@
             text-indent: 3%;
             color: pink;
             font-size: 14px;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
         }
 
         .section-1_song-name {
             @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-
+            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+    
             .song-name-input {
                 @include flexCenter(80%, 92%, 40px, center, center, row);
                 // opacity: 0;
                 border: none;
                 outline: none;
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
-                background: initial;
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+                background: #797979;
                 padding-left: 4%;
 
                 &::placeholder {
@@ -628,14 +634,12 @@
     
         .section-2_song-caption {
             @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-            
+            box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+    
             .song-caption-input {
                 @include flexCenter(80%, 92%, 40px, center, center, row);
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
-                background: initial;
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
+                background: #797979;
                 border: none;
                 padding-left: 4%;
 
@@ -651,18 +655,16 @@
         }
         .buttons-container {
             @include flexCenter(20%, 100%, 0px, center, center, row);
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
 
             .buttons-container_shadow-div-inset {
-                @include flexCenter(100%, 93%, 40px, space-between, center, row);
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
+                @include flexCenter(100%, 90%, 40px, space-between, center, row);
+                box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 3px #a9a9a9;
                 padding: 0% 2%;
 
                 .cancel-save-button {
-                    @include flexCenter(70%, 11%, 30px, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-                    background: initial;
+                    @include flexCenter(60%, 8%, 30px, center, center, row);
+                    box-shadow: 2px 2px 3px #424242, -1px -1px 3px #e0e0e0;
+                    background: #797979;
                     border: none;
                     color: white;
                     
@@ -685,48 +687,37 @@
     }
 }
 
-@keyframes opacityTransition {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 .actions-2_record {
     @include flexCenter(50%, 100%, 0px, center, flex-start, row);
-    opacity: 0;
-    animation: opacityTransition 1s forwards;
 
     .record-container {
-        @include flexCenter(89%, 96%, 10px 50px 50px 50px, space-between, center, row);
-        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
+        @include flexCenter(89%, 96%, 5px 50px 50px 50px, space-between, center, row);
+        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
 
         .record-1_select-beat {
             @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
             
             .select-beat_shadow-div-inset {
                 @include flexCenter(85%, 97%, 8px 40px 40px 50px, flex-end, center, row);
-                box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 4px #686868;
+                box-shadow: inset 2px 2px 3px #414141, inset -2px -2px 3px #929292;
 
                 .select-beat_shadow-div-outset {
                     @include flexCenter(75%, 91%, 50px, center, center, column);
-                    box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #6d6d6d;
-                    margin-right: 3%;
+                    box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 4px #a5a5a5;
+                    margin-right: 4%;
 
                     .select-beat-title {
                         @include flexCenter(33%, 100%, 0px, center, flex-start, column);
                         color: pink;
-                        font-size: 10px;
+                        font-size: 14px;
                         margin-left: 15%;
                     }
                     .track-select {
-                        background-color: #3d3d3d;
+                        background-color: #626262;
                         color: white;
-                        border: none;
+                        border-color: #626262;
                         height: 50%;
                         width: 90%;
-
                         &:focus {
                             outline: none !important;
                         }
@@ -734,111 +725,28 @@
                 }
             }
         }
-    }
-}
-// when save menu clicked adds this class to animate menu
-.save-menu-active {
-    .section-2a_flow-suggestions {
-        height: 10%;
-        transition: height .5s;
-        
-        .next-bar-container {
-            opacity: 0;
-        }
-        .suggestions {
-            height: 20%;
-            transition: height .5s;
 
-            .custom-rhyme {
-                opacity: 0;
-            }
-            .rhyme-lock-container {
-                opacity: 0;
-            }
-        }
-        .suggestion-button-container {
-            opacity: 0;
-        }
-    }
+        .record-2_record-btn {
+            @include flexCenter(100%, 35%, 50%, flex-end, center, row);
+            
+            .record-btn_shadow-div-inset {
+                @include flexCenter(88%, 52%, 50%, center, center, row);
+                box-shadow: inset 2px 2px 3px #434343, inset -3px -3px 3px #868686;
+                margin-right: 5%;
 
-    .section-2b_flow-controls {
-        height: 61%;
-        transition: height .5s;
+                .record-btn_shadow-div-outset {
+                    @include flexCenter(75%, 75%, 50%, center, center, row);
+                    background: #63DEBC;
+                    box-shadow: 3px 3px 4px 0px #3b3b3b, -3px -3px 3px #868686;
 
-        .flow-controls-container {
-            height: 75%;
-            transition: height .5s;
-
-            .flow-controls-1_playback-display {
-                height: 14%;
-                transition: height .5s;
-            }
-
-            .flow-controls-2_actions {
-                height: 85%;
-                transition: height .5s;
-
-                .actions-container_shadow-div-outset {
-                    height: 96%;
-                    width: 95%;
-                    transition: all .5s;
-
-                    .actions-container_shadow-div-inset {
-                        height: 98%;
-                        width: 98%;
-                        transition: height .5s;
-
-                        .actions-1_flow-takes {
-                            height: 20%;
-                            transition: height .5s;
-                            
-                            .flow-takes-1_select-takes {
-                                width: 100%;
-                                transition: width .5s;
-
-                                .select-takes-container_shadow-div-outset { 
-                                    height: 80%; 
-                                    width: 95%;
-                                    border-radius: 40px 30px 30px 5px;
-                                    transition: all .5s;
-
-                                    .select-takes-container {
-                                        height: 82%;
-                                        width: 98%;
-                                        border-radius: 55px 40px 40px 9px;
-                                        transition: all .5s;
-
-                                        .select-takes_shadow-div-inset {
-                                            width: 94%;
-                                            margin-right: 2%;
-                                            transition: width .5s;
-
-                                            .select-takes_shadow-div-outset {
-                                                background-color: #424242
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .flow-takes-2_takes-actions {
-                                @include flexCenter(100%, 0px, 50px, flex-start, center, row);
-                                opacity: 0;
-                                transition: all .25s;
-                            }
-                        }
+                    .bi-record-float {
+                        height: 1.7em;
+                        width: 1.7em;
+                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                     }
                 }
             }
         }
     }
 }
-.slideOut {
-    transform: translateX(170%);
-    opacity: 0;
-    transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-}
-.slideIn {
-    transform: translateX(0%);
-    transition: transform .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-}
+

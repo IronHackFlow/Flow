@@ -5,6 +5,7 @@ import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
+import UseAudioPlayer from "./UseAudioPlayer.js";
 import Comments from "./Comments.js";
 import Search from "./Search.js";
 import NavBar from "./NavBar.js";
@@ -25,12 +26,13 @@ function Home(props) {
   const [theFeedBool, setTheFeedBool] = useState(true);
   const [trendingBool, setTrendingBool] = useState(false);
   const [followingBool, setFollowingBool] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioInView, setAudioInView] = useState();
   const [songInView, setSongInView] = useState({});
   const [songUserInView, setSongUserInView] = useState({});
   const [commentsInView, setCommentsInView] = useState([]);
   const [likesInView, setLikesInView] = useState();
   const [followersInView, setFollowersInView] = useState();
-  const [audioInView, setAudioInView] = useState();
   const [userLiked, setUserLiked] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [searchPoppedUp, setSearchPoppedUp] = useState();
@@ -553,8 +555,12 @@ function Home(props) {
 
                 <div className="song-play-section">
                   <div className="play-bar-container">
-                    <div className="play-bar_shadow-div-inset">
-                    </div>
+                    <UseAudioPlayer 
+                      isPlaying={isPlaying}
+                      setIsPlaying={setIsPlaying}
+                      audioSrc={audioInView}
+                      setAudioSrc={setAudioInView}
+                      />
                   </div>
 
                   <div className="play-song-container">
