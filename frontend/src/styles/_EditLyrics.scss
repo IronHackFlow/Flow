@@ -1,0 +1,350 @@
+.EditLyrics {
+    background: #444444;
+
+    .section-1_profile-el {
+        @include flexCenter(5%, 100%, 0px, center, flex-end, column);
+        .close-screen {
+            @include flexCenter(30px, 30px, 50px, center, center, column);
+            background-color: initial;
+            border: none;
+            box-shadow: 3px 3px 5px 0px #1f1f1f, -1px -1px 2px #cfcfcf;
+            margin-right: 2%;
+        }
+    }
+    .section-2_lyrics-el {
+        @include flexCenter(77%, 100%, 30px 0px 0px 0px, flex-start, center, column);
+        background: linear-gradient(337deg, #5d5d5d 0%, #8d8d8d 100%);
+        position: absolute;
+
+        .lyrics-list-container {
+            @include flexCenter(intial, 97%, 0px, flex-start, center, column);
+            margin-top: 2%;
+            overflow-y: scroll;
+
+            .lyrics-list-item {
+                @include flexCenter(intial, 100%, 28px 5px 20px 5px, center, flex-start, row);
+                list-style-type: none;
+                min-height: 80px;
+                margin-bottom: 2%;
+                box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #c3c3c3;
+
+                .list-item-1_edit-lyrics {
+                    @include flexCenter(100%, 100%, 8px, center, center, column);
+
+                    .edit-lyrics-container {
+                        @include flexCenter(65%, 97%, 5px 30px 30px 5px, flex-start, flex-end, row);
+
+                        .edit-lyrics_shadow-div-outset {
+                            @include flexCenter(88%, 100%, 30px 3px 10px 30px, flex-start, center, row);
+                            box-shadow: 3px 3px 5px 0px #545454, -2px -2px 2px #cfcfcf;
+
+                            .buttons-container {
+                                @include flexCenter(100%, 20%, 8px, center, center, row);
+                                
+                                .buttons-container_shadow-div-inset {
+                                    @include flexCenter(89%, 93%, 30px 5px 5px 30px, space-evenly, center, row);
+                                    box-shadow: inset 2px 2px 4px 0px #3f3f3f, inset -2px -2px 2px #e6e6e6;
+                                    
+                                    .bar-number-container {
+                                        @include flexCenter(100%, 40%, 8px, flex-end, center, row);
+        
+                                        .bar-num_shadow-div-inset {
+                                            @include flexCenter(89%, 92%, 50px, flex-end, center, row);
+
+                                            .bar-num_shadow-div-outset {
+                                                @include flexCenter(85%, 85%, 50px 0px 0px 50px, center, center, row);
+                                                box-shadow: 2px 2px 6px 0px #3a3a3a, -1px -1px 2px #ffffff;
+                                                // background: #565555;
+                                                color: pink;
+                                                font-size: 13px;
+                                            }
+                                        }
+                                    }
+
+                                    .buttons_shadow-div-inset {
+                                        @include flexCenter(89%, 60%, 50px, center, center, row);
+                                        // box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+    
+                                        .buttons_shadow-div-outset {
+                                            @include flexCenter(85%, 76%, 3px, center, center, row);
+                                            background-color: #ec6aa0;
+                                            border: none;
+                                            color: white;
+                                            box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #ffffff;
+                                            
+                                            img {
+                                                height: 1.6em;
+                                                width: 1.6em;
+                                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .each-lyric-container {
+                                @include flexCenter(100%, 67%, 8px, flex-start, flex-start, row);
+                                overflow-y: scroll;
+
+                                .each-word-container {
+                                    @include flexCenter(16px, initial, 8px, flex-start, flex-start, row);
+                                    flex-wrap: wrap;
+                                    p {
+                                        height: 16px;
+                                        font-size: 13px;
+                                        color: white;
+                                        margin-left: 4px;
+                                        
+                                    }
+                                }
+                            }
+
+                            .close-btn-container {
+                                @include flexCenter(100%, 13%, 50px, flex-start, center, row);
+ 
+                                .close-btn_shadow-div-inset {
+                                    @include flexCenter(89%, 92%, 50px 5px 50px 50px, flex-start, center, row);
+                                    box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
+
+                                    .close-btn_shadow-div-outset {
+                                        @include flexCenter(77%, 74%, 50px, center, center, row);
+                                        background-color: initial;
+                                        border: none;
+                                        color: white;
+                                        box-shadow: 1px 1px 6px 0px #4d4d4d, -1px -1px 1px #d0d0d0;
+                                        margin-left: 11%;
+
+                                        img {
+                                            height: 1.7em;
+                                            width: 1.7em;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .list-item-2_lyric-suggestions {
+                        @include flexCenter(35%, 100%, 8px, flex-end, center, row);
+
+
+                    }
+                }
+            }
+        }
+
+    }
+    .section-3_controls {
+        @include flexCenter(22%, 100%, 30px 30px 0px 0px, center, center, column);
+        background: linear-gradient(341deg, #202020, #373737);
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+
+        .controls-container {
+            @include flexCenter(92%, 96%, 28px, center, center, column);
+            box-shadow: 3px 3px 8px 0px #060606, -2px -2px 2px #676767;
+            
+            .controls-1_options {
+                @include flexCenter(32%, 100%, 10px, flex-end, center, column);
+
+                .options_shadow-div-outset {
+                    @include flexCenter(94%, 98%, 30px 30px 30px 5px, center, center, column);
+                    box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+
+                }
+            }
+
+            .controls-2_inner {
+                @include flexCenter(34%, 100%, 10px, center, center, column);
+
+                .inner_shadow-div-outset {
+                    @include flexCenter(85%, 98%, 6px 30px 30px 6px, center, center, column);
+                    box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+                    
+                    .flow-controls-1_playback-display {
+                        @include flexCenter(85%, 100%, 0px, center, center, row);
+                        position: relative;
+                        transition: height .5s;
+            
+                        .play-btn-container {
+                            @include flexCenter(100%, 17%, 50px, center, center, row);
+            
+                            .play-btn-container_shadow-div-outset {
+                                @include flexCenter(84%, 84%, 50px 8px 8px 50px, center, center, row);
+                                box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+            
+                                .play-btn-container_shadow-div-inset {
+                                    @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
+                                    box-shadow: inset 1px 1px 4px 0px #070707, inset -2px -2px 2px #696969;
+            
+                                    .play-btn_shadow-div-outset {
+                                        @include flexCenter(80%, 57%, 50px, center, center,row);
+                                        text-align: center;
+                                        font-weight: bold;
+                                        background: #e24f8c;
+                                        margin-left: 12%;
+                                        border: none;
+                                        box-shadow: 2px 2px 5px #161616, -1px -1px 2px #e4e4e4;
+                                        
+                                        img {
+                                            height: 1.6em;
+                                            width: 1.6em;
+                                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                        }
+                                        
+                                        &:active {
+                                            box-shadow: inset 2px 2px 3px #313232, 
+                                                        inset -2px -2px 3px #9fa2a4;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+            
+                        .play-slider-container {
+                            @include flexCenter(100%, 83%, 0px, flex-start, center, row);
+            
+                            .play-slider-container_shadow-div-outset {
+                                @include flexCenter(84%, 98%, 8px 50px 50px 8px, center, center, row);
+                                box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+            
+                                .play-slider-container_shadow-div-inset {
+                                    @include flexCenter(83%, 97%, 8px 50px 50px 8px, center, center, row);
+                                    // background: #5d5d5d;
+                                    box-shadow: inset 1px 1px 5px 0px #0c0c0c, inset -1px -1px 2px #979797;
+            
+                                    .play-slider_shadow-div-outset {
+                                        @include flexCenter(75%, 96%, 8px 50px 50px 8px, center, center, column);
+                                        // box-shadow: 3px 3px 3px #282828, -2px -2px 2px 0px #838383;
+            
+                                        .play-slider_shadow-div-inset {
+                                            @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
+                                            // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+            
+                                            input[type="range"] {
+                                                appearance: none;
+                                                height: 46%;
+                                                width: 94%;
+                                                margin-left: 1%;
+                                                border-radius: 50px;
+                                                // background: #63DEBC;
+                                                box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+                                            }
+                                            input[type="range"]::-webkit-slider-thumb {
+                                                appearance: none;
+                                                height: 20px;
+                                                width: 20px;
+                                                border-radius: 50px;
+                                                cursor: pointer;
+                                                background: #4b4b4b;
+                                                transition: background-color 1s ease;
+                                                box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+            
+                                            }
+            
+                                            .time-text-container {
+                                                @include flexCenter(25%, 90%, 8px, space-between, center, row);
+                                                padding: 0% 3%;
+                
+                                                .time-text-start {
+                                                    font-size: 10px;
+                                                    color: white;
+                                                }
+                                                .time-text-end {
+                                                    font-size: 11px;
+                                                    color: white;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .actions-2_record {
+                @include flexCenter(32%, 100%, 0px, center, flex-start, row);
+            
+                .record-container {
+                    @include flexCenter(94%, 98%, 5px 30px 30px 30px, space-between, center, row);
+                    box-shadow: inset 2px 2px 3px #191919, inset -2px -2px 2px 0px #454545;
+            
+                    .record-1_select-beat {
+                        @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
+                        
+                        .select-beat_shadow-div-inset {
+                            @include flexCenter(80%, 95%, 8px 40px 40px 50px, flex-end, center, row);
+                            box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+            
+                            .select-beat_shadow-div-outset {
+                                @include flexCenter(80%, 94%, 50px, center, center, column);
+                                box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+                                margin-right: 2%;
+            
+                                .select-beat-title {
+                                    @include flexCenter(33%, 100%, 0px, center, flex-start, column);
+                                    color: pink;
+                                    font-size: 10px;
+                                    margin-left: 15%;
+                                }
+                                .track-select {
+                                    background-color: #272727;
+                                    color: white;
+                                    border: none;
+                                    height: 50%;
+                                    width: 90%;
+            
+                                    &:focus {
+                                        outline: none !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-4_display-lyrics {
+        @include flexCenter(initial, 100%, 0px, center, flex-start, row);
+        position: absolute;
+        bottom: 18%;
+        background: #000000ad;
+
+        .display-lyrics-container {
+            @include flexCenter(initial, 88%, 0px, flex-start, center, column);
+            padding: 3% 0% 11% 3%;
+
+            .display-each-container {
+                @include flexCenter(initial, 100%, 0px, flex-start, center, row);
+                min-height: 13px;
+                flex-wrap: wrap;
+                overflow-y: scroll;
+
+
+                p {
+                    color: white;
+                    font-size: 11px;
+                    margin-right: 1%;
+                }
+                .bar-no {
+                    color: pink;
+                    font-size: 8px;
+                }
+            }
+        }
+        .menu-down-container {
+            @include flexCenter(100%, 12%, 0px, flex-start, center, row);
+            margin-top: 2%;
+
+            .menu-down-btn {
+                @include flexCenter(initial, 100%, 0px, flex-start, center, row);
+                border: none;
+                background: initial
+            }
+        }
+    }
+}

@@ -1,14 +1,8 @@
 import axios from 'axios'
 
-<<<<<<< HEAD
-const baseURL = `http://localhost:5000/api`;
-// const baseURL = 'https://iron-flow.herokuapp.com/api'
-const token = localStorage.getItem("token");
-=======
 //const baseURL = `http://localhost:5000/api`;
 const baseURL = 'https://iron-flow.herokuapp.com/api'
 const token = localStorage.getItem('token')
->>>>>>> fc37656216b776777ffb6c0972b0cc95547d4676
 // const baseURL = process.env.NODE_ENV == 'production' ? " https://iron-flow.herokuapp.com/api ": "http://localhost:5000 "
 
 const API = axios.create({
@@ -204,6 +198,7 @@ const actions = {
                   songTotLikes: 0,
                   songUser: songData.user._id,
                   songDate: songData.date,
+                  songDuration: songData.songDuration,
                   songBeatTrack: null,
                 },
                 resetHead(),

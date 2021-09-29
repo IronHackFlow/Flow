@@ -4,6 +4,7 @@ const Songs = model(
   new Schema({
     songBeattrack: { type: Schema.Types.ObjectId, ref: 'Beats' },
     songDate: Date,
+    songDuration: Number,
     songUser: { type: Schema.Types.ObjectId, ref: 'User' },
     songTotLikes: Number,
     songURL: String,

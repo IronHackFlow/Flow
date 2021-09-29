@@ -5,7 +5,7 @@ import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
-import UseAudioPlayer from "./UseAudioPlayer.js";
+import AudioTimeSlider from "./AudioTimeSlider.js";
 import Comments from "./Comments.js";
 import Search from "./Search.js";
 import NavBar from "./NavBar.js";
@@ -624,14 +624,15 @@ function Home(props) {
 
                 <div className="song-play-section">
                   <div className="play-bar-container">
-                    <UseAudioPlayer 
+                    {/* <UseAudioPlayer 
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       audioSrc={audioInView}
                       setAudioSrc={setAudioInView}
-                      />
+                      allTakes={songInView}
+                      /> */}
                   </div>
-
+                  {console.log(songInView)}
                   <div className="play-song-container">
                     <div className="play-btn-container">
                       <div className="play-btn_shadow-div-outset">

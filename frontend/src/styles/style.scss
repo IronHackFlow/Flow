@@ -210,6 +210,7 @@ body,
 
 .Home,
 .TestAudio,
+.EditLyrics,
 .Profile,
 .EditProfileScreen,
 .SongScreen,
@@ -231,6 +232,7 @@ body,
   .App,
   .Home,
   .TestAudio,
+  .EditLyrics,
   .SongScreen,
   .Profile,
   .EditProfileScreen,
@@ -244,6 +246,7 @@ body,
 @import './HamburgerMenu';
 @import './Home';
 @import './TestAudio';
+@import './EditLyrics';
 @import './SongScreen';
 @import './Profile';
 @import './AuthLogin';

@@ -1,10 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../TheContext";
-import AudioTimeSlider from "./AudioTimeSlider";
+import UseAudioPlayer from "./UseAudioPlayer";
 import actions from "../api";
 import NavBar from "./NavBar";
 import Modal from "./ModalMenu";
@@ -20,7 +19,10 @@ import stop from "../images/stop.svg";
 import xExit from "../images/exit-x-2.svg";
 import save from "../images/save-disk.svg";
 import locked from "../images/locked.svg";
+import edit from "../images/edit.svg";
 import shuffle from "../images/shuffle.svg";
+import send from "../images/send.svg";
+import help from "../images/help2.svg";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext)
@@ -39,20 +41,15 @@ function TestAudio(props) {
     }
   ]
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
-  const initialState = {
-    recordingMinutes: 0,
-    recordingSeconds: 0,
-    initRecording: false,
-    mediaStream: null,
-    mediaRecorder: null,
-    audio: null,
-  }
-  const [recorderState, setRecorderState] = useState(initialState);
+
   const [audioSrc, setAudioSrc] = useState(null);
   const [silent, setSilent] = useState(false);
   const [saveSongMenu, setSaveSongMenu] = useState(false);
   const [recordingDisplay, setRecordingDisplay] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [lock, setLock] = useState([]);
   const [allTakes, setAllTakes] = useState([]);
   const [songUploadObject, setSongUploadObject] = useState([]);
   const [selectedOption, setSelectedOption] = useState();
@@ -60,15 +57,13 @@ function TestAudio(props) {
   const [songNameInput, setSongNameInput] = useState();
   const [songCaptionInput, setSongCaptionInput] = useState();
   const [lyricsArr, setLyricsArr] = useState([]);
-  const [rhymeWordHolder, setRhymeWordHolder] = useState("");
-  const [lockRhymeHolder, setLockRhymeHolder] = useState();
+  const [lastWordHolder, setLastWordHolder] = useState("");
   const [retrievedRhymes, setRetrievedRhymes] = useState([]);
   const [retrievedSelectedRhymes, setRetrievedSelectedRhymes] = useState([]);
   const [retrievedActionRhymes, setRetrievedActionRhymes] = useState([]);
   const [selectedRhymeNo, setSelectedRhymeNo] = useState(5);
-  const [selectedWordHolder, setSelectedWordHolder] = useState();
-  const [topRhymes, setTopRhymes] = useState([]);
-  const [lockedRhymes, setLockedRhymes] = useState([]);
+  const [selectedWord, setSelectedWord] = useState();
+  const [topRhymes, setTopRhymes] = useState();
   const [selectedRhymes, setSelectedRhymes] = useState([]);
   const [loadSelectedTake, setLoadSelectedTake] = useState();
   const [showLyricsLine, setShowLyricsLine] = useState([]);
@@ -84,8 +79,7 @@ function TestAudio(props) {
   const buttonCloseRef = useRef();
   const selectTakesRef = useRef();
   const keyRef = useRef(0);
-  const barNumberRef = useRef(1)
-  const slideOutMicRef = useRef();
+  const barNoRef = useRef(0)
 
   class SongData {
     constructor(name, blobFile, songmix, lyrics, date, songDuration) {
@@ -103,32 +97,51 @@ function TestAudio(props) {
   }
 
   useEffect(() => {
-    if (silent && recorderState.initRecording === true) {
+    if (silent) {
       setRetrievedActionRhymes([])
+      const splitTranscript = transcript.split(" ")
+      const filterTranscript = splitTranscript.filter(each => each.length > 0)
       getDatamuseRhymes()
-      setLyricsHandler()
+      if (filterTranscript.length !== 0) {
+        setLyricsArr(oldArr => [...oldArr, filterTranscript])
+        setShowLyricsLine(oldLine => [...oldLine, createLyricLine(filterTranscript)])
+      }
+      resetTranscript()
+      autoScroll()
     }
   }, [silent])
 
   useEffect(() => {
+    console.log(blobData, "what dis?")
     if (Object.keys(blobData).length !== 0) {
-      const songDate = new Date();
-      const songDuration = (dateAfter - dateBefore) - 200;
-      const songObject = new SongData(blobData.name, blobData.blob, blobData.url, [...lyricsArr], songDate, songDuration)
-      setAudioSrc(songObject.songmix)
-      setSelectedOption(songObject.songmix)
-      setAllTakes(eachTake => [...eachTake, {...songObject}])
+      const songDuration = (dateAfter - dateBefore) - 200
+      pushRecordTake(blobData.name, blobData.blob, blobData.url, songDuration)
       setBlobData({})
     }
     console.log('Check out the updated AllTakes: ', allTakes)
   }, [blobData])
+  
+  useEffect(() => {
+    if (isRecording) {
+      console.log("RECORDING STAAAAAAAAAAARRRRTTTTTTTTTTTED")
+      setRecordingDisplay(true)
+      setLyricsArr([])
+      setShowLyricsLine([])
+      recordAudio();
+    } 
+    else {
+      console.log("STOPPED REEEECCCCOOOORRRRDDDDDDDDIIING")
+      setSilent(true)
+      stopRecording();
+    }
+  }, [isRecording])
 
   useEffect(() => {
     setRetrievedSelectedRhymes([])
     let selectedHolder = []
 
-    if (selectedWordHolder !== undefined) {
-      datamuse.request(`words?rel_rhy=${selectedWordHolder}&max=20`)
+    if (selectedWord !== undefined) {
+      datamuse.request(`words?rel_rhy=${selectedWord}&max=20`)
         .then((res) => {
           if (res.length !== 0) {
             res.forEach((each) => {
@@ -143,22 +156,31 @@ function TestAudio(props) {
           }
         })
     }
-  }, [selectedWordHolder])
+  }, [selectedWord])
 
   useEffect(() => {
     setSelectedRhymes([...retrievedSelectedRhymes].slice(0, selectedRhymeNo))
   }, [retrievedSelectedRhymes, selectedRhymeNo])
+  
+  useEffect(() => {
+      let rhymeStr = transcript.split(" ")[transcript.split(" ").length - 1]
+      let uppercasedStr = rhymeStr.charAt(0).toUpperCase() + rhymeStr.slice(1)
+      setLastWordHolder(uppercasedStr)
+  }, [topRhymes, lastWordHolder])
+
+  useEffect(() => {
+    if (!isRecording)
+    barNoRef.current = 1
+  }, [isRecording])
 
   async function getActionVerbs(regex) {
     console.log(regex, 'this changes A LOT')
     const verbs = await datamuse.request(`words?rel_rhy=${regex}&max=20`)
       .then((res) => {
+        console.log(res)
         if (res.length !== 0) {
-          console.log(res)
           for (let i = 0; i < 1; i++) {
-            let randomIndex = Math.floor(Math.random() * (res.length - 1))
-            console.log(randomIndex, res[randomIndex].word)
-            setRetrievedActionRhymes(oldRhymes => [...oldRhymes, res[randomIndex].word])
+            setRetrievedActionRhymes(oldRhymes => [...oldRhymes, res[Math.floor(Math.random() * 19)].word])
           }
         }
       })
@@ -179,52 +201,33 @@ function TestAudio(props) {
   }
 
   async function getDatamuseRhymes() {
-    let splitScript = transcript.split(" ")
+    const lastWord = transcript.split(" ")[transcript.split(" ").length - 1]
+    let retrievedRhymesHolder = []
 
-    if (splitScript[0] !== "") {
-      let lastWord = splitScript[splitScript.length - 1]
-      setRhymeWordHolder(lastWord)
-      let retrievedRhymesHolder = []
-  
-      const getData = await datamuse.request(`words?rel_rhy=${lastWord}&max=30`)
-        .then((res) => {
-          setRetrievedRhymes([])
-          if (res.length !== 0) {
-            res.forEach((each) => {
-              setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
-            })
-            for (let i = 1; i <= selectedRhymeNo; i++) {
-              if (res[i].word !== undefined) {
-                retrievedRhymesHolder.push(`${res[i].word}`)
-              }
-            }
-            if (retrievedRhymesHolder.length !== 0) {
-              setTopRhymes(retrievedRhymesHolder)
+    const getData = await datamuse.request(`words?rel_rhy=${lastWord}&max=30`)
+      .then((res) => {
+        setRetrievedRhymes([])
+        if (res.length !== 0) {
+          res.forEach((each) => {
+            setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
+          })
+          for (let i = 1; i <= selectedRhymeNo; i++) {
+            if (res[i].word !== undefined) {
+              retrievedRhymesHolder.push(res[i].word)
             }
           }
-        })
-    }
-    else {
-      console.log(splitScript, "EMPTY LIKE MY SOUL :(")
-    }
-  }
-
-  const setLyricsHandler = () => {
-    const splitTranscript = transcript.split(" ")
-    const filterTranscript = splitTranscript.filter(each => each.length > 0)
-    if (filterTranscript.length !== 0) {
-      setLyricsArr(oldArr => [...oldArr, filterTranscript])
-      setShowLyricsLine(oldLine => [...oldLine, createLyricLine(filterTranscript)])
-    }
-    resetTranscript()
-    autoScroll()
+          if (retrievedRhymesHolder.length !== 0) {
+            setTopRhymes(retrievedRhymesHolder)
+          }
+        }
+      })
   }
 
   const createLyricLine = (transcript) => {
     return (
       <div className="prev-transcript-container">
         <div className="transcript-bar-no">
-          {`${barNumberRef.current++}`}
+          {`${barNoRef.current++}`}
         </div>
         <div className="transcript-word-container">
           {transcript.map((each, index) => {
@@ -232,7 +235,7 @@ function TestAudio(props) {
               <p 
                 className="prev-transcript-word" 
                 key={`transcript${uuidv4()}and${index}`}
-                onClick={(e) => showSelectedWord(e)}
+                onClick={(e) => setSelectedWordHandler(e)}
                 >
                   {each}
               </p>
@@ -284,20 +287,20 @@ function TestAudio(props) {
     })
   }
   const showLockedRhymes = () => {
-    return lockedRhymes.map((each, index) => {
+    return lock.map((each, index) => {
       return <p className="each-locked-rhyme" key={`${uuidv4()}lockedrhymes${index}`}>{each}</p>
     })
   }
 
-  const showRhymeWord = (holder) => {
-    let uppercasedWord = holder.charAt(0).toUpperCase() + holder.slice(1)
-    return uppercasedWord
-  }
-  
-  const showSelectedWord = (e) => {
+  const setSelectedWordHandler = (e) => {
     let selectStr = e.target.innerText
     let uppercasedStr = selectStr.charAt(0).toUpperCase() + selectStr.slice(1)
-    setSelectedWordHolder(uppercasedStr)
+    console.log(uppercasedStr)
+    setSelectedWord(uppercasedStr)
+  }
+
+  const changeRhymeNo = (e) => {
+    setSelectedRhymeNo(e.target.value)
   }
 
   const rhymeOptionNoHandler = useCallback(() => {
@@ -316,30 +319,29 @@ function TestAudio(props) {
 
 
   const shuffleRhymeHandler = (array, theState) => {
+    console.log(selectedRhymes, retrievedSelectedRhymes)
     let randomRhymeArr = []
-    if (array.length !== 0) {
-      for (let i = 1; i <= selectedRhymeNo; i++) {
-        randomRhymeArr.push(array[Math.floor(Math.random() * 20)])
-      }
-      if (theState === "topRhymes") {
-        setTopRhymes(randomRhymeArr)
-      }
-      else {
-        setSelectedRhymes(randomRhymeArr)
-      }
+    for (let i = 1; i <= selectedRhymeNo; i++) {
+      randomRhymeArr.push(array[Math.floor(Math.random() * 20)])
+    }
+    if (theState === "topRhymes") {
+      setTopRhymes(randomRhymeArr)
+    }
+    else {
+      setSelectedRhymes(randomRhymeArr)
     }
   }
 
   const lockSuggestion = () => {
     if (topRhymes) {
-      setLockRhymeHolder(rhymeWordHolder)
+      setIsLocked(true)
       const copyRhyme = [...topRhymes];
-      setLockedRhymes(copyRhyme);
+      setLock(copyRhyme);
     }
   };
 
   const loadTrack = () => {
-    if (!recorderState.initRecording) {
+    if (!isRecording) {
       let selectBox = document.getElementById("selectBox");
       let selectedValue = selectBox.options[selectBox.selectedIndex].value;
       document.getElementById("song").src = selectedValue;      
@@ -351,157 +353,130 @@ function TestAudio(props) {
       return <option key={`${element}_${index}`} value={element.song}>{element.name} </option>;
     });
   };
-
-  let myReq; //animation frame ID
-  const detectSilence = (stream, silence_delay = 50, min_decibels = -80) => {
-
-    const ctx = new AudioContext();
-    const analyser = ctx.createAnalyser();
-    const streamNode = ctx.createMediaStreamSource(stream);
-    streamNode.connect(analyser)
-    analyser.minDecibels = min_decibels
-    const data = new Uint8Array(analyser.frequencyBinCount); // will hold our data
-    let silence_start = performance.now();
-    let triggered = false; // trigger only once per silence event
-
-    const loop = (time) => {
-      myReq = requestAnimationFrame(loop);
-       // we'll loop every 60th of a second to check
-      analyser.getByteFrequencyData(data); // get current data
-      if (data.some((v) => v)) {
-        // if there is data above the given db limit
-        if (triggered) {
-          triggered = false
-          setSilent(false)
-        }
-        silence_start = time // set it to now
-      }
-      if (!triggered && time - silence_start > silence_delay) {
-        setSilent(true)
-        triggered = true
-      }
-    }
-    loop()
-  }
-
-  useEffect(() => {
-    if (recorderState.mediaStream) {
-      setRecorderState((prevState) => {
-        return {
-          ...prevState,
-          mediaRecorder: new MediaRecorder(prevState.mediaStream)
-        }
-      })
-    }
-  }, [recorderState.mediaStream])
-
-  useEffect(() => {
-    const recorder = recorderState.mediaRecorder
-    let chunks = []
-
-    if (recorder && recorder.state === "inactive") {
-      recorder.start()
-      setDateBefore(Date.now())
-
-      recorder.ondataavailable = (e) => {
-        chunks.push(e.data)
-      }
-      
-      recorder.onstop = () => {
-        setDateAfter(Date.now())
-        const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
-        const url = window.URL.createObjectURL(mpegBlob);
-        keyRef.current++
-        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
-        chunks = []
   
-        setRecorderState((prevState) => {
-          if (prevState.mediaRecorder) {
-            return {
-              ...initialState,
-              audio: url
-            }
+  let myReq; //animation frame ID
+  
+  const recordAudio = () => {
+    const detectSilence = (
+      stream,
+      onSoundEnd = _ => {},
+      onSoundStart = _ => {},
+      silence_delay = 50,
+      min_decibels = -80
+    ) => {
+      const ctx = new AudioContext();
+      const analyser = ctx.createAnalyser();
+      const streamNode = ctx.createMediaStreamSource(stream);
+
+      streamNode.connect(analyser)
+      analyser.minDecibels = min_decibels
+
+      const data = new Uint8Array(analyser.frequencyBinCount); // will hold our data
+      let silence_start = performance.now();
+      let triggered = false; // trigger only once per silence event
+      
+      const loop = (time) => {
+        myReq = requestAnimationFrame(loop); // we'll loop every 60th of a second to check
+        analyser.getByteFrequencyData(data); // get current data
+
+        if (data.some((v) => v)) {
+          // if there is data above the given db limit
+          if (triggered) {
+            triggered = false
+            onSoundStart()
           }
-          else {
-            return initialState
-          }
-        })
+          silence_start = time // set it to now
+        }
+        if (!triggered && time - silence_start > silence_delay) {
+          onSoundEnd()
+          triggered = true
+        }
       }
+      loop()
     }
 
-    return () => {
-      if (recorder) {
-        recorder.stream.getAudioTracks().forEach((track) => track.stop())
-      }
+    const onSilence = () => {
+      console.log('silence')
+      setSilent(true);
     }
-  }, [recorderState.mediaRecorder])
+    const onSpeak = () => {
+      console.log('speaking');
+      setSilent(false);
+    }
 
-  const resetSuggestions = () => {
-    setRecordingDisplay(true)
-    setLyricsArr([])
-    setShowLyricsLine([])
-    setRhymeWordHolder(null)
-    setLockRhymeHolder(null)
-    setSelectedWordHolder(null)
-    setTopRhymes([])
-    setLockedRhymes([])
-    setSelectedRhymes([])
-    resetTranscript()
-    barNumberRef.current = 1
+    navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+      })
+      .then(stream => {
+        detectSilence(stream, onSilence, onSpeak)
+
+        var audio = recordAudioRef.current.captureStream();
+        document.getElementById("song").play();
+
+        mergeStreams(stream, audio);
+        SpeechRecognition.startListening({ continuous: true });
+
+      })
+      .catch(console.error);
+
   }
 
-  async function startRecording() {
-    try {
-      resetSuggestions()
-      const stream1 = await navigator.mediaDevices.getUserMedia({ audio: true })
-      SpeechRecognition.startListening({ continuous: true });
+  const mergeStreams = (stream1, stream2) => {
+    const audioContext = new AudioContext();
 
-      var audio = document.getElementById("song").captureStream();
-      document.getElementById("song").play();
+    let audioIn_01 = audioContext.createMediaStreamSource(stream1)
+    let audioIn_02 = audioContext.createMediaStreamSource(stream2)
 
-      detectSilence(stream1)
+    let dest = audioContext.createMediaStreamDestination()
 
-      const audioContext = new AudioContext();
-      let audioIn_01 = audioContext.createMediaStreamSource(stream1)
-      let audioIn_02 = audioContext.createMediaStreamSource(audio)
-      let dest = audioContext.createMediaStreamDestination()
+    audioIn_01.connect(dest)
+    audioIn_02.connect(dest)
 
-      audioIn_01.connect(dest)
-      audioIn_02.connect(dest)
+    const recorder = new MediaRecorder(dest.stream);
 
-      setRecorderState((prevState) => {
-        return {
-          ...prevState,
-          initRecording: true,
-          mediaStream: dest.stream,
-        }
-      })
-    } catch (err) {
-      console.log(err)
-    }
+    recorder.start(); //console.log('started recording')
+    setDateBefore(Date.now())
+    let chunks = [];
+
+    recorder.ondataavailable = (event) => {
+      chunks.push(event.data);
+      createBlob(chunks);
+      // SpeechRecognition.stopListening();
+      console.log('oooooo an event with tasty data!', event)
+    };
+
+    document.getElementById("fixer").onclick = () => {
+      setDateAfter(Date.now())
+      SpeechRecognition.stopListening();
+      recorder.stop();
+      cancelAnimationFrame(myReq);
+    };
+  }
+
+  const pushRecordTake = (name, blob, audioUrl, songDuration) => {
+    const songDate = new Date()
+    const songObject = new SongData(name, blob, audioUrl, [...lyricsArr], songDate, songDuration);
+    setAudioSrc(songObject.songmix)
+    setSelectedOption(songObject.songmix)
+    setAllTakes(eachTake => [...eachTake, songObject])
+  };
+
+  const createBlob = (blob) => {
+    let mpegBlob = new Blob(blob, { type: "audio/mpeg-3" });
+    const url = window.URL.createObjectURL(mpegBlob);
+    keyRef.current++
+    setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
   }
 
   const stopRecording = () => {
-    if (recorderState.mediaRecorder !== null) {
-      if (recorderState.mediaRecorder.state !== "inactive") {
-        SpeechRecognition.stopListening();
-        recorderState.mediaRecorder.stop()
-        recordAudioRef.current.pause();
-        recordAudioRef.current.currentTime = 0;
-        setLyricsHandler()
-        setRecorderState((prevState) => {
-          return {
-            ...prevState,
-            initRecording: false,
-          }
-        })
-      }
-    }
-  }
-
-
+    document.getElementById("fixer").click();
+    recordAudioRef.current.pause();
+    recordAudioRef.current.currentTime = 0;
+  };
+ 
   const handlePlayPause = (bool) => {
-    if ((allTakes.length !== 0)) {
+    if ((allTakes.length !== 0) && !isRecording) {
       if (bool === true) {
         setIsPlaying(true)
       }
@@ -569,6 +544,7 @@ function TestAudio(props) {
     songNameInputRef.current.value =  ""
     songCaptionInputRef.current.value =  ""
   }
+  const slideOutMicRef = useRef();
 
   const toggleSaveSongMenu = () => {
     if (saveSongMenu === false) {
@@ -671,19 +647,19 @@ function TestAudio(props) {
         <div className="section-2a_flow-suggestions">
           <div className="next-bar-container">
             <div className="action-word-container">
-              {(retrievedActionRhymes && recordingDisplay) ? displayActionWords() : <p className="initial-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>}
+              {retrievedActionRhymes ? displayActionWords() : <p className="inital-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>}
             </div>
           </div>
 
           <div className="suggestions sug-1">
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset">
-                {(rhymeWordHolder && recordingDisplay) ? <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p> : <p>Top Rhymes</p>}
+                {recordingDisplay ? <p className="last-word-holder">{lastWordHolder}</p> : <p>Top Rhymes</p>}
               </div>
               <div className="custom-rhyme-inner">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(topRhymes.length !== 0  && recordingDisplay) ? showTopRhymes() : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
+                    {topRhymes ? showTopRhymes() : <p className="inital-prompt">Start recording to see your top rhymes.</p>}
                   </div>
                 </div>
               </div>
@@ -702,12 +678,12 @@ function TestAudio(props) {
           <div className="suggestions sug-2">
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset rw-two">
-                  {(lockRhymeHolder && recordingDisplay) ? <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p> : <p>Locked Rhymes</p>}
+                  {(recordingDisplay && isLocked) ? <p className="locked-word-holder">{lastWordHolder}</p> : <p>Locked Rhymes</p>}
                 </div>
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(lockedRhymes.length !== 0  && recordingDisplay) ? showLockedRhymes() : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
+                    {isLocked ? showLockedRhymes() : <p className="inital-prompt">Click lock button above to save top rhymes here.</p>}
                   </div>
                 </div>
               </div>
@@ -727,12 +703,12 @@ function TestAudio(props) {
           <div className="suggestions sug-3">
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset rw-three">
-                {(selectedWordHolder && recordingDisplay) ? <p className="selected-word-holder">{selectedWordHolder}</p> : <p>Selected Rhymes</p>}
+                {selectedWord ? <p className="select-word-holder">{selectedWord}</p> : <p>Selected Rhymes</p>}
               </div>
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(selectedWordHolder && recordingDisplay) ? showSelectedRhymes() : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
+                    {selectedWord ? showSelectedRhymes() : <p className="inital-prompt">Click any flowed lyric to generate rhymes here.</p>}
                   </div>
                 </div>
               </div>
@@ -755,7 +731,7 @@ function TestAudio(props) {
                   <select 
                     className="rhyme-lock-btn select-no" 
                     value={selectedRhymeNo}
-                    onChange={(e) => setSelectedRhymeNo(e.target.value)}
+                    onChange={(e) => changeRhymeNo(e)}
                     >
                       {rhymeOptionNoHandler()}
                   </select>
@@ -770,9 +746,9 @@ function TestAudio(props) {
               </div>
               <div className="rhyme-lock-button rlb-3">
                 <div className="rhyme-lock-outset">
-                  <Link to={{pathname: "/recordingBooth/EditLyrics", songs: [...allTakes], currentSong: selectedOption}} className="rhyme-lock-btn">
+                  <button className="rhyme-lock-btn">
                     Edit Lyrics
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -821,7 +797,7 @@ function TestAudio(props) {
                 <div className="play-slider-container_shadow-div-outset">
                   <div className="play-slider-container_shadow-div-inset">
                     <div className="play-slider_shadow-div-outset">
-                      <AudioTimeSlider
+                      <UseAudioPlayer 
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
                         audioSrc={audioSrc}
@@ -847,7 +823,7 @@ function TestAudio(props) {
                               className="select-takes_shadow-div-outset" 
                               value={selectedOption}
                               ref={selectTakesRef}
-                              onChange={(e) => loadTake(e)}
+                              onChange={e => loadTake(e)}
                             >
                               {chooseTake()}
                             </select>
@@ -881,10 +857,10 @@ function TestAudio(props) {
 
           <div className="record-2_record-btn" ref={slideOutMicRef}>
             <div className="record-btn_shadow-div-inset">
-              {recorderState.initRecording ? (
+              {isRecording ? (
                 <button
                   className="record-btn_shadow-div-outset"
-                  onClick={stopRecording}
+                  onClick={() => setIsRecording(false)}
                 >
                   <img
                     className="button-icons"
@@ -896,7 +872,7 @@ function TestAudio(props) {
               ) : (
                 <button
                   className="record-btn_shadow-div-outset"
-                  onClick={startRecording}
+                  onClick={() => setIsRecording(true)}
                 >
                   <img
                     className="button-icons"

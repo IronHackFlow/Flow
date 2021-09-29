@@ -1,11 +1,12 @@
-import { useEffect, useState, useRef } from 'react'
-import { Switch, Route, Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import actions from './api'
 import Auth from './components/Auth'
 import Home from './components/Home'
 import TestAudio from './components/TestAudio'
+import EditLyrics from './components/EditLyrics'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
 import Profile from './components/Profile'
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/profile/:id" render={props => <Profile user={user} {...props} />} />
           <Route exact path="/profile" render={props => <Profile user={user} {...props} />} />
           <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
+            <Route exact path="/recordingBooth/EditLyrics" render={props => <EditLyrics {...props} />} />
           <Route
             exact
             path="/editprofile-screen"

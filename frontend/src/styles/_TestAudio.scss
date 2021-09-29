@@ -86,6 +86,21 @@
         .next-bar-container {
             @include flexCenter(8%, 96%, 20px, flex-start, flex-start, row);
             box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+
+            .action-word-container {
+                @include flexCenter(90%, 96%, 20px, flex-start, center, row);
+                overflow-x: scroll;
+
+                .each-action-word {
+                    @include flexCenter(initial, initial, 0px, center, center, row);
+                    color: #00ffff;
+                    font-size: 16px;
+                    padding: 1px 3px 1px 3px;
+                }
+                .initial-prompt {
+                    margin-left: 2%;
+                }
+            }
         }
 
         .suggestions {
@@ -103,16 +118,18 @@
                     p {
                         color: white;
                         margin-left: 6%;
-                        font-size: 13px;
+                        font-size: 14px;
+                        font-weight: bold;
+                        letter-spacing: .5px;
                     }
-                    .last-word-holder {
-                        color: #f2bed3;
+                    .top-word-holder {
+                        color: #fc85b6;
                     }
                     .locked-word-holder {
-                        color: #ff9fc8;
+                        color: #ffbc00;
                     }
-                    .select-word-holder {
-                        color: #83e3e3;
+                    .selected-word-holder {
+                        color: #00ffd3;
                     }
                 }
 
@@ -130,13 +147,13 @@
     
                             .each-top-rhyme {
                                 @include flexCenter(10px, initial, 0px, center, center, row);
-                                color: #ff8ebd;
+                                color: #ffb9d6;
                                 font-size: 15px;
                                 font-weight: bold;
                                 padding: 1px 3px 1px 3px;
                             }
-    
-                            .inital-prompt {
+
+                            .initial-prompt {
                                 @include flexCenter(80%, initial, 0px, center, flex-start, row);
                                 color: #464646;
                                 font-size: 13px;
@@ -166,16 +183,19 @@
                                 }
                             }
                         }
+
                         .each-locked-rhyme {
                             @include flexCenter(10px, initial, 0px, center, center, row);
-                            color: #f14a8f;
+                            color: #ffe9ad;
                             font-size: 15px;
+                            font-weight: bold;
                             padding: 1px 3px 1px 3px;
                         }
                         .each-selected-rhyme {
                             @include flexCenter(10px, initial, 0px, center, center, row);
-                            color: #00ffff;
+                            color: #b0feec;
                             font-size: 15px;
+                            font-weight: bold;
                             padding: 1px 3px 1px 3px;
                         }
                     }
@@ -207,7 +227,15 @@
                             }
                             
                             &:active {
-                                box-shadow: none;
+                                height: 80%;
+                                width: 80%;
+                                background-color: #ec6aa0;
+                                box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
+
+                                img {
+                                   filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+
+                                }
                                 // box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
                             }
                         }

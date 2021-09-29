@@ -22,13 +22,13 @@ function UseAudioPlayer(props) {
     }
   }, [props.isPlaying])
   
-//   useEffect(() => {
-//     return () => {
-//       audioRef.current.pause();
-//       clearInterval(intervalRef.current);
-//       clearInterval(secondsRef.current)
-//     }
-//   }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     audioRef.current.pause();
+  //     clearInterval(intervalRef.current);
+  //     clearInterval(secondsRef.current)
+  //   }
+  // }, []);
   
   useEffect(() => {
     if (currentProgressRef.current >= 60) {
@@ -45,32 +45,32 @@ function UseAudioPlayer(props) {
     }
   }, [currentProgressRef.current])
     
-  // useEffect(() => {
-  //   if (props.allTakes.length !== 0) {
-  //     let filteredDuration = ""
+  useEffect(() => {
+    if (props.allTakes.length !== 0) {
+      let filteredDuration = ""
   
-  //     props.allTakes.filter((each) => {
-  //       if (each.songmix === audioRef.current.src) {
-  //         filteredDuration = each.songDuration / 1000
-  //       }
-  //     })
-  //     filteredDuration = Math.round(filteredDuration)
-  //     setSongDuration(filteredDuration)
+      props.allTakes.filter((each) => {
+        if (each.songmix === audioRef.current.src) {
+          filteredDuration = each.songDuration / 1000
+        }
+      })
+      filteredDuration = Math.round(filteredDuration)
+      setSongDuration(filteredDuration)
   
-  //     if (filteredDuration >= 60) {
-  //       const getMinutes = Math.floor(filteredDuration / 60)
-  //       const getSeconds = filteredDuration % 60
+      if (filteredDuration >= 60) {
+        const getMinutes = Math.floor(filteredDuration / 60)
+        const getSeconds = filteredDuration % 60
         
-  //       if (getSeconds < 10) {
-  //         let getJustSeconds = `0${getSeconds}`
-  //         setSongMinutes(`${getMinutes}:${getJustSeconds}`)
-  //       }
-  //       else {
-  //         setSongMinutes(`${getMinutes}:${getSeconds}`)
-  //       }
-  //     } 
-  //   }
-  // }, [props.audioSrc])
+        if (getSeconds < 10) {
+          let getJustSeconds = `0${getSeconds}`
+          setSongMinutes(`${getMinutes}:${getJustSeconds}`)
+        }
+        else {
+          setSongMinutes(`${getMinutes}:${getSeconds}`)
+        }
+      } 
+    }
+  }, [props.audioSrc])
   
   useEffect(() => {
     audioRef.current.pause();

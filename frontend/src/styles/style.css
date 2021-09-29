@@ -197,6 +197,7 @@ body,
 
 .Home,
 .TestAudio,
+.EditLyrics,
 .Profile,
 .EditProfileScreen,
 .SongScreen,
@@ -217,6 +218,7 @@ body,
   .App,
   .Home,
   .TestAudio,
+  .EditLyrics,
   .SongScreen,
   .Profile,
   .EditProfileScreen,
@@ -3136,6 +3138,52 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
 }
 
+.section-2_control-panel .section-2a_flow-suggestions .next-bar-container .action-word-container {
+  height: 90%;
+  width: 96%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  overflow-x: scroll;
+}
+
+.section-2_control-panel .section-2a_flow-suggestions .next-bar-container .action-word-container .each-action-word {
+  height: initial;
+  width: initial;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: #00ffff;
+  font-size: 16px;
+  padding: 1px 3px 1px 3px;
+}
+
+.section-2_control-panel .section-2a_flow-suggestions .next-bar-container .action-word-container .initial-prompt {
+  margin-left: 2%;
+}
+
 .section-2_control-panel .section-2a_flow-suggestions .suggestions {
   height: 22%;
   width: 96%;
@@ -3202,19 +3250,21 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset p {
   color: white;
   margin-left: 6%;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: .5px;
 }
 
-.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset .last-word-holder {
-  color: #f2bed3;
+.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset .top-word-holder {
+  color: #fc85b6;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset .locked-word-holder {
-  color: #ff9fc8;
+  color: #ffbc00;
 }
 
-.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset .select-word-holder {
-  color: #83e3e3;
+.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset .selected-word-holder {
+  color: #00ffd3;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .custom-rhyme-inner {
@@ -3295,13 +3345,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  color: #ff8ebd;
+  color: #ffb9d6;
   font-size: 15px;
   font-weight: bold;
   padding: 1px 3px 1px 3px;
 }
 
-.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .custom-rhyme-inner .custom-rhyme_shadow-div-inset .top-rhymes-container .inital-prompt {
+.section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .custom-rhyme-inner .custom-rhyme_shadow-div-inset .top-rhymes-container .initial-prompt {
   height: 80%;
   width: initial;
   border-radius: 0px;
@@ -3396,8 +3446,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  color: #f14a8f;
+  color: #ffe9ad;
   font-size: 15px;
+  font-weight: bold;
   padding: 1px 3px 1px 3px;
 }
 
@@ -3418,8 +3469,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  color: #00ffff;
+  color: #b0feec;
   font-size: 15px;
+  font-weight: bold;
   padding: 1px 3px 1px 3px;
 }
 
@@ -3516,8 +3568,16 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .rhyme-lock-btn:active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  height: 80%;
+  width: 80%;
+  background-color: #ec6aa0;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
+          box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
+}
+
+.section-2_control-panel .section-2a_flow-suggestions .suggestions .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .rhyme-lock-btn:active img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container {
@@ -5074,6 +5134,1119 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   transition: -webkit-transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
   transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
   transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05), -webkit-transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+}
+
+.EditLyrics {
+  background: #444444;
+}
+
+.EditLyrics .section-1_profile-el {
+  height: 5%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-1_profile-el .close-screen {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: initial;
+  border: none;
+  -webkit-box-shadow: 3px 3px 5px 0px #1f1f1f, -1px -1px 2px #cfcfcf;
+          box-shadow: 3px 3px 5px 0px #1f1f1f, -1px -1px 2px #cfcfcf;
+  margin-right: 2%;
+}
+
+.EditLyrics .section-2_lyrics-el {
+  height: 77%;
+  width: 100%;
+  border-radius: 30px 0px 0px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(337deg, #5d5d5d 0%, #8d8d8d 100%);
+  position: absolute;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container {
+  height: intial;
+  width: 97%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2%;
+  overflow-y: scroll;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item {
+  height: intial;
+  width: 100%;
+  border-radius: 28px 5px 20px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  list-style-type: none;
+  min-height: 80px;
+  margin-bottom: 2%;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #c3c3c3;
+          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #c3c3c3;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container {
+  height: 65%;
+  width: 97%;
+  border-radius: 5px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset {
+  height: 88%;
+  width: 100%;
+  border-radius: 30px 3px 10px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 5px 0px #545454, -2px -2px 2px #cfcfcf;
+          box-shadow: 3px 3px 5px 0px #545454, -2px -2px 2px #cfcfcf;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container {
+  height: 100%;
+  width: 20%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset {
+  height: 89%;
+  width: 93%;
+  border-radius: 30px 5px 5px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 4px 0px #3f3f3f, inset -2px -2px 2px #e6e6e6;
+          box-shadow: inset 2px 2px 4px 0px #3f3f3f, inset -2px -2px 2px #e6e6e6;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container {
+  height: 100%;
+  width: 40%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset {
+  height: 89%;
+  width: 92%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset .bar-num_shadow-div-outset {
+  height: 85%;
+  width: 85%;
+  border-radius: 50px 0px 0px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 6px 0px #3a3a3a, -1px -1px 2px #ffffff;
+          box-shadow: 2px 2px 6px 0px #3a3a3a, -1px -1px 2px #ffffff;
+  color: pink;
+  font-size: 13px;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset {
+  height: 89%;
+  width: 60%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset {
+  height: 85%;
+  width: 76%;
+  border-radius: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #ec6aa0;
+  border: none;
+  color: white;
+  -webkit-box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #ffffff;
+          box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #ffffff;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset img {
+  height: 1.6em;
+  width: 1.6em;
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container {
+  height: 100%;
+  width: 67%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  overflow-y: scroll;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container {
+  height: 16px;
+  width: initial;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container p {
+  height: 16px;
+  font-size: 13px;
+  color: white;
+  margin-left: 4px;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container {
+  height: 100%;
+  width: 13%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset {
+  height: 89%;
+  width: 92%;
+  border-radius: 50px 5px 50px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
+          box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset {
+  height: 77%;
+  width: 74%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: initial;
+  border: none;
+  color: white;
+  -webkit-box-shadow: 1px 1px 6px 0px #4d4d4d, -1px -1px 1px #d0d0d0;
+          box-shadow: 1px 1px 6px 0px #4d4d4d, -1px -1px 1px #d0d0d0;
+  margin-left: 11%;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset img {
+  height: 1.7em;
+  width: 1.7em;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions {
+  height: 35%;
+  width: 100%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls {
+  height: 22%;
+  width: 100%;
+  border-radius: 30px 30px 0px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(341deg, #202020, #373737);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.EditLyrics .section-3_controls .controls-container {
+  height: 92%;
+  width: 96%;
+  border-radius: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 8px 0px #060606, -2px -2px 2px #676767;
+          box-shadow: 3px 3px 8px 0px #060606, -2px -2px 2px #676767;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options {
+  height: 32%;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset {
+  height: 94%;
+  width: 98%;
+  border-radius: 30px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+          box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner {
+  height: 34%;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset {
+  height: 85%;
+  width: 98%;
+  border-radius: 6px 30px 30px 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+          box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display {
+  height: 85%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container {
+  height: 100%;
+  width: 17%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset {
+  height: 84%;
+  width: 84%;
+  border-radius: 50px 8px 8px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+          box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset {
+  height: 85%;
+  width: 87%;
+  border-radius: 50px 8px 8px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 1px 1px 4px 0px #070707, inset -2px -2px 2px #696969;
+          box-shadow: inset 1px 1px 4px 0px #070707, inset -2px -2px 2px #696969;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset {
+  height: 80%;
+  width: 57%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  font-weight: bold;
+  background: #e24f8c;
+  margin-left: 12%;
+  border: none;
+  -webkit-box-shadow: 2px 2px 5px #161616, -1px -1px 2px #e4e4e4;
+          box-shadow: 2px 2px 5px #161616, -1px -1px 2px #e4e4e4;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset img {
+  height: 1.6em;
+  width: 1.6em;
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset:active {
+  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container {
+  height: 100%;
+  width: 83%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset {
+  height: 84%;
+  width: 98%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+          box-shadow: 3px 3px 2px #171717, -2px -2px 2px 0px #515151;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset {
+  height: 83%;
+  width: 97%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 1px 1px 5px 0px #0c0c0c, inset -1px -1px 2px #979797;
+          box-shadow: inset 1px 1px 5px 0px #0c0c0c, inset -1px -1px 2px #979797;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset {
+  height: 75%;
+  width: 96%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px 50px 50px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 46%;
+  width: 94%;
+  margin-left: 1%;
+  border-radius: 50px;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+          box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #4b4b4b;
+  -webkit-transition: background-color 1s ease;
+  transition: background-color 1s ease;
+  -webkit-box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+          box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container {
+  height: 25%;
+  width: 90%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 0% 3%;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container .time-text-start {
+  font-size: 10px;
+  color: white;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset .time-text-container .time-text-end {
+  font-size: 11px;
+  color: white;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record {
+  height: 32%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container {
+  height: 94%;
+  width: 98%;
+  border-radius: 5px 30px 30px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #191919, inset -2px -2px 2px 0px #454545;
+          box-shadow: inset 2px 2px 3px #191919, inset -2px -2px 2px 0px #454545;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat {
+  height: 100%;
+  width: 65%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset {
+  height: 80%;
+  width: 95%;
+  border-radius: 8px 40px 40px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+          box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
+  height: 80%;
+  width: 94%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+          box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+  margin-right: 2%;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .select-beat-title {
+  height: 33%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: pink;
+  font-size: 10px;
+  margin-left: 15%;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select {
+  background-color: #272727;
+  color: white;
+  border: none;
+  height: 50%;
+  width: 90%;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select:focus {
+  outline: none !important;
+}
+
+.EditLyrics .section-4_display-lyrics {
+  height: initial;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  bottom: 18%;
+  background: #000000ad;
+}
+
+.EditLyrics .section-4_display-lyrics .display-lyrics-container {
+  height: initial;
+  width: 88%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 3% 0% 11% 3%;
+}
+
+.EditLyrics .section-4_display-lyrics .display-lyrics-container .display-each-container {
+  height: initial;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-height: 13px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.EditLyrics .section-4_display-lyrics .display-lyrics-container .display-each-container p {
+  color: white;
+  font-size: 11px;
+  margin-right: 1%;
+}
+
+.EditLyrics .section-4_display-lyrics .display-lyrics-container .display-each-container .bar-no {
+  color: pink;
+  font-size: 8px;
+}
+
+.EditLyrics .section-4_display-lyrics .menu-down-container {
+  height: 100%;
+  width: 12%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 2%;
+}
+
+.EditLyrics .section-4_display-lyrics .menu-down-container .menu-down-btn {
+  height: initial;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border: none;
+  background: initial;
 }
 
 .SongScreen {
