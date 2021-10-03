@@ -3175,7 +3175,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  color: #00ffff;
+  color: #424242;
   font-size: 16px;
   padding: 1px 3px 1px 3px;
 }
@@ -3608,9 +3608,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3663,6 +3663,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
 }
 
+.section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset a {
+  text-decoration: none;
+}
+
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .rhyme-lock-btn {
   height: 100%;
   width: 100%;
@@ -3700,7 +3704,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .select-no {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: bold;
   color: white;
 }
@@ -3711,7 +3715,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rlb-1 {
-  width: 25%;
+  width: 31%;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rlb-1 .rhyme-lock-outset {
@@ -3727,7 +3731,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rlb-3 {
-  width: 40%;
+  width: 35%;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container .rlb-3 .rhyme-lock-outset {

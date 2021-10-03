@@ -37,9 +37,11 @@ function EditLyrics(props) {
         return item
       }
     })
-    // setCurrentSong(props.location.songs.filter(item => item.songmix === props.location.currentSong))
-    setAudioSrc(currentSong?.songmix)
   }, [])
+
+  useEffect(() => {
+    setAudioSrc(currentSong?.songmix)
+  }, [currentSong])
 
   const closeWindow = () => {
     history.push({

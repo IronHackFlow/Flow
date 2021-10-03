@@ -53,7 +53,7 @@ function NavBar(props) {
     } else if (props.searchPoppedUp === false) {
       if (locationIndicator?.pathname === '/recordingBooth') {
         searchBtnRef1.current.style.background = 'initial'
-        searchBtnRef1.current.style.boxShadow = '2px 2px 3px 0px #353535, -3px -3px 4px #787878'
+        searchBtnRef1.current.style.boxShadow = '2px 2px 3px #353535, -3px -3px 4px #787878'
         searchBtnRef1.current.style.border = 'none'
         searchBtnRef1.current.style.transition = 'all .4s'
         searchBtnRef2.current.style.boxShadow =
@@ -169,6 +169,20 @@ function NavBar(props) {
       recordBtnRef4.current.style.filter = "invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%)"
       recordBtnRef5.current.style.color = "white" 
 
+      searchBtnRef1.current.style.background = 'initial'
+      searchBtnRef1.current.style.boxShadow = '2px 2px 3px #353535, -3px -3px 4px #787878'
+      searchBtnRef1.current.style.border = 'none'
+      searchBtnRef1.current.style.transition = 'all .4s'
+      searchBtnRef2.current.style.boxShadow =
+        '#333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset'
+      searchBtnRef2.current.style.height = '40px'
+      searchBtnRef2.current.style.width = '40px'
+      searchBtnRef2.current.style.transition = 'all .4s'
+      searchBtnRef3.current.style.boxShadow = '#333333 2px 2px 3px 0px, #838383 -2px -2px 3px'
+      searchBtnRef4.current.style.filter =
+        'invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)'
+      searchBtnRef5.current.style.color = '#ff8ebd'
+      
       profileBtnRef1.current.style.background = 'initial'
       profileBtnRef1.current.style.boxShadow = '2px 2px 3px 0px #353535, -3px -3px 4px #787878'
       profileBtnRef1.current.style.border = 'none'

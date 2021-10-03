@@ -93,7 +93,7 @@
 
                 .each-action-word {
                     @include flexCenter(initial, initial, 0px, center, center, row);
-                    color: #00ffff;
+                    color: #424242;
                     font-size: 16px;
                     padding: 1px 3px 1px 3px;
                 }
@@ -165,7 +165,7 @@
                                 @include flexCenter(90%, 17%, 50px, center, center, row);
                                 position: absolute;
                                 right: 1px;
-    
+
                                 .rhyme-lock-btn {
                                     @include flexCenter(59%, 72%, 50px, center, center, row);
                                     background-color: #8a8a8a;
@@ -249,7 +249,7 @@
             box-shadow: inset 3px 3px 5px 0px #4c4c4c, inset -2px -2px 3px #d0d0d0;
 
             .rhyme-lock-container {
-                @include flexCenter(75%, 96%, 50px, flex-start, center, row);
+                @include flexCenter(75%, 96%, 50px, space-between, center, row);
                 box-shadow: 3px 3px 3px #404040, -2px -2px 2px #a5a5a5;
 
                 .rhyme-lock-button {
@@ -260,6 +260,9 @@
                         margin-bottom: 1%;
                         box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
 
+                        a {
+                            text-decoration: none;
+                        }
                         .rhyme-lock-btn {
                             @include flexCenter(100%, 100%, 50px, center, center, row);
                             background-color: #ec6aa0;
@@ -278,7 +281,7 @@
                             }
                         }
                         .select-no {
-                            font-size: 10px;
+                            font-size: 13px;
                             font-weight: bold;
                             color: white;
 
@@ -291,7 +294,7 @@
                 }
 
                 .rlb-1 {
-                    width: 25%;
+                    width: 31%;
                     .rhyme-lock-outset {
                         width: 90%;
                     }
@@ -303,7 +306,7 @@
                     }
                 }
                 .rlb-3 {
-                    width: 40%;
+                    width: 35%;
 
                     .rhyme-lock-outset {
                         width: 91%;

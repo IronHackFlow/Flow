@@ -34,8 +34,9 @@ function TestAudio(props) {
   ]);
   const commands = [
     {
-      command: [/(?:(\w*ing))/g, /(?:(\w*ed))/g],
-      callback: (command) => getActionVerbs(command)
+      command: /\b(\w(\S{4,}))/g, 
+      callback: (command) => getActionWords(command),
+      matchInterim: true,
     }
   ]
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
@@ -125,8 +126,6 @@ function TestAudio(props) {
 
   useEffect(() => {
     setRetrievedSelectedRhymes([])
-    let selectedHolder = []
-
     if (selectedWordHolder !== undefined) {
       datamuse.request(`words?rel_rhy=${selectedWordHolder}&max=20`)
         .then((res) => {
@@ -134,39 +133,65 @@ function TestAudio(props) {
             res.forEach((each) => {
               setRetrievedSelectedRhymes(oldRhymes => [...oldRhymes, each.word])
             })
-            for (let i = 1; i <= selectedRhymeNo; i++) {
-              selectedHolder.push(res[i].word)
-            }
-            if (selectedHolder.length !== 0) {
-              setSelectedRhymes(selectedHolder)
-            }
           }
         })
     }
   }, [selectedWordHolder])
 
   useEffect(() => {
-    setSelectedRhymes([...retrievedSelectedRhymes].slice(0, selectedRhymeNo))
-  }, [retrievedSelectedRhymes, selectedRhymeNo])
-
-  async function getActionVerbs(regex) {
-    console.log(regex, 'this changes A LOT')
-    const verbs = await datamuse.request(`words?rel_rhy=${regex}&max=20`)
-      .then((res) => {
-        if (res.length !== 0) {
-          console.log(res)
-          for (let i = 0; i < 1; i++) {
-            let randomIndex = Math.floor(Math.random() * (res.length - 1))
-            console.log(randomIndex, res[randomIndex].word)
-            setRetrievedActionRhymes(oldRhymes => [...oldRhymes, res[randomIndex].word])
-          }
+    if (recorderState.mediaStream) {
+      setRecorderState((prevState) => {
+        return {
+          ...prevState,
+          mediaRecorder: new MediaRecorder(prevState.mediaStream)
         }
       })
-    console.log(retrievedActionRhymes, "RETRIEVED ACTIONS VERBS")
-  }
+    }
+  }, [recorderState.mediaStream])
+
+  useEffect(() => {
+    const recorder = recorderState.mediaRecorder
+    let chunks = []
+
+    if (recorder && recorder.state === "inactive") {
+      recorder.start()
+      setDateBefore(Date.now())
+
+      recorder.ondataavailable = (e) => {
+        chunks.push(e.data)
+      }
+      
+      recorder.onstop = () => {
+        setDateAfter(Date.now())
+        const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
+        const url = window.URL.createObjectURL(mpegBlob);
+        keyRef.current++
+        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
+        chunks = []
   
+        setRecorderState((prevState) => {
+          if (prevState.mediaRecorder) {
+            return {
+              ...initialState,
+              audio: url
+            }
+          }
+          else {
+            return initialState
+          }
+        })
+      }
+    }
+
+    return () => {
+      if (recorder) {
+        recorder.stream.getAudioTracks().forEach((track) => track.stop())
+      }
+    }
+  }, [recorderState.mediaRecorder])
+
   const displayActionWords = useCallback(() => {
-    return retrievedActionRhymes.map((each, index) => {
+    return retrievedActionRhymes.slice(0, 5).map((each, index) => {
       return (
         <p className="each-action-word" key={`${uuidv4()}action${index}`}>{each}</p>
       )
@@ -177,35 +202,93 @@ function TestAudio(props) {
     let scrollLyrics = document.getElementById('currentTranscript')
     scrollLyrics.scrollTop = scrollLyrics.scrollHeight
   }
+  const profanityRefilter = (curse) => {
+    let regexp = /\b\w\**(\*)/gm
+    let curseWord = curse.match(regexp)
+
+    if (curseWord[0].charAt(0) === "f") {
+      if (curseWord[0].length === 4) {
+        return "fuck"
+      } else if (curseWord[0].length === 7) {
+        return "fucking"
+      } else {
+        return "fucked"
+      }
+    } else if (curseWord[0].charAt(0) === "b") {
+      if (curseWord[0].length === 5) {
+        return "bitch"
+      } else {
+        return "bitches"
+      }
+    } else if (curseWord[0].charAt(0) === "c") {
+      if (curseWord[0].length === 4) {
+        return "cunt"
+      } else {
+        return "cunts"
+      }
+    } else if (curseWord[0].charAt(0) === "p") {
+      return "pussy"
+    } else if (curseWord[0].charAt(0) === "a") {
+      return "asshole"
+    } else if (curseWord[0].charAt(0) === "s") {
+      return "shit"
+    } else if (curseWord[0].charAt(0) === "n") {
+      if (curseWord[0].length === 6) {
+        return "niggas"
+      } else if (curseWord[0].length === 7) {
+        return "niggas"
+      }
+    }
+  }
+
+  async function getActionWords(regex) {
+    let finalWord = regex
+    if (regex.includes("*")) {
+      finalWord = profanityRefilter(regex)
+    }
+
+    const getData = await datamuse.request(`words?rel_trg=${finalWord}&max=20`)
+      .then((res) => {
+        if (res.length !== 0) {
+          console.log(res)
+          for (let i = 0; i < 1; i++) {
+            let randomIndex = Math.floor(Math.random() * (res.length - 1))
+            console.log(randomIndex, res[randomIndex].word)
+            setRetrievedActionRhymes(oldRhymes => [...oldRhymes, res[randomIndex].word])
+          }
+        }
+      })
+      .catch(console.error)
+    console.log(retrievedActionRhymes, "RETRIEVED ACTIONS VERBS")
+  }
 
   async function getDatamuseRhymes() {
     let splitScript = transcript.split(" ")
 
     if (splitScript[0] !== "") {
       let lastWord = splitScript[splitScript.length - 1]
-      setRhymeWordHolder(lastWord)
-      let retrievedRhymesHolder = []
-  
-      const getData = await datamuse.request(`words?rel_rhy=${lastWord}&max=30`)
+      let finalWord = lastWord
+
+      if (lastWord.includes("'")) {
+        finalWord = lastWord.split("'").join('')
+      }
+      if (lastWord.includes("*")) {
+        finalWord = profanityRefilter(lastWord)
+      }
+      setRhymeWordHolder(finalWord)
+      setRetrievedRhymes([])
+      console.log(finalWord, " - this is the last word")
+
+      const getData = await datamuse.request(`words?rel_rhy=${finalWord}&max=30`)
         .then((res) => {
-          setRetrievedRhymes([])
+          console.log(res, "I'm gonna need to see what I'm working with here")
           if (res.length !== 0) {
             res.forEach((each) => {
               setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
             })
-            for (let i = 1; i <= selectedRhymeNo; i++) {
-              if (res[i].word !== undefined) {
-                retrievedRhymesHolder.push(`${res[i].word}`)
-              }
-            }
-            if (retrievedRhymesHolder.length !== 0) {
-              setTopRhymes(retrievedRhymesHolder)
-            }
           }
         })
-    }
-    else {
-      console.log(splitScript, "EMPTY LIKE MY SOUL :(")
+        .catch(console.error)
     }
   }
 
@@ -273,20 +356,27 @@ function TestAudio(props) {
     }
   }, [allTakes, loadSelectedTake])
 
-  const showTopRhymes = () => {
-    return topRhymes.map((each, index) => {
-      return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
-    })
-  }
-  const showSelectedRhymes = () => {
-    return selectedRhymes.map((each, index) => {
-      return <p className="each-selected-rhyme" key={`${uuidv4()}selectedrhymes${index}`}>{each}</p>
-    })
-  }
-  const showLockedRhymes = () => {
-    return lockedRhymes.map((each, index) => {
-      return <p className="each-locked-rhyme" key={`${uuidv4()}lockedrhymes${index}`}>{each}</p>
-    })
+  const showRhymes = (array) => {
+    if (array?.length >= selectedRhymeNo) {
+      return array.slice(0, selectedRhymeNo).map((each, index) => {
+        if (index === selectedRhymeNo - 1) {
+          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
+        }
+        else {
+          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
+        }
+      })
+    }
+    else {
+      return array?.map((each, index) => {
+        if (index === array.length - 1) {
+          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
+        }
+        else {
+          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
+        }
+      })
+    }
   }
 
   const showRhymeWord = (holder) => {
@@ -319,21 +409,21 @@ function TestAudio(props) {
     let randomRhymeArr = []
     if (array.length !== 0) {
       for (let i = 1; i <= selectedRhymeNo; i++) {
-        randomRhymeArr.push(array[Math.floor(Math.random() * 20)])
+        randomRhymeArr.push(array[Math.floor(Math.random() * array?.length)])
       }
       if (theState === "topRhymes") {
-        setTopRhymes(randomRhymeArr)
+        setRetrievedRhymes(randomRhymeArr)
       }
       else {
-        setSelectedRhymes(randomRhymeArr)
+        setRetrievedSelectedRhymes(randomRhymeArr)
       }
     }
   }
 
   const lockSuggestion = () => {
-    if (topRhymes) {
+    if (retrievedRhymes) {
       setLockRhymeHolder(rhymeWordHolder)
-      const copyRhyme = [...topRhymes];
+      const copyRhyme = [...retrievedRhymes];
       setLockedRhymes(copyRhyme);
     }
   };
@@ -354,7 +444,6 @@ function TestAudio(props) {
 
   let myReq; //animation frame ID
   const detectSilence = (stream, silence_delay = 50, min_decibels = -80) => {
-
     const ctx = new AudioContext();
     const analyser = ctx.createAnalyser();
     const streamNode = ctx.createMediaStreamSource(stream);
@@ -384,58 +473,6 @@ function TestAudio(props) {
     loop()
   }
 
-  useEffect(() => {
-    if (recorderState.mediaStream) {
-      setRecorderState((prevState) => {
-        return {
-          ...prevState,
-          mediaRecorder: new MediaRecorder(prevState.mediaStream)
-        }
-      })
-    }
-  }, [recorderState.mediaStream])
-
-  useEffect(() => {
-    const recorder = recorderState.mediaRecorder
-    let chunks = []
-
-    if (recorder && recorder.state === "inactive") {
-      recorder.start()
-      setDateBefore(Date.now())
-
-      recorder.ondataavailable = (e) => {
-        chunks.push(e.data)
-      }
-      
-      recorder.onstop = () => {
-        setDateAfter(Date.now())
-        const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
-        const url = window.URL.createObjectURL(mpegBlob);
-        keyRef.current++
-        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
-        chunks = []
-  
-        setRecorderState((prevState) => {
-          if (prevState.mediaRecorder) {
-            return {
-              ...initialState,
-              audio: url
-            }
-          }
-          else {
-            return initialState
-          }
-        })
-      }
-    }
-
-    return () => {
-      if (recorder) {
-        recorder.stream.getAudioTracks().forEach((track) => track.stop())
-      }
-    }
-  }, [recorderState.mediaRecorder])
-
   const resetSuggestions = () => {
     setRecordingDisplay(true)
     setLyricsArr([])
@@ -443,7 +480,7 @@ function TestAudio(props) {
     setRhymeWordHolder(null)
     setLockRhymeHolder(null)
     setSelectedWordHolder(null)
-    setTopRhymes([])
+    setRetrievedRhymes([])
     setLockedRhymes([])
     setSelectedRhymes([])
     resetTranscript()
@@ -683,7 +720,7 @@ function TestAudio(props) {
               <div className="custom-rhyme-inner">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(topRhymes.length !== 0  && recordingDisplay) ? showTopRhymes() : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
+                    {(rhymeWordHolder && recordingDisplay) ? showRhymes(retrievedRhymes) : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
                   </div>
                 </div>
               </div>
@@ -707,7 +744,7 @@ function TestAudio(props) {
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(lockedRhymes.length !== 0  && recordingDisplay) ? showLockedRhymes() : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
+                    {(lockRhymeHolder && recordingDisplay) ? showRhymes(lockedRhymes) : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
                   </div>
                 </div>
               </div>
@@ -732,7 +769,7 @@ function TestAudio(props) {
               <div className="custom-rhyme-inner" id="lockedRhyme">
                 <div className="custom-rhyme_shadow-div-inset">
                   <div className="top-rhymes-container">
-                    {(selectedWordHolder && recordingDisplay) ? showSelectedRhymes() : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
+                    {(selectedWordHolder && recordingDisplay) ? showRhymes(retrievedSelectedRhymes) : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
                   </div>
                 </div>
               </div>
@@ -761,13 +798,7 @@ function TestAudio(props) {
                   </select>
                 </div>
               </div>
-              <div className="rhyme-lock-button rlb-2">
-                <div className="rhyme-lock-outset">
-                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, selectedRhymes)}>
-                    <img className="button-icons" src={shuffle} alt="shuffle" />
-                  </button>
-                </div>
-              </div>
+ 
               <div className="rhyme-lock-button rlb-3">
                 <div className="rhyme-lock-outset">
                   <Link to={{pathname: "/recordingBooth/EditLyrics", songs: [...allTakes], currentSong: selectedOption}} className="rhyme-lock-btn">

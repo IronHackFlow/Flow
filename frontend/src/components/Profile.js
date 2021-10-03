@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 import NavBar from '../components/NavBar'
-import mic from '../images/record2.svg'
-import avatar from '../images/avatar.svg'
 import social from '../images/social.svg'
 import followers from '../images/followers.svg'
 import heart from '../images/heart2.svg'
 import editicon from '../images/edit.svg'
 import logouticon from '../images/logout2.svg'
-import songs from '../images/music.svg'
-import explore from '../images/explore.svg'
+
 import play from '../images/play.svg'
 
 function Profile(props) {
