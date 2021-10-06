@@ -35,7 +35,7 @@ function Home(props) {
   const [followersInView, setFollowersInView] = useState();
   const [userLiked, setUserLiked] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
-  const [searchPoppedUp, setSearchPoppedUp] = useState();
+  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
   const [totalComments, setTotalComments] = useState();

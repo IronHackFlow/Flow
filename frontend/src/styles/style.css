@@ -184,17 +184,7 @@
 html,
 body,
 #root,
-.App {
-  height: 100vh;
-  width: 100vw;
-  font-family: 'Roboto', sans-serif;
-}
-
-.App {
-  text-align: center;
-  position: relative;
-}
-
+.App,
 .Home,
 .TestAudio,
 .EditLyrics,
@@ -203,28 +193,20 @@ body,
 .SongScreen,
 .LogIn {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
-@media screen and (min-width: 800px) {
+.App {
+  text-align: center;
+  position: relative;
+}
+
+@media screen and (min-width: 500px) {
   html {
+    background: #282727;
     margin: auto;
-    height: 715px;
-    width: 335px;
-    font-family: 'Roboto', sans-serif;
-  }
-  body,
-  #root,
-  .App,
-  .Home,
-  .TestAudio,
-  .EditLyrics,
-  .SongScreen,
-  .Profile,
-  .EditProfileScreen,
-  .LogIn {
-    height: 715px;
-    width: 335px;
+    width: 315px;
   }
 }
 
@@ -3820,7 +3802,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-shadow: inset 3px 3px 3px 0px #2b2b2b, inset -3px -3px 4px #686868;
           box-shadow: inset 3px 3px 3px 0px #2b2b2b, inset -3px -3px 4px #686868;
   position: absolute;
-  bottom: 100px;
+  bottom: 30%;
   -webkit-transition: height .5s;
   transition: height .5s;
 }
@@ -4277,7 +4259,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-1_select-takes .select-takes-container_shadow-div-outset .select-takes-container .select-takes_shadow-div-inset .select-takes_shadow-div-outset {
-  height: 60%;
+  height: 85%;
   width: 91%;
   border-radius: 30px;
   display: -webkit-box;
@@ -4490,9 +4472,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  position: fixed;
-  right: 9%;
-  bottom: 13%;
+  position: absolute;
+  right: 6%;
+  bottom: 32%;
   -webkit-box-shadow: -2px 5px 10px #292828;
           box-shadow: -2px 5px 10px #292828;
 }
@@ -4988,7 +4970,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background-color: #3d3d3d;
   color: white;
   border: none;
-  height: 50%;
+  height: 55%;
   width: 90%;
 }
 

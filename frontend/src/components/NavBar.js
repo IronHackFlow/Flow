@@ -155,6 +155,19 @@ function NavBar(props) {
         'invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)'
       profileBtnRef5.current.style.color = '#ff8ebd'
 
+      recordBtnRef1.current.style.background = 'initial'
+      recordBtnRef1.current.style.boxShadow = '2px 2px 5px #888888, -3px -3px 3px #ffffff'
+      recordBtnRef1.current.style.border = 'none'
+      recordBtnRef1.current.style.transition = 'all .4s'
+      recordBtnRef2.current.style.boxShadow =
+        'inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff'
+      recordBtnRef2.current.style.height = '40px'
+      recordBtnRef2.current.style.width = '40px'
+      recordBtnRef2.current.style.transition = 'all .4s'
+      recordBtnRef3.current.style.boxShadow = '2px 2px 3px 0px #929292, -2px -2px 3px #ffffff'
+      recordBtnRef4.current.style.filter =
+        'invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)'
+      recordBtnRef5.current.style.color = '#ff8ebd'
     }
     else if (locationIndicator?.pathname === "/recordingBooth") {
       recordBtnRef1.current.style.background = "#ec6aa0";
@@ -215,19 +228,11 @@ function NavBar(props) {
 
   return (
     <div className="NavBar">
-      {/* <div className="individual-container">
-                  <div className="individual-btn" ref={props.searchBtn} onClick={props.popUpSearch}>
-                    <img className="social-icons si-search" src={search} alt="search user icon" />
-                  </div>
-                  <div className="individual-text" style={{marginTop: "15px"}}>
-                    <p>Search</p>
-                  </div>
-                </div> */}
       <div className="navbar_section">
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
             <Link
-              to={user._id ? '/' : '/auth'}
+              to="/"
               className="navbar-btn-container"
               ref={socialBtnRef1}
               style={{ borderRadius: '40px 8px 8px 40px' }}
