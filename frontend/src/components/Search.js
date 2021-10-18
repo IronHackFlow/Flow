@@ -87,7 +87,7 @@ function Search(props) {
         <div className="com-cont-2">
           <div className="comments-container">
             <div className="comment-list-container com-list-cont">
-              <div className="com-list-search">
+              <div className="com-list-search" ref={props.commSearchRef}>
                 <div className="com-search">{suggestions}</div>
               </div>
             </div>

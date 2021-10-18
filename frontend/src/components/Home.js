@@ -49,6 +49,7 @@ function Home(props) {
   const searchBtn = useRef();
   const searchInputRef = useRef();
   const searchButtonRef = useRef();
+  const commSearchRef = useRef();
   const commentPopUpRef = useRef();
   const commentBtn = useRef();
   const commentInputRef = useRef();
@@ -342,6 +343,7 @@ function Home(props) {
       windowRef.current.style.bottom = '0'
       searchInputRef.current.style.opacity = 0
       searchButtonRef.current.style.opacity = 0
+      commSearchRef.current.style.opacity = 0
       searchButtonRef.current.style.transition = 'opacity .5s'
       setSearchPoppedUp(false)
     } else if (whichMenu === 'comment') {
@@ -361,6 +363,7 @@ function Home(props) {
       searchInputRef.current.focus()
       searchInputRef.current.style.opacity = 1
       searchButtonRef.current.style.opacity = 1
+      commSearchRef.current.style.opacity = 1
       searchButtonRef.current.style.transition = 'opacity .5s'
       popUpSearchRef.current.style.height = '50%'
       windowRef.current.style.bottom = '50%'
@@ -373,7 +376,7 @@ function Home(props) {
       opacityRef1.current.style.opacity = 1
       opacityRef2.current.style.opacity = 1
       commentPopUpRef.current.style.height = '50%'
-      windowRef.current.style.bottom = '50%'
+      windowRef.current.style.bottom = '46%'
       setPoppedUp(true)
     }
   }
@@ -519,6 +522,7 @@ function Home(props) {
             popUpSearchRef={popUpSearchRef}
             searchInputRef={searchInputRef}
             searchButtonRef={searchButtonRef}
+            commSearchRef={commSearchRef}
           />
 
           <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
@@ -591,7 +595,7 @@ function Home(props) {
                       >
                         <img
                           src={songUserInView?.picture}
-                          alt="user in view profile"
+                          alt=""
                           ref={props.profilePicRef}
                         />
                       </Link>

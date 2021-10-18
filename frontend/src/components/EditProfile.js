@@ -290,11 +290,6 @@ function EditProfile(props) {
               <Link
                 to={{ pathname: `/profile/${user._id}`, profileInfo: user }}
                 style={{ height: '100%' }}
-                onClick={() => {
-                  setToggleFeed(false)
-                  setToggleRecord(false)
-                  setToggleProfile(true)
-                }}
               >
                 <img className="button-icons bi-back" src={back} alt="back button icon"></img>
               </Link>

@@ -45,7 +45,16 @@ function DisplaySong(eachSong) {
         backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')`,
       }}
     >
-      {/* <div className="last-div"></div> */}
+      <div className="last-div">
+        {eachSong?.song?.songLyricsStr?.map((each, index) => {
+          return (
+            <div className="each-lyric-container">
+              <p className="each-lyric-no">{index + 1}</p>
+              <p className="each-lyric-line">{each}</p>
+            </div>
+          )
+        })}
+      </div>
     </li>
   )
 }

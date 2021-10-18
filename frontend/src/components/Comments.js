@@ -309,13 +309,17 @@ function Comments(props) {
           <div className="comments-title">
             <div className="comments-title-inner">
               <p>
-                Comments - <span style={{ color: '#ec6aa0' }}>{totalComments}</span>
+                Comments - <span style={{ color: '#e5bdcd' }}>{totalComments}</span>
               </p>
             </div>
           </div>
 
           <div className="comments-container">
-            <div className="comment-list-container">{renderEachComment()}</div>
+            <div className="comment-list-container">
+              <div className="comment-list-cont">
+                {renderEachComment()}
+              </div>
+            </div>
           </div>
         </div>
       </div>

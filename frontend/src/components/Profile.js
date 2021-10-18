@@ -8,7 +8,7 @@ import followers from '../images/followers.svg'
 import heart from '../images/heart2.svg'
 import editicon from '../images/edit.svg'
 import logouticon from '../images/logout2.svg'
-
+import xExit from "../images/exit-x-2.svg"
 import play from '../images/play.svg'
 
 function Profile(props) {
@@ -94,42 +94,6 @@ function Profile(props) {
       console.log(timeDiff / second, ' seconds ago')
       return `${Math.round(timeDiff / second)}s`
     }
-
-    // let diffSeconds = (timeDifference / 1000).toFixed(2)
-    // let diffMinutes = (diffSeconds / 60).toFixed(2)
-    // let diffHours = (diffMinutes / 60).toFixed(2)
-    // let diffDays = (diffHours / 24).toFixed(2)
-    // let diffWeeks = (diffDays / 7).toFixed(2)
-    // let diffMonths = (diffDays / 30).toFixed(2)
-    // let diffYears = (diffMonths / 12).toFixed(2)
-    // if (diffSeconds < 60) {
-    //   console.log(Math.round(diffSeconds), ' seconds ago')
-    //   return `${Math.round(diffSeconds)}s`
-    // }
-    // else if (diffMinutes >= 1 && diffMinutes <= 55) {
-    //   console.log(Math.round(diffMinutes), " minutes ago")
-    //   return `${Math.round(diffMinutes)}min`
-    // }
-    // else if (diffHours >= 1 && diffHours < 24) {
-    //   console.log(Math.round(diffHours), " hours ago")
-    //   return `${Math.round(diffHours)}h`
-    // }
-    // else if (diffDays >= 1 && diffDays < 7) {
-    //   console.log(Math.round(diffDays), " days ago")
-    //   return `${Math.round(diffDays)}d`
-    // }
-    // else if (diffWeeks >= 1 && diffWeeks < 8) {
-    //   console.log(Math.round(diffWeeks), " weeks ago")
-    //   return `${Math.round(diffWeeks)}w`
-    // }
-    // else if (diffWeeks >= 8 || diffMonths >= 2) {
-    //   console.log(Math.round(diffMonths), " months ago")
-    //   return `${Math.round(diffMonths)}m`
-    // }
-    // else if (diffMonths >= 12) {
-    //   console.log(Math.round(diffYears), " years ago")
-    //   return `${Math.round(diffYears)}y`
-    // }
   }
 
   const handlePlayPause = x => {
@@ -154,7 +118,7 @@ function Profile(props) {
     }, [])
 
     const showLyrics = () => {
-      return eachSong.songLyricsStr.map((eachLine, index) => {
+      return eachSong?.songLyricsStr?.map((eachLine, index) => {
         return <p key={`${eachLine}_${index}`}>{eachLine}</p>
       })
     }
@@ -175,20 +139,6 @@ function Profile(props) {
           </div>
 
           <div className="track-play-container">
-            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="play-container">
-              <div className="play-outset">
-                <div className="play-inset">
-                  <img
-                    className="button-icons bi-play-2"
-                    src={play}
-                    onClick={() => handlePlayPause(eachSong.songName)}
-                    alt="play"
-                  />
-                </div>
-              </div>
-            </div>
-
             <div className="track-data-container">
               <p className="tp-1">
                 <div className="shape-wrap"></div>This is a caption for the above song. I'm testing
@@ -212,6 +162,51 @@ function Profile(props) {
         <div className="lyrics-container">
           <div className="lyrics-outset">
             <div className="p-container">{showLyrics()}</div>
+          </div>
+        </div>
+        <div className="buttons-container">
+          <div className="delete-btn-container">
+          <div className="play-container">
+              <div className="play-outset">
+                <div className="play-inset">
+                  <img
+                    className="button-icons"
+                    src={xExit}
+                    onClick={() => handlePlayPause(eachSong.songName)}
+                    alt="exit"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="edit-btn-container">
+          <div className="play-container">
+              <div className="play-outset">
+                <div className="play-inset">
+                  <img
+                    className="button-icons bi-play-2"
+                    src={editicon}
+                    onClick={() => handlePlayPause(eachSong.songName)}
+                    alt="play"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="play-btn-container">
+          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+            <div className="play-container">
+              <div className="play-outset">
+                <div className="play-inset">
+                  <img
+                    className="button-icons bi-play-2"
+                    src={play}
+                    onClick={() => handlePlayPause(eachSong.songName)}
+                    alt="play"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </li>
