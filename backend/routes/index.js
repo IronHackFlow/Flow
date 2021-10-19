@@ -504,6 +504,24 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
   })
 })
 
+router.post(`/deleteSongRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = req.body
+      Songs.findByIdAndDelete(body.song)
+        .then((res) => {
+          res.status(200).json(res)
+          console.log(res, "i was deleted")
+        })
+        .catch((err) => {
+          res.status(500).json(err)
+        })
+    }
+  })
+})
+
 router.post(`/addBeatRT`, verifyToken, async (req, res, next) => {
   jwt.verify(req.token, 'secretkey', (err, authData) => {
     if (err) {

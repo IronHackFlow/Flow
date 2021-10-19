@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import TheContext from "../TheContext";
 import { v4 as uuidv4 } from "uuid";
 import AudioTimeSlider from "./AudioTimeSlider";
 import edit from "../images/edit.svg";
@@ -15,7 +16,10 @@ import beat4 from "../assets/beatsTrack4.m4a";
 import beat5 from "../assets/beatsTrack5.m4a";
 
 function EditLyrics(props) {
+  const { user } = React.useContext(TheContext)
   const history = useHistory()
+  const location = useLocation();
+
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
     { song: beat2, name: "Futurology" },
@@ -23,20 +27,28 @@ function EditLyrics(props) {
     { song: beat4, name: "Callback" },
     { song: beat5, name: "Drained" },
   ]);
-  const [getTakes, setGetTakes] = useState([])
-  const [currentSong, setCurrentSong] = useState()
+  const [getTakes, setGetTakes] = useState([]);
+  const [currentSong, setCurrentSong] = useState();
   const [audioSrc, setAudioSrc] = useState(null);
   const lyricsPopUpRef = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [linkLocation, setLinkLocation] = useState();
 
   useEffect(() => {
-    setGetTakes([...props.location.songs])
-    const getCurrentSong = props.location.songs.filter((item) => {
-      if (item.songmix === props.location.currentSong) {
-        setCurrentSong(item)
-        return item
-      }
-    })
+    if (props.location.pathname === `/recordingBooth/EditLyrics`) {
+      setLinkLocation(true)
+      setGetTakes([...props.location.songs])
+      const getCurrentSong = props.location.songs.filter((item) => {
+        if (item.songmix === props.location.currentSong) {
+          setCurrentSong(item)
+          return item
+        }
+      })
+    } else if (props.location.pathname === `/profile/${user?._id}/EditLyrics`) {
+      setLinkLocation(false)
+      console.log(props.location.currentSong)
+      setCurrentSong(props.location.currentSong)
+    }
   }, [])
 
   useEffect(() => {
@@ -44,15 +56,27 @@ function EditLyrics(props) {
   }, [currentSong])
 
   const closeWindow = () => {
-    history.push({
-      pathname: '/recordingBooth',
-      songs: props.location.songs
-    })
+    if (linkLocation === true) {
+      history.push({
+        pathname: '/recordingBooth',
+        songs: props.location.songs
+      })
+    } else {
+      history.push({
+        pathname: `/profile/${user?._id}`,
+        profileInfo: user,
+        songs: props.location.songs
+      })
+    }
+
   }
 
   const mapTakes = useCallback(() => {
     console.log(currentSong, "what it is?")
-    return currentSong?.lyrics.map((each, index) => {
+    return currentSong?.songLyricsStr.map((each, index) => {
+      if (linkLocation === false) {
+        each = each.split(' ')
+      }
       return (
         <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
           <div className="list-item-1_edit-lyrics">
@@ -102,7 +126,10 @@ function EditLyrics(props) {
 
   const mapMiniLyrics = () => {
     if (getTakes.length !== 0) {
-      return currentSong.lyrics.map((each, index) => {
+      return currentSong?.songLyricsStr.map((each, index) => {
+        if (linkLocation === false) {
+          each = each.split(' ')
+        }
         return (
           <div className="display-each-container">
             <p className="bar-no">{index + 1}</p>

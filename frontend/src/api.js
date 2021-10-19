@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-//const baseURL = `http://localhost:5000/api`;
-const baseURL = 'https://iron-flow.herokuapp.com/api'
+const baseURL = `http://localhost:5000/api`;
+// const baseURL = 'https://iron-flow.herokuapp.com/api'
 const token = localStorage.getItem('token')
 // const baseURL = process.env.NODE_ENV == 'production' ? " https://iron-flow.herokuapp.com/api ": "http://localhost:5000 "
 
@@ -78,6 +78,10 @@ const actions = {
 
   addSong: async song => {
     return await axios.post(`${baseURL}/addSongRT`, song, resetHead())
+  },
+
+  deleteSong: async song => {
+    return await axios.post(`${baseURL}/deleteSongRT`, song, resetHead())
   },
 
   addBeat: async () => {

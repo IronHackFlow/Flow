@@ -206,7 +206,7 @@ body,
 .EditProfileScreen,
 .SongScreen,
 .LogIn {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   font-family: 'Roboto', sans-serif;
 }
@@ -219,7 +219,8 @@ body,
   html {
     background: #282727;
     margin: auto;
-    width: 330px;
+    width: 370px;
+    height: 770px;
   }
 }
 

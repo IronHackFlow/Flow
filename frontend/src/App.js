@@ -48,6 +48,7 @@ function App() {
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/auth" render={props => <Auth setUser={setUser} {...props} />} />
           <Route exact path="/profile/:id" render={props => <Profile user={user} {...props} />} />
+            <Route exact path="/profile/:id/EditLyrics" render={props => <EditLyrics {...props} />} />
           <Route exact path="/profile" render={props => <Profile user={user} {...props} />} />
           <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
             <Route exact path="/recordingBooth/EditLyrics" render={props => <EditLyrics {...props} />} />

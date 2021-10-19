@@ -105,6 +105,7 @@ function Profile(props) {
     }
   }
 
+
   function ProfileSongs(eachSong) {
     const songListRef = useRef()
 
@@ -113,13 +114,28 @@ function Profile(props) {
       songListRef.current.focus()
     }
 
+    const deleteSong = (eachSong) => {
+      actions 
+        .deleteSong({ song: eachSong._id })
+        .then((res) => {
+          console.log(res, "what is this?")
+        })
+        .catch(console.error)
+      setThisUserSongs(oldArr => oldArr.filter(item => item._id !== eachSong._id))
+    }
+
     const setSongRefs = useCallback(node => {
       songListRef.current = node
     }, [])
 
     const showLyrics = () => {
       return eachSong?.songLyricsStr?.map((eachLine, index) => {
-        return <p key={`${eachLine}_${index}`}>{eachLine}</p>
+        return (
+          <div className="each-line-container">
+            <p className="each-line-no">{index + 1}</p>
+            <p className="each-line-lyric" key={`${eachLine}_${index}`}>{eachLine}</p>
+          </div>
+        )
       })
     }
 
@@ -134,76 +150,88 @@ function Profile(props) {
               }}
               className="song-name-outset"
             >
-              <p>{eachSong.songName}</p>
+              <div className="track-title-container">
+                <p>{eachSong.songName}</p>
+              </div>
+
+              <div className="track-data-container">
+                <div className="track-caption-container">
+                  <p>
+                    This is a caption for the above song. I'm testing the length
+                  </p>
+                </div>
+                <div className="track-social-container">
+                  <p>{dateFormatHandler(eachSong.songDate)}</p>
+                  <p>
+                    {eachSong.songLikes.length === 1
+                      ? `${eachSong.songLikes.length} Like`
+                      : `${eachSong.songLikes.length} Likes`}
+                  </p>
+                  <p>
+                    {eachSong.songComments.length === 1
+                      ? `${eachSong.songComments.length} Comment`
+                      : `${eachSong.songComments.length} Comments`}
+                  </p>
+                </div>
+              </div>
             </Link>
           </div>
 
-          <div className="track-play-container">
-            <div className="track-data-container">
-              <p className="tp-1">
-                <div className="shape-wrap"></div>This is a caption for the above song. I'm testing
-                the length
-              </p>
-              <p className="tp-2">{dateFormatHandler(eachSong.songDate)}</p>
-              <p className="tp-3">
-                {eachSong.songLikes.length === 1
-                  ? `${eachSong.songLikes.length} Like`
-                  : `${eachSong.songLikes.length} Likes`}
-              </p>
-              <p className="tp-4">
-                {eachSong.songComments.length === 1
-                  ? `${eachSong.songComments.length} Comment`
-                  : `${eachSong.songComments.length} Comments`}
-              </p>
+          <div className="lyrics-container">
+            <div className="lyrics-outset">
+              <div className="p-container">{showLyrics()}</div>
             </div>
           </div>
         </div>
 
-        <div className="lyrics-container">
-          <div className="lyrics-outset">
-            <div className="p-container">{showLyrics()}</div>
-          </div>
-        </div>
         <div className="buttons-container">
-          <div className="delete-btn-container">
-          <div className="play-container">
-              <div className="play-outset">
-                <div className="play-inset">
-                  <img
-                    className="button-icons"
-                    src={xExit}
-                    onClick={() => handlePlayPause(eachSong.songName)}
-                    alt="exit"
-                  />
+          <div className="buttons-inner">
+            {props.location.profileInfo._id === user._id
+             ? (
+               <>
+                <div className="delete-btn-container">
+                  <div className="play-container">
+                    <div className="play-outset">
+                      <div className="play-inset">
+                        <img
+                          className="button-icons"
+                          src={xExit}
+                          onClick={() => deleteSong(eachSong)}
+                          alt="exit"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="edit-btn-container">
-          <div className="play-container">
-              <div className="play-outset">
-                <div className="play-inset">
-                  <img
-                    className="button-icons bi-play-2"
-                    src={editicon}
-                    onClick={() => handlePlayPause(eachSong.songName)}
-                    alt="play"
-                  />
+                <div className="delete-btn-container">
+                  <div className="play-container">
+                    <div className="play-outset">
+                      <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
+                        <img
+                          className="button-icons"
+                          src={editicon}
+                          alt="edit"
+                        />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="play-btn-container">
-          <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-            <div className="play-container">
-              <div className="play-outset">
-                <div className="play-inset">
-                  <img
-                    className="button-icons bi-play-2"
-                    src={play}
-                    onClick={() => handlePlayPause(eachSong.songName)}
-                    alt="play"
-                  />
+              </>
+              ) : ""
+            }
+
+            <div className="delete-btn-container">
+            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+              <div className="play-container">
+                <div className="play-outset">
+                  <div className="play-inset">
+                    <img
+                      className="button-icons bi-play-2"
+                      src={play}
+                      onClick={() => handlePlayPause(eachSong.songName)}
+                      alt="play"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -213,11 +241,11 @@ function Profile(props) {
     )
   }
 
-  const showProfileSongs = () => {
+  const showProfileSongs = useCallback(() => {
     return thisUserSongs.map((eachSong, index) => {
       return <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
     })
-  }
+  }, [thisUserSongs])
 
   return (
     <div className="Profile">
@@ -247,14 +275,14 @@ function Profile(props) {
             <div className="fields_shadow-div-outset">
               <div className="users-details-each ude-1">
                 <p style={{ color: 'white' }}>Name: </p>
-                <p style={{ fontSize: '13px', marginLeft: '4%' }}>{thisUser.family_name}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.given_name} {thisUser.family_name}</p>
               </div>
 
               <div className="users-details-each ude-2">
                 <p style={{ color: 'white' }}>Email: </p>
                 <p
                   style={{
-                    fontSize: '13px',
+                    fontSize: '12px',
                     marginLeft: '4%',
                     overflowX: 'scroll',
                   }}
@@ -265,26 +293,26 @@ function Profile(props) {
 
               <div className="users-details-each ude-3">
                 <p style={{ color: 'white' }}>About: </p>
-                <p className="big-p" style={{ fontSize: '13px', marginLeft: '4%' }}>
+                <p className="big-p" style={{ fontSize: '12px', marginLeft: '4%' }}>
                   {thisUser.userAbout}
                 </p>
               </div>
 
               <div className="users-details-each ude-4">
                 <p style={{ color: 'white' }}>Twitter: </p>
-                <p style={{ fontSize: '13px', marginLeft: '4%' }}>{thisUser.userTwitter}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.userTwitter}</p>
               </div>
 
               <div className="users-details-each ude-5">
                 <p style={{ color: 'white' }}>Instagram: </p>
-                <p style={{ fontSize: '13px', marginLeft: '4%' }}>{thisUser.userInstagram}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.userInstagram}</p>
               </div>
 
               <div className="users-details-each ude-6">
                 <p style={{ color: 'white' }}>SoundCloud: </p>
                 <p
                   style={{
-                    fontSize: '13px',
+                    fontSize: '12px',
                     marginLeft: '4%',
                     overflowX: 'scroll',
                   }}

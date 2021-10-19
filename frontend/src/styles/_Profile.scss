@@ -96,6 +96,7 @@
           padding: 3px 10px 3px 10px;
           border-radius: 60px 100px 100px 60px;
           box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
+
           p {
             font-size: 11px;
             text-align: start;
@@ -192,7 +193,7 @@
 
 .section-2_profile {
   @include flexCenter(53%, 100%, none, center, center, column);
-  background: linear-gradient(0deg, #dfdfdf 0%, #ecf0f3 100%);
+  background: linear-gradient(0deg, #c6c6c6 0%, #e2e2e2 100%);
   position: absolute;
   bottom: 0;
   overflow-y: auto;
@@ -216,7 +217,7 @@
       // box-shadow: inset 3px 3px 4px #c5c5c5,
       //             inset -3px -3px 5px #ffffff;
       // scroll-snap-type: y mandatory;
-      border: 3px solid #ecf0f3;
+      // border: 3px solid #ecf0f3;
       overflow-y: scroll;
       box-shadow: inset 0px -2px 3px #bebebe;
 
@@ -229,7 +230,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 16px;
-        box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+        box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
         scroll-snap-align: start;
         scroll-snap-stop: always;
 
@@ -238,182 +239,171 @@
         }
 
         .track-details-container {
-          @include flexCenter(100%, 35%, none, center, center, column);
+          @include flexCenter(100%, 80%, none, center, center, column);
           // position: relative;
 
           .song-name-container {
-            @include flexCenter(23%, 100%, 0px, flex-end, center, column);
+            @include flexCenter(35%, 100%, 0px, flex-end, center, column);
 
             .song-name-outset {
-              // @include flexCenter(20px, 85%, 15px, center, flex-start, column);
+              @include flexCenter(89%, 95%, 10px 25Px 25px 2px, center, flex-start, column);
               box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-              min-height: 15px;
-              width: 83%;
-              border-radius: 15px;
-              padding: 3px;
-              display: flex;
-              justify-content: center;
-              align-items: flex-start;
-              flex-direction: column;
               text-decoration: none;
 
-              p {
-                font-size: 14px;
-                color: #e24f8c;
-                margin-left: 5%;
-                line-height: 1;
+              .track-title-container {
+                @include flexCenter(40%, 95%, 10px, space-evenly, flex-start, column);
+                margin-left: 4%;
+
+                p {
+                  font-size: 14px;
+                  color: #e24f8c;
+                  line-height: 1;
+                  text-align: start;
+                  word-break: break-word;
+                }
+              }
+
+              .track-data-container {
+                @include flexCenter(60%, 95%, 10px, space-evenly, flex-start, column);
+
+                p {
+                  font-size: 11px;
+                  color: #747474;
+                  text-align: start;
+                }
+
+                .track-caption-container {
+                  @include flexCenter(50%, 95%, 10px, space-evenly, flex-start, row);
+                  margin-left: 4%;
+                  overflow: hidden;
+                }
+                .track-social-container {
+                  @include flexCenter(50%, 95%, 10px, flex-start, flex-start, row);
+                  margin-left: 4%;
+
+                  p {
+                    margin-right: 3%;
+                  }
+                }
+              }
+            }
+          }
+
+          .lyrics-container {
+            @include flexCenter(65%, 100%, 20px, center, center, column);
+            // position: relative;
+  
+            .lyrics-outset {
+              @include flexCenter(91%, 95%, 2px 25px 25px 15px, center, center, column);
+              box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
+              // position: absolute;
+              // top: 10px;
+              // left: 10px;
+  
+              .p-container {
+                height: 90%;
+                width: 95%;
+                font-size: 13px;
+                line-height: 1.2;
+                color: #ff728a;
+                overflow-y: scroll;
                 text-align: start;
-                word-break: break-word;
+  
+                .each-line-container {
+                  @include flexCenter(initial, 100%, 15px, flex-start, flex-start, row);
+                  .each-line-no {
+                    font-size: 10px;
+                    color: gray;
+                    margin-right: 1%;
+                  }
+  
+                }
               }
-            }
-          }
-
-          .track-play-container {
-            @include flexCenter(77%, 100%, 0px, center, center, row);
-
-            .track-data-container {
-              @include flexCenter(100%, 40%, 10px, center, flex-start, column);
-              // box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-              position: relative;
-              .shape-wrap {
-                height: 50px;
-                width: 22px;
-                float: left;
-                shape-outside: polygon(
-                  0 0,
-                  25% 6%,
-                  47% 16%,
-                  66% 31%,
-                  83% 53%,
-                  94% 77%,
-                  100% 100%,
-                  0 100%
-                );
-              }
-              p {
-                font-size: 11px;
-                color: #959595;
-                position: absolute;
-              }
-              .tp-1 {
-                width: 93px;
-                height: 50px;
-                top: 6px;
-                right: -4px;
-                overflow: hidden;
-                line-height: 1;
-              }
-
-              .tp-2 {
-                right: 38px;
-                bottom: 37px;
-              }
-              .tp-3 {
-                bottom: 23px;
-                right: 24px;
-                overflow: hidden;
-              }
-              .tp-4 {
-                bottom: 10px;
-                width: 70px;
-                right: 1px;
-              }
-            }
-          }
-        }
-
-        .lyrics-container {
-          @include flexCenter(100%, 45%, 20px, center, center, column);
-          position: relative;
-
-          .lyrics-outset {
-            @include flexCenter(120px, 90%, 15px, center, center, column);
-            box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-
-            .p-container {
-              height: 90%;
-              width: 90%;
-              font-size: 13px;
-              line-height: 1.2;
-              color: #ff728a;
-              overflow-y: scroll;
-              text-align: start;
             }
           }
         }
 
         .buttons-container {
-          @include flexCenter(100%, 20%, 20px, center, center, column);
+          @include flexCenter(100%, 20%, 20px, center, flex-start, column);
 
-          .delete-btn-container {
-            @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
-            .play-container {
-              @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
-              box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+          .buttons-inner {
+            @include flexCenter(92%, 90%, 12px, center, center, column);
+            box-shadow: inset 3px 3px 4px #a2a2a2, inset -3px -3px 5px #ffffff;
 
-              .play-outset {
-                @include flexCenter(80%, 80%, 50%, center, center, row);
-                box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+            .delete-btn-container {
+              @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
+              
+              .play-container {
+                @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
+                // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 
-                .play-inset {
-                  @include flexCenter(80%, 80%, 50%, center, center, row);
-                  // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+                .play-outset {
+                  @include flexCenter(95%, 95%, 50%, center, center, row);
+                  box-shadow: inset 2px 2px 3px 0px #838282, inset -2px -2px 2px #ffffff;
 
-                  .bi-play-2 {
-                    margin: 1px 0px 0px 4px;
-                    font-size: 0.7em;
+                  .play-inset {
+                    @include flexCenter(75%, 75%, 50%, center, center, row);
+                    box-shadow: 2px 2px 3px 0px #838383, -2px -2px 2px #ffffff;
+                    background: #ec6aa0;
+                    
+                    img {
+                      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                    }
+                    .bi-play-2 {
+                      margin: 1px 0px 0px 4px;
+                      font-size: 0.7em;
+                    }
                   }
                 }
               }
             }
-          }
-          .edit-btn-container {
-            @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
-            .play-container {
-              @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
-              box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 
-              .play-outset {
-                @include flexCenter(80%, 80%, 50%, center, center, row);
-                box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+            // .edit-btn-container {
+            //   @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
+              
+            //   .play-container {
+            //     @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
+            //     // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 
-                .play-inset {
-                  @include flexCenter(80%, 80%, 50%, center, center, row);
-                  // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+            //     .play-outset {
+            //       @include flexCenter(80%, 80%, 50%, center, center, row);
+            //       box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 
-                  .bi-play-2 {
-                    margin: 1px 0px 0px 4px;
-                    font-size: 0.7em;
-                  }
-                }
-              }
-            }
-          }
-          .play-btn-container {
-            @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
+            //       .play-inset {
+            //         @include flexCenter(80%, 80%, 50%, center, center, row);
+            //         // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 
-            .play-container {
-              @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
-              box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+            //         .bi-play-2 {
+            //           margin: 1px 0px 0px 4px;
+            //           font-size: 0.7em;
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
+            // .play-btn-container {
+            //   @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
 
-              .play-outset {
-                @include flexCenter(80%, 80%, 50%, center, center, row);
-                box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+            //   .play-container {
+            //     @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
+            //     // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
 
-                .play-inset {
-                  @include flexCenter(80%, 80%, 50%, center, center, row);
-                  // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+            //     .play-outset {
+            //       @include flexCenter(80%, 80%, 50%, center, center, row);
+            //       box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
 
-                  .bi-play-2 {
-                    margin: 1px 0px 0px 4px;
-                    font-size: 0.7em;
-                  }
-                }
-              }
-            }
+            //       .play-inset {
+            //         @include flexCenter(80%, 80%, 50%, center, center, row);
+            //         // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
+
+            //         .bi-play-2 {
+            //           margin: 1px 0px 0px 4px;
+            //           font-size: 0.7em;
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
           }
         }
       }

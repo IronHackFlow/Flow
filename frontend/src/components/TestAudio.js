@@ -93,7 +93,7 @@ function TestAudio(props) {
       this.name = name;
       this.blobFile = blobFile;
       this.songmix = songmix;
-      this.lyrics = lyrics;
+      this.songLyricsStr = lyrics;
       this.date = date;
       this.songDuration = songDuration
       this.user = user;
