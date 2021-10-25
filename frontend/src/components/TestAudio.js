@@ -536,7 +536,6 @@ function TestAudio(props) {
     }
   }
 
-
   const handlePlayPause = (bool) => {
     if ((allTakes.length !== 0)) {
       if (bool === true) {

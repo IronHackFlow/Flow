@@ -105,14 +105,24 @@ function Profile(props) {
     }
   }
 
-
   function ProfileSongs(eachSong) {
     const songListRef = useRef()
 
+    const [deleteCheck, setDeleteCheck] = useState(true);
+
+    const deleteCheckHandler = (bool) => {
+      if (bool === false) {
+        setDeleteCheck(false)
+      } else {
+        setDeleteCheck(true)
+      }
+    }
+  
     const setFocus = () => {
       console.log(songListRef.current)
       songListRef.current.focus()
     }
+    
 
     const deleteSong = (eachSong) => {
       actions 
@@ -131,7 +141,7 @@ function Profile(props) {
     const showLyrics = () => {
       return eachSong?.songLyricsStr?.map((eachLine, index) => {
         return (
-          <div className="each-line-container">
+          <div className="each-line-container" key={`${eachLine}lyrics${index}`}>
             <p className="each-line-no">{index + 1}</p>
             <p className="each-line-lyric" key={`${eachLine}_${index}`}>{eachLine}</p>
           </div>
@@ -141,102 +151,122 @@ function Profile(props) {
 
     return (
       <li className="each-track-container" ref={setSongRefs} onClick={setFocus}>
-        <div className="track-details-container">
-          <div className="song-name-container">
-            <Link
-              to={{
-                pathname: `/SongScreen/${eachSong._id}`,
-                songInfo: { ...eachSong },
-              }}
-              className="song-name-outset"
-            >
-              <div className="track-title-container">
-                <p>{eachSong.songName}</p>
-              </div>
-
-              <div className="track-data-container">
-                <div className="track-caption-container">
-                  <p>
-                    This is a caption for the above song. I'm testing the length
-                  </p>
+        {deleteCheck
+          ? (
+            <>
+              <div className="track-details-container">
+                <div className="song-name-container">
+                  <Link
+                    to={{
+                      pathname: `/SongScreen/${eachSong._id}`,
+                      songInfo: { ...eachSong },
+                    }}
+                    className="song-name-outset"
+                  >
+                    <div className="track-title-container">
+                      <p>{eachSong.songName}</p>
+                    </div>
+                    <div className="track-data-container">
+                      <div className="track-caption-container">
+                        <p>
+                          This is a caption for the above song. I'm testing the length
+                        </p>
+                      </div>
+                      <div className="track-social-container">
+                        <p>{dateFormatHandler(eachSong.songDate)}</p>
+                        <p>
+                          {eachSong.songLikes.length === 1
+                            ? `${eachSong.songLikes.length} Like`
+                            : `${eachSong.songLikes.length} Likes`}
+                        </p>
+                        <p>
+                          {eachSong.songComments.length === 1
+                            ? `${eachSong.songComments.length} Comment`
+                            : `${eachSong.songComments.length} Comments`}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-                <div className="track-social-container">
-                  <p>{dateFormatHandler(eachSong.songDate)}</p>
-                  <p>
-                    {eachSong.songLikes.length === 1
-                      ? `${eachSong.songLikes.length} Like`
-                      : `${eachSong.songLikes.length} Likes`}
-                  </p>
-                  <p>
-                    {eachSong.songComments.length === 1
-                      ? `${eachSong.songComments.length} Comment`
-                      : `${eachSong.songComments.length} Comments`}
-                  </p>
+                <div className="lyrics-container">
+                  <div className="lyrics-outset">
+                    <div className="p-container">{showLyrics()}</div>
+                  </div>
                 </div>
               </div>
-            </Link>
-          </div>
-
-          <div className="lyrics-container">
-            <div className="lyrics-outset">
-              <div className="p-container">{showLyrics()}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="buttons-container">
-          <div className="buttons-inner">
-            {props.location.profileInfo._id === user._id
-             ? (
-               <>
-                <div className="delete-btn-container">
-                  <div className="play-container">
-                    <div className="play-outset">
-                      <div className="play-inset">
-                        <img
-                          className="button-icons"
-                          src={xExit}
-                          onClick={() => deleteSong(eachSong)}
-                          alt="exit"
-                        />
+              <div className="buttons-container">
+                <div className="buttons-inner">
+                  {props.location.profileInfo._id === user._id
+                  ? (
+                    <>
+                      <div className="delete-btn-container">
+                        <div className="play-container">
+                          <div className="play-outset">
+                            <div className="play-inset">
+                              <img
+                                className="button-icons"
+                                src={xExit}
+                                onClick={() => deleteCheckHandler(false)}
+                                alt="exit"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="delete-btn-container">
+                        <div className="play-container">
+                          <div className="play-outset">
+                            <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
+                              <img
+                                className="button-icons"
+                                src={editicon}
+                                alt="edit"
+                              />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                    ) : ""
+                  }
+                  <div className="delete-btn-container">
+                    <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+                    <div className="play-container">
+                      <div className="play-outset">
+                        <div className="play-inset">
+                          <img
+                            className="button-icons bi-play-2"
+                            src={play}
+                            onClick={() => handlePlayPause(eachSong.songName)}
+                            alt="play"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="delete-btn-container">
-                  <div className="play-container">
-                    <div className="play-outset">
-                      <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
-                        <img
-                          className="button-icons"
-                          src={editicon}
-                          alt="edit"
-                        />
-                      </Link>
-                    </div>
+              </div>
+            </>
+          )
+          : (
+            <div className="delete-container">
+              <div className="delete-question-container">
+               <p>Are you sure you want to delete <span style={{color: '#e24f8c'}}>{eachSong.songName}</span>?</p>
+              </div>
+              <div className="delete-btn-container">
+                <div className="delete-btn_shadow-div-inset">
+                  <div className="cancel-btn-container">
+                    Cancel
                   </div>
-                </div>
-              </>
-              ) : ""
-            }
-
-            <div className="delete-btn-container">
-            <audio id={eachSong.songName} src={eachSong.songURL}></audio>
-              <div className="play-container">
-                <div className="play-outset">
-                  <div className="play-inset">
-                    <img
-                      className="button-icons bi-play-2"
-                      src={play}
-                      onClick={() => handlePlayPause(eachSong.songName)}
-                      alt="play"
-                    />
+                  <div className="confirm-btn-container">
+                    Delete
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          )
+        }
+ 
       </li>
     )
   }

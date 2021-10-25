@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import TheContext from "../TheContext";
 import { v4 as uuidv4 } from "uuid";
 import AudioTimeSlider from "./AudioTimeSlider";
@@ -18,7 +18,6 @@ import beat5 from "../assets/beatsTrack5.m4a";
 function EditLyrics(props) {
   const { user } = React.useContext(TheContext)
   const history = useHistory()
-  const location = useLocation();
 
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
@@ -30,10 +29,10 @@ function EditLyrics(props) {
   const [getTakes, setGetTakes] = useState([]);
   const [currentSong, setCurrentSong] = useState();
   const [audioSrc, setAudioSrc] = useState(null);
-  const lyricsPopUpRef = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [linkLocation, setLinkLocation] = useState();
-
+  const lyricsPopUpRef = useRef();
+  
   useEffect(() => {
     if (props.location.pathname === `/recordingBooth/EditLyrics`) {
       setLinkLocation(true)
@@ -49,7 +48,7 @@ function EditLyrics(props) {
       console.log(props.location.currentSong)
       setCurrentSong(props.location.currentSong)
     }
-  }, [])
+  }, [linkLocation])
 
   useEffect(() => {
     setAudioSrc(currentSong?.songmix)
@@ -68,7 +67,6 @@ function EditLyrics(props) {
         songs: props.location.songs
       })
     }
-
   }
 
   const mapTakes = useCallback(() => {
@@ -125,23 +123,21 @@ function EditLyrics(props) {
   }, [currentSong, props.location])
 
   const mapMiniLyrics = () => {
-    if (getTakes.length !== 0) {
-      return currentSong?.songLyricsStr.map((each, index) => {
-        if (linkLocation === false) {
-          each = each.split(' ')
-        }
-        return (
-          <div className="display-each-container">
-            <p className="bar-no">{index + 1}</p>
-            {each.map((e) => {
-              return (
-                <p className="each-word">{e}</p>
-              )
-            })}
-          </div>
-        )
-      })
-    }
+    return currentSong?.songLyricsStr.map((each, index) => {
+      if (linkLocation === false) {
+        each = each.split(' ')
+      }
+      return (
+        <div className="display-each-container">
+          <p className="bar-no">{index + 1}</p>
+          {each.map((e) => {
+            return (
+              <p className="each-word">{e}</p>
+            )
+          })}
+        </div>
+      )
+    })
   }
 
   // const showMiniLyrics = (bool) => {

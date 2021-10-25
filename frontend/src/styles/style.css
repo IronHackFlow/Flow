@@ -8029,6 +8029,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset img {
+  height: 1.5em;
+  width: 1.5em;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
@@ -8089,6 +8091,91 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: none;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.delete-container {
+  height: 90%;
+  width: 95%;
+  border-radius: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+          box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+}
+
+.delete-container .delete-question-container {
+  height: 50%;
+  width: 100%;
+  border-radius: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.delete-container .delete-question-container p {
+  font-size: 13px;
+  color: gray;
+}
+
+.delete-container .delete-btn-container {
+  height: 50%;
+  width: 100%;
+  border-radius: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.delete-container .delete-btn-container .delete-btn_shadow-div-inset {
+  height: 90%;
+  width: 97%;
+  border-radius: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
+          box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
 }
 
 .LogIn {

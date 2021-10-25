@@ -240,7 +240,6 @@
 
         .track-details-container {
           @include flexCenter(100%, 80%, none, center, center, column);
-          // position: relative;
 
           .song-name-container {
             @include flexCenter(35%, 100%, 0px, flex-end, center, column);
@@ -291,14 +290,10 @@
 
           .lyrics-container {
             @include flexCenter(65%, 100%, 20px, center, center, column);
-            // position: relative;
   
             .lyrics-outset {
               @include flexCenter(91%, 95%, 2px 25px 25px 15px, center, center, column);
               box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-              // position: absolute;
-              // top: 10px;
-              // left: 10px;
   
               .p-container {
                 height: 90%;
@@ -347,6 +342,8 @@
                     background: #ec6aa0;
                     
                     img {
+                      height: 1.5em;
+                      width: 1.5em;
                       filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                     }
                     .bi-play-2 {
@@ -357,53 +354,6 @@
                 }
               }
             }
-
-            // .edit-btn-container {
-            //   @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
-              
-            //   .play-container {
-            //     @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
-            //     // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-
-            //     .play-outset {
-            //       @include flexCenter(80%, 80%, 50%, center, center, row);
-            //       box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-
-            //       .play-inset {
-            //         @include flexCenter(80%, 80%, 50%, center, center, row);
-            //         // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-
-            //         .bi-play-2 {
-            //           margin: 1px 0px 0px 4px;
-            //           font-size: 0.7em;
-            //         }
-            //       }
-            //     }
-            //   }
-            // }
-            // .play-btn-container {
-            //   @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
-
-            //   .play-container {
-            //     @include flexCenter(95%, 90%, 50px 5px 5px 50px, center, center, row);
-            //     // box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-
-            //     .play-outset {
-            //       @include flexCenter(80%, 80%, 50%, center, center, row);
-            //       box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-
-            //       .play-inset {
-            //         @include flexCenter(80%, 80%, 50%, center, center, row);
-            //         // box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 3px #ffffff;
-
-            //         .bi-play-2 {
-            //           margin: 1px 0px 0px 4px;
-            //           font-size: 0.7em;
-            //         }
-            //       }
-            //     }
-            //   }
-            // }
           }
         }
       }
@@ -428,6 +378,28 @@
       border-radius: none;
       background: none;
       box-shadow: none;
+    }
+  }
+}
+.delete-container {
+  @include flexCenter(90%, 95%, 11px, center, center, column);
+  box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+
+  .delete-question-container {
+    @include flexCenter(50%, 100%, 11px, center, center, row);
+
+    p {
+      font-size: 13px;
+      color: gray;
+    }
+  }
+  .delete-btn-container {
+    @include flexCenter(50%, 100%, 11px, center, center, row);
+
+    .delete-btn_shadow-div-inset {
+      @include flexCenter(90%, 97%, 11px, center, center, row);
+      box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
+
     }
   }
 }

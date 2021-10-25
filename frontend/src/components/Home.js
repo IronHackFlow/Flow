@@ -628,7 +628,7 @@ function Home(props) {
 
                 <div className="song-play-section">
                   <div className="play-bar-container">
-                    {/* <UseAudioPlayer 
+                    {/* <AudioTimeSlider
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       audioSrc={audioInView}
@@ -636,7 +636,7 @@ function Home(props) {
                       allTakes={songInView}
                       /> */}
                   </div>
-                  {console.log(songInView)}
+
                   <div className="play-song-container">
                     <div className="play-btn-container">
                       <div className="play-btn_shadow-div-outset">
