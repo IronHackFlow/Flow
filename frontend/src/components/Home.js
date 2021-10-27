@@ -628,13 +628,13 @@ function Home(props) {
 
                 <div className="song-play-section">
                   <div className="play-bar-container">
-                    {/* <AudioTimeSlider
+                    <AudioTimeSlider
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       audioSrc={audioInView}
                       setAudioSrc={setAudioInView}
                       allTakes={songInView}
-                      /> */}
+                      />
                   </div>
 
                   <div className="play-song-container">

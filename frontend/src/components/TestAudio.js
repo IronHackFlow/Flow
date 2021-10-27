@@ -89,10 +89,10 @@ function TestAudio(props) {
   const slideOutMicRef = useRef();
 
   class SongData {
-    constructor(name, blobFile, songmix, lyrics, date, songDuration) {
+    constructor(name, blobFile, songURL, lyrics, date, songDuration) {
       this.name = name;
       this.blobFile = blobFile;
-      this.songmix = songmix;
+      this.songURL = songURL;
       this.songLyricsStr = lyrics;
       this.date = date;
       this.songDuration = songDuration
@@ -116,8 +116,9 @@ function TestAudio(props) {
       const songDate = new Date();
       const songDuration = (dateAfter - dateBefore) - 200;
       const songObject = new SongData(blobData.name, blobData.blob, blobData.url, [...lyricsArr], songDate, songDuration)
-      setAudioSrc(songObject.songmix)
-      setSelectedOption(songObject.songmix)
+      setAudioSrc(songObject.songURL)
+      setSelectedOption(songObject.songURL)
+      setSongUploadObject(songObject)
       setAllTakes(eachTake => [...eachTake, {...songObject}])
       setBlobData({})
     }
@@ -335,7 +336,7 @@ function TestAudio(props) {
         <>
           {loadSelectedTake?.lyrics.map((row, index) => {
             return (
-              <div className="prev-transcript-container" key={`${uuidv4()}_${index}`}>
+              <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
                 <div className="transcript-bar-no">
                   {`${index + 1}`}
                 </div>
@@ -553,6 +554,7 @@ function TestAudio(props) {
     setLoadSelectedTake(allTakes[e.target.selectedIndex])
     setAudioSrc(e.target.value)
     setSongUploadObject(allTakes[e.target.selectedIndex])
+    console.log(songUploadObject, "what the fuck is this shit omgo woefjma")
     setRecordingDisplay(false)
   };
 
@@ -563,7 +565,7 @@ function TestAudio(props) {
     else {
       return allTakes.map((element, index) => {
         return (
-          <option value={element.songmix} key={`${index}_${element.songmix}`}>
+          <option value={element.songURL} key={`${index}_${element.songURL}`}>
             {element.songName ? element.songName : element.name}
           </option>
         )
@@ -572,7 +574,7 @@ function TestAudio(props) {
   }, [allTakes, songNameUpdate])
 
   const deleteOneTake = () => {
-    setAllTakes(eachTake => eachTake.filter(item => item.songmix !== selectedOption))
+    setAllTakes(eachTake => eachTake.filter(item => item.songURL !== selectedOption))
   }
 
   const handleSaveSong = (e) => {
@@ -585,6 +587,14 @@ function TestAudio(props) {
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.date = new Date()
+      // setSongUploadObject((prevState) => ({
+      //   ...prevState,
+      //   songName: songNameInput
+      // }))
+
+      console.log(songUploadObject, "lolodsfollolld")
+
+
 
       actions
         .uploadFile(
@@ -724,6 +734,7 @@ function TestAudio(props) {
                 </div>
               </div>
             </div>
+            {console.log(songUploadObject, "yo check it ")}
             <div className="rhyme-lock-container">
               <div className="rhyme-lock-button">
                 <div className="rhyme-lock-outset">

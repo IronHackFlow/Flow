@@ -46,15 +46,16 @@ function UseAudioPlayer(props) {
   }, [currentProgressRef.current])
     
   useEffect(() => {
-    if (props.allTakes) {
+    if (props.allTakes.length >= 1) {
       let filteredDuration = ""
   
-
       props.allTakes.filter((each) => {
-        if (each.songmix === audioRef.current.src) {
+        console.log(each)
+        if (each.songURL === audioRef.current.src) {
           filteredDuration = each.songDuration / 1000
         }
       })
+
       filteredDuration = Math.round(filteredDuration)
       setSongDuration(filteredDuration)
   
@@ -70,7 +71,24 @@ function UseAudioPlayer(props) {
           setSongMinutes(`${getMinutes}:${getSeconds}`)
         }
       } 
-    } 
+    } else {
+      let filteredDuration = Math.round(props.allTakes.songDuration / 1000)
+      console.log(filteredDuration, "what is dis?")
+      setSongDuration(filteredDuration)
+
+      if (filteredDuration >= 60) {
+        const getMinutes = Math.floor(filteredDuration / 60)
+        const getSeconds = filteredDuration % 60
+        
+        if (getSeconds < 10) {
+          let getJustSeconds = `0${getSeconds}`
+          setSongMinutes(`${getMinutes}:${getJustSeconds}`)
+        }
+        else {
+          setSongMinutes(`${getMinutes}:${getSeconds}`)
+        }
+      } 
+    }
   }, [props.audioSrc])
   
   useEffect(() => {

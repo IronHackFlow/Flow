@@ -485,6 +485,7 @@ router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
         songUser: req.body.songUser,
         songBG: req.body.songBG,
         songDate: req.body.songDate,
+        songDuration: req.body.songDuration,
         songName: req.body.songName,
         songLyricsStr: req.body.songLyricsStr,
         songPBR: req.body.songPBR,

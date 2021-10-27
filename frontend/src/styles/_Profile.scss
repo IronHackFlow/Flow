@@ -350,6 +350,14 @@
                       margin: 1px 0px 0px 4px;
                       font-size: 0.7em;
                     }
+                    &:active {
+                      box-shadow: none;
+                      background: none;
+
+                      img {
+                        filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+                      }
+                    }
                   }
                 }
               }
@@ -386,7 +394,7 @@
   box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
 
   .delete-question-container {
-    @include flexCenter(50%, 100%, 11px, center, center, row);
+    @include flexCenter(60%, 100%, 11px, center, center, row);
 
     p {
       font-size: 13px;
@@ -394,12 +402,35 @@
     }
   }
   .delete-btn-container {
-    @include flexCenter(50%, 100%, 11px, center, center, row);
+    @include flexCenter(40%, 100%, 11px, center, center, row);
 
     .delete-btn_shadow-div-inset {
-      @include flexCenter(90%, 97%, 11px, center, center, row);
+      @include flexCenter(86%, 97%, 11px, center, center, row);
       box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
 
+      .space-container {
+        width: 40%
+      }
+      .cancel-btn-container {
+        @include flexCenter(100%, 30%, 11px, center, center, row);
+        
+        .cancel-btn_shadow-div-outset {
+          @include flexCenter(70%, 90%, 20px, center, center, row);
+          box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+          color: gray;
+
+        }
+      }
+      .confirm-btn-container {
+        @include flexCenter(100%, 30%, 11px, center, center, row);
+
+        .confirm-btn_shadow-div-outset {
+          @include flexCenter(70%, 90%, 20px, center, center, row);
+          box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+          background: #ec6aa0;
+          color: white;
+        }
+      }
     }
   }
 }

@@ -256,7 +256,47 @@
           @include flexCenter(57%, 100%, 50px, space-evenly, center, column);
 
           .play-bar-container {
-            @include flexCenter(14%, 100%, 50px, center, center, column);
+            @include flexCenter(20%, 100%, 50px, center, center, column);
+
+            .play-slider_shadow-div-inset {
+              @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
+              // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+              input[type="range"] {
+                  appearance: none;
+                  height: 46%;
+                  width: 94%;
+                  margin-left: 1%;
+                  border-radius: 50px;
+                  // background: #63DEBC;
+                  box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+              }
+              input[type="range"]::-webkit-slider-thumb {
+                  appearance: none;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50px;
+                  cursor: pointer;
+                  background: #4b4b4b;
+                  transition: background-color 1s ease;
+                  box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+
+              }
+
+              .time-text-container {
+                  @include flexCenter(25%, 90%, 8px, space-between, center, row);
+                  padding: 0% 3%;
+
+                  .time-text-start {
+                      font-size: 10px;
+                      color: white;
+                  }
+                  .time-text-end {
+                      font-size: 11px;
+                      color: white;
+                  }
+              }
+          }
 
             .play-bar_shadow-div-inset {
               @include flexCenter(60%, 85%, 50px, center, center, column);
@@ -265,7 +305,7 @@
           }
 
           .play-song-container {
-            @include flexCenter(86%, 100%, 50px, center, center, column);
+            @include flexCenter(80%, 100%, 50px, center, center, column);
 
             .play-btn-container {
               @include flexCenter(100%, 19%, 50px, center, center, column);

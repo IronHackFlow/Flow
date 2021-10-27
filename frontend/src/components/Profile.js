@@ -107,9 +107,13 @@ function Profile(props) {
 
   function ProfileSongs(eachSong) {
     const songListRef = useRef()
-
     const [deleteCheck, setDeleteCheck] = useState(true);
 
+    const setFocus = () => {
+      console.log(songListRef.current)
+      songListRef.current.focus()
+    }
+    
     const deleteCheckHandler = (bool) => {
       if (bool === false) {
         setDeleteCheck(false)
@@ -118,12 +122,6 @@ function Profile(props) {
       }
     }
   
-    const setFocus = () => {
-      console.log(songListRef.current)
-      songListRef.current.focus()
-    }
-    
-
     const deleteSong = (eachSong) => {
       actions 
         .deleteSong({ song: eachSong._id })
@@ -194,6 +192,7 @@ function Profile(props) {
                   </div>
                 </div>
               </div>
+              
               <div className="buttons-container">
                 <div className="buttons-inner">
                   {props.location.profileInfo._id === user._id
@@ -255,11 +254,16 @@ function Profile(props) {
               </div>
               <div className="delete-btn-container">
                 <div className="delete-btn_shadow-div-inset">
+                  <div className="space-container"></div>
                   <div className="cancel-btn-container">
-                    Cancel
+                    <div className="cancel-btn_shadow-div-outset" onClick={() => deleteCheckHandler(true)}>
+                      Cancel
+                    </div>
                   </div>
                   <div className="confirm-btn-container">
-                    Delete
+                    <div className="confirm-btn_shadow-div-outset" onClick={() => deleteSong(eachSong)}>
+                      Delete
+                    </div>
                   </div>
                 </div>
               </div>
