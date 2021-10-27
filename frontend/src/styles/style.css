@@ -1951,6 +1951,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   font-size: 16px;
   color: white;
   font-weight: bold;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #one img {
@@ -2017,9 +2019,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2027,10 +2029,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container {
-  height: 20%;
+  height: 25px;
   width: 100%;
   border-radius: 50px;
   display: -webkit-box;
@@ -2046,10 +2049,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: absolute;
+  top: 0;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-slider_shadow-div-inset {
-  height: 100%;
+  height: 80%;
   width: 100%;
   border-radius: 8px 50px 50px 8px;
   display: -webkit-box;
@@ -2075,26 +2080,26 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   width: 94%;
   margin-left: 1%;
   border-radius: 50px;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
-          box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
+  -webkit-box-shadow: inset 2px 2px 2px 0px #282828, inset -1px -1px 2px #e8e4e4;
+          box-shadow: inset 2px 2px 2px 0px #282828, inset -1px -1px 2px #e8e4e4;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-slider_shadow-div-inset input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
-  height: 20px;
+  height: 10px;
   width: 20px;
   border-radius: 50px;
   cursor: pointer;
-  background: #4b4b4b;
+  background: #767676;
   -webkit-transition: background-color 1s ease;
   transition: background-color 1s ease;
-  -webkit-box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
-          box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
+  -webkit-box-shadow: inset 1px 1px 1px 0px #c2c2c2, inset -1px -1px 1px #222222;
+          box-shadow: inset 1px 1px 1px 0px #c2c2c2, inset -1px -1px 1px #222222;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-slider_shadow-div-inset .time-text-container {
-  height: 25%;
+  height: 54%;
   width: 90%;
   border-radius: 8px;
   display: -webkit-box;
@@ -2244,6 +2249,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
           box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
   background: linear-gradient(145deg, #676767, #7e7e7e);
+  border: none;
 }
 
 /* ------------------------------ Comment Pop Up menu ------------------------------------------*/

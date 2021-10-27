@@ -27,7 +27,7 @@ function Home(props) {
   const [trendingBool, setTrendingBool] = useState(false);
   const [followingBool, setFollowingBool] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioInView, setAudioInView] = useState();
+  const [audioInView, setAudioInView] = useState(null);
   const [songInView, setSongInView] = useState({});
   const [songUserInView, setSongUserInView] = useState({});
   const [commentsInView, setCommentsInView] = useState([]);
@@ -171,13 +171,21 @@ function Home(props) {
     return gifsCopy[index].url
   }
 
-  const handlePlayPause = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play()
-      playPauseRef.current.src = pause
-    } else {
-      audioRef.current.pause()
-      playPauseRef.current.src = play
+  // const handlePlayPause = () => {
+  //   if (audioRef.current.paused) {
+  //     audioRef.current.play()
+  //     playPauseRef.current.src = pause
+  //   } else {
+  //     audioRef.current.pause()
+  //     playPauseRef.current.src = play
+  //   }
+  // }
+  const handlePlayPause = (bool) => {
+    if (bool === true) {
+      setIsPlaying(true)
+    }
+    else {
+      setIsPlaying(false)
     }
   }
 
@@ -641,15 +649,35 @@ function Home(props) {
                     <div className="play-btn-container">
                       <div className="play-btn_shadow-div-outset">
                         <div className="play-btn_shadow-div-inset">
-                          <div className="play-btn_shadow-div-outset-2" onClick={handlePlayPause}>
-                            <img
-                              className="button-icons bi-play"
-                              src={play}
-                              ref={playPauseRef}
-                              alt="play"
-                            />
-                            <audio ref={audioRef} src={audioInView} id="damn"></audio>
-                          </div>
+                          {isPlaying 
+                            ? (
+                              <button 
+                                className="play-btn_shadow-div-outset-2" 
+                                onClick={() => handlePlayPause(false)}
+                              >
+                                <img
+                                  className="button-icons bi-play"
+                                  src={pause}
+                                  ref={playPauseRef}
+                                  alt="pause"
+                                />
+                                {/* <audio ref={audioRef} src={audioInView} id="damn"></audio> */}
+                              </button>
+                            )
+                            : (
+                              <button 
+                                className="play-btn_shadow-div-outset-2" 
+                                onClick={() => handlePlayPause(true)}
+                              >
+                                <img
+                                  className="button-icons bi-play"
+                                  src={play}
+                                  ref={playPauseRef}
+                                  alt="play"
+                                />
+                                {/* <audio ref={audioRef} src={audioInView} id="damn"></audio> */}
+                              </button>
+                            )}
                         </div>
                       </div>
                     </div>

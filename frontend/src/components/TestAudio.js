@@ -581,27 +581,18 @@ function TestAudio(props) {
     e.preventDefault()
     if (allTakes.length === 0) {
       console.log('You have no Flows to save')
-    } 
-    else {
+    } else {
       const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.date = new Date()
-      // setSongUploadObject((prevState) => ({
-      //   ...prevState,
-      //   songName: songNameInput
-      // }))
-
-      console.log(songUploadObject, "lolodsfollolld")
-
-
-
+      console.log(songUploadObject, "lets dig in here")
       actions
         .uploadFile(
           {
             fileName: fileName,
             fileType: 'audio/mpeg-3',
-            file: songUploadObject.songBlob,
+            file: songUploadObject.blobFile,
             kind: 'song',
           },
           songUploadObject,
@@ -611,6 +602,7 @@ function TestAudio(props) {
         })
         .catch(console.error)
     }
+    setSaveSongMenu(false)
     setSongNameUpdate(songUploadObject.songName)
     songNameInputRef.current.value =  ""
     songCaptionInputRef.current.value =  ""
@@ -620,12 +612,10 @@ function TestAudio(props) {
     if (saveSongMenu === false) {
       setSaveSongMenu(true)
       slideOutMicRef.current.className = "record-2_record-btn slideOut"
-
     } 
     else {
       setSaveSongMenu(false)
       slideOutMicRef.current.className = "record-2_record-btn slideIn"
-
     }
   }
   
