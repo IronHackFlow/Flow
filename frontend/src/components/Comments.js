@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../TheContext'
 import TheViewContext from '../TheViewContext'
+import FormatDate from './utils/FormatDate'
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
 import comments from '../images/comment.svg'
@@ -10,7 +11,6 @@ import trash from '../images/trashbin.svg'
 import send from '../images/send.svg'
 import share from '../images/share.svg'
 import flag from '../images/flag.svg'
-import moment from 'moment'
 
 function Comments(props) {
   const { songInView, totalComments, setTotalComments } = React.useContext(TheViewContext)
@@ -20,18 +20,17 @@ function Comments(props) {
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
   const [songCommUser, setSongCommUser] = useState()
-  // const [totalComments, setTotalComments] = useState([]);
-
-  const renderRef = useRef(0)
 
   useEffect(() => {
     actions
       .getComments({ id: songInView._id })
       .then(res => {
         console.log('Returned these comments from DB: ', res.data)
-        setCommState(res.data.songComments)
-        setTotalComments(res.data.songComments.length)
-        setSongCommUser(res.data.songUser)
+        if (res.data) {
+          setCommState(res.data.songComments)
+          setTotalComments(res.data.songComments.length)
+          setSongCommUser(res.data.songUser)
+        }
       })
       .catch(console.error)
   }, [songInView, totalComments])
@@ -54,9 +53,8 @@ function Comments(props) {
       })
       .catch(console.error)
 
-    setTimeout(() => {
-      props.commentInputRef.current.value = ''
-    }, [200])
+    props.commentInputRef.current.value = ''
+
   }
 
   function GetComments(each) {
@@ -163,7 +161,7 @@ function Comments(props) {
         .catch(console.error)
     }
 
-    const menuAnimations = e => {
+    const menuAnimations = () => {
       if (menuBool === false) {
         likeTextRef.current.style.animation = 'fadeOutText .3s forwards'
         replyTextRef.current.style.animation = 'fadeOutText .3s forwards'
@@ -209,7 +207,7 @@ function Comments(props) {
               </span>
             </p>
             <p className="comment-date">
-              {each.commDate ? moment(each.commDate).fromNow() : '5 months ago'}
+              <FormatDate date={each.commDate} />
             </p>
             <p className="comment-text" ref={commentTextRef}>
               {each.comment}
@@ -264,7 +262,7 @@ function Comments(props) {
                 <div className="comm-likereply-text">Report</div>
               </div>
 
-              <div className="dot-menu" onClick={e => menuAnimations(e)} ref={dotMenuRef}>
+              <div className="dot-menu" onClick={() => menuAnimations()} ref={dotMenuRef}>
                 <div className="dots"></div>
                 <div className="dots"></div>
                 <div className="dots"></div>

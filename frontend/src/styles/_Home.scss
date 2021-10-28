@@ -206,7 +206,16 @@
                   font-weight: bold;
                   white-space: nowrap;
                   overflow-x: scroll;
+                }
 
+                #two {
+                  display: flex;
+                  align-items: center;
+                  flex-direction: row;
+                  padding-left: 6px;
+                  font-size: 14px;
+                  color: #e0bbbb;
+                  
                   img {
                     height: 5px;
                     width: 5px;
@@ -215,18 +224,14 @@
                       contrast(76%);
                   }
                 }
-
-                #two {
-                  padding-left: 6px;
-                  font-size: 14px;
-                  color: #e0bbbb;
-                }
               }
 
               .song-caption-container {
                 @include flexCenter(35%, 100%, 50px, flex-start, center, row);
 
                 .song-date {
+                  display: flex;
+                  flex-direction: row;
                   margin-left: 7px;
                   white-space: nowrap;
                   text-align: left;
@@ -236,7 +241,8 @@
                   img {
                     height: 5px;
                     width: 5px;
-                    margin-left: 3px;
+                    margin-left: 4px;
+                    margin-top: 4px;
                     filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%)
                       contrast(76%);
                   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
+import FormatDate from './utils/FormatDate'
 import NavBar from '../components/NavBar'
 import social from '../images/social.svg'
 import followers from '../images/followers.svg'
@@ -53,47 +54,6 @@ function Profile(props) {
     setThisUser({})
     setUserViewed({})
     localStorage.clear()
-  }
-
-  const dateFormatHandler = date => {
-    const getDate = new Date()
-    const currentDate = Date.parse(getDate)
-    const objDate = Date.parse(date)
-    const timeDiff = currentDate - objDate
-
-    const year = 31536000000
-    const month = 2592000000
-    const week = 604800000
-    const day = 86400000
-    const hour = 3600000
-    const minute = 60000
-    const second = 1000
-
-    if (timeDiff >= year) {
-      console.log(timeDiff / year, ' years ago')
-      return `${Math.round(timeDiff / year)}y`
-    } else if (timeDiff >= month && timeDiff < year) {
-      if (timeDiff / month < 11.5) {
-        return `${Math.round(timeDiff / month)}m`
-      } else {
-        return '1y'
-      }
-    } else if (timeDiff >= week && timeDiff < month * 2) {
-      console.log(timeDiff / week, ' weeks ago')
-      return `${Math.round(timeDiff / week)}w`
-    } else if (timeDiff >= day && timeDiff < week) {
-      console.log(timeDiff / day, ' days ago')
-      return `${Math.round(timeDiff / day)}d`
-    } else if (timeDiff >= hour && timeDiff < day) {
-      console.log(timeDiff / hour, ' hours ago')
-      return `${Math.round(timeDiff / hour)}h`
-    } else if (timeDiff >= minute && timeDiff < hour) {
-      console.log(timeDiff / minute, ' minutes ago')
-      return `${Math.round(timeDiff / minute)}m`
-    } else if (timeDiff >= second && timeDiff < minute) {
-      console.log(timeDiff / second, ' seconds ago')
-      return `${Math.round(timeDiff / second)}s`
-    }
   }
 
   const handlePlayPause = x => {
@@ -171,7 +131,7 @@ function Profile(props) {
                         </p>
                       </div>
                       <div className="track-social-container">
-                        <p>{dateFormatHandler(eachSong.songDate)}</p>
+                        <FormatDate date={eachSong.songDate} />
                         <p>
                           {eachSong.songLikes.length === 1
                             ? `${eachSong.songLikes.length} Like`

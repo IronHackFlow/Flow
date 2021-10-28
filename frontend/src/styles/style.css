@@ -1955,18 +1955,28 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   overflow-x: scroll;
 }
 
-.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #one img {
+.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #two {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-left: 6px;
+  font-size: 14px;
+  color: #e0bbbb;
+}
+
+.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #two img {
   height: 5px;
   width: 5px;
   margin-left: 5px;
   -webkit-filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
           filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
-}
-
-.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #two {
-  padding-left: 6px;
-  font-size: 14px;
-  color: #e0bbbb;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container {
@@ -1989,6 +1999,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   margin-left: 7px;
   white-space: nowrap;
   text-align: left;
@@ -1999,7 +2016,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date img {
   height: 5px;
   width: 5px;
-  margin-left: 3px;
+  margin-left: 4px;
+  margin-top: 4px;
   -webkit-filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
           filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
 }

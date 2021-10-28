@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { CSSTransition } from "react-transition-group"
 import { Link } from "react-router-dom";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
+import FormatDate from "./utils/FormatDate"
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
 import AudioTimeSlider from "./AudioTimeSlider.js";
@@ -42,7 +42,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState(user.userFollows);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();
@@ -60,7 +60,6 @@ function Home(props) {
   const followBtnRef2 = useRef();
   const followBtnRef3 = useRef();
   const profilePicRef = useRef();
-  const audioRef = useRef();
   const playPauseRef = useRef();
   const feedRef1 = useRef();
   const feedRef2 = useRef();
@@ -68,7 +67,6 @@ function Home(props) {
   const trendingRef2 = useRef();
   const followingRef1 = useRef();
   const followingRef2 = useRef();
-  const howManyRendersRef = useRef(0);
 
   useEffect(() => {
     actions
@@ -98,6 +96,7 @@ function Home(props) {
   }, [trendingBool])
 
   useEffect(() => {
+    console.log(updateFollowFeed, "what's in here bruh?")
     actions
       .getUserFollowsSongs(updateFollowFeed)
       .then(res => {
@@ -144,15 +143,15 @@ function Home(props) {
   }
 
   const showSongs = useCallback(() => {
-    if (theFeedBool === true && trendingBool === false && followingBool === false) {
+    if (theFeedBool === true) {
       return theFeedSongs.map((eachSong, index) => {
         return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
       })
-    } else if (trendingBool === true && theFeedBool === false && followingBool === false) {
+    } else if (trendingBool === true) {
       return trendingSongsFeed.map((eachSong, index) => {
         return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
       })
-    } else if (followingBool === true && trendingBool === false && theFeedBool === false) {
+    } else if (followingBool === true) {
       return followingSongsFeed.map((eachSong, index) => {
         return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
       })
@@ -171,62 +170,12 @@ function Home(props) {
     return gifsCopy[index].url
   }
 
-  // const handlePlayPause = () => {
-  //   if (audioRef.current.paused) {
-  //     audioRef.current.play()
-  //     playPauseRef.current.src = pause
-  //   } else {
-  //     audioRef.current.pause()
-  //     playPauseRef.current.src = play
-  //   }
-  // }
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)
     }
     else {
       setIsPlaying(false)
-    }
-  }
-
-  const dateFormatHandler = date => {
-    const getDate = new Date()
-    const currentDate = Date.parse(getDate)
-    const objDate = Date.parse(date)
-    const timeDiff = currentDate - objDate
-
-    const year = 31536000000
-    const month = 2592000000
-    const week = 604800000
-    const day = 86400000
-    const hour = 3600000
-    const minute = 60000
-    const second = 1000
-
-    if (timeDiff >= year) {
-      // console.log((timeDiff / year), " years ago")
-      return `${Math.round(timeDiff / year)}y`
-    } else if (timeDiff >= month && timeDiff < year) {
-      if (timeDiff / month < 11.5) {
-        return `${Math.round(timeDiff / month)}m`
-      } else {
-        return '1y'
-      }
-    } else if (timeDiff >= week && timeDiff < month * 2) {
-      // console.log((timeDiff / week), " weeks ago")
-      return `${Math.round(timeDiff / week)}w`
-    } else if (timeDiff >= day && timeDiff < week) {
-      // console.log((timeDiff / day), " days ago")
-      return `${Math.round(timeDiff / day)}d`
-    } else if (timeDiff >= hour && timeDiff < day) {
-      // console.log((timeDiff / hour), " hours ago")
-      return `${Math.round(timeDiff / hour)}h`
-    } else if (timeDiff >= minute && timeDiff < hour) {
-      // console.log((timeDiff / minute), " minutes ago")
-      return `${Math.round(timeDiff / minute)}m`
-    } else if (timeDiff >= second && timeDiff < minute) {
-      // console.log((timeDiff / second), " seconds ago")
-      return `${Math.round(timeDiff / second)}s`
     }
   }
 
@@ -435,7 +384,6 @@ function Home(props) {
                   </div>
                 </div>
               </div>
-              {/* {console.log(howManyRendersRef.current++)} */}
               <div className="each-feed_shadow-div-inset" style={{ borderRadius: '50px' }}>
                 <div
                   className="each-feed_shadow-div-outset"
@@ -490,31 +438,9 @@ function Home(props) {
           </div>
 
           <div className="video-scroll-container" ref={windowRef}>
-            <ul className="video-scroll-container">{showSongs()}</ul>
-            {/* <CSSTransition
-                in={toggleSocial}
-                key={'key2'}
-                classNames={transClass()}
-                timeout={800}
-                mountOnEnter
-                unmountOnExit
-                >
-                  <ul className="video-scroll-container">
-                    {showSongs()}
-                  </ul>
-              </CSSTransition>
-              <CSSTransition 
-                in={toggleExplore}
-                key={'key1'}
-                classNames={transClass()}
-                timeout={800}
-                mountOnEnter
-                unmountOnExit
-                >
-                  <ul className="video-scroll-container">
-                    {showExploreSongs()}
-                  </ul>
-              </CSSTransition> */}
+            <ul className="video-scroll-container">
+              {showSongs()}
+            </ul>
           </div>
 
           <Comments
@@ -614,14 +540,14 @@ function Home(props) {
                     <div className="song-title_shadow-div-outset">
                       <div className="song-title_shadow-div-inset">
                         <p id="one">
-                          {songInView.songName} <img src={bullet} alt="bullet point" />
+                          {songInView.songName}
                         </p>
-                        <p id="two">{songUserInView.userName}</p>
+                        <p id="two"><img src={bullet} alt="bullet point" /> {songUserInView.userName}</p>
                       </div>
 
                       <div className="song-caption-container">
                         <p className="song-date">
-                          {dateFormatHandler(songInView.songDate)}{' '}
+                          <FormatDate date={songInView.songDate} />{' '}
                           <img src={bullet} alt="bullet point" />
                         </p>
                         <p className="song-caption">
@@ -661,7 +587,6 @@ function Home(props) {
                                   ref={playPauseRef}
                                   alt="pause"
                                 />
-                                {/* <audio ref={audioRef} src={audioInView} id="damn"></audio> */}
                               </button>
                             )
                             : (
@@ -675,7 +600,6 @@ function Home(props) {
                                   ref={playPauseRef}
                                   alt="play"
                                 />
-                                {/* <audio ref={audioRef} src={audioInView} id="damn"></audio> */}
                               </button>
                             )}
                         </div>
