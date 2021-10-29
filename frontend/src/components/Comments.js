@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
 import TheViewContext from '../TheViewContext'
 import FormatDate from './utils/FormatDate'
@@ -14,7 +15,6 @@ import flag from '../images/flag.svg'
 
 function Comments(props) {
   const { songInView, totalComments, setTotalComments } = React.useContext(TheViewContext)
-
   const { user } = React.useContext(TheContext)
 
   const [comment, setComment] = useState()
@@ -188,7 +188,7 @@ function Comments(props) {
             <div className="comment-photo-outer">
               <Link
                 to={{
-                  pathname: `/profile/other/${each.commUser._id}`,
+                  pathname: `/profile/${each.commUser._id}`,
                   profileInfo: each.commUser,
                 }}
               >
@@ -277,7 +277,7 @@ function Comments(props) {
   const renderEachComment = useCallback(() => {
     if (props.poppedUp === true) {
       return commState.map((each, index) => {
-        return <GetComments key={each._id + index} {...each} />
+        return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`} {...each} />
       })
     } else {
       return null
@@ -287,7 +287,6 @@ function Comments(props) {
   return (
     <div ref={props.commentPopUpRef} className="comment-pop-out">
       <div className="inner-com">
-        {/* {console.log(`checking renders, ${renderRef.current++}`)} */}
         <div ref={props.opacityRef1} style={{ opacity: '0' }} className="com-cont-1">
           <form className="social-comment-form" onSubmit={handleSubmit}>
             <input

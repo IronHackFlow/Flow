@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import FormatDate from "./utils/FormatDate"
@@ -145,15 +146,15 @@ function Home(props) {
   const showSongs = useCallback(() => {
     if (theFeedBool === true) {
       return theFeedSongs.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
       })
     } else if (trendingBool === true) {
       return trendingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
       })
     } else if (followingBool === true) {
       return followingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
       })
     }
   }, [

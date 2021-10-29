@@ -19,7 +19,6 @@ function Profile(props) {
   const [thisUserSongs, setThisUserSongs] = useState([])
 
   useEffect(() => {
-    console.log('profile.js line 53 ', props.location.profileInfo)
     actions
       .getUserSongs({ songUser: props.location.profileInfo?._id })
       .then(res => {
@@ -43,17 +42,19 @@ function Profile(props) {
         .getAUser({ id: props.location.profileInfo._id })
         .then(res => {
           setThisUser(res.data)
-          console.log('shit son, this may work')
+          console.log('shit son, what is the difference here ??')
         })
         .catch(console.error)
     }
   }, [props.location])
 
   const logout = () => {
-    setUser({})
-    setThisUser({})
-    setUserViewed({})
-    localStorage.clear()
+    if (props.location.profileInfo._id === user._id) {
+      setUser({})
+      setThisUser({})
+      setUserViewed({})
+      localStorage.clear()
+    }
   }
 
   const handlePlayPause = x => {
