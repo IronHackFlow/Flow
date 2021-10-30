@@ -139,8 +139,8 @@
                 width: 58%;
 
                 p {
-                  font-size: 11px;
-                  color: #e0bbbb;
+                  font-size: 10px;
+                  color: #ffd6d6;
                 }
               }
             }
@@ -220,6 +220,7 @@
                     height: 5px;
                     width: 5px;
                     margin-left: 5px;
+                    margin-right: 5px;
                     filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%)
                       contrast(76%);
                   }

@@ -1741,8 +1741,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-text p {
-  font-size: 11px;
-  color: #e0bbbb;
+  font-size: 10px;
+  color: #ffd6d6;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data {
@@ -1975,6 +1975,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   height: 5px;
   width: 5px;
   margin-left: 5px;
+  margin-right: 5px;
   -webkit-filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
           filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg) brightness(100%) contrast(76%);
 }

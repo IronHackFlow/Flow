@@ -34,7 +34,7 @@ function Profile(props) {
         .getOneUser()
         .then(res => {
           setThisUser(res.data)
-          console.log('shit son, this may work')
+          console.log(res.data, 'shit son, this may work')
         })
         .catch(console.error)
     } else {
@@ -42,7 +42,7 @@ function Profile(props) {
         .getAUser({ id: props.location.profileInfo._id })
         .then(res => {
           setThisUser(res.data)
-          console.log('shit son, what is the difference here ??')
+          console.log(res.data, 'shit son, what is the difference here ??')
         })
         .catch(console.error)
     }

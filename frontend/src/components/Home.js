@@ -484,7 +484,12 @@ function Home(props) {
                       </div>
                       <div className="action-btn-text" ref={followBtnRef3}>
                         <p style={{ color: 'white' }}>{totalFollowers}</p>
-                        <p>Follow</p>
+                        <p> {console.log(totalFollowers, "what diss?")}
+                          {(totalFollowers === 1)
+                              ? "Follow"
+                              : "Follows"
+                          }
+                        </p>
                       </div>
                     </div>
 
@@ -494,7 +499,12 @@ function Home(props) {
                       </div>
                       <div className="action-btn-text">
                         <p style={{ color: 'white' }}>{totalLikes}</p>
-                        <p>Like</p>
+                        <p>
+                          {(totalLikes === 1) 
+                              ? "Like"
+                              : "Likes"
+                          }
+                        </p>
                       </div>
                     </div>
 
@@ -508,7 +518,12 @@ function Home(props) {
                       </div>
                       <div className="action-btn-text">
                         <p style={{ color: 'white' }}>{totalComments}</p>
-                        <p>Comment</p>
+                        <p>
+                          {(totalComments === 1) 
+                              ? "Comment"
+                              : "Comments"
+                          }
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -543,7 +558,7 @@ function Home(props) {
                         <p id="one">
                           {songInView.songName}
                         </p>
-                        <p id="two"><img src={bullet} alt="bullet point" /> {songUserInView.userName}</p>
+                        <p id="two"><img src={bullet} alt="bullet point" />{" "}{songUserInView.userName}</p>
                       </div>
 
                       <div className="song-caption-container">
