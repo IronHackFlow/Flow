@@ -38,20 +38,19 @@ function EditLyrics(props) {
       setLinkLocation(true)
       setGetTakes([...props.location.songs])
       const getCurrentSong = props.location.songs.filter((item) => {
-        if (item.songmix === props.location.currentSong) {
+        if (item.songURL === props.location.currentSong) {
           setCurrentSong(item)
           return item
         }
       })
     } else if (props.location.pathname === `/profile/${user?._id}/EditLyrics`) {
       setLinkLocation(false)
-      console.log(props.location.currentSong)
       setCurrentSong(props.location.currentSong)
     }
   }, [linkLocation])
 
   useEffect(() => {
-    setAudioSrc(currentSong?.songmix)
+    setAudioSrc(currentSong?.songURL)
   }, [currentSong])
 
   const closeWindow = () => {
@@ -98,9 +97,9 @@ function EditLyrics(props) {
                 </div>
                 <div className="each-lyric-container">
                   <div className="each-word-container">
-                    {each.map((item) => {
+                    {each.map((e, i) => {
                       return (
-                        <p>{item}</p>
+                        <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
                       )
                     })}
                   </div>

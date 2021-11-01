@@ -554,7 +554,6 @@ function TestAudio(props) {
     setLoadSelectedTake(allTakes[e.target.selectedIndex])
     setAudioSrc(e.target.value)
     setSongUploadObject(allTakes[e.target.selectedIndex])
-    console.log(songUploadObject, "what the fuck is this shit omgo woefjma")
     setRecordingDisplay(false)
   };
 
@@ -586,7 +585,7 @@ function TestAudio(props) {
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.date = new Date()
-      console.log(songUploadObject, "lets dig in here")
+
       actions
         .uploadFile(
           {
@@ -612,8 +611,7 @@ function TestAudio(props) {
     if (saveSongMenu === false) {
       setSaveSongMenu(true)
       slideOutMicRef.current.className = "record-2_record-btn slideOut"
-    } 
-    else {
+    } else {
       setSaveSongMenu(false)
       slideOutMicRef.current.className = "record-2_record-btn slideIn"
     }
@@ -724,7 +722,7 @@ function TestAudio(props) {
                 </div>
               </div>
             </div>
-            {console.log(songUploadObject, "yo check it ")}
+
             <div className="rhyme-lock-container">
               <div className="rhyme-lock-button">
                 <div className="rhyme-lock-outset">

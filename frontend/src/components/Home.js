@@ -43,7 +43,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState(user.userFollows);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
   
   const windowRef = useRef();
   const popUpSearchRef = useRef();
@@ -78,7 +78,6 @@ function Home(props) {
           return { song: each, songVideo: getRandomBackground() }
         })
         setTheFeedSongs(songsArray.reverse())
-        console.log(songsArray)
       })
       .catch(console.error)
   }, [theFeedBool])
@@ -220,7 +219,7 @@ function Home(props) {
     actions
       .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
       .then(res => {
-        console.log(`deleted a follow from: `, res.data.followerData._doc)
+        console.log(`deleted a follow from: `, res)
         setTotalFollowers(res.data.followedData._doc.followers.length)
         setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
@@ -484,7 +483,7 @@ function Home(props) {
                       </div>
                       <div className="action-btn-text" ref={followBtnRef3}>
                         <p style={{ color: 'white' }}>{totalFollowers}</p>
-                        <p> {console.log(totalFollowers, "what diss?")}
+                        <p>
                           {(totalFollowers === 1)
                               ? "Follow"
                               : "Follows"
@@ -558,7 +557,7 @@ function Home(props) {
                         <p id="one">
                           {songInView.songName}
                         </p>
-                        <p id="two"><img src={bullet} alt="bullet point" />{" "}{songUserInView.userName}</p>
+                        <p id="two"><img src={bullet} alt="bullet point" />{songUserInView.userName}</p>
                       </div>
 
                       <div className="song-caption-container">
