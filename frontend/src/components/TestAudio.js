@@ -87,6 +87,7 @@ function TestAudio(props) {
   const keyRef = useRef(0);
   const barNumberRef = useRef(1)
   const slideOutMicRef = useRef();
+  const [recordingBooth] = useState(`#363636`);
 
   class SongData {
     constructor(name, blobFile, songURL, lyrics, date, songDuration) {
@@ -856,6 +857,7 @@ function TestAudio(props) {
                         audioSrc={audioSrc}
                         setAudioSrc={setAudioSrc}
                         allTakes={allTakes}
+                        location={recordingBooth}
                         />
                     </div>
                   </div>

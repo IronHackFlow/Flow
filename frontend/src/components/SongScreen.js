@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
+import AudioTimeSlider from "./AudioTimeSlider"
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
 import play from '../images/play.svg'
@@ -23,6 +24,8 @@ function SongScreen(props) {
   const [totalLikes, setTotalLikes] = useState()
   const [thisSong, setThisSong] = useState({})
   const [allSongs, setAllSongs] = useState([])
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [songScreen] = useState(`#353535`);
 
   const followBtn = useRef()
   const audioRef = useRef()
@@ -51,13 +54,15 @@ function SongScreen(props) {
       .catch(console.error)
   }, [props.location])
 
-  const handlePlayPause = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play()
-      playPauseRef.current.src = pause
+  const handlePlayPause = (bool) => {
+    if (bool === true) {
+      // audioRef.current.play()
+      // playPauseRef.current.src = pause
+      setIsPlaying(true)
     } else {
-      audioRef.current.pause()
-      playPauseRef.current.src = play
+      // audioRef.current.pause()
+      // playPauseRef.current.src = play
+      setIsPlaying(false)
     }
   }
 
@@ -227,12 +232,21 @@ function SongScreen(props) {
 
                 <div className="play-buttons-middle">
                   <div className="play-outer">
-                    <div className="play-inner" onClick={handlePlayPause}>
-                      <div className="play-img-container">
-                        <img src={play} ref={playPauseRef} alt="play icon" />
-                        <audio ref={audioRef} src={thisSong.songURL}></audio>
-                      </div>
-                    </div>
+                    {isPlaying
+                      ? (
+                        <div className="play-inner" onClick={() => handlePlayPause(false)}>
+                          <div className="play-img-container">
+                            <img src={pause} ref={playPauseRef} alt="pause icon" />
+                          </div>
+                        </div>
+                      )
+                      : (
+                        <div className="play-inner" onClick={() => handlePlayPause(true)}>
+                          <div className="play-img-container">
+                            <img src={play} ref={playPauseRef} alt="play icon" />
+                          </div>
+                        </div>
+                      )}
                   </div>
                 </div>
 
@@ -244,7 +258,13 @@ function SongScreen(props) {
               </div>
 
               <div className="play-slider-container">
-                <div className="play-slider-outer"></div>
+                <AudioTimeSlider
+                  isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  audioSrc={thisSong?.songURL}
+                  allTakes={allSongs}
+                  location={songScreen}
+                />
               </div>
             </div>
           </div>

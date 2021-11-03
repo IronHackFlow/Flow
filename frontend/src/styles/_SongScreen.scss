@@ -133,10 +133,46 @@
           .play-slider-container {
             @include flexCenter(13%, 100%, 0px, center, flex-start, row);
 
-            .play-slider-outer {
-              @include flexCenter(50%, 90%, 50px, flex-end, center, column);
-              box-shadow: inset 3px 3px 4px #303131, inset -3px -3px 4px 0px #585858;
+            .play-slider_shadow-div-inset {
+              @include flexCenter(100%, 90%, 50px, flex-end, center, column);
+              // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
+
+              input[type="range"] {
+                  appearance: none;
+                  height: 50%;
+                  width: 94%;
+                  margin-left: 1%;
+                  border-radius: 50px;
+                  // background: #63DEBC;
+                  box-shadow: inset 2px 2px 2px 0px #282828, inset -1px -1px 2px #747474;
+              }
+              input[type="range"]::-webkit-slider-thumb {
+                  appearance: none;
+                  height: 18px;
+                  width: 18px;
+                  border-radius: 50px;
+                  cursor: pointer;
+                  background: #4a4a4a;
+                  transition: background-color 1s ease;
+                  box-shadow: inset 1px 1px 1px 0px #a0a0a0, inset -1px -1px 1px #222222;
+
+              }
+
+              .time-text-container {
+                  @include flexCenter(50%, 90%, 8px, space-between, center, row);
+                  padding: 0% 3%;
+
+                  .time-text-start {
+                      font-size: 10px;
+                      color: white;
+                  }
+                  .time-text-end {
+                      font-size: 11px;
+                      color: white;
+                  }
+              }
             }
+            
           }
         }
       }

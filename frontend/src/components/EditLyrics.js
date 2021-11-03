@@ -127,7 +127,7 @@ function EditLyrics(props) {
         each = each.split(' ')
       }
       return (
-        <div className="display-each-container">
+        <div className="display-each-container" key={`${uuidv4()}cont${each}and${index}`}>
           <p className="bar-no">{index + 1}</p>
           {each.map((e) => {
             return (

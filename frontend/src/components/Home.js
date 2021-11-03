@@ -68,6 +68,7 @@ function Home(props) {
   const trendingRef2 = useRef();
   const followingRef1 = useRef();
   const followingRef2 = useRef();
+  const [home] = useState(`#6d6d6d`);
 
   useEffect(() => {
     actions
@@ -182,9 +183,8 @@ function Home(props) {
   const followCheck = () => {
     if (user._id === songUserInView._id) {
       console.log(`You can't follow yourself lol`)
-      return null
-    }
-    actions
+    } else {
+      actions
       .getAUser({ id: songUserInView._id })
       .then(res => {
         let deleteObj = null
@@ -202,6 +202,7 @@ function Home(props) {
         }
       })
       .catch(console.error)
+    }
   }
 
   const postFollow = () => {
@@ -219,7 +220,7 @@ function Home(props) {
     actions
       .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
       .then(res => {
-        console.log(`deleted a follow from: `, res)
+        console.log(`deleted a follow from: `, res.data.followerData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
         setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
@@ -583,6 +584,7 @@ function Home(props) {
                       audioSrc={audioInView}
                       setAudioSrc={setAudioInView}
                       allTakes={songInView}
+                      location={home}
                       />
                   </div>
 

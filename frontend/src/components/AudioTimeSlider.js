@@ -10,6 +10,7 @@ function UseAudioPlayer(props) {
   const [songDuration, setSongDuration] = useState(0);
   const [songMinutes, setSongMinutes] = useState(0);
 
+
   useEffect(() => {
     if (props.isPlaying) {
       audioRef.current.play()
@@ -28,7 +29,8 @@ function UseAudioPlayer(props) {
   //     clearInterval(secondsRef.current)
   //   }
   // }, []);
-  
+
+
   useEffect(() => {
     if (currentProgressRef.current >= 60) {
       let current = currentProgressRef.current
@@ -87,7 +89,7 @@ function UseAudioPlayer(props) {
         }
       } 
     }
-  }, [props.audioSrc])
+  }, [props.audioSrc, setSongDuration])
   
   useEffect(() => {
     audioRef.current.pause();
@@ -98,7 +100,7 @@ function UseAudioPlayer(props) {
   
   const currentPercentage = songDuration ? `${(trackProgress / songDuration) * 100}%` : '0%';
   const trackStyling = `
-    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #63DEBC), color-stop(${currentPercentage}, #363636))
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #63DEBC), color-stop(${currentPercentage}, ${props.location}))
   `;
   
   const startTimer = () => {
