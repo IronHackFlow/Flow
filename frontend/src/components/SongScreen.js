@@ -28,40 +28,39 @@ function SongScreen(props) {
   const [songScreen] = useState(`#353535`);
 
   const followBtn = useRef()
-  const audioRef = useRef()
   const playPauseRef = useRef()
 
   useEffect(() => {
-    setTotalFollowers(thisSong.songUser?.followers?.length)
+    setTotalFollowers(thisSong?.songUser?.followers?.length)
   }, [thisSong])
 
   useEffect(() => {
-    setTotalLikes(thisSong.songLikes?.length)
+    setTotalLikes(thisSong?.songLikes?.length)
   }, [thisSong])
 
   useEffect(() => {
-    setThisSong(props.location.songInfo)
-    console.log('location info passed from click', props.location)
-  }, [props.location])
-
-  useEffect(() => {
-    console.log(props.location.songInfo.songUser, "i don't know")
+    console.log(props.location.songInfo?.songUser, "i don't know")
     actions
-      .getUserSongs({ songUser: props.location.songInfo.songUser })
+      .getUserSongs({ songUser: props.location.songInfo?.songUser })
       .then(res => {
         setAllSongs(res.data)
+        setAllSongs(prevArr => prevArr.map(each => ({
+          ...each,
+          songVideo: getRandomBackground()
+        })))
       })
       .catch(console.error)
   }, [props.location])
 
+  useEffect(() => {
+    let song = allSongs.filter(each => each._id === props.location.songInfo._id)
+    setThisSong(song[0])
+  }, [allSongs])
+
   const handlePlayPause = (bool) => {
     if (bool === true) {
-      // audioRef.current.play()
-      // playPauseRef.current.src = pause
       setIsPlaying(true)
     } else {
-      // audioRef.current.pause()
-      // playPauseRef.current.src = play
       setIsPlaying(false)
     }
   }
@@ -180,7 +179,7 @@ function SongScreen(props) {
 
   const findCurrentSong = direction => {
     allSongs.filter((each, index) => {
-      if (each._id === thisSong._id) {
+      if (each._id === thisSong?._id) {
         if (direction === 'back') {
           if (index === 0) {
             return null
@@ -202,20 +201,55 @@ function SongScreen(props) {
     <div
       className="SongScreen"
       style={{
-        backgroundImage: `url('${gradientbg}'), url(${getRandomBackground()})`,
+        backgroundImage: `url('${gradientbg}'), url(${thisSong?.songVideo})`,
       }}
     >
-      <div className="close-window-container">
-        <div className="close-window-outer" onClick={closeSongWindow}>
-          <div className="close-window-inner">
-            <img src={close} alt="close window" />
+      <div className="close-window-frame">
+        <div className="song-listing-container">
+          <div className="song-listing-outer">
+            <div className="song-listing-inner">
+              <div className="listing-photo-container">
+                <div className="listing-photo-outer">
+                  <div className="listing-photo-inner">
+                    <img src={thisSong?.songUser?.picture} alt="song user" />
+                  </div>
+                </div>
+              </div>
+              <div className="listing-track-container">
+                <div className="track-title-container">
+                  <div className="track-title-outer">
+                    <p>{thisSong?.songName}</p>
+                  </div>
+                </div>
+                <div className="track-details-container">
+                  <p>
+                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.songUser?.userName}</span>
+                  </p>
+                  <p>on: {moment(thisSong?.songDate).format('LL')}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="close-window-container">
+          <div className="close-window-outer" onClick={closeSongWindow}>
+            <div className="close-window-inner">
+              <img src={close} alt="close window" />
+            </div>
           </div>
         </div>
       </div>
 
       <div className="song-video-frame">
-        <div className="song-video-inner">
-          <div className="song-video-outer"></div>
+        <div className="song-lyric-container">
+          {thisSong?.songLyricsStr?.map((each, index) => {
+              return (
+                <div className="each-lyric-container">
+                  <p className="each-lyric-no">{index + 1}</p>
+                  <p className="each-lyric-line">{each}</p>
+                </div>
+              )
+          })}
         </div>
       </div>
 
@@ -236,7 +270,7 @@ function SongScreen(props) {
                       ? (
                         <div className="play-inner" onClick={() => handlePlayPause(false)}>
                           <div className="play-img-container">
-                            <img src={pause} ref={playPauseRef} alt="pause icon" />
+                            <img src={pause} ref={playPauseRef} style={{marginLeft: '0%'}} alt="pause icon" />
                           </div>
                         </div>
                       )
@@ -268,32 +302,6 @@ function SongScreen(props) {
               </div>
             </div>
           </div>
-          <div className="song-listing-container">
-            <div className="song-listing-outer">
-              <div className="song-listing-inner">
-                <div className="listing-photo-container">
-                  <div className="listing-photo-outer">
-                    <div className="listing-photo-inner">
-                      <img src={thisSong.songUser?.picture} alt="song user" />
-                    </div>
-                  </div>
-                </div>
-                <div className="listing-track-container">
-                  <div className="track-title-container">
-                    <div className="track-title-outer">
-                      <p>{thisSong.songName}</p>
-                    </div>
-                  </div>
-                  <div className="track-details-container">
-                    <p>
-                      by: <span style={{ color: '#b7a2a6' }}>{thisSong.songUser?.userName}</span>
-                    </p>
-                    <p>on: {moment(thisSong.songDate).format('LL')}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="social-buttons">
@@ -304,7 +312,12 @@ function SongScreen(props) {
               </div>
               <div className="button-title">
                 <p style={{ color: '#ff3b8c' }}>{totalFollowers}</p>
-                <p>Follow</p>
+                <p>
+                  {(totalFollowers === 1)
+                    ? "Follower"
+                    : "Followers"
+                  }
+                </p>
               </div>
             </div>
 
@@ -314,7 +327,12 @@ function SongScreen(props) {
               </div>
               <div className="button-title">
                 <p style={{ color: '#ff3b8c' }}>{totalLikes}</p>
-                <p>Like</p>
+                <p>
+                  {(totalLikes === 1)
+                    ? "Like"
+                    : "Likes"
+                  }
+                </p>
               </div>
             </div>
 
@@ -327,8 +345,13 @@ function SongScreen(props) {
                 ></img>
               </div>
               <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{thisSong.songComments?.length}</p>
-                <p>Comment</p>
+                <p style={{ color: '#ff3b8c' }}>{thisSong?.songComments?.length}</p>
+                <p>
+                  {(thisSong?.songComments?.length === 1)
+                    ? "Comment"
+                    : "Comments"
+                  }
+                </p>
               </div>
             </div>
           </div>

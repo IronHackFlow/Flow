@@ -333,8 +333,14 @@
                   .play-btn_shadow-div-outset-2 {
                     @include flexCenter(77%, 77%, 50px, center, center, column);
                     box-shadow: 3px 3px 3px #575757, -2px -2px 2px 0px #b6b6b6;
-                    background: linear-gradient(145deg, #676767, #7e7e7e);
+                    // background: linear-gradient(145deg, #676767, #7e7e7e);
+                    background: initial;
                     border: none;
+
+                    &:active {
+                      box-shadow: inset 3px 3px 3px #575757, inset -2px -2px 2px 0px #b6b6b6;
+                      transition: all .2s ease-out;
+                    }
                   }
                 }
               }

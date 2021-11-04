@@ -3,50 +3,147 @@
   background-position: top;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: stretch;
 
-  .close-window-container {
-    @include flexCenter(55px, 55px, 50px, center, center, row);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #4e4d4d;
-    border: 1px solid #565656;
-    box-shadow: inset 3px 3px 3px 1px #2d2d2d, inset -3px -3px 3px 1px #6f6f6f;
+  .close-window-frame {
+    @include flexCenter(15%, 100%, 0px, space-evenly, center, row);
+    background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
+    box-shadow: 0px 7px 60px 10px #303030;
 
-    .close-window-outer {
-      @include flexCenter(70%, 70%, 50px, center, center, row);
-      box-shadow: 2px 2px 5px 1px #282828, -2px -2px 2px 0px #6f6f6f;
+    .song-listing-container {
+      @include flexCenter(100%, 90%, 0px, center, center, column);
 
-      .close-window-inner {
-        @include flexCenter(80%, 80%, 50px, center, center, row);
-        box-shadow: inset 2px 2px 3px #2b2b2b, inset -2px -2px 2px 0px #6f6f6f;
+      .song-listing-outer {
+        @include flexCenter(80%, 95%, 50px, center, center, column);
+        background: linear-gradient(315deg, #383838, #464646);
+        box-shadow: 3px 3px 8px 0px #252525, -3px -3px 5px #666565;
 
-        img {
-          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-            contrast(103%);
-          height: 1.1em;
-          width: 1.1em;
+        .song-listing-inner {
+          @include flexCenter(80%, 94%, 40px, center, center, row);
+          box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
+
+          .listing-photo-container {
+            @include flexCenter(100%, 29%, 0px, center, center, row);
+
+            .listing-photo-outer {
+              @include flexCenter(80%, 70%, 50px, center, center, row);
+              box-shadow: 9px 9px 20px 0px #2b2b2b, -3px -3px 5px #666565;
+
+              .listing-photo-inner {
+                @include flexCenter(90%, 90%, 50px, center, center, row);
+                box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
+                overflow: hidden;
+
+                img {
+                  height: 100%;
+                  width: 100%;
+                }
+              }
+            }
+          }
+
+          .listing-track-container {
+            @include flexCenter(100%, 71%, 0px, center, center, column);
+
+            .track-title-container {
+              @include flexCenter(40%, 90%, 0px, center, center, row);
+              position: relative;
+
+              .track-title-outer {
+                @include flexCenter(80%, 100%, 40px, flex-start, center, row);
+                box-shadow: 1px 3px 8px 0px #2c2c2c, -4px -3px 4px #666565;
+                border: 1px solid #e24f8c;
+                position: absolute;
+                right: 15px;
+                top: 8px;
+
+                p {
+                  color: rgb(204, 204, 204);
+                  font-weight: bold;
+                  font-size: 14px;
+                  margin-left: 5%;
+                }
+              }
+            }
+
+            .track-details-container {
+              @include flexCenter(60%, 90%, 0px, center, flex-start, column);
+
+              p {
+                color: grey;
+                font-size: 13px;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+    .close-window-container {
+      @include flexCenter(100%, 9%, 50px, center, flex-start, row);
+      margin-top: 5%;
+      margin-right: 1%;
+      // background: #4e4d4d;
+      // border: 1px solid #565656;
+      // box-shadow: inset 3px 3px 3px 1px #2d2d2d, inset -3px -3px 3px 1px #6f6f6f;
+  
+      .close-window-outer {
+        @include flexCenter(26%, 90%, 50px, center, center, row);
+        box-shadow: 2px 2px 3px 1px #363636, -2px -2px 2px 0px #7e7e7e;
+  
+        .close-window-inner {
+          @include flexCenter(80%, 80%, 50px, center, center, row);
+          box-shadow: inset 2px 2px 3px #2b2b2b, inset -2px -2px 2px 0px #6f6f6f;
+  
+          img {
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+              contrast(103%);
+            height: 1.1em;
+            width: 1.1em;
+          }
         }
       }
     }
   }
-
   .song-video-frame {
-    @include flexCenter(0%, 100%, 0px, space-evenly, center, column);
-    background: linear-gradient(319deg, #555555, #7a7a7a);
-    box-shadow: 0px 50px 50px 15px #3d3d3d;
-  }
+    @include flexCenter(40%, 100%, 40px 40px 0px 0px, center, center, column);
 
+    .song-lyric-container {
+      @include flexCenter(94%, 95%, 7px, flex-start, flex-start, column);
+      overflow-y: scroll;
+      background: #00000094;
+
+      .each-lyric-container {
+        @include flexCenter(initial, 100%, 0px, flex-start, flex-start, row);
+
+        .each-lyric-no {
+          color: #ffc6de;
+          font-size: 10px;
+          margin-left: 1%;
+        }
+
+        .each-lyric-line {
+          font-size: 13px;
+          margin-left: 1%;
+          color: #ec6aa0;
+          text-align: start;
+
+        }
+      }
+    }
+
+  }
   .song-details-container {
-    @include flexCenter(60%, 100%, 40px 40px 0px 0px, center, center, column);
+    @include flexCenter(45%, 100%, 40px 40px 0px 0px, center, center, column);
     background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
+    // position: absolute;
+    // bottom: 0;
 
     .song-details {
-      @include flexCenter(78%, 100%, 0px, center, center, column);
+      @include flexCenter(70%, 100%, 0px, center, center, column);
 
       .song-play-container {
-        @include flexCenter(70%, 100%, 0px, center, center, column);
+        @include flexCenter(100%, 100%, 0px, center, center, column);
 
         .song-play-outer {
           @include flexCenter(90%, 94%, 30px 30px 10px 10px, center, center, column);
@@ -91,15 +188,19 @@
                   box-shadow: 3px 3px 5px #282828, -3px -3px 3px 0px #565656;
 
                   .play-img-container {
-                    @include flexCenter(85%, 85%, 100px, center, center, column);
-                    box-shadow: inset 3px 3px 5px #333333, inset -3px -3px 3px 0px #565656;
+                    @include flexCenter(80%, 80%, 100px, center, center, column);
+                    box-shadow: 3px 3px 5px #252525, -3px -3px 3px 0px #565656;
 
                     img {
-                      height: 80%;
-                      width: 80%;
-                      margin-left: 15%;
+                      height: 70%;
+                      width: 70%;
+                      margin-left: 10%;
                       filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg)
                         brightness(100%) contrast(98%);
+                    }
+
+                    &:active {
+                      box-shadow: inset 3px 3px 5px #333333, inset -3px -3px 3px 0px #565656;
                     }
                   }
                 }
@@ -176,80 +277,10 @@
           }
         }
       }
-
-      .song-listing-container {
-        @include flexCenter(30%, 100%, 0px, flex-start, center, column);
-
-        .song-listing-outer {
-          @include flexCenter(88%, 90%, 50px, center, center, column);
-          background: linear-gradient(315deg, #383838, #464646);
-          box-shadow: 3px 3px 8px 0px #252525, -3px -3px 5px #666565;
-
-          .song-listing-inner {
-            @include flexCenter(80%, 94%, 40px, center, center, row);
-            box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
-
-            .listing-photo-container {
-              @include flexCenter(100%, 29%, 0px, center, center, row);
-
-              .listing-photo-outer {
-                @include flexCenter(80%, 70%, 50px, center, center, row);
-                box-shadow: 9px 9px 20px 0px #2b2b2b, -3px -3px 5px #666565;
-
-                .listing-photo-inner {
-                  @include flexCenter(90%, 90%, 50px, center, center, row);
-                  box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
-                  overflow: hidden;
-
-                  img {
-                    height: 100%;
-                    width: 100%;
-                  }
-                }
-              }
-            }
-
-            .listing-track-container {
-              @include flexCenter(100%, 71%, 0px, center, center, column);
-
-              .track-title-container {
-                @include flexCenter(40%, 90%, 0px, center, center, row);
-                position: relative;
-
-                .track-title-outer {
-                  @include flexCenter(80%, 100%, 40px, flex-start, center, row);
-                  box-shadow: 1px 3px 8px 0px #2c2c2c, -4px -3px 4px #666565;
-                  border: 1px solid #e24f8c;
-                  position: absolute;
-                  right: 15px;
-                  top: 8px;
-
-                  p {
-                    color: rgb(204, 204, 204);
-                    font-weight: bold;
-                    font-size: 14px;
-                    margin-left: 5%;
-                  }
-                }
-              }
-
-              .track-details-container {
-                @include flexCenter(60%, 90%, 0px, center, flex-start, column);
-
-                p {
-                  color: grey;
-                  font-size: 13px;
-                  font-weight: bold;
-                }
-              }
-            }
-          }
-        }
-      }
     }
 
     .social-buttons {
-      @include flexCenter(22%, 100%, 0px, center, flex-start, row);
+      @include flexCenter(30%, 100%, 0px, center, flex-start, row);
       border-bottom: 1px solid #616161;
 
       .social-list {
@@ -273,9 +304,9 @@
 
             &:active {
               box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
-              background-color: #ec6aa0;
+              background: #ec6aa0;
               border: 1px solid #e24f8c;
-              transition: all 0.4s ease-out;
+              transition: all 0.2s ease-out;
 
               img {
                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)

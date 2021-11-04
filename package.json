@@ -21,6 +21,7 @@
         "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.1",
         "mongoose": "^6.0.5",
+        "react-custom-scrollbars": "^4.2.1",
         "react-google-button": "^0.7.2",
         "react-google-login": "^5.2.2",
         "react-intersection-observer": "^8.31.0",

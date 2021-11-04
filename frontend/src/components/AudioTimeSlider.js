@@ -89,7 +89,7 @@ function UseAudioPlayer(props) {
         }
       } 
     }
-  }, [props.audioSrc, setSongDuration])
+  }, [props.audioSrc, props.allTakes])
   
   useEffect(() => {
     audioRef.current.pause();

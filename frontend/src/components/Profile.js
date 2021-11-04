@@ -39,7 +39,7 @@ function Profile(props) {
         .catch(console.error)
     } else {
       actions
-        .getAUser({ id: props.location.profileInfo._id })
+        .getAUser({ id: props.location.profileInfo?._id })
         .then(res => {
           setThisUser(res.data)
           console.log(res.data, 'shit son, what is the difference here ??')
