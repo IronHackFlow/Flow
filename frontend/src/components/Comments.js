@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
-import TheViewContext from '../TheViewContext'
+// import TheViewContext from '../TheViewContext'
 import FormatDate from './utils/FormatDate'
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
@@ -14,7 +14,7 @@ import share from '../images/share.svg'
 import flag from '../images/flag.svg'
 
 function Comments(props) {
-  const { songInView, totalComments, setTotalComments } = React.useContext(TheViewContext)
+  // const { totalComments, setTotalComments } = React.useContext(TheViewContext)
   const { user } = React.useContext(TheContext)
 
   const [comment, setComment] = useState()
@@ -23,17 +23,17 @@ function Comments(props) {
 
   useEffect(() => {
     actions
-      .getComments({ id: songInView._id })
+      .getComments({ id: props.songInView?._id })
       .then(res => {
         console.log('Returned these comments from DB: ', res.data)
         if (res.data) {
           setCommState(res.data.songComments)
-          setTotalComments(res.data.songComments.length)
+          props.setTotalComments(res.data.songComments.length)
           setSongCommUser(res.data.songUser)
         }
       })
       .catch(console.error)
-  }, [songInView, totalComments])
+  }, [props.songInView, props.totalComments])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -44,12 +44,12 @@ function Comments(props) {
     actions
       .addComment({
         comment: comment,
-        commSong: songInView._id,
+        commSong: props.songInView._id,
         commDate: new Date(),
       })
       .then(res => {
         console.log(res.data, 'comment data')
-        setTotalComments(res.data.songComments.length)
+        props.setTotalComments(res.data.songComments.length)
       })
       .catch(console.error)
 
@@ -106,13 +106,13 @@ function Comments(props) {
     const deleteComment = each => {
       if (user._id === each.commUser._id) {
         actions
-          .deleteComment({ deleteObj: each, songId: songInView._id })
+          .deleteComment({ deleteObj: each, songId: props.songInView._id })
           .then(res => {
             console.log(
               `deleted a comment from song ${res.data.songName}'s songComments:`,
               res.data.songComments,
             )
-            setTotalComments(res.data.songComments.length)
+            props.setTotalComments(res.data.songComments.length)
           })
           .catch(console.error)
       } else {
@@ -285,9 +285,9 @@ function Comments(props) {
   }, [props.poppedUp, commState])
 
   return (
-    <div ref={props.commentPopUpRef} className="comment-pop-out">
-      <div className="inner-com">
-        <div ref={props.opacityRef1} style={{ opacity: '0' }} className="com-cont-1">
+    <div className="comment-pop-out" ref={props.commentPopUpRef}>
+      <div className="inner-com" ref={props.commentInnerRef}>
+        <div className="com-cont-1" ref={props.opacityRef1} style={{ opacity: '0' }}>
           <form className="social-comment-form" onSubmit={handleSubmit}>
             <input
               className="social-comment-input"
@@ -306,7 +306,7 @@ function Comments(props) {
           <div className="comments-title">
             <div className="comments-title-inner">
               <p>
-                Comments - <span style={{ color: '#e5bdcd' }}>{totalComments}</span>
+                Comments - <span style={{ color: '#e5bdcd' }}>{props.totalComments}</span>
               </p>
             </div>
           </div>

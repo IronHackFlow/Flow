@@ -4,6 +4,7 @@ import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
 import AudioTimeSlider from "./AudioTimeSlider"
+import Comments from "./Comments"
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
 import play from '../images/play.svg'
@@ -18,18 +19,27 @@ import gradientbg from '../images/gradient-bg-2.png'
 function SongScreen(props) {
   const { user } = React.useContext(TheContext)
 
-  const history = useHistory()
-  const gifsCopy = [...gifsArr]
-  const [totalFollowers, setTotalFollowers] = useState()
-  const [totalLikes, setTotalLikes] = useState()
-  const [thisSong, setThisSong] = useState({})
-  const [allSongs, setAllSongs] = useState([])
+  const history = useHistory();
+  const gifsCopy = [...gifsArr];
+  const [totalFollowers, setTotalFollowers] = useState();
+  const [totalLikes, setTotalLikes] = useState();
+  const [thisSong, setThisSong] = useState({});
+  const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [poppedUp, setPoppedUp] = useState(false);
+  const [totalComments, setTotalComments] = useState(thisSong?.songComments?.length);
   const [songScreen] = useState(`#353535`);
 
-  const followBtn = useRef()
-  const playPauseRef = useRef()
-
+  const windowRef = useRef();
+  const commentPopUpRef = useRef();
+  const commentInputRef = useRef();
+  const commentButtonRef = useRef();
+  const commentInnerRef = useRef();
+  const opacityRef1 = useRef();
+  const opacityRef2 = useRef();
+  const followBtn = useRef();
+  const playPauseRef = useRef();
+;
   useEffect(() => {
     setTotalFollowers(thisSong?.songUser?.followers?.length)
   }, [thisSong])
@@ -40,13 +50,15 @@ function SongScreen(props) {
 
   useEffect(() => {
     console.log(props.location.songInfo?.songUser, "i don't know")
+    let keyIndex = 1
     actions
       .getUserSongs({ songUser: props.location.songInfo?.songUser })
       .then(res => {
         setAllSongs(res.data)
         setAllSongs(prevArr => prevArr.map(each => ({
           ...each,
-          songVideo: getRandomBackground()
+          songVideo: getRandomBackground(),
+          songIndex: keyIndex++
         })))
       })
       .catch(console.error)
@@ -75,6 +87,45 @@ function SongScreen(props) {
   const getRandomBackground = () => {
     let index = Math.floor(Math.random() * gifsCopy.length)
     return gifsCopy[index].url
+  }
+
+  const popUpComments = () => {
+    if (poppedUp === false) {
+      menuUp('comment')
+    } else {
+      menuDown('comment')
+    }
+  }
+
+  const menuUp = () => {
+    commentInputRef.current.focus()
+    commentInputRef.current.style.opacity = 1
+    commentButtonRef.current.style.opacity = 1
+    commentButtonRef.current.style.transition = 'opacity .5s'
+    opacityRef1.current.style.opacity = 1
+    opacityRef2.current.style.opacity = 1
+    commentPopUpRef.current.style.height = '44%'
+    commentPopUpRef.current.style.bottom = '40%'
+    commentPopUpRef.current.style.justifyContent = 'flex-start'
+    commentInnerRef.current.style.height = '85%'
+    commentInnerRef.current.style.marginTop = '2%'
+    windowRef.current.style.bottom = '46%'
+    setPoppedUp(true)
+  }
+
+  const menuDown = () => {
+    commentPopUpRef.current.style.height = '0px'
+    commentPopUpRef.current.style.bottom = '40%'
+    commentPopUpRef.current.style.justifyContent = 'flex-start'
+    commentInnerRef.current.style.height = '85%'
+    commentInnerRef.current.style.marginTop = '2%'
+    windowRef.current.style.bottom = '0'
+    commentInputRef.current.style.opacity = 0
+    commentButtonRef.current.style.opacity = 0
+    commentButtonRef.current.style.transition = 'opacity .5s'
+    opacityRef1.current.style.opacity = 0
+    opacityRef2.current.style.opacity = 0
+    setPoppedUp(false)
   }
 
   const followCheck = () => {
@@ -177,6 +228,7 @@ function SongScreen(props) {
       .catch(console.error)
   }
 
+
   const findCurrentSong = direction => {
     allSongs.filter((each, index) => {
       if (each._id === thisSong?._id) {
@@ -218,10 +270,17 @@ function SongScreen(props) {
               <div className="listing-track-container">
                 <div className="track-title-container">
                   <div className="track-title-outer">
-                    <p>{thisSong?.songName}</p>
+                    <p className="track-name">{thisSong?.songName}</p>
+                    <p className="track-index"><span style={{color: '#ffa6cb'}}>{thisSong?.songIndex}</span> of {allSongs.length}</p>
                   </div>
                 </div>
                 <div className="track-details-container">
+                  <p>
+                    {thisSong?.songCaption
+                      ? thisSong?.songCaption
+                      : "No caption for this song"
+                    }
+                  </p>
                   <p>
                     by: <span style={{ color: '#b7a2a6' }}>{thisSong?.songUser?.userName}</span>
                   </p>
@@ -240,18 +299,32 @@ function SongScreen(props) {
         </div>
       </div>
 
-      <div className="song-video-frame">
+      <div className="song-video-frame" ref={windowRef}> 
         <div className="song-lyric-container">
           {thisSong?.songLyricsStr?.map((each, index) => {
-              return (
-                <div className="each-lyric-container">
-                  <p className="each-lyric-no">{index + 1}</p>
-                  <p className="each-lyric-line">{each}</p>
-                </div>
-              )
+            return (
+              <div className="each-lyric-container">
+                <p className="each-lyric-no">{index + 1}</p>
+                <p className="each-lyric-line">{each}</p>
+              </div>
+            )
           })}
         </div>
       </div>
+
+      <Comments
+        commentPopUpRef={commentPopUpRef}
+        commentInputRef={commentInputRef}
+        commentButtonRef={commentButtonRef}
+        commentInnerRef={commentInnerRef}
+        poppedUp={poppedUp}
+        songInView={thisSong}
+        totalComments={totalComments}
+        setTotalComments={setTotalComments}
+        menuUp={menuUp}
+        opacityRef1={opacityRef1}
+        opacityRef2={opacityRef2}
+      />
 
       <div className="song-details-container">
         <div className="song-details">
@@ -326,7 +399,7 @@ function SongScreen(props) {
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
               <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{totalLikes}</p>
+                <p style={{color: '#ff3b8c'}}>{totalLikes}</p>
                 <p>
                   {(totalLikes === 1)
                     ? "Like"
@@ -337,7 +410,7 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div className="social-button" ref={props.commentBtn} onClick={props.popUpComments}>
+              <div className={poppedUp ? "social-button pushed" : "social-button"} onClick={popUpComments}>
                 <img
                   className="social-icons comment"
                   src={comments}
@@ -345,9 +418,9 @@ function SongScreen(props) {
                 ></img>
               </div>
               <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{thisSong?.songComments?.length}</p>
+                <p style={{color: '#ff3b8c'}}>{totalComments}</p>
                 <p>
-                  {(thisSong?.songComments?.length === 1)
+                  {(totalComments === 1)
                     ? "Comment"
                     : "Comments"
                   }

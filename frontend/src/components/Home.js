@@ -52,7 +52,6 @@ function Home(props) {
   const searchButtonRef = useRef();
   const commSearchRef = useRef();
   const commentPopUpRef = useRef();
-  const commentBtn = useRef();
   const commentInputRef = useRef();
   const commentButtonRef = useRef();
   const opacityRef1 = useRef();
@@ -448,6 +447,9 @@ function Home(props) {
             commentPopUpRef={commentPopUpRef}
             commentInputRef={commentInputRef}
             commentButtonRef={commentButtonRef}
+            songInView={songInView}
+            totalComments={totalComments}
+            setTotalComments={setTotalComments}
             poppedUp={poppedUp}
             menuUp={menuUp}
             opacityRef1={opacityRef1}
@@ -509,7 +511,7 @@ function Home(props) {
                     </div>
 
                     <div className="action-btn_shadow-div-outset" onClick={popUpComments}>
-                      <div className="action-btn-icon_shadow-div-inset" ref={commentBtn}>
+                      <div className="action-btn-icon_shadow-div-inset">
                         <img
                           className="social-icons si-comment"
                           src={comments}

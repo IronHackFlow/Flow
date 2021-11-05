@@ -19,14 +19,14 @@
         box-shadow: 3px 3px 8px 0px #252525, -3px -3px 5px #666565;
 
         .song-listing-inner {
-          @include flexCenter(80%, 94%, 40px, center, center, row);
-          box-shadow: inset 5px 5px 10px #383939, inset -5px -5px 7px 0px #4f4e4e;
+          @include flexCenter(94%, 97%, 50px, center, center, row);
+          box-shadow: inset 3px 3px 4px #2a2a2a, inset -3px -3px 3px 0px #505050;
 
           .listing-photo-container {
             @include flexCenter(100%, 29%, 0px, center, center, row);
 
             .listing-photo-outer {
-              @include flexCenter(80%, 70%, 50px, center, center, row);
+              @include flexCenter(80%, 80%, 50px, center, center, row);
               box-shadow: 9px 9px 20px 0px #2b2b2b, -3px -3px 5px #666565;
 
               .listing-photo-inner {
@@ -46,28 +46,35 @@
             @include flexCenter(100%, 71%, 0px, center, center, column);
 
             .track-title-container {
-              @include flexCenter(40%, 90%, 0px, center, center, row);
+              @include flexCenter(30%, 90%, 0px, center, center, row);
               position: relative;
 
               .track-title-outer {
                 @include flexCenter(80%, 100%, 40px, flex-start, center, row);
-                box-shadow: 1px 3px 8px 0px #2c2c2c, -4px -3px 4px #666565;
+                box-shadow: 3px 3px 8px 0px #202020, -2px -2px 5px #727272;
                 border: 1px solid #e24f8c;
                 position: absolute;
                 right: 15px;
                 top: 8px;
 
-                p {
-                  color: rgb(204, 204, 204);
+                .track-name {
+                  width: 80%;
+                  color: #fa80b3;
                   font-weight: bold;
                   font-size: 14px;
-                  margin-left: 5%;
+                  text-align: start;
+                  text-indent: 5%;
+                }
+                .track-index {
+                  width: 20%;
+                  color: rgb(204, 204, 204);
+                  font-size: 11px;
                 }
               }
             }
 
             .track-details-container {
-              @include flexCenter(60%, 90%, 0px, center, flex-start, column);
+              @include flexCenter(70%, 90%, 0px, center, flex-start, column);
 
               p {
                 color: grey;
@@ -136,6 +143,7 @@
   .song-details-container {
     @include flexCenter(45%, 100%, 40px 40px 0px 0px, center, center, column);
     background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
+    z-index: 1;
     // position: absolute;
     // bottom: 0;
 
@@ -302,6 +310,16 @@
             background: linear-gradient(145deg, #323232, #3b3b3b);
             box-shadow: 4px 4px 6px #282828, -4px -4px 6px #4f4f4f;
 
+            .follow {
+              height: 3em;
+              width: 3em;
+              margin-left: 10%;
+            }
+            .heart {
+              height: 1.8em;
+              width: 1.8em;
+            }
+            
             &:active {
               box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
               background: #ec6aa0;
@@ -312,6 +330,17 @@
                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
                   contrast(103%);
               }
+            }
+          }
+
+          .pushed {
+            box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
+            background: #ec6aa0;
+            border: 1px solid #e24f8c;
+
+            img {
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                contrast(103%);
             }
           }
 
