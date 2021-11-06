@@ -1,0 +1,325 @@
+.search-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(0deg, #b1b1b1 0%, #828282 100%);
+    border-radius: 30px 30px 0px 0px;
+    
+    .exit-container {
+        @include flexCenter(9%, 100%, 25px 25px 5px, center, center, column);
+
+        .exit-button {
+            @include flexCenter(40px, 40px, 50px, center, center, column);
+            box-shadow: 2px 3px 4px #414141, -3px -2px 3px #d3d3d3;
+            color: white;
+        }
+    }
+    .inner-com {
+      @include flexCenter(96%, 96%, 25px 25px 5px, flex-start, center, column);
+      // margin: 2% 0% 1% 0%;
+      // background: #ecf0f3;
+      box-shadow: 2px 3px 4px #414141, -3px -2px 3px #d3d3d3;
+  
+      .com-cont-1 {
+        @include flexCenter(7%, 100%, 0px, center, center, row);
+  
+        .social-comment-form {
+          @include flexCenter(77%, 97%, 20px, space-evenly, center, row);
+          box-shadow: inset 2px 2px 4px #505050, inset -2px -2px 3px #cecece;
+  
+          .social-comment-input {
+            opacity: 0;
+            // display: none;
+            font-family: inherit;
+            font-size: 1em;
+            height: 66%;
+            width: 79%;
+            border-radius: 20px;
+            border: none;
+            padding-left: 3%;
+            background: #686a6b;
+            box-shadow: inset 2px 2px 3px #444444, inset -1px -1px 3px #ffffff;
+  
+            &:defined {
+              color: pink;
+            }
+            &::placeholder {
+              color: #adadad;
+            }
+            &:focus {
+              border: 2px solid pink;
+              outline: none !important;
+              color: white;
+              border-radius: 20px;
+            }
+          }
+          .comment-button {
+            @include flexCenter(27px, 40px, 30px, center, center, row);
+            box-shadow: 2px 2px 4px #373737, -2px -2px 5px #c7c7c7;
+            opacity: 0;
+            border: none;
+            background: #ec6aa0;
+          }
+        }
+      }
+  
+      .com-cont-2 {
+        @include flexCenter(93%, 100%, 25px, center, center, column);
+  
+        .comments-title {
+          height: 8%;
+          width: 96%;
+  
+          .comments-title-inner {
+            @include flexCenter(88%, 100%, 21px, center, center, row);
+            box-shadow: 2px 2px 4px #555555, -2px -2px 4px #dbdbdb;
+  
+            p {
+              font-weight: bold;
+              color: #5b5b5b;
+            }
+          }
+        }
+  
+        .comments-container {
+          @include flexCenter(92%, 100%, 21px, center, center, row);
+  
+          .comment-list-container {
+            @include flexCenter(97%, 98%, 15px 15px 5px 24px, center, center, column);
+            background: #686a6b;
+            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
+  
+            .comment-list-cont {
+              @include flexCenter(98%, 100%, 15px 15px 5px 24px, flex-start, center, column);
+              overflow-y: scroll;
+  
+              .comment-list {
+                // @include flexCenter(80px, 93%, 20px, center, center, row);
+                min-height: 125px;
+                width: 95%;
+                border-radius: 13px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 2%;
+                background: #686a6b;
+                box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+    
+                .comment-list-photo {
+                  @include flexCenter(100%, 20%, 0px, center, flex-start, row);
+                  padding: 15px 0px 0px 5px;
+    
+                  .comment-photo-inner {
+                    @include flexCenter(50px, 80%, 50px, center, center, column);
+                    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+    
+                    .comment-photo-outer {
+                      @include flexCenter(80%, 80%, 50px, center, center, row);
+                      box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+    
+                      a {
+                        @include flexCenter(90%, 90%, 50px, center, center, row);
+                        overflow: hidden;
+                        object-fit: contain;
+    
+                        img {
+                          height: 100%;
+                          width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+    
+                .comment-list-inner {
+                  @include flexCenter(100%, 78%, 0px, space-evenly, flex-start, column);
+                  position: relative;
+    
+                  .comment-list-outer {
+                    @include flexCenter(65px, 95%, 10px 10px 20px 10px, center, center, column);
+                    box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+                    position: absolute;
+                    top: 8px;
+                    right: 8px;
+    
+                    .comment-username {
+                      height: 15px;
+                      width: 90%;
+                      color: #ec6aa0;
+                      font-weight: bold;
+                      text-align: start;
+                      margin-bottom: 3px;
+                    }
+                    .comment-date {
+                      height: 15px;
+                      width: 90%;
+                      color: #efbfbf;
+                      font-size: 12px;
+                      text-align: start;
+                      margin-bottom: 10px;
+                    }
+                    .comment-text {
+                      min-height: 15px;
+                      width: 90%;
+                      text-align: start;
+                      color: white;
+                      word-wrap: break-word;
+                      font-size: 14px;
+                      // overflow-y: scroll;
+                      line-height: 1;
+                      margin-bottom: 5px;
+                    }
+                  }
+    
+                  .comment-list-buttons {
+                    @include flexCenter(45px, 100%, 50px, flex-start, center, row);
+                    position: absolute;
+                    bottom: 3px;
+                    left: 0;
+    
+                    .comment-popout-container {
+                      @include flexCenter(38px, 30px, 8px, flex-start, center, row);
+                      box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+                      position: absolute;
+                      right: 8px;
+    
+                      .clc-3,
+                      .clc-4 {
+                        opacity: 0;
+                        .clb-3,
+                        .clb-4 {
+                          @include flexCenter(26px, 26px, 50px, center, center, row);
+                        }
+                      }
+                      .dot-menu {
+                        @include flexCenter(100%, 30px, 0px, center, center, column);
+                        position: absolute;
+                        right: 0px;
+    
+                        .dots {
+                          height: 10px;
+                          width: 10px;
+                          border-radius: 50px;
+                          box-shadow: inset 2px 2px 1px #4f4f4f, inset -2px -2px 1px #949292;
+                        }
+                      }
+                    }
+    
+                    .comment-likereply-container {
+                      @include flexCenter(100%, initial, 0px, flex-start, center, row);
+    
+                      .comm-likereply-btn {
+                        @include flexCenter(28px, 28px, 50px, center, center, row);
+                        box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+                        margin: 0px 8px 0px 8px;
+    
+                        &:active {
+                          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+                        }
+    
+                        .likes-number-container {
+                          @include flexCenter(30px, 30px, 100%, center, center, row);
+                          position: absolute;
+                          top: -10%;
+                          left: 8%;
+                          background: none;
+    
+                          p {
+                            font-size: 13px;
+                            font-weight: bold;
+                            color: white;
+                          }
+                        }
+    
+                        .social-icons {
+                          height: 1.2em;
+                          width: 1.2em;
+                        }
+    
+                        .heart {
+                          height: 1.5em;
+                          width: 1.5em;
+                        }
+                      }
+    
+                      .comm-likereply-text {
+                        display: flex;
+                        font-size: 13px;
+                        color: white;
+                        font-weight: bold;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* ------------------- Comment Pop up (SEARCH RESULTS) ------------------------- */
+  .com-list-cont {
+    .com-list-search {
+      @include flexCenter(88%, 93%, 14px, center, center, row);
+      margin-top: 4%;
+      opacity: 0;
+      background: #686a6b;
+      box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+  
+      .com-search {
+        @include flexCenter(85%, 90%, 12px, center, center, column);
+        color: white;
+        box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+  
+        .search-results {
+          @include flexCenter(90%, 94%, 0px, space-between, center, row);
+  
+          .search-username-container {
+            height: 100%;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+  
+            p {
+              color: #ec6aa0;
+              font-weight: 700;
+              text-align: start;
+              width: 90%;
+              margin: auto;
+            }
+          }
+  
+          .search-prof-container {
+            @include flexCenter(100%, 50%, 0px, center, center, row);
+  
+            .search-prof-inset {
+              @include flexCenter(80%, 90%, 50%, center, center, row);
+              box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+  
+              .search-prof-outset {
+                @include flexCenter(85%, 85%, 50%, center, center, row);
+                box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
+  
+                .search-results-link {
+                  height: 90%;
+                  width: 90%;
+                  overflow: hidden;
+                  border-radius: 50%;
+  
+                  img {
+                    height: 100%;
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

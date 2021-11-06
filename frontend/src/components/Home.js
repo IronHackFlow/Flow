@@ -278,54 +278,14 @@ function Home(props) {
 
   const popUpComments = () => {
     if (poppedUp === false) {
-      menuDown('search')
-      menuUp('comment')
+      setPoppedUp(true)
     } else {
-      menuDown('comment')
-    }
-  }
-
-  const popUpSearch = () => {
-    if (searchPoppedUp === false) {
-      menuDown('comment')
-      menuUp('search')
-    } else {
-      menuDown('search')
-    }
-  }
-
-  const menuDown = whichMenu => {
-    if (whichMenu === 'search') {
-      popUpSearchRef.current.style.height = '0px'
-      windowRef.current.style.bottom = '0'
-      searchInputRef.current.style.opacity = 0
-      searchButtonRef.current.style.opacity = 0
-      commSearchRef.current.style.opacity = 0
-      searchButtonRef.current.style.transition = 'opacity .5s'
-      setSearchPoppedUp(false)
-    } else if (whichMenu === 'comment') {
-      commentPopUpRef.current.style.height = '0px'
-      windowRef.current.style.bottom = '0'
-      commentInputRef.current.style.opacity = 0
-      commentButtonRef.current.style.opacity = '0'
-      commentButtonRef.current.style.transition = 'opacity .5s'
-      opacityRef1.current.style.opacity = 0
-      opacityRef2.current.style.opacity = 0
       setPoppedUp(false)
     }
   }
 
-  const menuUp = whichMenu => {
-    if (whichMenu === 'search') {
-      searchInputRef.current.focus()
-      searchInputRef.current.style.opacity = 1
-      searchButtonRef.current.style.opacity = 1
-      commSearchRef.current.style.opacity = 1
-      searchButtonRef.current.style.transition = 'opacity .5s'
-      popUpSearchRef.current.style.height = '50%'
-      windowRef.current.style.bottom = '50%'
-      setSearchPoppedUp(true)
-    } else if (whichMenu === 'comment') {
+  useEffect(() => {
+    if (poppedUp === true) {
       commentInputRef.current.focus()
       commentInputRef.current.style.opacity = 1
       commentButtonRef.current.style.opacity = '1'
@@ -334,9 +294,16 @@ function Home(props) {
       opacityRef2.current.style.opacity = 1
       commentPopUpRef.current.style.height = '50%'
       windowRef.current.style.bottom = '46%'
-      setPoppedUp(true)
+    } else {
+      commentPopUpRef.current.style.height = '0px'
+      windowRef.current.style.bottom = '0'
+      commentInputRef.current.style.opacity = 0
+      commentButtonRef.current.style.opacity = '0'
+      commentButtonRef.current.style.transition = 'opacity .5s'
+      opacityRef1.current.style.opacity = 0
+      opacityRef2.current.style.opacity = 0
     }
-  }
+  }, [poppedUp])
 
   return (
     <TheViewContext.Provider
@@ -451,16 +418,15 @@ function Home(props) {
             totalComments={totalComments}
             setTotalComments={setTotalComments}
             poppedUp={poppedUp}
-            menuUp={menuUp}
             opacityRef1={opacityRef1}
             opacityRef2={opacityRef2}
           />
-          <Search
+          {/* <Search
             popUpSearchRef={popUpSearchRef}
             searchInputRef={searchInputRef}
             searchButtonRef={searchButtonRef}
             commSearchRef={commSearchRef}
-          />
+          /> */}
 
           <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
             <div className="song-details-1_actions">
@@ -632,7 +598,6 @@ function Home(props) {
         </div>
 
         <NavBar
-          popUpSearch={popUpSearch}
           searchPoppedUp={searchPoppedUp}
           searchBtn={searchBtn}
           profilePicRef={profilePicRef}

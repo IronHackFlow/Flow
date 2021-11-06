@@ -793,7 +793,8 @@
 
         .flow-controls-container {
             height: 75%;
-            transition: height .5s;
+            bottom: 21%;
+            transition: all .5s;
 
             .flow-controls-1_playback-display {
                 height: 14%;

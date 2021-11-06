@@ -52,9 +52,7 @@ function Comments(props) {
         props.setTotalComments(res.data.songComments.length)
       })
       .catch(console.error)
-
     props.commentInputRef.current.value = ''
-
   }
 
   function GetComments(each) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
@@ -69,6 +69,35 @@ function SongScreen(props) {
     setThisSong(song[0])
   }, [allSongs])
 
+  useEffect(() => {
+    if (poppedUp === true) {
+      commentInputRef.current.focus()
+      commentInputRef.current.style.opacity = 1
+      commentButtonRef.current.style.opacity = 1
+      commentButtonRef.current.style.transition = 'opacity .5s'
+      opacityRef1.current.style.opacity = 1
+      opacityRef2.current.style.opacity = 1
+      commentPopUpRef.current.style.height = '44%'
+      commentPopUpRef.current.style.bottom = '40%'
+      commentPopUpRef.current.style.justifyContent = 'flex-start'
+      commentInnerRef.current.style.height = '85%'
+      commentInnerRef.current.style.marginTop = '2%'
+      windowRef.current.style.bottom = '46%'
+    } else {
+      commentPopUpRef.current.style.height = '0px'
+      commentPopUpRef.current.style.bottom = '40%'
+      commentPopUpRef.current.style.justifyContent = 'flex-start'
+      commentInnerRef.current.style.height = '85%'
+      commentInnerRef.current.style.marginTop = '2%'
+      windowRef.current.style.bottom = '0'
+      commentInputRef.current.style.opacity = 0
+      commentButtonRef.current.style.opacity = 0
+      commentButtonRef.current.style.transition = 'opacity .5s'
+      opacityRef1.current.style.opacity = 0
+      opacityRef2.current.style.opacity = 0
+    }
+  }, [poppedUp])
+
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)
@@ -91,41 +120,10 @@ function SongScreen(props) {
 
   const popUpComments = () => {
     if (poppedUp === false) {
-      menuUp('comment')
+      setPoppedUp(true)
     } else {
-      menuDown('comment')
+      setPoppedUp(false)
     }
-  }
-
-  const menuUp = () => {
-    commentInputRef.current.focus()
-    commentInputRef.current.style.opacity = 1
-    commentButtonRef.current.style.opacity = 1
-    commentButtonRef.current.style.transition = 'opacity .5s'
-    opacityRef1.current.style.opacity = 1
-    opacityRef2.current.style.opacity = 1
-    commentPopUpRef.current.style.height = '44%'
-    commentPopUpRef.current.style.bottom = '40%'
-    commentPopUpRef.current.style.justifyContent = 'flex-start'
-    commentInnerRef.current.style.height = '85%'
-    commentInnerRef.current.style.marginTop = '2%'
-    windowRef.current.style.bottom = '46%'
-    setPoppedUp(true)
-  }
-
-  const menuDown = () => {
-    commentPopUpRef.current.style.height = '0px'
-    commentPopUpRef.current.style.bottom = '40%'
-    commentPopUpRef.current.style.justifyContent = 'flex-start'
-    commentInnerRef.current.style.height = '85%'
-    commentInnerRef.current.style.marginTop = '2%'
-    windowRef.current.style.bottom = '0'
-    commentInputRef.current.style.opacity = 0
-    commentButtonRef.current.style.opacity = 0
-    commentButtonRef.current.style.transition = 'opacity .5s'
-    opacityRef1.current.style.opacity = 0
-    opacityRef2.current.style.opacity = 0
-    setPoppedUp(false)
   }
 
   const followCheck = () => {
@@ -321,7 +319,6 @@ function SongScreen(props) {
         songInView={thisSong}
         totalComments={totalComments}
         setTotalComments={setTotalComments}
-        menuUp={menuUp}
         opacityRef1={opacityRef1}
         opacityRef2={opacityRef2}
       />

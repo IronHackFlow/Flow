@@ -288,7 +288,7 @@ function NavBar(props) {
               </div>
             </Link>
 
-            <div className="navbar-btn-container" ref={searchBtnRef1} onClick={props.popUpSearch}>
+            <Link to="/search" className="navbar-btn-container" ref={searchBtnRef1} onClick={props.popUpSearch}>
               <div className="navbar-btn_shadow-div-inset" ref={searchBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={searchBtnRef3}>
                   <img
@@ -302,7 +302,7 @@ function NavBar(props) {
               <div className="navbar-btn-text" ref={searchBtnRef5}>
                 Search
               </div>
-            </div>
+            </Link>
 
             <Link
               to={user._id ? { pathname: `/profile/${user._id}`, profileInfo: user } : '/auth'}

@@ -11,6 +11,7 @@ import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
 import Profile from './components/Profile'
 import SongScreen from './components/SongScreen'
+import Search from './components/Search'
 
 function App() {
   const location = useLocation()
@@ -52,15 +53,10 @@ function App() {
           <Route exact path="/profile" render={props => <Profile user={user} {...props} />} />
           <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
             <Route exact path="/recordingBooth/EditLyrics" render={props => <EditLyrics {...props} />} />
-          <Route
-            exact
-            path="/editprofile-screen"
-            render={props => <EditProfileScreen {...props} />}
-          />
+          <Route exact path="/editprofile-screen" render={props => <EditProfileScreen {...props} />} />
           <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
-          {/* <Route exact path="/social-feed" render={(props) => <SocialFeed {...props} />} />
-          <Route exact path="/explore-feed" render={(props) => <SocialFeed {...props} />} /> */}
           <Route exact path="/SongScreen/:id" render={props => <SongScreen {...props} />} />
+          <Route exact path="/search" render={props => <Search {...props} />} />
         </Switch>
       </div>
     </TheContext.Provider>

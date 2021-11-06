@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import actions from '../api'
 import send from '../images/send.svg'
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
+  const history = useHistory();
 
   const listUsers = e => {
     if (e.target.value.length > 0) {
@@ -67,28 +68,35 @@ function Search(props) {
   }
 
   return (
-    <div className="comment-pop-out" ref={props.popUpSearchRef}>
-      <div className="inner-com">
-        <div className="com-cont-1">
-          <form className="social-comment-form">
-            <input
-              className="social-comment-input"
-              ref={props.searchInputRef}
-              onChange={listUsers}
-              type="text"
-              placeholder="Search for a user"
-            ></input>
-            <button className="comment-button" ref={props.searchButtonRef}>
-              <img className="social-icons si-send" src={send} alt="send" />
-            </button>
-          </form>
+    <div className="Search">
+      <div className="search-inner">
+        <div className="exit-container">
+          <div className="exit-button" >
+            X
+          </div>
         </div>
+        <div className="inner-com">
+          <div className="com-cont-1">
+            <form className="social-comment-form">
+              <input
+                className="social-comment-input"
+                ref={props.searchInputRef}
+                onChange={listUsers}
+                type="text"
+                placeholder="Search for a user"
+              ></input>
+              <button className="comment-button">
+                <img className="social-icons si-send" src={send} alt="send" />
+              </button>
+            </form>
+          </div>
 
-        <div className="com-cont-2">
-          <div className="comments-container">
-            <div className="comment-list-container com-list-cont">
-              <div className="com-list-search" ref={props.commSearchRef}>
-                <div className="com-search">{suggestions}</div>
+          <div className="com-cont-2">
+            <div className="comments-container">
+              <div className="comment-list-container com-list-cont">
+                <div className="com-list-search">
+                  <div className="com-search">{suggestions}</div>
+                </div>
               </div>
             </div>
           </div>
