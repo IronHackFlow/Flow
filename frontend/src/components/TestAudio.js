@@ -55,7 +55,7 @@ function TestAudio(props) {
   const [recordingDisplay, setRecordingDisplay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
-  const [songUploadObject, setSongUploadObject] = useState([]);
+  const [songUploadObject, setSongUploadObject] = useState();
   const [selectedOption, setSelectedOption] = useState();
   const [songNameUpdate, setSongNameUpdate] = useState();
   const [songNameInput, setSongNameInput] = useState();
@@ -90,17 +90,16 @@ function TestAudio(props) {
   const [recordingBooth] = useState(`#363636`);
 
   class SongData {
-    constructor(name, blobFile, songURL, lyrics, date, songDuration) {
-      this.name = name;
+    constructor(songName, blobFile, songURL, lyrics, date, songDuration) {
+      this.songName = songName;
       this.blobFile = blobFile;
       this.songURL = songURL;
       this.songLyricsStr = lyrics;
-      this.date = date;
+      this.songDate = date;
       this.songDuration = songDuration
-      this.user = user;
-      this.songName = null;
+      this.songUser = user;
       this.songCaption = null;
-      this.background = null;
+      this.songBG = null;
     }
   }
 
@@ -116,7 +115,7 @@ function TestAudio(props) {
     if (Object.keys(blobData).length !== 0) {
       const songDate = new Date();
       const songDuration = (dateAfter - dateBefore) - 200;
-      const songObject = new SongData(blobData.name, blobData.blob, blobData.url, [...lyricsArr], songDate, songDuration)
+      const songObject = new SongData(blobData.songName, blobData.songBlob, blobData.songURL, [...lyricsArr], songDate, songDuration)
       setAudioSrc(songObject.songURL)
       setSelectedOption(songObject.songURL)
       setSongUploadObject(songObject)
@@ -168,7 +167,7 @@ function TestAudio(props) {
         const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
         const url = window.URL.createObjectURL(mpegBlob);
         keyRef.current++
-        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, url: url })
+        setBlobData({ songName: `Take ${keyRef.current}`, songBlob: mpegBlob, songURL: url })
         chunks = []
   
         setRecorderState((prevState) => {
@@ -335,7 +334,7 @@ function TestAudio(props) {
     else {
       return (
         <>
-          {loadSelectedTake?.lyrics.map((row, index) => {
+          {loadSelectedTake?.songLyricsStr.map((row, index) => {
             return (
               <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
                 <div className="transcript-bar-no">
@@ -566,7 +565,7 @@ function TestAudio(props) {
       return allTakes.map((element, index) => {
         return (
           <option value={element.songURL} key={`${index}_${element.songURL}`}>
-            {element.songName ? element.songName : element.name}
+            {element.songName}
           </option>
         )
       })
@@ -585,14 +584,14 @@ function TestAudio(props) {
       const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
-      songUploadObject.date = new Date()
+      songUploadObject.songDate = new Date()
 
       actions
         .uploadFile(
           {
             fileName: fileName,
             fileType: 'audio/mpeg-3',
-            file: songUploadObject.blobFile,
+            file: songUploadObject.songURL,
             kind: 'song',
           },
           songUploadObject,
@@ -800,7 +799,7 @@ function TestAudio(props) {
  
               <div className="rhyme-lock-button rlb-3">
                 <div className="rhyme-lock-outset">
-                  <Link to={{pathname: "/recordingBooth/EditLyrics", songs: [...allTakes], currentSong: selectedOption}} className="rhyme-lock-btn">
+                  <Link to={{pathname: "/recordingBooth/EditLyrics", songs: [...allTakes], currentSong: songUploadObject}} className="rhyme-lock-btn">
                     Edit Lyrics
                   </Link>
                 </div>
@@ -854,9 +853,7 @@ function TestAudio(props) {
                       <AudioTimeSlider
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
-                        audioSrc={audioSrc}
-                        setAudioSrc={setAudioSrc}
-                        allTakes={allTakes}
+                        currentSong={songUploadObject}
                         location={recordingBooth}
                         />
                     </div>

@@ -365,8 +365,7 @@ function SongScreen(props) {
                 <AudioTimeSlider
                   isPlaying={isPlaying}
                   setIsPlaying={setIsPlaying}
-                  audioSrc={thisSong?.songURL}
-                  allTakes={allSongs}
+                  currentSong={thisSong}
                   location={songScreen}
                 />
               </div>

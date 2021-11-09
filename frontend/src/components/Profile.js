@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
 import TheContext from '../TheContext'
 import FormatDate from './utils/FormatDate'
@@ -11,16 +12,16 @@ import editicon from '../images/edit.svg'
 import logouticon from '../images/logout2.svg'
 import xExit from "../images/exit-x-2.svg"
 import play from '../images/play.svg'
+import pause from '../images/pause.svg'
 
 function Profile(props) {
   const { user, setUser, setUserViewed } = React.useContext(TheContext)
-
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
 
   useEffect(() => {
     actions
-      .getUserSongs({ songUser: props.location.profileInfo?._id })
+      .getUserSongs({ songUser: props.location.pathname.slice(9) })
       .then(res => {
         setThisUserSongs(res.data)
         console.log(res.data, 'lol')
@@ -29,7 +30,7 @@ function Profile(props) {
   }, [props.location])
 
   useEffect(() => {
-    if (props.location.profileInfo?._id === user._id) {
+    if (props.location.pathname.slice(9) === user._id) {
       actions
         .getOneUser()
         .then(res => {
@@ -39,7 +40,7 @@ function Profile(props) {
         .catch(console.error)
     } else {
       actions
-        .getAUser({ id: props.location.profileInfo?._id })
+        .getAUser({ id: props.location.pathname.slice(9) })
         .then(res => {
           setThisUser(res.data)
           console.log(res.data, 'shit son, what is the difference here ??')
@@ -47,9 +48,9 @@ function Profile(props) {
         .catch(console.error)
     }
   }, [props.location])
-
+  
   const logout = () => {
-    if (props.location.profileInfo._id === user._id) {
+    if (props.location.pathname.slice(9) === user._id) {
       setUser({})
       setThisUser({})
       setUserViewed({})
@@ -57,18 +58,28 @@ function Profile(props) {
     }
   }
 
-  const handlePlayPause = x => {
-    const currentPlayer = document.getElementById(`${x}`)
-    if (currentPlayer.paused) {
-      currentPlayer.play()
-    } else {
-      currentPlayer.pause()
-    }
-  }
-
   function ProfileSongs(eachSong) {
-    const songListRef = useRef()
     const [deleteCheck, setDeleteCheck] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
+    
+    const songListRef = useRef()
+    const audioRef = useRef();
+
+    useEffect(() => {
+      if (isPlaying) {
+        audioRef.current.play()
+      } else {
+        audioRef.current.pause()
+      }
+    }, [isPlaying])
+
+    const handlePlayPause = () => {
+      if (isPlaying) {
+        setIsPlaying(false)
+      } else {
+        setIsPlaying(true)
+      }
+    }
 
     const setFocus = () => {
       console.log(songListRef.current)
@@ -95,6 +106,10 @@ function Profile(props) {
 
     const setSongRefs = useCallback(node => {
       songListRef.current = node
+    }, [])
+
+    const setAudioRefs = useCallback(node => {
+      audioRef.current = node
     }, [])
 
     const showLyrics = () => {
@@ -156,51 +171,51 @@ function Profile(props) {
               
               <div className="buttons-container">
                 <div className="buttons-inner">
-                  {props.location.profileInfo._id === user._id
-                  ? (
-                    <>
-                      <div className="delete-btn-container">
-                        <div className="play-container">
-                          <div className="play-outset">
-                            <div className="play-inset">
-                              <img
-                                className="button-icons"
-                                src={xExit}
-                                onClick={() => deleteCheckHandler(false)}
-                                alt="exit"
-                              />
+                  {props.location.pathname.slice(9) === user._id
+                    ? (
+                      <>
+                        <div className="delete-btn-container">
+                          <div className="play-container">
+                            <div className="play-outset">
+                              <div className="play-inset">
+                                <img
+                                  className="button-icons"
+                                  src={xExit}
+                                  onClick={() => deleteCheckHandler(false)}
+                                  alt="exit"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="delete-btn-container">
-                        <div className="play-container">
-                          <div className="play-outset">
-                            <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
-                              <img
-                                className="button-icons"
-                                src={editicon}
-                                alt="edit"
-                              />
-                            </Link>
+                        <div className="delete-btn-container">
+                          <div className="play-container">
+                            <div className="play-outset">
+                              <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
+                                <img
+                                  className="button-icons"
+                                  src={editicon}
+                                  alt="edit"
+                                />
+                              </Link>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </>
+                      </>
                     ) : ""
                   }
                   <div className="delete-btn-container">
-                    <audio id={eachSong.songName} src={eachSong.songURL}></audio>
+                    <audio src={eachSong.songURL} ref={setAudioRefs}></audio>
                     <div className="play-container">
                       <div className="play-outset">
-                        <div className="play-inset">
+                        <button className="play-inset">
                           <img
                             className="button-icons bi-play-2"
-                            src={play}
-                            onClick={() => handlePlayPause(eachSong.songName)}
+                            src={isPlaying ? pause : play}
+                            onClick={() => handlePlayPause()}
                             alt="play"
                           />
-                        </div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -231,14 +246,13 @@ function Profile(props) {
             </div>
           )
         }
- 
       </li>
     )
   }
 
   const showProfileSongs = useCallback(() => {
     return thisUserSongs.map((eachSong, index) => {
-      return <ProfileSongs key={`${eachSong._id}_${index}`} {...eachSong} />
+      return <ProfileSongs key={`${uuidv4()}song${eachSong._id}_${index}`} {...eachSong} />
     })
   }, [thisUserSongs])
 
@@ -250,7 +264,7 @@ function Profile(props) {
             <div div className="user-pic-container">
               <div className="user-pic_shadow-div-outset">
                 <div className="user-pic_shadow-div-inset">
-                  <img className="profile-pic" src={thisUser.picture} alt="prof pic" />
+                  <img className="profile-pic" src={thisUser?.picture} alt="prof pic" />
                 </div>
               </div>
             </div>
@@ -258,7 +272,7 @@ function Profile(props) {
             <div className="user-name-container">
               <div className="user-name_shadow-div-outset">
                 <div className="user-name_shadow-div-inset">
-                  <p className="username-text-me">{thisUser.userName}</p>
+                  <p className="username-text-me">{thisUser?.userName}</p>
                 </div>
               </div>
             </div>
@@ -270,7 +284,7 @@ function Profile(props) {
             <div className="fields_shadow-div-outset">
               <div className="users-details-each ude-1">
                 <p style={{ color: 'white' }}>Name: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.given_name} {thisUser.family_name}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.given_name} {thisUser?.family_name}</p>
               </div>
 
               <div className="users-details-each ude-2">
@@ -282,25 +296,25 @@ function Profile(props) {
                     overflowX: 'scroll',
                   }}
                 >
-                  {thisUser.email}
+                  {thisUser?.email}
                 </p>
               </div>
 
               <div className="users-details-each ude-3">
                 <p style={{ color: 'white' }}>About: </p>
                 <p className="big-p" style={{ fontSize: '12px', marginLeft: '4%' }}>
-                  {thisUser.userAbout}
+                  {thisUser?.userAbout}
                 </p>
               </div>
 
               <div className="users-details-each ude-4">
                 <p style={{ color: 'white' }}>Twitter: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.userTwitter}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userTwitter}</p>
               </div>
 
               <div className="users-details-each ude-5">
                 <p style={{ color: 'white' }}>Instagram: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser.userInstagram}</p>
+                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userInstagram}</p>
               </div>
 
               <div className="users-details-each ude-6">
@@ -312,7 +326,7 @@ function Profile(props) {
                     overflowX: 'scroll',
                   }}
                 >
-                  {thisUser.userSoundCloud}
+                  {thisUser?.userSoundCloud}
                 </p>
               </div>
             </div>
@@ -327,7 +341,7 @@ function Profile(props) {
               </div>
               <div className="btn-title" style={{ flexDirection: 'column' }}>
                 <p>Followers</p>
-                <p style={{ color: 'pink' }}>{thisUser.followers?.length}</p>
+                <p style={{ color: 'pink' }}>{thisUser?.followers?.length}</p>
               </div>
             </div>
 
@@ -339,7 +353,7 @@ function Profile(props) {
               </div>
               <div className="btn-title" style={{ flexDirection: 'column' }}>
                 <p>Follows</p>
-                <p style={{ color: 'pink' }}>{thisUser.userFollows?.length}</p>
+                <p style={{ color: 'pink' }}>{thisUser?.userFollows?.length}</p>
               </div>
             </div>
 
@@ -387,7 +401,7 @@ function Profile(props) {
           </div>
         </div>
 
-        <NavBar socialDisplay="none" />
+        <NavBar />
       </div>
     </div>
   )

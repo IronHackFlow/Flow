@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import TheContext from "../TheContext";
+import actions from "../api"
 import { v4 as uuidv4 } from "uuid";
 import AudioTimeSlider from "./AudioTimeSlider";
 import edit from "../images/edit.svg";
@@ -27,31 +28,55 @@ function EditLyrics(props) {
     { song: beat5, name: "Drained" },
   ]);
   const [getTakes, setGetTakes] = useState([]);
+  const [thisUserSongs, setThisUserSongs] = useState([])
   const [currentSong, setCurrentSong] = useState();
+  const [allSongs, setAllSongs] = useState([])
   const [audioSrc, setAudioSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [linkLocation, setLinkLocation] = useState();
+  const [editLyrics] = useState(`#363636`);
+
   const lyricsPopUpRef = useRef();
   
   useEffect(() => {
     if (props.location.pathname === `/recordingBooth/EditLyrics`) {
       setLinkLocation(true)
       setGetTakes([...props.location.songs])
-      const getCurrentSong = props.location.songs.filter((item) => {
-        if (item.songURL === props.location.currentSong) {
-          setCurrentSong(item)
-          return item
-        }
-      })
+      setCurrentSong(props.location.currentSong)
     } else if (props.location.pathname === `/profile/${user?._id}/EditLyrics`) {
       setLinkLocation(false)
       setCurrentSong(props.location.currentSong)
     }
+    console.log(getTakes, "i wanna see this ok?")
   }, [linkLocation])
 
   useEffect(() => {
     setAudioSrc(currentSong?.songURL)
   }, [currentSong])
+
+  useEffect(() => {
+    if (props.location.currentSong === undefined) {
+      setCurrentSong(thisUserSongs[0])
+    }
+  }, [thisUserSongs])
+  
+  useEffect(() => {
+    actions
+      .getUserSongs({ songUser: user._id })
+      .then(res => {
+        setThisUserSongs(res.data)
+      })
+      .catch(console.error)
+  }, [])
+ 
+  useEffect(() => {
+    if (getTakes?.length > 0) {
+      const combineArr = [...getTakes, ...thisUserSongs]
+      setAllSongs(combineArr)
+    } else {
+      setAllSongs(thisUserSongs)
+    }
+  }, [getTakes, thisUserSongs])
 
   const closeWindow = () => {
     if (linkLocation === true) {
@@ -62,76 +87,76 @@ function EditLyrics(props) {
     } else {
       history.push({
         pathname: `/profile/${user?._id}`,
-        profileInfo: user,
         songs: props.location.songs
       })
     }
   }
 
   const mapTakes = useCallback(() => {
-    console.log(currentSong, "what it is?")
-    return currentSong?.songLyricsStr.map((each, index) => {
-      if (linkLocation === false) {
-        each = each.split(' ')
-      }
-      return (
-        <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
-          <div className="list-item-1_edit-lyrics">
-            <div className="edit-lyrics-container">
-              <div className="edit-lyrics_shadow-div-outset">
-                <div className="buttons-container">
-                  <div className="buttons-container_shadow-div-inset">
-                    <div className="bar-number-container">
-                      <div className="bar-num_shadow-div-inset">
-                        <div className="bar-num_shadow-div-outset">
-                          {index + 1}
+    if (currentSong) {
+      return currentSong?.songLyricsStr.map((each, index) => {
+        if (!(Array.isArray(each))) {
+          each = each.split(' ')
+        }
+        return (
+          <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
+            <div className="list-item-1_edit-lyrics">
+              <div className="edit-lyrics-container">
+                <div className="edit-lyrics_shadow-div-outset">
+                  <div className="buttons-container">
+                    <div className="buttons-container_shadow-div-inset">
+                      <div className="bar-number-container">
+                        <div className="bar-num_shadow-div-inset">
+                          <div className="bar-num_shadow-div-outset">
+                            {index + 1}
+                          </div>
                         </div>
                       </div>
+                      <div className="buttons_shadow-div-inset">
+                        <button className="buttons_shadow-div-outset">
+                          <img className="button-icons" src={edit} alt="edit" />
+                        </button>
+                      </div>
                     </div>
-                    <div className="buttons_shadow-div-inset">
-                      <button className="buttons_shadow-div-outset">
-                        <img className="button-icons" src={edit} alt="edit" />
+                  </div>
+                  <div className="each-lyric-container">
+                    <div className="each-word-container">
+                      {each.map((e, i) => {
+                        return (
+                          <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
+                        )
+                      })}
+                    </div>
+                  </div>
+                  <div className="close-btn-container">
+                    <div className="close-btn_shadow-div-inset">
+                      <button className="close-btn_shadow-div-outset">
+                        <img className="button-icons" src={del} alt="delete" />
                       </button>
                     </div>
                   </div>
                 </div>
-                <div className="each-lyric-container">
-                  <div className="each-word-container">
-                    {each.map((e, i) => {
-                      return (
-                        <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
-                      )
-                    })}
-                  </div>
-                </div>
-                <div className="close-btn-container">
-                  <div className="close-btn_shadow-div-inset">
-                    <button className="close-btn_shadow-div-outset">
-                      <img className="button-icons" src={del} alt="delete" />
-                    </button>
-                  </div>
-                </div>
+              </div>
+              <div className="list-item-2_lyric-suggestions">
               </div>
             </div>
-            <div className="list-item-2_lyric-suggestions">
-            </div>
-          </div>
-        </li>
-      )
-    })
+          </li>
+        )
+      })
+    }
   }, [currentSong, props.location])
 
   const mapMiniLyrics = () => {
     return currentSong?.songLyricsStr.map((each, index) => {
-      if (linkLocation === false) {
+      if (!(Array.isArray(each))) {
         each = each.split(' ')
       }
       return (
         <div className="display-each-container" key={`${uuidv4()}cont${each}and${index}`}>
           <p className="bar-no">{index + 1}</p>
-          {each.map((e) => {
+          {each.map((e, i) => {
             return (
-              <p className="each-word">{e}</p>
+              <p className="each-word" key={`${e}and${i}`}>{e}</p>
             )
           })}
         </div>
@@ -156,6 +181,24 @@ function EditLyrics(props) {
     let selectedValue = selectBox.options[selectBox.selectedIndex].value;
     document.getElementById("song").src = selectedValue;      
   };
+  const [selectedSong, setSelectedSong] = useState();
+
+  const chooseSongs = () => {
+    return allSongs.map((each, index) => {
+      return (
+        <option value={each.songURL} key={`${index}+${each._id}`}>
+          {each.songName}
+        </option>
+      )
+    })
+  }
+
+  const loadSong = (e) => {
+    setSelectedSong(e.target.value)
+    setCurrentSong(allSongs[e.target.selectedIndex])
+    console.log(allSongs[e.target.selectedIndex], "sdkfsdkfd")
+    console.log(selectedSong, "what itsdfs fkdjfs")
+  }
 
   const handlePlayPause = (bool) => {
     if (bool === true) {
@@ -183,13 +226,20 @@ function EditLyrics(props) {
           <div className="controls-1_options">
             <div className="options_shadow-div-outset">
               <div className="options-1_choose-song">
-
+                <select
+                  className="select-songs"
+                  value={selectedSong}
+                  onChange={(e) => loadSong(e)}
+                >
+                  {chooseSongs()}
+                </select>
               </div>
               <div className="options-2_toggle-lyrics">
 
               </div>
             </div>
           </div>
+
           <div className="controls-2_inner">
             <div className="inner_shadow-div-outset">
             <div className="flow-controls-1_playback-display">
@@ -235,8 +285,8 @@ function EditLyrics(props) {
                       <AudioTimeSlider
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
-                        audioSrc={audioSrc}
-                        allTakes={getTakes}
+                        currentSong={currentSong}
+                        location={editLyrics}
                         />
                     </div>
                   </div>

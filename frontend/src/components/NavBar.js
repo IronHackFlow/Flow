@@ -266,7 +266,6 @@ function NavBar(props) {
                 Home
               </div>
             </Link>
-            {/* to={user._id ? ("/recordingBooth") : ("/auth")} */}
 
             <Link
               to={"/recordingBooth"}
@@ -288,7 +287,7 @@ function NavBar(props) {
               </div>
             </Link>
 
-            <Link to="/search" className="navbar-btn-container" ref={searchBtnRef1} onClick={props.popUpSearch}>
+            <Link to={{pathname: "/search", link: locationIndicator?.pathname }} className="navbar-btn-container" ref={searchBtnRef1} onClick={props.popUpSearch}>
               <div className="navbar-btn_shadow-div-inset" ref={searchBtnRef2}>
                 <div className="navbar-btn_shadow-div-outset" ref={searchBtnRef3}>
                   <img
@@ -305,7 +304,7 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={user._id ? { pathname: `/profile/${user._id}`, profileInfo: user } : '/auth'}
+              to={user._id ? `/profile/${user._id}` : '/auth'}
               className="navbar-btn-container"
               ref={profileBtnRef1}
               style={{ borderRadius: '8px 40px 40px 8px' }}

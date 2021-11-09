@@ -421,12 +421,6 @@ function Home(props) {
             opacityRef1={opacityRef1}
             opacityRef2={opacityRef2}
           />
-          {/* <Search
-            popUpSearchRef={popUpSearchRef}
-            searchInputRef={searchInputRef}
-            searchButtonRef={searchButtonRef}
-            commSearchRef={commSearchRef}
-          /> */}
 
           <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
             <div className="song-details-1_actions">
@@ -505,10 +499,7 @@ function Home(props) {
                   <div className="user-pic-container">
                     <div className="user-pic_shadow-div-outset">
                       <Link
-                        to={{
-                          pathname: `/profile/${songUserInView._id}`,
-                          profileInfo: songUserInView,
-                        }}
+                        to={`/profile/${songUserInView._id}`}
                         className="user-pic_shadow-div-inset"
                       >
                         <img
@@ -549,9 +540,7 @@ function Home(props) {
                     <AudioTimeSlider
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
-                      audioSrc={audioInView}
-                      setAudioSrc={setAudioInView}
-                      allTakes={songInView}
+                      currentSong={songInView}
                       location={home}
                       />
                   </div>

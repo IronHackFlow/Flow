@@ -340,6 +340,7 @@
                     @include flexCenter(75%, 75%, 50%, center, center, row);
                     box-shadow: 2px 2px 3px 0px #838383, -2px -2px 2px #ffffff;
                     background: #ec6aa0;
+                    border: none;
                     
                     img {
                       height: 1.5em;
@@ -348,8 +349,8 @@
                     }
                     .bi-play-2 {
                       margin: 1px 0px 0px 4px;
-                      font-size: 0.7em;
                     }
+                    
                     &:active {
                       box-shadow: none;
                       background: none;

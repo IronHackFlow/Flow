@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef} from "react";
 
 function UseAudioPlayer(props) {
-  const audioRef = useRef();
   const [trackProgress, setTrackProgress] = useState(0);
+  const [songDuration, setSongDuration] = useState(0);
+  const [songMinutes, setSongMinutes] = useState(0);
+
+  const audioRef = useRef();
   const intervalRef = useRef();
   const secondsRef = useRef();
   const currentProgressRef = useRef(0);
   const currentMinutesRef = useRef();
-  const [songDuration, setSongDuration] = useState(0);
-  const [songMinutes, setSongMinutes] = useState(0);
-
 
   useEffect(() => {
     if (props.isPlaying) {
@@ -22,15 +22,6 @@ function UseAudioPlayer(props) {
     }
   }, [props.isPlaying])
   
-  // useEffect(() => {
-  //   return () => {
-  //     audioRef.current.pause();
-  //     clearInterval(intervalRef.current);
-  //     clearInterval(secondsRef.current)
-  //   }
-  // }, []);
-
-
   useEffect(() => {
     if (currentProgressRef.current >= 60) {
       let current = currentProgressRef.current
@@ -47,56 +38,29 @@ function UseAudioPlayer(props) {
   }, [currentProgressRef.current])
     
   useEffect(() => {
-    if (props.allTakes.length >= 1) {
-      let filteredDuration = ""
-  
-      props.allTakes.filter((each) => {
-        console.log(each)
-        if (each.songURL === audioRef.current.src) {
-          filteredDuration = each.songDuration / 1000
-        }
-      })
-
-      filteredDuration = Math.round(filteredDuration)
-      setSongDuration(filteredDuration)
-  
-      if (filteredDuration >= 60) {
-        const getMinutes = Math.floor(filteredDuration / 60)
-        const getSeconds = filteredDuration % 60
-        
-        if (getSeconds < 10) {
-          let getJustSeconds = `0${getSeconds}`
-          setSongMinutes(`${getMinutes}:${getJustSeconds}`)
-        }
-        else {
-          setSongMinutes(`${getMinutes}:${getSeconds}`)
-        }
-      } 
-    } else {
-      let filteredDuration = Math.round(props.allTakes.songDuration / 1000)
-      setSongDuration(filteredDuration)
-
-      if (filteredDuration >= 60) {
-        const getMinutes = Math.floor(filteredDuration / 60)
-        const getSeconds = filteredDuration % 60
-        
-        if (getSeconds < 10) {
-          let getJustSeconds = `0${getSeconds}`
-          setSongMinutes(`${getMinutes}:${getJustSeconds}`)
-        }
-        else {
-          setSongMinutes(`${getMinutes}:${getSeconds}`)
-        }
-      } 
-    }
-  }, [props.audioSrc, props.allTakes])
+    let filteredDuration = Math.round(props.currentSong?.songDuration / 1000)
+    setSongDuration(filteredDuration)
+    
+    if (filteredDuration >= 60) {
+      const getMinutes = Math.floor(filteredDuration / 60)
+      const getSeconds = filteredDuration % 60
+      
+      if (getSeconds < 10) {
+        let getJustSeconds = `0${getSeconds}`
+        setSongMinutes(`${getMinutes}:${getJustSeconds}`)
+      }
+      else {
+        setSongMinutes(`${getMinutes}:${getSeconds}`)
+      }
+    } 
+  }, [props.currentSong])
   
   useEffect(() => {
     audioRef.current.pause();
-    audioRef.current.src = props.audioSrc
+    audioRef.current.src = props.currentSong?.songURL
     setTrackProgress(audioRef.current.currentTime);
     currentProgressRef.current = 0
-  }, [props.audioSrc])
+  }, [props.currentSong])
   
   const currentPercentage = songDuration ? `${(trackProgress / songDuration) * 100}%` : '0%';
   const trackStyling = `
@@ -165,7 +129,7 @@ function UseAudioPlayer(props) {
           {songDuration >= 60 ? songMinutes : songDuration}
         </div>
       </div>
-      <audio ref={audioRef} src={props.audioSrc} />
+      <audio ref={audioRef} src={props.currentSong?.songURL} />
     </div>
   )
 }

@@ -14,6 +14,13 @@ function Search(props) {
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
   }
+  useEffect(() => {
+    console.log(props.location, "yall funny")
+  })
+
+  const closeWindow = () => {
+    history.push(props.location.link)
+  }
 
   const suggestionBox = info => {
     //render top 1, 2 or 4 suggestions
@@ -71,7 +78,7 @@ function Search(props) {
     <div className="Search">
       <div className="search-inner">
         <div className="exit-container">
-          <div className="exit-button" >
+          <div className="exit-button" onClick={() => closeWindow()}>
             X
           </div>
         </div>
@@ -80,7 +87,6 @@ function Search(props) {
             <form className="social-comment-form">
               <input
                 className="social-comment-input"
-                ref={props.searchInputRef}
                 onChange={listUsers}
                 type="text"
                 placeholder="Search for a user"
@@ -93,9 +99,11 @@ function Search(props) {
 
           <div className="com-cont-2">
             <div className="comments-container">
-              <div className="comment-list-container com-list-cont">
+              <div className="comment-list-container">
                 <div className="com-list-search">
-                  <div className="com-search">{suggestions}</div>
+                  <div className="com-search">
+                    {suggestions}
+                  </div>
                 </div>
               </div>
             </div>
