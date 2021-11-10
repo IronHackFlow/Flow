@@ -30,6 +30,7 @@ function EditLyrics(props) {
   const [getTakes, setGetTakes] = useState([]);
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [currentSong, setCurrentSong] = useState();
+  const [lyricsArray, setLyricsArray] = useState([]);
   const [allSongs, setAllSongs] = useState([])
   const [audioSrc, setAudioSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -79,6 +80,17 @@ function EditLyrics(props) {
     }
   }, [getTakes, thisUserSongs])
 
+  useEffect(() => {
+    let lyricArray = currentSong?.songLyricsStr.map((each, index) => {
+      if (typeof each === 'string') {
+        return each.split(' ')
+      } else {
+        return each
+      }
+    })
+    setLyricsArray(lyricArray)
+  }, [currentSong])
+
   const closeWindow = () => {
     if (linkLocation === true) {
       history.push({
@@ -94,8 +106,9 @@ function EditLyrics(props) {
   }
 
   function LyricLine(lyric, index) {
+    console.log(index, 'wtf')
     return (
-      <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
+      <li className="lyrics-list-item">
         <div className="list-item-1_edit-lyrics">
           <div className="edit-lyrics-container">
             <div className="edit-lyrics_shadow-div-outset">
@@ -142,16 +155,19 @@ function EditLyrics(props) {
 
   const mapTakes = useCallback(() => {
     if (currentSong) {
-      return currentSong?.songLyricsStr.map((each, index) => {
+      return lyricsArray?.map((each, index) => {
         if (!(Array.isArray(each))) {
           each = each.split(' ')
         }
         return (
-          <LyricLine key={`${uuidv4()}+${each}+${index}`} lyric={[...each]} {...index} />
+          <LyricLine 
+            key={`${uuidv4()}+${each}+${index}`} 
+            lyric={[...each]} 
+            {...index} />
         )
       })
     }
-  }, [currentSong, props.location])
+  }, [lyricsArray, props.location])
 
   const mapMiniLyrics = () => {
     return currentSong?.songLyricsStr.map((each, index) => {
