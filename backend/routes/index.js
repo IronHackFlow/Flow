@@ -76,6 +76,7 @@ router.post('/getManyUsersRT', async (req, res, next) => {
 router.post(`/getCommentsRT`, async (req, res, next) => {
   console.log('getting some song comments', req.body.id)
   let body = { id: req.body.id }
+  
   await Songs.findById(body.id)
     .populate('songComments')
     .populate({ path: 'songComments', populate: 'commUser' })

@@ -46,6 +46,7 @@ function EditLyrics(props) {
     } else if (props.location.pathname === `/profile/${user?._id}/EditLyrics`) {
       setLinkLocation(false)
       setCurrentSong(props.location.currentSong)
+      setSelectedSong(props.location.currentSong.songURL)
     }
     console.log(getTakes, "i wanna see this ok?")
   }, [linkLocation])
@@ -92,6 +93,53 @@ function EditLyrics(props) {
     }
   }
 
+  function LyricLine(lyric, index) {
+    return (
+      <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
+        <div className="list-item-1_edit-lyrics">
+          <div className="edit-lyrics-container">
+            <div className="edit-lyrics_shadow-div-outset">
+              <div className="buttons-container">
+                <div className="buttons-container_shadow-div-inset">
+                  <div className="bar-number-container">
+                    <div className="bar-num_shadow-div-inset">
+                      <div className="bar-num_shadow-div-outset">
+                        {index + 1}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="buttons_shadow-div-inset">
+                    <button className="buttons_shadow-div-outset">
+                      <img className="button-icons" src={edit} alt="edit" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="each-lyric-container">
+                <div className="each-word-container">
+                  {lyric.lyric.map((e, i) => {
+                    return (
+                      <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="close-btn-container">
+                <div className="close-btn_shadow-div-inset">
+                  <button className="close-btn_shadow-div-outset">
+                    <img className="button-icons" src={del} alt="delete" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="list-item-2_lyric-suggestions">
+          </div>
+        </div>
+      </li>
+    )
+  }
+
   const mapTakes = useCallback(() => {
     if (currentSong) {
       return currentSong?.songLyricsStr.map((each, index) => {
@@ -99,48 +147,7 @@ function EditLyrics(props) {
           each = each.split(' ')
         }
         return (
-          <li className="lyrics-list-item" key={`${uuidv4()}lyrics${index}`}>
-            <div className="list-item-1_edit-lyrics">
-              <div className="edit-lyrics-container">
-                <div className="edit-lyrics_shadow-div-outset">
-                  <div className="buttons-container">
-                    <div className="buttons-container_shadow-div-inset">
-                      <div className="bar-number-container">
-                        <div className="bar-num_shadow-div-inset">
-                          <div className="bar-num_shadow-div-outset">
-                            {index + 1}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="buttons_shadow-div-inset">
-                        <button className="buttons_shadow-div-outset">
-                          <img className="button-icons" src={edit} alt="edit" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="each-lyric-container">
-                    <div className="each-word-container">
-                      {each.map((e, i) => {
-                        return (
-                          <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
-                        )
-                      })}
-                    </div>
-                  </div>
-                  <div className="close-btn-container">
-                    <div className="close-btn_shadow-div-inset">
-                      <button className="close-btn_shadow-div-outset">
-                        <img className="button-icons" src={del} alt="delete" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="list-item-2_lyric-suggestions">
-              </div>
-            </div>
-          </li>
+          <LyricLine key={`${uuidv4()}+${each}+${index}`} lyric={[...each]} {...index} />
         )
       })
     }
@@ -154,11 +161,11 @@ function EditLyrics(props) {
       return (
         <div className="display-each-container" key={`${uuidv4()}cont${each}and${index}`}>
           <p className="bar-no">{index + 1}</p>
-          {each.map((e, i) => {
-            return (
-              <p className="each-word" key={`${e}and${i}`}>{e}</p>
-            )
-          })}
+            {each.map((e, i) => {
+              return (
+                <p className="each-word" key={`${e}and${i}`}>{e}</p>
+              )
+            })}
         </div>
       )
     })
@@ -212,15 +219,17 @@ function EditLyrics(props) {
   return (
     <div className="EditLyrics">
       <div className="section-1_profile-el">
-          <button className="close-screen" onClick={closeWindow}>
-            <img className="button-icons" src={exit} alt="exit" />
-          </button>
+        <button className="close-screen" onClick={closeWindow}>
+          <img className="button-icons" src={exit} alt="exit" />
+        </button>
       </div>
+
       <div className="section-2_lyrics-el">
-          <ul className="lyrics-list-container">
-            {mapTakes()}
-          </ul>
+        <ul className="lyrics-list-container">
+          {mapTakes()}
+        </ul>
       </div>
+
       <div className="section-3_controls">
         <div className="controls-container">
           <div className="controls-1_options">
@@ -242,59 +251,57 @@ function EditLyrics(props) {
 
           <div className="controls-2_inner">
             <div className="inner_shadow-div-outset">
-            <div className="flow-controls-1_playback-display">
-              <div className="play-btn-container">
-                <div className="play-btn-container_shadow-div-outset">
-                  <div className="play-btn-container_shadow-div-inset">
-                    {isPlaying ? (
-                      <button
-                        className="play-btn_shadow-div-outset play"
-                        aria-label="Pause"
-                        onClick={() => handlePlayPause(false)}
-                      >
-                        <img
-                          className="button-icons bi-pause"
-                          id="play-stop-img"
-                          src={pause}
-                          alt="pause icon"
-                        />
-                      </button>
-                    ) : (
-                      <button
-                      className="play-btn_shadow-div-outset pause"
-                      aria-label="Play"
-                      onClick={() => handlePlayPause(true)}
-                    >
-                      <img
-                        className="button-icons bi-play"
-                        id="play-stop-img"
-                        src={play}
-                        alt="play icon"
-                      />
-                    </button>
-                    )
-                  }
+              <div className="flow-controls-1_playback-display">
+                <div className="play-btn-container">
+                  <div className="play-btn-container_shadow-div-outset">
+                    <div className="play-btn-container_shadow-div-inset">
+                      {isPlaying ? (
+                        <button
+                          className="play-btn_shadow-div-outset play"
+                          aria-label="Pause"
+                          onClick={() => handlePlayPause(false)}
+                        >
+                          <img
+                            className="button-icons bi-pause"
+                            src={pause}
+                            alt="pause icon"
+                          />
+                        </button>
+                      ) : (
+                        <button
+                          className="play-btn_shadow-div-outset pause"
+                          aria-label="Play"
+                          onClick={() => handlePlayPause(true)}
+                        >
+                          <img
+                            className="button-icons bi-play"
+                            src={play}
+                            alt="play icon"
+                          />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="play-slider-container">
-                <div className="play-slider-container_shadow-div-outset">
-                  <div className="play-slider-container_shadow-div-inset">
-                    <div className="play-slider_shadow-div-outset">
-                      <AudioTimeSlider
-                        isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
-                        currentSong={currentSong}
-                        location={editLyrics}
+                <div className="play-slider-container">
+                  <div className="play-slider-container_shadow-div-outset">
+                    <div className="play-slider-container_shadow-div-inset">
+                      <div className="play-slider_shadow-div-outset">
+                        <AudioTimeSlider
+                          isPlaying={isPlaying}
+                          setIsPlaying={setIsPlaying}
+                          currentSong={currentSong}
+                          location={editLyrics}
                         />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            </div>
           </div>
+
           <div className="actions-2_record">
             <div className="record-container">
               <div className="record-1_select-beat">
@@ -303,6 +310,7 @@ function EditLyrics(props) {
                     <div className="select-beat-title">
                       Select A Beat :
                     </div>
+
                     <select id="selectBox" className="track-select" onChange={() => loadTrack()}>
                       {chooseTrack()}
                     </select>
@@ -313,6 +321,7 @@ function EditLyrics(props) {
           </div>
         </div>
       </div>
+
       <div className="section-4_display-lyrics" ref={lyricsPopUpRef}>
         <div className="display-lyrics-container">
           {mapMiniLyrics()}

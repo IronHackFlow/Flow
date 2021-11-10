@@ -149,9 +149,18 @@
                 @include flexCenter(32%, 100%, 10px, flex-end, center, column);
 
                 .options_shadow-div-outset {
-                    @include flexCenter(94%, 98%, 30px 30px 30px 5px, center, center, column);
+                    @include flexCenter(94%, 98%, 30px 30px 30px 5px, center, center, row);
                     box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
 
+                    .options-1_choose-song {
+                        @include flexCenter(75%, 47%, 30px 30px 30px 5px, center, center, column);
+                        box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+
+                    }
+                    .options-2_toggle-lyrics {
+                        @include flexCenter(75%, 50%, 30px 30px 30px 5px, center, center, column);
+
+                    }
                 }
             }
 

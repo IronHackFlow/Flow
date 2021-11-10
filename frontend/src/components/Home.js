@@ -36,7 +36,6 @@ function Home(props) {
   const [followersInView, setFollowersInView] = useState();
   const [userLiked, setUserLiked] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
-  const [searchPoppedUp, setSearchPoppedUp] = useState(false);
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
   const [totalComments, setTotalComments] = useState();
@@ -46,11 +45,6 @@ function Home(props) {
   const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
   
   const windowRef = useRef();
-  const popUpSearchRef = useRef();
-  const searchBtn = useRef();
-  const searchInputRef = useRef();
-  const searchButtonRef = useRef();
-  const commSearchRef = useRef();
   const commentPopUpRef = useRef();
   const commentInputRef = useRef();
   const commentButtonRef = useRef();
@@ -587,8 +581,6 @@ function Home(props) {
         </div>
 
         <NavBar
-          searchPoppedUp={searchPoppedUp}
-          searchBtn={searchBtn}
           profilePicRef={profilePicRef}
         />
       </div>
