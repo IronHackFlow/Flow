@@ -155,12 +155,27 @@
                     .options-1_choose-song {
                         @include flexCenter(75%, 47%, 30px 30px 30px 5px, center, center, column);
                         box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
-
                     }
                     
                     .options-2_toggle-lyrics {
                         @include flexCenter(75%, 50%, 30px 30px 30px 5px, center, center, column);
+                        
+                        .save-btn-container {
+                            @include flexCenter(100%, 50%, 30px 30px 30px 5px, center, center, column);
+                            
+                            .save-btn {
+                                @include flexCenter(90%, 50%, 30px, center, center, column);
+                                box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+                                border: none;
+                                background: #ec6aa0;
+                                color: white;
 
+                                &:active {
+                                    box-shadow: none;
+                                    background: #fa8cba;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -357,4 +372,8 @@
             }
         }
     }
+}
+
+.ghost {
+    background: rgb(93, 93, 93);
 }

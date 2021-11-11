@@ -183,6 +183,20 @@ function NavBar(props) {
       recordBtnRef4.current.style.filter =
         'invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)'
       recordBtnRef5.current.style.color = '#ff8ebd'
+
+      searchBtnRef1.current.style.background = 'initial'
+      searchBtnRef1.current.style.boxShadow = '2px 2px 5px #888888, -3px -3px 3px #ffffff'
+      searchBtnRef1.current.style.border = 'none'
+      searchBtnRef1.current.style.transition = 'all .4s'
+      searchBtnRef2.current.style.boxShadow =
+        'inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff'
+      searchBtnRef2.current.style.height = '40px'
+      searchBtnRef2.current.style.width = '40px'
+      searchBtnRef2.current.style.transition = 'all .4s'
+      searchBtnRef3.current.style.boxShadow = '2px 2px 3px 0px #929292, -2px -2px 3px #ffffff'
+      searchBtnRef4.current.style.filter =
+        'invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%)'
+      searchBtnRef5.current.style.color = '#ff8ebd'
     }
     else if (locationIndicator?.pathname === "/recordingBooth") {
       recordBtnRef1.current.style.background = "#ec6aa0";

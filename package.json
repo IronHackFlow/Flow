@@ -27,7 +27,12 @@
         "react-google-login": "^5.2.2",
         "react-intersection-observer": "^8.31.0",
         "react-scripts": "^4.0.3",
+        "react-sortablejs": "^6.0.0",
         "react-speech-recognition": "^3.7.0",
+        "sortablejs": "^1.14.0",
         "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@types/sortablejs": "^1.10.7"
     }
 }

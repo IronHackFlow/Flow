@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { ReactSortable } from "react-sortablejs";
 import TheContext from "../TheContext";
 import actions from "../api"
 import { v4 as uuidv4 } from "uuid";
@@ -32,6 +33,8 @@ function EditLyrics(props) {
   const [currentSong, setCurrentSong] = useState();
   const [lyricsArray, setLyricsArray] = useState([]);
   const [allSongs, setAllSongs] = useState([])
+  const [lyricsDisplay, setLyricsDisplay] = useState([]);
+  const [selectedSong, setSelectedSong] = useState();
   const [audioSrc, setAudioSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [linkLocation, setLinkLocation] = useState();
@@ -89,6 +92,7 @@ function EditLyrics(props) {
       }
     })
     setLyricsArray(lyricArray)
+
   }, [currentSong])
 
   const closeWindow = () => {
@@ -105,67 +109,58 @@ function EditLyrics(props) {
     }
   }
 
-  function LyricLine(lyric, index) {
-    console.log(index, 'wtf')
-    return (
-      <li className="lyrics-list-item">
-        <div className="list-item-1_edit-lyrics">
-          <div className="edit-lyrics-container">
-            <div className="edit-lyrics_shadow-div-outset">
-              <div className="buttons-container">
-                <div className="buttons-container_shadow-div-inset">
-                  <div className="bar-number-container">
-                    <div className="bar-num_shadow-div-inset">
-                      <div className="bar-num_shadow-div-outset">
-                        {index + 1}
+  useEffect(() => {
+    if (currentSong) {
+      let lyricDisplay = lyricsArray?.map((each, index) => {
+        return (
+          <li className="lyrics-list-item" key={`${each}+++${index}`}>
+            <div className="list-item-1_edit-lyrics">
+              <div className="edit-lyrics-container">
+                <div className="edit-lyrics_shadow-div-outset">
+                  <div className="buttons-container">
+                    <div className="buttons-container_shadow-div-inset">
+                      <div className="bar-number-container">
+                        <div className="bar-num_shadow-div-inset">
+                          <div className="bar-num_shadow-div-outset">
+                            {index + 1}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="buttons_shadow-div-inset">
+                        <button className="buttons_shadow-div-outset">
+                          <img className="button-icons" src={edit} alt="edit" />
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <div className="buttons_shadow-div-inset">
-                    <button className="buttons_shadow-div-outset">
-                      <img className="button-icons" src={edit} alt="edit" />
-                    </button>
+
+                  <div className="each-lyric-container">
+                    <div className="each-word-container">
+                      {each.map((e, i) => {
+                        return (
+                          <p key={`${i}+${e}`}>{e}</p>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="close-btn-container">
+                    <div className="close-btn_shadow-div-inset">
+                      <button className="close-btn_shadow-div-outset">
+                        <img className="button-icons" src={del} alt="delete" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="each-lyric-container">
-                <div className="each-word-container">
-                  {lyric.lyric.map((e, i) => {
-                    return (
-                      <p key={`${uuidv4()}e${e}${i}`}>{e}</p>
-                    )
-                  })}
-                </div>
-              </div>
-              <div className="close-btn-container">
-                <div className="close-btn_shadow-div-inset">
-                  <button className="close-btn_shadow-div-outset">
-                    <img className="button-icons" src={del} alt="delete" />
-                  </button>
-                </div>
+
+              <div className="list-item-2_lyric-suggestions">
               </div>
             </div>
-          </div>
-          <div className="list-item-2_lyric-suggestions">
-          </div>
-        </div>
-      </li>
-    )
-  }
-
-  const mapTakes = useCallback(() => {
-    if (currentSong) {
-      return lyricsArray?.map((each, index) => {
-        if (!(Array.isArray(each))) {
-          each = each.split(' ')
-        }
-        return (
-          <LyricLine 
-            key={`${uuidv4()}+${each}+${index}`} 
-            lyric={[...each]} 
-            {...index} />
+          </li>
         )
       })
+      setLyricsDisplay(lyricDisplay)
     }
   }, [lyricsArray, props.location])
 
@@ -204,7 +199,6 @@ function EditLyrics(props) {
     let selectedValue = selectBox.options[selectBox.selectedIndex].value;
     document.getElementById("song").src = selectedValue;      
   };
-  const [selectedSong, setSelectedSong] = useState();
 
   const chooseSongs = () => {
     return allSongs.map((each, index) => {
@@ -239,11 +233,19 @@ function EditLyrics(props) {
           <img className="button-icons" src={exit} alt="exit" />
         </button>
       </div>
-
       <div className="section-2_lyrics-el">
-        <ul className="lyrics-list-container">
-          {mapTakes()}
-        </ul>
+        <ReactSortable 
+          className="lyrics-list-container"
+          list={lyricsDisplay}
+          setList={setLyricsDisplay}
+          group="groupName"
+          ghostClass="ghost"
+          animation={200}
+          delayOnTouchStart={true}
+          delay={2}
+        >
+          {lyricsDisplay}
+        </ReactSortable>
       </div>
 
       <div className="section-3_controls">
@@ -260,7 +262,11 @@ function EditLyrics(props) {
                 </select>
               </div>
               <div className="options-2_toggle-lyrics">
-
+                <div className="save-btn-container">
+                  <button className="save-btn">
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>

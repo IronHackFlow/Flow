@@ -6120,6 +6120,55 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: column;
 }
 
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .save-btn-container {
+  height: 100%;
+  width: 50%;
+  border-radius: 30px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .save-btn-container .save-btn {
+  height: 90%;
+  width: 50%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+          box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+  border: none;
+  background: #ec6aa0;
+  color: white;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .save-btn-container .save-btn:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #fa8cba;
+}
+
 .EditLyrics .section-3_controls .controls-container .controls-2_inner {
   height: 34%;
   width: 100%;
@@ -6687,6 +6736,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   border: none;
   background: initial;
+}
+
+.ghost {
+  background: #5d5d5d;
 }
 
 .SongScreen {
