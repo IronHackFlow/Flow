@@ -6,10 +6,12 @@ import actions from "../api"
 import { v4 as uuidv4 } from "uuid";
 import AudioTimeSlider from "./AudioTimeSlider";
 import edit from "../images/edit.svg";
+import save from "../images/save-disk.svg";
 import del from "../images/delete2.svg";
 import exit from "../images/exit-x-2.svg";
 import down from "../images/down.svg";
 import pause from "../images/pause.svg";
+import move from "../images/move.svg";
 import play from "../images/play.svg";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
@@ -86,11 +88,12 @@ function EditLyrics(props) {
   useEffect(() => {
     let lyricArray = currentSong?.songLyricsStr.map((each, index) => {
       if (typeof each === 'string') {
-        return each.split(' ')
+        return { id: `${index}${each}`, array: each.split(' ') }
       } else {
-        return each
+        return { id: `${index}${each}`, array: each }
       }
     })
+    console.log(lyricArray, "wLSKJDFLKSDJFLKSJDFLKSJDFkdkdffkjd DKJFS sdkfj")
     setLyricsArray(lyricArray)
 
   }, [currentSong])
@@ -108,61 +111,112 @@ function EditLyrics(props) {
       })
     }
   }
+  const [editToggle, setEditToggle] = useState(false);
+  const [targetLine, setTargetLine] = useState();
 
-  useEffect(() => {
-    if (currentSong) {
-      let lyricDisplay = lyricsArray?.map((each, index) => {
-        return (
-          <li className="lyrics-list-item" key={`${each}+++${index}`}>
-            <div className="list-item-1_edit-lyrics">
-              <div className="edit-lyrics-container">
-                <div className="edit-lyrics_shadow-div-outset">
-                  <div className="buttons-container">
-                    <div className="buttons-container_shadow-div-inset">
-                      <div className="bar-number-container">
-                        <div className="bar-num_shadow-div-inset">
-                          <div className="bar-num_shadow-div-outset">
-                            {index + 1}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="buttons_shadow-div-inset">
-                        <button className="buttons_shadow-div-outset">
-                          <img className="button-icons" src={edit} alt="edit" />
-                        </button>
+  function EachLyricLine(each, index) {
+
+    const editLyricLine = (each) => {
+      setTargetLine(each)
+      setEditToggle(true)
+      console.log(targetLine, "WTF")
+      console.log(each, "editing")
+    }
+
+    const deleteLyricLine = (e) => {
+      console.log(e, "deleted")
+    }
+    
+    const saveLyricLine = (e) => {
+      setEditToggle(false)
+      console.log(e, "saved")
+    }
+
+    const mapEachLyric = useCallback((wordArr) => {
+      console.log(wordArr, "WHATAMAIDOING?")
+      console.log(targetLine, "WWWWHHAHAHAHTDOING?")
+      if (editToggle) {
+        if (wordArr.id === targetLine.id) {
+          console.log('guess so')
+          wordArr.array.map((each, index) => {
+            console.log(each, "YO Y O YO WHATF THE FUCK")
+            return (
+              <input placeholder={`${each}`} key={`${each}++${index}`}></input>
+            )
+          })
+        }
+      } else {
+        console.log("GUESSSS NOT")
+        return wordArr.array?.map((each, index) => {
+          return <p key={`${each}+${index}`} id={`${each}`}>{each}</p>
+        })
+      }
+    }, [editToggle])
+
+    return (
+      <li className="lyrics-list-item" key={`${each.id}+++${index}`}>
+        <div className="list-item-1_edit-lyrics">
+          <div className="edit-lyrics-container">
+            <div className="edit-lyrics_shadow-div-outset">
+              <div className="buttons-container">
+                <div className="buttons-container_shadow-div-inset">
+                  <div className="bar-number-container">
+                    <div className="bar-num_shadow-div-inset">
+                      <div className="bar-num_shadow-div-outset">
+                        {index + 1}
                       </div>
                     </div>
                   </div>
-
-                  <div className="each-lyric-container">
-                    <div className="each-word-container">
-                      {each.map((e, i) => {
-                        return (
-                          <p key={`${i}+${e}`}>{e}</p>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="close-btn-container">
-                    <div className="close-btn_shadow-div-inset">
-                      <button className="close-btn_shadow-div-outset">
-                        <img className="button-icons" src={del} alt="delete" />
+                  <div className="buttons_shadow-div-inset">
+                    {editToggle ? (
+                      <button className="buttons_shadow-div-outset" onClick={() => saveLyricLine(each)}>
+                        <img className="button-icons" src={save} alt="save" />
                       </button>
-                    </div>
+                    ) : (
+                      <button className="buttons_shadow-div-outset" onClick={() => editLyricLine(each)}>
+                        <img className="button-icons" src={edit} alt="edit" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
 
-              <div className="list-item-2_lyric-suggestions">
+              <div className="each-lyric-container">
+                <div className="each-word-container">
+                  {mapEachLyric(each)}
+                </div>
+              </div>
+
+              <div className="close-btn-container">
+                <div className="close-btn_shadow-div-inset">
+                  <button className="close-btn_shadow-div-outset" onClick={(e) => deleteLyricLine(e)}>
+                    <img className="button-icons" src={del} alt="delete" />
+                  </button>
+                </div>
               </div>
             </div>
-          </li>
+          </div>
+
+          <div className="list-item-2_lyric-suggestions">
+            <div className="handle">
+              <img className="button-icons" src={move} alt="move" />
+            </div>
+          </div>
+        </div>
+      </li>
+    )
+  }
+  
+  useEffect(() => {
+    if (currentSong) {
+      let lyricDisplay = lyricsArray?.map((each, index) => {
+        return (
+          <EachLyricLine {...each} index={index} />
         )
       })
       setLyricsDisplay(lyricDisplay)
     }
-  }, [lyricsArray, props.location])
+  }, [lyricsArray, props.location, editToggle])
 
   const mapMiniLyrics = () => {
     return currentSong?.songLyricsStr.map((each, index) => {
@@ -241,6 +295,7 @@ function EditLyrics(props) {
           group="groupName"
           ghostClass="ghost"
           animation={200}
+          handle=".handle"
           delayOnTouchStart={true}
           delay={2}
         >
@@ -253,13 +308,18 @@ function EditLyrics(props) {
           <div className="controls-1_options">
             <div className="options_shadow-div-outset">
               <div className="options-1_choose-song">
-                <select
-                  className="select-songs"
-                  value={selectedSong}
-                  onChange={(e) => loadSong(e)}
-                >
-                  {chooseSongs()}
-                </select>
+                <div className="choose-song_shadow-div-inset">
+                  <div className="choose-song-title">
+                    Select A Song:
+                  </div>
+                  <select
+                    className="select-songs"
+                    value={selectedSong}
+                    onChange={(e) => loadSong(e)}
+                  >
+                    {chooseSongs()}
+                  </select>
+                </div>
               </div>
               <div className="options-2_toggle-lyrics">
                 <div className="save-btn-container">

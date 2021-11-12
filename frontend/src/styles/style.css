@@ -5845,7 +5845,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #ec6aa0;
+  background: #ec6aa0;
   border: none;
   color: white;
   -webkit-box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #ffffff;
@@ -5857,6 +5857,17 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   width: 1.6em;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active {
+  background: initial;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #3f3f3f, inset -1px -1px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #3f3f3f, inset -1px -1px 3px #ffffff;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active img {
+  -webkit-filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+          filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
 
 .EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container {
@@ -5964,7 +5975,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: initial;
+  background: initial;
   border: none;
   color: white;
   -webkit-box-shadow: 1px 1px 6px 0px #4d4d4d, -1px -1px 1px #d0d0d0;
@@ -5977,6 +5988,17 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   width: 1.7em;
 }
 
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active {
+  background: #ec6aa0;
+  -webkit-box-shadow: inset 1px 1px 6px 0px #37071b, inset -1px -1px 1px #ffffff;
+          box-shadow: inset 1px 1px 6px 0px #37071b, inset -1px -1px 1px #ffffff;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
 .EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions {
   height: 35%;
   width: 100%;
@@ -5984,9 +6006,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -5994,6 +6016,34 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .handle {
+  height: 25px;
+  width: 25px;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .handle img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+  height: 1.3em;
+  width: 1.3em;
 }
 
 .EditLyrics .section-3_controls {
@@ -6099,6 +6149,50 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: column;
   -webkit-box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
           box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset {
+  height: 90%;
+  width: 96%;
+  border-radius: 30px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+          box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .choose-song-title {
+  height: 40%;
+  width: 90%;
+  color: pink;
+  font-size: 11px;
+  text-align: start;
+  text-indent: 3%;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .select-songs {
+  height: 50%;
+  width: 90%;
+  color: white;
+  background: #313131;
+  border: none;
+  border-radius: 30px;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .select-songs:focus {
+  border: 1px solid white;
+  outline: none !important;
 }
 
 .EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics {

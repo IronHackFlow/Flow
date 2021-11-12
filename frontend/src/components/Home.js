@@ -8,7 +8,6 @@ import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
 import AudioTimeSlider from "./AudioTimeSlider.js";
 import Comments from "./Comments.js";
-import Search from "./Search.js";
 import NavBar from "./NavBar.js";
 import gifsArr from "../images/gifs.json";
 import play from "../images/play.svg";

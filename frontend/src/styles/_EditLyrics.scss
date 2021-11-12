@@ -67,7 +67,7 @@
     
                                         .buttons_shadow-div-outset {
                                             @include flexCenter(85%, 76%, 3px, center, center, row);
-                                            background-color: #ec6aa0;
+                                            background: #ec6aa0;
                                             border: none;
                                             color: white;
                                             box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #ffffff;
@@ -77,6 +77,15 @@
                                                 width: 1.6em;
                                                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 
+                                            }
+                                            &:active {
+                                                background: initial;
+                                                box-shadow: inset 2px 2px 3px 0px #3f3f3f, inset -1px -1px 3px #ffffff;
+
+                                                img {
+                                                    filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+
+                                                }
                                             }
                                         }
                                     }
@@ -109,7 +118,7 @@
 
                                     .close-btn_shadow-div-outset {
                                         @include flexCenter(77%, 74%, 50px, center, center, row);
-                                        background-color: initial;
+                                        background: initial;
                                         border: none;
                                         color: white;
                                         box-shadow: 1px 1px 6px 0px #4d4d4d, -1px -1px 1px #d0d0d0;
@@ -119,21 +128,39 @@
                                             height: 1.7em;
                                             width: 1.7em;
                                         }
+                                        &:active {
+                                            background: #ec6aa0;
+                                            box-shadow: inset 1px 1px 6px 0px #37071b, inset -1px -1px 1px #ffffff;
+
+                                            img {
+                                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                     .list-item-2_lyric-suggestions {
-                        @include flexCenter(35%, 100%, 8px, flex-end, center, row);
+                        @include flexCenter(35%, 100%, 8px, flex-start, center, row);
 
-
+                        .handle {
+                            @include flexCenter(25px, 25px, 8px, center, center, row);
+                            margin-left: 1%;
+                            margin-bottom: 1%;
+                            
+                            img {
+                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                                height: 1.3em;
+                                width: 1.3em;
+                            }
+                        }
                     }
                 }
             }
         }
-
     }
+
     .section-3_controls {
         @include flexCenter(22%, 100%, 30px 30px 0px 0px, center, center, column);
         background: linear-gradient(341deg, #202020, #373737);
@@ -155,6 +182,34 @@
                     .options-1_choose-song {
                         @include flexCenter(75%, 47%, 30px 30px 30px 5px, center, center, column);
                         box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+                        
+                        .choose-song_shadow-div-inset {
+                            @include flexCenter(90%, 96%, 30px 30px 30px 5px, center, center, column);
+                            box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+
+                            .choose-song-title  {
+                                height: 40%;
+                                width: 90%;
+                                color: pink;
+                                font-size: 11px;
+                                text-align: start;
+                                text-indent: 3%;
+                            }
+
+                            .select-songs {
+                                height: 50%;
+                                width: 90%;
+                                color: white;
+                                background: #313131;
+                                border: none;
+                                border-radius: 30px;
+
+                                &:focus {
+                                    border: 1px solid white;
+                                    outline: none !important;
+                                }
+                            }
+                        }
                     }
                     
                     .options-2_toggle-lyrics {
