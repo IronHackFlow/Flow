@@ -96,15 +96,59 @@
                                 @include flexCenter(100%, 67%, 8px, flex-start, flex-start, row);
                                 overflow-y: scroll;
 
+                                .confirm-delete-container {
+                                    @include flexCenter(100%, 100%, 8px, center, center, column);
+
+                                    .confirm-delete-title {
+                                        @include flexCenter(30%, 100%, 8px, flex-start, flex-start, row);
+                                       
+                                        p {
+                                            height: 16px;
+                                            font-size: 13px;
+                                            color: white;
+                                            margin-left: 4px;
+                                            
+                                        }
+                                    }
+                                    .word-btn-container {
+                                        @include flexCenter(70%, 100%, 8px, flex-end, center, row);
+
+                                        .word-cancel {
+                                            @include flexCenter(60%, 20%, 50px, center, center, row);
+                                            margin-right: 4%;
+                                            background: initial;
+                                            border: none;
+                                            box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #cdcdcd;
+                                            color: white;
+                                            font-size: 12px;
+                                        }
+                                        .word-delete {
+                                            @include flexCenter(60%, 20%, 50px, center, center, row);
+                                            margin-right: 21%;
+                                            background: #ec6aa0;
+                                            border: none;
+                                            box-shadow: 3px 3px 5px 0px #3f3f3f, -1px -1px 3px #cdcdcd;
+                                            color: white;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
+
                                 .each-word-container {
                                     @include flexCenter(16px, initial, 8px, flex-start, flex-start, row);
                                     flex-wrap: wrap;
+
                                     p {
                                         height: 16px;
                                         font-size: 13px;
                                         color: white;
                                         margin-left: 4px;
-                                        
+                                    }
+                                    input {
+                                        height: 16px;
+                                        font-size: 13px;
+                                        color: white;
+                                        margin-left: 4px;
                                     }
                                 }
                             }

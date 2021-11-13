@@ -114,47 +114,46 @@ function EditLyrics(props) {
   const [editToggle, setEditToggle] = useState(false);
   const [targetLine, setTargetLine] = useState();
 
-  function EachLyricLine(each, index) {
+  function EachLyricLine(each) {
+    const [deleteBool, setDeleteBool] = useState(false);
+    const lyricRefs = useRef();
 
     const editLyricLine = (each) => {
       setTargetLine(each)
       setEditToggle(true)
-      console.log(targetLine, "WTF")
       console.log(each, "editing")
     }
 
     const deleteLyricLine = (e) => {
-      console.log(e, "deleted")
+      setLyricsArray(prevArr => prevArr.filter((each) => each.id !== e.id))
     }
     
     const saveLyricLine = (e) => {
       setEditToggle(false)
       console.log(e, "saved")
     }
+    const setLyricRefs = useCallback((node) => {
+      lyricRefs.current = node
+    }, [])
 
     const mapEachLyric = useCallback((wordArr) => {
-      console.log(wordArr, "WHATAMAIDOING?")
-      console.log(targetLine, "WWWWHHAHAHAHTDOING?")
       if (editToggle) {
-        if (wordArr.id === targetLine.id) {
-          console.log('guess so')
-          wordArr.array.map((each, index) => {
-            console.log(each, "YO Y O YO WHATF THE FUCK")
-            return (
-              <input placeholder={`${each}`} key={`${each}++${index}`}></input>
-            )
-          })
-        }
+        return wordArr.array.map((each, index) => {
+          if (wordArr.id === targetLine.id) {
+            return <input placeholder={`${each}`} key={`${each}++${index}`}></input>
+          } else {
+            return <p key={`${each}+${index}`} id={`${each}`}>{each}</p>
+          }
+        })
       } else {
-        console.log("GUESSSS NOT")
         return wordArr.array?.map((each, index) => {
           return <p key={`${each}+${index}`} id={`${each}`}>{each}</p>
         })
       }
-    }, [editToggle])
+    }, [])
 
     return (
-      <li className="lyrics-list-item" key={`${each.id}+++${index}`}>
+      <li className="lyrics-list-item" key={`${each.id}+++${each.index}`} ref={setLyricRefs}>
         <div className="list-item-1_edit-lyrics">
           <div className="edit-lyrics-container">
             <div className="edit-lyrics_shadow-div-outset">
@@ -163,12 +162,12 @@ function EditLyrics(props) {
                   <div className="bar-number-container">
                     <div className="bar-num_shadow-div-inset">
                       <div className="bar-num_shadow-div-outset">
-                        {index + 1}
+                        {each.index + 1}
                       </div>
                     </div>
                   </div>
                   <div className="buttons_shadow-div-inset">
-                    {editToggle ? (
+                    {(editToggle && (targetLine.id === each.id)) ? (
                       <button className="buttons_shadow-div-outset" onClick={() => saveLyricLine(each)}>
                         <img className="button-icons" src={save} alt="save" />
                       </button>
@@ -182,14 +181,31 @@ function EditLyrics(props) {
               </div>
 
               <div className="each-lyric-container">
-                <div className="each-word-container">
-                  {mapEachLyric(each)}
-                </div>
+                {deleteBool ? (
+                  <div className="confirm-delete-container">
+                    <div className="confirm-delete-title">
+                      <p style={{color: "pink"}}>Do you want to delete this line?</p>
+                    </div>
+                    <div className="word-btn-container">
+                      <button className="word-cancel" onClick={() => setDeleteBool(false)}>
+                        Cancel
+                      </button>
+                      <button className="word-delete" onClick={() => deleteLyricLine(each)}>
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="each-word-container">
+                    {mapEachLyric(each)}
+                  </div>
+                )}
+
               </div>
 
               <div className="close-btn-container">
                 <div className="close-btn_shadow-div-inset">
-                  <button className="close-btn_shadow-div-outset" onClick={(e) => deleteLyricLine(e)}>
+                  <button className="close-btn_shadow-div-outset" onClick={() => setDeleteBool(true)}>
                     <img className="button-icons" src={del} alt="delete" />
                   </button>
                 </div>
@@ -216,7 +232,7 @@ function EditLyrics(props) {
       })
       setLyricsDisplay(lyricDisplay)
     }
-  }, [lyricsArray, props.location, editToggle])
+  }, [lyricsArray, props.location, editToggle, targetLine])
 
   const mapMiniLyrics = () => {
     return currentSong?.songLyricsStr.map((each, index) => {
