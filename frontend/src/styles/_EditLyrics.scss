@@ -135,7 +135,7 @@
                                 }
 
                                 .each-word-container {
-                                    @include flexCenter(16px, initial, 8px, flex-start, flex-start, row);
+                                    @include flexCenter(100%, initial, 8px, flex-start, flex-start, row);
                                     flex-wrap: wrap;
 
                                     p {
@@ -144,11 +144,21 @@
                                         color: white;
                                         margin-left: 4px;
                                     }
+
                                     input {
-                                        height: 16px;
+                                        @include flexCenter(18px, initial, 50px, center, center, row);
                                         font-size: 13px;
+                                        background: initial;
                                         color: white;
+                                        box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
                                         margin-left: 4px;
+                                        border: none;
+
+                                        &::placeholder {
+                                            color: white;
+                                            text-align: start;
+                                            text-indent: 8px;
+                                        }
                                     }
                                 }
                             }

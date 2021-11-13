@@ -40,6 +40,8 @@ function EditLyrics(props) {
   const [audioSrc, setAudioSrc] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [linkLocation, setLinkLocation] = useState();
+  const [editToggle, setEditToggle] = useState(false);
+  const [targetLine, setTargetLine] = useState();
   const [editLyrics] = useState(`#363636`);
 
   const lyricsPopUpRef = useRef();
@@ -111,8 +113,6 @@ function EditLyrics(props) {
       })
     }
   }
-  const [editToggle, setEditToggle] = useState(false);
-  const [targetLine, setTargetLine] = useState();
 
   function EachLyricLine(each) {
     const [deleteBool, setDeleteBool] = useState(false);
@@ -136,11 +136,15 @@ function EditLyrics(props) {
       lyricRefs.current = node
     }, [])
 
+    const getInputId = () => {
+      
+    }
+
     const mapEachLyric = useCallback((wordArr) => {
       if (editToggle) {
         return wordArr.array.map((each, index) => {
           if (wordArr.id === targetLine.id) {
-            return <input placeholder={`${each}`} key={`${each}++${index}`}></input>
+            return <input placeholder={`${each}`} key={`${each}++${index}`} style={{width: `${each.length * 6 + 16}px`}}></input>
           } else {
             return <p key={`${each}+${index}`} id={`${each}`}>{each}</p>
           }
@@ -200,7 +204,6 @@ function EditLyrics(props) {
                     {mapEachLyric(each)}
                   </div>
                 )}
-
               </div>
 
               <div className="close-btn-container">
@@ -227,7 +230,7 @@ function EditLyrics(props) {
     if (currentSong) {
       let lyricDisplay = lyricsArray?.map((each, index) => {
         return (
-          <EachLyricLine {...each} index={index} />
+          <EachLyricLine {...each} index={index} key={`${each.id}lyric${index}`} />
         )
       })
       setLyricsDisplay(lyricDisplay)

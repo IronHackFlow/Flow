@@ -6007,7 +6007,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container {
-  height: 16px;
+  height: 100%;
   width: initial;
   border-radius: 8px;
   display: -webkit-box;
@@ -6035,10 +6035,53 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container input {
-  height: 16px;
+  height: 18px;
+  width: initial;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   font-size: 13px;
+  background: initial;
   color: white;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
+          box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 3px #a7a7a7;
   margin-left: 4px;
+  border: none;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container input::-webkit-input-placeholder {
+  color: white;
+  text-align: start;
+  text-indent: 8px;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container input:-ms-input-placeholder {
+  color: white;
+  text-align: start;
+  text-indent: 8px;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container input::-ms-input-placeholder {
+  color: white;
+  text-align: start;
+  text-indent: 8px;
+}
+
+.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container input::placeholder {
+  color: white;
+  text-align: start;
+  text-indent: 8px;
 }
 
 .EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container {
