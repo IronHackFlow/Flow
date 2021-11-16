@@ -90,9 +90,9 @@ function EditLyrics(props) {
   useEffect(() => {
     let lyricArray = currentSong?.songLyricsStr.map((each, index) => {
       if (typeof each === 'string') {
-        return { id: `${index}${each}`, array: each.split(' ') }
+        return { id: `${index + 1}${each}`, array: each.split(' ') }
       } else {
-        return { id: `${index}${each}`, array: each }
+        return { id: `${index + 1}${each}`, array: each }
       }
     })
     console.log(lyricArray, "wLSKJDFLKSDJFLKSJDFLKSJDFkdkdffkjd DKJFS sdkfj")
@@ -117,6 +117,7 @@ function EditLyrics(props) {
   function EachLyricLine(each) {
     const [deleteBool, setDeleteBool] = useState(false);
     const lyricRefs = useRef();
+    const regexNo = /^(?:\d*)/g
 
     const editLyricLine = (each) => {
       setTargetLine(each)
@@ -132,13 +133,10 @@ function EditLyrics(props) {
       setEditToggle(false)
       console.log(e, "saved")
     }
+    
     const setLyricRefs = useCallback((node) => {
       lyricRefs.current = node
     }, [])
-
-    const getInputId = () => {
-      
-    }
 
     const mapEachLyric = useCallback((wordArr) => {
       if (editToggle) {
@@ -157,7 +155,7 @@ function EditLyrics(props) {
     }, [])
 
     return (
-      <li className="lyrics-list-item" key={`${each.id}+++${each.index}`} ref={setLyricRefs}>
+      <li className="lyrics-list-item" ref={setLyricRefs}>
         <div className="list-item-1_edit-lyrics">
           <div className="edit-lyrics-container">
             <div className="edit-lyrics_shadow-div-outset">
@@ -166,7 +164,7 @@ function EditLyrics(props) {
                   <div className="bar-number-container">
                     <div className="bar-num_shadow-div-inset">
                       <div className="bar-num_shadow-div-outset">
-                        {each.index + 1}
+                        {each.id.match(regexNo)}
                       </div>
                     </div>
                   </div>
@@ -235,17 +233,14 @@ function EditLyrics(props) {
       })
       setLyricsDisplay(lyricDisplay)
     }
-  }, [lyricsArray, props.location, editToggle, targetLine])
+  }, [props.location, lyricsArray, editToggle, targetLine])
 
-  const mapMiniLyrics = () => {
-    return currentSong?.songLyricsStr.map((each, index) => {
-      if (!(Array.isArray(each))) {
-        each = each.split(' ')
-      }
+  const mapMiniLyrics = useCallback(() => {
+    return lyricsArray?.map((each, index) => {
       return (
-        <div className="display-each-container" key={`${uuidv4()}cont${each}and${index}`}>
+        <div className="display-each-container" key={`cont${each.id}and${index}`}>
           <p className="bar-no">{index + 1}</p>
-            {each.map((e, i) => {
+          {each.array.map((e, i) => {
               return (
                 <p className="each-word" key={`${e}and${i}`}>{e}</p>
               )
@@ -253,17 +248,11 @@ function EditLyrics(props) {
         </div>
       )
     })
-  }
+  }, [lyricsArray, lyricsDisplay])
 
-  // const showMiniLyrics = (bool) => {
-  //   if (bool === true) {
-  //     lyricsPopUpRef.current.style.height = lyricsPopUpRef.current.scrollHeight
-  //     console.log(lyricsPopUpRef.current.scrollHeight, "show it!")
-  //   }
-  // }
   const chooseTrack = () => {
     return tracks.map((element, index) => {
-      return <option key={`${element}_${index}`} value={element.song}>{element.name} </option>;
+      return <option key={`${element}_${index}`} value={element.song}>{element.name}</option>;
     });
   };
 
@@ -299,6 +288,12 @@ function EditLyrics(props) {
     }
   }
 
+  const setLyricsArrayHandler = (e) => {
+    let getItem = lyricsArray.filter((each) => each.id === lyricsDisplay[e.newDraggableIndex].props.id)
+    lyricsArray.splice(e.oldDraggableIndex, 1)
+    lyricsArray.splice(e.newDraggableIndex, 0, getItem[0])
+  }
+
   return (
     <div className="EditLyrics">
       <div className="section-1_profile-el">
@@ -308,6 +303,7 @@ function EditLyrics(props) {
       </div>
       <div className="section-2_lyrics-el">
         <ReactSortable 
+          tag="ul"
           className="lyrics-list-container"
           list={lyricsDisplay}
           setList={setLyricsDisplay}
@@ -315,13 +311,14 @@ function EditLyrics(props) {
           ghostClass="ghost"
           animation={200}
           handle=".handle"
+          onSort={(e) => setLyricsArrayHandler(e)}
           delayOnTouchStart={true}
           delay={2}
         >
           {lyricsDisplay}
         </ReactSortable>
       </div>
-
+          {console.log(lyricsArray, "what it do?")}
       <div className="section-3_controls">
         <div className="controls-container">
           <div className="controls-1_options">
