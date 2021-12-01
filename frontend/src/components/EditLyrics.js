@@ -318,7 +318,7 @@ function EditLyrics(props) {
           {lyricsDisplay}
         </ReactSortable>
       </div>
-          {console.log(lyricsArray, "what it do?")}
+
       <div className="section-3_controls">
         <div className="controls-container">
           <div className="controls-1_options">
