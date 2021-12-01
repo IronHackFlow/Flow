@@ -178,7 +178,14 @@ function Comments(props) {
         setMenuBool(false)
       }
     }
-
+    const [editCommentText, setEditCommentText] = useState(false);
+    const editCommentHandler = () => {
+      if (editCommentText) {
+        setEditCommentText(false)
+      } else {
+        setEditCommentText(true)
+      }
+    }
     return (
       <div className="comment-list" ref={setCommentListRefs}>
         <div className="comment-list-photo">
@@ -207,9 +214,17 @@ function Comments(props) {
             <p className="comment-date">
               <FormatDate date={each.commDate} />
             </p>
-            <p className="comment-text" ref={commentTextRef}>
-              {each.comment}
-            </p>
+            {editCommentText ? (
+              <textarea 
+                className="comment-text-input" 
+                ref={commentTextRef}
+                placeholder={each.comment}>
+              </textarea>
+            ) : (
+              <p className="comment-text" ref={commentTextRef}>
+                {each.comment}
+              </p>
+            )}
           </div>
 
           <div className="comment-list-buttons" ref={listBtnsRef}>
@@ -227,13 +242,14 @@ function Comments(props) {
                   <p>{checkCommUser ? '' : totalCommentLikes}</p>
                 </div>
               </div>
+
               <div className="comm-likereply-text" ref={likeTextRef}>
                 {checkCommUser ? 'Delete' : 'Like'}
               </div>
             </div>
 
             <div className="comment-likereply-container clc-2">
-              <div className="comm-likereply-btn clb-2">
+              <div className="comm-likereply-btn clb-2" onClick={() => editCommentHandler()}>
                 <img
                   className="social-icons comment"
                   src={checkCommUser ? edit : comments}
