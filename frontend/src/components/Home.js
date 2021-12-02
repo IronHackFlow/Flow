@@ -41,7 +41,7 @@ function Home(props) {
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
-  const [updateFollowFeed, setUpdateFollowFeed] = useState(user?.userFollows);
+  const [updateFollowFeed, setUpdateFollowFeed] = useState();
   
   const windowRef = useRef();
   const commentPopUpRef = useRef();
@@ -63,52 +63,74 @@ function Home(props) {
   const [home] = useState(`#6d6d6d`);
 
   useEffect(() => {
-    actions
-      .getMostLikedSongs()
-      .then(res => {
-        console.log(res)
-        const songsArray = res.data.map(each => {
-          return { song: each, songVideo: getRandomBackground() }
-        })
-        setTheFeedSongs(songsArray.reverse())
-      })
-      .catch(console.error)
-  }, [theFeedBool])
+    setUpdateFollowFeed(user?.userFollows)
+  }, [user])
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     actions
       .getMostLikedSongs()
       .then(res => {
+        let counter = 0
+        const songsArray = res.data.map((each, index)=> {
+          if (index > 9) {
+            counter++
+            index = (index + counter) - index
+          }
+          return { song: each, songVideo: gifsCopy[index].url }
+        })
+        
+        counter = 0
         const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const songsArray = sortByLikes.map(each => {
-          return { song: each, songVideo: getRandomBackground() }
+        const trendingArray = sortByLikes.map((each, index) => {
+          if (index > 9) {
+            counter++
+            index = (index + counter) - index
+          }
+          return { song: each, songVideo: gifsCopy[index].url }
         })
-        setTrendingSongsFeed(songsArray)
-      })
+
+        songsArray.reverse()
+        setTheFeedSongs(songsArray)
+        setTrendingSongsFeed(trendingArray)
+      }, signal)
       .catch(console.error)
-  }, [trendingBool])
+
+    return () => controller.abort()
+  }, [totalLikes])
 
   useEffect(() => {
-    console.log(updateFollowFeed, "what's in here bruh?")
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     actions
       .getUserFollowsSongs(updateFollowFeed)
       .then(res => {
-        const songsArray = res.data.map(each => {
-          return { song: each, songVideo: getRandomBackground() }
+        let counter = 0
+        const songsArray = res.data.map((each, index) => {
+          if (index > 9) {
+            counter++
+            index = (index + counter) - index
+          }
+          return { song: each, songVideo: gifsCopy[index].url }
         })
         console.log(res.data, "all songs by users you're following")
         setFollowingSongsFeed(songsArray.reverse())
-      })
+      }, signal)
       .catch(console.error)
-  }, [user, updateFollowFeed])
+
+    return () => controller.abort()
+  }, [updateFollowFeed])
 
   useEffect(() => {
     setTotalFollowers(followersInView?.length)
   }, [followersInView, theFeedBool, trendingBool, followingBool])
 
   useEffect(() => {
-    setTotalLikes(likesInView?.length)
-  }, [likesInView, theFeedBool, trendingBool, followingBool])
+    setTotalLikes(() => likesInView?.length)
+  }, [likesInView])
 
   useEffect(() => {
     feedRef1.current.style.boxShadow = 'inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd'
@@ -138,15 +160,15 @@ function Home(props) {
   const showSongs = useCallback(() => {
     if (theFeedBool === true) {
       return theFeedSongs.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}feed${eachSong.song._id}_${index}`} {...eachSong} />
       })
     } else if (trendingBool === true) {
       return trendingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}trending${eachSong.song._id}_${index}`} {...eachSong} />
       })
     } else if (followingBool === true) {
       return followingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}song${eachSong.song?._id + index}`} {...eachSong} />
+        return <DisplaySong key={`${uuidv4()}following${eachSong.song._id}_${index}`} {...eachSong} />
       })
     }
   }, [
@@ -249,7 +271,6 @@ function Home(props) {
       })
       .then(res => {
         console.log(`added a like to: `, res.data)
-        setUserLiked(true)
         setTotalLikes(res.data.songLikes.length)
       })
       .catch(console.error)

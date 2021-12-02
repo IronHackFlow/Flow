@@ -109,14 +109,19 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
   console.log(req.body, 'is this an array?')
-  const followedIds = req.body.map(each => {
-    return each.followed
-  })
-  console.log('this an array?', followedIds)
+  const getFollowedIds = (arr) => {
+    return arr.map(each => {
+      return each.followed
+    })
+  }
+  // const followedIds = await req.body.map(each => {
+  //   return each.followed
+  // })
 
-  await Songs.find({ songUser: followedIds })
+  await Songs.find({ songUser: getFollowedIds(req.body) })
     .populate('songUser')
     .then(songs => {
+      console.log(songs, "what???")
       songs.forEach(each => console.log(each.songName))
       res.status(200).json(songs)
     })
