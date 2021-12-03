@@ -27,6 +27,7 @@ function SongScreen(props) {
   const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [poppedUp, setPoppedUp] = useState(false);
+  const [commentsArray, setCommentsArray] = useState([])
   const [totalComments, setTotalComments] = useState(thisSong?.songComments?.length);
   const [songScreen] = useState(`#353535`);
 
@@ -50,16 +51,19 @@ function SongScreen(props) {
 
   useEffect(() => {
     console.log(props.location.songInfo?.songUser, "i don't know")
-    let keyIndex = 1
     actions
       .getUserSongs({ songUser: props.location.songInfo?.songUser })
       .then(res => {
         setAllSongs(res.data)
-        setAllSongs(prevArr => prevArr.map(each => ({
+        setAllSongs(prevArr => prevArr.map((each, index) => ({
           ...each,
           songVideo: getRandomBackground(),
-          songIndex: keyIndex++
+          songIndex: index + 1
         })))
+        let commentArr = res.data.map((each, index) => {
+          return { songId: each._id, comments: each.songComments }
+        })
+        setCommentsArray(commentArr)
       })
       .catch(console.error)
   }, [props.location])
@@ -68,35 +72,6 @@ function SongScreen(props) {
     let song = allSongs.filter(each => each._id === props.location.songInfo._id)
     setThisSong(song[0])
   }, [allSongs])
-
-  useEffect(() => {
-    if (poppedUp === true) {
-      commentInputRef.current.focus()
-      commentInputRef.current.style.opacity = 1
-      commentButtonRef.current.style.opacity = 1
-      commentButtonRef.current.style.transition = 'opacity .5s'
-      opacityRef1.current.style.opacity = 1
-      opacityRef2.current.style.opacity = 1
-      commentPopUpRef.current.style.height = '44%'
-      commentPopUpRef.current.style.bottom = '40%'
-      commentPopUpRef.current.style.justifyContent = 'flex-start'
-      commentInnerRef.current.style.height = '85%'
-      commentInnerRef.current.style.marginTop = '2%'
-      windowRef.current.style.bottom = '46%'
-    } else {
-      commentPopUpRef.current.style.height = '0px'
-      commentPopUpRef.current.style.bottom = '40%'
-      commentPopUpRef.current.style.justifyContent = 'flex-start'
-      commentInnerRef.current.style.height = '85%'
-      commentInnerRef.current.style.marginTop = '2%'
-      windowRef.current.style.bottom = '0'
-      commentInputRef.current.style.opacity = 0
-      commentButtonRef.current.style.opacity = 0
-      commentButtonRef.current.style.transition = 'opacity .5s'
-      opacityRef1.current.style.opacity = 0
-      opacityRef2.current.style.opacity = 0
-    }
-  }, [poppedUp])
 
   const handlePlayPause = (bool) => {
     if (bool === true) {
@@ -121,6 +96,7 @@ function SongScreen(props) {
   const popUpComments = () => {
     if (poppedUp === false) {
       setPoppedUp(true)
+      commentInputRef.current.focus()
     } else {
       setPoppedUp(false)
     }
@@ -317,6 +293,8 @@ function SongScreen(props) {
         commentInnerRef={commentInnerRef}
         poppedUp={poppedUp}
         songInView={thisSong}
+        commentsArray={commentsArray}
+        setCommentsArray={setCommentsArray}
         totalComments={totalComments}
         setTotalComments={setTotalComments}
         opacityRef1={opacityRef1}

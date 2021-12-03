@@ -610,6 +610,17 @@
     }
   }
 }
+/* --- Comment tweaks for SongScreen menu --- */
+.songScreen-pop-out {
+  bottom: 40%;
+  justify-content: flex-start;
+  .inner-com {
+    height: 85%;
+    margin-top: 2%;
+
+  }
+}
+
 .comment-popped {
   height: 50%;
   transition: all .3s ease-in;
@@ -630,6 +641,9 @@
       opacity: 1;
     }
   }
+}
+.songScreen-popped {
+  height: 44%;
 }
 .transitions {
   background: #efbfbf;

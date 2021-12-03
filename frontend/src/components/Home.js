@@ -64,31 +64,32 @@ function Home(props) {
     actions
       .getMostLikedSongs()
       .then(res => {
-        let counter = 0
-        let commentArray = []
-        const songsArray = res.data.map((each, index)=> {
-          if (index > 9) {
-            counter++
-            index = (index + counter) - index
-          }
-          commentArray.push({ songId: each._id, comments: each.songComments })
-          return { song: each, songVideo: gifsCopy[index].url }
-        })
+        // let commentArray = []
+        // const songsArray = res.data.map((each, index)=> {
+        //   commentArray.push({ songId: each._id, comments: each.songComments })
+        //   return { song: each, songVideo: gifsCopy[index].url }
+        // }).reverse()
+        // const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
+        // const trendingArray = sortByLikes.map((each, index) => {
+        //   return { song: each, songVideo: gifsCopy[index].url }
+        // })
+        // setCommentsArray(commentArray)
+        // setTheFeedSongs(songsArray)
+        // setTrendingSongsFeed(trendingArray)
+        setCommentsArray(res.data)
+        setTheFeedSongs(res.data)
+        setTrendingSongsFeed(res.data)
+        setCommentsArray(prevArr => prevArr.map((each, index) => ({
+          ...each._id,
+          ...each.songComments
+        })))
+        setTheFeedSongs(prevArr => prevArr.map((each, index) => ({
+          ...each,
+          songVideo: gifsCopy[index].url
+        })).reverse())
+        console.log(commentsArray, "comments is good?")
+        console.log(theFeedSongs, "theFeed is good?")
 
-        counter = 0
-        const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const trendingArray = sortByLikes.map((each, index) => {
-          if (index > 9) {
-            counter++
-            index = (index + counter) - index
-          }
-          return { song: each, songVideo: gifsCopy[index].url }
-        })
-
-        songsArray.reverse()
-        setCommentsArray(commentArray)
-        setTheFeedSongs(songsArray)
-        setTrendingSongsFeed(trendingArray)
       }, signal)
       .catch(console.error)
     return () => controller.abort()
@@ -155,14 +156,13 @@ function Home(props) {
 
   useEffect(() => {
     let feed = theFeedSongs.map((eachSong, index) => {
-      return <DisplaySong key={`${uuidv4()}feed${eachSong.song._id}_${index}`} {...eachSong} />
+      return <DisplaySong key={`${uuidv4()}feed${eachSong._id}_${index}`} {...eachSong} />
     })
     setDisplayFeed(feed)
   }, [theFeedSongs])
 
   const showSongs = useCallback(() => {
     if (theFeedBool === true) {
-      console.log(displayFeed, "what dis?")
       return displayFeed
     } else if (trendingBool === true) {
       return trendingSongsFeed.map((eachSong, index) => {
@@ -181,6 +181,7 @@ function Home(props) {
     trendingBool,
     followingBool,
   ])
+
   const scrollToTop = () => {
     console.log(window, 'lol??')
     window.scrollTo({
@@ -295,19 +296,11 @@ function Home(props) {
   const popUpComments = () => {
     if (poppedUp === false) {
       setPoppedUp(true)
+      commentInputRef.current.focus()
     } else {
       setPoppedUp(false)
     }
   }
-
-  useEffect(() => {
-    if (poppedUp === true) {
-      commentInputRef.current.focus()
-      // windowRef.current.style.bottom = '46%'
-    } else {
-      // windowRef.current.style.bottom = '0'
-    }
-  }, [poppedUp])
 
   return (
     <TheViewContext.Provider
@@ -416,7 +409,7 @@ function Home(props) {
             </div>
           </ul>
 
-          <Comments
+          {/* <Comments
             commentInputRef={commentInputRef}
             songInView={songInView}
             commentsArray={commentsArray}
@@ -424,7 +417,7 @@ function Home(props) {
             totalComments={totalComments}
             setTotalComments={setTotalComments}
             poppedUp={poppedUp}
-          />
+          /> */}
 
           <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
             <div className="song-details-1_actions">

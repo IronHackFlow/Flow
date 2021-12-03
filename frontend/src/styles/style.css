@@ -3376,6 +3376,19 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   font-weight: bold;
 }
 
+/* --- Comment tweaks for SongScreen menu --- */
+.songScreen-pop-out {
+  bottom: 40%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.songScreen-pop-out .inner-com {
+  height: 85%;
+  margin-top: 2%;
+}
+
 .comment-popped {
   height: 50%;
   -webkit-transition: all .3s ease-in;
@@ -3398,6 +3411,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .comment-popped .inner-com .com-cont-2 {
   opacity: 1;
+}
+
+.songScreen-popped {
+  height: 44%;
 }
 
 .transitions {

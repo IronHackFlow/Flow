@@ -100,7 +100,7 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
   let body = req.body
   await Songs.find({ songUser: body.songUser })
     .populate('songUser')
-    .populate('songComments')
+    .populate({ path: 'songComments', populate: 'commUser' })
     .then(songs => {
       res.status(200).json(songs)
     })

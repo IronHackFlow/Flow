@@ -20,8 +20,9 @@ function Comments(props) {
 
   useEffect(() => {
     let commentInView = props.commentsArray.filter((each) => {
-      if (each.songId === props.songInView._id) {
-        props.setTotalComments(each.comments.length)
+      if (each._id === props.songInView._id) {
+        console.log(each)
+        props.setTotalComments(each.songComments.length)
         return each
       }
     })
@@ -301,7 +302,7 @@ function Comments(props) {
 
 
   return (
-    <div className={props.poppedUp ? "comment-pop-out comment-popped" : "comment-pop-out"} ref={props.commentPopUpRef}>
+    <div className={props.poppedUp ? "comment-pop-out songScreen-pop-out comment-popped songScreen-popped" : "comment-pop-out songScreen-pop-out"} ref={props.commentPopUpRef}>
       <div className="inner-com">
         <div className="com-cont-1">
           <form className="social-comment-form" onSubmit={(e) => handleSubmit(e)}>

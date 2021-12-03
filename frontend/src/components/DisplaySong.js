@@ -15,6 +15,7 @@ function DisplaySong(eachSong) {
   } = React.useContext(TheViewContext)
 
   const viewRef = useRef()
+
   const [inViewRef, inView] = useInView({
     threshold: .99,
     root: document.querySelector('.video-scroll-container'),
@@ -27,16 +28,17 @@ function DisplaySong(eachSong) {
     },
     [inViewRef],
   )
+
   useEffect(() => {
     let mounted = true;
     if (inView) {
-      setSongInView(eachSong.song)
-      setSongUserInView(eachSong.song.songUser)
-      setFollowersInView(eachSong.song.songUser.followers)
-      setCommentsInView(eachSong.song.songComments)
-      setLikesInView(eachSong.song.songLikes)
-      setAudioInView(eachSong.song.songURL)
-      console.log('this is the song inView: ', eachSong.song)
+      setSongInView(eachSong)
+      setSongUserInView(eachSong.songUser)
+      setFollowersInView(eachSong.songUser.followers)
+      setCommentsInView(eachSong.songComments)
+      setLikesInView(eachSong.songLikes)
+      setAudioInView(eachSong.songURL)
+      console.log('this is the song inView: ', eachSong)
     }
     return () => mounted = false
   }, [inView])
@@ -50,7 +52,7 @@ function DisplaySong(eachSong) {
       }}
     >
       <div className="last-div">
-        {eachSong?.song?.songLyricsStr?.map((each, index) => {
+        {eachSong?.songLyricsStr?.map((each, index) => {
           return (
             <div className="each-lyric-container">
               <p className="each-lyric-no">{index + 1}</p>
