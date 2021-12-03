@@ -372,7 +372,7 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
   // Songs.find({$sort: {"songTotLikes": -1}})
   Songs.find({})
     .populate('songUser')
-    .populate('songComments')
+    .populate({ path: 'songComments', populate: 'commUser' })
     .populate({ path: 'songUser', populate: 'followers' })
     .then(songs => {
       res.status(200).json(songs)
@@ -387,12 +387,10 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
     } else {
       let body = {
         comment: req.body.comment,
-        commUser: authData.user._id,
+        commUser: authData.user,
         commSong: req.body.commSong,
         commDate: req.body.commDate,
       }
-      console.log(body, 'this is')
-
       let comment = await Comments.create(body)
 
       await Songs.findByIdAndUpdate(
@@ -400,6 +398,7 @@ router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
         { $push: { songComments: comment } },
         { new: true },
       )
+        .populate({ path: 'songComments', populate: 'commUser' })
         .then(song => {
           res.status(200).json(song)
           console.log(`ADDED a comment: `, comment)
@@ -424,6 +423,7 @@ router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
         { $pull: { songComments: body.deleteObj._id } },
         { new: true },
       )
+        .populate({ path: 'songComments', populate: 'commUser' })
         .then(song => {
           res.status(200).json(song)
         })

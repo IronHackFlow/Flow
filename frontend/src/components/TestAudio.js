@@ -428,12 +428,13 @@ function TestAudio(props) {
       setLockedRhymes(copyRhyme);
     }
   };
-
-  const loadTrack = () => {
+  const [selectedBeat, setSelectedBeat] = useState();
+  const loadTrack = (e) => {
     if (!recorderState.initRecording) {
-      let selectBox = document.getElementById("selectBox");
-      let selectedValue = selectBox.options[selectBox.selectedIndex].value;
-      document.getElementById("song").src = selectedValue;      
+      setSelectedBeat(e.target.value)
+      // let selectBox = document.getElementById("selectBox");
+      // let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      // document.getElementById("song").src = selectedValue;      
     }
   };
 
@@ -675,7 +676,7 @@ function TestAudio(props) {
                   <div className="select-beat-title">
                     Select A Beat :
                   </div>
-                  <select id="selectBox" className="track-select" onChange={() => loadTrack()}>
+                  <select id="selectBox" value={selectedBeat} className="track-select" onChange={(e) => loadTrack(e)}>
                     {chooseTrack()}
                   </select>
                 </div>

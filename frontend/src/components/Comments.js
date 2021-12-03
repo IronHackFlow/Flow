@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
-// import TheViewContext from '../TheViewContext'
 import FormatDate from './utils/FormatDate'
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
@@ -14,26 +13,37 @@ import share from '../images/share.svg'
 import flag from '../images/flag.svg'
 
 function Comments(props) {
-  // const { totalComments, setTotalComments } = React.useContext(TheViewContext)
   const { user } = React.useContext(TheContext)
 
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
-  const [songCommUser, setSongCommUser] = useState()
 
   useEffect(() => {
-    actions
-      .getComments({ id: props.songInView?._id })
-      .then(res => {
-        console.log('Returned these comments from DB: ', res.data)
-        if (res.data) {
-          setCommState(res.data.songComments)
-          props.setTotalComments(res.data.songComments.length)
-          setSongCommUser(res.data.songUser)
+    let commentInView = props.commentsArray.filter((each) => {
+      if (each.songId === props.songInView._id) {
+        props.setTotalComments(each.comments.length)
+        return each
+      }
+    })
+    let commentDisplay = commentInView[0]?.comments.map((each, index) => {
+      return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
+    })
+    setCommState(commentDisplay)
+    
+  }, [props.songInView, props.commentsArray])
+
+  const resetCommentsArray = (arr) => {
+    props.setCommentsArray((prevArr) => {
+      return prevArr.map((each) => {
+        if (each.songId === props.songInView._id) {
+          each.comments = arr
+          return each
+        } else {
+          return each
         }
       })
-      .catch(console.error)
-  }, [props.songInView, props.totalComments])
+    })
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -48,7 +58,8 @@ function Comments(props) {
         commDate: new Date(),
       })
       .then(res => {
-        console.log(res.data, 'comment data')
+        let comments = res.data.songComments
+        resetCommentsArray(comments)
         props.setTotalComments(res.data.songComments.length)
       })
       .catch(console.error)
@@ -59,6 +70,7 @@ function Comments(props) {
     const [totalCommentLikes, setTotalCommentLikes] = useState()
     const [checkCommUser, setCheckCommUser] = useState()
     const [menuBool, setMenuBool] = useState(false)
+    const [editCommentText, setEditCommentText] = useState(false);
 
     const commentListRef = useRef()
     const commentTextRef = useRef()
@@ -98,7 +110,7 @@ function Comments(props) {
           }
         }
       },
-      [commState],
+      [commState, editCommentText],
     )
 
     const deleteComment = each => {
@@ -106,10 +118,8 @@ function Comments(props) {
         actions
           .deleteComment({ deleteObj: each, songId: props.songInView._id })
           .then(res => {
-            console.log(
-              `deleted a comment from song ${res.data.songName}'s songComments:`,
-              res.data.songComments,
-            )
+            let comments = res.data.songComments
+            resetCommentsArray(comments)
             props.setTotalComments(res.data.songComments.length)
           })
           .catch(console.error)
@@ -178,7 +188,7 @@ function Comments(props) {
         setMenuBool(false)
       }
     }
-    const [editCommentText, setEditCommentText] = useState(false);
+
     const editCommentHandler = () => {
       if (editCommentText) {
         setEditCommentText(false)
@@ -186,6 +196,7 @@ function Comments(props) {
         setEditCommentText(true)
       }
     }
+
     return (
       <div className="comment-list" ref={setCommentListRefs}>
         <div className="comment-list-photo">
@@ -208,7 +219,7 @@ function Comments(props) {
             <p className="comment-username">
               {each.commUser.userName}
               <span style={{ color: 'white', fontWeight: 'bold', fontSize: '12px' }}>
-                {songCommUser === each.commUser._id ? ' 𑁦 song author' : null}
+                {props.songInView.songUser._id === each.commUser._id ? ' 𑁦 song author' : null}
               </span>
             </p>
             <p className="comment-date">
@@ -288,21 +299,12 @@ function Comments(props) {
     )
   }
 
-  const renderEachComment = useCallback(() => {
-    if (props.poppedUp === true) {
-      return commState.map((each, index) => {
-        return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`} {...each} />
-      })
-    } else {
-      return null
-    }
-  }, [props.poppedUp, commState])
 
   return (
-    <div className="comment-pop-out" ref={props.commentPopUpRef}>
-      <div className="inner-com" ref={props.commentInnerRef}>
-        <div className="com-cont-1" ref={props.opacityRef1} style={{ opacity: '0' }}>
-          <form className="social-comment-form" onSubmit={handleSubmit}>
+    <div className={props.poppedUp ? "comment-pop-out comment-popped" : "comment-pop-out"} ref={props.commentPopUpRef}>
+      <div className="inner-com">
+        <div className="com-cont-1">
+          <form className="social-comment-form" onSubmit={(e) => handleSubmit(e)}>
             <input
               className="social-comment-input"
               ref={props.commentInputRef}
@@ -310,13 +312,13 @@ function Comments(props) {
               type="text"
               placeholder="Make a comment..."
             ></input>
-            <button className="comment-button" ref={props.commentButtonRef}>
+            <button className="comment-button">
               <img className="social-icons si-send" src={send} alt="send" />
             </button>
           </form>
         </div>
 
-        <div className="com-cont-2" ref={props.opacityRef2} style={{ opacity: '0' }}>
+        <div className="com-cont-2">
           <div className="comments-title">
             <div className="comments-title-inner">
               <p>
@@ -328,7 +330,7 @@ function Comments(props) {
           <div className="comments-container">
             <div className="comment-list-container">
               <div className="comment-list-cont">
-                {renderEachComment()}
+                {commState}
               </div>
             </div>
           </div>

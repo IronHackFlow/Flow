@@ -33,22 +33,18 @@ function Home(props) {
   const [commentsInView, setCommentsInView] = useState([]);
   const [likesInView, setLikesInView] = useState();
   const [followersInView, setFollowersInView] = useState();
-  const [userLiked, setUserLiked] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [totalFollowers, setTotalFollowers] = useState();
   const [totalLikes, setTotalLikes] = useState();
   const [totalComments, setTotalComments] = useState();
+  const [commentsArray, setCommentsArray] = useState([])
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
   const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
   const [updateFollowFeed, setUpdateFollowFeed] = useState();
   
   const windowRef = useRef();
-  const commentPopUpRef = useRef();
   const commentInputRef = useRef();
-  const commentButtonRef = useRef();
-  const opacityRef1 = useRef();
-  const opacityRef2 = useRef();
   const followBtnRef1 = useRef();
   const followBtnRef2 = useRef();
   const followBtnRef3 = useRef();
@@ -63,25 +59,22 @@ function Home(props) {
   const [home] = useState(`#6d6d6d`);
 
   useEffect(() => {
-    setUpdateFollowFeed(user?.userFollows)
-  }, [user])
-
-  useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-
     actions
       .getMostLikedSongs()
       .then(res => {
         let counter = 0
+        let commentArray = []
         const songsArray = res.data.map((each, index)=> {
           if (index > 9) {
             counter++
             index = (index + counter) - index
           }
+          commentArray.push({ songId: each._id, comments: each.songComments })
           return { song: each, songVideo: gifsCopy[index].url }
         })
-        
+
         counter = 0
         const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
         const trendingArray = sortByLikes.map((each, index) => {
@@ -93,18 +86,17 @@ function Home(props) {
         })
 
         songsArray.reverse()
+        setCommentsArray(commentArray)
         setTheFeedSongs(songsArray)
         setTrendingSongsFeed(trendingArray)
       }, signal)
       .catch(console.error)
-
     return () => controller.abort()
   }, [totalLikes])
 
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-
     actions
       .getUserFollowsSongs(updateFollowFeed)
       .then(res => {
@@ -120,16 +112,19 @@ function Home(props) {
         setFollowingSongsFeed(songsArray.reverse())
       }, signal)
       .catch(console.error)
-
     return () => controller.abort()
   }, [updateFollowFeed])
 
   useEffect(() => {
-    setTotalFollowers(followersInView?.length)
-  }, [followersInView, theFeedBool, trendingBool, followingBool])
+    setUpdateFollowFeed(user?.userFollows)
+  }, [user])
 
   useEffect(() => {
-    setTotalLikes(() => likesInView?.length)
+    setTotalFollowers(followersInView?.length)
+  }, [followersInView])
+
+  useEffect(() => {
+    setTotalLikes(likesInView?.length)
   }, [likesInView])
 
   useEffect(() => {
@@ -157,6 +152,7 @@ function Home(props) {
     ref6.current.style.color = '#ec6aa0'
   }
 
+
   const showSongs = useCallback(() => {
     if (theFeedBool === true) {
       return theFeedSongs.map((eachSong, index) => {
@@ -179,12 +175,13 @@ function Home(props) {
     trendingBool,
     followingBool,
   ])
-
-  const getRandomBackground = () => {
-    let index = Math.floor(Math.random() * gifsCopy.length)
-    return gifsCopy[index].url
+  const scrollToTop = () => {
+    console.log(window, 'lol??')
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
-
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)
@@ -301,21 +298,9 @@ function Home(props) {
   useEffect(() => {
     if (poppedUp === true) {
       commentInputRef.current.focus()
-      commentInputRef.current.style.opacity = 1
-      commentButtonRef.current.style.opacity = '1'
-      commentButtonRef.current.style.transition = 'opacity .5s'
-      opacityRef1.current.style.opacity = 1
-      opacityRef2.current.style.opacity = 1
-      commentPopUpRef.current.style.height = '50%'
-      windowRef.current.style.bottom = '46%'
+      // windowRef.current.style.bottom = '46%'
     } else {
-      commentPopUpRef.current.style.height = '0px'
-      windowRef.current.style.bottom = '0'
-      commentInputRef.current.style.opacity = 0
-      commentButtonRef.current.style.opacity = '0'
-      commentButtonRef.current.style.transition = 'opacity .5s'
-      opacityRef1.current.style.opacity = 0
-      opacityRef2.current.style.opacity = 0
+      // windowRef.current.style.bottom = '0'
     }
   }, [poppedUp])
 
@@ -334,8 +319,6 @@ function Home(props) {
         setFollowersInView,
         audioInView,
         setAudioInView,
-        totalComments,
-        setTotalComments,
       }}
     >
       <div className="Home">
@@ -418,22 +401,24 @@ function Home(props) {
             </div>
           </div>
 
-          <div className="video-scroll-container" ref={windowRef}>
-            <ul className="video-scroll-container">
-              {showSongs()}
-            </ul>
-          </div>
+
+          <ul className="video-scroll-container" ref={windowRef}>
+            {showSongs()}
+            <div className="scroll-top-container" onClick={() => scrollToTop()}>
+              <div className="scroll-top-button">
+                ^
+              </div>
+            </div>
+          </ul>
 
           <Comments
-            commentPopUpRef={commentPopUpRef}
             commentInputRef={commentInputRef}
-            commentButtonRef={commentButtonRef}
             songInView={songInView}
+            commentsArray={commentsArray}
+            setCommentsArray={setCommentsArray}
             totalComments={totalComments}
             setTotalComments={setTotalComments}
             poppedUp={poppedUp}
-            opacityRef1={opacityRef1}
-            opacityRef2={opacityRef2}
           />
 
           <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
