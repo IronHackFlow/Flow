@@ -13,19 +13,12 @@ function DisplaySong(eachSong) {
     setLikesInView,
     setFollowersInView,
   } = React.useContext(TheViewContext)
-  const [scrollBool, setScrollBool] = useState(true)
 
   const viewRef = useRef()
   const [inViewRef, inView] = useInView({
     threshold: .99,
     root: document.querySelector('.video-scroll-container'),
   })
-  useEffect(() => {
-    
-    if (scrollBool) {
-      console.log(scrollBool, "hmm")
-    }
-  }, [scrollBool])
   
   const setRefs = useCallback(
     node => {
@@ -43,7 +36,6 @@ function DisplaySong(eachSong) {
       setCommentsInView(eachSong.song.songComments)
       setLikesInView(eachSong.song.songLikes)
       setAudioInView(eachSong.song.songURL)
-      setScrollBool(false)
       console.log('this is the song inView: ', eachSong.song)
     }
     return () => mounted = false

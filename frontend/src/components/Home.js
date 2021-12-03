@@ -151,13 +151,19 @@ function Home(props) {
     ref6.current.style.boxShadow = 'inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff'
     ref6.current.style.color = '#ec6aa0'
   }
+  const [displayFeed, setDisplayFeed] = useState([])
 
+  useEffect(() => {
+    let feed = theFeedSongs.map((eachSong, index) => {
+      return <DisplaySong key={`${uuidv4()}feed${eachSong.song._id}_${index}`} {...eachSong} />
+    })
+    setDisplayFeed(feed)
+  }, [theFeedSongs])
 
   const showSongs = useCallback(() => {
     if (theFeedBool === true) {
-      return theFeedSongs.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}feed${eachSong.song._id}_${index}`} {...eachSong} />
-      })
+      console.log(displayFeed, "what dis?")
+      return displayFeed
     } else if (trendingBool === true) {
       return trendingSongsFeed.map((eachSong, index) => {
         return <DisplaySong key={`${uuidv4()}trending${eachSong.song._id}_${index}`} {...eachSong} />
@@ -168,7 +174,7 @@ function Home(props) {
       })
     }
   }, [
-    theFeedSongs,
+    displayFeed,
     trendingSongsFeed,
     followingSongsFeed,
     theFeedBool,
@@ -185,8 +191,7 @@ function Home(props) {
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)
-    }
-    else {
+    } else {
       setIsPlaying(false)
     }
   }
