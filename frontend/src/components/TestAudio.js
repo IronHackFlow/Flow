@@ -50,6 +50,7 @@ function TestAudio(props) {
   }
   const [recorderState, setRecorderState] = useState(initialState);
   const [audioSrc, setAudioSrc] = useState(null);
+  const [selectedBeat, setSelectedBeat] = useState(tracks[0].song);
   const [silent, setSilent] = useState(false);
   const [saveSongMenu, setSaveSongMenu] = useState(false);
   const [recordingDisplay, setRecordingDisplay] = useState(false);
@@ -428,18 +429,16 @@ function TestAudio(props) {
       setLockedRhymes(copyRhyme);
     }
   };
-  const [selectedBeat, setSelectedBeat] = useState();
+
   const loadTrack = (e) => {
     if (!recorderState.initRecording) {
-      setSelectedBeat(e.target.value)
-      // let selectBox = document.getElementById("selectBox");
-      // let selectedValue = selectBox.options[selectBox.selectedIndex].value;
-      // document.getElementById("song").src = selectedValue;      
+      setSelectedBeat(e.target.value)    
     }
   };
 
   const chooseTrack = () => {
     return tracks.map((element, index) => {
+      console.log(element, "what tha")
       return <option key={`${element}_${index}`} value={element.song}>{element.name} </option>;
     });
   };
@@ -690,9 +689,7 @@ function TestAudio(props) {
   
   return (
     <div className="TestAudio">
-      <audio id="song" src={beat1} loop={true} ref={recordAudioRef}></audio>
-      <p id="fixer"></p>
-
+      <audio src={selectedBeat} loop={true} ref={recordAudioRef}></audio>
       <div className="section-1_speech">
         <div className="scroll-rhymes-container" id="currentTranscript" ref={scrollRef}>
           {recordingDisplay ? showLyricsLine : displayTakeLyrics()}

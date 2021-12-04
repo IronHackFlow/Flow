@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import gradientbg from '../images/gradient-bg-2.png'
 import TheViewContext from '../TheViewContext'
 
-function DisplaySong(eachSong) {
+function DisplaySong(props) {
   const {
     setSongInView,
     setAudioInView,
@@ -13,7 +13,7 @@ function DisplaySong(eachSong) {
     setLikesInView,
     setFollowersInView,
   } = React.useContext(TheViewContext)
-
+  
   const viewRef = useRef()
 
   const [inViewRef, inView] = useInView({
@@ -32,13 +32,13 @@ function DisplaySong(eachSong) {
   useEffect(() => {
     let mounted = true;
     if (inView) {
-      setSongInView(eachSong)
-      setSongUserInView(eachSong.songUser)
-      setFollowersInView(eachSong.songUser.followers)
-      setCommentsInView(eachSong.songComments)
-      setLikesInView(eachSong.songLikes)
-      setAudioInView(eachSong.songURL)
-      console.log('this is the song inView: ', eachSong)
+      setSongInView(props.eachSong.song)
+      setSongUserInView(props.eachSong.song.songUser)
+      setFollowersInView(props.eachSong.song.songUser.followers)
+      setCommentsInView(props.eachSong.song.songComments)
+      setLikesInView(props.eachSong.song.songLikes)
+      setAudioInView(props.eachSong.song.songURL)
+      console.log('this is the song inView: ', props.eachSong.song)
     }
     return () => mounted = false
   }, [inView])
@@ -46,15 +46,16 @@ function DisplaySong(eachSong) {
   return (
     <li
       className="video-pane"
+      key={props.passKey}
       ref={setRefs}
       style={{
-        backgroundImage: `url('${gradientbg}'), url('${eachSong.songVideo}')`,
+        backgroundImage: `url('${gradientbg}'), url('${props.eachSong.songVideo}')`,
       }}
     >
       <div className="last-div">
-        {eachSong?.songLyricsStr?.map((each, index) => {
+        {props.eachSong.song.songLyricsStr?.map((each, index) => {
           return (
-            <div className="each-lyric-container">
+            <div className="each-lyric-container" key={`${uuidv4()}_${index}_songlyrics`}>
               <p className="each-lyric-no">{index + 1}</p>
               <p className="each-lyric-line">{each}</p>
             </div>

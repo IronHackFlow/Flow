@@ -113,7 +113,7 @@ function UseAudioPlayer(props) {
         value={trackProgress}
         step=".1"
         min="0"
-        max={songDuration}
+        max={songDuration ? songDuration : `${songDuration}`}
         onChange={(e) => onScrub(e.target.value)}
         onMouseUp={() => onScrubEnd()}
         onKeyUp={() => onScrubEnd()}
@@ -126,7 +126,7 @@ function UseAudioPlayer(props) {
           {currentProgressRef.current >= 60 ? currentMinutesRef.current : currentProgressRef.current}
         </div>
         <div className="time-text-end">
-          {songDuration >= 60 ? songMinutes : songDuration}
+          {songDuration >= 60 ? songMinutes : `${songDuration}`}
         </div>
       </div>
       <audio ref={audioRef} src={props.currentSong?.songURL} />

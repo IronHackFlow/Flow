@@ -20,19 +20,19 @@ function Comments(props) {
 
   useEffect(() => {
     let commentInView = props.commentsArray.filter((each) => {
-      if (each._id === props.songInView._id) {
-        console.log(each)
-        props.setTotalComments(each.songComments.length)
+      if (each.songId === props.songInView._id) {
+        props.setTotalComments(each.comments?.length)
         return each
       }
     })
-    let commentDisplay = commentInView[0]?.comments.map((each, index) => {
+    let commentDisplay = commentInView[0]?.comments?.map((each, index) => {
       return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
     })
     setCommState(commentDisplay)
     
   }, [props.songInView, props.commentsArray])
 
+  
   const resetCommentsArray = (arr) => {
     props.setCommentsArray((prevArr) => {
       return prevArr.map((each) => {
@@ -95,6 +95,12 @@ function Comments(props) {
         setCheckCommUser(false)
       }
     }, [commState])
+
+    useEffect(() => {
+      if (editCommentText) {
+        document.querySelector(".comment-text-input").focus()
+      }
+    }, [editCommentText])
 
     const setCommentListRefs = useCallback(
       node => {
@@ -189,13 +195,20 @@ function Comments(props) {
         setMenuBool(false)
       }
     }
-
-    const editCommentHandler = () => {
+  
+    const setEditCommentBoolean = () => {
       if (editCommentText) {
         setEditCommentText(false)
       } else {
         setEditCommentText(true)
       }
+    }
+    const [commentValue, setCommentValue] = useState();
+
+    const editCommentTextHandler = (e) => {
+      e.preventDefault()
+      setCommentValue(e.target.value)
+      console.log(commentValue, "what in herre?")
     }
 
     return (
@@ -218,19 +231,21 @@ function Comments(props) {
         <div className="comment-list-inner">
           <div className="comment-list-outer" ref={commentListOuterRef}>
             <p className="comment-username">
-              {each.commUser.userName}
+              {each.commUser?.userName}
               <span style={{ color: 'white', fontWeight: 'bold', fontSize: '12px' }}>
-                {props.songInView.songUser._id === each.commUser._id ? ' 𑁦 song author' : null}
+                {props.songInView?.songUser?._id === each.commUser._id ? ' 𑁦 song author' : null}
               </span>
             </p>
-            <p className="comment-date">
+            <div className="comment-date">
               <FormatDate date={each.commDate} />
-            </p>
+            </div>
             {editCommentText ? (
               <textarea 
                 className="comment-text-input" 
                 ref={commentTextRef}
-                placeholder={each.comment}>
+                defaultValue={each.comment}
+                placeholder={each.comment}
+                onChange={(e) => editCommentTextHandler(e)}>
               </textarea>
             ) : (
               <p className="comment-text" ref={commentTextRef}>
@@ -261,7 +276,7 @@ function Comments(props) {
             </div>
 
             <div className="comment-likereply-container clc-2">
-              <div className="comm-likereply-btn clb-2" onClick={() => editCommentHandler()}>
+              <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
                 <img
                   className="social-icons comment"
                   src={checkCommUser ? edit : comments}
@@ -299,10 +314,24 @@ function Comments(props) {
       </div>
     )
   }
-
+  const getCommentClass = () => {
+    if (props.whichMenu === "Home") {
+      if (props.poppedUp === true) {
+        return "comment-pop-out comment-popped"
+      } else {
+        return "comment-pop-out"
+      }
+    } else {
+      if (props.poppedUp === true) {
+        return "comment-pop-out songScreen-pop-out songScreen-popped"
+      } else {
+        return "comment-pop-out songScreen-pop-out"
+      }
+    }
+  }
 
   return (
-    <div className={props.poppedUp ? "comment-pop-out songScreen-pop-out comment-popped songScreen-popped" : "comment-pop-out songScreen-pop-out"} ref={props.commentPopUpRef}>
+    <div className={getCommentClass()}>
       <div className="inner-com">
         <div className="com-cont-1">
           <form className="social-comment-form" onSubmit={(e) => handleSubmit(e)}>

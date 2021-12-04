@@ -40,22 +40,16 @@ function Home(props) {
   const [commentsArray, setCommentsArray] = useState([])
   const [theFeedSongs, setTheFeedSongs] = useState([]);
   const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
-  const [followingSongsFeed, setFollowingSongsFeed] = useState([]);
+  const [followingSongsFeed, setFollowingSongsFeed] = useState([]);  
+  const [displayFeed, setDisplayFeed] = useState([])
+  const [displayTrending, setDisplayTrending] = useState([])
+  const [displayFollowing, setDisplayFollowing] = useState([])
   const [updateFollowFeed, setUpdateFollowFeed] = useState();
   
   const windowRef = useRef();
   const commentInputRef = useRef();
-  const followBtnRef1 = useRef();
-  const followBtnRef2 = useRef();
-  const followBtnRef3 = useRef();
   const profilePicRef = useRef();
   const playPauseRef = useRef();
-  const feedRef1 = useRef();
-  const feedRef2 = useRef();
-  const trendingRef1 = useRef();
-  const trendingRef2 = useRef();
-  const followingRef1 = useRef();
-  const followingRef2 = useRef();
   const [home] = useState(`#6d6d6d`);
 
   useEffect(() => {
@@ -64,32 +58,18 @@ function Home(props) {
     actions
       .getMostLikedSongs()
       .then(res => {
-        // let commentArray = []
-        // const songsArray = res.data.map((each, index)=> {
-        //   commentArray.push({ songId: each._id, comments: each.songComments })
-        //   return { song: each, songVideo: gifsCopy[index].url }
-        // }).reverse()
-        // const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        // const trendingArray = sortByLikes.map((each, index) => {
-        //   return { song: each, songVideo: gifsCopy[index].url }
-        // })
-        // setCommentsArray(commentArray)
-        // setTheFeedSongs(songsArray)
-        // setTrendingSongsFeed(trendingArray)
-        setCommentsArray(res.data)
-        setTheFeedSongs(res.data)
-        setTrendingSongsFeed(res.data)
-        setCommentsArray(prevArr => prevArr.map((each, index) => ({
-          ...each._id,
-          ...each.songComments
-        })))
-        setTheFeedSongs(prevArr => prevArr.map((each, index) => ({
-          ...each,
-          songVideo: gifsCopy[index].url
-        })).reverse())
-        console.log(commentsArray, "comments is good?")
-        console.log(theFeedSongs, "theFeed is good?")
-
+        let commentArray = []
+        const songsArray = res.data.map((each, index)=> {
+          commentArray.push({ songId: each._id, comments: each.songComments })
+          return { song: each, songVideo: gifsCopy[index].url }
+        }).reverse()
+        const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
+        const trendingArray = sortByLikes.map((each, index) => {
+          return { song: each, songVideo: gifsCopy[index].url }
+        })
+        setCommentsArray(commentArray)
+        setTheFeedSongs(songsArray)
+        setTrendingSongsFeed(trendingArray)
       }, signal)
       .catch(console.error)
     return () => controller.abort()
@@ -101,23 +81,18 @@ function Home(props) {
     actions
       .getUserFollowsSongs(updateFollowFeed)
       .then(res => {
-        let counter = 0
         const songsArray = res.data.map((each, index) => {
-          if (index > 9) {
-            counter++
-            index = (index + counter) - index
-          }
           return { song: each, songVideo: gifsCopy[index].url }
-        })
+        }).reverse()
         console.log(res.data, "all songs by users you're following")
-        setFollowingSongsFeed(songsArray.reverse())
+        setFollowingSongsFeed(songsArray)
       }, signal)
       .catch(console.error)
     return () => controller.abort()
   }, [updateFollowFeed])
 
   useEffect(() => {
-    setUpdateFollowFeed(user?.userFollows)
+    setUpdateFollowFeed(user.userFollows)
   }, [user])
 
   useEffect(() => {
@@ -129,66 +104,43 @@ function Home(props) {
   }, [likesInView])
 
   useEffect(() => {
-    feedRef1.current.style.boxShadow = 'inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd'
-    feedRef1.current.style.background = '#e24f8c'
-    feedRef2.current.style.boxShadow = 'none'
-    feedRef2.current.style.color = 'white'
     setTotalComments(commentsInView?.length)
   }, [])
 
-  const setFeedToggleRefs = (ref1, ref2, ref3, ref4, ref5, ref6) => {
-    ref1.current.style.boxShadow = 'inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd'
-    ref1.current.style.background = '#e24f8c'
-    ref2.current.style.boxShadow = 'none'
-    ref2.current.style.color = 'white'
-
-    ref3.current.style.boxShadow = '2px 2px 4px #505050, -2px -2px 2px #ffffff'
-    ref3.current.style.background = 'none'
-    ref4.current.style.boxShadow = 'inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff'
-    ref4.current.style.color = '#ec6aa0'
-
-    ref5.current.style.boxShadow = '2px 2px 4px #505050, -2px -2px 2px #ffffff'
-    ref5.current.style.background = 'none'
-    ref6.current.style.boxShadow = 'inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff'
-    ref6.current.style.color = '#ec6aa0'
-  }
-  const [displayFeed, setDisplayFeed] = useState([])
-
   useEffect(() => {
     let feed = theFeedSongs.map((eachSong, index) => {
-      return <DisplaySong key={`${uuidv4()}feed${eachSong._id}_${index}`} {...eachSong} />
+      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}feed${eachSong.song._id}_${index}`} />
     })
     setDisplayFeed(feed)
   }, [theFeedSongs])
 
-  const showSongs = useCallback(() => {
-    if (theFeedBool === true) {
-      return displayFeed
-    } else if (trendingBool === true) {
-      return trendingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}trending${eachSong.song._id}_${index}`} {...eachSong} />
-      })
-    } else if (followingBool === true) {
-      return followingSongsFeed.map((eachSong, index) => {
-        return <DisplaySong key={`${uuidv4()}following${eachSong.song._id}_${index}`} {...eachSong} />
-      })
-    }
-  }, [
-    displayFeed,
-    trendingSongsFeed,
-    followingSongsFeed,
-    theFeedBool,
-    trendingBool,
-    followingBool,
-  ])
-
-  const scrollToTop = () => {
-    console.log(window, 'lol??')
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  useEffect(() => {
+    let trend = trendingSongsFeed.map((eachSong, index) => {
+      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}trending${eachSong.song._id}_${index + 1}`} />
     })
-  }
+    setDisplayTrending(trend)
+  }, [trendingSongsFeed])
+  
+  useEffect(() => {
+    let follow = followingSongsFeed.map((eachSong, index) => {
+      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}following${eachSong.song._id}_${index + 3}`} />
+    })
+    setDisplayFollowing(follow)
+  }, [followingSongsFeed])
+
+  const showSongs = useCallback(() => {
+    if (theFeedBool) return displayFeed
+    else if (trendingBool) return displayTrending
+    else if (followingBool) return displayFollowing
+  }, [displayFeed, displayTrending, displayFollowing, theFeedBool, trendingBool, followingBool])
+
+  // const scrollToTop = () => {
+  //   console.log(window, 'lol??')
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth'
+  //   })
+  // }
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)
@@ -199,7 +151,7 @@ function Home(props) {
 
   const followCheck = () => {
     if (user._id === songUserInView._id) {
-      console.log(`You can't follow yourself lol`)
+      console.log(songUserInView, `You can't follow yourself lol`)
     } else {
       actions
       .getAUser({ id: songUserInView._id })
@@ -321,50 +273,33 @@ function Home(props) {
     >
       <div className="Home">
         <div className="section-1_feed">
-          <div div className="section-1a_toggle-feed">
+          <div className="section-1a_toggle-feed">
             <div className="toggle-feed-container">
               <div className="each-feed_shadow-div-inset">
                 <div
-                  className="each-feed_shadow-div-outset"
-                  ref={feedRef1}
+                  className={theFeedBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
-                    setFeedToggleRefs(
-                      feedRef1,
-                      feedRef2,
-                      trendingRef1,
-                      trendingRef2,
-                      followingRef1,
-                      followingRef2,
-                    )
                     setTheFeedBool(true)
                     setTrendingBool(false)
                     setFollowingBool(false)
                   }}
                 >
-                  <div className="each-feed_shadow-div-inset-2" ref={feedRef2}>
+                  <div className={theFeedBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Feed
                   </div>
                 </div>
               </div>
+              
               <div className="each-feed_shadow-div-inset" style={{ borderRadius: '50px' }}>
                 <div
-                  className="each-feed_shadow-div-outset"
-                  ref={trendingRef1}
+                  className={trendingBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
-                    setFeedToggleRefs(
-                      trendingRef1,
-                      trendingRef2,
-                      feedRef1,
-                      feedRef2,
-                      followingRef1,
-                      followingRef2,
-                    )
                     setTrendingBool(true)
                     setTheFeedBool(false)
                     setFollowingBool(false)
                   }}
                 >
-                  <div className="each-feed_shadow-div-inset-2" ref={trendingRef2}>
+                  <div className={trendingBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Trending
                   </div>
                 </div>
@@ -375,23 +310,14 @@ function Home(props) {
                 style={{ borderRadius: '50px 5px 5px 50px' }}
               >
                 <div
-                  className="each-feed_shadow-div-outset"
-                  ref={followingRef1}
+                  className={followingBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
-                    setFeedToggleRefs(
-                      followingRef1,
-                      followingRef2,
-                      trendingRef1,
-                      trendingRef2,
-                      feedRef1,
-                      feedRef2,
-                    )
                     setFollowingBool(true)
                     setTrendingBool(false)
                     setTheFeedBool(false)
                   }}
                 >
-                  <div className="each-feed_shadow-div-inset-2" ref={followingRef2}>
+                  <div className={followingBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Following
                   </div>
                 </div>
@@ -402,14 +328,14 @@ function Home(props) {
 
           <ul className="video-scroll-container" ref={windowRef}>
             {showSongs()}
-            <div className="scroll-top-container" onClick={() => scrollToTop()}>
+            {/* <div className="scroll-top-container" onClick={() => scrollToTop()}>
               <div className="scroll-top-button">
                 ^
               </div>
-            </div>
+            </div> */}
           </ul>
 
-          {/* <Comments
+          <Comments
             commentInputRef={commentInputRef}
             songInView={songInView}
             commentsArray={commentsArray}
@@ -417,9 +343,10 @@ function Home(props) {
             totalComments={totalComments}
             setTotalComments={setTotalComments}
             poppedUp={poppedUp}
-          /> */}
+            whichMenu="Home"
+          />
 
-          <div className="section-1c_song-details" style={{ display: props.socialDisplay }}>
+          <div className="section-1c_song-details">
             <div className="song-details-1_actions">
               <div className="actions_shadow-div-outset">
                 <div className="actions_shadow-div-inset">
@@ -431,17 +358,15 @@ function Home(props) {
                     >
                       <div
                         className="action-btn-icon_shadow-div-inset"
-                        ref={followBtnRef1}
                         style={{ borderRadius: '40px 4px 4px 40px' }}
                       >
                         <img
                           className="social-icons si-follow"
                           src={follow}
-                          ref={followBtnRef2}
                           alt="follow user icon"
                         />
                       </div>
-                      <div className="action-btn-text" ref={followBtnRef3}>
+                      <div className="action-btn-text">
                         <p style={{ color: 'white' }}>{totalFollowers}</p>
                         <p>
                           {(totalFollowers === 1)
@@ -518,10 +443,10 @@ function Home(props) {
                       </div>
 
                       <div className="song-caption-container">
-                        <p className="song-date">
+                        <div className="song-date">
                           <FormatDate date={songInView.songDate} />{' '}
                           <img src={bullet} alt="bullet point" />
-                        </p>
+                        </div>
                         <p className="song-caption">
                           {songInView.songCaption
                             ? songInView.songCaption

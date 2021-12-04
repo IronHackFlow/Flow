@@ -287,18 +287,14 @@ function SongScreen(props) {
       </div>
 
       <Comments
-        commentPopUpRef={commentPopUpRef}
         commentInputRef={commentInputRef}
-        commentButtonRef={commentButtonRef}
-        commentInnerRef={commentInnerRef}
         poppedUp={poppedUp}
         songInView={thisSong}
         commentsArray={commentsArray}
         setCommentsArray={setCommentsArray}
         totalComments={totalComments}
         setTotalComments={setTotalComments}
-        opacityRef1={opacityRef1}
-        opacityRef2={opacityRef2}
+        whichMenu="SongScreen"
       />
 
       <div className="song-details-container">

@@ -30,6 +30,7 @@ function EditLyrics(props) {
     { song: beat4, name: "Callback" },
     { song: beat5, name: "Drained" },
   ]);
+  const [selectedBeat, setSelectedBeat] = useState(tracks[0].song);
   const [getTakes, setGetTakes] = useState([]);
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [currentSong, setCurrentSong] = useState();
@@ -256,11 +257,10 @@ function EditLyrics(props) {
     });
   };
 
-  const loadTrack = () => {
-    let selectBox = document.getElementById("selectBox");
-    let selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    document.getElementById("song").src = selectedValue;      
+  const loadTrack = (e) => {
+    setSelectedBeat(e.target.value)
   };
+
 
   const chooseSongs = () => {
     return allSongs.map((each, index) => {
@@ -408,10 +408,14 @@ function EditLyrics(props) {
                     <div className="select-beat-title">
                       Select A Beat :
                     </div>
-
-                    <select id="selectBox" className="track-select" onChange={() => loadTrack()}>
+                    <select 
+                      id="selectBox" 
+                      className="track-select" 
+                      value={selectedBeat}
+                      onChange={(e) => loadTrack(e)}>
                       {chooseTrack()}
                     </select>
+                    <audio src={selectedBeat} loop={true}></audio>
                   </div>
                 </div>
               </div>
