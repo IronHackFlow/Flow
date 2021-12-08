@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
@@ -32,12 +32,7 @@ function SongScreen(props) {
   const [songScreen] = useState(`#353535`);
 
   const windowRef = useRef();
-  const commentPopUpRef = useRef();
   const commentInputRef = useRef();
-  const commentButtonRef = useRef();
-  const commentInnerRef = useRef();
-  const opacityRef1 = useRef();
-  const opacityRef2 = useRef();
   const followBtn = useRef();
   const playPauseRef = useRef();
 ;

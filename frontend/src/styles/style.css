@@ -207,8 +207,8 @@ body,
   html {
     background: #282727;
     margin: auto;
-    width: 370px;
-    height: 770px;
+    width: 360px;
+    height: 100vh;
   }
 }
 
@@ -3487,6 +3487,37 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: linear-gradient(323deg, #262626 0%, #474646 100%);
 }
 
+.section-1_speech .modal-toggle-btn {
+  height: 35px;
+  width: 35px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #ec6aa0;
+  -webkit-box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
+          box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
+  border: 1px solid #e74d8d;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.section-1_speech .modal-toggle-btn img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
 .section-1_speech .scroll-rhymes-container {
   height: 76%;
   width: 96%;
@@ -3671,6 +3702,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
           box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+  opacity: 1;
+  -webkit-transition: opacity .3s .3s;
+  transition: opacity .3s .3s;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .next-bar-container .action-word-container {
@@ -3759,6 +3793,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  opacity: 1;
+  -webkit-transition: opacity .3s .3s;
+  transition: opacity .3s .3s;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .custom-rhyme .rhymed-word_shadow-div-inset {
@@ -4027,6 +4064,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  opacity: 1;
+  -webkit-transition: opacity .3s .3s;
+  transition: opacity .3s .3s;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .rhyme-lock-container .rhyme-lock-button {
@@ -4134,6 +4174,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: inset 3px 3px 5px 0px #4c4c4c, inset -2px -2px 3px #d0d0d0;
           box-shadow: inset 3px 3px 5px 0px #4c4c4c, inset -2px -2px 3px #d0d0d0;
+  opacity: 1;
+  -webkit-transition: .3s .3s;
+  transition: .3s .3s;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestion-button-container .rhyme-lock-container {
@@ -5409,9 +5452,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  opacity: 0;
-  -webkit-animation: opacityTransition 1s forwards;
-          animation: opacityTransition 1s forwards;
+  opacity: 1;
 }
 
 .actions-2_record .record-container {
@@ -5475,9 +5516,62 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 4px #686868;
 }
 
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container {
+  height: 100%;
+  width: 20%;
+  border-radius: 8px 40px 40px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn {
+  height: 75%;
+  width: 70%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #6d6d6d;
+          box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #6d6d6d;
+  background: initial;
+  border: none;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn img {
+  height: 1.7em;
+  width: 1.7em;
+  margin-left: 3px;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn:active {
+  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+}
+
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
   height: 75%;
-  width: 91%;
+  width: 80%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5539,6 +5633,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .save-menu-active .section-2a_flow-suggestions .next-bar-container {
   opacity: 0;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
 }
 
 .save-menu-active .section-2a_flow-suggestions .suggestions {
@@ -5549,14 +5645,20 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .save-menu-active .section-2a_flow-suggestions .suggestions .custom-rhyme {
   opacity: 0;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
 }
 
 .save-menu-active .section-2a_flow-suggestions .suggestions .rhyme-lock-container {
   opacity: 0;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
 }
 
 .save-menu-active .section-2a_flow-suggestions .suggestion-button-container {
   opacity: 0;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
 }
 
 .save-menu-active .section-2b_flow-controls {
@@ -5663,17 +5765,16 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-transform: translateX(170%);
           transform: translateX(170%);
   opacity: 0;
-  -webkit-transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  -webkit-transition: all 0.4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  transition: all 0.4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .slideIn {
   -webkit-transform: translateX(0%);
           transform: translateX(0%);
-  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: -webkit-transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05), -webkit-transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  opacity: 1;
+  -webkit-transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .EditLyrics {
@@ -10374,6 +10475,209 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   border-radius: 50px;
   -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 2px #d1ffe6;
           box-shadow: 2px 2px 4px #283e35, -1px -1px 2px #d1ffe6;
+}
+
+.RecordBoothModal {
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  z-index: 0;
+  background: #0000008c;
+  opacity: 0;
+}
+
+.RecordBoothModal .close-window-btn {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+
+.RecordBoothModal .section-4_controls {
+  height: 200px;
+  width: 95%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(314deg, #5a5a5a 0%, #8d8d8d 100%);
+  position: absolute;
+  bottom: 34%;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset {
+  height: 95%;
+  width: 97%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container {
+  height: 80%;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset {
+  height: 95%;
+  width: 95%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
+          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers {
+  height: 32%;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset {
+  height: 90%;
+  width: 97%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container {
+  height: 20%;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container .next-back-btn {
+  height: 22px;
+  width: 40px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: initial;
+  border: none;
+  color: white;
+  -webkit-box-shadow: 2px 2px 3px 0px #424242, -2px -2px 3px #a3a3a3;
+          box-shadow: 2px 2px 3px 0px #424242, -2px -2px 3px #a3a3a3;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container .back-btn {
+  margin-left: 4%;
+}
+
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container .next-btn {
+  margin-right: 4%;
 }
 
 :root {

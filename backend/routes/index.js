@@ -21,6 +21,7 @@ router.get(`/user`, verifyToken, async (req, res, next) => {
         .populate('userFollows')
         .then(user => {
           res.status(200).json(user)
+          console.log(user, 'is this showing up?')
         })
         .catch(err => res.status(500).json(err))
     }

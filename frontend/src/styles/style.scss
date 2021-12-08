@@ -220,8 +220,8 @@ body,
   html {
     background: #282727;
     margin: auto;
-    width: 370px;
-    height: 770px;
+    width: 360px;
+    height: 100vh;
   }
 }
 
@@ -237,6 +237,7 @@ body,
 @import './EditProfile';
 @import './Buttons';
 @import './Modal';
+@import './RecordingBoothModal';
 
 :root {
   --routedi2bg: #ecf0f3;

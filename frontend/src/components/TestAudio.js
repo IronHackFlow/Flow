@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
+import RecordingBoothModal from "./RecordingBoothModal";
 import actions from "../api";
 import NavBar from "./NavBar";
-import Modal from "./ModalMenu";
 import beat1 from "../assets/beatsTrack1.m4a";
 import beat2 from "../assets/beatsTrack2.m4a";
 import beat3 from "../assets/beatsTrack3.m4a";
@@ -21,6 +21,7 @@ import xExit from "../images/exit-x-2.svg";
 import save from "../images/save-disk.svg";
 import locked from "../images/locked.svg";
 import shuffle from "../images/shuffle.svg";
+import modal from "../images/modal.svg";
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext)
@@ -50,6 +51,7 @@ function TestAudio(props) {
   }
   const [recorderState, setRecorderState] = useState(initialState);
   const [audioSrc, setAudioSrc] = useState(null);
+  const [beatIsPlaying, setBeatIsPlaying] = useState(false)
   const [selectedBeat, setSelectedBeat] = useState(tracks[0].song);
   const [silent, setSilent] = useState(false);
   const [saveSongMenu, setSaveSongMenu] = useState(false);
@@ -77,7 +79,10 @@ function TestAudio(props) {
   const [blobData, setBlobData] = useState({})
   const [dateBefore, setDateBefore] = useState();
   const [dateAfter, setDateAfter] = useState();
+  const [toggleModal, setToggleModal] = useState(false);
 
+  const modalBtnRef = useRef();
+  const playBeatRef = useRef();
   const recordAudioRef = useRef();
   const scrollRef = useRef();
   const saveSongPopUpRef = useRef();
@@ -137,6 +142,7 @@ function TestAudio(props) {
             })
           }
         })
+        .catch(console.error)
     }
   }, [selectedWordHolder])
 
@@ -192,6 +198,21 @@ function TestAudio(props) {
     }
   }, [recorderState.mediaRecorder])
 
+  useEffect(() => {
+    if (beatIsPlaying) {
+      playBeatRef.current.play()
+    } else {
+      playBeatRef.current.pause()
+    }
+  }, [beatIsPlaying])
+
+  const toggleModalHandler = () => {
+    if (toggleModal) {
+      setToggleModal(false)
+    } else {
+      setToggleModal(true)
+    }
+  }
   const displayActionWords = useCallback(() => {
     return retrievedActionRhymes.slice(0, 5).map((each, index) => {
       return (
@@ -204,6 +225,7 @@ function TestAudio(props) {
     let scrollLyrics = document.getElementById('currentTranscript')
     scrollLyrics.scrollTop = scrollLyrics.scrollHeight
   }
+
   const profanityRefilter = (curse) => {
     let regexp = /\b\w\**(\*)/gm
     let curseWord = curse.match(regexp)
@@ -277,6 +299,7 @@ function TestAudio(props) {
       if (lastWord.includes("*")) {
         finalWord = profanityRefilter(lastWord)
       }
+
       setRhymeWordHolder(finalWord)
       setRetrievedRhymes([])
       console.log(finalWord, " - this is the last word")
@@ -331,8 +354,7 @@ function TestAudio(props) {
   const displayTakeLyrics = useCallback(() => {
     if (allTakes.length === 0) {
       return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
-    }
-    else {
+    } else {
       return (
         <>
           {loadSelectedTake?.songLyricsStr.map((row, index) => {
@@ -363,18 +385,15 @@ function TestAudio(props) {
       return array.slice(0, selectedRhymeNo).map((each, index) => {
         if (index === selectedRhymeNo - 1) {
           return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
-        }
-        else {
+        } else {
           return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
         }
       })
-    }
-    else {
+    } else {
       return array?.map((each, index) => {
         if (index === array.length - 1) {
           return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
-        }
-        else {
+        } else {
           return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
         }
       })
@@ -438,7 +457,6 @@ function TestAudio(props) {
 
   const chooseTrack = () => {
     return tracks.map((element, index) => {
-      console.log(element, "what tha")
       return <option key={`${element}_${index}`} value={element.song}>{element.name} </option>;
     });
   };
@@ -610,10 +628,8 @@ function TestAudio(props) {
   const toggleSaveSongMenu = () => {
     if (saveSongMenu === false) {
       setSaveSongMenu(true)
-      slideOutMicRef.current.className = "record-2_record-btn slideOut"
     } else {
       setSaveSongMenu(false)
-      slideOutMicRef.current.className = "record-2_record-btn slideIn"
     }
   }
   
@@ -671,6 +687,24 @@ function TestAudio(props) {
           <div className="record-container">
             <div className="record-1_select-beat">
               <div className="select-beat_shadow-div-inset">
+                <div className="select-beat_play-container">
+                  {beatIsPlaying ? (
+                    <button 
+                      className="select-beat_play-btn"
+                      onClick={() => setBeatIsPlaying(false)}
+                      >
+                      <img className="button-icons" src={pause} alt="pause" />
+                    </button>
+                  ) : (
+                    <button 
+                      className="select-beat_play-btn"
+                      onClick={() => setBeatIsPlaying(true)}
+                    >
+                      <img className="button-icons" src={play} alt="play" />
+                    </button>
+                  )}
+                  <audio src={selectedBeat} ref={playBeatRef} />
+                </div>
                 <div className="select-beat_shadow-div-outset">
                   <div className="select-beat-title">
                     Select A Beat :
@@ -686,11 +720,24 @@ function TestAudio(props) {
       )
     }
   }
-  
+
   return (
     <div className="TestAudio">
-      <audio src={selectedBeat} loop={true} ref={recordAudioRef}></audio>
+      <RecordingBoothModal 
+       toggleModal={toggleModal} 
+       setToggleModal={setToggleModal}
+       modalBtnRef={modalBtnRef}
+      />
+      <audio id="song" src={selectedBeat} loop={true} ref={recordAudioRef}></audio>
       <div className="section-1_speech">
+        <button 
+          className="modal-toggle-btn"
+          ref={modalBtnRef} 
+          onClick={() => toggleModalHandler()}
+        >
+          <img className="button-icons" src={modal} alt="modal" />
+        </button>
+
         <div className="scroll-rhymes-container" id="currentTranscript" ref={scrollRef}>
           {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
         </div>
@@ -853,7 +900,7 @@ function TestAudio(props) {
                         setIsPlaying={setIsPlaying}
                         currentSong={songUploadObject}
                         location={recordingBooth}
-                        />
+                      />
                     </div>
                   </div>
                 </div>
@@ -905,7 +952,7 @@ function TestAudio(props) {
             </div>
           </div>
 
-          <div className="record-2_record-btn" ref={slideOutMicRef}>
+          <div className={`record-2_record-btn ${saveSongMenu ? "slideOut" : "slideIn"}`}>
             <div className="record-btn_shadow-div-inset">
               {recorderState.initRecording ? (
                 <button

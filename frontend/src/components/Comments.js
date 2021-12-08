@@ -46,6 +46,22 @@ function Comments(props) {
     })
   }
 
+  const getCommentClass = () => {
+    if (props.whichMenu === "Home") {
+      if (props.poppedUp === true) {
+        return "comment-pop-out comment-popped"
+      } else {
+        return "comment-pop-out"
+      }
+    } else {
+      if (props.poppedUp === true) {
+        return "comment-pop-out songScreen-pop-out songScreen-popped"
+      } else {
+        return "comment-pop-out songScreen-pop-out"
+      }
+    }
+  }
+  
   const handleSubmit = e => {
     e.preventDefault()
     if (comment === undefined) {
@@ -275,18 +291,33 @@ function Comments(props) {
               </div>
             </div>
 
-            <div className="comment-likereply-container clc-2">
-              <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
-                <img
-                  className="social-icons comment"
-                  src={checkCommUser ? edit : comments}
-                  alt="edit or reply"
-                />
+            {checkCommUser ? (
+              <div className="comment-likereply-container clc-2">
+                <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
+                  <img
+                    className="social-icons comment"
+                    src={edit}
+                    alt="edit"
+                  />
+                </div>
+                <div className="comm-likereply-text" ref={replyTextRef}>
+                  Edit
+                </div>
               </div>
-              <div className="comm-likereply-text" ref={replyTextRef}>
-                {checkCommUser ? 'Edit' : 'Reply'}
+            ) : (
+              <div className="comment-likereply-container clc-2">
+                <div className="comm-likereply-btn clb-2">
+                  <img
+                    className="social-icons comment"
+                    src={comments}
+                    alt="reply"
+                  />
+                </div>
+                <div className="comm-likereply-text" ref={replyTextRef}>
+                  Reply
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="comment-popout-container" ref={slideOutRef}>
               <div className="comment-likereply-container clc-3" ref={clcThree}>
@@ -313,21 +344,6 @@ function Comments(props) {
         </div>
       </div>
     )
-  }
-  const getCommentClass = () => {
-    if (props.whichMenu === "Home") {
-      if (props.poppedUp === true) {
-        return "comment-pop-out comment-popped"
-      } else {
-        return "comment-pop-out"
-      }
-    } else {
-      if (props.poppedUp === true) {
-        return "comment-pop-out songScreen-pop-out songScreen-popped"
-      } else {
-        return "comment-pop-out songScreen-pop-out"
-      }
-    }
   }
 
   return (

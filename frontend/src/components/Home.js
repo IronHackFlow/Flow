@@ -45,12 +45,12 @@ function Home(props) {
   const [displayTrending, setDisplayTrending] = useState([])
   const [displayFollowing, setDisplayFollowing] = useState([])
   const [updateFollowFeed, setUpdateFollowFeed] = useState();
+  const [home] = useState(`#6d6d6d`);
   
   const windowRef = useRef();
   const commentInputRef = useRef();
   const profilePicRef = useRef();
   const playPauseRef = useRef();
-  const [home] = useState(`#6d6d6d`);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -84,7 +84,6 @@ function Home(props) {
         const songsArray = res.data.map((each, index) => {
           return { song: each, songVideo: gifsCopy[index].url }
         }).reverse()
-        console.log(res.data, "all songs by users you're following")
         setFollowingSongsFeed(songsArray)
       }, signal)
       .catch(console.error)
@@ -104,26 +103,22 @@ function Home(props) {
   }, [likesInView])
 
   useEffect(() => {
-    setTotalComments(commentsInView?.length)
-  }, [])
-
-  useEffect(() => {
     let feed = theFeedSongs.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}feed${eachSong.song._id}_${index}`} />
+      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}feed${eachSong.song._id}_${index}`} />
     })
     setDisplayFeed(feed)
   }, [theFeedSongs])
 
   useEffect(() => {
     let trend = trendingSongsFeed.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}trending${eachSong.song._id}_${index + 1}`} />
+      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}trending${eachSong.song._id}_${index + 1}`} />
     })
     setDisplayTrending(trend)
   }, [trendingSongsFeed])
   
   useEffect(() => {
     let follow = followingSongsFeed.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} passKey={`${uuidv4()}following${eachSong.song._id}_${index + 3}`} />
+      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}following${eachSong.song._id}_${index + 3}`} />
     })
     setDisplayFollowing(follow)
   }, [followingSongsFeed])
@@ -134,13 +129,6 @@ function Home(props) {
     else if (followingBool) return displayFollowing
   }, [displayFeed, displayTrending, displayFollowing, theFeedBool, trendingBool, followingBool])
 
-  // const scrollToTop = () => {
-  //   console.log(window, 'lol??')
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth'
-  //   })
-  // }
   const handlePlayPause = (bool) => {
     if (bool === true) {
       setIsPlaying(true)

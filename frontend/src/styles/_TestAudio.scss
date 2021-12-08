@@ -10,6 +10,19 @@
     // background-position-y: 10%;
     background: linear-gradient(323deg, #262626 0%, #474646 100%);
 
+    .modal-toggle-btn {
+        @include flexCenter(35px, 35px, 50px, center, center, column);
+        background: #ec6aa0;
+        box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
+        border: 1px solid #e74d8d;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        
+        img {
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+        }
+    }
     .scroll-rhymes-container {
         @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
         overflow-y: scroll;
@@ -86,6 +99,8 @@
         .next-bar-container {
             @include flexCenter(8%, 96%, 20px, flex-start, flex-start, row);
             box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+            opacity: 1;
+            transition: opacity .3s .3s;
 
             .action-word-container {
                 @include flexCenter(90%, 96%, 20px, flex-start, center, row);
@@ -110,6 +125,8 @@
 
             .custom-rhyme {
                 @include flexCenter(100%, 100%, 50px, space-evenly, flex-start, column);
+                opacity: 1;
+                transition: opacity .3s .3s;
 
                 .rhymed-word_shadow-div-inset {
                     @include flexCenter(35%, 55%, 5px 0px 22px 0px, flex-start, center, row);
@@ -204,6 +221,8 @@
 
             .rhyme-lock-container {
                 @include flexCenter(100%, 24%, 50px, flex-end, center, row);
+                opacity: 1;
+                transition: opacity .3s .3s;
 
                 .rhyme-lock-button {
                     @include flexCenter(78%, 66%, 50px, center, center, row);
@@ -236,7 +255,6 @@
                                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 
                                 }
-                                // box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
                             }
                         }
                     }
@@ -247,6 +265,8 @@
         .suggestion-button-container {
             @include flexCenter(17%, 97%, 50px, center, center, row);
             box-shadow: inset 3px 3px 5px 0px #4c4c4c, inset -2px -2px 3px #d0d0d0;
+            opacity: 1;
+            transition: .3s .3s;
 
             .rhyme-lock-container {
                 @include flexCenter(75%, 96%, 50px, space-between, center, row);
@@ -721,8 +741,8 @@
 }
 .actions-2_record {
     @include flexCenter(50%, 100%, 0px, center, flex-start, row);
-    opacity: 0;
-    animation: opacityTransition 1s forwards;
+    opacity: 1;
+    // animation: opacityTransition 1s forwards;
 
     .record-container {
         @include flexCenter(89%, 96%, 10px 50px 50px 50px, space-between, center, row);
@@ -734,9 +754,29 @@
             .select-beat_shadow-div-inset {
                 @include flexCenter(85%, 97%, 8px 40px 40px 50px, flex-end, center, row);
                 box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 4px #686868;
+                
+                .select-beat_play-container {
+                    @include flexCenter(100%, 20%, 8px 40px 40px 50px, center, center, row);
 
+                    .select-beat_play-btn {
+                        @include flexCenter(75%, 70%, 50px, center, center, row);
+                        box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #6d6d6d;
+                        background: initial;
+                        border: none;
+
+                        img {
+                            height: 1.7em;
+                            width: 1.7em;
+                            margin-left: 3px;
+                        }
+                        &:active {
+                            box-shadow: inset 2px 2px 3px #313232, 
+                                        inset -2px -2px 3px #9fa2a4;
+                        }
+                    }
+                }
                 .select-beat_shadow-div-outset {
-                    @include flexCenter(75%, 91%, 50px, center, center, column);
+                    @include flexCenter(75%, 80%, 50px, center, center, column);
                     box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #6d6d6d;
                     margin-right: 3%;
 
@@ -770,6 +810,7 @@
         
         .next-bar-container {
             opacity: 0;
+            transition: opacity .3s;
         }
         .suggestions {
             height: 20%;
@@ -777,13 +818,16 @@
 
             .custom-rhyme {
                 opacity: 0;
+                transition: opacity .3s;
             }
             .rhyme-lock-container {
                 opacity: 0;
+                transition: opacity .3s;
             }
         }
         .suggestion-button-container {
             opacity: 0;
+            transition: opacity .3s;
         }
     }
 
@@ -863,9 +907,10 @@
 .slideOut {
     transform: translateX(170%);
     opacity: 0;
-    transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    transition: all .4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 .slideIn {
     transform: translateX(0%);
-    transition: transform .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    opacity: 1;
+    transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
