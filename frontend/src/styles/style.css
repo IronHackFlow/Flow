@@ -10606,6 +10606,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  opacity: 0;
 }
 
 .RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset {

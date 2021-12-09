@@ -33,11 +33,11 @@
                     
                     .step-containers {
                         @include flexCenter(32%, 100%, 10px, center, center, column);
+                        opacity: 0;
 
                         .steps_shadow-div-inset {
                             @include flexCenter(90%, 97%, 30px, center, center, column);
                             box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
-
                         }
                     }
                 }
@@ -52,7 +52,6 @@
                     border: none;
                     color: white;
                     box-shadow: 2px 2px 3px 0px #424242, -2px -2px 3px #a3a3a3;
-
                 }
                 .back-btn {
                     margin-left: 4%;
