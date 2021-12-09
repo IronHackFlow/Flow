@@ -61,11 +61,11 @@ function RecordingBoothModal(props) {
 
   const showSteps = useCallback(() => {
     console.log(modalInDisplay.steps, "what dis?")
-    return modalInDisplay?.steps?.map((each, index) => {
+    return modalInDisplay.steps.map((each, index) => {
       return (
         <div 
           className="step-containers" 
-          key={`${uuidv4()}_${each.title}`}
+          key={`${uuidv4()}_${each}`}
           style={{ opacity: '1'}}
         >
           <div className="steps_shadow-div-inset">
