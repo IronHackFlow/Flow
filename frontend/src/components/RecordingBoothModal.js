@@ -7,7 +7,7 @@ function RecordingBoothModal(props) {
   let modalObjArr = [
     {
       index: 0,
-      title: "Welcome to Flow",
+      title: "Welcome to the Flow Tutorial",
       steps: [
         { step: "Let's get started, please hit the next button below", show: true }
       ]
@@ -41,9 +41,12 @@ function RecordingBoothModal(props) {
   ]
   const [modalInDisplay, setModalInDisplay] = useState(modalObjArr[0]);
   const [modalSteps, setModalSteps] = useState(modalObjArr[0].steps);
-  const [currentStep, setCurrentStep] = useState(modalSteps[0]);
+  const [currentStep, setCurrentStep] = useState(modalObjArr[0].steps[0]);
   const [endOfModal, setEndOfModal] = useState(true);
   const [beginOfModal, setBeginOfModal] = useState(true)
+  const [modalStepClass, setModalStepClass] = useState(null);
+  const [modalSectionClass, setModalSectionClass] = useState('');
+  const [arrowDir, setArrowDir] = useState('down');
 
   const modalWindowRef = useRef();
 
@@ -64,7 +67,7 @@ function RecordingBoothModal(props) {
   }, [props.toggleModal, props.setToggleModal])
 
   useEffect(() => {
-    if (modalInDisplay.index === 3 && modalSteps[modalSteps.length - 1].step === currentStep.step) {
+    if ((modalInDisplay.index === 3) && (modalSteps[modalSteps.length - 1].step === currentStep.step)) {
       setEndOfModal(true)
     } else {
       setEndOfModal(false)
@@ -96,6 +99,45 @@ function RecordingBoothModal(props) {
     }
   }, [currentStep])
 
+  
+  useEffect(() => {
+    if (modalInDisplay.index === 0) {
+      setModalSectionClass('first-modal')
+      setArrowDir('down')
+    }
+    else if (modalInDisplay.index === 1) {
+      setModalSectionClass('second-modal')
+      setArrowDir('down')
+    }
+    else if (modalInDisplay.index === 2) {
+      setModalSectionClass('third-modal')
+      setArrowDir('up')
+    }
+    else if (modalInDisplay.index === 3) {
+      setModalSectionClass('fourth-modal')
+      setArrowDir('up')
+    }
+  }, [modalInDisplay])
+
+  useEffect(() => {
+    if (currentStep.step === modalObjArr[1].steps[0].step) return setModalStepClass('one-one')
+    else if (currentStep.step === modalObjArr[1].steps[1].step) return setModalStepClass('one-two')
+    else if (currentStep.step === modalObjArr[1].steps[2].step) return setModalStepClass('one-three')
+    else if (currentStep.step === modalObjArr[2].steps[0].step) return setModalStepClass('two-one')
+    else if (currentStep.step === modalObjArr[2].steps[1].step) return setModalStepClass('two-two')
+    else if (currentStep.step === modalObjArr[2].steps[2].step) return setModalStepClass('two-three')
+    else if (currentStep.step === modalObjArr[3].steps[0].step) return setModalStepClass('three-one')
+    else if (currentStep.step === modalObjArr[3].steps[1].step) return setModalStepClass('three-two')
+  }, [currentStep])
+
+  const showArrow = useCallback(() => {
+    return (
+      <div className={`arrow-container ${modalStepClass ? modalStepClass : "one-one"}`}>
+        <div className={`arrow-head ${arrowDir}`}></div>
+      </div>
+    )
+  }, [modalStepClass])
+
   const mapSteps = useCallback(() => {
     return modalInDisplay?.steps.map((each, index) => {
       return (
@@ -113,24 +155,30 @@ function RecordingBoothModal(props) {
     })
   }, [modalInDisplay])
 
-  const showStepsHandler = (direction) => {
+  const closeWindowHandler = () => {
+    props.setToggleModal(false)
+    setModalInDisplay(modalObjArr[0])
+    setModalSteps(modalObjArr[0].steps)
+    setCurrentStep(modalObjArr[0].steps[0])
+    setEndOfModal(false)
+    setBeginOfModal(true)
+    setArrowDir('down')
+    setModalStepClass('')
+    setModalSectionClass('')
+  }
+
+  const microStepHandler = () => {
     modalSteps.filter((each, index) => {
       if (each.step === currentStep.step) {
-        if (direction === 'back') {
-          if ((index - 1) !== null) {
-            setCurrentStep(modalSteps[index - 1])
-          }
-        } else {
-          if ((index + 1) !== null) {
-            setCurrentStep(modalSteps[index + 1])
-
-          }
+        if ((index + 1) !== null) {
+          setCurrentStep(modalSteps[index + 1])
         }
       }
     })
   }
 
-  const getModal = (direction) => {
+  const macroStepHandler = (direction) => {
+    console.log('whats going on man?', modalInDisplay, modalSteps, currentStep)
     modalObjArr.filter((each) => {
       if (each.index === modalInDisplay.index) {
         if (direction === 'back') {
@@ -146,7 +194,7 @@ function RecordingBoothModal(props) {
           } 
         } else {
           if (modalSteps[modalSteps.length -1].step !== currentStep.step) {
-            showStepsHandler(direction)
+            microStepHandler()
           } else if (each.index !== 3) {
             setModalInDisplay(modalObjArr[each.index + 1])
             setModalSteps(modalObjArr[each.index + 1].steps)
@@ -160,39 +208,47 @@ function RecordingBoothModal(props) {
   return (
     <div className="RecordBoothModal" ref={modalWindowRef}>
       <div className="close-window-container">
-        <div className="close-window-btn" onClick={() => props.setToggleModal(false)}>
+        <div className="close-window-btn" onClick={() => closeWindowHandler()}>
           <img className="button-icons" src={xExit} alt="exit" />
         </div>
       </div>
 
-      <div className="section-4_controls">
+      <div className={`section-4_controls ${modalSectionClass}`}>
         <div className="section_shadow-div-inset">
+          <div className="section_next-container">
+            <div className="next-container_shadow-div-inset">
+              {modalInDisplay.title}
+            </div>
+          </div>
           <div className="section_text-container">
             <div className="text-container_shadow-div-outset">
               {mapSteps()}
             </div>
           </div>
-          <div className="section_next-container">
+        </div>
+      </div>
+      
+      {showArrow()}
+
+      <div className="modal-navigation-container">
+        <div className="modal-navigation_shadow-div-inset">
+          <div className="modal-navigation_shadow-div-outset">
             {!beginOfModal ? (
-              <button className="next-back-btn back-btn" onClick={() => getModal('back')}>
+              <button className="next-back-btn back-btn" onClick={() => macroStepHandler('back')}>
                 Back
               </button>
             ) : (
               <div></div>
-            )}
+              )}
             {!endOfModal ? (
-              <button className="next-back-btn next-btn" onClick={() => getModal('next')}>
+              <button className="next-back-btn next-btn" onClick={() => macroStepHandler('next')}>
                 Next
               </button>
             ) : (
               <div></div>
-            )}
-
+              )}
           </div>
         </div>
-      </div>
-      <div className="arrow-container">
-        
       </div>
     </div>
   )
