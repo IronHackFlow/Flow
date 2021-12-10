@@ -61,5 +61,13 @@
                 }
             }
         }
-    }   
+    }
+    .arrow-container {
+        @include flexCenter(60px, 10px, 0px, center, center, row);
+        position: absolute;
+        color: pink;
+        bottom: 34%;
+        right: 20%;
+
+    }
 }

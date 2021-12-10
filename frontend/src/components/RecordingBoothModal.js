@@ -39,9 +39,11 @@ function RecordingBoothModal(props) {
       ]
     }
   ]
-  const history = useHistory();
-  const [modalIndex, setModalIndex] = useState(0);
   const [modalInDisplay, setModalInDisplay] = useState(modalObjArr[0]);
+  const [modalSteps, setModalSteps] = useState(modalObjArr[0].steps);
+  const [currentStep, setCurrentStep] = useState(modalSteps[0]);
+  const [endOfModal, setEndOfModal] = useState(true);
+  const [beginOfModal, setBeginOfModal] = useState(true)
 
   const modalWindowRef = useRef();
 
@@ -61,11 +63,38 @@ function RecordingBoothModal(props) {
     }
   }, [props.toggleModal, props.setToggleModal])
 
-  const stepRef = useRef();
+  useEffect(() => {
+    if (modalInDisplay.index === 3 && modalSteps[modalSteps.length - 1].step === currentStep.step) {
+      setEndOfModal(true)
+    } else {
+      setEndOfModal(false)
+    }
+  }, [currentStep])
 
-  const [modalSteps, setModalSteps] = useState(modalObjArr[0].steps);
-  const [currentStep, setCurrentStep] = useState(modalSteps[0].step);
-  const [opacityTracker, setOpacityTracker] = useState({current: currentStep, show: true });
+  useEffect(() => {
+    if (modalInDisplay.index !== 0) {
+      setBeginOfModal(false)
+    } else {
+      setBeginOfModal(true)
+    }
+  }, [modalInDisplay])
+
+  useEffect(() => {
+    if (!currentStep.show) {
+      let newModalInDisplay = modalInDisplay.steps.map((each) => {
+        if (each.step === currentStep.step) {
+          return {...each, show: true }
+        } else { 
+          return each
+        }
+      })
+      setModalInDisplay(prevModal => ({
+        ...prevModal,
+        steps: newModalInDisplay
+      }))
+
+    }
+  }, [currentStep])
 
   const mapSteps = useCallback(() => {
     return modalInDisplay?.steps.map((each, index) => {
@@ -74,7 +103,7 @@ function RecordingBoothModal(props) {
           id={each.step}
           className="step-containers" 
           key={`${uuidv4()}_${each[index]}`}
-          style={(index === 0 || each === opacityTracker.current) ? { opacity: '1' } : {}}
+          style={(each.show === true) ? { opacity: '1' } : { opacity: '0'}}
         >
           <div className="steps_shadow-div-inset">
             {each.step}
@@ -82,60 +111,49 @@ function RecordingBoothModal(props) {
         </div>
       )    
     })
-  }, [modalInDisplay, opacityTracker])
+  }, [modalInDisplay])
 
   const showStepsHandler = (direction) => {
-    console.log(currentStep, modalSteps, "ok what??")
     modalSteps.filter((each, index) => {
-      if (each.step === currentStep) {
+      if (each.step === currentStep.step) {
         if (direction === 'back') {
           if ((index - 1) !== null) {
-            console.log("BACK INSIDE CALLED", each, index)
-            setCurrentStep(modalSteps[index - 1].step)
+            setCurrentStep(modalSteps[index - 1])
           }
         } else {
           if ((index + 1) !== null) {
-            console.log("FORWARD INSIDE CALLED", each, index)
-            setCurrentStep(modalSteps[index + 1].step)
+            setCurrentStep(modalSteps[index + 1])
+
           }
         }
       }
     })
   }
 
-  useEffect(() => {
-    setOpacityTracker({ current: currentStep, show: true })
-    console.log(currentStep, "what")
-  }, [currentStep])
-
   const getModal = (direction) => {
-    console.log(currentStep, modalSteps, "yoyoyo")
     modalObjArr.filter((each) => {
       if (each.index === modalInDisplay.index) {
         if (direction === 'back') {
-
-          if (modalSteps[0].step !== currentStep) {
-            console.log("BACK YOYO I WAS CALLED", currentStep)
-            showStepsHandler(direction)
+          if (modalSteps[0].step !== currentStep.step) {
+            setModalInDisplay(modalObjArr[each.index])
+            setModalSteps(modalObjArr[each.index].steps)
+            setCurrentStep(modalObjArr[each.index].steps[0])
           }
           else if (each.index !== 0) {
             setModalInDisplay(modalObjArr[each.index - 1])
             setModalSteps(modalObjArr[each.index - 1].steps)
-            setCurrentStep(modalObjArr[each.index - 1].steps[0].step)
+            setCurrentStep(modalObjArr[each.index - 1].steps[0])
           } 
         } else {
-          if (modalSteps[modalSteps.length -1].step !== currentStep) {
-            console.log("FORWARD YOYO I WAS CALLED", currentStep)
+          if (modalSteps[modalSteps.length -1].step !== currentStep.step) {
             showStepsHandler(direction)
-          }
-          else if (each.index !== 3) {
+          } else if (each.index !== 3) {
             setModalInDisplay(modalObjArr[each.index + 1])
             setModalSteps(modalObjArr[each.index + 1].steps)
-            setCurrentStep(modalObjArr[each.index + 1].steps[0].step)
-
-          }
+            setCurrentStep(modalObjArr[each.index + 1].steps[0])
+          } 
         }
-      }
+      } 
     })
   }
 
@@ -155,16 +173,27 @@ function RecordingBoothModal(props) {
             </div>
           </div>
           <div className="section_next-container">
-            <button className="next-back-btn back-btn" onClick={() => getModal('back')}>
-              Back
-            </button>
-            <button className="next-back-btn next-btn" onClick={() => getModal('next')}>
-              Next
-            </button>
+            {!beginOfModal ? (
+              <button className="next-back-btn back-btn" onClick={() => getModal('back')}>
+                Back
+              </button>
+            ) : (
+              <div></div>
+            )}
+            {!endOfModal ? (
+              <button className="next-back-btn next-btn" onClick={() => getModal('next')}>
+                Next
+              </button>
+            ) : (
+              <div></div>
+            )}
+
           </div>
         </div>
       </div>
-
+      <div className="arrow-container">
+        
+      </div>
     </div>
   )
 }
