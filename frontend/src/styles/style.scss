@@ -224,7 +224,7 @@ body,
     height: 100vh;
   }
 }
-
+input, textarea, select, button { font-family:inherit; }
 @import './NavBar';
 @import './HamburgerMenu';
 @import './Search';

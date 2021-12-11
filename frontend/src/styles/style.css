@@ -212,6 +212,10 @@ body,
   }
 }
 
+input, textarea, select, button {
+  font-family: inherit;
+}
+
 .NavBar {
   height: 11%;
   width: 100%;
@@ -10484,20 +10488,79 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  z-index: 0;
+  opacity: 0;
+}
+
+.RecordBoothModal .opacity-section-1 {
+  height: 30%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  position: absolute;
-  z-index: 0;
+      -ms-flex-direction: column;
+          flex-direction: column;
   background: #0000008c;
-  opacity: 0;
+}
+
+.RecordBoothModal .opacity-section-2 {
+  height: 35%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #0000008c;
+}
+
+.RecordBoothModal .opacity-section-3 {
+  height: 35%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #0000008c;
 }
 
 .RecordBoothModal .close-window-btn {
@@ -10675,6 +10738,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   font-size: 13px;
 }
 
+.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .highlight-step {
+  -webkit-box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
+          box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
+  background: #ec6aa0;
+  border: 3px solid #ec6aa0;
+}
+
 .RecordBoothModal .third-modal {
   bottom: 10%;
 }
@@ -10735,6 +10805,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-clip-path: polygon(50% 59%, 3% 0, 100% 0);
           clip-path: polygon(50% 59%, 3% 0, 100% 0);
   bottom: -14px;
+}
+
+.RecordBoothModal .zero-zero {
+  height: 194px;
+  top: 66%;
+  left: 84%;
 }
 
 .RecordBoothModal .one-one {
@@ -10875,6 +10951,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 
 .RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn {
   margin-left: 2%;
+}
+
+.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn:active {
+  background: #767676;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
+          box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
 }
 
 .RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-btn {

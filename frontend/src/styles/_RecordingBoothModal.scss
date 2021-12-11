@@ -1,14 +1,30 @@
 .RecordBoothModal {
-    @include flexCenter(100%, 100%, 0px, center, stretch, row);
+    @include flexCenter(100%, 100%, 0px, flex-start, center, column);
     position: absolute;
     z-index: 0;
-    background: #0000008c;
     opacity: 0;
+
+    .opacity-section-1 {
+        @include flexCenter(30%, 100%, 0px, center, center, column);
+        background: #0000008c;
+
+    }
+    .opacity-section-2 {
+        @include flexCenter(35%, 100%, 0px, center, center, column);
+        background: #0000008c;
+
+    }
+    .opacity-section-3 {
+        @include flexCenter(35%, 100%, 0px, center, center, column);
+        background: #0000008c;
+
+    }
 
     .close-window-btn {
         position: absolute;
         top: 7px;
         right: 7px;
+
         .close-window-btn {
 
         }
@@ -51,7 +67,12 @@
                             @include flexCenter(100%, 97%, 30px, center, center, column);
                             box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
                             color: white;
-                        font-size: 13px;
+                            font-size: 13px;
+                        }
+                        .highlight-step {
+                            box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
+                            background: #ec6aa0;
+                            border: 3px solid #ec6aa0;
                         }
                     }
                 }
@@ -89,6 +110,11 @@
             clip-path: polygon(50% 59%, 3% 0, 100% 0);
             bottom: -14px;
         }
+    }
+    .zero-zero {
+        height: 194px;
+        top: 66%;
+        left: 84%;
     }
     .one-one {
         height: 100px;
@@ -156,6 +182,11 @@
                 }
                 .back-btn {
                     margin-left: 2%;
+                    
+                    &:active {
+                        background: #767676;
+                        box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
+                    }
                 }
                 .next-btn {
                     margin-right: 2%;

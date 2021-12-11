@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import xExit from "../images/exit-x-2.svg"
 
@@ -47,7 +46,7 @@ function RecordingBoothModal(props) {
   const [modalStepClass, setModalStepClass] = useState(null);
   const [modalSectionClass, setModalSectionClass] = useState('');
   const [arrowDir, setArrowDir] = useState('down');
-
+  const [highlightClass, setHighlightClass] = useState('highlight-step')
   const modalWindowRef = useRef();
 
   useEffect(() => {
@@ -64,7 +63,7 @@ function RecordingBoothModal(props) {
       props.modalBtnRef.current.style.opacity = 1
       props.modalBtnRef.current.style.transition = "opacity .2s"
     }
-  }, [props.toggleModal, props.setToggleModal])
+  }, [props.toggleModal])
 
   useEffect(() => {
     if ((modalInDisplay.index === 3) && (modalSteps[modalSteps.length - 1].step === currentStep.step)) {
@@ -99,7 +98,6 @@ function RecordingBoothModal(props) {
     }
   }, [currentStep])
 
-  
   useEffect(() => {
     if (modalInDisplay.index === 0) {
       setModalSectionClass('first-modal')
@@ -120,7 +118,8 @@ function RecordingBoothModal(props) {
   }, [modalInDisplay])
 
   useEffect(() => {
-    if (currentStep.step === modalObjArr[1].steps[0].step) return setModalStepClass('one-one')
+    if (currentStep.step === modalObjArr[0].steps[0].step) return setModalStepClass('zero-zero')
+    else if (currentStep.step === modalObjArr[1].steps[0].step) return setModalStepClass('one-one')
     else if (currentStep.step === modalObjArr[1].steps[1].step) return setModalStepClass('one-two')
     else if (currentStep.step === modalObjArr[1].steps[2].step) return setModalStepClass('one-three')
     else if (currentStep.step === modalObjArr[2].steps[0].step) return setModalStepClass('two-one')
@@ -142,18 +141,17 @@ function RecordingBoothModal(props) {
     return modalInDisplay?.steps.map((each, index) => {
       return (
         <div 
-          id={each.step}
           className="step-containers" 
           key={`${uuidv4()}_${each[index]}`}
           style={(each.show === true) ? { opacity: '1' } : { opacity: '0'}}
         >
-          <div className="steps_shadow-div-inset">
+          <div className={`steps_shadow-div-inset ${currentStep.step === each.step ? highlightClass : ""}`}>
             {each.step}
           </div>
         </div>
       )    
     })
-  }, [modalInDisplay])
+  }, [modalInDisplay, currentStep])
 
   const closeWindowHandler = () => {
     props.setToggleModal(false)
@@ -178,7 +176,6 @@ function RecordingBoothModal(props) {
   }
 
   const macroStepHandler = (direction) => {
-    console.log('whats going on man?', modalInDisplay, modalSteps, currentStep)
     modalObjArr.filter((each) => {
       if (each.index === modalInDisplay.index) {
         if (direction === 'back') {
@@ -207,6 +204,14 @@ function RecordingBoothModal(props) {
 
   return (
     <div className="RecordBoothModal" ref={modalWindowRef}>
+      <div className="opacity-section-1">
+        
+      </div>
+      <div className="opacity-section-2">
+
+      </div>
+      <div className="opacity-section-3">
+      </div>
       <div className="close-window-container">
         <div className="close-window-btn" onClick={() => closeWindowHandler()}>
           <img className="button-icons" src={xExit} alt="exit" />
@@ -239,14 +244,14 @@ function RecordingBoothModal(props) {
               </button>
             ) : (
               <div></div>
-              )}
+            )}
             {!endOfModal ? (
               <button className="next-back-btn next-btn" onClick={() => macroStepHandler('next')}>
                 Next
               </button>
             ) : (
               <div></div>
-              )}
+            )}
           </div>
         </div>
       </div>
