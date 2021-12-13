@@ -203,6 +203,10 @@ body,
   position: relative;
 }
 
+input, textarea, select, button {
+  font-family: inherit;
+}
+
 @media screen and (min-width: 500px) {
   html {
     background: #282727;
@@ -210,10 +214,6 @@ body,
     width: 360px;
     height: 100vh;
   }
-}
-
-input, textarea, select, button {
-  font-family: inherit;
 }
 
 .NavBar {
@@ -10503,7 +10503,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   opacity: 0;
 }
 
-.RecordBoothModal .opacity-section-1 {
+.opacity-section-1 {
   height: 30%;
   width: 100%;
   border-radius: 0px;
@@ -10523,7 +10523,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: #0000008c;
 }
 
-.RecordBoothModal .opacity-section-2 {
+.opacity-section-2 {
   height: 35%;
   width: 100%;
   border-radius: 0px;
@@ -10543,7 +10543,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: #0000008c;
 }
 
-.RecordBoothModal .opacity-section-3 {
+.opacity-section-3 {
   height: 35%;
   width: 100%;
   border-radius: 0px;
@@ -10563,13 +10563,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: #0000008c;
 }
 
-.RecordBoothModal .close-window-btn {
+.close-window-btn {
   position: absolute;
   top: 7px;
   right: 7px;
 }
 
-.RecordBoothModal .section-4_controls {
+.section-4_controls {
   height: 200px;
   width: 95%;
   border-radius: 0px;
@@ -10586,12 +10586,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: linear-gradient(314deg, #5a5a5a 0%, #8d8d8d 100%);
+  background: linear-gradient(314deg, #b6b6b6 0%, #d6d6d6 100%);
   position: absolute;
   bottom: 34%;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset {
+.section-4_controls .section_shadow-div-inset {
   height: 95%;
   width: 97%;
   border-radius: 10px;
@@ -10608,12 +10608,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
-          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container {
-  height: 25%;
+.section-4_controls .section_shadow-div-inset .section_next-container {
+  height: 17%;
   width: 100%;
   border-radius: 10px;
   display: -webkit-box;
@@ -10631,7 +10631,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_next-container .next-container_shadow-div-inset {
+.section-4_controls .section_shadow-div-inset .section_next-container .next-container_shadow-div-inset {
   height: 70%;
   width: 95%;
   border-radius: 50px;
@@ -10648,14 +10648,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #a3a3a3;
-          box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #a3a3a3;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
   color: #ec6aa0;
-  background: #6f6f6f;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container {
-  height: 75%;
+.section-4_controls .section_shadow-div-inset .section_text-container {
+  height: 83%;
   width: 100%;
   border-radius: 10px;
   display: -webkit-box;
@@ -10673,7 +10672,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: column;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset {
+.section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset {
   height: 95%;
   width: 95%;
   border-radius: 10px;
@@ -10690,11 +10689,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
-          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
+  -webkit-box-shadow: 2px 2px 3px 0px #868686, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 3px 0px #868686, -2px -2px 2px #ffffff;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers {
+.section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers {
   height: 27%;
   width: 100%;
   border-radius: 10px;
@@ -10715,7 +10714,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   margin-top: 2%;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset {
+.section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset {
   height: 100%;
   width: 97%;
   border-radius: 30px;
@@ -10732,28 +10731,20 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
-          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
   color: white;
   font-size: 13px;
 }
 
-.RecordBoothModal .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .highlight-step {
+.section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .highlight-step {
   -webkit-box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
           box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
   background: #ec6aa0;
   border: 3px solid #ec6aa0;
 }
 
-.RecordBoothModal .third-modal {
-  bottom: 10%;
-}
-
-.RecordBoothModal .fourth-modal {
-  bottom: 42%;
-}
-
-.RecordBoothModal .arrow-container {
+.arrow-container {
   height: 100px;
   width: 5px;
   border-radius: 0px;
@@ -10774,7 +10765,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   background: #e24f8c;
 }
 
-.RecordBoothModal .arrow-container .arrow-head {
+.arrow-container .arrow-head {
   height: 15px;
   width: 15px;
   border-radius: 0px;
@@ -10795,74 +10786,20 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   position: absolute;
 }
 
-.RecordBoothModal .arrow-container .up {
+.arrow-container .up {
   -webkit-clip-path: polygon(50% 39%, 0 100%, 100% 100%);
           clip-path: polygon(50% 39%, 0 100%, 100% 100%);
   top: -14px;
 }
 
-.RecordBoothModal .arrow-container .down {
+.arrow-container .down {
   -webkit-clip-path: polygon(50% 59%, 3% 0, 100% 0);
           clip-path: polygon(50% 59%, 3% 0, 100% 0);
   bottom: -14px;
 }
 
-.RecordBoothModal .zero-zero {
-  height: 194px;
-  top: 66%;
-  left: 84%;
-}
-
-.RecordBoothModal .one-one {
-  height: 100px;
-  top: 66%;
-  left: 27%;
-}
-
-.RecordBoothModal .one-two {
-  height: 110px;
-  top: 66%;
-  left: 87%;
-}
-
-.RecordBoothModal .one-three {
-  height: 64px;
-  top: 66%;
-  left: 71%;
-}
-
-.RecordBoothModal .two-one {
-  height: 225px;
-  bottom: 34.5%;
-  left: 14%;
-}
-
-.RecordBoothModal .two-two {
-  height: 157px;
-  bottom: 34.5%;
-  left: 14%;
-}
-
-.RecordBoothModal .two-three {
-  height: 91px;
-  bottom: 34.5%;
-  left: 14%;
-}
-
-.RecordBoothModal .three-one {
-  height: 25px;
-  bottom: 66.7%;
-  left: 22%;
-}
-
-.RecordBoothModal .three-two {
-  height: 67px;
-  bottom: 66.7%;
-  left: 47%;
-}
-
-.RecordBoothModal .modal-navigation-container {
-  height: 7%;
+.modal-navigation-container {
+  height: 6%;
   width: 90%;
   border-radius: 50px;
   display: -webkit-box;
@@ -10879,11 +10816,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
       -ms-flex-direction: row;
           flex-direction: row;
   position: absolute;
-  bottom: 15px;
-  background: linear-gradient(314deg, #5a5a5a 0%, #8d8d8d 100%);
+  bottom: 8px;
+  background: linear-gradient(314deg, #b6b6b6 0%, #d6d6d6 100%);
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset {
+.modal-navigation-container .modal-navigation_shadow-div-inset {
   height: 86%;
   width: 98%;
   border-radius: 50px;
@@ -10900,11 +10837,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
-          box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #a3a3a3;
+  -webkit-box-shadow: inset 2px 2px 2px 0px #7a7a7a, inset -2px -2px 1px #ffffff;
+          box-shadow: inset 2px 2px 2px 0px #7a7a7a, inset -2px -2px 1px #ffffff;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset {
   height: 76%;
   width: 96%;
   border-radius: 50px;
@@ -10921,11 +10858,11 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
-          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 3px #a7a7a7;
+  -webkit-box-shadow: 2px 2px 2px 0px #7a7a7a, -2px -2px 1px #ffffff;
+          box-shadow: 2px 2px 2px 0px #7a7a7a, -2px -2px 1px #ffffff;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-back-btn {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-back-btn {
   height: 73%;
   width: 46px;
   border-radius: 50px;
@@ -10944,32 +10881,140 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   background: initial;
   border: none;
-  color: white;
-  -webkit-box-shadow: 2px 2px 3px 0px #424242, -2px -2px 3px #a3a3a3;
-          box-shadow: 2px 2px 3px 0px #424242, -2px -2px 3px #a3a3a3;
+  -webkit-box-shadow: 2px 2px 3px 0px #7a7a7a, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 3px 0px #7a7a7a, -2px -2px 2px #ffffff;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn {
   margin-left: 2%;
+  color: #e24f8c;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn:active {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn:active {
   background: #767676;
   -webkit-box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
           box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-btn {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-btn {
   margin-right: 2%;
+  color: white;
   background: #e24f8c;
   -webkit-box-shadow: 2px 2px 5px 0px #381321, -1px -1px 3px #ffffff;
           box-shadow: 2px 2px 5px 0px #381321, -1px -1px 3px #ffffff;
 }
 
-.RecordBoothModal .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-btn:active {
+.modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .next-btn:active {
   background: #c597aa;
   -webkit-box-shadow: inset 2px 2px 5px 0px #442a34, inset -1px -1px 2px #ffffff;
           box-shadow: inset 2px 2px 5px 0px #442a34, inset -1px -1px 2px #ffffff;
+}
+
+.third-modal {
+  bottom: 8%;
+  height: 215px;
+}
+
+.fourth-modal {
+  bottom: 42%;
+}
+
+.arrow-zero-zero {
+  height: 25.5%;
+  top: 66%;
+  left: 84%;
+}
+
+.arrow-one-one {
+  height: 13%;
+  top: 66%;
+  left: 27%;
+}
+
+.arrow-one-two {
+  height: 13%;
+  top: 66%;
+  left: 87%;
+}
+
+.arrow-one-three {
+  height: 7.5%;
+  top: 66%;
+  left: 71%;
+}
+
+.arrow-two-one {
+  height: 21.5%;
+  bottom: 34.5%;
+  left: 14%;
+}
+
+.arrow-two-two {
+  height: 13.5%;
+  bottom: 34.5%;
+  left: 14%;
+}
+
+.arrow-two-three {
+  height: 5.5%;
+  bottom: 34.5%;
+  left: 14%;
+}
+
+.arrow-three-one {
+  height: 2.5%;
+  bottom: 66.7%;
+  left: 22%;
+}
+
+.arrow-three-two {
+  height: 8%;
+  bottom: 66.7%;
+  left: 47%;
+}
+
+.focus-one-one {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 5% 100%, 5% 43%, 63% 43%, 63% 62%, 0% 62%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 5% 100%, 5% 43%, 63% 43%, 63% 62%, 0% 62%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-one-two {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 79% 100%, 79% 45%, 96% 45%, 96% 66%, 0% 66%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 79% 100%, 79% 45%, 96% 45%, 96% 66%, 0% 66%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-one-three {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 5% 100%, 5% 28%, 95% 28%, 95% 44%, 0% 44%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 5% 100%, 5% 28%, 95% 28%, 95% 44%, 0% 44%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-two-one {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 10%, 99% 10%, 99% 35%, 0% 35%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 10%, 99% 10%, 99% 35%, 0% 35%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-two-two {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 34%, 99% 34%, 99% 58%, 0% 58%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 34%, 99% 34%, 99% 58%, 0% 58%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-two-three {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 57%, 99% 57%, 99% 81%, 0% 81%, 0% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 57%, 99% 57%, 99% 81%, 0% 81%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-three-one {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 81%, 99% 81%, 99% 97%, 1% 97%, 1% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 81%, 99% 81%, 99% 97%, 1% 97%, 1% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-three-two {
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 2%, 99% 2%, 99% 80%, 1% 80%, 1% 100%, 100% 100%, 100% 0%);
+          clip-path: polygon(0% 0%, 0% 100%, 1% 100%, 1% 2%, 99% 2%, 99% 80%, 1% 80%, 1% 100%, 100% 100%, 100% 0%);
+}
+
+.focus-border {
+  border: 2px solid #e24f8c;
 }
 
 :root {

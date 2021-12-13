@@ -33,8 +33,8 @@ function RecordingBoothModal(props) {
       index: 3,
       title: "Lyrics Display",
       steps: [
-        { step: "Lyrics List", show: true },
-        { step: "Lyrics Transcript", show: false }
+        { step: "Lyrics Transcript", show: true },
+        { step: "Lyrics List", show: false }
       ]
     }
   ]
@@ -43,10 +43,11 @@ function RecordingBoothModal(props) {
   const [currentStep, setCurrentStep] = useState(modalObjArr[0].steps[0]);
   const [endOfModal, setEndOfModal] = useState(true);
   const [beginOfModal, setBeginOfModal] = useState(true)
-  const [modalStepClass, setModalStepClass] = useState(null);
-  const [modalSectionClass, setModalSectionClass] = useState('');
-  const [arrowDir, setArrowDir] = useState('down');
-  const [highlightClass, setHighlightClass] = useState('highlight-step')
+  const [arrowClass, setArrowClass] = useState(null);
+  const [focusClass, setFocusClass] = useState(null);
+  const [modalPositionClass, setModalPositionClass] = useState(null);
+  const [arrowDirectionClass, setArrowDirectionClass] = useState('down');
+
   const modalWindowRef = useRef();
 
   useEffect(() => {
@@ -99,59 +100,58 @@ function RecordingBoothModal(props) {
   }, [currentStep])
 
   useEffect(() => {
-    if (modalInDisplay.index === 0) {
-      setModalSectionClass('first-modal')
-      setArrowDir('down')
-    }
-    else if (modalInDisplay.index === 1) {
-      setModalSectionClass('second-modal')
-      setArrowDir('down')
-    }
-    else if (modalInDisplay.index === 2) {
-      setModalSectionClass('third-modal')
-      setArrowDir('up')
-    }
-    else if (modalInDisplay.index === 3) {
-      setModalSectionClass('fourth-modal')
-      setArrowDir('up')
-    }
+    if (modalInDisplay.index === 0) return setModalBodyClasses('first-modal', 'down')
+    else if (modalInDisplay.index === 1) return setModalBodyClasses('second-modal', 'down')
+    else if (modalInDisplay.index === 2) return setModalBodyClasses('third-modal', 'up')
+    else if (modalInDisplay.index === 3) return setModalBodyClasses('fourth-modal', 'up')
   }, [modalInDisplay])
 
   useEffect(() => {
-    if (currentStep.step === modalObjArr[0].steps[0].step) return setModalStepClass('zero-zero')
-    else if (currentStep.step === modalObjArr[1].steps[0].step) return setModalStepClass('one-one')
-    else if (currentStep.step === modalObjArr[1].steps[1].step) return setModalStepClass('one-two')
-    else if (currentStep.step === modalObjArr[1].steps[2].step) return setModalStepClass('one-three')
-    else if (currentStep.step === modalObjArr[2].steps[0].step) return setModalStepClass('two-one')
-    else if (currentStep.step === modalObjArr[2].steps[1].step) return setModalStepClass('two-two')
-    else if (currentStep.step === modalObjArr[2].steps[2].step) return setModalStepClass('two-three')
-    else if (currentStep.step === modalObjArr[3].steps[0].step) return setModalStepClass('three-one')
-    else if (currentStep.step === modalObjArr[3].steps[1].step) return setModalStepClass('three-two')
+    if (currentStep.step === modalObjArr[0].steps[0].step) return setTipClasses('arrow-zero-zero', 'focus-zero-zero')
+    else if (currentStep.step === modalObjArr[1].steps[0].step) return setTipClasses('arrow-one-one', 'focus-one-one', 10)
+    else if (currentStep.step === modalObjArr[1].steps[1].step) return setTipClasses('arrow-one-two', 'focus-one-two', 11)
+    else if (currentStep.step === modalObjArr[1].steps[2].step) return setTipClasses('arrow-one-three', 'focus-one-three', 12)
+    else if (currentStep.step === modalObjArr[2].steps[0].step) return setTipClasses('arrow-two-one', 'focus-two-one', 20)
+    else if (currentStep.step === modalObjArr[2].steps[1].step) return setTipClasses('arrow-two-two', 'focus-two-two', 21)
+    else if (currentStep.step === modalObjArr[2].steps[2].step) return setTipClasses('arrow-two-three', 'focus-two-three', 22)
+    else if (currentStep.step === modalObjArr[3].steps[0].step) return setTipClasses('arrow-three-one', 'focus-three-one', 30)
+    else if (currentStep.step === modalObjArr[3].steps[1].step) return setTipClasses('arrow-three-two', 'focus-three-two', 31)
   }, [currentStep])
 
   const showArrow = useCallback(() => {
     return (
-      <div className={`arrow-container ${modalStepClass ? modalStepClass : "one-one"}`}>
-        <div className={`arrow-head ${arrowDir}`}></div>
+      <div className={`arrow-container ${arrowClass}`}>
+        <div className={`arrow-head ${arrowDirectionClass}`}></div>
       </div>
     )
-  }, [modalStepClass])
+  }, [arrowClass])
 
   const mapSteps = useCallback(() => {
-    return modalInDisplay?.steps.map((each, index) => {
+    return modalInDisplay?.steps.map((each) => {
       return (
         <div 
-          className="step-containers" 
-          key={`${uuidv4()}_${each[index]}`}
+          className="step-containers"
+          key={`${uuidv4()}_${each.step}`}
           style={(each.show === true) ? { opacity: '1' } : { opacity: '0'}}
         >
-          <div className={`steps_shadow-div-inset ${currentStep.step === each.step ? highlightClass : ""}`}>
+          <div className={`steps_shadow-div-inset ${currentStep.step === each.step ? "highlight-step" : ""}`}>
             {each.step}
           </div>
         </div>
       )    
     })
   }, [modalInDisplay, currentStep])
+
+  const setModalBodyClasses = (section, direction) => {
+    setModalPositionClass(section)
+    setArrowDirectionClass(direction)
+  }
+
+  const setTipClasses = (arrow, focus, num) => {
+    setArrowClass(arrow)
+    setFocusClass(focus)
+    props.setFocusBorder(num)
+  }
 
   const closeWindowHandler = () => {
     props.setToggleModal(false)
@@ -160,13 +160,14 @@ function RecordingBoothModal(props) {
     setCurrentStep(modalObjArr[0].steps[0])
     setEndOfModal(false)
     setBeginOfModal(true)
-    setArrowDir('down')
-    setModalStepClass('')
-    setModalSectionClass('')
+    setArrowDirectionClass('down')
+    setArrowClass('')
+    setModalPositionClass('')
+    setFocusClass('')
   }
 
   const microStepHandler = () => {
-    modalSteps.filter((each, index) => {
+    modalSteps.forEach((each, index) => {
       if (each.step === currentStep.step) {
         if ((index + 1) !== null) {
           setCurrentStep(modalSteps[index + 1])
@@ -176,21 +177,20 @@ function RecordingBoothModal(props) {
   }
 
   const macroStepHandler = (direction) => {
-    modalObjArr.filter((each) => {
+    modalObjArr.forEach((each) => {
       if (each.index === modalInDisplay.index) {
         if (direction === 'back') {
           if (modalSteps[0].step !== currentStep.step) {
             setModalInDisplay(modalObjArr[each.index])
             setModalSteps(modalObjArr[each.index].steps)
             setCurrentStep(modalObjArr[each.index].steps[0])
-          }
-          else if (each.index !== 0) {
+          } else if (each.index !== 0) {
             setModalInDisplay(modalObjArr[each.index - 1])
             setModalSteps(modalObjArr[each.index - 1].steps)
             setCurrentStep(modalObjArr[each.index - 1].steps[0])
           } 
         } else {
-          if (modalSteps[modalSteps.length -1].step !== currentStep.step) {
+          if (modalSteps[modalSteps.length - 1].step !== currentStep.step) {
             microStepHandler()
           } else if (each.index !== 3) {
             setModalInDisplay(modalObjArr[each.index + 1])
@@ -198,27 +198,27 @@ function RecordingBoothModal(props) {
             setCurrentStep(modalObjArr[each.index + 1].steps[0])
           } 
         }
-      } 
+      }
     })
   }
 
   return (
     <div className="RecordBoothModal" ref={modalWindowRef}>
-      <div className="opacity-section-1">
-        
-      </div>
-      <div className="opacity-section-2">
 
+      <div className={`opacity-section-1 ${modalInDisplay.index === 3 ? `${focusClass}` : ""}`}>
       </div>
-      <div className="opacity-section-3">
+      <div className={`opacity-section-2 ${modalInDisplay.index === 2 ? `${focusClass}` : ""}`}>
       </div>
+      <div className={`opacity-section-3 ${modalInDisplay.index === 1 ? `${focusClass}` : ""}`}>
+      </div>
+
       <div className="close-window-container">
         <div className="close-window-btn" onClick={() => closeWindowHandler()}>
           <img className="button-icons" src={xExit} alt="exit" />
         </div>
       </div>
 
-      <div className={`section-4_controls ${modalSectionClass}`}>
+      <div className={`section-4_controls ${modalPositionClass}`}>
         <div className="section_shadow-div-inset">
           <div className="section_next-container">
             <div className="next-container_shadow-div-inset">

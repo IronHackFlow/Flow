@@ -215,6 +215,7 @@ body,
   text-align: center;
   position: relative;
 }
+input, textarea, select, button { font-family:inherit; }
 
 @media screen and (min-width: 500px) {
   html {
@@ -224,7 +225,7 @@ body,
     height: 100vh;
   }
 }
-input, textarea, select, button { font-family:inherit; }
+
 @import './NavBar';
 @import './HamburgerMenu';
 @import './Search';

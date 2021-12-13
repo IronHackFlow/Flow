@@ -80,6 +80,7 @@ function TestAudio(props) {
   const [dateBefore, setDateBefore] = useState();
   const [dateAfter, setDateAfter] = useState();
   const [toggleModal, setToggleModal] = useState(false);
+  const [focusBorder, setFocusBorder] = useState(null)
 
   const modalBtnRef = useRef();
   const playBeatRef = useRef();
@@ -92,7 +93,6 @@ function TestAudio(props) {
   const selectTakesRef = useRef();
   const keyRef = useRef(0);
   const barNumberRef = useRef(1)
-  const slideOutMicRef = useRef();
   const [recordingBooth] = useState(`#363636`);
 
   class SongData {
@@ -686,7 +686,7 @@ function TestAudio(props) {
         <div className="actions-2_record">
           <div className="record-container">
             <div className="record-1_select-beat">
-              <div className="select-beat_shadow-div-inset">
+              <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
                 <div className="select-beat_play-container">
                   {beatIsPlaying ? (
                     <button 
@@ -727,6 +727,8 @@ function TestAudio(props) {
        toggleModal={toggleModal} 
        setToggleModal={setToggleModal}
        modalBtnRef={modalBtnRef}
+       focusBorder={focusBorder}
+       setFocusBorder={setFocusBorder}
       />
       <audio id="song" src={selectedBeat} loop={true} ref={recordAudioRef}></audio>
       <div className="section-1_speech">
@@ -738,10 +740,10 @@ function TestAudio(props) {
           <img className="button-icons" src={modal} alt="modal" />
         </button>
 
-        <div className="scroll-rhymes-container" id="currentTranscript" ref={scrollRef}>
+        <div className={`scroll-rhymes-container ${focusBorder === 31 ? "focus-border" : ""}`} id="currentTranscript" ref={scrollRef}>
           {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
         </div>
-        <div className="scroll-rhymes-line">
+        <div className={`scroll-rhymes-line ${focusBorder === 30 ? "focus-border" : ""}`}>
           <p className="transcript-line-2">{transcript}</p>
         </div>
       </div>
@@ -754,7 +756,7 @@ function TestAudio(props) {
             </div>
           </div>
 
-          <div className="suggestions sug-1">
+          <div className={`suggestions ${focusBorder === 20 ? "focus-border" : ""}`}>
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset">
                 {(rhymeWordHolder && recordingDisplay) ? <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p> : <p>Top Rhymes</p>}
@@ -779,7 +781,7 @@ function TestAudio(props) {
             </div>
           </div>
 
-          <div className="suggestions sug-2">
+          <div className={`suggestions ${focusBorder === 21 ? "focus-border" : ""}`}>
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset rw-two">
                   {(lockRhymeHolder && recordingDisplay) ? <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p> : <p>Locked Rhymes</p>}
@@ -804,7 +806,7 @@ function TestAudio(props) {
             </div>
           </div>
 
-          <div className="suggestions sug-3">
+          <div className={`suggestions ${focusBorder === 22 ? "focus-border" : ""}`}>
             <div className="custom-rhyme">
               <div className="rhymed-word_shadow-div-inset rw-three">
                 {(selectedWordHolder && recordingDisplay) ? <p className="selected-word-holder">{selectedWordHolder}</p> : <p>Selected Rhymes</p>}
@@ -931,7 +933,7 @@ function TestAudio(props) {
 
                     <div className="flow-takes-2_takes-actions">
                       <div className="takes-actions-container">
-                        <div className="actions-btn-container">
+                        <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
                           <div 
                             className="actions-btn_shadow-div-outset ab-save" 
                             onClick={toggleSaveSongMenu}>
@@ -953,7 +955,7 @@ function TestAudio(props) {
           </div>
 
           <div className={`record-2_record-btn ${saveSongMenu ? "slideOut" : "slideIn"}`}>
-            <div className="record-btn_shadow-div-inset">
+            <div className={`record-btn_shadow-div-inset ${focusBorder === 11 ? "focus-border" : ""}`}>
               {recorderState.initRecording ? (
                 <button
                   className="record-btn_shadow-div-outset"
