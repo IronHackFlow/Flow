@@ -6,9 +6,16 @@ function RecordingBoothModal(props) {
   let modalObjArr = [
     {
       index: 0,
-      title: "Welcome to the Flow Tutorial",
+      title: "Welcome to the Flow Recording Booth",
       steps: [
-        { step: "Let's get started, please hit the next button below", show: true }
+        { 
+          step: `In this tutorial you learn all you need to know to start Flowing.
+                 After which you'll have no excuses for not reaching your Rap God 
+                 letslakdjfladskjflasjdf alsdkjfa lsdjfalsdjf akdjfsldf jsldfkjs 
+                 lsdkjflsdkjflasdsjkf djfdkfj aldfjkf dfk djf jdka sdfdklj flkj 
+                 potential! Let's get started, please hit the next button below`, 
+          show: true 
+        }
       ]
     },
     {
@@ -135,7 +142,7 @@ function RecordingBoothModal(props) {
           style={(each.show === true) ? { opacity: '1' } : { opacity: '0'}}
         >
           <div className={`steps_shadow-div-inset ${currentStep.step === each.step ? "highlight-step" : ""}`}>
-            {each.step}
+            <p>{each.step}</p>
           </div>
         </div>
       )    

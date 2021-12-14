@@ -25,41 +25,52 @@
 }
 
 .section-4_controls {
-    @include flexCenter(200px, 95%, 0px, center, center, column);
+    @include flexCenter(35%, 95%, 0px, center, center, column);
     background: linear-gradient(314deg, #b6b6b6 0%, #d6d6d6 100%);
     position: absolute;
     bottom: 34%;
 
     .section_shadow-div-inset {
-        @include flexCenter(95%, 97%, 10px, center, center, column);
+        @include flexCenter(96%, 97%, 25px 25px 10px 10px, center, center, column);
         box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
         
         .section_next-container {
             @include flexCenter(17%, 100%, 10px, center, center, row);
             
             .next-container_shadow-div-inset {
-                @include flexCenter(70%, 95%, 50px, center, center, column);
-                box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
+                @include flexCenter(69%, 96%, 20px 20px 3px 3px, center, center, column);
+                box-shadow: 2px 2px 3px 0px #7a7a7a, -2px -2px 3px #ffffff;
                 color: #ec6aa0;
+                font-weight: bold;
             }
         }
         .section_text-container {
             @include flexCenter(83%, 100%, 10px, flex-start, center, column);
            
             .text-container_shadow-div-outset {
-                @include flexCenter(95%, 95%, 10px, flex-start, center, column);
+                @include flexCenter(97%, 96%, 3px 3px 7px 7px, flex-start, center, column);
                 box-shadow: 2px 2px 3px 0px #868686, -2px -2px 2px #ffffff;
                 
                 .step-containers {
-                    @include flexCenter(27%, 100%, 10px, center, center, column);
+                    @include flexCenter(initial, 100%, 10px, center, center, column);
+                    min-height: 24%;
                     opacity: 0;
-                    margin-top: 2%;
+                    margin-top: 4%;
                     
                     .steps_shadow-div-inset {
-                        @include flexCenter(100%, 97%, 30px, center, center, column);
+                        @include flexCenter(initial, 96%, 30px, center, center, column);
+                        min-height: 100%;
                         box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
                         color: white;
-                        font-size: 13px;
+                        padding-top: 1%;
+                        padding-bottom: 1%;
+
+                        p {
+                            height: fit-content;
+                            width: 91%;
+                            font-size: .85rem;
+                            text-align: start;
+                        }
                     }
                     .highlight-step {
                         box-shadow: inset 2px 2px 4px 0px #5e2d41, inset -2px -2px 3px #ffd9e8;
@@ -117,7 +128,7 @@
                 color: #e24f8c;
 
                 &:active {
-                    background: #767676;
+                    background: #aaaaaa;
                     box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
                 }
             }

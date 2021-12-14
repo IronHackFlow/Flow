@@ -10570,7 +10570,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-4_controls {
-  height: 200px;
+  height: 35%;
   width: 95%;
   border-radius: 0px;
   display: -webkit-box;
@@ -10592,9 +10592,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-4_controls .section_shadow-div-inset {
-  height: 95%;
+  height: 96%;
   width: 97%;
-  border-radius: 10px;
+  border-radius: 25px 25px 10px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10632,9 +10632,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-4_controls .section_shadow-div-inset .section_next-container .next-container_shadow-div-inset {
-  height: 70%;
-  width: 95%;
-  border-radius: 50px;
+  height: 69%;
+  width: 96%;
+  border-radius: 20px 20px 3px 3px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10648,9 +10648,10 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #7a7a7a, -2px -2px 3px #ffffff;
+          box-shadow: 2px 2px 3px 0px #7a7a7a, -2px -2px 3px #ffffff;
   color: #ec6aa0;
+  font-weight: bold;
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container {
@@ -10673,9 +10674,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset {
-  height: 95%;
-  width: 95%;
-  border-radius: 10px;
+  height: 97%;
+  width: 96%;
+  border-radius: 3px 3px 7px 7px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10694,7 +10695,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers {
-  height: 27%;
+  height: initial;
   width: 100%;
   border-radius: 10px;
   display: -webkit-box;
@@ -10710,13 +10711,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-height: 24%;
   opacity: 0;
-  margin-top: 2%;
+  margin-top: 4%;
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset {
-  height: 100%;
-  width: 97%;
+  height: initial;
+  width: 96%;
   border-radius: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10731,10 +10733,21 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-height: 100%;
   -webkit-box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
           box-shadow: inset 2px 2px 3px 0px #7a7a7a, inset -2px -2px 3px #ffffff;
   color: white;
-  font-size: 13px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .steps_shadow-div-inset p {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 91%;
+  font-size: .85rem;
+  text-align: start;
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .step-containers .highlight-step {
@@ -10891,7 +10904,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .modal-navigation-container .modal-navigation_shadow-div-inset .modal-navigation_shadow-div-outset .back-btn:active {
-  background: #767676;
+  background: #aaaaaa;
   -webkit-box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
           box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 3px #a3a3a3;
 }
