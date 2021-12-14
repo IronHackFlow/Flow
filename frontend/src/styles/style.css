@@ -205,6 +205,8 @@ body,
 
 input, textarea, select, button {
   font-family: inherit;
+  border: none;
+  background: initial;
 }
 
 @media screen and (min-width: 500px) {
@@ -2955,7 +2957,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #686a6b;
+  background: linear-gradient(314deg, #4c4c4c, #7b7b7b);
   -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
           box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
 }
@@ -2981,9 +2983,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list {
-  min-height: 125px;
-  width: 95%;
-  border-radius: 13px;
+  width: 96%;
+  border-radius: 11px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2993,14 +2994,13 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 2%;
-  background: #686a6b;
+  margin-top: 1%;
   -webkit-box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
           box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-photo {
-  height: 100%;
+  height: 98%;
   width: 20%;
   border-radius: 0px;
   display: -webkit-box;
@@ -3016,7 +3016,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding: 15px 0px 0px 5px;
+  padding-top: 2%;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-photo .comment-photo-inner {
@@ -3089,8 +3089,8 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner {
-  height: 100%;
-  width: 78%;
+  height: auto;
+  width: 80%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3105,13 +3105,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: relative;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-outer {
-  height: 65px;
-  width: 95%;
-  border-radius: 10px 10px 20px 10px;
+  height: auto;
+  width: 97%;
+  border-radius: 7px 7px 25px 7px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3127,9 +3126,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: column;
   -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
           box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  margin-top: 3%;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-outer .comment-username {
@@ -3151,7 +3148,9 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-outer .comment-text {
-  min-height: 15px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   width: 90%;
   text-align: start;
   color: white;
@@ -3205,7 +3204,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons {
-  height: 45px;
+  height: auto;
   width: 100%;
   border-radius: 50px;
   display: -webkit-box;
@@ -3221,14 +3220,12 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  position: absolute;
-  bottom: 3px;
-  left: 0;
+  margin: 4% 0% 4% 0%;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container {
-  height: 38px;
-  width: 30px;
+  height: auto;
+  width: 50%;
   border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3245,8 +3242,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
           flex-direction: row;
   -webkit-box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
           box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-  position: absolute;
-  right: 8px;
+  position: relative;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .clc-3,
@@ -3294,15 +3290,15 @@ nav .menu .menu-route .menu-outset .menu-inset a {
       -ms-flex-direction: column;
           flex-direction: column;
   position: absolute;
-  right: 0px;
+  right: 11px;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons .comment-popout-container .dot-menu .dots {
-  height: 10px;
-  width: 10px;
+  height: 9px;
+  width: 9px;
   border-radius: 50px;
-  -webkit-box-shadow: inset 2px 2px 1px #4f4f4f, inset -2px -2px 1px #949292;
-          box-shadow: inset 2px 2px 1px #4f4f4f, inset -2px -2px 1px #949292;
+  -webkit-box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
+          box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container {
@@ -3465,6 +3461,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-shadow: inset 3px 3px 4px #bd9797, inset -3px -3px 4px #ffe7e7;
           box-shadow: inset 3px 3px 4px #bd9797, inset -3px -3px 4px #ffe7e7;
   border: 2px solid #df56a0;
+}
+
+.loading {
+  height: 100%;
+  width: 100%;
+  color: white;
+  background: gray;
+  position: absolute;
 }
 
 .TestAudio {
@@ -8472,14 +8476,14 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .users-details-each {
-  margin-left: 4%;
+  margin-left: 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 20px;
+  height: 10%;
   color: #ff728a;
   padding: 3px 10px 3px 10px;
   border-radius: 60px 100px 100px 60px;
@@ -8493,19 +8497,19 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-1 {
-  width: 48%;
+  width: 45%;
   border-radius: 30px 50px 50px 15px;
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-2 {
-  width: 72%;
+  width: 74%;
   border-radius: 15px 50px 50px 15px;
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-3 {
-  width: 84%;
+  width: 86%;
   border-radius: 6px 35px 35px 6px;
-  height: 60px;
+  height: 22%;
   padding: 6px 10px 6px 10px;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
@@ -8519,17 +8523,17 @@ nav .menu .menu-route .menu-outset .menu-inset a {
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-4 {
-  width: 81%;
+  width: 84%;
   border-radius: 15px 50px 50px 15px;
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-5 {
-  width: 72%;
+  width: 74%;
   border-radius: 15px 50px 50px 15px;
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-outset .ude-6 {
-  width: 48%;
+  width: 44%;
   border-radius: 15px 50px 50px 30px;
 }
 
@@ -10711,7 +10715,7 @@ nav .menu .menu-route .menu-outset .menu-inset a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-height: 24%;
+  min-height: 15%;
   opacity: 0;
   margin-top: 4%;
 }

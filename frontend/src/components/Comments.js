@@ -89,9 +89,6 @@ function Comments(props) {
     const [menuBool, setMenuBool] = useState(false)
     const [editCommentText, setEditCommentText] = useState(false);
 
-    const commentListRef = useRef()
-    const commentTextRef = useRef()
-    const commentListOuterRef = useRef()
     const likeTextRef = useRef()
     const replyTextRef = useRef()
     const listBtnsRef = useRef()
@@ -117,24 +114,6 @@ function Comments(props) {
         document.querySelector(".comment-text-input").focus()
       }
     }, [editCommentText])
-
-    const setCommentListRefs = useCallback(
-      node => {
-        commentListRef.current = node
-
-        if (commentTextRef.current !== null && commentListRef.current !== null) {
-          if (commentTextRef.current.scrollHeight > 20) {
-            let commentText = commentTextRef.current.scrollHeight
-            let commentListOuter = commentText + 47
-            let commentList = commentListOuter + 60
-            commentTextRef.current.style.height = `${commentText}px`
-            commentListOuterRef.current.style.height = `${commentListOuter}px`
-            commentListRef.current.style.minHeight = `${commentList}px`
-          }
-        }
-      },
-      [commState, editCommentText],
-    )
 
     const deleteComment = each => {
       if (user._id === each.commUser._id) {
@@ -228,7 +207,7 @@ function Comments(props) {
     }
 
     return (
-      <div className="comment-list" ref={setCommentListRefs}>
+      <div className="comment-list">
         <div className="comment-list-photo">
           <div className="comment-photo-inner">
             <div className="comment-photo-outer">
@@ -245,7 +224,7 @@ function Comments(props) {
         </div>
 
         <div className="comment-list-inner">
-          <div className="comment-list-outer" ref={commentListOuterRef}>
+          <div className="comment-list-outer">
             <p className="comment-username">
               {each.commUser?.userName}
               <span style={{ color: 'white', fontWeight: 'bold', fontSize: '12px' }}>
@@ -258,13 +237,12 @@ function Comments(props) {
             {editCommentText ? (
               <textarea 
                 className="comment-text-input" 
-                ref={commentTextRef}
                 defaultValue={each.comment}
                 placeholder={each.comment}
                 onChange={(e) => editCommentTextHandler(e)}>
               </textarea>
             ) : (
-              <p className="comment-text" ref={commentTextRef}>
+              <p className="comment-text">
                 {each.comment}
               </p>
             )}

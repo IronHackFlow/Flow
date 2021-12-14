@@ -220,9 +220,9 @@ function RecordingBoothModal(props) {
       </div>
 
       <div className="close-window-container">
-        <div className="close-window-btn" onClick={() => closeWindowHandler()}>
+        <button className="close-window-btn" onClick={() => closeWindowHandler()}>
           <img className="button-icons" src={xExit} alt="exit" />
-        </div>
+        </button>
       </div>
 
       <div className={`section-4_controls ${modalPositionClass}`}>

@@ -343,6 +343,7 @@
     }
   }
 }
+
 /* ------------------------------ Comment Pop Up menu ------------------------------------------*/
 .comment-pop-out {
   display: flex;
@@ -428,7 +429,7 @@
 
         .comment-list-container {
           @include flexCenter(97%, 98%, 15px 15px 5px 24px, center, center, column);
-          background: #686a6b;
+          background: linear-gradient(314deg, #4c4c4c, #7b7b7b);
           box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
 
           .comment-list-cont {
@@ -436,20 +437,17 @@
             overflow-y: scroll;
 
             .comment-list {
-              // @include flexCenter(80px, 93%, 20px, center, center, row);
-              min-height: 125px;
-              width: 95%;
-              border-radius: 13px;
+              width: 96%;
+              border-radius: 11px;
               display: flex;
               align-items: center;
               justify-content: center;
-              margin-top: 2%;
-              background: #686a6b;
+              margin-top: 1%;
               box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
   
               .comment-list-photo {
-                @include flexCenter(100%, 20%, 0px, center, flex-start, row);
-                padding: 15px 0px 0px 5px;
+                @include flexCenter(98%, 20%, 0px, center, flex-start, row);
+                padding-top: 2%;
   
                 .comment-photo-inner {
                   @include flexCenter(50px, 80%, 50px, center, center, column);
@@ -474,15 +472,13 @@
               }
   
               .comment-list-inner {
-                @include flexCenter(100%, 78%, 0px, space-evenly, flex-start, column);
-                position: relative;
-  
+                @include flexCenter(auto, 80%, 0px, space-evenly, flex-start, column);
+
                 .comment-list-outer {
-                  @include flexCenter(65px, 95%, 10px 10px 20px 10px, center, center, column);
+                  @include flexCenter(auto, 97%, 7px 7px 25px 7px, center, center, column);
                   box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-                  position: absolute;
-                  top: 8px;
-                  right: 8px;
+                  margin-top: 3%;
+
   
                   .comment-username {
                     height: 15px;
@@ -501,7 +497,7 @@
                     margin-bottom: 10px;
                   }
                   .comment-text {
-                    min-height: 15px;
+                    height: fit-content;
                     width: 90%;
                     text-align: start;
                     color: white;
@@ -538,16 +534,13 @@
                 }
   
                 .comment-list-buttons {
-                  @include flexCenter(45px, 100%, 50px, flex-start, center, row);
-                  position: absolute;
-                  bottom: 3px;
-                  left: 0;
-  
+                  @include flexCenter(auto, 100%, 50px, flex-start, center, row);
+                  margin: 4% 0% 4% 0%;
+
                   .comment-popout-container {
-                    @include flexCenter(38px, 30px, 8px, flex-start, center, row);
+                    @include flexCenter(auto, 50%, 8px, flex-start, center, row);
                     box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-                    position: absolute;
-                    right: 8px;
+                    position: relative;
   
                     .clc-3,
                     .clc-4 {
@@ -560,13 +553,13 @@
                     .dot-menu {
                       @include flexCenter(100%, 30px, 0px, center, center, column);
                       position: absolute;
-                      right: 0px;
+                      right: 11px;
   
                       .dots {
-                        height: 10px;
-                        width: 10px;
+                        height: 9px;
+                        width: 9px;
                         border-radius: 50px;
-                        box-shadow: inset 2px 2px 1px #4f4f4f, inset -2px -2px 1px #949292;
+                        box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
                       }
                     }
                   }
@@ -681,4 +674,11 @@
   background: #efbfbf;
   box-shadow: inset 3px 3px 4px #bd9797, inset -3px -3px 4px #ffe7e7;
   border: 2px solid #df56a0;
+}
+.loading {
+  height: 100%;
+  width: 100%;
+  color: white;
+  background: gray;
+  position: absolute;
 }

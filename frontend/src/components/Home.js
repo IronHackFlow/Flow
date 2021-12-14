@@ -51,13 +51,16 @@ function Home(props) {
   const commentInputRef = useRef();
   const profilePicRef = useRef();
   const playPauseRef = useRef();
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(() => {
+    setIsLoading(true)
     const controller = new AbortController();
     const signal = controller.signal;
     actions
       .getMostLikedSongs()
       .then(res => {
+        setIsLoading(false)
         let commentArray = []
         const songsArray = res.data.map((each, index)=> {
           commentArray.push({ songId: each._id, comments: each.songComments })
@@ -264,7 +267,7 @@ function Home(props) {
           <div className="section-1a_toggle-feed">
             <div className="toggle-feed-container">
               <div className="each-feed_shadow-div-inset">
-                <div
+                <button
                   className={theFeedBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
                     setTheFeedBool(true)
@@ -275,11 +278,11 @@ function Home(props) {
                   <div className={theFeedBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Feed
                   </div>
-                </div>
+                </button>
               </div>
               
               <div className="each-feed_shadow-div-inset" style={{ borderRadius: '50px' }}>
-                <div
+                <button
                   className={trendingBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
                     setTrendingBool(true)
@@ -290,14 +293,14 @@ function Home(props) {
                   <div className={trendingBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Trending
                   </div>
-                </div>
+                </button>
               </div>
 
               <div
                 className="each-feed_shadow-div-inset"
                 style={{ borderRadius: '50px 5px 5px 50px' }}
               >
-                <div
+                <button
                   className={followingBool ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
                     setFollowingBool(true)
@@ -308,13 +311,16 @@ function Home(props) {
                   <div className={followingBool ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Following
                   </div>
-                </div>
+                </button>
               </div>
             </div>
           </div>
 
 
           <ul className="video-scroll-container" ref={windowRef}>
+            {/* <div className="loading" style={isLoading ? { opacity: 1 } : { opacity: 0 } }>
+              LOADING!
+            </div> */}
             {showSongs()}
             {/* <div className="scroll-top-container" onClick={() => scrollToTop()}>
               <div className="scroll-top-button">
@@ -339,7 +345,7 @@ function Home(props) {
               <div className="actions_shadow-div-outset">
                 <div className="actions_shadow-div-inset">
                   <div className="action-btns-container">
-                    <div
+                    <button
                       className="action-btn_shadow-div-outset"
                       onClick={followCheck}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
@@ -363,9 +369,9 @@ function Home(props) {
                           }
                         </p>
                       </div>
-                    </div>
+                    </button>
 
-                    <div className="action-btn_shadow-div-outset" onClick={likeCheck}>
+                    <button className="action-btn_shadow-div-outset" onClick={likeCheck}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
@@ -378,9 +384,9 @@ function Home(props) {
                           }
                         </p>
                       </div>
-                    </div>
+                    </button>
 
-                    <div className="action-btn_shadow-div-outset" onClick={popUpComments}>
+                    <button className="action-btn_shadow-div-outset" onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img
                           className="social-icons si-comment"
@@ -397,7 +403,7 @@ function Home(props) {
                           }
                         </p>
                       </div>
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
