@@ -377,18 +377,6 @@
       }
     }
   }
-
-  .NavBar {
-    height: 21%;
-    position: relative;
-
-    .navbar_section {
-      height: 100%;
-      border-radius: none;
-      background: none;
-      box-shadow: none;
-    }
-  }
 }
 .delete-container {
   @include flexCenter(90%, 95%, 11px, center, center, column);

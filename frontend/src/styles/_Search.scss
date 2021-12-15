@@ -1,7 +1,7 @@
 .Search {
   .search-inner {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -9,7 +9,7 @@
     background: linear-gradient(0deg, #b1b1b1 0%, #828282 100%);
     
     .exit-container {
-        @include flexCenter(9%, 100%, 25px 25px 5px, center, center, column);
+        @include flexCenter(8%, 100%, 25px 25px 5px, center, center, column);
 
         .exit-button {
             @include flexCenter(40px, 40px, 50px, center, center, column);
@@ -19,7 +19,7 @@
     }
 
     .inner-com {
-      @include flexCenter(96%, 96%, 25px 25px 5px, flex-start, center, column);
+      @include flexCenter(77%, 96%, 25px 25px 5px, flex-start, center, column);
       // margin: 2% 0% 1% 0%;
       // background: #ecf0f3;
       box-shadow: 2px 3px 4px #414141, -3px -2px 3px #d3d3d3;
@@ -138,3 +138,4 @@
     }
   }
 }
+

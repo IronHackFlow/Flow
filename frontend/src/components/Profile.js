@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
 import TheContext from '../TheContext'
-import FormatDate from './utils/FormatDate'
+import FormatDate from './FormatDate'
 import NavBar from '../components/NavBar'
 import social from '../images/social.svg'
 import followers from '../images/followers.svg'
@@ -401,7 +401,7 @@ function Profile(props) {
           </div>
         </div>
 
-        <NavBar />
+        <NavBar locationClass={'NavBarProfile'} />
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import actions from '../api'
+import NavBar from './NavBar'
 import send from '../images/send.svg'
 
 function Search(props) {
@@ -110,6 +111,7 @@ function Search(props) {
           </div>
         </div>
       </div>
+      <NavBar />
     </div>
   )
 }

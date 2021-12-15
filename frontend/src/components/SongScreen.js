@@ -199,7 +199,7 @@ function SongScreen(props) {
 
 
   const findCurrentSong = direction => {
-    allSongs.filter((each, index) => {
+    allSongs.forEach((each, index) => {
       if (each._id === thisSong?._id) {
         if (direction === 'back') {
           if (index === 0) {

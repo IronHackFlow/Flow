@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
-import FormatDate from './utils/FormatDate'
+import FormatDate from './FormatDate'
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
 import comments from '../images/comment.svg'

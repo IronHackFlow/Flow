@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
-import FormatDate from "./utils/FormatDate"
+import FormatDate from "./FormatDate"
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
 import AudioTimeSlider from "./AudioTimeSlider.js";
@@ -364,8 +364,8 @@ function Home(props) {
                         <p style={{ color: 'white' }}>{totalFollowers}</p>
                         <p>
                           {(totalFollowers === 1)
-                              ? "Follow"
-                              : "Follows"
+                            ? "Follow"
+                            : "Follows"
                           }
                         </p>
                       </div>
@@ -379,8 +379,8 @@ function Home(props) {
                         <p style={{ color: 'white' }}>{totalLikes}</p>
                         <p>
                           {(totalLikes === 1) 
-                              ? "Like"
-                              : "Likes"
+                            ? "Like"
+                            : "Likes"
                           }
                         </p>
                       </div>
@@ -398,8 +398,8 @@ function Home(props) {
                         <p style={{ color: 'white' }}>{totalComments}</p>
                         <p>
                           {(totalComments === 1) 
-                              ? "Comment"
-                              : "Comments"
+                            ? "Comment"
+                            : "Comments"
                           }
                         </p>
                       </div>
@@ -502,9 +502,7 @@ function Home(props) {
           </div>
         </div>
 
-        <NavBar
-          profilePicRef={profilePicRef}
-        />
+        <NavBar locationClass={'NavBarHome'}/>
       </div>
     </TheViewContext.Provider>
   )

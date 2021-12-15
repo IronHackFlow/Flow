@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
-import TheContext from "../TheContext";
 import actions from "../api"
-import { v4 as uuidv4 } from "uuid";
+import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
 import edit from "../images/edit.svg";
 import save from "../images/save-disk.svg";

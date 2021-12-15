@@ -984,7 +984,7 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
-        <NavBar />
+        <NavBar locationClass={'NavBarTestAudio'} />
       </div>
     </div>
   )
