@@ -66,12 +66,23 @@ router.post(`/getSongRT`, async (req, res, next) => {
 
 //search bar bobby
 router.post('/getManyUsersRT', async (req, res, next) => {
+  let searchData = { user: "", songs: "" }
   await User.find({ userName: { $regex: req.body.search, $options: '$i' } })
     .then(user => {
-      res.status(200).json(user)
+      searchData.user = user
       console.log('yo its ya boi' + user)
     })
     .catch(err => res.status(500).json(err))
+
+  await Songs.find({ songName: { $regex: req.body.search, $options: '$i' } })
+    .populate('songUser')
+    .then(songs => {
+      searchData.songs = songs
+      console.log('yo its ya boi 2' + songs)
+    })
+    .catch(err => res.status(500).json(err))
+  console.log(searchData, "LOL IS IT A OBJECT??")
+  res.status(200).json(searchData)
 })
 
 router.post('/getManySongsRT', async (req, res, next) => {

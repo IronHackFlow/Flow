@@ -76,7 +76,6 @@ function NavBar(props) {
             <Link 
               to={{pathname: "/search", link: locationIndicator?.pathname }} 
               className={`navbar-btn-container ${selectedBtn === 'search' ? "btn-selected" : unselectedBtns}`}
-              onClick={props.popUpSearch}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
