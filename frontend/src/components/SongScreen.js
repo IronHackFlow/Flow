@@ -151,7 +151,7 @@ function SongScreen(props) {
       })
       .then(res => {
         console.log(`added a follow to: `, res.data)
-        setTotalFollowers(res.data.followers.length)
+        setTotalFollowers(res.data.followedData._doc.followers.length)
       })
       .catch(console.error)
   }
@@ -164,7 +164,7 @@ function SongScreen(props) {
       })
       .then(res => {
         console.log(`deleted a follow from: `, res.data)
-        setTotalFollowers(res.data.followers.length)
+        setTotalFollowers(res.data.followedData._doc.followers.length)
       })
       .catch(console.error)
   }

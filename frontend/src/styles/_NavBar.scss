@@ -89,7 +89,7 @@
   }
 }
 
-// everything else
+// toggle class for Home, Profile, and Search when UNSELECTED
 .btn-unselected {
   background: initial;
   box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
@@ -111,6 +111,8 @@
     color: #ff8ebd;
   }
 }
+
+// toggle class for Home, Profile, and Search when either is SELECTED
 .btn-selected {
   background: #ec6aa0;
   box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
@@ -132,8 +134,8 @@
     color: #ffffff;
   }
 }
-// class to be added on NavBar btn indicating which page is being shown
-// when RecordingBooth is shown all classes get these styles
+
+// toggle class for Home, Profile, and Search when RecordingBooth is SELECTED
 .section-2_control-panel {
   .NavBar {
     .navbar_section {
@@ -166,6 +168,7 @@
   }
 }
 
+// toggle class for RecordingBooth when SELECTED
 .section-2_control-panel {
   .NavBar {
     .navbar_section {
@@ -194,79 +197,6 @@
           }
         }
       }
-    }
-  }
-}
-
-@keyframes animatedOutset {
-  from {
-    box-shadow: 2px 2px 4px 0px #b0b1b3, -2px -2px 3px #ffffff;
-  }
-  to {
-    box-shadow: inset 2px 2px 3px 0px #b0b1b3, inset -2px -2px 3px #ffffff;
-  }
-}
-@keyframes opacityToOne {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fadeOutText {
-  0% {
-    opacity: 1;
-    width: initial;
-  }
-  60% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-    width: 0;
-  }
-}
-@keyframes moveBtnsLeft {
-  0% {
-    left: 0px;
-  }
-  100% {
-    left: -60px;
-  }
-}
-@keyframes popOutBtns {
-  0% {
-    width: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-    right: 0px;
-  }
-  100% {
-    width: 195px;
-    border-radius: 30px 15px 15px 30px;
-    box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
-    right: -51px;
-  }
-}
-
-@mixin menuPopout() {
-  @keyframes #{$name} {
-    from {
-      opacity: $opacity;
-      opacity: $opacity2;
-      width: $width;
-      left: $width2;
-      right: $right;
-      border-radius: $borderRadius;
-    }
-    to {
-      opacity: $opacityX;
-      opacity: $opacity2X;
-      width: $widthX;
-      left: $width2X;
-      right: $rightX;
-      border-radius: $borderRadiusX;
     }
   }
 }

@@ -6,18 +6,18 @@ import send from '../images/send.svg'
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
+  const [songSuggestions, setSongSuggestions] = useState(<h4>Find A Song</h4>)
+  
   const history = useHistory();
 
   const listUsers = e => {
     if (e.target.value.length > 0) {
       grabUsers(e.target.value)
+      grabSongs(e.target.value)
     } else {
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
   }
-  useEffect(() => {
-    console.log(props.location, "yall funny")
-  })
 
   const closeWindow = () => {
     history.push(props.location.link)
@@ -25,17 +25,18 @@ function Search(props) {
 
   const suggestionBox = info => {
     //render top 1, 2 or 4 suggestions
+
     const mappedRes = info.data.map(ele => {
       return { userName: ele.userName, picture: ele.picture, profile: ele }
     })
 
-    if (mappedRes.length === 1) {
+    if (mappedRes.length > 0) {
       return mappedRes.map(ele => {
         console.log(ele)
         return (
           <div className="search-results">
             <div className="search-username-container">
-              <p className="comment-username">{`@${ele.userName}`}</p>
+              <p className="comment-username">{`@${ele.userName ? ele.userName : ele.profile.songName}`}</p>
             </div>
 
             <div className="search-prof-container">
@@ -75,6 +76,18 @@ function Search(props) {
       })
   }
 
+  const grabSongs = theQuery => {
+    actions
+    .getManySongs({ search: theQuery })
+    .then(res => {
+      console.log(res)
+      setSongSuggestions(suggestionBox(res))
+    })
+    .catch(e => {
+      console.log(e)
+    })  
+  }
+
   return (
     <div className="Search">
       <div className="search-inner">
@@ -104,6 +117,7 @@ function Search(props) {
                 <div className="com-list-search">
                   <div className="com-search">
                     {suggestions}
+                    {songSuggestions}
                   </div>
                 </div>
               </div>

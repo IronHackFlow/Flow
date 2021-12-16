@@ -87,7 +87,7 @@
                 box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
           
                 .search-results {
-                  @include flexCenter(90%, 94%, 0px, space-between, center, row);
+                  @include flexCenter(20%, 94%, 0px, space-between, center, row);
           
                   .search-username-container {
                     height: 100%;

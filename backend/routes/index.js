@@ -74,6 +74,15 @@ router.post('/getManyUsersRT', async (req, res, next) => {
     .catch(err => res.status(500).json(err))
 })
 
+router.post('/getManySongsRT', async (req, res, next) => {
+  await Songs.find({ songName: { $regex: req.body.search, $options: '$i' } })
+    .then(song => {
+      res.status(200).json(song)
+      console.log('yo its ya boi' + song)
+    })
+    .catch(err => res.status(500).json(err))
+})
+
 router.post(`/getCommentsRT`, async (req, res, next) => {
   console.log('getting some song comments', req.body.id)
   let body = { id: req.body.id }

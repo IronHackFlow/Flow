@@ -49,7 +49,6 @@ function Home(props) {
   
   const windowRef = useRef();
   const commentInputRef = useRef();
-  const profilePicRef = useRef();
   const playPauseRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   
@@ -133,11 +132,8 @@ function Home(props) {
   }, [displayFeed, displayTrending, displayFollowing, theFeedBool, trendingBool, followingBool])
 
   const handlePlayPause = (bool) => {
-    if (bool === true) {
-      setIsPlaying(true)
-    } else {
-      setIsPlaying(false)
-    }
+    if (bool === true) return setIsPlaying(true)
+    else return setIsPlaying(false)
   }
 
   const followCheck = () => {
@@ -244,7 +240,7 @@ function Home(props) {
       setPoppedUp(false)
     }
   }
-
+  
   return (
     <TheViewContext.Provider
       value={{

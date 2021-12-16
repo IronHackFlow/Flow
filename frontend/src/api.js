@@ -42,7 +42,9 @@ const actions = {
   getManyUsers: async searchStr => {
     return await axios.post(`${baseURL}/getManyUsersRT`, searchStr, resetHead())
   },
-
+  getManySongs: async searchStr => {
+    return await axios.post(`${baseURL}/getManySongsRT`, searchStr, resetHead())
+  },
   getSong: async getSong => {
     return await axios.post(`${baseURL}/getSongRT`, getSong, resetHead())
   },
