@@ -43,10 +43,16 @@ body,
   width: 100%;
   font-family: 'Roboto', sans-serif;
 }
+
+body, #root {
+  position: relative;
+}
+
 .App {
   text-align: center;
   position: relative;
 }
+
 input, textarea, select, button { 
   font-family: inherit; 
   border: none;
