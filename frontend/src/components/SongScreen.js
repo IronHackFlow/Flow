@@ -52,10 +52,10 @@ function SongScreen(props) {
         setAllSongs(res.data)
         setAllSongs(prevArr => prevArr.map((each, index) => ({
           ...each,
-          songVideo: getRandomBackground(),
+          songVideo: gifsCopy[index].url,
           songIndex: index + 1
         })))
-        let commentArr = res.data.map((each, index) => {
+        let commentArr = res.data.map((each) => {
           return { songId: each._id, comments: each.songComments }
         })
         setCommentsArray(commentArr)
@@ -64,6 +64,7 @@ function SongScreen(props) {
   }, [props.location])
 
   useEffect(() => {
+    console.log(props.location, history.location, "WHAHASFHSLDKFJ")
     let song = allSongs.filter(each => each._id === props.location.songInfo._id)
     setThisSong(song[0])
   }, [allSongs])
@@ -77,10 +78,17 @@ function SongScreen(props) {
   }
 
   const closeSongWindow = () => {
-    history.push({
-      pathname: `/profile/${thisSong.songUser?._id}`,
-      profileInfo: thisSong.songUser,
-    })
+    if (props.location.link === '/search') {
+      history.push({
+        pathname: '/search',
+        searchValue: history.location.searchValue
+      })
+    } else {
+      history.push({
+        pathname: `/profile/${thisSong.songUser?._id}`,
+        profileInfo: thisSong.songUser,
+      })
+    }
   }
 
   const getRandomBackground = () => {
@@ -272,7 +280,7 @@ function SongScreen(props) {
         <div className="song-lyric-container">
           {thisSong?.songLyricsStr?.map((each, index) => {
             return (
-              <div className="each-lyric-container">
+              <div className="each-lyric-container" key={`${each}_${index}`}>
                 <p className="each-lyric-no">{index + 1}</p>
                 <p className="each-lyric-line">{each}</p>
               </div>

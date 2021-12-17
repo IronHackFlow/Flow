@@ -48,6 +48,7 @@ function EditLyrics(props) {
   
   useEffect(() => {
     if (props.location.pathname === `/recordingBooth/EditLyrics`) {
+      console.log(props.location, "YOYOYOYOYOYO")
       setLinkLocation(true)
       setGetTakes([...props.location.songs])
       setCurrentSong(props.location.currentSong)

@@ -20,6 +20,11 @@ function App() {
   const [locationIndicator, setLocationIndicator] = useState()
 
   useEffect(() => {
+    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    document.getElementById("body").style.height = `${h}px`
+  }, [])
+
+  useEffect(() => {
     actions
       .getUser()
       .then(res => {

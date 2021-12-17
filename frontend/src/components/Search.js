@@ -8,33 +8,50 @@ import xExit from "../images/exit-x-2.svg"
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
-  const [songSuggestions, setSongSuggestions] = useState(<h4>Find A Song</h4>)
   const [searchValue, setSearchValue] = useState();
   const history = useHistory();
   const searchInputRef = useRef();
+
+  useEffect(() => {
+    if (props.location.searchValue) {
+      const value = props.location.searchValue
+      searchInputRef.current.focus()
+      searchInputRef.current.value = value
+      setSearchValue(value)
+      grabUsers(value)
+    }
+  }, [])
 
   const listUsers = e => {
     e.preventDefault()
     setSearchValue(e.target.value)
     if (e.target.value.length > 0) {
       grabUsers(e.target.value)
-      // grabSongs(e.target.value)
     } else {
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
   }
 
+  const grabUsers = theQuery => {
+    actions
+      .getManyUsers({ search: theQuery })
+      .then(res => {
+        console.log(res.data, "this an object? should have songs and users")
+        setSuggestions(suggestionBox(res.data))
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
+
   const closeWindow = () => {
+    console.log(history.location, "WHAT FTFUCK")
     if (history.location.link && history.location.link !== "/search") {
       history.push(history.location.link)
     } else {
       history.push("/")
     }
   }
-
-  useEffect(() => {
-    console.log(history, "what??")
-  })
 
   const clearSearchField = (e) => {
     e.preventDefault()
@@ -59,22 +76,37 @@ function Search(props) {
     }
 
     if (searchArr.length > 0) {
-      return searchArr.map(ele => {
+      return searchArr.map((ele, index) => {
         console.log(ele)
         return (
-          <li className="search-results">
-            <div className="search-username-container">
-              <p className="comment-username">{`@${ele.user ? ele.user.userName : ele.song.songName}`}</p>
+          <li className="suggestions-result-list" key={ele.user ? `${ele.user._id}_${index}` : `${ele.song._id}_${index}`}>
+            <div className="result-1_data">
+              <div className="data_shadow-div-outset">
+                <div className="search-icon-container">
+                  <img className="button-icons" src={search} alt="search icon" />
+                </div>
+                <div className="data-container">
+                  <p className="comment-username">{`${ele.user ? ele.user.userName : ele.song.songName}`}</p>
+                  <p className="data-type">
+                    {ele.user ? "Artist" : "Song"}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="search-prof-container">
+            <div className="result-2_picture">
               <div className="search-prof-inset">
                 <div className="search-prof-outset">
                   <Link
-                    to={{
-                      pathname: `/profile/${ele.user ? ele.user._id : ele.song.songUser._id}`,
-                      profileInfo: ele.user ? ele.user._id : ele.song.songUser._id,
-                    }}
+                    to={ele.user ? ({
+                      pathname: `/profile/${ele.user._id}`,
+                      profileInfo: ele.user
+                    }) : ({
+                      pathname: `/SongScreen/${ele.song._id}`,
+                      songInfo: ele.song,
+                      link: "/search",
+                      searchValue: searchInputRef.current.value
+                    })}
                     className="search-results-link"
                   >
                     <img className="prof-pic" src={ele.user ? ele.user.picture : ele.song.songUser.picture} alt=""></img>
@@ -92,24 +124,10 @@ function Search(props) {
     }
   }
 
-  const grabUsers = theQuery => {
-    actions
-      .getManyUsers({ search: theQuery })
-      .then(res => {
-        console.log(res.data, "this an object? should have songs and users")
-        setSuggestions(suggestionBox(res.data))
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  }
-
-
-
   return (
     <div className="Search">
       <div className="search-inner">
-        <div className="search-field-container">
+        <div className="section-1_search-field">
           <div className="search-field_shadow-div-outset">
             <form className="search-field-form">
               <div className="search-back-btn-container">
@@ -137,13 +155,13 @@ function Search(props) {
             </form>
           </div>
         </div>
-        <div className="search-results-container">
+        <div className="section-2_search-results">
           <div className="results-1_recent">
             
           </div>
           <div className="results-2_suggestions">
-            <div className="comment-list-container">
-              <ul className="com-search">
+            <div className="suggestions_shadow-div-inset">
+              <ul className="suggestions_shadow-div-outset">
                 {suggestions}
               </ul>
             </div>
