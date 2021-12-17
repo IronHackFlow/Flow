@@ -5,6 +5,7 @@ import actions from '../api'
 import TheContext from '../TheContext'
 import AudioTimeSlider from "./AudioTimeSlider"
 import Comments from "./Comments"
+import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
 import play from '../images/play.svg'
@@ -13,7 +14,6 @@ import backward from '../images/backward.svg'
 import forward from '../images/forward.svg'
 import close from '../images/close.svg'
 import heart2 from '../images/heart2.svg'
-import gifsArr from '../images/gifs.json'
 import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
