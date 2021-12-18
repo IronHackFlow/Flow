@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
-import { Link } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
+import AuthLogIn from './AuthLogIn'
+import AuthSignUp from './AuthSignUp'
+
 
 const Auth = (props) => {
   const { 
     user, setUser
   } = React.useContext(TheContext)
-
+  const [toggleLogin, setToggleLogin] = useState(true)
   const onResponse = (response) => {
     actions
       .logIn(response)
@@ -39,52 +41,43 @@ const Auth = (props) => {
             <div className="mid-inset">
               <div className="login-container">
                 <div className="title-container">
-                  <h1>FLOW</h1>
+
                 </div>
                 <div className="user-input-container">
                   <div className="user-login_shadow-div-outset">
                     <div className="user-login-1_title">
                       <div className="title_shadow-div-inset">
-                        Log In
+                        {toggleLogin ? "Log in to Flow" : "Sign up for Flow"}
                       </div>
                     </div>
-                    <div className="user-login-2_form">
-                      <form className="login-form">
-                        <div className="email-container">
-                            <p>Email</p>
-                            <input></input>
+                    <div className="user-login-2_other-logins">
+                      <div className="other-logins-1_google-btn">
+                        <div className="google-btn_shadow-div-outset">
+                          <p>Continue with </p>
+                          <GoogleLogin 
+                            clientId={process.env.REACT_APP_GOOGLEID}
+                            buttonText="Signup"
+                            onSuccess={onResponse}
+                            onFailure={onResponse}
+                            cookiePolicy={"single_host_origin"}
+                          />
                         </div>
-                        <div className="password-container">  
-                            <p>Password</p>
-                            <input></input>
-                        </div>
-                        <Link 
-                            to ="/" 
-                            className="login-link"
-                        >
-                            <div className="login-button">
-                                <h4>Enter</h4>
-                            </div>
-                        </Link>
-                      </form>
+                      </div>
+                      <div className="other-logins-2_or-container">
+                        <div className="border"></div>
+                        <p>or</p>
+                        <div className="border"></div>
+                      </div>
                     </div>
-                    <div className="user-login-3_other-logins">
-                      <GoogleLogin 
-                        clientId={process.env.REACT_APP_GOOGLEID}
-                        buttonText="Signup"
-                        onSuccess={onResponse}
-                        onFailure={onResponse}
-                        cookiePolicy={"single_host_origin"}
-                      />
-                    </div>
-
+                    {toggleLogin ? (<AuthLogIn />) : (<AuthSignUp />)}
                   </div>
                 </div>
-                <div className="bottom-filler-space"></div>
               </div>
             </div>
             <div className="mid-inset-bottom">
               <div className="bottom_shadow-div-outset">
+                <p>Don't have an account?</p>
+                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "Log In" : "Sign Up"}</button>
               </div>
             </div>
           </div>

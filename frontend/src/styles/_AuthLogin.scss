@@ -4,6 +4,7 @@
   z-index: 100;
   position: absolute;
 }
+
 .page-container {
   @include flexCenter(100%, 100%, none, flex-start, center, column);
   background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
@@ -17,7 +18,7 @@
 
       .upper-inset {
         @include flexCenter(88%, 97%, 50px, space-around, center, row);
-        box-shadow: inset 2px 2px 4px #767676, inset -2px -2px 2px #e1e1e1;
+        box-shadow: inset 2px 2px 4px #606060, inset -3px -3px 2px #dfdfdf;
 
         .upper-inset-outset {
           @include flexCenter(85%, 96%, 50px, space-around, center, row);
@@ -29,25 +30,25 @@
   }
 
   .middle-container {
-    @include flexCenter(60%, 96%, 40px 40px 8px 8px, center, center, row);
+    @include flexCenter(70%, 96%, 40px 40px 8px 8px, center, center, row);
     box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
 
     .mid-outset {
       @include flexCenter(98%, 97%, 34px, center, center, column);
-      box-shadow: inset 3px 3px 3px #696868, inset -3px -3px 3px #c3c1c1;
+      box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
       
       .mid-inset {
-        @include flexCenter(83%, 96%, 27px 27px 5px 5px, center, center, row);
+        @include flexCenter(87%, 96%, 27px 27px 5px 5px, center, center, row);
         background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
-        box-shadow: 2px 3px 3px #535353, -1px -3px 3px #fcfcfc;
+        box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
         margin-top: 2%;
 
         .login-container {
-          @include flexCenter(98%, 97%, 23px, center, center, column);
-          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+          @include flexCenter(98.3%, 97%, 23px, center, center, column);
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
           .title-container {
-            height: 25%;
+            height: 15%;
             width: 100%;
 
             h1 {
@@ -60,76 +61,112 @@
           }
 
           .user-input-container {
-            @include flexCenter(75%, 100%, 20px, space-evenly, center, column);
+            @include flexCenter(85%, 100%, 20px, space-evenly, center, column);
 
             .user-login_shadow-div-outset {
-              @include flexCenter(95%, 95%, 26px 26px 20px 20px, space-evenly, center, column);
+              @include flexCenter(96%, 95%, 26px 26px 20px 20px, space-evenly, center, column);
               box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
 
               .user-login-1_title {
-                @include flexCenter(20%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
+                @include flexCenter(15%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
                 
                 .title_shadow-div-inset {
-                  @include flexCenter(85%, 97%, 40px, center, center, column);
-                  box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
-
+                  @include flexCenter(80%, 95%, 40px, center, center, column);
+                  box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #e3e1e1;
+                  color: #e24f8c;
+                  font-size: 20px;
+                  font-weight: bold;
                 }
               }
-              .user-login-2_form {
-                @include flexCenter(60%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
-
-              }
-              .user-login-3_other-logins {
+              
+              .user-login-2_other-logins {
                 @include flexCenter(20%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
+                
+                .other-logins-1_google-btn {
+                  @include flexCenter(78%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
 
+                  .google-btn_shadow-div-outset {
+                    @include flexCenter(90%, 84%, 5px, space-evenly, center, row);
+                    box-shadow: 2px 2px 3px #686868, -2px -2px 2px #e7e7e7;
+                    
+                    p {
+                      color: white;
+                      width: 51%;
+                      text-align: start;
+                    }
+                  }
+                }
+                .other-logins-2_or-container {
+                  @include flexCenter(22%, 90%, 5px 5px 20px 20px, space-evenly, center, row);
+                  color: #e24f8c;
+
+                  .border {
+                    height: 2px;
+                    background: #949494;
+                    width: 40%;
+                  }
+                }
               }
 
+              .user-login-3_form {
+                @include flexCenter(65%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
 
+                .login-form {
+                  @include flexCenter(97%, 97%, 17px, space-evenly, center, column);
+                  box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
 
-              .user-input_shadow-div-outset {
-                @include flexCenter(95%, 95%, 20px, space-evenly, center, column);
+                  .login-input-container {
+                    @include flexCenter(38%, 100%, 17px, flex-end, center, column);
 
-                .user-input {
-                  height: 10%;
-                  width: 80%;
-                  padding: 5px;
-                  border-radius: 20px;
-                  box-shadow: inset 2px 2px 3px #bbbaba, inset -2px -2px 3px #ffffff;
-    
-                  .user-text {
-                    height: 100%;
-                    width: 100%;
-                    border-radius: 20px;
-                    border: none;
-    
-                    &::placeholder {
-                      color: rgb(165, 164, 164);
+                    .login-input_shadow-div-outset {
+                      @include flexCenter(91%, 96%, 17px, center, center, column);
+                      box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+                      
+                      p {
+                        @include flexCenter(35%, 90%, 17px, center, flex-start, column);
+                        color: white;
+                        font-size: 15px;
+
+                      }
+                      .input-container {
+                        @include flexCenter(65%, 100%, 30px, center, center, column);
+
+                        .login-input-field {
+                          @include flexCenter(80%, 91%, 30px, center, center, column);
+                          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+                          padding-left: 5%;
+
+                          &:defined {
+                            color: pink;
+                          }
+                          &::placeholder {
+                            color: #676767;
+                          }
+                          &:focus {
+                            border: 2px solid pink;
+                            outline: none !important;
+                            color: white;
+                            border-radius: 30px;
+                          }
+                        }
+                      }
                     }
                   }
-                }
-                .ui-login-i {
-                  padding: 0px;
-                  height: 15%;
-                  .ui-login-t {
-                    background: none;
-                    font-family: inherit;
-                    padding-left: 10%;
-                    &:focus {
-                      outline: none !important;
-                      border: 2px solid rgb(46, 194, 145);
-                      color: rgb(38, 153, 115);
+
+                  .enter-btn-container {
+                    @include flexCenter(24%, 100%, 17px, space-evenly, center, column);
+                    
+                    .login-link {
+                      @include flexCenter(70%, 94%, 50px, center, center, column);
+                      text-decoration: none;
+                      color: white;
+                      box-shadow: 3px 4px 3px #646464, -2px -2px 3px #e2e2e2;
+                      background: linear-gradient(45deg, #54d9ad, #2ec291);
+
+                      .login-button {
+                        @include flexCenter(100%, 100%, 20px, center, center, row);
+                      }
                     }
-                  }
-                }
-                .login-link {
-                  text-decoration: none;
-                  color: white;
-                  height: 15%;
-                  width: 85%;
-                  .login-button {
-                    @include flexCenter(100%, 100%, 20px, center, center, row);
-                    background: rgb(46, 194, 145);
-                    box-shadow: 3px 4px 8px #a9a9a9, -1px 1px 3px #fdfeff;
                   }
                 }
               }
@@ -137,15 +174,23 @@
           }
         }
       }
-    }
-    .mid-inset-bottom {
-      @include flexCenter(17%, 100%, 20px, center, center, row);
-     
-      .bottom_shadow-div-outset {
-        @include flexCenter(82%, 96%, 5px 5px 28px 28px, center, center, row);
-        box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
-        background: #939393;
+      .mid-inset-bottom {
+        @include flexCenter(13%, 100%, 20px, center, center, row);
+       
+        .bottom_shadow-div-outset {
+          @include flexCenter(82%, 96%, 5px 5px 28px 28px, space-evenly, center, row);
+          box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
+          background: #939393;
+          color: white;
 
+          button {
+            @include flexCenter(30px, 55px, 30px, center, center, row);
+            background: #e24f8c;
+            color: white;
+            font-weight: bold;
+            box-shadow: 3px 3px 3px #5a5a5a, -2px -2px 2px #c6c6c6;
+          }
+        }
       }
     }
   }
