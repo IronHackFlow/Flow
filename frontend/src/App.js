@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import actions from './api'
@@ -15,7 +15,9 @@ import Search from './components/Search'
 
 function App() {
   const location = useLocation()
+  const history = useHistory()
   const [user, setUser] = useState({})
+  const [userIsAuth, setUserIsAuth] = useState({})
   const [userViewed, setUserViewed] = useState({})
   const [locationIndicator, setLocationIndicator] = useState()
 
@@ -24,15 +26,41 @@ function App() {
     document.getElementById("body").style.height = `${h}px`
   }, [])
 
+  // useEffect(() => {
+  //   actions
+  //     .getAUser(userId)
+  //     .then(res => {
+  //       setUser(res.data)
+  //       console.log('user is logged in', user)
+  //     })
+  //     .catch(console.error)
+  // }, [])
+
+  useEffect(() => {
+    if (userIsAuth) {
+      actions
+        .getAUser({ id: userIsAuth })
+        .then(res => {
+          setUser(res.data)
+          console.log(res.data, "WHATLSKDJ")
+          console.log("User is logged in, go to profile to log out", user)
+        })
+    }
+  }, [userIsAuth])
+
   useEffect(() => {
     actions
-      .getUser()
-      .then(res => {
-        setUser(res.data)
-        console.log('user is logged in', user)
+      .isUserAuth()
+      .then(data => {
+        console.log(data.data, "COME ON MAN")
+        if (data.data.isLoggedIn) {
+
+          setUserIsAuth(data.data.user)
+        }
       })
       .catch(console.error)
   }, [])
+
 
   useEffect(() => {
     setLocationIndicator(location)
@@ -50,8 +78,11 @@ function App() {
       }}
     >
       <div className="App">
+        {  console.log('ice cream', user)}
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
+          <Route exact path="/AuthSignUp" render={props => <Auth {...props} />} /> 
+          <Route exact path="/AuthLogIn" render={props => <Auth {...props} />} /> 
           <Route exact path="/auth" render={props => <Auth setUser={setUser} {...props} />} />
           <Route exact path="/profile/:id" render={props => <Profile user={user} {...props} />} />
             <Route exact path="/profile/:id/EditLyrics" render={props => <EditLyrics {...props} />} />

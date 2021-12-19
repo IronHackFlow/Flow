@@ -11,9 +11,9 @@ function NavBar(props) {
   const [unselectedBtns, setUnselectedBtns] = useState('')
   const [selectedBtn, setSelectedBtn] = useState('')
 
-  useEffect(() => {
-    user ? setUserViewed(user) : setUser({})
-  }, [])
+  // useEffect(() => {
+  //   user ? setUserViewed(user) : setUser({})
+  // }, [])
 
   useEffect(() => {
     if (locationIndicator?.pathname === '/') {
@@ -92,7 +92,7 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={user._id ? `/profile/${user._id}` : '/auth'}
+              to={user?._id ? `/profile/${user?._id}` : '/auth'}
               className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : unselectedBtns}`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >

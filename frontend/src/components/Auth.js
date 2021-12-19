@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
+import { Link, useHistory } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 import AuthLogIn from './AuthLogIn'
@@ -10,18 +11,24 @@ const Auth = (props) => {
   const { 
     user, setUser
   } = React.useContext(TheContext)
+  const history = useHistory()
   const [toggleLogin, setToggleLogin] = useState(true)
-  const onResponse = (response) => {
+
+  // const onResponse = (response) => {
+  //   actions
+  //     .logIn(response)
+  //     .then(res => {
+  //       console.log("THIS", props)
+  //       setUser(res.data)
+  //     })
+  //     .catch(console.error)
+  // }
+  useEffect(() => {
     actions
-      .logIn(response)
-      .then(res => {
-        console.log("THIS", props)
-        setUser(res.data)
-      })
+      .isUserAuth()
+      .then(data => data.isLoggedIn ? history.push('/') : null)
       .catch(console.error)
-  }
-    
-  console.log('ice cream', user)
+  }, [])
 
   return (
     <div className="LogIn">
@@ -54,13 +61,14 @@ const Auth = (props) => {
                       <div className="other-logins-1_google-btn">
                         <div className="google-btn_shadow-div-outset">
                           <p>Continue with </p>
-                          <GoogleLogin 
+                          {/* <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLEID}
                             buttonText="Signup"
                             onSuccess={onResponse}
                             onFailure={onResponse}
                             cookiePolicy={"single_host_origin"}
-                          />
+                          /> */}
+                          <Link to="/">Enter</Link>
                         </div>
                       </div>
                       <div className="other-logins-2_or-container">
@@ -76,8 +84,8 @@ const Auth = (props) => {
             </div>
             <div className="mid-inset-bottom">
               <div className="bottom_shadow-div-outset">
-                <p>Don't have an account?</p>
-                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "Log In" : "Sign Up"}</button>
+                <p>{toggleLogin ? "Don't have an account?" : "Already a member?"}</p>
+                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "Sign Up" : "Log In"}</button>
               </div>
             </div>
           </div>

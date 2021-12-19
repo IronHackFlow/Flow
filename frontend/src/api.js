@@ -3,22 +3,39 @@ import axios from 'axios'
 const baseURL = `http://localhost:5000/api`;
 // const baseURL = 'https://iron-flow.herokuapp.com/api'
 const token = localStorage.getItem('token')
+
 // const baseURL = process.env.NODE_ENV == 'production' ? " https://iron-flow.herokuapp.com/api ": "http://localhost:5000 "
 
 const API = axios.create({
   baseURL,
-  headers: { Authorization: `Bearer ${token}` },
+  headers: { Authorization: "Bearer " + token },
 })
 
 let resetHead = () => {
   return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Authorization: "Bearer " + localStorage.getItem('token'),
     },
   }
 }
 
 const actions = {
+  signUp: async (user) => {
+    return await axios.post(`${baseURL}/signUp`, user, resetHead())
+  },
+
+  logIn: async (user) => {
+    return await axios.post(`${baseURL}/logIn`, user, resetHead())
+  },
+
+  isUserAuth: async () => {
+    return await axios.get(`${baseURL}/isUserAuth`, resetHead())
+  },
+
+  getUserName: async () => {
+    return await axios.get(`${baseURL}/getUserName`, resetHead())
+  },
+
   getUser: async () => {
     //This will go get our user every time we refresh
     return await axios.get(`${baseURL}/user`, resetHead())
@@ -147,7 +164,7 @@ const actions = {
     console.log('are we there yet')
     return await axios.post(`${baseURL}/addAPost`, { post }, resetHead())
   },
-  logIn: async data => {
+  logMeIn: async data => {
     localStorage.setItem('googleTokenId', data.tokenId)
 
     let headerObj = resetHead()

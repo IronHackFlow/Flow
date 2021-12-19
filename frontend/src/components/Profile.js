@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
 import TheContext from '../TheContext'
@@ -16,6 +16,7 @@ import pause from '../images/pause.svg'
 
 function Profile(props) {
   const { user, setUser, setUserViewed } = React.useContext(TheContext)
+  const history = useHistory()
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
 
@@ -49,12 +50,10 @@ function Profile(props) {
     }
   }, [props.location])
   
-  const logout = () => {
+  const logout = async () => {
     if (props.location.pathname.slice(9) === user._id) {
-      setUser({})
-      setThisUser({})
-      setUserViewed({})
-      localStorage.clear()
+      localStorage.removeItem('token')
+      await history.push('/auth')
     }
   }
 
@@ -382,7 +381,7 @@ function Profile(props) {
 
             <div className="each-button-container ebc-5">
               <div className="profile-button-outset">
-                <div className="profile-button-inset" onClick={logout}>
+                <div className="profile-button-inset" onClick={() => logout()}>
                   <img className="button-icons logout" src={logouticon} alt="log out" />
                 </div>
               </div>
