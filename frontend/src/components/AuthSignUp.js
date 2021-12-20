@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import actions from '../api';
+import TheContext from '../TheContext'
 
 function AuthSignUp(props) {
+  const { userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory();
   const [email, setEmail] = useState()
   const [userName, setUserName] = useState()
   const [password, setPassword] = useState()
 
-  useEffect(() => {
-    actions
-      .isUserAuth()
-      .then(data => data.isLoggedIn ? history.push('/') : null)
-      .catch(console.error)
-  }, [])
+  // useEffect(() => {
+  //   actions
+  //     .isUserAuth()
+  //     .then(data => data.isLoggedIn ? history.push('/') : null)
+  //     .catch(console.error)
+  // }, [])
 
   const signUpHandler = async (e) => {
     e.preventDefault()
@@ -28,6 +30,16 @@ function AuthSignUp(props) {
       .signUp(user)
       .then(res => {
         console.log(res)
+        if (res.data.message === "Success") {
+          actions
+            .logIn(user)
+            .then((res) => {
+              console.log(res.data, "plz")
+              localStorage.setItem('token', res.data.token)
+              setUserToggle(!userToggle)
+            })
+            .catch(console.error)
+        }
       })
       .catch(console.error)
   }

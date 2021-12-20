@@ -15,12 +15,13 @@ import play from '../images/play.svg'
 import pause from '../images/pause.svg'
 
 function Profile(props) {
-  const { user, setUser, setUserViewed } = React.useContext(TheContext)
+  const { user, setUser, setUserIsAuth, userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
 
   useEffect(() => {
+    console.log(localStorage, "what it is?")
     actions
       .getUserSongs({ songUser: props.location.pathname.slice(9) })
       .then(res => {
@@ -31,9 +32,9 @@ function Profile(props) {
   }, [props.location])
 
   useEffect(() => {
-    if (props.location.pathname.slice(9) === user._id) {
+    if (props.location.pathname.slice(9) === user?._id) {
       actions
-        .getOneUser()
+        .getAUser({ id: user?._id })
         .then(res => {
           setThisUser(res.data)
           console.log(res.data, 'shit son, this may work')
@@ -48,13 +49,14 @@ function Profile(props) {
         })
         .catch(console.error)
     }
-  }, [props.location])
+  }, [props.location, user])
   
-  const logout = async () => {
-    if (props.location.pathname.slice(9) === user._id) {
-      localStorage.removeItem('token')
-      await history.push('/auth')
-    }
+  async function logout() {
+    setUserToggle(!userToggle)
+    setUser({})
+    setUserIsAuth({})
+    localStorage.removeItem('token')
+    await history.push('/auth')
   }
 
   function ProfileSongs(eachSong) {
@@ -131,7 +133,7 @@ function Profile(props) {
                 <div className="song-name-container">
                   <Link
                     to={{
-                      pathname: `/SongScreen/${eachSong._id}`,
+                      pathname: `/songScreen/${eachSong._id}`,
                       songInfo: { ...eachSong },
                     }}
                     className="song-name-outset"
@@ -190,7 +192,7 @@ function Profile(props) {
                         <div className="delete-btn-container">
                           <div className="play-container">
                             <div className="play-outset">
-                              <Link to={{pathname: `/profile/${user._id}/EditLyrics`, currentSong: eachSong}} className="play-inset">
+                              <Link to={{pathname: `/profile/${user._id}/editLyrics`, currentSong: eachSong}} className="play-inset">
                                 <img
                                   className="button-icons"
                                   src={editicon}
@@ -280,53 +282,55 @@ function Profile(props) {
 
         <div className="section-1b_user-data">
           <div className="user-data-1_fields-container">
-            <div className="fields_shadow-div-outset">
-              <div className="users-details-each ude-1">
-                <p style={{ color: 'white' }}>Name: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.given_name} {thisUser?.family_name}</p>
-              </div>
+            <div className="fields_shadow-div-inset">
+              <div className="fields_shadow-div-outset">
+                <div className="users-details-each ude-1">
+                  <p style={{ color: 'white' }}>Name: </p>
+                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.given_name} {thisUser?.family_name}</p>
+                </div>
 
-              <div className="users-details-each ude-2">
-                <p style={{ color: 'white' }}>Email: </p>
-                <p
-                  style={{
-                    fontSize: '12px',
-                    marginLeft: '4%',
-                    overflowX: 'scroll',
-                  }}
-                >
-                  {thisUser?.email}
-                </p>
-              </div>
+                <div className="users-details-each ude-2">
+                  <p style={{ color: 'white' }}>Email: </p>
+                  <p
+                    style={{
+                      fontSize: '12px',
+                      marginLeft: '4%',
+                      overflowX: 'scroll',
+                    }}
+                  >
+                    {thisUser?.email}
+                  </p>
+                </div>
 
-              <div className="users-details-each ude-3">
-                <p style={{ color: 'white' }}>About: </p>
-                <p className="big-p" style={{ fontSize: '12px', marginLeft: '4%' }}>
-                  {thisUser?.userAbout}
-                </p>
-              </div>
+                <div className="users-details-each ude-3">
+                  <p style={{ color: 'white' }}>About: </p>
+                  <p className="big-p" style={{ fontSize: '12px', marginLeft: '4%' }}>
+                    {thisUser?.userAbout}
+                  </p>
+                </div>
 
-              <div className="users-details-each ude-4">
-                <p style={{ color: 'white' }}>Twitter: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userTwitter}</p>
-              </div>
+                <div className="users-details-each ude-4">
+                  <p style={{ color: 'white' }}>Twitter: </p>
+                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userTwitter}</p>
+                </div>
 
-              <div className="users-details-each ude-5">
-                <p style={{ color: 'white' }}>Instagram: </p>
-                <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userInstagram}</p>
-              </div>
+                <div className="users-details-each ude-5">
+                  <p style={{ color: 'white' }}>Instagram: </p>
+                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userInstagram}</p>
+                </div>
 
-              <div className="users-details-each ude-6">
-                <p style={{ color: 'white' }}>SoundCloud: </p>
-                <p
-                  style={{
-                    fontSize: '12px',
-                    marginLeft: '4%',
-                    overflowX: 'scroll',
-                  }}
-                >
-                  {thisUser?.userSoundCloud}
-                </p>
+                <div className="users-details-each ude-6">
+                  <p style={{ color: 'white' }}>SoundCloud: </p>
+                  <p
+                    style={{
+                      fontSize: '12px',
+                      marginLeft: '4%',
+                      overflowX: 'scroll',
+                    }}
+                  >
+                    {thisUser?.userSoundCloud}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -393,8 +397,21 @@ function Profile(props) {
 
       <div className="section-2_profile">
         <div className="section-2a_songs">
-          <ul className="songs-1_songs-list">{showProfileSongs()}</ul>
-
+          <ul className="songs-1_songs-list">
+            {thisUserSongs.length ? (
+              showProfileSongs()
+            ) : (
+              <div className="no-tracks-container">
+                <div className="no-tracks_shadow-div-inset">
+                  <div className="no-tracks_shadow-div-outset">
+                    <div className="no-tracks-text">
+                      <p>You haven't saved any songs yet, what are you waiting for??</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </ul>
           <div className="songs-2_slider-container">
             <div className="songs-slider-outer"></div>
           </div>

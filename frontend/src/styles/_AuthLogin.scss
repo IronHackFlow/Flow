@@ -23,7 +23,9 @@
         .upper-inset-outset {
           @include flexCenter(85%, 96%, 50px, space-around, center, row);
           box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #d9d9d9;
-
+          color: #ec6aa0;
+          font-size: 22px;
+          font-weight: bold;
         }
       }
     }
@@ -50,14 +52,6 @@
           .title-container {
             height: 15%;
             width: 100%;
-
-            h1 {
-              font-size: 50px;
-              background: #b7b5b5;
-              color: transparent;
-              text-shadow: 2px 2px 3px #ffffff;
-              -webkit-background-clip: text;
-            }
           }
 
           .user-input-container {
@@ -73,7 +67,7 @@
                 .title_shadow-div-inset {
                   @include flexCenter(80%, 95%, 40px, center, center, column);
                   box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #e3e1e1;
-                  color: #e24f8c;
+                  color: #ec6aa0;
                   font-size: 20px;
                   font-weight: bold;
                 }
@@ -192,18 +186,6 @@
           }
         }
       }
-    }
-  }
-
-  .bottom-container {
-    @include flexCenter(15%, 85%, none, center, center, column);
-
-    .useless-bars {
-      height: 15%;
-      width: 90%;
-      margin: 2% 0% 2% 0%;
-      border-radius: 20px;
-      box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
     }
   }
 }

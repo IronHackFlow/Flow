@@ -7,13 +7,10 @@ import home from '../images/home.svg'
 import search from '../images/search.svg'
 
 function NavBar(props) {
-  const { user, setUser, setUserViewed, locationIndicator } = React.useContext(TheContext)
+  const { user, locationIndicator } = React.useContext(TheContext)
   const [unselectedBtns, setUnselectedBtns] = useState('')
   const [selectedBtn, setSelectedBtn] = useState('')
 
-  // useEffect(() => {
-  //   user ? setUserViewed(user) : setUser({})
-  // }, [])
 
   useEffect(() => {
     if (locationIndicator?.pathname === '/') {
@@ -92,7 +89,7 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={user?._id ? `/profile/${user?._id}` : '/auth'}
+              to={user._id ? `/profile/${user._id}` : '/auth'}
               className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : unselectedBtns}`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >

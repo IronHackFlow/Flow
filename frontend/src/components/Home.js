@@ -18,9 +18,7 @@ import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
-  const { 
-    user
-  } = React.useContext(TheContext);
+  const { user } = React.useContext(TheContext);
 
   const gifsCopy = [...gifsArr];
   const [theFeedBool, setTheFeedBool] = useState(true);
@@ -54,8 +52,9 @@ function Home(props) {
   
   useEffect(() => {
     setIsLoading(true)
-    const controller = new AbortController();
-    const signal = controller.signal;
+    const controller = new AbortController()
+    const signal = controller.signal
+
     actions
       .getMostLikedSongs()
       .then(res => {
@@ -74,14 +73,19 @@ function Home(props) {
         setTrendingSongsFeed(trendingArray)
       }, signal)
       .catch(console.error)
+
     return () => controller.abort()
   }, [totalLikes])
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
+    const controller = new AbortController()
+    const signal = controller.signal
+
+    let filteredArr = []
+    updateFollowFeed?.forEach(each => filteredArr.push(each.followed))
+
     actions
-      .getUserFollowsSongs(updateFollowFeed)
+      .getUserFollowsSongs(filteredArr)
       .then(res => {
         const songsArray = res.data.map((each, index) => {
           return { song: each, songVideo: gifsCopy[index].url }
@@ -89,6 +93,7 @@ function Home(props) {
         setFollowingSongsFeed(songsArray)
       }, signal)
       .catch(console.error)
+
     return () => controller.abort()
   }, [updateFollowFeed])
 

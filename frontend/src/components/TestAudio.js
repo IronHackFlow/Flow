@@ -846,7 +846,7 @@ function TestAudio(props) {
  
               <div className="rhyme-lock-button rlb-3">
                 <div className="rhyme-lock-outset">
-                  <Link to={{pathname: "/recordingBooth/EditLyrics", songs: [...allTakes], currentSong: songUploadObject}} className="rhyme-lock-btn">
+                  <Link to={{pathname: "/recordingBooth/editLyrics", songs: [...allTakes], currentSong: songUploadObject}} className="rhyme-lock-btn">
                     Edit Lyrics
                   </Link>
                 </div>

@@ -8,9 +8,7 @@ import AuthSignUp from './AuthSignUp'
 
 
 const Auth = (props) => {
-  const { 
-    user, setUser
-  } = React.useContext(TheContext)
+  const { userToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [toggleLogin, setToggleLogin] = useState(true)
 
@@ -23,12 +21,17 @@ const Auth = (props) => {
   //     })
   //     .catch(console.error)
   // }
+
   useEffect(() => {
     actions
       .isUserAuth()
-      .then(data => data.isLoggedIn ? history.push('/') : null)
+      .then(data => {
+        if (data.data.isLoggedIn) {
+          history.push('/')
+        }
+      })
       .catch(console.error)
-  }, [])
+  }, [history, userToggle])
 
   return (
     <div className="LogIn">
@@ -37,7 +40,7 @@ const Auth = (props) => {
           <div className="upper-outset">
             <div className="upper-inset">
               <div className="upper-inset-outset">
-
+                Welcome To Flow
               </div>
             </div>
           </div>
@@ -54,13 +57,13 @@ const Auth = (props) => {
                   <div className="user-login_shadow-div-outset">
                     <div className="user-login-1_title">
                       <div className="title_shadow-div-inset">
-                        {toggleLogin ? "Log in to Flow" : "Sign up for Flow"}
+                        {toggleLogin ? "Log In" : "Sign Up"}
                       </div>
                     </div>
                     <div className="user-login-2_other-logins">
                       <div className="other-logins-1_google-btn">
                         <div className="google-btn_shadow-div-outset">
-                          <p>Continue with </p>
+                          {/* <p>Continue with </p> */}
                           {/* <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLEID}
                             buttonText="Signup"
@@ -68,7 +71,7 @@ const Auth = (props) => {
                             onFailure={onResponse}
                             cookiePolicy={"single_host_origin"}
                           /> */}
-                          <Link to="/">Enter</Link>
+                          {/* <Link to="/">Enter</Link> */}
                         </div>
                       </div>
                       <div className="other-logins-2_or-container">
@@ -85,7 +88,7 @@ const Auth = (props) => {
             <div className="mid-inset-bottom">
               <div className="bottom_shadow-div-outset">
                 <p>{toggleLogin ? "Don't have an account?" : "Already a member of Flow?"}</p>
-                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "Log In" : "Sign Up"}</button>
+                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "SignUp" : "Log In"}</button>
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import actions from '../api'
 import back from '../images/back.svg'
 
 function EditProfile(props) {
-  const { user, setToggleFeed, setToggleRecord, setToggleProfile } = React.useContext(TheContext)
+  const { user } = React.useContext(TheContext)
 
   const [thisUser, setThisUser] = useState([user])
   const [thisUsersSongs, setThisUsersSongs] = useState([])
@@ -25,7 +25,7 @@ function EditProfile(props) {
 
   useEffect(() => {
     actions
-      .getOneUser()
+      .getAUser({ id: user._id })
       .then(thisUserDbData => {
         setThisUser(thisUserDbData.data)
         console.log(thisUser)
@@ -71,15 +71,6 @@ function EditProfile(props) {
     })
   }
 
-  // const toggleExpand = (e) => {
-  //   // console.log(e.current.style.height)
-  //   // console.log(sectionArray)
-  //   if (e.current.style.height === '70%') {
-  //     console.log(e)
-  //     e.current.style.height = '40%'
-  //     console.log(e.current.style.height)
-  //   }
-  // }
   const songsToEdit = () => {
     return thisUsersSongs.map((each, index) => {
       return (

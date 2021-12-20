@@ -2,9 +2,9 @@ import axios from 'axios'
 
 const baseURL = `http://localhost:5000/api`;
 // const baseURL = 'https://iron-flow.herokuapp.com/api'
-const token = localStorage.getItem('token')
-
 // const baseURL = process.env.NODE_ENV == 'production' ? " https://iron-flow.herokuapp.com/api ": "http://localhost:5000 "
+
+const token = localStorage.getItem('token')
 
 const API = axios.create({
   baseURL,
@@ -87,7 +87,6 @@ const actions = {
   },
 
   addFollow: async followDat => {
-    // console.log('followDat from the API', followDat)
     return await axios.post(`${baseURL}/addFollowRT`, followDat, resetHead())
   },
 

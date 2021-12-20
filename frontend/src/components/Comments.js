@@ -75,9 +75,11 @@ function Comments(props) {
         commDate: new Date(),
       })
       .then(res => {
-        let comments = res.data.songComments
-        resetCommentsArray(comments)
-        props.setTotalComments(res.data.songComments.length)
+        if (res.data.songComments.length) {
+          let comments = res.data.songComments
+          resetCommentsArray(comments)
+          props.setTotalComments(res.data.songComments.length)
+        }
       })
       .catch(console.error)
     props.commentInputRef.current.value = ''

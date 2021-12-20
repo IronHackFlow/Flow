@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import actions from '../api';
+import TheContext from '../TheContext'
 
 function AuthLogIn(props) {
+  const { userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [email, setEmail] = useState()
   const [userName, setUserName] = useState()
   const [password, setPassword] = useState()
 
-  useEffect(() => {
-    actions
-      .isUserAuth()
-      .then(data => data.data.isLoggedIn ? history.push('/') : null)
-      .catch(console.error)
-  }, [])
 
-  const handleLogIn = (e) => {
+  const handleLogIn = async (e) => {
     e.preventDefault()
     const user = {
       userName: userName,
       password: password
     }
-
-    actions
-      .logIn(user)
-      .then((res) => {
-        console.log(res, "what is it?")
-        localStorage.setItem('token', res.data.token.split(' ')[1])
-      })
-      .catch(() => {})
+    try {
+      const res = await actions
+        .logIn(user)
+        .then((res) => {
+          console.log(res.data, "plz")
+          localStorage.setItem('token', res.data.token)
+          setUserToggle(!userToggle)
+        })
+        .catch(console.error)
+    } catch(err) {
+      console.log(err)
+    }
   }
-
 
   return (
     <div className="user-login-3_form">
