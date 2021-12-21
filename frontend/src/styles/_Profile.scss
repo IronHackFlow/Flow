@@ -10,53 +10,51 @@
   z-index: 1;
 
   .section-1a_user-title {
-    @include flexCenter(16%, 100%, none, flex-end, center, row);
-    margin-right: 4%;
+    @include flexCenter(16%, 100%, none, center, center, row);
 
     .user-title_shadow-div-inset {
-      @include flexCenter(90%, 80%, 40px 5px 40px 40px, center, center, row);
-      box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 4px #eaeaea;
+      @include flexCenter(80%, 97%, 50px 5px 50px 50px, center, center, row);
+      box-shadow: inset 3px 3px 3px #6e6e6e, inset -2px -3px 3px #ffffff;
 
       .user-pic-container {
-        @include flexCenter(100%, 20%, none, flex-end, center, row);
+        @include flexCenter(100%, 25%, none, center, center, row);
 
         .user-pic_shadow-div-outset {
-          //57px 57px
-          @include flexCenter(82%, 95%, 50px, center, center, row);
-          box-shadow: 3px 3px 4px 1px #7b7b7b, -2px -2px 3px #e6e6e6;
+          @include flexCenter(77%, 85%, 50px 5px 5px 50px, center, center, row);
+          box-shadow: 2px 2px 3px 1px #7b7b7b, -2px -2px 2px #eeeeee;
 
           .user-pic_shadow-div-inset {
-            @include flexCenter(90%, 90%, 100%, center, center, row);
-            box-shadow: inset 2px 2px 5px #737373, inset -3px -3px 4px #dadada;
+            @include flexCenter(90%, 92%, 40px 5px 5px 40px, center, center, row);
+            box-shadow: inset 1px 1px 2px #737373, inset -2px -2px 2px #ffffff;
             overflow: hidden;
 
             .profile-pic {
-              height: 80%;
-              width: 80%;
+              height: 79%;
+              width: 73%;
               object-fit: cover;
-              border: 1px solid white;
-              border-radius: 50%;
+              margin-left: 10%;
+              border-radius: 3px;
             }
           }
         }
       }
 
       .user-name-container {
-        @include flexCenter(100%, 77%, none, center, center, row);
+        @include flexCenter(100%, 75%, none, flex-start, center, row);
 
         .user-name_shadow-div-outset {
-          @include flexCenter(74%, 90%, 40px, center, center, row);
-          box-shadow: 2px 2px 4px 1px #7b7b7b, -3px -3px 3px #dedcdc;
-          border: 1px solid #bbbbbb;
-          margin-left: 5%;
+          @include flexCenter(77%, 97%, 5px 50px 50px 5px, center, center, row);
+          box-shadow: 2px 2px 3px 1px #7b7b7b, -2px -2px 2px #ffffff;
 
           .user-name_shadow-div-inset {
-            @include flexCenter(85%, 94%, 45px, center, center, row);
-            box-shadow: inset 3px 3px 5px #7b7b7b, inset -3px -3px 5px #ffffff;
+            @include flexCenter(83%, 96%, 8px 50px 50px 8px, center, center, row);
+            box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #e7e7e7;
 
             .username-text-me {
-              width: 75%;
+              height: 65%;
+              width: 90%;
               font-size: 20px;
+              text-align: start;
               color: #e24f8c;
               overflow-x: scroll;
               white-space: nowrap;
@@ -76,118 +74,183 @@
     @include flexCenter(84%, 100%, none, flex-start, stretch, row);
 
     .user-data-1_fields-container {
-      @include flexCenter(100%, 90%, none, center, center, row);
+      @include flexCenter(100%, 78%, none, flex-end, flex-start, row);
       position: relative;
 
       .fields_shadow-div-inset {
-        @include flexCenter(98%, 96%, 20px 180px 180px 20px, center, center, column);
-        box-shadow: inset 3px 3px 3px #818181, inset -3px -3px 3px #dbdbdb;
+        @include flexCenter(97%, 97%, 20px 180px 180px 20px, center, center, column);
+        box-shadow: 3px 2px 5px #7c7c7c, -2px -2px 2px #f2f2f2;
+        margin-top: 1%;
 
         .fields_shadow-div-outset {
-          //300px 255px
-          @include flexCenter(96%, 95%, 16px 180px 180px 16px, space-evenly, flex-start, column);
-          box-shadow: 2px 3px 3px 0px #838282, -2px -2px 3px 0px #e3e3e3;
+          @include flexCenter(98%, 97%, 16px 180px 180px 16px, space-evenly, flex-start, column);
+          box-shadow: inset 2px 3px 3px 0px #838282, inset -2px -2px 3px 0px #e3e3e3;
 
           .users-details-each {
-            margin-left: 2%;
-            display: flex;
-            align-items: center;
-            height: 10%;
-            color: #ff728a;
-            padding: 3px 10px 3px 10px;
-            border-radius: 60px 100px 100px 60px;
-            box-shadow: inset 3px 3px 3px #838282, inset -3px -3px 4px #d5d4d4;
+            @include flexCenter(11%, 97%, 7px 30px 30px 7px, center, center, row);
+            box-shadow: inset 2px 2px 3px #707070, inset -3px -3px 2px #d5d4d4;
+            margin-left: 2.5%;
+            font-size: 12px;
 
-            p {
-              font-size: 11px;
-              text-align: start;
+            .p-1 {
+              @include flexCenter(100%, 50px, 0px, center, center, row);
+
+              p {
+                width: 85%;
+                padding-left: 15%;
+                color: white;
+                text-align: start;
+                word-break: break-all;
+                overflow-y: scroll;
+              }
+            }
+            .p-2 {
+              @include flexCenter(100%, 80%, 0px, flex-start, center, row);
+
+              p {
+                height: 80%;
+                width: 90%;
+                color: #ff728a;
+                text-align: start;
+                overflow-y: scroll;
+              }
             }
           }
 
           .ude-1 {
-            width: 45%;
-            border-radius: 30px 50px 50px 15px;
-          }
-          .ude-2 {
-            width: 74%;
-            border-radius: 15px 50px 50px 15px;
-          }
-          .ude-3 {
-            width: 86%;
-            border-radius: 6px 35px 35px 6px;
-            height: 22%;
-            padding: 6px 10px 6px 10px;
-            align-items: stretch;
-
-            .big-p {
-              height: 100%;
-              overflow-y: scroll;
-              line-height: 1.2;
+            width: 48%;
+            border-radius: 16px 30px 30px 7px;
+            .p-2 {
+              width: 64%;
             }
           }
+          .ude-2 {
+            width: 78%;
+          }
+          .ude-3 {
+            width: 90%;
+          }
           .ude-4 {
-            width: 84%;
-            border-radius: 15px 50px 50px 15px;
+            height: 19%;
+            width: 94%;
+            border-radius: 4px 35px 35px 4px;
+            .p-2 {
+              width: 84%;
+            }
           }
           .ude-5 {
-            width: 74%;
-            border-radius: 15px 50px 50px 15px;
+            width: 90%;
           }
           .ude-6 {
-            width: 44%;
-            border-radius: 15px 50px 50px 30px;
+            width: 78%;
+          }
+          .ude-7 {
+            width: 48%;
+            border-radius: 7px 30px 30px 16px;
+            .p-2 {
+              width: 64%;
+            }
           }
         }
       }
     }
 
     .user-data-2_btns-container {
-      @include flexCenter(100%, 30%, 0px, center, center, column);
-      position: relative;
-      right: 0px;
+      @include flexCenter(100%, 22%, 0px, center, flex-end, column);
 
-      .each-button-container {
-        @include flexCenter(50px, 110px, 0px, flex-start, center, row);
-        position: absolute;
+      .follows-likes-container {
+        @include flexCenter(55%, 100%, 0px, flex-start, center, column);
 
-        .profile-button-outset {
-          @include flexCenter(50px, 50px, 50%, center, center, row);
-          box-shadow: inset 2px 2px 3px #797979, inset -2px -2px 3px #cfcfcf;
+        .follows-likes_shadow-div-inset {
+          @include flexCenter(90%, 87%, 40px 5px 5px 40px, center, center, column);
+          box-shadow: inset 2px 2px 4px #606060, inset -2px -2px 5px #fffefe;
 
-          .profile-button-inset {
-            @include flexCenter(75%, 75%, 50%, center, center, row);
-            box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #c5c5c5;
+          .each-button-container {
+            @include flexCenter(32%, 100%, 0px, center, center, row);
+    
+            .profile-button-outset {
+              @include flexCenter(89%, 82%, 50px, center, center, column);
+              box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #dddddd;
+    
+              .btn-title {
+                @include flexCenter(30%, 100%, 50px, center, center, column);
+                font-size: 11px;
+                color: white;
+              }
+
+              .profile-button-inset {
+                @include flexCenter(70%, 100%, 50%, center, center, row);
+
+                .number-container {
+                  @include flexCenter(100%, 40%, 0, flex-end, center, row);
+                  color: #ffd9e8;
+                  font-size: 11px;
+                  word-break: break-all;
+                  text-align: end;
+                }
+                .icon-container {
+                  @include flexCenter(100%, 60%, 0, center, center, row);
+                }
+              }
+              .pbe-1 {
+                height: 60%;
+                padding-top: 10%;
+              } 
+              .pbe-2 {
+                height: 65%;
+                padding-top: 5%;
+                .icon-container {
+                  img {
+                    height: 1.55em;
+                    width: 1.55em;
+                  }
+                }
+              }
+              .pbe-3 {
+                height: 60%;
+                padding-bottom: 10%;
+                .icon-container {
+                  img {
+                    height: 1.8em;
+                    width: 1.8em;
+                  }
+                }
+              }
+            }
           }
         }
       }
 
-      .btn-title {
-        font-size: 11px;
-        color: white;
-        margin-left: 5px;
-      }
+      .edit-logout-container {
+        @include flexCenter(45%, 100%, 0px, flex-start, center, column);
 
-      .ebc-1 {
-        top: 10px;
-        right: 35px;
-      }
-      .ebc-2 {
-        top: 70px;
-        right: 1px;
-        width: 105px;
-      }
-      .ebc-3 {
-        right: 14px;
-        width: 80px;
-      }
-      .ebc-4 {
-        bottom: 70px;
-        right: 27px;
-        width: 80px;
-      }
-      .ebc-5 {
-        bottom: 10px;
-        right: 36px;
+        .edit-logout_shadow-div-inset {
+          @include flexCenter(80%, 87%, 40px 5px 5px 40px, center, center, column);
+          box-shadow: inset 2px 2px 3px #6c6b6b, inset -2px -2px 3px #e5e3e3;
+
+          .each-button-container {
+            @include flexCenter(48%, 100%, 0px, center, center, row);
+    
+            .profile-button-outset {
+              @include flexCenter(88%, 82%, 50px, center, center, column);
+              box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #cbcaca;
+              background: #ec6aa0;
+
+              .btn-title {
+                @include flexCenter(30%, 100%, 50px, center, center, column);
+                font-size: 11px;
+                color: white;
+              }
+              .profile-button-inset {
+                @include flexCenter(70%, 75%, 50px, center, center, row);
+
+                img {
+                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -216,15 +279,10 @@
 
     .songs-1_songs-list {
       @include flexCenter(87%, 86%, 15px, flex-start, flex-start, column);
-      // box-shadow: inset 3px 3px 4px #c5c5c5,
-      //             inset -3px -3px 5px #ffffff;
-      // scroll-snap-type: y mandatory;
-      // border: 3px solid #ecf0f3;
       overflow-y: scroll;
       box-shadow: inset 0px -2px 3px #bebebe;
 
       .each-track-container {
-        // @include flexCenter(100%, 95%, 16px, flex-start, stretch, column);
         min-height: 155px;
         width: 100%;
         margin-top: 2%;
@@ -313,7 +371,6 @@
                     color: gray;
                     margin-right: 1%;
                   }
-  
                 }
               }
             }

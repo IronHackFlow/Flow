@@ -19,6 +19,7 @@ function Profile(props) {
   const history = useHistory()
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
+  const [thisUserLikes, setThisUserLikes] = useState([])
 
   useEffect(() => {
     console.log(localStorage, "what it is?")
@@ -51,6 +52,15 @@ function Profile(props) {
     }
   }, [props.location, user])
   
+  useEffect(() => {
+    actions
+      .getUsersLikes({ likeUser: thisUser?._id })
+      .then((res) => {
+        setThisUserLikes(res.data)
+      })
+      .catch(console.error)
+  }, [thisUser])
+
   async function logout() {
     setUserToggle(!userToggle)
     setUser({})
@@ -223,8 +233,7 @@ function Profile(props) {
                 </div>
               </div>
             </>
-          )
-          : (
+          ) : (
             <div className="delete-container">
               <div className="delete-question-container">
                <p>Are you sure you want to delete <span style={{color: '#e24f8c'}}>{eachSong.songName}</span>?</p>
@@ -285,111 +294,151 @@ function Profile(props) {
             <div className="fields_shadow-div-inset">
               <div className="fields_shadow-div-outset">
                 <div className="users-details-each ude-1">
-                  <p style={{ color: 'white' }}>Name: </p>
-                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.given_name} {thisUser?.family_name}</p>
+                  <div className="p-1">
+                    <p>Name: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.given_name} {thisUser?.family_name}</p>
+                  </div>
                 </div>
 
                 <div className="users-details-each ude-2">
-                  <p style={{ color: 'white' }}>Email: </p>
-                  <p
-                    style={{
-                      fontSize: '12px',
-                      marginLeft: '4%',
-                      overflowX: 'scroll',
-                    }}
-                  >
-                    {thisUser?.email}
-                  </p>
+                  <div className="p-1">
+                    <p>Email: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.email}</p>
+                  </div>
                 </div>
 
                 <div className="users-details-each ude-3">
-                  <p style={{ color: 'white' }}>About: </p>
-                  <p className="big-p" style={{ fontSize: '12px', marginLeft: '4%' }}>
-                    {thisUser?.userAbout}
-                  </p>
+                  <div className="p-1">
+                    <p>Town: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.location}</p>
+                  </div>
                 </div>
 
                 <div className="users-details-each ude-4">
-                  <p style={{ color: 'white' }}>Twitter: </p>
-                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userTwitter}</p>
+                  <div className="p-1">
+                    <p>Bio: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.userAbout}</p>
+                  </div>
                 </div>
 
                 <div className="users-details-each ude-5">
-                  <p style={{ color: 'white' }}>Instagram: </p>
-                  <p style={{ fontSize: '12px', marginLeft: '4%' }}>{thisUser?.userInstagram}</p>
+                  <div className="p-1">
+                    <p>Twttr: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.userTwitter}</p>
+                  </div>
                 </div>
 
                 <div className="users-details-each ude-6">
-                  <p style={{ color: 'white' }}>SoundCloud: </p>
-                  <p
-                    style={{
-                      fontSize: '12px',
-                      marginLeft: '4%',
-                      overflowX: 'scroll',
-                    }}
-                  >
-                    {thisUser?.userSoundCloud}
-                  </p>
+                  <div className="p-1">
+                    <p>Insta: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.userInstagram}</p>
+                  </div>
+                </div>
+
+                <div className="users-details-each ude-7">
+                  <div className="p-1">
+                    <p>Sound Cloud: </p>
+                  </div>
+                  <div className="p-2">
+                    <p>{thisUser?.userSoundCloud}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="user-data-2_btns-container">
-            <div div className="each-button-container ebc-1">
-              <div className="profile-button-outset">
-                <div className="profile-button-inset">
-                  <img className="button-icons logout" src={followers} alt="followers" />
+            <div className="follows-likes-container">
+              <div className="follows-likes_shadow-div-inset">
+                <div div className="each-button-container ebc-1">
+                  <div className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
+                    <div className="profile-button-inset pbe-1">
+                      <p className="number-container">
+                        {/* eventually create logic to deal with 4 digit number here */}
+                        {thisUser.followers ? thisUser.followers.length : "0"}
+                      </p>
+                      <div className="icon-container">
+                        <img className="button-icons logout" src={followers} style={{margin: "12% 0% 0% 8%"}} alt="followers" />
+                      </div>
+                    </div>
+                    <div className="btn-title">
+                      Followers
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="btn-title" style={{ flexDirection: 'column' }}>
-                <p>Followers</p>
-                <p style={{ color: 'pink' }}>{thisUser?.followers?.length}</p>
+
+                <div className="each-button-container ebc-2">
+                  <div className="profile-button-outset" style={{borderRadius: "4px"}}>
+                    <div className="profile-button-inset pbe-2">
+                      <p className="number-container">
+                        {thisUser.userFollows ? thisUser.userFollows.length : "0"}
+                      </p>
+                      <div className="icon-container">
+                        <img className="button-icons logout" src={social} alt="following" />
+                      </div>
+                    </div>
+                    <div className="btn-title">
+                      Following
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="each-button-container ebc-3">
+                  <div className="profile-button-outset" style={{borderRadius: "4px 4px 4px 35px"}}>
+                    <div className="btn-title">
+                      Likes
+                    </div>
+                    <div className="profile-button-inset pbe-3">
+                      <p className="number-container">
+                        {thisUserLikes ? thisUserLikes.length : "0"}
+                      </p>
+                      <div className="icon-container">
+                        <img className="button-icons logout" src={heart} style={{margin: "0% 0% 20% 5%"}} alt="likes" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="each-button-container ebc-2">
-              <div className="profile-button-outset">
-                <div className="profile-button-inset">
-                  <img className="button-icons logout" src={social} alt="following" />
-                </div>
-              </div>
-              <div className="btn-title" style={{ flexDirection: 'column' }}>
-                <p>Follows</p>
-                <p style={{ color: 'pink' }}>{thisUser?.userFollows?.length}</p>
-              </div>
-            </div>
+            <div className="edit-logout-container">
+              {thisUser._id === user._id ? (
+                <div className="edit-logout_shadow-div-inset">
+                  <div className="each-button-container ebc-4">
+                    <div className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
+                      <Link to="/editprofile-screen" className="profile-button-inset pbe-4">
+                        <img className="button-icons edit" src={editicon} style={{margin: "12% 0% 0% 11%"}} alt="edit" />
+                      </Link>
+                      <div className="btn-title">
+                        Edit
+                      </div>
+                    </div>
+                  </div>
 
-            <div className="each-button-container ebc-3">
-              <div className="profile-button-outset">
-                <Link to="/editprofile-screen" className="profile-button-inset">
-                  <img className="button-icons edit" src={editicon} alt="edit" />
-                </Link>
-              </div>
-              <div className="btn-title">
-                <p>Edit</p>
-              </div>
-            </div>
-
-            <div className="each-button-container ebc-4">
-              <div className="profile-button-outset">
-                <div className="profile-button-inset">
-                  <img className="button-icons logout" src={heart} alt="likes" />
+                  <div className="each-button-container ebc-5">
+                    <div className="profile-button-outset" style={{borderRadius: "4px 4px 4px 35px"}}>
+                      <div className="btn-title">
+                        Log Out
+                      </div>
+                      <div className="profile-button-inset pbe-5" onClick={() => logout()}>
+                        <img className="button-icons logout" src={logouticon} style={{margin: "0% 0% 18% 9%"}} alt="log out" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="btn-title" style={{ flexDirection: 'column' }}>
-                <p>Likes</p>
-                <p style={{ color: 'pink' }}>#</p>
-              </div>
-            </div>
-
-            <div className="each-button-container ebc-5">
-              <div className="profile-button-outset">
-                <div className="profile-button-inset" onClick={() => logout()}>
-                  <img className="button-icons logout" src={logouticon} alt="log out" />
-                </div>
-              </div>
-              <div className="btn-title">Log Out</div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -401,15 +450,28 @@ function Profile(props) {
             {thisUserSongs.length ? (
               showProfileSongs()
             ) : (
-              <div className="no-tracks-container">
-                <div className="no-tracks_shadow-div-inset">
-                  <div className="no-tracks_shadow-div-outset">
-                    <div className="no-tracks-text">
-                      <p>You haven't saved any songs yet, what are you waiting for??</p>
+              <li className="each-track-container">
+                <div className="track-details-container">
+                  <div className="song-name-container">
+                    <div className="song-name-outset">
+                      <div className="track-title-container">
+                        <p style={{fontWeight: "bold", fontSize: "14px"}}>User hasn't saved any Flows</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="lyrics-container"> 
+                    <div className="lyrics-outset">
+                      <div className="p-container">
+                        <p>{thisUser._id === user._id ? "Go to the Recording Booth to start your budding new rap career!" : ""}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                <div className="buttons-container">
+                  <div className="buttons-inner">
+                  </div>
+                </div>
+              </li>
             )}
           </ul>
           <div className="songs-2_slider-container">
