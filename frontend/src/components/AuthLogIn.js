@@ -25,7 +25,7 @@ function AuthLogIn(props) {
           localStorage.setItem('token', res.data.token)
           setUserToggle(!userToggle)
         })
-        .catch(console.error)
+        .catch(err => console.log(err))
     } catch(err) {
       console.log(err)
     }

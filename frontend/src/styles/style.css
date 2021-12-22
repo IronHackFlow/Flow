@@ -2565,6 +2565,7 @@ input, textarea, select, button {
   -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
           box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
   margin: 0px 8px 0px 8px;
+  position: relative;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-inner .comment-list-buttons .comment-likereply-container .comm-likereply-btn:active {
@@ -2590,8 +2591,8 @@ input, textarea, select, button {
       -ms-flex-direction: row;
           flex-direction: row;
   position: absolute;
-  top: -10%;
-  left: 8%;
+  top: -37%;
+  left: 32%;
   background: none;
 }
 

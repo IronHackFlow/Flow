@@ -9,7 +9,7 @@ const Songs = model(
     songTotLikes: Number,
     songURL: String,
     songPBR: Number,
-    songLyricsStr: [String],
+    songLyricsStr: [[String]],
     songLyricsAudio: String,
     songBG: String,
     songCaption: String,

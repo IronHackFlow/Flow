@@ -104,7 +104,7 @@ function Comments(props) {
     }, [])
 
     useEffect(() => {
-      if (each.commUser._id === user._id) {
+      if (each.commUser._id === user?._id) {
         setCheckCommUser(true)
       } else {
         setCheckCommUser(false)

@@ -98,7 +98,7 @@ function Home(props) {
   }, [updateFollowFeed])
 
   useEffect(() => {
-    setUpdateFollowFeed(user.userFollows)
+    setUpdateFollowFeed(user?.userFollows)
   }, [user])
 
   useEffect(() => {

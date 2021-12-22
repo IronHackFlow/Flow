@@ -34,7 +34,7 @@ function NavBar(props) {
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
             <Link
-              to="/"
+              to={user ? "/" : "auth"}
               className={`navbar-btn-container ${selectedBtn === 'home' ? "btn-selected" : unselectedBtns}`}
               style={{ borderRadius: '40px 8px 8px 40px' }}
             >
@@ -89,7 +89,7 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={user._id ? `/profile/${user._id}` : '/auth'}
+              to={user?._id ? `/profile/${user._id}` : '/auth'}
               className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : unselectedBtns}`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >

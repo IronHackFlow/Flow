@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const axios = require('axios')
@@ -16,37 +16,36 @@ const Follows = require('../models/Follows')
 router.post(`/signUp`, async (req, res, next) => {
   const user = req.body
 
-  const takenUserName = await User.findOne({ userName: user.userName.toLowerCase() })
-  const takenEmail = await User.findOne({ email: user.email.toLowerCase() })
+  const takenUserName = await User.findOne({ userName: user.userName })
+  const takenEmail = await User.findOne({ email: user.email })
 
   if (takenUserName || takenEmail) {
-    res.status(400).json({ message: "Username or email has already been taken" })
+    res.json({ message: "Username or email has already been taken" })
   } else {
     user.password = await bcrypt.hash(req.body.password, 10)
 
     const dbUser = {
       userName: user.userName.toLowerCase(),
       email: user.email.toLowerCase(),
-      password: user.password,
-      picture: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/100/100`
+      password: user.password
     }
     const newUser = User.create(dbUser)
-    res.status(200).json({message: "Success"})
+    res.json({message: "Success"})
   }
 })
 
 router.post(`/logIn`, async (req, res, next) => {
   const userLoggingIn = req.body
-  User.findOne({ userName: userLoggingIn.userName.toLowerCase() })
+  User.findOne({ userName: userLoggingIn.userName })
     .then(dbUser => {
       if (!dbUser) {
-        return res.status(400).json({ message: "Invalid Username or Password" })
+        return res.json({ message: "Invalid Username or Password" })
       }
       bcrypt.compare(userLoggingIn.password, dbUser.password)
         .then(isCorrect => {
           if (isCorrect) {
             const payload = {
-              _id: dbUser._id,
+              id: dbUser._id,
               userName: dbUser.userName
             }
             jwt.sign(
@@ -64,36 +63,16 @@ router.post(`/logIn`, async (req, res, next) => {
               }
             )
           } else {
-            return res.status(400).json({ message: "Invalid Username or Password"})
+            return res.json({ message: "Invalid Username or Password"})
           }
         })
     })
 })
 
-router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
-  User.findById(req.user._id)
-    .populate('userFollows')
-    .then(user => {
-      console.log(user, "this user is authorized")
-      res.status(200).json({ isLoggedIn: true, user })
-    })
-    .catch(err => res.status(500).json(err))
+router.get(`/isUserAuth`, verifyJWT, (req, res) => {
+  res.json({ isLoggedIn: true, user: req.user.id })
 })
 
-// router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
-//   res.json({ isLoggedIn: true, userId: req.user._id })
-// })
-
-router.get(`/getAuthUser`, verifyJWT, (req, res, next) => {
-  console.log(req.user)
-  User.findById(req.user._id)
-    .populate('userFollows')
-    .then(user => {
-      console.log(user, "this user is authorized")
-      res.status(200).json(user)
-    })
-    .catch(err => res.status(500).json(err))
-})
 
 router.get(`/user`, verifyToken, async (req, res, next) => {
   //GETTING OUR USER
@@ -133,6 +112,7 @@ router.post(`/getAUserRT`, async (req, res, next) => {
     .populate('followers')
     .populate('userFollows')
     .then(user => {
+      console.log(user, "ok what is going on again?")
       res.status(200).json(user)
     })
     .catch(err => res.status(500).json(err))
@@ -213,11 +193,21 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 })
 
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  // console.log(req.body, 'is this an array?')
-  await Songs.find({ songUser: req.body })
+  console.log(req.body, 'is this an array?')
+  const getFollowedIds = (arr) => {
+    return arr.map(each => {
+      return each.followed
+    })
+  }
+  // const followedIds = await req.body.map(each => {
+  //   return each.followed
+  // })
+
+  await Songs.find({ songUser: getFollowedIds(req.body) })
     .populate('songUser')
     .then(songs => {
-      // songs.forEach(each => console.log(each.songName))
+      console.log(songs, "what???")
+      songs.forEach(each => console.log(each.songName))
       res.status(200).json(songs)
     })
     .catch(err => {
@@ -225,118 +215,135 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
     })
 })
 
-router.post(`/getUsersLikes`, async (req, res, next) => {
-  await Likes.find({ likeUser: req.body.likeUser })
-    .then(likes => {
-      res.status(200).json(likes)
+router.post(`/getSongLikesRT`, async (req, res, next) => {
+  Songs.findById({ SongTotLikes: req.body._id })
+  console
+    .log('getting LIKES from SONG LIKES ROUTE...', req.body._id)
+    .then(songLikes => {
+      res.status(200).json(songLikes)
     })
     .catch(err => res.status(500).json(err))
 })
 
 router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
-  let bodySong = {
-    likeUser: req.user._id,
-    likerSong: req.body.likerSong,
-    likeDate: req.body.likeDate,
-  }
-  let bodyComm = {
-    likeUser: req.user._id,
-    likedComment: req.body.likedComment,
-    likeDate: req.body.likeDate,
-  }
-  let likeCheck = req.body.commLike
+  jwt.verify(req.headers['authorization'].split(' ')[1], process.env.JWT_SECRET, async (err, authData) => {
+    console.log(authData, "WHSDLKF ALK SD FLK")
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let bodySong = {
+        likeUser: authData.id,
+        likerSong: req.body.likerSong,
+        likeDate: req.body.likeDate,
+      }
+      let bodyComm = {
+        likeUser: authData.id,
+        likedComment: req.body.likedComment,
+        likeDate: req.body.likeDate,
+      }
+      let likeCheck = req.body.commLike
 
-  if (likeCheck === false) {
-    let likedObject = await Likes.create(bodySong)
-    console.log(`CREATED songLike object: `, likedObject)
+      if (likeCheck === false) {
+        let likedObject = await Likes.create(bodySong)
+        console.log(`CREATED songLike object: `, likedObject)
 
-    await Songs.findByIdAndUpdate(
-      bodySong.likerSong,
-      { $push: { songLikes: likedObject } },
-      { new: true },
-    )
-      .then(song => {
-        res.status(200).json(song)
-        console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-  } else {
-    let likedCommObject = await Likes.create(bodyComm)
-    console.log('CREATED commentLike object: ', likedCommObject)
+        await Songs.findByIdAndUpdate(
+          bodySong.likerSong,
+          { $push: { songLikes: likedObject } },
+          { new: true },
+        )
+          .then(song => {
+            res.status(200).json(song)
+            console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
+          })
+          .catch(err => {
+            next(err)
+          })
+      } else {
+        let likedCommObject = await Likes.create(bodyComm)
+        console.log('CREATED commentLike object: ', likedCommObject)
 
-    await Comments.findByIdAndUpdate(
-      bodyComm.likedComment,
-      { $push: { commLikes: likedCommObject } },
-      { new: true },
-    ) 
-      .then(comm => {
-        res.status(200).json(comm)
-        console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-  }
+        await Comments.findByIdAndUpdate(
+          bodyComm.likedComment,
+          { $push: { commLikes: likedCommObject } },
+          { new: true },
+        )
+          .then(comm => {
+            res.status(200).json(comm)
+            console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
+          })
+          .catch(err => {
+            next(err)
+          })
+      }
+    }
+  })
 })
 
 router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
-  let bodySong = {
-    likeUser: req.user._id,
-    likerSong: req.body.likerSong,
-    deleteObj: req.body.deleteObj,
-  }
-  let bodyComm = {
-    likeUser: req.user._id,
-    deleteObj: req.body.deleteObj,
-  }
-  let likeCheck = req.body.commLike
+  jwt.verify(req.headers['authorization'].split(' ')[1], process.env.JWT_SECRET, async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let bodySong = {
+        likeUser: authData.id,
+        likerSong: req.body.likerSong,
+        deleteObj: req.body.deleteObj,
+      }
+      let bodyComm = {
+        likeUser: authData.id,
+        deleteObj: req.body.deleteObj,
+      }
+      let likeCheck = req.body.commLike
 
-  if (likeCheck === false) {
-    await Songs.findByIdAndUpdate(
-      bodySong.likerSong,
-      { $pull: { songLikes: bodySong.deleteObj._id } },
-      { new: true },
-    )
-      .then(song => {
-        res.status(200).json(song)
-        console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-    await Likes.findByIdAndDelete(bodySong.deleteObj._id)
-      .then(res => {
-        console.log('this songLike has been eliminated!', res)
-      })
-      .catch(err => {
-        next(err)
-      })
-  } else {
-    await Comments.findByIdAndUpdate(
-      bodyComm.deleteObj.likedComment,
-      { $pull: { commLikes: bodyComm.deleteObj._id } },
-      { new: true },
-    )
-      .then(comm => {
-        res.status(200).json(comm)
-        console.log(
-          `DELETED a like from CommentUser: ${comm.commUser}'s likes: `,
-          comm.commLikes,
+      if (likeCheck === false) {
+        await Songs.findByIdAndUpdate(
+          bodySong.likerSong,
+          { $pull: { songLikes: bodySong.deleteObj._id } },
+          { new: true },
         )
-      })
-      .catch(err => {
-        next(err)
-      })
-    await Likes.findByIdAndDelete(bodyComm.deleteObj._id)
-      .then(res => {
-        console.log('this commentLike has been eliminated!', res)
-      })
-      .catch(err => {
-        next(err)
-      })
-  }
+          .then(song => {
+            res.status(200).json(song)
+            console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
+          })
+          .catch(err => {
+            next(err)
+          })
+
+        await Likes.findByIdAndDelete(bodySong.deleteObj._id)
+          .then(res => {
+            console.log('this songLike has been eliminated!', res)
+          })
+          .catch(err => {
+            next(err)
+          })
+      } else {
+        await Comments.findByIdAndUpdate(
+          bodyComm.deleteObj.likedComment,
+          { $pull: { commLikes: bodyComm.deleteObj._id } },
+          { new: true },
+        )
+          .then(comm => {
+            res.status(200).json(comm)
+            console.log(
+              `DELETED a like from CommentUser: ${comm.commUser}'s likes: `,
+              comm.commLikes,
+            )
+          })
+          .catch(err => {
+            next(err)
+          })
+
+        await Likes.findByIdAndDelete(bodyComm.deleteObj._id)
+          .then(res => {
+            console.log('this commentLike has been eliminated!', res)
+          })
+          .catch(err => {
+            next(err)
+          })
+      }
+    }
+  })
 })
 // router.post(`/deleteLikeRT`, verifyToken, async (req, res, next) => {
 //   jwt.verify(req.token, 'secretkey', async (err, authData) => {
@@ -404,103 +411,112 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
 //   })
 // })
 
-router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
-  console.log(req.message, "?")
-  if (req.user.id) {
-    let body = {
-      follower: req.user.id,
-      followed: req.body.followedUser,
-      followDate: req.body.followDate,
+router.post(`/addFollowRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = {
+        follower: authData.user._id,
+        followed: req.body.followedUser,
+        followDate: req.body.followDate,
+      }
+
+      console.log('DATA received from follow button click', body)
+
+      let followedObject = await Follows.create(body)
+      console.log(`CREATED follow object: `, followedObject)
+      let resData = { followerData: '', followedData: '' }
+
+      await User.findByIdAndUpdate(
+        body.follower,
+        { $push: { userFollows: followedObject } },
+        { new: true },
+      )
+        .populate('userFollows')
+        .then(authUser => {
+          resData.followerData = { ...authUser }
+          console.log(
+            `ADDED a follow to User: ${authUser.userName}'s userFollows: `,
+            authUser.userFollows,
+          )
+        })
+        .catch(err => {
+          next(err)
+        })
+
+      await User.findByIdAndUpdate(
+        body.followed,
+        { $push: { followers: followedObject } },
+        { new: true },
+      )
+        .then(user => {
+          resData.followedData = { ...user }
+          console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
+        })
+        .catch(err => {
+          next(err)
+        })
+      console.log('what the fuccck', resData)
+      res.status(200).json(resData)
     }
-
-    let followedObject = await Follows.create(body)
-    console.log(`CREATED follow object: `, followedObject)
-    let resData = { followerData: '', followedData: '' }
-
-    await User.findByIdAndUpdate(
-      body.follower,
-      { $push: { userFollows: followedObject } },
-      { new: true },
-    )
-      .populate('userFollows')
-      .then(authUser => {
-        resData.followerData = { ...authUser }
-        console.log(
-          `ADDED a follow to User: ${authUser.userName}'s userFollows: `,
-          authUser.userFollows,
-        )
-      })
-      .catch(err => {
-        next(err)
-      })
-
-    await User.findByIdAndUpdate(
-      body.followed,
-      { $push: { followers: followedObject } },
-      { new: true },
-    )
-      .then(user => {
-        resData.followedData = { ...user }
-        console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
-      })
-      .catch(err => {
-        next(err)
-      })
-    res.status(200).json(resData)
-  } else {
-    console.log('user not authorized')
-  }
+  })
 })
 
-router.post(`/deleteFollowRT`, verifyJWT, async (req, res, next) => {
-  console.log(req.user, "????")
+router.post(`/deleteFollowRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = {
+        follower: authData.user._id,
+        followed: req.body.followedUser,
+        deleteObj: req.body.deleteObj,
+      }
 
-  if (req.user.id) {
-    let body = {
-      follower: req.user.id,
-      followed: req.body.followedUser,
-      deleteObj: req.body.deleteObj,
+      let resData = { followerData: '', followedData: '' }
+
+      await User.findByIdAndUpdate(
+        body.follower,
+        { $pull: { userFollows: body.deleteObj._id } },
+        { new: true },
+      )
+        .populate('userFollows')
+        .then(authUser => {
+          resData.followerData = { ...authUser }
+          console.log(
+            `DELETED a follow from User: ${authUser.userName}'s userFollows: `,
+            authUser.userFollows,
+          )
+        })
+        .catch(err => {
+          next(err)
+        })
+
+      await User.findByIdAndUpdate(
+        body.followed,
+        { $pull: { followers: body.deleteObj._id } },
+        { new: true },
+      )
+        .then(user => {
+          resData.followedData = { ...user }
+          console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)
+        })
+        .catch(err => {
+          next(err)
+        })
+
+      await Follows.findByIdAndDelete(body.deleteObj._id)
+        .then(res => {
+          console.log('this follow has been eliminated!', res)
+        })
+        .catch(err => {
+          next(err)
+        })
+
+      res.status(200).json(resData)
     }
-    let resData = { followerData: '', followedData: '' }
-    await User.findByIdAndUpdate(
-      body.follower,
-      { $pull: { userFollows: body.deleteObj._id } },
-      { new: true },
-    )
-      .populate('userFollows')
-      .then(authUser => {
-        resData.followerData = { ...authUser }
-        console.log(
-          `DELETED a follow from User: ${authUser.userName}'s userFollows: `,
-          authUser.userFollows,
-        )
-      })
-      .catch(err => {
-        next(err)
-      })
-    await User.findByIdAndUpdate(
-      body.followed,
-      { $pull: { followers: body.deleteObj._id } },
-      { new: true },
-    )
-      .then(user => {
-        resData.followedData = { ...user }
-        console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)
-      })
-      .catch(err => {
-        next(err)
-      })
-    await Follows.findByIdAndDelete(body.deleteObj._id)
-      .then(res => {
-        console.log('this follow has been eliminated!', res)
-      })
-      .catch(err => {
-        next(err)
-      })
-    res.status(200).json(resData)
-  } else {
-    console.log("user not authorized")
-  }
+  })
 })
 
 router.post(`/getMostLikedSongsRT`, (req, res, next) => {
@@ -515,29 +531,34 @@ router.post(`/getMostLikedSongsRT`, (req, res, next) => {
     .catch(err => res.status(500).json(err))
 })
 
-router.post(`/addCommentRT`, verifyJWT, async (req, res, next) => {
-  let body = {
-    comment: req.body.comment,
-    commUser: req.user.id,
-    commSong: req.body.commSong,
-    commDate: req.body.commDate,
-  }
+router.post(`/addCommentRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = {
+        comment: req.body.comment,
+        commUser: authData.user,
+        commSong: req.body.commSong,
+        commDate: req.body.commDate,
+      }
+      let comment = await Comments.create(body)
 
-  let comment = await Comments.create(body)
-
-  await Songs.findByIdAndUpdate(
-    body.commSong,
-    { $push: { songComments: comment } },
-    { new: true },
-  )
-    .populate({ path: 'songComments', populate: 'commUser' })
-    .then(song => {
-      res.status(200).json(song)
-      console.log(`ADDED a comment: `, comment)
-    })
-    .catch(err => {
-      next(err)
-    })
+      await Songs.findByIdAndUpdate(
+        body.commSong,
+        { $push: { songComments: comment } },
+        { new: true },
+      )
+        .populate({ path: 'songComments', populate: 'commUser' })
+        .then(song => {
+          res.status(200).json(song)
+          console.log(`ADDED a comment: `, comment)
+        })
+        .catch(err => {
+          next(err)
+        })
+    }
+  })
 })
 
 router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
@@ -572,14 +593,31 @@ router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
   })
 })
 
-router.post(`/addUserProfRT`, verifyJWT, async (req, res, next) => {
-  const body = req.body
-  await User.findByIdAndUpdate(req.user.id, body)
-    .then(ppl => {
-      res.status(200).json(ppl)
-    })
-    .catch(err => res.status(500).json(err))
+router.post(`/addUserProfRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      User.findByIdAndUpdate(authData.user._id, req.body)
+        .then(ppl => {
+          res.status(200).json(ppl)
+        })
+        .catch(err => res.status(500).json(err))
+    }
+  })
+})
 
+router.post(`/addAPost`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = req.body
+      body.userId = authData.user._id
+      let post = await Post.create(body)
+      res.status(200).json(post)
+    }
+  })
 })
 
 router.get(`/getUserLikedSongsRT`, verifyToken, async (req, res, next) => {
@@ -594,8 +632,11 @@ router.get(`/getUserLikedSongsRT`, verifyToken, async (req, res, next) => {
   })
 })
 
-router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
-  console.log(req.body, "OMG IS THIS WHERE THE PROBLEM IS??")
+router.post(`/addSongRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
       let song = {
         songURL: req.body.songURL,
         songUser: req.body.songUser,
@@ -610,15 +651,15 @@ router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
         songCaption: req.body.songCaption,
         songBeatTrack: req.body.songBeatTrack,
       }
-      console.log(song.songLyricsStr, "OMSDFSODFMSDKF")
+      console.log(req.body, 'add song here')
 
-      const newSong = await Songs.create(song)
-      res.status(200).json(newSong)
-        // .then(theSong => {
-        //   console.log(theSong, "is this being returned? naaa")
-        //   res.status(200).json(theSong)
-        // })
-        // .catch(err => res.status(500).json(err))
+      Songs.create(song)
+        .then(theSong => {
+          res.status(200).json(theSong)
+        })
+        .catch(err => res.status(500).json(err))
+    }
+  })
 })
 
 router.post(`/deleteSongRT`, verifyToken, async (req, res, next) => {
@@ -631,7 +672,7 @@ router.post(`/deleteSongRT`, verifyToken, async (req, res, next) => {
         .then((res) => {
           res.status(200).json(res)
           console.log(res, "i was deleted")
-        }) 
+        })
         .catch((err) => {
           res.status(500).json(err)
         })
@@ -679,6 +720,23 @@ router.post(`/addBeatRT`, verifyToken, async (req, res, next) => {
 //         }
 //     })
 // })
+
+router.get(`/myPosts`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    //I'm available via AuthData
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let posts = await Post.find({ userId: authData.user._id })
+      res.status(200).json(posts)
+    }
+  })
+})
+
+router.get(`/allPosts`, async (req, res, next) => {
+  let allPosts = await Post.find({})
+  res.status(200).json(allPosts)
+})
 
 router.post(`/logMeIn`, async (req, res, next) => {
   const tokenId = req.header('X-Google-Token')
@@ -740,114 +798,77 @@ function verifyJWT(req, res, next) {
   console.log(req.headers, token, "stillgood?")
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) return res.status(400).json({
+      if (err) return res.json({
         isLoggedIn: false,
         message: "Failed to Authenticate"
       })
       req.user = {}
-      req.user._id = decoded._id
+      req.user.id = decoded.id
       req.user.userName = decoded.userName
       next()
     })
   } else {
-    console.log("unauthorized user")
-    res.status(403).json({ message: "Incorrect Token Given", isLoggedIn: false })
+    res.json({ message: "Incorrect Token Given", isLoggedIn: false })
   }
 }
 
 var aws = require('aws-sdk')
- require('dotenv').config()
-// Configure dotenv to load in the .env file
+require('dotenv').config() // Configure dotenv to load in the .env file
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({
   region: 'us-east-2', // Put your aws region here
   accessKeyId: process.env.AWSAccessKeyId,
   secretAccessKey: process.env.AWSSecretKey,
-  signatureVersion: 'v4'
 })
 
 const S3_BUCKET = process.env.Bucket
 
 // Now lets export this function so we can call it from somewhere else
 // exports.sign_s3 = (req,res) => {
-router.post('/sign_s3', (req, res) => {
-  const s3 = new aws.S3() // Create a new instance of S3
-  const fileName = req.body.fileName
-  const fileType = req.body.fileType
-  const file = req.body.file
-  const kind = req.body.kind
-  console.log(fileName, "COME ON MANC")
-  // Set up the payload of what we are sending to the S3 api
-  const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: fileName,
-    Expires: 3000,
-    ContentType: fileType,
-    ACL: 'public-read',
-  }
+router.post('/sign_s3', verifyToken, (req, res) => {
+  let incoming = req.body
 
-  // Make a request to the S3 API to get a signed URL which we can use to upload our file
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if (err) return res.json({ message: err })
-      // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
-      const returnData = {
-        signedRequest: data,
-        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+  jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      const s3 = new aws.S3() // Create a new instance of S3
+      const fileName = req.body.fileName
+      const fileType = req.body.fileType
+      const file = req.body.file
+      const kind = req.body.kind
+
+      // Set up the payload of what we are sending to the S3 api
+      const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        Expires: 3000,
+        ContentType: fileType,
+        ACL: 'public-read',
       }
-      if (kind == 'song') {
-        // Songs.create(  PASS IN DATA  )
-      } else if (kind == 'profilePic') {
-        // User.update (  PASS IN DATA  )
-      } else if (kind == 'beatTrack') {
-        // Beats.create(  PASS IN DATA  )
-      }
-      res.json(returnData)
+      // Make a request to the S3 API to get a signed URL which we can use to upload our file
+      s3.getSignedUrl('putObject', s3Params, async (err, data) => {
+        if (err) {
+          console.log(err)
+          res.json({ error: err })
+        }
+        // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
+        const returnData = {
+          signedRequest: data,
+          url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+        }
+
+        if (kind == 'song') {
+          // Songs.create(  PASS IN DATA  )
+        } else if (kind == 'profilePic') {
+          // User.update (  PASS IN DATA  )
+        } else if (kind == 'beatTrack') {
+          // Beats.create(  PASS IN DATA  )
+        }
+        res.json({ data: { returnData } })
+      })
+    }
   })
 })
-// router.post('/sign_s3', verifyToken, (req, res) => {
-//   let incoming = req.body
-
-//   jwt.verify(req.token, 'secretkey', async (err, authData) => {
-//     if (err) {
-//       res.status(403).json(err)
-//     } else {
-//       const s3 = new aws.S3() // Create a new instance of S3
-//       const fileName = req.body.fileName
-//       const fileType = req.body.fileType
-//       const file = req.body.file
-//       const kind = req.body.kind
-
-//       // Set up the payload of what we are sending to the S3 api
-//       const s3Params = {
-//         Bucket: S3_BUCKET,
-//         Key: fileName,
-//         Expires: 3000,
-//         ContentType: fileType,
-//         ACL: 'public-read',
-//       }
-//       // Make a request to the S3 API to get a signed URL which we can use to upload our file
-//       s3.getSignedUrl('putObject', s3Params, async (err, data) => {
-//         if (err) {
-//           console.log(err)
-//           res.json({ error: err })
-//         }
-//         // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
-//         const returnData = {
-//           signedRequest: data,
-//           url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
-//         }
-
-//         if (kind == 'song') {
-//           // Songs.create(  PASS IN DATA  )
-//         } else if (kind == 'profilePic') {
-//           // User.update (  PASS IN DATA  )
-//         } else if (kind == 'beatTrack') {
-//           // Beats.create(  PASS IN DATA  )
-//         }
-//         res.json({ data: { returnData } })
-//       })
-//     }
-//   })
-// })
 
 module.exports = router

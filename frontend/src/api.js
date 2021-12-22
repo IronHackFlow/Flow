@@ -32,6 +32,10 @@ const actions = {
     return await axios.get(`${baseURL}/isUserAuth`, resetHead())
   },
 
+  getAuthUser: async () => {
+    return await axios.get(`${baseURL}/getAuthUser`, resetHead())
+  },
+
   getUserName: async () => {
     return await axios.get(`${baseURL}/getUserName`, resetHead())
   },
@@ -59,9 +63,11 @@ const actions = {
   getManyUsers: async searchStr => {
     return await axios.post(`${baseURL}/getManyUsersRT`, searchStr, resetHead())
   },
+
   getManySongs: async searchStr => {
     return await axios.post(`${baseURL}/getManySongsRT`, searchStr, resetHead())
   },
+
   getSong: async getSong => {
     return await axios.post(`${baseURL}/getSongRT`, getSong, resetHead())
   },
@@ -153,16 +159,6 @@ const actions = {
     return await axios.get(`${baseURL}/getMostFollowedRT`, resetHead())
   },
 
-  getMyPosts: async () => {
-    return await axios.get(`${baseURL}/myPosts`, resetHead())
-  },
-  getAllPosts: async () => {
-    return await axios.get(`${baseURL}/allPosts`, resetHead())
-  },
-  addPost: async post => {
-    console.log('are we there yet')
-    return await axios.post(`${baseURL}/addAPost`, { post }, resetHead())
-  },
   logMeIn: async data => {
     localStorage.setItem('googleTokenId', data.tokenId)
 
@@ -186,20 +182,22 @@ const actions = {
         {
           fileName: fileName,
           fileType: fileType,
+          file: file,
           kind: kind,
         },
         resetHead(),
       )
-      .then(response => {
-        var returnData = response.data.data.returnData
-        var signedRequest = returnData.signedRequest
-        var url = returnData.url
+      .then(res => {
+        console.log(res, "YO WHTF IS GONING ON HERE OK??")
+        var rtnData = res.data
+        var signedRequest = rtnData.signedRequest
+        var url = rtnData.url
         var options = {
           headers: {
             'Content-Type': fileType,
           },
         }
-        console.log(response)
+        console.log(signedRequest, file, options, "come on man what is goin on h??")
 
         // return response
         axios
@@ -210,17 +208,17 @@ const actions = {
               return await axios.post(
                 `${baseURL}/addSongRT`,
                 {
-                  songName: songData.songName,
-                  songCaption: songData.songCaption,
-                  songBG: null,
-                  songLyricsAudio: null,
-                  songLyricsStr: songData.lyrics,
-                  songPBR: null,
                   songURL: url,
-                  songTotLikes: 0,
-                  songUser: songData.user._id,
-                  songDate: songData.date,
+                  songUser: songData.songUser._id,
+                  songBG: null,
+                  songDate: songData.songDate,
                   songDuration: songData.songDuration,
+                  songName: songData.songName,
+                  songLyricsStr: songData.songLyricsStr,
+                  songPBR: null,
+                  songBPM: null,
+                  songTotLikes: 0,
+                  songCaption: songData.songCaption,
                   songBeatTrack: null,
                 },
                 resetHead(),
@@ -233,13 +231,10 @@ const actions = {
             //post url to mongoose here??  or better do it from backend index.js before sending response to here???
             alert('File uploaded')
           })
-          .catch(error => {
-            alert('ERROR ' + JSON.stringify(error))
-          })
+          .catch(console.error)
+
       })
-      .catch(error => {
-        alert(JSON.stringify(error))
-      })
+      .catch(console.error)
   },
 }
 

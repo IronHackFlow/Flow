@@ -96,9 +96,9 @@ function TestAudio(props) {
   const [recordingBooth] = useState(`#363636`);
 
   class SongData {
-    constructor(songName, blobFile, songURL, lyrics, date, songDuration) {
+    constructor(songName, songBlob, songURL, lyrics, date, songDuration) {
       this.songName = songName;
-      this.blobFile = blobFile;
+      this.songBlob = songBlob;
       this.songURL = songURL;
       this.songLyricsStr = lyrics;
       this.songDate = date;
@@ -599,11 +599,11 @@ function TestAudio(props) {
     if (allTakes.length === 0) {
       console.log('You have no Flows to save')
     } else {
-      const fileName = songUploadObject?.user?._id + songNameInput.replaceAll(" ", "-")
+      const fileName = songUploadObject.songUser._id + songNameInput.replaceAll(" ", "-")
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.songDate = new Date()
-
+      console.log(fileName, "HLAKJSD")
       actions
         .uploadFile(
           {

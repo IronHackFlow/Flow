@@ -25,8 +25,8 @@ const Auth = (props) => {
   useEffect(() => {
     actions
       .isUserAuth()
-      .then(data => {
-        if (data.data.isLoggedIn) {
+      .then(res => {
+        if (res.data.isLoggedIn) {
           history.push('/')
         }
       })

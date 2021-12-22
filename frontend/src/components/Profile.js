@@ -22,31 +22,24 @@ function Profile(props) {
   const [thisUserLikes, setThisUserLikes] = useState([])
 
   useEffect(() => {
-    console.log(localStorage, "what it is?")
     actions
       .getUserSongs({ songUser: props.location.pathname.slice(9) })
       .then(res => {
         setThisUserSongs(res.data)
-        console.log(res.data, 'lol')
+        // console.log(res.data, 'lol')
       })
       .catch(console.error)
   }, [props.location])
 
   useEffect(() => {
     if (props.location.pathname.slice(9) === user?._id) {
-      actions
-        .getAUser({ id: user?._id })
-        .then(res => {
-          setThisUser(res.data)
-          console.log(res.data, 'shit son, this may work')
-        })
-        .catch(console.error)
+      setThisUser(user)
     } else {
       actions
         .getAUser({ id: props.location.pathname.slice(9) })
         .then(res => {
           setThisUser(res.data)
-          console.log(res.data, 'shit son, what is the difference here ??')
+          // console.log(res.data, 'shit son, what is the difference here ??')
         })
         .catch(console.error)
     }
@@ -93,7 +86,7 @@ function Profile(props) {
     }
 
     const setFocus = () => {
-      console.log(songListRef.current)
+      // console.log(songListRef.current)
       songListRef.current.focus()
     }
     
@@ -109,7 +102,7 @@ function Profile(props) {
       actions 
         .deleteSong({ song: eachSong._id })
         .then((res) => {
-          console.log(res, "what is this?")
+          // console.log(res, "what is this?")
         })
         .catch(console.error)
       setThisUserSongs(oldArr => oldArr.filter(item => item._id !== eachSong._id))

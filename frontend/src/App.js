@@ -17,7 +17,7 @@ import Search from './components/Search'
 function App() {
   const location = useLocation()
   const history = useHistory()
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState()
   const [userIsAuth, setUserIsAuth] = useState()
   const [userToggle, setUserToggle] = useState(false)
   const [locationIndicator, setLocationIndicator] = useState()
@@ -27,30 +27,29 @@ function App() {
     document.getElementById("body").style.height = `${h}px`
   }, [])
 
-  useEffect(() => {
-    if (userIsAuth) {
-      actions
-        .getAUser({ id: userIsAuth })
-        .then(res => {
-          setUser(res.data)
-          console.log("User is logged in, go to profile to log out", user)
-        })
-        .catch(console.error)
-    } else {
-      history.push('/auth')
-    }
-  }, [userIsAuth])
+  // useEffect(() => {
+  //   if (userIsAuth) {
+  //     actions
+  //       .getAUser({ id: userIsAuth })
+  //       .then(res => {
+  //         setUser(res.data)
+  //         console.log("User is logged in, go to profile to log out", user)
+  //       })
+  //       .catch(console.error)
+  //   } else {
+  //     history.push('/auth')
+  //   }
+  // }, [userIsAuth])
 
   useEffect(() => {
     actions
       .isUserAuth()
-      .then(data => {
-        if (data.data.isLoggedIn) {
-          setUserIsAuth(data.data.user)
-        }
+      .then(res => {
+        setUser(res.data.user)
+        console.log(res.data.user, "is logged in ")
       })
       .catch(console.error)
-  }, [userToggle])
+  }, [])
 
 
   useEffect(() => {
