@@ -603,7 +603,7 @@ function TestAudio(props) {
       songUploadObject.songName = songNameInput
       songUploadObject.songCaption = songCaptionInput
       songUploadObject.songDate = new Date()
-      console.log(fileName, "HLAKJSD")
+
       actions
         .uploadFile(
           {

@@ -8,19 +8,20 @@ import AuthSignUp from './AuthSignUp'
 
 
 const Auth = (props) => {
-  const { userToggle } = React.useContext(TheContext)
+  const { userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [toggleLogin, setToggleLogin] = useState(true)
 
-  // const onResponse = (response) => {
-  //   actions
-  //     .logIn(response)
-  //     .then(res => {
-  //       console.log("THIS", props)
-  //       setUser(res.data)
-  //     })
-  //     .catch(console.error)
-  // }
+  const onResponse = (response) => {
+    actions
+      .logInGoogle(response)
+      .then(res => {
+        console.log("THIS", res)
+        localStorage.setItem('token', res.data.token)
+        setUserToggle(!userToggle)
+      })
+      .catch(console.error)
+  }
 
   useEffect(() => {
     actions
@@ -45,7 +46,6 @@ const Auth = (props) => {
             </div>
           </div>
         </div>
-
         <div className="middle-container">
           <div className="mid-outset">
             <div className="mid-inset">
@@ -63,15 +63,14 @@ const Auth = (props) => {
                     <div className="user-login-2_other-logins">
                       <div className="other-logins-1_google-btn">
                         <div className="google-btn_shadow-div-outset">
-                          {/* <p>Continue with </p> */}
-                          {/* <GoogleLogin 
+                          <p>Continue with </p>
+                          <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLEID}
                             buttonText="Signup"
                             onSuccess={onResponse}
                             onFailure={onResponse}
                             cookiePolicy={"single_host_origin"}
-                          /> */}
-                          {/* <Link to="/">Enter</Link> */}
+                          />
                         </div>
                       </div>
                       <div className="other-logins-2_or-container">

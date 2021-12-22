@@ -147,6 +147,7 @@ const actions = {
   addComment: async addComm => {
     return await axios.post(`${baseURL}/addCommentRT`, addComm, resetHead())
   },
+
   deleteComment: async delComm => {
     return await axios.post(`${baseURL}/deleteCommentRT`, delComm, resetHead())
   },
@@ -159,18 +160,12 @@ const actions = {
     return await axios.get(`${baseURL}/getMostFollowedRT`, resetHead())
   },
 
-  logMeIn: async data => {
+  logInGoogle: async data => {
     localStorage.setItem('googleTokenId', data.tokenId)
-
     let headerObj = resetHead()
     headerObj.headers['X-Google-Token'] = data.tokenId
-
     let resFromOurDB = await axios.post(`${baseURL}/logMeIn`, data, headerObj)
-
-    console.log(resFromOurDB)
-
     window.localStorage.setItem('token', resFromOurDB?.data?.token)
-
     return resFromOurDB
   },
 

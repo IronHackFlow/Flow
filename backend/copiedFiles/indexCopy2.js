@@ -1,3 +1,4 @@
+
 const express = require('express')
 const mongoose = require('mongoose')
 const axios = require('axios')
@@ -36,9 +37,7 @@ router.post(`/signUp`, async (req, res, next) => {
 
 router.post(`/logIn`, async (req, res, next) => {
   const userLoggingIn = req.body
-
   User.findOne({ userName: userLoggingIn.userName.toLowerCase() })
-    .select('+password')
     .then(dbUser => {
       if (!dbUser) {
         return res.status(400).json({ message: "Invalid Username or Password" })
@@ -604,21 +603,22 @@ router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
         // .catch(err => res.status(500).json(err))
 })
 
-router.post(`/deleteSongRT`, verifyJWT, async (req, res, next) => {
-  let body = req.body.song
-  console.log(body._id, "ugh")
-  if (body.songUser._id === req.user._id) {
-    Songs.findByIdAndDelete(body._id)
-    .then((res) => {
-      console.log(res, "i was deleted")
-      res.status(200).json(res)
-    }) 
-    .catch((err) => {
-      res.status(500).json(err)
-    })
-  } else {
-    console.log("Can't delete due to User not being the songUser")
-  }
+router.post(`/deleteSongRT`, verifyToken, async (req, res, next) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.status(403).json(err)
+    } else {
+      let body = req.body
+      Songs.findByIdAndDelete(body.song)
+        .then((res) => {
+          res.status(200).json(res)
+          console.log(res, "i was deleted")
+        }) 
+        .catch((err) => {
+          res.status(500).json(err)
+        })
+    }
+  })
 })
 
 router.post(`/addBeatRT`, verifyToken, async (req, res, next) => {
@@ -662,23 +662,16 @@ router.post(`/addBeatRT`, verifyToken, async (req, res, next) => {
 //     })
 // })
 
-router.post(`/logInGoogle`, async (req, res, next) => {
+router.post(`/logMeIn`, async (req, res, next) => {
   const tokenId = req.header('X-Google-Token')
-  console.log(tokenId, "google token")
   if (!tokenId) {
     res.status(401).json({ msg: 'Mising Google JWT' })
   }
   const googleResponse = await axios.get(
     `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${encodeURI(tokenId)}`,
   )
-  const { email, 
-          email_verified, 
-          picture, 
-          given_name, 
-          family_name, 
-          error_description 
-  } = googleResponse.data
-
+  const { email, email_verified, picture, given_name, family_name, error_description } =
+    googleResponse.data
   if (!email || error_description) {
     res.status(400).json({ msg: error_description })
   } else if (!email_verified) {
@@ -687,8 +680,6 @@ router.post(`/logInGoogle`, async (req, res, next) => {
 
   const userData = {
     email,
-    password: `thisisnotvalid`,
-    userName: email,
     email_verified,
     picture,
     given_name,
@@ -701,20 +692,8 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   if (!user) {
     user = await User.create(userData)
   }
-
-  const payload = {
-    _id: user._id,
-    userName: email
-  }
-
-  jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 86400}, (err, token) => {
-    if (err) return res.json({ message: err })
-    else {
-      return res.json({
-        message: "Success",
-        token: token
-      })
-    }
+  jwt.sign({ user }, 'secretkey', (err, token) => {
+    res.status(200).json({ ...user._doc, token })
   })
 })
 
@@ -740,7 +719,7 @@ function verifyToken(req, res, next) {
 
 function verifyJWT(req, res, next) {
   const token = req.headers['authorization']?.split(' ')[1]
-
+  console.log(req.headers, token, "stillgood?")
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) return res.status(400).json({
@@ -753,13 +732,13 @@ function verifyJWT(req, res, next) {
       next()
     })
   } else {
+    console.log("unauthorized user")
     res.status(403).json({ message: "Incorrect Token Given", isLoggedIn: false })
   }
 }
 
 var aws = require('aws-sdk')
-const { json } = require('express')
-require('dotenv').config()
+ require('dotenv').config()
 // Configure dotenv to load in the .env file
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({

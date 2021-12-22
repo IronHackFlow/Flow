@@ -100,7 +100,7 @@ function Profile(props) {
   
     const deleteSong = (eachSong) => {
       actions 
-        .deleteSong({ song: eachSong._id })
+        .deleteSong({ song: eachSong })
         .then((res) => {
           // console.log(res, "what is this?")
         })

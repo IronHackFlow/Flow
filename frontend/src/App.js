@@ -49,7 +49,7 @@ function App() {
         console.log(res.data.user, "is logged in ")
       })
       .catch(console.error)
-  }, [])
+  }, [userToggle])
 
 
   useEffect(() => {
@@ -70,6 +70,7 @@ function App() {
       }}
     >
       <div className="App">
+        {console.log(user, "ohhi")}
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 
