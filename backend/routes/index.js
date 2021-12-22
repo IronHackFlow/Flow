@@ -540,11 +540,7 @@ router.post(`/addCommentRT`, verifyJWT, async (req, res, next) => {
     })
 })
 
-router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
-  jwt.verify(req.token, 'secretkey', async (err, authData) => {
-    if (err) {
-      res.status(403).json(err)
-    } else {
+router.post(`/deleteCommentRT`, verifyJWT, async (req, res, next) => {
       let body = { deleteObj: req.body.deleteObj, songId: req.body.songId }
       console.log(body, 'this is')
 
@@ -568,8 +564,6 @@ router.post(`/deleteCommentRT`, verifyToken, async (req, res, next) => {
         .catch(err => {
           next(err)
         })
-    }
-  })
 })
 
 router.post(`/addUserProfRT`, verifyJWT, async (req, res, next) => {
