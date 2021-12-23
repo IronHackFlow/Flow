@@ -13,9 +13,7 @@ function UseAudioPlayer(props) {
 
   useEffect(() => {
     if (props.isPlaying) {
-      console.log(props.currentSong, "hmm")
       audioRef.current.play()
-      .catch(err => console.log(err))
       startTimer();
     } else {
       clearInterval(intervalRef.current);

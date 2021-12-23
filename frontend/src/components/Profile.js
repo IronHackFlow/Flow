@@ -102,10 +102,10 @@ function Profile(props) {
       actions 
         .deleteSong({ song: eachSong })
         .then((res) => {
-          // console.log(res, "what is this?")
+          console.log(res.data)
+          setThisUserSongs(oldArr => oldArr.filter(item => item._id !== eachSong._id))
         })
         .catch(console.error)
-      setThisUserSongs(oldArr => oldArr.filter(item => item._id !== eachSong._id))
     }
 
     const setSongRefs = useCallback(node => {
@@ -309,7 +309,7 @@ function Profile(props) {
                     <p>Town: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.location}</p>
+                    <p>{thisUser?.userLocation}</p>
                   </div>
                 </div>
 
@@ -407,7 +407,7 @@ function Profile(props) {
             </div>
 
             <div className="edit-logout-container">
-              {thisUser._id === user._id ? (
+              {thisUser?._id === user?._id ? (
                 <div className="edit-logout_shadow-div-inset">
                   <div className="each-button-container ebc-4">
                     <div className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
@@ -455,7 +455,7 @@ function Profile(props) {
                   <div className="lyrics-container"> 
                     <div className="lyrics-outset">
                       <div className="p-container">
-                        <p>{thisUser._id === user._id ? "Go to the Recording Booth to start your budding new rap career!" : ""}</p>
+                        <p>{thisUser?._id === user?._id ? "Go to the Recording Booth to start your budding new rap career!" : ""}</p>
                       </div>
                     </div>
                   </div>

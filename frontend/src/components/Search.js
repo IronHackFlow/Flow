@@ -50,7 +50,7 @@ function Search(props) {
 
   const grabUsers = theQuery => {
     actions
-      .getManyUsers({ search: theQuery })
+      .getManySongsAndUsers({ search: theQuery })
       .then(res => {
         console.log(res.data, "this an object? should have songs and users")
         setSuggestions(suggestionBox(res.data))

@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import actions from '../api';
 import TheContext from '../TheContext'
+import eye from "../images/eye.svg"
+import noEye from "../images/no-eye.svg"
 
 function AuthSignUp(props) {
   const { userToggle, setUserToggle } = React.useContext(TheContext)
-  const history = useHistory();
+
   const [email, setEmail] = useState()
   const [userName, setUserName] = useState()
   const [password, setPassword] = useState()
-
-  // useEffect(() => {
-  //   actions
-  //     .isUserAuth()
-  //     .then(data => data.isLoggedIn ? history.push('/') : null)
-  //     .catch(console.error)
-  // }, [])
+  const [showPassword, setShowPassword] = useState(false)
 
   const signUpHandler = async (e) => {
     e.preventDefault()
@@ -59,30 +54,41 @@ function AuthSignUp(props) {
             </div>
           </div>
         </div>
+
         <div className="login-input-container email-container">
           <div className="login-input_shadow-div-outset email" style={{borderRadius: "13px 13px 5px 5px"}}>
             <p>Email</p>
             <div className="input-container">
               <input 
                 className="login-input-field email-input"
-                type="text"
+                type="email"
                 onChange={(e) => setEmail(e.target.value)}
-
               ></input>
             </div>
           </div>
         </div>
+
         <div className="login-input-container password-container">
           <div className="login-input_shadow-div-outset password" style={{borderRadius: "5px 5px 13px 13px"}}>
             <p>Password</p>
             <div className="input-container">
               <input 
                 className="login-input-field password-input"
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
+              <div className="show-password-container signup-pass" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? (
+                  <img className="button-icons password-no-eye" src={noEye} alt="hide password" />
+                ) : (
+                  <img className="button-icons password-eye" src={eye} alt="show password" />
+                )}
+              </div>
             </div>
           </div>
         </div>
+
         <div className="enter-btn-container">
           <button
             type="submit" 
@@ -92,14 +98,6 @@ function AuthSignUp(props) {
               <h4>Sign Up</h4>
             </div>
           </button>
-          {/* <Link 
-            to ="/" 
-            className="login-link"
-          >
-            <div className="login-button">
-              <h4>Sign Up</h4>
-            </div>
-          </Link> */}
         </div>
       </form>
     </div>

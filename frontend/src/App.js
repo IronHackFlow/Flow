@@ -27,20 +27,6 @@ function App() {
     document.getElementById("body").style.height = `${h}px`
   }, [])
 
-  // useEffect(() => {
-  //   if (userIsAuth) {
-  //     actions
-  //       .getAUser({ id: userIsAuth })
-  //       .then(res => {
-  //         setUser(res.data)
-  //         console.log("User is logged in, go to profile to log out", user)
-  //       })
-  //       .catch(console.error)
-  //   } else {
-  //     history.push('/auth')
-  //   }
-  // }, [userIsAuth])
-
   useEffect(() => {
     actions
       .isUserAuth()
@@ -55,7 +41,7 @@ function App() {
   useEffect(() => {
     setLocationIndicator(location)
   }, [location])
-
+  
   return (
     <TheContext.Provider
       value={{
@@ -70,7 +56,6 @@ function App() {
       }}
     >
       <div className="App">
-        {console.log(user, "ohhi")}
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 

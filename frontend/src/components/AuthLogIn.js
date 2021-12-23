@@ -1,15 +1,14 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import actions from '../api';
 import TheContext from '../TheContext'
+import eye from "../images/eye.svg"
+import noEye from "../images/no-eye.svg"
 
 function AuthLogIn(props) {
   const { userToggle, setUserToggle } = React.useContext(TheContext)
-  const history = useHistory()
-  const [email, setEmail] = useState()
   const [userName, setUserName] = useState()
   const [password, setPassword] = useState()
-
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogIn = async (e) => {
     e.preventDefault()
@@ -39,7 +38,7 @@ function AuthLogIn(props) {
       >
         <div className="login-input-container email-container">
           <div className="login-input_shadow-div-outset email" style={{borderRadius: "13px 13px 5px 5px"}}>
-            <p>Email or Username</p>
+            <p>Username</p>
             <div className="input-container">
               <input 
                 className="login-input-field email-input"
@@ -55,8 +54,17 @@ function AuthLogIn(props) {
             <div className="input-container">
               <input 
                 className="login-input-field password-input"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
+              <div className="show-password-container" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? (
+                  <img className="button-icons password-no-eye" src={noEye} alt="hide password" />
+                ) : (
+                  <img className="button-icons password-eye" src={eye} alt="show password" />
+                )}
+              </div>
             </div>
           </div>
         </div>

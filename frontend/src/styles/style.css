@@ -9438,6 +9438,7 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .login-input-field {
@@ -9487,6 +9488,60 @@ input, textarea, select, button {
   outline: none !important;
   color: white;
   border-radius: 30px;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container {
+  height: 32px;
+  width: 32px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 2px #686868, -2px -2px 2px #d3d3d3;
+          box-shadow: 2px 2px 2px #686868, -2px -2px 2px #d3d3d3;
+  position: absolute;
+  right: 12px;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-eye {
+  height: 2em;
+  width: 2em;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-no-eye {
+  height: 1.7em;
+  width: 1.7em;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container:active {
+  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass {
+  height: 23px;
+  width: 23px;
+  right: 11px;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass .password-eye {
+  height: 1.7em;
+  width: 1.7em;
+}
+
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass .password-no-eye {
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .enter-btn-container {

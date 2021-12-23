@@ -60,8 +60,8 @@ const actions = {
     return await axios.post(`${baseURL}/getUserFollowsSongsRT`, userFollows, resetHead())
   },
   //search bar bobby
-  getManyUsers: async searchStr => {
-    return await axios.post(`${baseURL}/getManyUsersRT`, searchStr, resetHead())
+  getManySongsAndUsers: async searchStr => {
+    return await axios.post(`${baseURL}/getManySongsAndUsersRT`, searchStr, resetHead())
   },
 
   getManySongs: async searchStr => {
@@ -164,7 +164,7 @@ const actions = {
     localStorage.setItem('googleTokenId', data.tokenId)
     let headerObj = resetHead()
     headerObj.headers['X-Google-Token'] = data.tokenId
-    let resFromOurDB = await axios.post(`${baseURL}/logMeIn`, data, headerObj)
+    let resFromOurDB = await axios.post(`${baseURL}/logInGoogle`, data, headerObj)
     window.localStorage.setItem('token', resFromOurDB?.data?.token)
     return resFromOurDB
   },

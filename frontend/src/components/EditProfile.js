@@ -5,7 +5,7 @@ import actions from '../api'
 import back from '../images/back.svg'
 
 function EditProfile(props) {
-  const { user } = React.useContext(TheContext)
+  const { user, userToggle, setUserToggle } = React.useContext(TheContext)
 
   const [thisUser, setThisUser] = useState([user])
   const [thisUsersSongs, setThisUsersSongs] = useState([])
@@ -49,6 +49,7 @@ function EditProfile(props) {
       .addUserProf(thisUser)
       .then(newUserUpdate => {
         console.log('new new user update!', newUserUpdate)
+        setUserToggle(!userToggle)
       })
       .catch(console.error)
   }

@@ -104,7 +104,7 @@ function Comments(props) {
     }, [])
 
     useEffect(() => {
-      if (each.commUser._id === user?._id) {
+      if (each.commUser?._id === user?._id) {
         setCheckCommUser(true)
       } else {
         setCheckCommUser(false)
@@ -215,11 +215,11 @@ function Comments(props) {
             <div className="comment-photo-outer">
               <Link
                 to={{
-                  pathname: `/profile/${each.commUser._id}`,
+                  pathname: `/profile/${each.commUser?._id}`,
                   profileInfo: each.commUser,
                 }}
-              >
-                <img src={each.commUser.picture} alt="user's profile"></img>
+              >{console.log(each, "lets see")}
+                <img src={each.commUser?.picture} alt="user's profile"></img>
               </Link>
             </div>
           </div>
@@ -230,7 +230,7 @@ function Comments(props) {
             <p className="comment-username">
               {each.commUser?.userName}
               <span style={{ color: 'white', fontWeight: 'bold', fontSize: '12px' }}>
-                {props.songInView?.songUser?._id === each.commUser._id ? ' 𑁦 song author' : null}
+                {props.songInView?.songUser?._id === each.commUser?._id ? ' 𑁦 song author' : null}
               </span>
             </p>
             <div className="comment-date">
