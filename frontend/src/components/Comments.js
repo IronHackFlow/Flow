@@ -133,6 +133,7 @@ function Comments(props) {
     }
 
     const likeCheck = () => {
+      console.log(each, "what am I getting here in comment like check")
       actions
         .getAComment({ id: each._id })
         .then(res => {

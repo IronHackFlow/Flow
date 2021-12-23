@@ -5,6 +5,12 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
+const indexRoutes = require('./routes/index')
+const authRoutes = require('./routes/authRoutes')
+const songRoutes = require('./routes/songRoutes')
+const likeRoutes = require('./routes/likeRoutes')
+const followRoutes = require('./routes/followRoutes')
+const commentRoutes = require('./routes/commentRoutes')
 
 const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/localIronPlate`
 
@@ -26,7 +32,12 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 
-app.use('/api', require('./routes'))
+app.use('/api', indexRoutes)
+app.use('/api', authRoutes)
+app.use('/api', songRoutes)
+app.use('/api', likeRoutes)
+app.use('/api', followRoutes)
+app.use('/api', commentRoutes)
 
 const PORT = process.env.PORT || 5000
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
+import useHandleLike from "./useHandleLike.js"
 import FormatDate from "./FormatDate"
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
@@ -20,6 +21,8 @@ import like from "../images/heart2.svg";
 function Home(props) {
   const { user } = React.useContext(TheContext);
 
+  const { handleLike, totalLikes, setTotalLikes, totalCommentLikes, setTotalCommentLikes } = useHandleLike();
+
   const gifsCopy = [...gifsArr];
   const [theFeedBool, setTheFeedBool] = useState(true);
   const [trendingBool, setTrendingBool] = useState(false);
@@ -33,7 +36,7 @@ function Home(props) {
   const [followersInView, setFollowersInView] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [totalFollowers, setTotalFollowers] = useState();
-  const [totalLikes, setTotalLikes] = useState();
+  // const [totalLikes, setTotalLikes] = useState();
   const [totalComments, setTotalComments] = useState();
   const [commentsArray, setCommentsArray] = useState([])
   const [theFeedSongs, setTheFeedSongs] = useState([]);
@@ -188,54 +191,55 @@ function Home(props) {
       .catch(console.error)
   }
 
-  const likeCheck = () => {
-    actions
-      .getSong({ id: songInView._id })
-      .then(res => {
-        let deleteObj = null
+  // const likeCheck = () => {
+  //   console.log(songInView, "what am i getting here in song like check")
+  //   actions
+  //     .getSong({ id: songInView._id })
+  //     .then(res => {
+  //       let deleteObj = null
 
-        res.data.songLikes.forEach(each => {
-          if (each.likeUser === user._id) {
-            deleteObj = each
-          }
-        })
+  //       res.data.songLikes.forEach(each => {
+  //         if (each.likeUser === user._id) {
+  //           deleteObj = each
+  //         }
+  //       })
 
-        if (deleteObj === null) {
-          postLike()
-        } else {
-          deleteLike(deleteObj)
-        }
-      })
-      .catch(console.error)
-  }
+  //       if (deleteObj === null) {
+  //         postLike()
+  //       } else {
+  //         deleteLike(deleteObj)
+  //       }
+  //     })
+  //     .catch(console.error)
+  // }
 
-  const postLike = () => {
-    actions
-      .addLike({
-        likerSong: songInView._id,
-        likeDate: new Date(),
-        commLike: false,
-      })
-      .then(res => {
-        console.log(`added a like to: `, res.data)
-        setTotalLikes(res.data.songLikes.length)
-      })
-      .catch(console.error)
-  }
+  // const postLike = () => {
+  //   actions
+  //     .addLike({
+  //       likerSong: songInView._id,
+  //       likeDate: new Date(),
+  //       commLike: false,
+  //     })
+  //     .then(res => {
+  //       console.log(`added a like to: `, res.data)
+  //       setTotalLikes(res.data.songLikes.length)
+  //     })
+  //     .catch(console.error)
+  // }
 
-  const deleteLike = deleteObj => {
-    actions
-      .deleteLike({
-        likerSong: songInView._id,
-        deleteObj: deleteObj,
-        commLike: false,
-      })
-      .then(res => {
-        console.log(`deleted a like from: `, res.data)
-        setTotalLikes(res.data.songLikes.length)
-      })
-      .catch(console.error)
-  }
+  // const deleteLike = deleteObj => {
+  //   actions
+  //     .deleteLike({
+  //       likerSong: songInView._id,
+  //       deleteObj: deleteObj,
+  //       commLike: false,
+  //     })
+  //     .then(res => {
+  //       console.log(`deleted a like from: `, res.data)
+  //       setTotalLikes(res.data.songLikes.length)
+  //     })
+  //     .catch(console.error)
+  // }
 
   const popUpComments = () => {
     if (poppedUp === false) {
@@ -372,7 +376,7 @@ function Home(props) {
                       </div>
                     </button>
 
-                    <button className="action-btn_shadow-div-outset" onClick={likeCheck}>
+                    <button className="action-btn_shadow-div-outset" onClick={() => handleLike("Song", songInView?._id, 1)}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
