@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
 import FormatDate from './FormatDate'
+import usePostLike from "./utils/usePostLike"
+import useDebugInformation from "./utils/useDebugInformation"
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
 import comments from '../images/comment.svg'
@@ -14,7 +16,6 @@ import flag from '../images/flag.svg'
 
 function Comments(props) {
   const { user } = React.useContext(TheContext)
-
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
 
@@ -86,7 +87,8 @@ function Comments(props) {
   }
 
   function GetComments(each) {
-    const [totalCommentLikes, setTotalCommentLikes] = useState()
+    const { handlePostLike, totalCommentLikes, setTotalCommentLikes } = usePostLike()
+    const [commentValue, setCommentValue] = useState();
     const [checkCommUser, setCheckCommUser] = useState()
     const [menuBool, setMenuBool] = useState(false)
     const [editCommentText, setEditCommentText] = useState(false);
@@ -132,48 +134,6 @@ function Comments(props) {
       }
     }
 
-    const likeCheck = () => {
-      console.log(each, "what am I getting here in comment like check")
-      actions
-        .getAComment({ id: each._id })
-        .then(res => {
-          let deleteObj = null
-
-          res.data.commLikes.forEach(each => {
-            if (each.likeUser === user._id) {
-              deleteObj = each
-            }
-          })
-
-          if (deleteObj === null) {
-            likeComment()
-          } else {
-            unlikeComment(deleteObj)
-          }
-        })
-        .catch(console.error)
-    }
-
-    const likeComment = () => {
-      actions
-        .addLike({ likedComment: each, likeDate: new Date(), commLike: true })
-        .then(res => {
-          console.log(`added a like to: `, res.data)
-          setTotalCommentLikes(res.data.commLikes.length)
-        })
-        .catch(console.error)
-    }
-
-    const unlikeComment = deleteObj => {
-      actions
-        .deleteLike({ deleteObj: deleteObj, commLike: true })
-        .then(res => {
-          console.log(`deleted a like from: `, res.data)
-          setTotalCommentLikes(res.data.commLikes.length)
-        })
-        .catch(console.error)
-    }
-
     const menuAnimations = () => {
       if (menuBool === false) {
         likeTextRef.current.style.animation = 'fadeOutText .3s forwards'
@@ -201,7 +161,6 @@ function Comments(props) {
         setEditCommentText(true)
       }
     }
-    const [commentValue, setCommentValue] = useState();
 
     const editCommentTextHandler = (e) => {
       e.preventDefault()
@@ -219,7 +178,7 @@ function Comments(props) {
                   pathname: `/profile/${each.commUser?._id}`,
                   profileInfo: each.commUser,
                 }}
-              >{console.log(each, "lets see")}
+              >
                 <img src={each.commUser?.picture} alt="user's profile"></img>
               </Link>
             </div>
@@ -255,7 +214,7 @@ function Comments(props) {
             <div className="comment-likereply-container clc-1">
               <div
                 className="comm-likereply-btn clb-1"
-                onClick={checkCommUser ? () => deleteComment(each) : likeCheck}
+                onClick={checkCommUser ? () => deleteComment(each) : () => { handlePostLike("Comment", each._id)}}
               >
                 <img
                   className="social-icons heart"

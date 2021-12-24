@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
-import useHandleLike from "./useHandleLike.js"
+import usePostLike from "./utils/usePostLike";
+import usePostFollow from "./utils/usePostFollow";
+import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
@@ -19,9 +21,10 @@ import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
+  // useDebugInformation("Home", props)
   const { user } = React.useContext(TheContext);
-
-  const { handleLike, totalLikes, setTotalLikes, totalCommentLikes, setTotalCommentLikes } = useHandleLike();
+  const { handlePostLike, totalLikes, setTotalLikes } = usePostLike();
+  const { handlePostFollow, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed } = usePostFollow();
 
   const gifsCopy = [...gifsArr];
   const [theFeedBool, setTheFeedBool] = useState(true);
@@ -35,8 +38,6 @@ function Home(props) {
   const [likesInView, setLikesInView] = useState();
   const [followersInView, setFollowersInView] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
-  const [totalFollowers, setTotalFollowers] = useState();
-  // const [totalLikes, setTotalLikes] = useState();
   const [totalComments, setTotalComments] = useState();
   const [commentsArray, setCommentsArray] = useState([])
   const [theFeedSongs, setTheFeedSongs] = useState([]);
@@ -45,7 +46,6 @@ function Home(props) {
   const [displayFeed, setDisplayFeed] = useState([])
   const [displayTrending, setDisplayTrending] = useState([])
   const [displayFollowing, setDisplayFollowing] = useState([])
-  const [updateFollowFeed, setUpdateFollowFeed] = useState();
   const [home] = useState(`#6d6d6d`);
   
   const windowRef = useRef();
@@ -144,103 +144,6 @@ function Home(props) {
     else return setIsPlaying(false)
   }
 
-  const followCheck = () => {
-    if (user._id === songUserInView._id) {
-      console.log(songUserInView, `You can't follow yourself lol`)
-    } else {
-      actions
-      .getAUser({ id: songUserInView._id })
-      .then(res => {
-        let deleteObj = null
-
-        res.data.followers.forEach(each => {
-          if (each.follower === user._id) {
-            deleteObj = each
-          }
-        })
-
-        if (deleteObj === null) {
-          postFollow()
-        } else {
-          deleteFollow(deleteObj)
-        }
-      })
-      .catch(console.error)
-    }
-  }
-
-  const postFollow = () => {
-    actions
-      .addFollow({ followedUser: songUserInView._id, followDate: new Date() })
-      .then(res => {
-        console.log(`added a follow to: `, res.data.followedData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
-      })
-      .catch(console.error)
-  }
-
-  const deleteFollow = deleteObj => {
-    actions
-      .deleteFollow({ followedUser: songUserInView._id, deleteObj: deleteObj })
-      .then(res => {
-        console.log(`deleted a follow from: `, res.data.followerData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
-      })
-      .catch(console.error)
-  }
-
-  // const likeCheck = () => {
-  //   console.log(songInView, "what am i getting here in song like check")
-  //   actions
-  //     .getSong({ id: songInView._id })
-  //     .then(res => {
-  //       let deleteObj = null
-
-  //       res.data.songLikes.forEach(each => {
-  //         if (each.likeUser === user._id) {
-  //           deleteObj = each
-  //         }
-  //       })
-
-  //       if (deleteObj === null) {
-  //         postLike()
-  //       } else {
-  //         deleteLike(deleteObj)
-  //       }
-  //     })
-  //     .catch(console.error)
-  // }
-
-  // const postLike = () => {
-  //   actions
-  //     .addLike({
-  //       likerSong: songInView._id,
-  //       likeDate: new Date(),
-  //       commLike: false,
-  //     })
-  //     .then(res => {
-  //       console.log(`added a like to: `, res.data)
-  //       setTotalLikes(res.data.songLikes.length)
-  //     })
-  //     .catch(console.error)
-  // }
-
-  // const deleteLike = deleteObj => {
-  //   actions
-  //     .deleteLike({
-  //       likerSong: songInView._id,
-  //       deleteObj: deleteObj,
-  //       commLike: false,
-  //     })
-  //     .then(res => {
-  //       console.log(`deleted a like from: `, res.data)
-  //       setTotalLikes(res.data.songLikes.length)
-  //     })
-  //     .catch(console.error)
-  // }
-
   const popUpComments = () => {
     if (poppedUp === false) {
       setPoppedUp(true)
@@ -327,11 +230,6 @@ function Home(props) {
               LOADING!
             </div> */}
             {showSongs()}
-            {/* <div className="scroll-top-container" onClick={() => scrollToTop()}>
-              <div className="scroll-top-button">
-                ^
-              </div>
-            </div> */}
           </ul>
 
           <Comments
@@ -352,7 +250,7 @@ function Home(props) {
                   <div className="action-btns-container">
                     <button
                       className="action-btn_shadow-div-outset"
-                      onClick={followCheck}
+                      onClick={() => { handlePostFollow(songInView.songUser._id) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                     >
                       <div
@@ -376,7 +274,7 @@ function Home(props) {
                       </div>
                     </button>
 
-                    <button className="action-btn_shadow-div-outset" onClick={() => handleLike("Song", songInView?._id, 1)}>
+                    <button className="action-btn_shadow-div-outset" onClick={() => { handlePostLike("Song", songInView._id) }}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>

@@ -5,6 +5,8 @@ import actions from '../api'
 import TheContext from '../TheContext'
 import AudioTimeSlider from "./AudioTimeSlider"
 import Comments from "./Comments"
+import usePostLike from "./utils/usePostLike";
+import usePostFollow from "./utils/usePostFollow";
 import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
@@ -18,11 +20,11 @@ import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
   const { user } = React.useContext(TheContext)
+  const { handlePostLike, totalLikes, setTotalLikes } = usePostLike();
+  const { handlePostFollow, totalFollowers, setTotalFollowers } = usePostFollow();
 
   const history = useHistory();
   const gifsCopy = [...gifsArr];
-  const [totalFollowers, setTotalFollowers] = useState();
-  const [totalLikes, setTotalLikes] = useState();
   const [thisSong, setThisSong] = useState({});
   const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -45,7 +47,9 @@ function SongScreen(props) {
   }, [thisSong])
 
   useEffect(() => {
-    console.log(props.location.songInfo?.songUser, "i don't know")
+    const controller = new AbortController()
+    const signal = controller.signal
+
     actions
       .getUserSongs({ songUser: props.location.songInfo?.songUser })
       .then(res => {
@@ -59,8 +63,10 @@ function SongScreen(props) {
           return { songId: each._id, comments: each.songComments }
         })
         setCommentsArray(commentArr)
-      })
+      }, signal)
       .catch(console.error)
+      
+    return () => controller.abort()
   }, [props.location])
 
   useEffect(() => {
@@ -91,11 +97,6 @@ function SongScreen(props) {
     }
   }
 
-  const getRandomBackground = () => {
-    let index = Math.floor(Math.random() * gifsCopy.length)
-    return gifsCopy[index].url
-  }
-
   const popUpComments = () => {
     if (poppedUp === false) {
       setPoppedUp(true)
@@ -104,107 +105,6 @@ function SongScreen(props) {
       setPoppedUp(false)
     }
   }
-
-  const followCheck = () => {
-    if (user._id === thisSong.songUser._id) {
-      console.log(`You can't follow yourself lol`)
-      return null
-    }
-    actions
-      .getAUser({ id: user._id })
-      .then(res => {
-        let deleteObj = null
-
-        res.data.userFollows.forEach(each => {
-          if (each.followed === thisSong.songUser._id) {
-            deleteObj = each
-          }
-        })
-
-        if (deleteObj === null) {
-          followUser()
-        } else {
-          deleteFollow(deleteObj)
-        }
-      })
-      .catch(console.error)
-  }
-
-  const likeCheck = () => {
-    actions
-      .getSong({ id: thisSong._id })
-      .then(res => {
-        let deleteObj = null
-
-        res.data.songLikes.forEach(each => {
-          if (each.likeUser === user._id) {
-            deleteObj = each
-          }
-        })
-
-        if (deleteObj === null) {
-          likePost()
-        } else {
-          deleteLike(deleteObj)
-        }
-      })
-      .catch(console.error)
-  }
-
-  const followUser = () => {
-    actions
-      .addFollow({
-        followedUser: thisSong.songUser._id,
-        followDate: new Date(),
-      })
-      .then(res => {
-        console.log(`added a follow to: `, res.data)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-      })
-      .catch(console.error)
-  }
-
-  const deleteFollow = deleteObj => {
-    actions
-      .deleteFollow({
-        followedUser: thisSong.songUser._id,
-        deleteObj: deleteObj,
-      })
-      .then(res => {
-        console.log(`deleted a follow from: `, res.data)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-      })
-      .catch(console.error)
-  }
-
-  const likePost = () => {
-    actions
-      .addLike({
-        likerSong: thisSong._id,
-        likeDate: new Date(),
-        commLike: false,
-      })
-      .then(res => {
-        console.log(`added a like to: `, res.data)
-        setTotalLikes(res.data.songLikes.length)
-      })
-      .catch(console.error)
-  }
-
-  const deleteLike = deleteObj => {
-    actions
-      .deleteLike({
-        likerSong: thisSong._id,
-        deleteObj: deleteObj,
-        commLike: false,
-      })
-      .then(res => {
-        console.log(`deleted a like from: `, res.data)
-        setTotalLikes(res.data.songLikes.length)
-      })
-      .catch(console.error)
-  }
-
 
   const findCurrentSong = direction => {
     allSongs.forEach((each, index) => {
@@ -353,7 +253,7 @@ function SongScreen(props) {
         <div className="social-buttons">
           <div className="social-list">
             <div className="social-button-container">
-              <div className="social-button" onClick={followCheck} ref={followBtn}>
+              <div className="social-button" onClick={() => { handlePostFollow(thisSong.songUser._id)}} ref={followBtn}>
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="button-title">
@@ -368,7 +268,7 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div className="social-button" onClick={likeCheck}>
+              <div className="social-button" onClick={thisSong?._id ?  () => { handlePostLike("Song", thisSong._id) } : null}>
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
               <div className="button-title">

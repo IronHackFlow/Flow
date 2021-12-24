@@ -100,6 +100,17 @@ function EditLyrics(props) {
     setLyricsArray(lyricArray)
 
   }, [currentSong])
+  
+  useEffect(() => {
+    if (currentSong) {
+      let lyricDisplay = lyricsArray?.map((each, index) => {
+        return (
+          <EachLyricLine {...each} index={index} key={`${each.id}lyric${index}`} />
+        )
+      })
+      setLyricsDisplay(lyricDisplay)
+    }
+  }, [props.location, lyricsArray, editToggle, targetLine])
 
   const closeWindow = () => {
     if (linkLocation === true) {
@@ -225,17 +236,6 @@ function EditLyrics(props) {
     )
   }
   
-  useEffect(() => {
-    if (currentSong) {
-      let lyricDisplay = lyricsArray?.map((each, index) => {
-        return (
-          <EachLyricLine {...each} index={index} key={`${each.id}lyric${index}`} />
-        )
-      })
-      setLyricsDisplay(lyricDisplay)
-    }
-  }, [props.location, lyricsArray, editToggle, targetLine])
-
   const mapMiniLyrics = useCallback(() => {
     return lyricsArray?.map((each, index) => {
       return (

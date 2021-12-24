@@ -11,7 +11,6 @@ function NavBar(props) {
   const [unselectedBtns, setUnselectedBtns] = useState('')
   const [selectedBtn, setSelectedBtn] = useState('')
 
-
   useEffect(() => {
     if (locationIndicator?.pathname === '/') {
       setSelectedBtn('home')
