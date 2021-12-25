@@ -9,6 +9,7 @@ import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
 import actions from "../api";
 import DisplaySong from "./DisplaySong.js";
+import IntersectionTest from "./IntersectionTest.js"
 import AudioTimeSlider from "./AudioTimeSlider.js";
 import Comments from "./Comments.js";
 import NavBar from "./NavBar.js";
@@ -21,10 +22,11 @@ import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
-  // useDebugInformation("Home", props)
+  useDebugInformation("Home", props)
   const { user } = React.useContext(TheContext);
   const { handlePostLike, totalLikes, setTotalLikes } = usePostLike();
-  const { handlePostFollow, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed } = usePostFollow();
+  const { handlePostFollow, updatedFollowersRef,  totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed } = usePostFollow();
+  const [totalFollowsLikesArr, setTotalFollowsLikesArr] = useState([]);
 
   const gifsCopy = [...gifsArr];
   const [theFeedBool, setTheFeedBool] = useState(true);
@@ -104,13 +106,13 @@ function Home(props) {
     setUpdateFollowFeed(user?.userFollows)
   }, [user])
 
-  useEffect(() => {
-    setTotalFollowers(followersInView?.length)
-  }, [followersInView])
+  // useEffect(() => {
+  //   setTotalFollowers(songInView?.songUser?.followers?.length)
+  // }, [songInView])
 
-  useEffect(() => {
-    setTotalLikes(likesInView?.length)
-  }, [likesInView])
+  // useEffect(() => {
+  //   setTotalLikes(songInView?.songLikes?.length)
+  // }, [songInView])
 
   useEffect(() => {
     let feed = theFeedSongs.map((eachSong, index) => {
@@ -152,7 +154,32 @@ function Home(props) {
       setPoppedUp(false)
     }
   }
-  
+  const totalFollowsRef = useRef();
+  const totalLikesRef = useRef();
+
+  useEffect(() => {
+    console.log(updatedFollowersRef?.current, totalFollowsRef.current, "this even changing?")
+    if (totalFollowers !== undefined) {
+      let newTotalFollowsLikesArr = totalFollowsLikesArr.map((each) => {
+        if (each.songId === songInView._id) {
+          return { ...each, totalFollowers: totalFollowers }
+        } else {
+          return each
+        }
+      })
+      console.log(newTotalFollowsLikesArr, "what a name ")
+      setTotalFollowsLikesArr(newTotalFollowsLikesArr)
+    }
+    totalFollowsLikesArr.forEach((each) => {
+      if (each.songId === songInView._id) {
+
+          totalFollowsRef.current = each.totalFollowers
+          totalLikesRef.current = each.totalLikes
+
+      }
+    })
+  }, [songInView, totalFollowers])
+
   return (
     <TheViewContext.Provider
       value={{
@@ -168,6 +195,8 @@ function Home(props) {
         setFollowersInView,
         audioInView,
         setAudioInView,
+        totalLikes, totalFollowers,
+        totalFollowsLikesArr, setTotalFollowsLikesArr
       }}
     >
       <div className="Home">
@@ -224,13 +253,14 @@ function Home(props) {
             </div>
           </div>
 
+          <IntersectionTest windowRef={windowRef} />
 
-          <ul className="video-scroll-container" ref={windowRef}>
-            {/* <div className="loading" style={isLoading ? { opacity: 1 } : { opacity: 0 } }>
+          {/* <ul className="video-scroll-container" ref={windowRef}>
+            <div className="loading" style={isLoading ? { opacity: 1 } : { opacity: 0 } }>
               LOADING!
-            </div> */}
+            </div>
             {showSongs()}
-          </ul>
+          </ul> */}
 
           <Comments
             commentInputRef={commentInputRef}
@@ -250,7 +280,7 @@ function Home(props) {
                   <div className="action-btns-container">
                     <button
                       className="action-btn_shadow-div-outset"
-                      onClick={() => { handlePostFollow(songInView.songUser._id) }}
+                      onClick={() => { handlePostFollow(songInView?.songUser._id) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                     >
                       <div
@@ -264,9 +294,9 @@ function Home(props) {
                         />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalFollowers}</p>
+                        <p style={{ color: 'white' }}>{totalFollowsRef.current}</p>
                         <p>
-                          {(totalFollowers === 1)
+                          {(totalFollowsRef.current === 1)
                             ? "Follow"
                             : "Follows"
                           }
@@ -279,9 +309,9 @@ function Home(props) {
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalLikes}</p>
+                        <p style={{ color: 'white' }}>{totalLikesRef.current}</p>
                         <p>
-                          {(totalLikes === 1) 
+                          {(totalLikesRef.current === 1) 
                             ? "Like"
                             : "Likes"
                           }
@@ -318,11 +348,11 @@ function Home(props) {
                   <div className="user-pic-container">
                     <div className="user-pic_shadow-div-outset">
                       <Link
-                        to={`/profile/${songUserInView._id}`}
+                        to={`/profile/${songInView.songUser?._id}`}
                         className="user-pic_shadow-div-inset"
                       >
                         <img
-                          src={songUserInView?.picture}
+                          src={songInView.songUser?.picture}
                           alt=""
                           ref={props.profilePicRef}
                         />
@@ -334,19 +364,19 @@ function Home(props) {
                     <div className="song-title_shadow-div-outset">
                       <div className="song-title_shadow-div-inset">
                         <p id="one">
-                          {songInView.songName}
+                          {songInView?.songName}
                         </p>
-                        <p id="two"><img src={bullet} alt="bullet point" />{songUserInView.userName}</p>
+                        <p id="two"><img src={bullet} alt="bullet point" />{songInView.songUser?.userName}</p>
                       </div>
 
                       <div className="song-caption-container">
                         <div className="song-date">
-                          <FormatDate date={songInView.songDate} />{' '}
+                          <FormatDate date={songInView?.songDate} />{' '}
                           <img src={bullet} alt="bullet point" />
                         </div>
                         <p className="song-caption">
-                          {songInView.songCaption
-                            ? songInView.songCaption
+                          {songInView?.songCaption
+                            ? songInView?.songCaption
                             : 'no caption for this song'}
                         </p>
                       </div>

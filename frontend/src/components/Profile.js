@@ -55,10 +55,10 @@ function Profile(props) {
   }, [thisUser])
 
   async function logout() {
-    setUserToggle(!userToggle)
     setUser({})
     setUserIsAuth({})
     localStorage.removeItem('token')
+    setUserToggle(!userToggle)
     await history.push('/auth')
   }
 
@@ -360,7 +360,7 @@ function Profile(props) {
                     <div className="profile-button-inset pbe-1">
                       <p className="number-container">
                         {/* eventually create logic to deal with 4 digit number here */}
-                        {thisUser.followers ? thisUser.followers.length : "0"}
+                        {thisUser.followers?.length ? thisUser.followers.length : "0"}
                       </p>
                       <div className="icon-container">
                         <img className="button-icons logout" src={followers} style={{margin: "12% 0% 0% 8%"}} alt="followers" />
@@ -376,7 +376,7 @@ function Profile(props) {
                   <div className="profile-button-outset" style={{borderRadius: "4px"}}>
                     <div className="profile-button-inset pbe-2">
                       <p className="number-container">
-                        {thisUser.userFollows ? thisUser.userFollows.length : "0"}
+                        {thisUser.userFollows?.length ? thisUser.userFollows.length : "0"}
                       </p>
                       <div className="icon-container">
                         <img className="button-icons logout" src={social} alt="following" />
@@ -440,7 +440,7 @@ function Profile(props) {
       <div className="section-2_profile">
         <div className="section-2a_songs">
           <ul className="songs-1_songs-list">
-            {thisUserSongs.length ? (
+            {thisUserSongs?.length ? (
               showProfileSongs()
             ) : (
               <li className="each-track-container">

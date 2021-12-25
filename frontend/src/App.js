@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import actions from './api'
@@ -16,9 +16,7 @@ import Search from './components/Search'
 
 function App() {
   const location = useLocation()
-  const history = useHistory()
   const [user, setUser] = useState()
-  const [userIsAuth, setUserIsAuth] = useState()
   const [userToggle, setUserToggle] = useState(false)
   const [locationIndicator, setLocationIndicator] = useState()
 
@@ -47,8 +45,6 @@ function App() {
       value={{
         user,
         setUser,
-        userIsAuth,
-        setUserIsAuth,
         userToggle,
         setUserToggle,
         locationIndicator,
@@ -63,10 +59,10 @@ function App() {
           <Route exact path="/auth" render={props => <Auth {...props} />} />
           <Route exact path="/navBar" render={props => <NavBar {...props} />} />
           <Route exact path="/profile/:id" render={props => <Profile {...props} />} />
-            <Route exact path="/profile/:id/editLyrics" render={props => <EditLyrics {...props} />} />
+          <Route exact path="/profile/:id/editLyrics" render={props => <EditLyrics {...props} />} />
           <Route exact path="/profile" render={props => <Profile {...props} />} />
           <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
-            <Route exact path="/recordingBooth/editLyrics" render={props => <EditLyrics {...props} />} />
+          <Route exact path="/recordingBooth/editLyrics" render={props => <EditLyrics {...props} />} />
           <Route exact path="/editprofile-screen" render={props => <EditProfileScreen {...props} />} />
           <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
           <Route exact path="/songScreen/:id" render={props => <SongScreen {...props} />} />

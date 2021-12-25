@@ -535,6 +535,13 @@ input, textarea, select, button {
   background: #ec6aa0;
 }
 
+.Search .search-inner .section-1_search-field .search-field_shadow-div-outset .search-field-form .search-back-btn-container .search-back-btn img {
+  height: 1.7em;
+  width: 1.7em;
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
 .Search .search-inner .section-1_search-field .search-field_shadow-div-outset .search-field-form .search-field-input-container {
   height: 100%;
   width: 88%;

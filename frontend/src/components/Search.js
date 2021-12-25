@@ -140,7 +140,7 @@ function Search(props) {
             <form className="search-field-form">
               <div className="search-back-btn-container">
                 <button className="search-back-btn" onClick={() => closeWindow()}>
-                  <img className="social-icons si-send" src={back} alt="send" />
+                  <img className="button-icons" src={back} alt="back" />
                 </button>
               </div>
 

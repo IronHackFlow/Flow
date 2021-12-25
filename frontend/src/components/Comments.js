@@ -21,7 +21,7 @@ function Comments(props) {
 
   useEffect(() => {
     let commentInView = props.commentsArray.filter((each) => {
-      if (each.songId === props.songInView._id) {
+      if (each.songId === props.songInView?._id) {
         props.setTotalComments(each.comments?.length)
         return each
       }
@@ -37,7 +37,7 @@ function Comments(props) {
   const resetCommentsArray = (arr) => {
     props.setCommentsArray((prevArr) => {
       return prevArr.map((each) => {
-        if (each.songId === props.songInView._id) {
+        if (each.songId === props.songInView?._id) {
           each.comments = arr
           return each
         } else {
@@ -72,7 +72,7 @@ function Comments(props) {
     actions
       .addComment({
         comment: comment,
-        commSong: props.songInView._id,
+        commSong: props.songInView?._id,
         commDate: new Date(),
       })
       .then(res => {
@@ -122,7 +122,7 @@ function Comments(props) {
     const deleteComment = each => {
       if (user._id === each.commUser._id) {
         actions
-          .deleteComment({ deleteObj: each, songId: props.songInView._id })
+          .deleteComment({ deleteObj: each, songId: props.songInView?._id })
           .then(res => {
             let comments = res.data.songComments
             resetCommentsArray(comments)

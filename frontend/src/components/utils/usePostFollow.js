@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import actions from "../../api.js";
 import TheContext from "../../TheContext.js"
 
@@ -6,6 +6,7 @@ export default function usePostFollow() {
   const { user } = React.useContext(TheContext);
   const [totalFollowers, setTotalFollowers] = useState();
   const [updateFollowFeed, setUpdateFollowFeed] = useState();
+  const updatedFollowersRef = useRef();
 
   function followCheck(id) {
     if (user._id === id) {
@@ -35,7 +36,8 @@ export default function usePostFollow() {
       .then(res => {
         console.log(`added a follow to: `, res.data.followedData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
+        updatedFollowersRef.current = res.data.followedData._doc.followers.length
+        // setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
       .catch(console.error)
   }
@@ -46,7 +48,8 @@ export default function usePostFollow() {
       .then(res => {
         console.log(`deleted a follow from: `, res.data.followerData._doc)
         setTotalFollowers(res.data.followedData._doc.followers.length)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
+        updatedFollowersRef.current = res.data.followedData._doc.followers.length
+        // setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
       })
       .catch(console.error)
   }
@@ -56,5 +59,5 @@ export default function usePostFollow() {
     followCheck(id)
   }
 
-  return { handlePostFollow, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed}
+  return { handlePostFollow, updatedFollowersRef, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed}
 }
