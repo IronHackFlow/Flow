@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import actions from "../../api.js";
 import TheContext from "../../TheContext.js"
 
@@ -6,8 +6,9 @@ export default function useHandleLike() {
   const { user } = React.useContext(TheContext);
   const [totalLikes, setTotalLikes] = useState();
   const [totalCommentLikes, setTotalCommentLikes] = useState();
+  const [returnLikeSongId, setReturnLikeSongId] = useState();
 
-  function checkSongLikes(id) {
+  const checkSongLikes = (id) => {
     actions
       .getSong({ id : id })
       .then(res => {
@@ -23,7 +24,7 @@ export default function useHandleLike() {
       .catch(console.error)
   }
 
-  function checkCommentLikes(id) {
+  const checkCommentLikes = (id) => {
     actions
       .getAComment({ id: id })
       .then(res => {
@@ -39,7 +40,7 @@ export default function useHandleLike() {
       .catch(console.error)
   }
 
-  function addLikeSong(id) {
+  const addLikeSong = (id) => {
     actions
     .addLike({ likerSong: id, likeDate: new Date(), commLike: false})
     .then(res => {
@@ -49,7 +50,7 @@ export default function useHandleLike() {
     .catch(console.error)
   }
 
-  function addLikeComment(id) {
+  const addLikeComment = (id) => {
     actions
     .addLike({ likedComment: id, likeDate: new Date(), commLike: true})
     .then(res => {
@@ -60,7 +61,7 @@ export default function useHandleLike() {
     .catch(console.error)
   }
 
-  function deleteLikeSong(id, deleteData) {
+  const deleteLikeSong = (id, deleteData) => {
     actions
     .deleteLike({
       likerSong: id,
@@ -70,12 +71,11 @@ export default function useHandleLike() {
     .then(res => {
       console.log(`deleted a like from: `, res.data)
       setTotalLikes(res.data.songLikes?.length)
-
     })
     .catch(console.error)
   }
 
-  function deleteLikeComment(deleteData) {
+  const deleteLikeComment = (deleteData) => {
     actions
       .deleteLike({ deleteObj: deleteData, commLike: true })
       .then(res => {
@@ -85,8 +85,10 @@ export default function useHandleLike() {
       .catch(console.error)
   }
   
-  const handlePostLike = (model, id) => {
+  const handlePostLike = (model, id, arr) => {
     console.log(`Gonna handle this ${model} Like`)
+    setReturnLikeSongId(id)
+    
     if (model === "Song") {
       checkSongLikes(id)
     } else {
@@ -94,5 +96,13 @@ export default function useHandleLike() {
     }
   }
 
-  return { handlePostLike, totalLikes, setTotalLikes, totalCommentLikes, setTotalCommentLikes }
+  return { 
+    handlePostLike, 
+    returnLikeSongId,
+    setReturnLikeSongId,
+    totalLikes, 
+    setTotalLikes, 
+    totalCommentLikes, 
+    setTotalCommentLikes 
+  }
 }

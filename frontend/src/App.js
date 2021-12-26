@@ -3,6 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import actions from './api'
+import useDebugInformation from "./components/utils/useDebugInformation"
 import Auth from './components/Auth'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
@@ -14,7 +15,8 @@ import Profile from './components/Profile'
 import SongScreen from './components/SongScreen'
 import Search from './components/Search'
 
-function App() {
+function App(props) {
+  // useDebugInformation("App", props)
   const location = useLocation()
   const [user, setUser] = useState()
   const [userToggle, setUserToggle] = useState(false)

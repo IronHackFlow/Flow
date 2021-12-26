@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import CSSTransitionGroup from "react-transition-group";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
@@ -22,10 +23,10 @@ import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
-  useDebugInformation("Home", props)
+  useDebugInformation("IntersectionTest", props)
   const { user } = React.useContext(TheContext);
-  const { handlePostLike, totalLikes, setTotalLikes } = usePostLike();
-  const { handlePostFollow, updatedFollowersRef,  totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed } = usePostFollow();
+  const { handlePostLike, returnLikeSongId, setReturnLikeSongId, totalLikes, setTotalLikes } = usePostLike();
+  const { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed } = usePostFollow();
   const [totalFollowsLikesArr, setTotalFollowsLikesArr] = useState([]);
 
   const gifsCopy = [...gifsArr];
@@ -41,10 +42,12 @@ function Home(props) {
   const [followersInView, setFollowersInView] = useState();
   const [poppedUp, setPoppedUp] = useState(false);
   const [totalComments, setTotalComments] = useState();
-  const [commentsArray, setCommentsArray] = useState([])
-  const [theFeedSongs, setTheFeedSongs] = useState([]);
-  const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
-  const [followingSongsFeed, setFollowingSongsFeed] = useState([]);  
+  const [commentsArray, setCommentsArray] = useState([]);
+
+  const [homeFeed, setHomeFeed] = useState([]);
+  const [trendingFeed, setTrendingFeed] = useState([]);
+  const [followingFeed, setFollowingFeed] = useState([]);
+
   const [displayFeed, setDisplayFeed] = useState([])
   const [displayTrending, setDisplayTrending] = useState([])
   const [displayFollowing, setDisplayFollowing] = useState([])
@@ -55,91 +58,79 @@ function Home(props) {
   const playPauseRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   
-  useEffect(() => {
-    setIsLoading(true)
-    const controller = new AbortController()
-    const signal = controller.signal
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   const controller = new AbortController()
+  //   const signal = controller.signal
 
-    actions
-      .getMostLikedSongs()
-      .then(res => {
-        setIsLoading(false)
-        let commentArray = []
-        const songsArray = res.data.map((each, index)=> {
-          commentArray.push({ songId: each._id, comments: each.songComments })
-          return { song: each, songVideo: gifsCopy[index].url }
-        }).reverse()
-        const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const trendingArray = sortByLikes.map((each, index) => {
-          return { song: each, songVideo: gifsCopy[index].url }
-        })
-        setCommentsArray(commentArray)
-        setTheFeedSongs(songsArray)
-        setTrendingSongsFeed(trendingArray)
-      }, signal)
-      .catch(console.error)
+  //   actions
+  //     .getMostLikedSongs()
+  //     .then(res => {
+  //       setIsLoading(false)
+  //       let commentArray = []
+  //       const songsArray = res.data.map((each, index)=> {
+  //         commentArray.push({ songId: each._id, comments: each.songComments })
+  //         return { song: each, songVideo: gifsCopy[index].url }
+  //       }).reverse()
+  //       const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
+  //       const trendingArray = sortByLikes.map((each, index) => {
+  //         return { song: each, songVideo: gifsCopy[index].url }
+  //       })
+  //       setCommentsArray(commentArray)
+  //       setTheFeedSongs(songsArray)
+  //       setTrendingSongsFeed(trendingArray)
+  //     }, signal)
+  //     .catch(console.error)
 
-    return () => controller.abort()
-  }, [totalLikes])
+  //   return () => controller.abort()
+  // }, [])
 
-  useEffect(() => {
-    const controller = new AbortController()
-    const signal = controller.signal
+  // useEffect(() => {
+  //   const controller = new AbortController()
+  //   const signal = controller.signal
 
-    let filteredArr = []
-    updateFollowFeed?.forEach(each => filteredArr.push(each.followed))
+  //   let filteredArr = []
+  //   updateFollowFeed?.forEach(each => filteredArr.push(each.followed))
 
-    actions
-      .getUserFollowsSongs(filteredArr)
-      .then(res => {
-        const songsArray = res.data.map((each, index) => {
-          return { song: each, songVideo: gifsCopy[index].url }
-        }).reverse()
-        setFollowingSongsFeed(songsArray)
-      }, signal)
-      .catch(console.error)
+  //   actions
+  //     .getUserFollowsSongs(filteredArr)
+  //     .then(res => {
+  //       const songsArray = res.data.map((each, index) => {
+  //         return { song: each, songVideo: gifsCopy[index].url }
+  //       }).reverse()
+  //       setFollowingSongsFeed(songsArray)
+  //     }, signal)
+  //     .catch(console.error)
 
-    return () => controller.abort()
-  }, [updateFollowFeed])
+  //   return () => controller.abort()
+  // }, [updateFollowFeed])
 
   useEffect(() => {
     setUpdateFollowFeed(user?.userFollows)
   }, [user])
 
   // useEffect(() => {
-  //   setTotalFollowers(songInView?.songUser?.followers?.length)
-  // }, [songInView])
+  //   let feed = theFeedSongs.map((eachSong, index) => {
+  //     return <DisplaySong eachSong={eachSong} key={`${uuidv4()}feed${eachSong.song._id}_${index}`} />
+  //   })
+  //   setDisplayFeed(feed)
+  // }, [theFeedSongs])
 
   // useEffect(() => {
-  //   setTotalLikes(songInView?.songLikes?.length)
-  // }, [songInView])
-
-  useEffect(() => {
-    let feed = theFeedSongs.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}feed${eachSong.song._id}_${index}`} />
-    })
-    setDisplayFeed(feed)
-  }, [theFeedSongs])
-
-  useEffect(() => {
-    let trend = trendingSongsFeed.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}trending${eachSong.song._id}_${index + 1}`} />
-    })
-    setDisplayTrending(trend)
-  }, [trendingSongsFeed])
+  //   let trend = trendingSongsFeed.map((eachSong, index) => {
+  //     return <DisplaySong eachSong={eachSong} key={`${uuidv4()}trending${eachSong.song._id}_${index + 1}`} />
+  //   })
+  //   setDisplayTrending(trend)
+  // }, [trendingSongsFeed])
   
-  useEffect(() => {
-    let follow = followingSongsFeed.map((eachSong, index) => {
-      return <DisplaySong eachSong={eachSong} key={`${uuidv4()}following${eachSong.song._id}_${index + 3}`} />
-    })
-    setDisplayFollowing(follow)
-  }, [followingSongsFeed])
+  // useEffect(() => {
+  //   let follow = followingSongsFeed.map((eachSong, index) => {
+  //     return <DisplaySong eachSong={eachSong} key={`${uuidv4()}following${eachSong.song._id}_${index + 3}`} />
+  //   })
+  //   setDisplayFollowing(follow)
+  // }, [followingSongsFeed])
+  
 
-  const showSongs = useCallback(() => {
-    if (theFeedBool) return displayFeed
-    else if (trendingBool) return displayTrending
-    else if (followingBool) return displayFollowing
-  }, [displayFeed, displayTrending, displayFollowing, theFeedBool, trendingBool, followingBool])
 
   const handlePlayPause = (bool) => {
     if (bool === true) return setIsPlaying(true)
@@ -154,31 +145,47 @@ function Home(props) {
       setPoppedUp(false)
     }
   }
-  const totalFollowsRef = useRef();
-  const totalLikesRef = useRef();
 
   useEffect(() => {
-    console.log(updatedFollowersRef?.current, totalFollowsRef.current, "this even changing?")
-    if (totalFollowers !== undefined) {
-      let newTotalFollowsLikesArr = totalFollowsLikesArr.map((each) => {
-        if (each.songId === songInView._id) {
-          return { ...each, totalFollowers: totalFollowers }
+    let newArr = totalFollowsLikesArr.map((each) => {
+      if (each.songId === songInView._id) {
+        if (songInView._id === returnLikeSongId || songInView._id === returnFollowSongId) {
+          if (each.totalFollowers !== totalFollowers) {
+            let newFollowTotal = totalFollowers
+            setTotalFollowers(newFollowTotal)
+            return { ...each, totalFollowers: newFollowTotal }
+          } else if (each.totalLikes !== totalLikes) {
+            let newLikeTotal  = totalLikes
+            setTotalLikes(newLikeTotal)
+            return { ...each, totalLikes: newLikeTotal }
+          } else {
+            return each
+          }
         } else {
+          setReturnFollowSongId(null)
+          setReturnLikeSongId(null)
+          setTotalLikes(each.totalLikes)
+          setTotalFollowers(each.totalFollowers)
           return each
         }
-      })
-      console.log(newTotalFollowsLikesArr, "what a name ")
-      setTotalFollowsLikesArr(newTotalFollowsLikesArr)
-    }
-    totalFollowsLikesArr.forEach((each) => {
-      if (each.songId === songInView._id) {
-
-          totalFollowsRef.current = each.totalFollowers
-          totalLikesRef.current = each.totalLikes
-
+      } else {
+        return each
       }
     })
-  }, [songInView, totalFollowers])
+    setTotalFollowsLikesArr(newArr)
+  }, [songInView, returnFollowSongId, returnLikeSongId, totalFollowers, totalLikes])
+  // useEffect(() => {
+  //   if (updateArr?.length && Array.isArray(updateArr)) {
+  //     console.log(updateArr, "is this happening?")
+  //     setTotalFollowsLikesArr([...updateArr])
+  //   } 
+  //   totalFollowsLikesArr.forEach((each) => {
+  //     if (each.songId === songInView._id) {
+  //       setTotalFollowers(each.totalFollowers)
+  //       setTotalLikes(each.totalLikes)
+  //     }
+  //   })
+  // }, [songInView, totalFollowsLikesArr, updateArr])
 
   return (
     <TheViewContext.Provider
@@ -196,7 +203,8 @@ function Home(props) {
         audioInView,
         setAudioInView,
         totalLikes, totalFollowers,
-        totalFollowsLikesArr, setTotalFollowsLikesArr
+        totalFollowsLikesArr, setTotalFollowsLikesArr,
+        theFeedBool, trendingBool, followingBool
       }}
     >
       <div className="Home">
@@ -253,8 +261,11 @@ function Home(props) {
             </div>
           </div>
 
-          <IntersectionTest windowRef={windowRef} />
 
+          <IntersectionTest 
+            windowRef={windowRef} 
+          />
+        
           {/* <ul className="video-scroll-container" ref={windowRef}>
             <div className="loading" style={isLoading ? { opacity: 1 } : { opacity: 0 } }>
               LOADING!
@@ -280,7 +291,7 @@ function Home(props) {
                   <div className="action-btns-container">
                     <button
                       className="action-btn_shadow-div-outset"
-                      onClick={() => { handlePostFollow(songInView?.songUser._id) }}
+                      onClick={() => { handlePostFollow(songInView?.songUser._id, songInView._id) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                     >
                       <div
@@ -294,9 +305,9 @@ function Home(props) {
                         />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalFollowsRef.current}</p>
+                        <p style={{ color: 'white' }}>{totalFollowers}</p>
                         <p>
-                          {(totalFollowsRef.current === 1)
+                          {(totalFollowers === 1)
                             ? "Follow"
                             : "Follows"
                           }
@@ -304,14 +315,14 @@ function Home(props) {
                       </div>
                     </button>
 
-                    <button className="action-btn_shadow-div-outset" onClick={() => { handlePostLike("Song", songInView._id) }}>
+                    <button className="action-btn_shadow-div-outset" onClick={() => { handlePostLike("Song", songInView._id, totalFollowsLikesArr) }}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
                       <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalLikesRef.current}</p>
+                        <p style={{ color: 'white' }}>{totalLikes}</p>
                         <p>
-                          {(totalLikesRef.current === 1) 
+                          {(totalLikes === 1) 
                             ? "Like"
                             : "Likes"
                           }

@@ -1,35 +1,49 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
-import gradientbg from '../images/gradient-bg-2.png'
 import TheViewContext from '../TheViewContext'
+import TheContext from '../TheContext'
+import useDebugInformation from "./utils/useDebugInformation"
 import actions from '../api'
+import gradientbg from '../images/gradient-bg-2.png'
 import gifsArr from "../images/gifs.json";
-import { ElastiCache } from 'aws-sdk';
 
 function IntersectionTest(props) {
+  // useDebugInformation("IntersectionTest", props)
+  const { user } = React.useContext(TheContext)
   const {
-    setSongInView,
-    totalLikes, totalFollowers,
+    setSongInView, followingFeed, 
     totalFollowsLikesArr, setTotalFollowsLikesArr,
-    setAudioInView,
-    setSongUserInView,
-    setCommentsInView,
-    setLikesInView,
-    setFollowersInView,
+    theFeedBool, trendingBool, followingBool
   } = React.useContext(TheViewContext)
 
   const gifsCopy = [...gifsArr];
   const [commentsArray, setCommentsArray] = useState([])
-  const [theFeedSongs, setTheFeedSongs] = useState([]);
-  const [trendingSongsFeed, setTrendingSongsFeed] = useState([]);
-  const [displayTrending, setDisplayTrending] = useState([])
+  const [homeFeedArr, setHomeFeedArr] = useState([]);
+  const [trendingFeedArr, setTrendingFeedArr] = useState([]);
+  const [followingFeedArr, setFollowingFeedArr] = useState([])
+  const [feedArr, setFeedArr] = useState([])
+  const [value, setValue] = useState("");
+
+  const viewRef = useRef();
+
+  useEffect(() => {
+    if (!feedArr?.length) {
+      setFeedArr(homeFeedArr)
+    } else if (theFeedBool) {
+      setFeedArr(homeFeedArr)
+    } else if (trendingBool) {
+      setFeedArr(trendingFeedArr)
+    } else if (followingBool) {
+      setFeedArr(followingFeedArr)
+    }
+  }, [homeFeedArr, theFeedBool, trendingBool, followingBool])
 
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          trendingSongsFeed.forEach((each) => {
+          feedArr.forEach((each) => {
             if (each.song._id === entry.target.id) {
               setSongInView(each.song)
               // setSongUserInView(each.song.songUser)
@@ -53,17 +67,41 @@ function IntersectionTest(props) {
   useEffect(() => {
     const controller = new AbortController()
     const signal = controller.signal
+    
+      let filteredArr = []
+      user?.userFollows?.filter(each => filteredArr.push(each.followed))
 
-    actions
-      .getMostLikedSongs()
+      actions
+      .getUserFollowsSongs(filteredArr)
       .then(res => {
+
+        const songsArray = res.data.map((each, index) => {
+          return { song: each, songVideo: gifsCopy[index].url }
+        }).reverse()
+
+        setFollowingFeedArr(songsArray)
+      }, signal)
+      .catch(console.error)
+
+    return () => controller.abort()
+  }, [user])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+    
+    actions
+    .getMostLikedSongs()
+    .then(res => {
         let commentArray = []
+
         const songsArray = res.data.map((each, index)=> {
           commentArray.push({ songId: each._id, comments: each.songComments })
           return { song: each, songVideo: gifsCopy[index].url }
         }).reverse()
+        
         const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const trendingArray = sortByLikes.map((each, index) => {
+        const trendingArray = sortByLikes.map((each, index) => {   
           const likesFollowsObj = {
             songId: each._id,
             totalLikes: each.songLikes.length,
@@ -73,30 +111,45 @@ function IntersectionTest(props) {
           setTotalFollowsLikesArr(totalFollowsLikesArr)
           return { song: each, songVideo: gifsCopy[index].url }
         })
-        setCommentsArray(commentArray)
-        setTheFeedSongs(songsArray)
-        setTrendingSongsFeed(trendingArray)
-      }, signal)
-      .catch(console.error)
-  
-    return () => controller.abort()
+
+        setHomeFeedArr(songsArray)
+        setTrendingFeedArr(trendingArray)
+
+    }, signal)
+
+    .catch(console.error)
   }, [])
+  // useEffect(() => {
+  //   let feed = feedArr.map((each) => {
+  //     return (
+  //       <li
+  //         id={each.song._id}
+  //         ref={setRefs}
+  //         className="video-pane"
+  //         key={`${uuidv4()}_${each.song._id}`}
+  //         style={{
+  //           backgroundImage: `url('${gradientbg}'), url('')`,
+  //         }}
+  //       >
+  //         <div className="last-div">
+  //           {each.song.songLyricsStr?.map((each, index) => {
+  //             return (
+  //               <div className="each-lyric-container" key={`${uuidv4()}_${index}_songlyrics`}>
+  //                 <p className="each-lyric-no">{index + 1}</p>
+  //                 <p className="each-lyric-line">{each}</p>
+  //               </div>
+  //             )
+  //           })}
+  //         </div>
+  //       </li>
+  //     )
+  //   })
 
-  const viewRef = useRef();
+  //   setFeedElements(feed)
+  // }, [feedArr])
 
-
-  const setRefs = useCallback(
-    node => {
-      viewRef.current = node
-      if (viewRef.current !== null) {
-        observer.observe(viewRef.current)
-      }
-    },
-    [trendingSongsFeed],
-  )
-    
-  useEffect(() => {
-    let trend = trendingSongsFeed.map((each) => {
+  const showFeedSongs = useCallback(() => {
+    return feedArr.map((each) => {
       return (
         <li
           id={each.song._id}
@@ -120,25 +173,27 @@ function IntersectionTest(props) {
         </li>
       )
     })
-    setDisplayTrending(trend)
-  }, [trendingSongsFeed])
+  }, [feedArr, homeFeedArr, trendingFeedArr, followingFeedArr])
 
+  const setRefs = useCallback(
+    node => {
+      viewRef.current = node
+      if (viewRef.current !== null) {
+        observer.observe(viewRef.current)
+      }
+    },
+    [feedArr],
+  )
     
-  const showTrendingSongs = useCallback(() => {
-    return displayTrending?.map((each, index) => {
-      return each
-    })
-  }, [displayTrending, trendingSongsFeed])
+  // const showFeedSongs = useCallback(() => {
+  //   return feedElements.map((each, index) => {
+  //     return each
+  //   })
+  // }, [feedElements, feedArr])
     
-  const lastCardObserver = new IntersectionObserver(
-    entries => {
-      const lastCard = entries[0]
-    }, {}
-  ) 
-
   return (
     <ul className="video-scroll-container" ref={props.windowRef}>
-      {showTrendingSongs()}
+      {showFeedSongs()}
     </ul>
   )
 }
