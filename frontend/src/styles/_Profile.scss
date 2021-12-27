@@ -297,6 +297,36 @@
         &:focus {
           background: pink;
         }
+        &:hover {
+          background: pink;
+          .track-details-container {
+            .song-name-container {
+              .song-name-outset {
+                box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+              }
+            }
+            .lyrics-container {
+              .lyrics-outset {
+                box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+              }
+            }
+          }
+          .buttons-container {
+            .buttons-inner {
+              box-shadow: inset 2px 2px 2px 0px #b294a0, inset -2px -2px 2px #ffe2ee;
+              .delete-btn-container {
+                .play-container {
+                  .play-outset {
+                    box-shadow: inset 2px 2px 2px 0px #b294a0, inset -2px -2px 2px #fdeaf2;
+                    .play-inset {
+                      box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
 
         .track-details-container {
           @include flexCenter(100%, 80%, none, center, center, column);
@@ -461,6 +491,19 @@
       .songs-slider-outer {
         @include flexCenter(100%, 80%, 50px, center, center, row);
         box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+        position: relative;
+        
+        .songs-slider-bar {
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          height: 0%;
+          width: 55%;
+          border-radius: 10px;
+          box-shadow: 2px 2px 2px 0px #8c8c8c, -2px -2px 2px #eeeeee;
+          background: #aaaaaa;
+          transition: height 0.2s ease-out;
+        }
       }
     }
   }

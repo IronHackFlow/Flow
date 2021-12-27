@@ -18,6 +18,7 @@ function Comments(props) {
   const { user } = React.useContext(TheContext)
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
+  const [commLikesArr, setCommLikesArr] = useState([])
 
   useEffect(() => {
     let commentInView = props.commentsArray.filter((each) => {
@@ -26,6 +27,7 @@ function Comments(props) {
         return each
       }
     })
+    console.log(commentInView, "what the fuck?")
     let commentDisplay = commentInView[0]?.comments?.map((each, index) => {
       return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
     })
@@ -222,7 +224,7 @@ function Comments(props) {
                   alt="delete or like"
                 />
                 <div className="likes-number-container">
-                  <p>{checkCommUser ? '' : totalCommentLikes}</p>
+                  <p>{checkCommUser ? '' : totalCommentLikes?.length}</p>
                 </div>
               </div>
 

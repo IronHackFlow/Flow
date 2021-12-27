@@ -4,8 +4,8 @@ import TheContext from "../../TheContext.js"
 
 export default function useHandleLike() {
   const { user } = React.useContext(TheContext);
-  const [totalLikes, setTotalLikes] = useState();
-  const [totalCommentLikes, setTotalCommentLikes] = useState();
+  const [totalLikes, setTotalLikes] = useState([]);
+  const [totalCommentLikes, setTotalCommentLikes] = useState([]);
   const [returnLikeSongId, setReturnLikeSongId] = useState();
 
   const checkSongLikes = (id) => {
@@ -13,11 +13,14 @@ export default function useHandleLike() {
       .getSong({ id : id })
       .then(res => {
         let deleteData = null
-        res.data.songLikes.forEach(each => {
-          if (each.likeUser === user._id) {
-            deleteData = each
+        let songLikes = res.data.songLikes
+
+        for (let i = 0; i < songLikes.length; i++) {
+          if (songLikes[i].likeUser === user._id) {
+            deleteData = songLikes[i]
           }
-        })
+        }
+
         if (deleteData) return deleteLikeSong(id, deleteData)
         else return addLikeSong(id)
       })
@@ -29,11 +32,14 @@ export default function useHandleLike() {
       .getAComment({ id: id })
       .then(res => {
         let deleteData = null
-        res.data.commLikes.forEach(each => {
-          if (each.likeUser === user._id) {
-            deleteData = each
+        let commLikes = res.data.commLikes
+
+        for (let i = 0; i < commLikes.length; i++) {
+          if (commLikes[i].likeUser === user._id) {
+            deleteData = commLikes[i]
           }
-        })
+        }
+
         if (deleteData) return deleteLikeComment(deleteData)
         else return addLikeComment(id)
       })
@@ -45,7 +51,7 @@ export default function useHandleLike() {
     .addLike({ likerSong: id, likeDate: new Date(), commLike: false})
     .then(res => {
       console.log('added a like to: ', res.data)
-      setTotalLikes(res.data.songLikes?.length)
+      setTotalLikes(res.data.songLikes)
     })
     .catch(console.error)
   }
@@ -55,8 +61,7 @@ export default function useHandleLike() {
     .addLike({ likedComment: id, likeDate: new Date(), commLike: true})
     .then(res => {
       console.log('added a like to: ', res.data)
-      setTotalCommentLikes(res.data.commLikes?.length)
-
+      setTotalCommentLikes(res.data.commLikes)
     })
     .catch(console.error)
   }
@@ -70,7 +75,7 @@ export default function useHandleLike() {
     })
     .then(res => {
       console.log(`deleted a like from: `, res.data)
-      setTotalLikes(res.data.songLikes?.length)
+      setTotalLikes(res.data.songLikes)
     })
     .catch(console.error)
   }
@@ -80,7 +85,7 @@ export default function useHandleLike() {
       .deleteLike({ deleteObj: deleteData, commLike: true })
       .then(res => {
         console.log(`deleted a like from: `, res.data)
-        setTotalCommentLikes(res.data.commLikes?.length)
+        setTotalCommentLikes(res.data.commLikes)
       })
       .catch(console.error)
   }

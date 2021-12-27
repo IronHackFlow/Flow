@@ -48,12 +48,10 @@
   .video-scroll-container {
     height: 62%;
     width: 100%;
-    scroll-snap-type: mandatory;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     overflow-y: scroll;
     position: relative;
-    transition: bottom 0.5s;
 
     .video-pane {
       @include flexCenter(100%, 100%, 0px, center, center, column);
@@ -138,6 +136,21 @@
                   font-size: 10px;
                   color: #ffd6d6;
                 }
+              }
+            }
+            // class to apply on user liking, following, or commenting on a song
+            .liked-followed-commented {
+              background: #ec6aa0;
+              box-shadow: 2px 2px 3px #5c3847, -2px -2px 1px 0px #ffdae9;
+              .action-btn-icon_shadow-div-inset {
+                box-shadow: inset 1px 1px 3px #3b272f, inset -2px -2px 3px #fdedf4;
+                background: #c85886;
+                img {
+                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                }
+              }
+              .action-btn-text {
+                color: #ffd1e4;
               }
             }
           }

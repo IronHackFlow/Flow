@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
@@ -13,6 +13,7 @@ import logouticon from '../images/logout2.svg'
 import xExit from "../images/exit-x-2.svg"
 import play from '../images/play.svg'
 import pause from '../images/pause.svg'
+import { stringify } from 'datamuse';
 
 function Profile(props) {
   const { user, setUser, setUserIsAuth, userToggle, setUserToggle } = React.useContext(TheContext)
@@ -61,12 +62,12 @@ function Profile(props) {
     setUserToggle(!userToggle)
     await history.push('/auth')
   }
+  const songListRef = useRef()
 
-  function ProfileSongs(eachSong) {
+  function ProfileSongs(eachSong, id) {
     const [deleteCheck, setDeleteCheck] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
     
-    const songListRef = useRef()
     const audioRef = useRef();
 
     useEffect(() => {
@@ -468,7 +469,9 @@ function Profile(props) {
             )}
           </ul>
           <div className="songs-2_slider-container">
-            <div className="songs-slider-outer"></div>
+            <div className="songs-slider-outer">
+              <div className="songs-slider-bar"></div>
+            </div>
           </div>
         </div>
 

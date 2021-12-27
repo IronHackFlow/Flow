@@ -5,7 +5,6 @@ import TheContext from "../../TheContext.js"
 export default function usePostFollow() {
   const { user } = React.useContext(TheContext);
   const [totalFollowers, setTotalFollowers] = useState();
-  const [updateFollowFeed, setUpdateFollowFeed] = useState();
   const [returnFollowSongId, setReturnFollowSongId] = useState();
 
   const followCheck = (userId) => {
@@ -16,12 +15,13 @@ export default function usePostFollow() {
       .getAUser({ id: userId })
       .then(res => {
         let deleteObj = null
+        let followArr = res.data.followers
         
-        res.data.followers.forEach(each => {
-          if (each.follower === user._id) {
-            deleteObj = each
+        for (let i = 0; i < followArr.length; i++) {
+          if (followArr[i].follower === user._id) {
+            deleteObj = followArr[i]
           }
-        })
+        }
 
         if (deleteObj) return deleteFollow(userId, deleteObj)
         else return postFollow(userId)
@@ -35,8 +35,7 @@ export default function usePostFollow() {
       .addFollow({ followedUser: userId, followDate: new Date() })
       .then(res => {
         console.log(`added a follow to: `, res.data.followedData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-        // setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
+        setTotalFollowers(res.data.followedData._doc.followers)
       })
       .catch(console.error)
   }
@@ -46,8 +45,7 @@ export default function usePostFollow() {
       .deleteFollow({ followedUser: userId, deleteObj: deleteObj })
       .then(res => {
         console.log(`deleted a follow from: `, res.data.followerData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers.length)
-        // setUpdateFollowFeed(res.data.followerData._doc.userFollows.reverse())
+        setTotalFollowers(res.data.followedData._doc.followers)
       })
       .catch(console.error)
   }
@@ -58,5 +56,5 @@ export default function usePostFollow() {
     followCheck(userId)
   }
 
-  return { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers, updateFollowFeed, setUpdateFollowFeed}
+  return { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers }
 }

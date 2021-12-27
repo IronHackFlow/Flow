@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../TheViewContext'
@@ -12,9 +12,8 @@ function IntersectionTest(props) {
   // useDebugInformation("IntersectionTest", props)
   const { user } = React.useContext(TheContext)
   const {
-    setSongInView, followingFeed, 
-    totalFollowsLikesArr, setTotalFollowsLikesArr,
-    theFeedBool, trendingBool, followingBool
+    setSongInView, totalFollowsLikesArr, setTotalFollowsLikesArr,
+    theFeedBool, trendingBool, followingBool, updateFollowFeed
   } = React.useContext(TheViewContext)
 
   const gifsCopy = [...gifsArr];
@@ -23,27 +22,18 @@ function IntersectionTest(props) {
   const [trendingFeedArr, setTrendingFeedArr] = useState([]);
   const [followingFeedArr, setFollowingFeedArr] = useState([])
   const [feedArr, setFeedArr] = useState([])
-  const [value, setValue] = useState("");
+  const [feedObjArr, setFeedObjArr] = useState([])
+  const [homeDisplayNodes, setHomeDisplayNodes] = useState([])
+  const [trendingDisplayNodes, setTrendingDisplayNodes] = useState([])
+  const [followingDisplayNodes, setFollowingDisplayNodes] = useState([])
 
   const viewRef = useRef();
-
-  useEffect(() => {
-    if (!feedArr?.length) {
-      setFeedArr(homeFeedArr)
-    } else if (theFeedBool) {
-      setFeedArr(homeFeedArr)
-    } else if (trendingBool) {
-      setFeedArr(trendingFeedArr)
-    } else if (followingBool) {
-      setFeedArr(followingFeedArr)
-    }
-  }, [homeFeedArr, theFeedBool, trendingBool, followingBool])
 
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          feedArr.forEach((each) => {
+          feedObjArr?.forEach((each) => {
             if (each.song._id === entry.target.id) {
               setSongInView(each.song)
               // setSongUserInView(each.song.songUser)
@@ -84,7 +74,7 @@ function IntersectionTest(props) {
       .catch(console.error)
 
     return () => controller.abort()
-  }, [user])
+  }, [user, updateFollowFeed])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -95,7 +85,7 @@ function IntersectionTest(props) {
     .then(res => {
         let commentArray = []
 
-        const songsArray = res.data.map((each, index)=> {
+        const songsArray = res.data.map((each, index) => {
           commentArray.push({ songId: each._id, comments: each.songComments })
           return { song: each, songVideo: gifsCopy[index].url }
         }).reverse()
@@ -111,7 +101,7 @@ function IntersectionTest(props) {
           setTotalFollowsLikesArr(totalFollowsLikesArr)
           return { song: each, songVideo: gifsCopy[index].url }
         })
-
+        setCommentsArray(commentArray)
         setHomeFeedArr(songsArray)
         setTrendingFeedArr(trendingArray)
 
@@ -119,37 +109,34 @@ function IntersectionTest(props) {
 
     .catch(console.error)
   }, [])
-  // useEffect(() => {
-  //   let feed = feedArr.map((each) => {
-  //     return (
-  //       <li
-  //         id={each.song._id}
-  //         ref={setRefs}
-  //         className="video-pane"
-  //         key={`${uuidv4()}_${each.song._id}`}
-  //         style={{
-  //           backgroundImage: `url('${gradientbg}'), url('')`,
-  //         }}
-  //       >
-  //         <div className="last-div">
-  //           {each.song.songLyricsStr?.map((each, index) => {
-  //             return (
-  //               <div className="each-lyric-container" key={`${uuidv4()}_${index}_songlyrics`}>
-  //                 <p className="each-lyric-no">{index + 1}</p>
-  //                 <p className="each-lyric-line">{each}</p>
-  //               </div>
-  //             )
-  //           })}
-  //         </div>
-  //       </li>
-  //     )
-  //   })
 
-  //   setFeedElements(feed)
-  // }, [feedArr])
+  useEffect(() => {
+    setHomeDisplayNodes(returnFeedNodes(homeFeedArr))
+    setTrendingDisplayNodes(returnFeedNodes(trendingFeedArr))
+    setFollowingDisplayNodes(returnFeedNodes(followingFeedArr))
+  }, [homeFeedArr, trendingFeedArr, followingFeedArr])
 
-  const showFeedSongs = useCallback(() => {
-    return feedArr.map((each) => {
+  useEffect(() => {
+    if (feedArr.length === 0) {
+      setFeedArr(homeDisplayNodes)
+      setFeedObjArr(homeFeedArr)
+    } else if (theFeedBool) {
+      setFeedArr(homeDisplayNodes)
+      setFeedObjArr(homeFeedArr)
+
+    } else if (trendingBool) {
+      setFeedArr(trendingDisplayNodes)
+      setFeedObjArr(trendingFeedArr)
+
+    } else if (followingBool) {
+      setFeedArr(followingDisplayNodes)
+      setFeedObjArr(followingFeedArr)
+
+    }
+  }, [feedArr, feedObjArr, homeFeedArr, homeDisplayNodes, theFeedBool, trendingBool, followingBool])
+  
+  const returnFeedNodes = (arr) => {
+    let feedNodes = arr.map((each) => {
       return (
         <li
           id={each.song._id}
@@ -173,7 +160,11 @@ function IntersectionTest(props) {
         </li>
       )
     })
-  }, [feedArr, homeFeedArr, trendingFeedArr, followingFeedArr])
+    return feedNodes
+  }
+  const showFeedSongs = useCallback(() => {
+    return feedArr.map(each => each)
+  }, [feedArr])
 
   const setRefs = useCallback(
     node => {
@@ -182,7 +173,7 @@ function IntersectionTest(props) {
         observer.observe(viewRef.current)
       }
     },
-    [feedArr],
+    [feedArr, feedObjArr],
   )
     
   // const showFeedSongs = useCallback(() => {
