@@ -6,6 +6,7 @@ export default function usePostFollow() {
   const { user } = React.useContext(TheContext);
   const [totalFollowers, setTotalFollowers] = useState();
   const [returnFollowSongId, setReturnFollowSongId] = useState();
+  const [updateFollowFeed, setUpdateFollowFeed] = useState([]);
 
   const followCheck = (userId) => {
     if (user._id === userId) {
@@ -36,6 +37,7 @@ export default function usePostFollow() {
       .then(res => {
         console.log(`added a follow to: `, res.data.followedData._doc)
         setTotalFollowers(res.data.followedData._doc.followers)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
       })
       .catch(console.error)
   }
@@ -46,6 +48,7 @@ export default function usePostFollow() {
       .then(res => {
         console.log(`deleted a follow from: `, res.data.followerData._doc)
         setTotalFollowers(res.data.followedData._doc.followers)
+        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
       })
       .catch(console.error)
   }
@@ -56,5 +59,5 @@ export default function usePostFollow() {
     followCheck(userId)
   }
 
-  return { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers }
+  return { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers, updateFollowFeed }
 }

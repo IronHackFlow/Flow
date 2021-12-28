@@ -13,10 +13,9 @@ import logouticon from '../images/logout2.svg'
 import xExit from "../images/exit-x-2.svg"
 import play from '../images/play.svg'
 import pause from '../images/pause.svg'
-import { stringify } from 'datamuse';
 
 function Profile(props) {
-  const { user, setUser, setUserIsAuth, userToggle, setUserToggle } = React.useContext(TheContext)
+  const { user, setUser, userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
@@ -57,7 +56,6 @@ function Profile(props) {
 
   async function logout() {
     setUser({})
-    setUserIsAuth({})
     localStorage.removeItem('token')
     setUserToggle(!userToggle)
     await history.push('/auth')

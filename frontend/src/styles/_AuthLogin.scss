@@ -24,7 +24,7 @@
           @include flexCenter(85%, 96%, 50px, space-around, center, row);
           box-shadow: 2px 2px 3px #6f6f6f, -2px -2px 3px #d9d9d9;
           color: #ec6aa0;
-          font-size: 22px;
+          font-size: 25px;
           font-weight: bold;
         }
       }
@@ -50,8 +50,10 @@
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
           .title-container {
-            height: 15%;
-            width: 100%;
+            @include flexCenter(15%, 100%, 0px, center, center, column);
+            img {
+              height: 85%;
+            }
           }
 
           .user-input-container {

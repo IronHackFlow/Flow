@@ -30,14 +30,15 @@ function Home(props) {
     returnLikeSongId, 
     setReturnLikeSongId, 
     totalLikes, 
-    setTotalLikes 
+    setTotalLikes,
   } = usePostLike();
   const { 
     handlePostFollow, 
     returnFollowSongId, 
     setReturnFollowSongId, 
     totalFollowers, 
-    setTotalFollowers
+    setTotalFollowers,
+    updateFollowFeed
   } = usePostFollow();
   
   const [songInView, setSongInView] = useState({});
@@ -60,7 +61,7 @@ function Home(props) {
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />
     else if (isTrendingFeed) return <TrendingFeed />
-    else if (isFollowingFeed) return <FollowingFeed />
+    else if (isFollowingFeed) return <FollowingFeed updateFollowFeed={updateFollowFeed} />
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
 
   useEffect(() => {
@@ -135,7 +136,7 @@ function Home(props) {
         setCommentsArr,
         totalFollowsLikesArr, 
         setTotalFollowsLikesArr,
-        isFollowingFeed
+        isFollowingFeed,
       }}
     >
       <div className="Home">

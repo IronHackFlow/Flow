@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../../TheViewContext'
+import Loading from '../Loading'
 import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../../api'
 import gradientbg from '../../images/gradient-bg-2.png'
@@ -13,6 +14,7 @@ function TrendingFeed(props) {
   const gifsCopy = [...gifsArr];
   const [trendingFeedArr, setTrendingFeedArr] = useState([]);
   const [trendingDisplayNodes, setTrendingDisplayNodes] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const viewRef = useRef();
 
@@ -37,20 +39,21 @@ function TrendingFeed(props) {
   )
 
   useEffect(() => {
+    setIsLoading(true)
     const controller = new AbortController()
     const signal = controller.signal
     
     actions
     .getMostLikedSongs()
     .then(res => {
-        const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-        const trendingArray = sortByLikes.map((each, index) => {   
-          return { song: each, songVideo: gifsCopy[index].url }
-        })
+      const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
+      const trendingArray = sortByLikes.map((each, index) => {   
+        return { song: each, songVideo: gifsCopy[index].url }
+      })
 
-        setTrendingFeedArr(trendingArray)
+      setTrendingFeedArr(trendingArray)
+      setIsLoading(false)
     }, signal)
-
     .catch(console.error)
   }, [])
 
@@ -94,6 +97,7 @@ function TrendingFeed(props) {
 
   return (
     <ul className="video-scroll-container">
+      <Loading isLoading={isLoading} />
       {trendingDisplayNodes}
     </ul>
   )

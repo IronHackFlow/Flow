@@ -37,13 +37,13 @@ function SongScreen(props) {
   const commentInputRef = useRef();
   const followBtn = useRef();
   const playPauseRef = useRef();
-;
+
   useEffect(() => {
-    setTotalFollowers(thisSong?.songUser?.followers?.length)
+    setTotalFollowers(thisSong?.songUser?.followers)
   }, [thisSong])
 
   useEffect(() => {
-    setTotalLikes(thisSong?.songLikes?.length)
+    setTotalLikes(thisSong?.songLikes)
   }, [thisSong])
 
   useEffect(() => {
@@ -257,9 +257,9 @@ function SongScreen(props) {
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{totalFollowers}</p>
+                <p style={{ color: '#ff3b8c' }}>{totalFollowers?.length}</p>
                 <p>
-                  {(totalFollowers === 1)
+                  {(totalFollowers?.length === 1)
                     ? "Follower"
                     : "Followers"
                   }
@@ -272,9 +272,9 @@ function SongScreen(props) {
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
               <div className="button-title">
-                <p style={{color: '#ff3b8c'}}>{totalLikes}</p>
+                <p style={{color: '#ff3b8c'}}>{totalLikes?.length}</p>
                 <p>
-                  {(totalLikes === 1)
+                  {(totalLikes?.length === 1)
                     ? "Like"
                     : "Likes"
                   }

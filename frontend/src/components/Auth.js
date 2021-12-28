@@ -5,6 +5,7 @@ import actions from '../api'
 import TheContext from '../TheContext'
 import AuthLogIn from './AuthLogIn'
 import AuthSignUp from './AuthSignUp'
+import flowLogo from '../images/FlowLogo.png'
 
 
 const Auth = (props) => {
@@ -41,7 +42,7 @@ const Auth = (props) => {
           <div className="upper-outset">
             <div className="upper-inset">
               <div className="upper-inset-outset">
-                Welcome To Flow
+                Welcome To
               </div>
             </div>
           </div>
@@ -51,7 +52,7 @@ const Auth = (props) => {
             <div className="mid-inset">
               <div className="login-container">
                 <div className="title-container">
-
+                  <img src={flowLogo} alt="flow logo" />
                 </div>
                 <div className="user-input-container">
                   <div className="user-login_shadow-div-outset">

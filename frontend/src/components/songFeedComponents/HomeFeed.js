@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../../TheViewContext'
+import Loading from '../Loading'
 import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../../api'
 import gradientbg from '../../images/gradient-bg-2.png'
@@ -11,14 +12,13 @@ function HomeFeed(props) {
   // useDebugInformation("IntersectionTest", props)
   const { 
     setSongInView, 
-    isHomeFeed,
     setTotalFollowsLikesArr,
     setCommentsArr
   } = React.useContext(TheViewContext)
   const gifsCopy = [...gifsArr];
   const [homeFeedArr, setHomeFeedArr] = useState([]);
   const [homeDisplayNodes, setHomeDisplayNodes] = useState([])
-
+  const [isLoading, setIsLoading] = useState(false)
   const viewRef = useRef();
 
   const observer = new IntersectionObserver(
@@ -42,30 +42,32 @@ function HomeFeed(props) {
   )
 
   useEffect(() => {
+    setIsLoading(true)
     const controller = new AbortController()
     const signal = controller.signal
     
     actions
     .getMostLikedSongs()
     .then(res => {
-        console.log(res.data, "lets see this tho?")
-        let commentArray = []
-        let followsLikesArray = []
-        const songsArray = res.data.map((each, index) => {
-          commentArray.push({ songId: each._id, comments: each.songComments })
-          const likesFollowsObj = {
-            songId: each._id,
-            totalLikes: each.songLikes,
-            totalFollowers: each.songUser.followers
-          }
-          followsLikesArray.push(likesFollowsObj)
-          return { song: each, songVideo: gifsCopy[index].url }
-        }).reverse()
+      console.log(res.data, "lets see this tho?")
+      let commentArray = []
+      let followsLikesArray = []
 
-        setTotalFollowsLikesArr(followsLikesArray)
-        setCommentsArr(commentArray)
-        setHomeFeedArr(songsArray)
+      const songsArray = res.data.map((each, index) => {
+        commentArray.push({ songId: each._id, comments: each.songComments })
+        const likesFollowsObj = {
+          songId: each._id,
+          totalLikes: each.songLikes,
+          totalFollowers: each.songUser.followers
+        }
+        followsLikesArray.push(likesFollowsObj)
+        return { song: each, songVideo: gifsCopy[index].url }
+      }).reverse()
 
+      setTotalFollowsLikesArr(followsLikesArray)
+      setCommentsArr(commentArray)
+      setHomeFeedArr(songsArray)
+      setIsLoading(false)
     }, signal)
 
     .catch(console.error)
@@ -111,6 +113,7 @@ function HomeFeed(props) {
 
   return (
     <ul className="video-scroll-container">
+      <Loading isLoading={isLoading} />
       {homeDisplayNodes}
     </ul>
   )
