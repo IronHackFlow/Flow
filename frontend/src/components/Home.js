@@ -226,14 +226,16 @@ function Home(props) {
                           alt="follow user icon"
                         />
                       </div>
-                      <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalFollowers?.length}</p>
-                        <p>
-                          {(totalFollowers?.length === 1)
-                            ? "Follow"
-                            : "Follows"
-                          }
-                        </p>
+                      <div className="action-btn-container">
+                        <div className="action-btn-text">
+                          <p style={{ color: 'white' }}>{totalFollowers?.length}</p>
+                          <p>
+                            {(totalFollowers?.length === 1)
+                              ? "Follow"
+                              : "Follows"
+                            }
+                          </p>
+                        </div>
                       </div>
                     </button>
 
@@ -244,14 +246,16 @@ function Home(props) {
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
-                      <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalLikes?.length}</p>
-                        <p>
-                          {(totalLikes?.length === 1) 
-                            ? "Like"
-                            : "Likes"
-                          }
-                        </p>
+                      <div className="action-btn-container">
+                        <div className="action-btn-text">
+                          <p style={{ color: 'white' }}>{totalLikes?.length}</p>
+                          <p>
+                            {(totalLikes?.length === 1) 
+                              ? "Like"
+                              : "Likes"
+                            }
+                          </p>
+                        </div>
                       </div>
                     </button>
 
@@ -263,14 +267,16 @@ function Home(props) {
                           alt="comment on post icon"
                         />
                       </div>
-                      <div className="action-btn-text">
-                        <p style={{ color: 'white' }}>{totalComments}</p>
-                        <p>
-                          {(totalComments === 1) 
-                            ? "Comment"
-                            : "Comments"
-                          }
-                        </p>
+                      <div className="action-btn-container">
+                        <div className="action-btn-text">
+                          <p style={{ color: 'white' }}>{totalComments}</p>
+                          <p>
+                            {(totalComments === 1) 
+                              ? "Comment"
+                              : "Comments"
+                            }
+                          </p>
+                        </div>
                       </div>
                     </button>
                   </div>
@@ -281,79 +287,71 @@ function Home(props) {
             <div className="song-details-2_song-data">
               <div className="song-data-container">
                 <div className="song-user-section">
-                  <div className="user-pic-container">
-                    <div className="user-pic_shadow-div-outset">
-                      <Link
-                        to={`/profile/${songInView.songUser?._id}`}
-                        className="user-pic_shadow-div-inset"
-                      >
-                        <img
-                          src={songInView.songUser?.picture}
-                          alt=""
-                          ref={props.profilePicRef}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="song-title-container">
-                    <div className="song-title_shadow-div-outset">
-                      <div className="song-title_shadow-div-inset">
-                        <p id="one">
-                          {songInView?.songName}
-                        </p>
-                        <p id="two">
-                          <img src={bullet} alt="bullet point" />
-                          {songInView.songUser?.userName}
-                        </p>
+                  <div className="song-user-container">
+                    <div className="user-pic-container">
+                      <div className="user-pic_shadow-div-outset">
+                        <Link
+                          to={`/profile/${songInView.songUser?._id}`}
+                          className="user-pic_shadow-div-inset"
+                        >
+                          <img
+                            src={songInView.songUser?.picture}
+                            alt=""
+                            ref={props.profilePicRef}
+                          />
+                        </Link>
                       </div>
+                    </div>
 
-                      <div className="song-caption-container">
-                        <div className="song-date">
-                          <FormatDate date={songInView?.songDate} />{' '}
-                          <img src={bullet} alt="bullet point" />
+                    <div className="song-title-container">
+                      <div className="song-title_shadow-div-outset">
+                        <div className="song-title_shadow-div-inset">
+                          <p id="one">
+                            {songInView?.songName}
+                          </p>
+                          <p id="two">
+                            <img src={bullet} alt="bullet point" />
+                            {songInView.songUser?.userName}
+                          </p>
                         </div>
-                        <p className="song-caption">
-                          {songInView?.songCaption
-                            ? songInView?.songCaption
-                            : 'no caption for this song'}
-                        </p>
+
+                        <div className="song-caption-container">
+                          <div className="song-date">
+                            <FormatDate date={songInView?.songDate} />{' '}
+                            <img src={bullet} alt="bullet point" />
+                          </div>
+                          <p className="song-caption">
+                            {songInView?.songCaption
+                              ? songInView?.songCaption
+                              : 'no caption for this song'}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="song-play-section">
-                  <div className="play-bar-container">
-                    <AudioTimeSlider
-                      isPlaying={isPlaying}
-                      setIsPlaying={setIsPlaying}
-                      currentSong={songInView}
-                      location={home}
-                      />
-                  </div>
-
                   <div className="play-song-container">
                     <div className="play-btn-container">
-                      <div className="play-btn_shadow-div-outset">
+                      <div className="play-btn-container-2">
                         <div className="play-btn_shadow-div-inset">
-                          {isPlaying 
-                            ? (
+                          {isPlaying ? 
+                            (
                               <button 
-                                className="play-btn_shadow-div-outset-2" 
+                                className="play-btn_shadow-div-outset" 
                                 onClick={() => handlePlayPause(false)}
                               >
                                 <img
-                                  className="button-icons bi-play"
+                                  className="button-icons bi-pause"
                                   src={pause}
                                   ref={playPauseRef}
                                   alt="pause"
                                 />
                               </button>
-                            )
-                            : (
+                            ) : (
                               <button 
-                                className="play-btn_shadow-div-outset-2" 
+                                className="play-btn_shadow-div-outset" 
                                 onClick={() => handlePlayPause(true)}
                               >
                                 <img
@@ -366,6 +364,17 @@ function Home(props) {
                             )}
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  
+                  <div className="play-bar-container">
+                    <div className="play-bar_shadow-div-inset">
+                      <AudioTimeSlider
+                        isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
+                        currentSong={songInView}
+                        location={home}
+                      />
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
@@ -23,8 +23,12 @@ function App(props) {
   const [locationIndicator, setLocationIndicator] = useState()
 
   useEffect(() => {
-    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    document.getElementById("body").style.height = `${h}px`
+    const handleResize = () => {
+      var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      document.getElementById("body").style.height = `${h}px`
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {

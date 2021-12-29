@@ -54,7 +54,7 @@ function Comments(props) {
       if (props.poppedUp === true) {
         return "comment-pop-out comment-popped"
       } else {
-        return "comment-pop-out"
+        return "comment-pop-out comment-menu-down"
       }
     } else {
       if (props.poppedUp === true) {
@@ -293,16 +293,20 @@ function Comments(props) {
       <div className="inner-com">
         <div className="com-cont-1">
           <form className="social-comment-form" onSubmit={(e) => handleSubmit(e)}>
-            <input
-              className="social-comment-input"
-              ref={props.commentInputRef}
-              onChange={e => setComment(e.target.value)}
-              type="text"
-              placeholder="Make a comment..."
-            ></input>
-            <button className="comment-button">
-              <img className="social-icons si-send" src={send} alt="send" />
-            </button>
+            <div className="social-input-container">
+              <input
+                className="social-comment-input"
+                ref={props.commentInputRef}
+                onChange={e => setComment(e.target.value)}
+                type="text"
+                placeholder="Make a comment..."
+              ></input>
+            </div>
+            <div className="comment-btn-container">
+              <button className="comment-button">
+                <img className="social-icons si-send" src={send} alt="send" />
+              </button>
+            </div>
           </form>
         </div>
 

@@ -56,7 +56,7 @@ function AuthSignUp(props) {
         </div>
 
         <div className="login-input-container email-container">
-          <div className="login-input_shadow-div-outset email" style={{borderRadius: "13px 13px 5px 5px"}}>
+          <div className="login-input_shadow-div-outset email" style={{borderRadius: "5px"}}>
             <p>Email</p>
             <div className="input-container">
               <input 

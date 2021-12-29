@@ -68,26 +68,28 @@ function UseAudioPlayer(props) {
   `;
   
   const startTimer = () => {
-    clearInterval(intervalRef.current)
-    clearInterval(secondsRef.current)
-  
-    intervalRef.current = setInterval(() => {
-      if (audioRef.current.ended) {
-        props.setIsPlaying(false)
-        currentProgressRef.current = 0
-      } 
-      else {
-        setTrackProgress(audioRef.current.currentTime)
-      }
-    }, [100])
-  
-    secondsRef.current = setInterval(() => {
-      if (audioRef.current.ended) {
-      }
-      else {
-        currentProgressRef.current++
-      }
-    }, [1000])
+    if (audioRef.current !== null) {
+      clearInterval(intervalRef.current)
+      clearInterval(secondsRef.current)
+    
+      intervalRef.current = setInterval(() => {
+        if (audioRef.current?.ended) {
+          props.setIsPlaying(false)
+          currentProgressRef.current = 0
+        } 
+        else {
+          setTrackProgress(audioRef.current?.currentTime)
+        }
+      }, [100])
+    
+      secondsRef.current = setInterval(() => {
+        if (audioRef.current?.ended) {
+        }
+        else {
+          currentProgressRef.current++
+        }
+      }, [1000])
+    }
   }
     
   const onScrub = (value) => {
