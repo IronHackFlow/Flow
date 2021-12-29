@@ -12,13 +12,11 @@ import gifsArr from "../../images/gifs.json";
 function FollowingFeed(props) {
   // useDebugInformation("IntersectionTest", props)
   const { user } = React.useContext(TheContext)
-  const { setSongInView } = React.useContext(TheViewContext)
+  const { setSongInView, isLoading, setIsLoading } = React.useContext(TheViewContext)
 
   const gifsCopy = [...gifsArr];
   const [followingFeedArr, setFollowingFeedArr] = useState([]);
   const [followingDisplayNodes, setFollowingDisplayNodes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
   const viewRef = useRef();
 
   const observer = new IntersectionObserver(

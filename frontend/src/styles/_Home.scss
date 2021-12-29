@@ -10,34 +10,40 @@
   overflow-y: hidden;
 
   .section-1a_toggle-feed {
-    @include flexCenter(5%, 100%, 0px, center, center, row);
+    @include flexCenter(6%, 100%, 0px 0px 22px 22px, center, center, row);
     background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
 
     .toggle-feed-container {
       @include flexCenter(100%, 99%, 0px, space-around, center, row);
 
       .each-feed_shadow-div-inset {
-        @include flexCenter(81%, 32%, 5px 50px 50px 5px, center, center, row);
-        box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #ffffff;
+        @include flexCenter(83%, 32%, 5px, center, center, row);
+        box-shadow: inset 2px 2px 3px #4c4c4c, inset -2px -2px 3px #ffffff;
 
         .each-feed_shadow-div-outset {
-          @include flexCenter(65%, 89%, 40px, center, center, column);
-          box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
+          @include flexCenter(72%, 91%, 3px, center, center, column);
+          box-shadow: 2px 2px 4px #4c4b4b, -2px -2px 2px #ffffff;
 
           .each-feed_shadow-div-inset-2 {
-            @include flexCenter(90%, 96%, 35px, center, center, column);
-            box-shadow: inset 1px 1px 3px #6a6a6a, inset -1px -1px 3px #ffffff;
+            @include flexCenter(77%, 94%, 35px, center, center, column);
+            box-shadow: inset 1px 1px 3px #464646, inset -1px -1px 3px #ffffff;
             font-size: 14px;
             color: #ec6aa0;
             font-weight: bolder;
           }
         }
+        // classes to apply to toggle feed button when clicked
         .toggle-feed {
-          box-shadow: inset 2px 2px 4px #813052, inset -2px -2px 2px #f8aecd;
+          height: 76%;
+          width: 92%;
           background: #e24f8c;
+          box-shadow: inset 2px 2px 3px #813052, inset -2px -2px 2px #fedeeb;
+          transition: background .4s ease-in;
 
           .toggle-feed-2 {
-            box-shadow: none;
+            height: 73%;
+            width: 91%;
+            box-shadow: inset 1px 1px 3px #6c2341, inset -1px -1px 3px #eab4ca;
             color: white;
           }
         }
@@ -119,22 +125,25 @@
 
             .action-btn_shadow-div-outset {
               @include flexCenter(77%, 30.5%, 4px, space-evenly, center, row);
+              background: initial;
               box-shadow: 3px 3px 4px #505050, -2px -2px 2px 0px #ffffff;
+              transition: background .2s, box-shadow .2s;
 
               &:active {
                 box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
+                transition: box-shadow .5s;
               }
 
               .action-btn-icon_shadow-div-inset {
                 @include flexCenter(100%, 32%, 0, center, center, row);
                 color: #ec6aa0;
                 list-style-type: none;
-                // box-shadow: inset 1px 1px 3px #575757, inset -1px -1px 3px #fdfdfd;
               }
 
               .action-btn-container {
                 @include flexCenter(100%, 68%, 0, flex-start, center, row);
-
+                position: relative;
+                
                 .action-btn-text {
                   @include flexCenter(80%, 93%, 3px, center, center, column);
                   box-shadow: inset 1px 1px 3px #505050, inset -1px -1px 3px #ffffff;
@@ -148,10 +157,12 @@
                 }
               }
             }
+
             // class to apply on user liking, following, or commenting on a song
             .liked-followed-commented {
               background: #ec6aa0;
               box-shadow: 3px 3px 3px #502939, -1px -2px 2px 0px #fff1f7;
+              transition: background .2s, box-shadow .2s;
               .action-btn-icon_shadow-div-inset {
                 img {
                   filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
@@ -161,6 +172,20 @@
                 box-shadow: inset 1px 1px 3px #3b272f, inset -2px -2px 3px #fdedf4;
                 background: #c85886;
                 color: #ffd1e4;
+                transition: background .2s, box-shadow .2s;
+              }
+            }
+            // class to apply to comment button on press
+            .comment-pressed {
+              box-shadow: inset 3px 3px 3px #464646, inset -2px -2px 3px 0px #ffffff;
+              background: #737373;
+              transition: background .4s, box-shadow .4s;
+              .action-btn-container {
+                .action-btn-text {
+                  height: 73%;
+                  width: 91%;
+                  box-shadow: 1px 1px 2px #414141, -1px -1px 3px #b3b3b3;
+                }
               }
             }
           }
@@ -493,10 +518,10 @@
 
                 .comment-list-photo {
                   @include flexCenter(98%, 22%, 0px, center, flex-start, row);
-                  padding-top: 2%;
+                  padding-top: 1.5%;
     
                   .comment-photo-inner {
-                    @include flexCenter(4em, 80%, 9px 30px 30px 4px, center, center, column);
+                    @include flexCenter(4em, 82%, 9px 30px 30px 4px, center, center, column);
                     box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 3px #9d9d9d;
     
                     .comment-photo-outer {
@@ -609,10 +634,6 @@
                         .comm-likereply-btn {
                           @include flexCenter(100%, 45%, 0, center, center, row);
                           // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-                          
-                          &:active {
-                            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-                          }
 
                           .likes-number-container {
                             @include flexCenter(30px, 30px, 100%, center, center, row);
@@ -644,6 +665,11 @@
                           font-size: .8rem;
                           color: white;
                           font-weight: bold;
+                        }
+
+                        &:active {
+                          background: #606060;
+                          box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
                         }
                       }
                     }
@@ -771,11 +797,4 @@
   background: #efbfbf;
   box-shadow: inset 3px 3px 4px #bd9797, inset -3px -3px 4px #ffe7e7;
   border: 2px solid #df56a0;
-}
-.loading {
-  height: 100%;
-  width: 100%;
-  color: white;
-  background: gray;
-  position: absolute;
 }

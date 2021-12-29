@@ -46,6 +46,7 @@ function Home(props) {
   const [commentsArr, setCommentsArr] = useState([])
   const [totalComments, setTotalComments] = useState();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isHomeFeed, setIsHomeFeed] = useState(true);
   const [isTrendingFeed, setIsTrendingFeed] = useState(false);
   const [isFollowingFeed, setIsFollowingFeed] = useState(false);
@@ -137,15 +138,21 @@ function Home(props) {
         totalFollowsLikesArr, 
         setTotalFollowsLikesArr,
         isFollowingFeed,
+        isLoading, 
+        setIsLoading
       }}
     >
       <div className="Home">
         <div className="section-1_feed">
           <div className="section-1a_toggle-feed">
             <div className="toggle-feed-container">
-              <div className="each-feed_shadow-div-inset">
+              <div 
+                className="each-feed_shadow-div-inset"
+                style={{borderRadius: "3px 3px 3px 19px"}}
+              >
                 <button
                   className={isHomeFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
+                  style={{borderRadius: "30px 5px 5px 30px"}}
                   onClick={() => {
                     setIsHomeFeed(true)
                     setIsTrendingFeed(false)
@@ -158,7 +165,7 @@ function Home(props) {
                 </button>
               </div>
               
-              <div className="each-feed_shadow-div-inset" style={{ borderRadius: '50px' }}>
+              <div className="each-feed_shadow-div-inset">
                 <button
                   className={isTrendingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   onClick={() => {
@@ -175,10 +182,11 @@ function Home(props) {
 
               <div
                 className="each-feed_shadow-div-inset"
-                style={{ borderRadius: '50px 5px 5px 50px' }}
+                style={{ borderRadius: '3px 3px 19px 3px' }}
               >
                 <button
                   className={isFollowingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
+                  style={{borderRadius: "5px 30px 30px 5px"}}
                   onClick={() => {
                     setIsFollowingFeed(true)
                     setIsTrendingFeed(false)
@@ -227,6 +235,8 @@ function Home(props) {
                         />
                       </div>
                       <div className="action-btn-container">
+                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalFollowers?.length}</p>
                           <p>
@@ -247,6 +257,8 @@ function Home(props) {
                         <img className="social-icons si-like" src={like} alt="like post icon" />
                       </div>
                       <div className="action-btn-container">
+                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalLikes?.length}</p>
                           <p>
@@ -259,7 +271,7 @@ function Home(props) {
                       </div>
                     </button>
 
-                    <button className="action-btn_shadow-div-outset" onClick={popUpComments}>
+                    <button className={`action-btn_shadow-div-outset ${poppedUp ? "comment-pressed" : ""}`} onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img
                           className="social-icons si-comment"
@@ -268,6 +280,8 @@ function Home(props) {
                         />
                       </div>
                       <div className="action-btn-container">
+                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalComments}</p>
                           <p>
