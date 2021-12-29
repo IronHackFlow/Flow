@@ -451,27 +451,27 @@
       @include flexCenter(85%, 100%, 25px, center, center, column);
       opacity: 0;
 
-      .comments-title {
-        height: 8%;
-        width: 96%;
+      // .comments-title {
+      //   height: 8%;
+      //   width: 96%;
 
-        .comments-title-inner {
-          @include flexCenter(88%, 100%, 21px, center, center, row);
-          box-shadow: 2px 2px 4px #555555, -2px -2px 4px #dbdbdb;
+      //   .comments-title-inner {
+      //     @include flexCenter(88%, 100%, 21px, center, center, row);
+      //     box-shadow: 2px 2px 4px #555555, -2px -2px 4px #dbdbdb;
 
-          p {
-            font-weight: bold;
-            color: #5b5b5b;
-          }
-        }
-      }
+      //     p {
+      //       font-weight: bold;
+      //       color: #5b5b5b;
+      //     }
+      //   }
+      // }
 
       .comments-container {
-        @include flexCenter(92%, 100%, 21px, center, center, row);
+        @include flexCenter(100%, 100%, 21px, center, center, row);
 
         .comment-list-container {
           @include flexCenter(97%, 98%, 15px 15px 5px 24px, center, center, column);
-          background: linear-gradient(314deg, #4c4c4c, #7b7b7b);
+          background: linear-gradient(313deg, #383737, #767676);
           box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
 
           .comment-list-cont {
@@ -484,171 +484,198 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              flex-direction: column;
               margin-top: 1%;
-              box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
+              box-shadow: inset 2px 2px 4px #313131, inset -2px -2px 3px #777777;
   
-              .comment-list-photo {
-                @include flexCenter(98%, 20%, 0px, center, flex-start, row);
-                padding-top: 2%;
-  
-                .comment-photo-inner {
-                  @include flexCenter(50px, 80%, 50px, center, center, column);
-                  box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #9e9e9e;
-  
-                  .comment-photo-outer {
-                    @include flexCenter(80%, 80%, 50px, center, center, row);
-                    box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-  
-                    a {
-                      @include flexCenter(90%, 90%, 50px, center, center, row);
-                      overflow: hidden;
-                      object-fit: contain;
-  
-                      img {
-                        height: 100%;
-                        width: 100%;
+              .comment-list-inner {
+                @include flexCenter(auto, 100%, 0px, space-evenly, flex-start, row);
+
+                .comment-list-photo {
+                  @include flexCenter(98%, 22%, 0px, center, flex-start, row);
+                  padding-top: 2%;
+    
+                  .comment-photo-inner {
+                    @include flexCenter(4em, 80%, 9px 30px 30px 4px, center, center, column);
+                    box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 3px #9d9d9d;
+    
+                    .comment-photo-outer {
+                      @include flexCenter(80%, 80%, 50px, center, center, row);
+                      box-shadow: 2px 2px 3px #3b3b3b, -2px -2px 2px #939292;
+    
+                      a {
+                        @include flexCenter(90%, 90%, 50px, center, center, row);
+                        overflow: hidden;
+                        object-fit: contain;
+    
+                        img {
+                          height: 100%;
+                          width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                .comment-text-container {
+                  @include flexCenter(auto, 78%, 0, center, flex-start, column);
+
+                  .comment-list-outer {
+                    @include flexCenter(auto, 97%, 22px 5px 30px 5px, center, center, column);
+                    box-shadow: 2px 2px 3px #2f2f2f, -2px -2px 2px #989898;
+                    margin-top: 3%;
+
+                    .comment-username {
+                      height: 15px;
+                      width: 90%;
+                      font-size: 1.1rem;
+                      color: #ec6aa0;
+                      font-weight: bold;
+                      text-align: start;
+                      margin: 1% 0% 1% 0%;
+                    }
+                    .comment-date {
+                      height: 15px;
+                      width: 90%;
+                      color: #efbfbf;
+                      text-align: start;
+                      margin-bottom: 2%;
+                      p {
+                        font-size: .8rem;
+                      }
+                    }
+                    .comment-text {
+                      height: fit-content;
+                      width: 90%;
+                      text-align: start;
+                      color: white;
+                      word-wrap: break-word;
+                      font-size: 1rem;
+                      line-height: 1;
+                      margin-bottom: 5px;
+                    }
+                    .comment-text-input {
+                      min-height: 15px;
+                      border-radius: 5px 5px 15px 15px;
+                      background: initial;
+                      box-shadow: inset 2px 2px 3px #464646, inset -2px -2px 3px #9e9e9e;
+                      width: 90%;
+                      font-size: 13px;
+                      padding: 3px;
+                      text-align: start;
+                      color: white;
+                      word-wrap: break-word;
+                      line-height: 1;
+                      margin-bottom: 5px;
+                      
+                      &::placeholder {
+                        color: rgb(155, 155, 155);
+                        font-family: 'Roboto', sans-serif;
+                      }
+                      &:focus {
+                        border: 2px solid pink;
+                        outline: none !important;
+                        color: white;
+                        border-radius: 5px 5px 15px 15px;
                       }
                     }
                   }
                 }
               }
-  
-              .comment-list-inner {
-                @include flexCenter(auto, 80%, 0px, space-evenly, flex-start, column);
 
-                .comment-list-outer {
-                  @include flexCenter(auto, 97%, 7px 7px 25px 7px, center, center, column);
-                  box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
-                  margin-top: 3%;
+              .comment-list-buttons {
+                @include flexCenter(2.5em, 100%, 0, flex-start, center, row);
+                margin: 2% 0% 2% 0%;
 
-  
-                  .comment-username {
-                    height: 15px;
-                    width: 90%;
-                    color: #ec6aa0;
-                    font-weight: bold;
-                    text-align: start;
-                    margin-bottom: 3px;
-                  }
-                  .comment-date {
-                    height: 15px;
-                    width: 90%;
-                    color: #efbfbf;
-                    font-size: 12px;
-                    text-align: start;
-                    margin-bottom: 10px;
-                  }
-                  .comment-text {
-                    height: fit-content;
-                    width: 90%;
-                    text-align: start;
-                    color: white;
-                    word-wrap: break-word;
-                    font-size: 14px;
-                    line-height: 1;
-                    margin-bottom: 5px;
-                  }
-                  .comment-text-input {
-                    min-height: 15px;
-                    border-radius: 5px 5px 15px 15px;
-                    background: initial;
-                    box-shadow: inset 2px 2px 3px #464646, inset -2px -2px 3px #9e9e9e;
-                    width: 90%;
-                    font-size: 13px;
-                    padding: 3px;
-                    text-align: start;
-                    color: white;
-                    word-wrap: break-word;
-                    line-height: 1;
-                    margin-bottom: 5px;
-                    
-                    &::placeholder {
-                      color: rgb(155, 155, 155);
-                      font-family: 'Roboto', sans-serif;
-                    }
-                    &:focus {
-                      border: 2px solid pink;
-                      outline: none !important;
-                      color: white;
-                      border-radius: 5px 5px 15px 15px;
-                    }
-                  }
+                .space-filler {
+                  @include flexCenter(100%, 22%, 0, center, center, row);
+
                 }
-  
-                .comment-list-buttons {
-                  @include flexCenter(auto, 100%, 50px, flex-start, center, row);
-                  margin: 4% 0% 4% 0%;
+                .comment-btns-container {
+                  @include flexCenter(100%, 78%, 0, flex-start, center, row);
 
-                  .comment-popout-container {
-                    @include flexCenter(auto, 50%, 8px, flex-start, center, row);
-                    box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-                    position: relative;
-  
-                    .clc-3,
-                    .clc-4 {
-                      opacity: 0;
-                      .clb-3,
-                      .clb-4 {
-                        @include flexCenter(26px, 26px, 50px, center, center, row);
-                      }
-                    }
-                    .dot-menu {
-                      @include flexCenter(100%, 30px, 0px, center, center, column);
-                      position: absolute;
-                      right: 11px;
-  
-                      .dots {
-                        height: 9px;
-                        width: 9px;
-                        border-radius: 50px;
-                        box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
-                      }
-                    }
-                  }
-  
-                  .comment-likereply-container {
-                    @include flexCenter(100%, initial, 0px, flex-start, center, row);
-  
-                    .comm-likereply-btn {
-                      @include flexCenter(28px, 28px, 50px, center, center, row);
-                      box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-                      margin: 0px 8px 0px 8px;
-                      position: relative;
-                      
-                      &:active {
-                        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
-                      }
-  
-                      .likes-number-container {
-                        @include flexCenter(30px, 30px, 100%, center, center, row);
-                        position: absolute;
-                        top: -37%;
-                        left: 32%;
-                        background: none;
-  
-                        p {
-                          font-size: 13px;
-                          font-weight: bold;
+                  .comment-btns_shadow-div-inset {
+                    @include flexCenter(100%, 97%, 30px 5px 15px 30px, flex-start, center, row);
+                    box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
+
+                    .comment-likereply-container {
+                      @include flexCenter(100%, 33%, 0px, center, center, row);
+                      margin-left: 2%;
+
+                      .comment-likereply_shadow-div-outset {
+                        @include flexCenter(69%, 95%, 4px, center, center, row);
+                        box-shadow: 2px 2px 3px #353535, -2px -2px 2px #858585;
+
+                        .comm-likereply-btn {
+                          @include flexCenter(100%, 45%, 0, center, center, row);
+                          // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+                          
+                          &:active {
+                            box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -2px 3px #989898;
+                          }
+
+                          .likes-number-container {
+                            @include flexCenter(30px, 30px, 100%, center, center, row);
+                            position: absolute;
+                            top: -37%;
+                            left: 32%;
+                            background: none;
+
+                            p {
+                              font-size: .75rem;
+                              font-weight: bold;
+                              color: white;
+                            }
+                          }
+
+                          .comment {
+                            height: 1rem;
+                          }
+                          .heart {
+                            height: 1.5rem;
+                          }
+                          .edit {
+                            height: 1.4rem;
+                          }
+                        }
+
+                        .comm-likereply-text {
+                          @include flexCenter(100%, 55%, 0, flex-start, center, row);
+                          font-size: .8rem;
                           color: white;
+                          font-weight: bold;
                         }
                       }
-  
-                      .social-icons {
-                        height: 1.2em;
-                        width: 1.2em;
-                      }
-  
-                      .heart {
-                        height: 1.5em;
-                        width: 1.5em;
-                      }
                     }
-  
-                    .comm-likereply-text {
-                      display: flex;
-                      font-size: 13px;
-                      color: white;
-                      font-weight: bold;
+                    .clc-2 {
+                      justify-content: flex-start;
+                    }
+
+                    .comment-popout-container {
+                      @include flexCenter(auto, 30%, 8px, flex-start, center, row);
+                      box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+                      position: relative;
+
+                      .clc-3,
+                      .clc-4 {
+                        opacity: 0;
+                        .clb-3,
+                        .clb-4 {
+                          @include flexCenter(26px, 26px, 50px, center, center, row);
+                        }
+                      }
+                      .dot-menu {
+                        @include flexCenter(100%, 30px, 0px, center, center, column);
+                        position: absolute;
+                        right: 11px;
+
+                        .dots {
+                          height: 9px;
+                          width: 9px;
+                          border-radius: 50px;
+                          box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
+                        }
+                      }
                     }
                   }
                 }

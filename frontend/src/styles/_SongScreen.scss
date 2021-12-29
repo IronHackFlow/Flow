@@ -312,7 +312,9 @@
               height: 1.8em;
               width: 1.8em;
             }
-            
+            .comment {
+              height: 1.5rem;
+            }
             &:active {
               box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
               background: #ec6aa0;

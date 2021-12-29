@@ -172,114 +172,128 @@ function Comments(props) {
 
     return (
       <div className="comment-list">
-        <div className="comment-list-photo">
-          <div className="comment-photo-inner">
-            <div className="comment-photo-outer">
-              <Link
-                to={{
-                  pathname: `/profile/${each.commUser?._id}`,
-                  profileInfo: each.commUser,
-                }}
-              >
-                <img src={each.commUser?.picture} alt="user's profile"></img>
-              </Link>
+        <div className="comment-list-inner">
+          <div className="comment-list-photo">
+            <div className="comment-photo-inner">
+              <div className="comment-photo-outer">
+                <Link
+                  to={{
+                    pathname: `/profile/${each.commUser?._id}`,
+                    profileInfo: each.commUser,
+                  }}
+                >
+                  <img src={each.commUser?.picture} alt="user's profile"></img>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="comment-text-container">
+            <div className="comment-list-outer">
+              <p className="comment-username">
+                {each.commUser?.userName}
+                <span style={{ color: 'white', fontWeight: 'bold', fontSize: '11px' }}>
+                  {props.songInView?.songUser?._id === each.commUser?._id ? ' 𑁦 song author' : null}
+                </span>
+              </p>
+              <div className="comment-date">
+                <FormatDate date={each.commDate} />
+              </div>
+              {editCommentText ? (
+                <textarea 
+                  className="comment-text-input" 
+                  defaultValue={each.comment}
+                  placeholder={each.comment}
+                  onChange={(e) => editCommentTextHandler(e)}>
+                </textarea>
+              ) : (
+                <p className="comment-text">
+                  {each.comment}
+                </p>
+              )}
             </div>
           </div>
         </div>
+        
+        <div className="comment-list-buttons" ref={listBtnsRef}>
+          <div className="space-filler">
 
-        <div className="comment-list-inner">
-          <div className="comment-list-outer">
-            <p className="comment-username">
-              {each.commUser?.userName}
-              <span style={{ color: 'white', fontWeight: 'bold', fontSize: '12px' }}>
-                {props.songInView?.songUser?._id === each.commUser?._id ? ' 𑁦 song author' : null}
-              </span>
-            </p>
-            <div className="comment-date">
-              <FormatDate date={each.commDate} />
-            </div>
-            {editCommentText ? (
-              <textarea 
-                className="comment-text-input" 
-                defaultValue={each.comment}
-                placeholder={each.comment}
-                onChange={(e) => editCommentTextHandler(e)}>
-              </textarea>
-            ) : (
-              <p className="comment-text">
-                {each.comment}
-              </p>
-            )}
           </div>
+          <div className="comment-btns-container">
+            <div className="comment-btns_shadow-div-inset">
+              <div className="comment-likereply-container clc-1">
+                <div className="comment-likereply_shadow-div-outset" style={{borderRadius: "40px 4px 4px 40px"}}>
+                  <div
+                    className="comm-likereply-btn clb-1"
+                    onClick={checkCommUser ? () => deleteComment(each) : () => { handlePostLike("Comment", each._id)}}
+                  >
+                    <img
+                      className="social-icons heart"
+                      src={checkCommUser ? trash : heart2}
+                      alt="delete or like"
+                    />
+                    <div className="likes-number-container">
+                      <p>{checkCommUser ? '' : totalCommentLikes?.length}</p>
+                    </div>
+                  </div>
 
-          <div className="comment-list-buttons" ref={listBtnsRef}>
-            <div className="comment-likereply-container clc-1">
-              <div
-                className="comm-likereply-btn clb-1"
-                onClick={checkCommUser ? () => deleteComment(each) : () => { handlePostLike("Comment", each._id)}}
-              >
-                <img
-                  className="social-icons heart"
-                  src={checkCommUser ? trash : heart2}
-                  alt="delete or like"
-                />
-                <div className="likes-number-container">
-                  <p>{checkCommUser ? '' : totalCommentLikes?.length}</p>
+                  <div className="comm-likereply-text" ref={likeTextRef}>
+                    {checkCommUser ? 'Delete' : 'Like'}
+                  </div>
                 </div>
               </div>
 
-              <div className="comm-likereply-text" ref={likeTextRef}>
-                {checkCommUser ? 'Delete' : 'Like'}
-              </div>
-            </div>
+              {checkCommUser ? (
+                <div className="comment-likereply-container clc-2">
+                  <div className="comment-likereply_shadow-div-outset">
+                    <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
+                      <img
+                        className="social-icons edit"
+                        src={edit}
+                        alt="edit"
+                      />
+                    </div>
+                    <div className="comm-likereply-text" ref={replyTextRef}>
+                      Edit
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="comment-likereply-container clc-2">
+                  <div className="comment-likereply_shadow-div-outset">
+                    <div className="comm-likereply-btn clb-2">
+                      <img
+                        className="social-icons comment"
+                        src={comments}
+                        alt="reply"
+                      />
+                    </div>
+                    <div className="comm-likereply-text" ref={replyTextRef}>
+                      Reply
+                    </div>
+                  </div>
+                </div>
+              )}
 
-            {checkCommUser ? (
-              <div className="comment-likereply-container clc-2">
-                <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
-                  <img
-                    className="social-icons comment"
-                    src={edit}
-                    alt="edit"
-                  />
+              <div className="comment-popout-container" ref={slideOutRef}>
+                {/* <div className="comment-likereply-container clc-3" ref={clcThree}>
+                  <div className="comm-likereply-btn clb-3">
+                    <img className="social-icons comment" src={share} alt="share" />
+                  </div>
+                  <div className="comm-likereply-text">Share</div>
                 </div>
-                <div className="comm-likereply-text" ref={replyTextRef}>
-                  Edit
-                </div>
-              </div>
-            ) : (
-              <div className="comment-likereply-container clc-2">
-                <div className="comm-likereply-btn clb-2">
-                  <img
-                    className="social-icons comment"
-                    src={comments}
-                    alt="reply"
-                  />
-                </div>
-                <div className="comm-likereply-text" ref={replyTextRef}>
-                  Reply
-                </div>
-              </div>
-            )}
 
-            <div className="comment-popout-container" ref={slideOutRef}>
-              <div className="comment-likereply-container clc-3" ref={clcThree}>
-                <div className="comm-likereply-btn clb-3">
-                  <img className="social-icons comment" src={share} alt="share" />
-                </div>
-                <div className="comm-likereply-text">Share</div>
-              </div>
+                <div className="comment-likereply-container clc-4" ref={clcFour}>
+                  <div className="comm-likereply-btn clb-4">
+                    <img className="social-icons comment" src={flag} alt="report flag" />
+                  </div>
+                  <div className="comm-likereply-text">Report</div>
+                </div> */}
 
-              <div className="comment-likereply-container clc-4" ref={clcFour}>
-                <div className="comm-likereply-btn clb-4">
-                  <img className="social-icons comment" src={flag} alt="report flag" />
-                </div>
-                <div className="comm-likereply-text">Report</div>
-              </div>
-
-              <div className="dot-menu" onClick={() => menuAnimations()} ref={dotMenuRef}>
-                <div className="dots"></div>
-                <div className="dots"></div>
-                <div className="dots"></div>
+                {/* <div className="dot-menu" onClick={() => menuAnimations()} ref={dotMenuRef}>
+                  <div className="dots"></div>
+                  <div className="dots"></div>
+                  <div className="dots"></div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -311,13 +325,13 @@ function Comments(props) {
         </div>
 
         <div className="com-cont-2">
-          <div className="comments-title">
+          {/* <div className="comments-title">
             <div className="comments-title-inner">
               <p>
                 Comments - <span style={{ color: '#e5bdcd' }}>{props.totalComments}</span>
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="comments-container">
             <div className="comment-list-container">

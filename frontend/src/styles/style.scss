@@ -54,7 +54,9 @@ body, #root {
   text-align: center;
 
 }
-
+a {
+  text-decoration: none
+}
 input, textarea, select, button { 
   font-family: inherit; 
   border: none;
