@@ -2,11 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
-
 const User = require('../models/User')
 const Follows = require('../models/Follows')
-
-
 
 router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
   let body = {
@@ -41,6 +38,7 @@ router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
     { $push: { followers: followedObject } },
     { new: true },
   )
+    .populate('followers')
     .then(user => {
       resData.followedData = { ...user }
       console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
@@ -81,6 +79,7 @@ router.post(`/deleteFollowRT`, verifyJWT, async (req, res, next) => {
     { $pull: { followers: body.deleteObj._id } },
     { new: true },
   )
+    .populate('followers')
     .then(user => {
       resData.followedData = { ...user }
       console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)

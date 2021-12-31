@@ -7,6 +7,7 @@ import AudioTimeSlider from "./AudioTimeSlider"
 import Comments from "./Comments"
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
+
 import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'

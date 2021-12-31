@@ -23,7 +23,7 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   useDebugInformation("Home", props)
-  const { user } = React.useContext(TheContext);
+  const { user, windowSize } = React.useContext(TheContext);
 
   const { 
     handlePostLike, 
@@ -58,6 +58,28 @@ function Home(props) {
   
   const commentInputRef = useRef();
   const playPauseRef = useRef();
+
+  // this to prevent the mobile keyboard from ruining layout...........
+  // gets window height and converts body element and component div height to pixels
+  useLayoutEffect(() => {
+    var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    document.getElementById('body').style.height = `${onLoad}px`
+    document.getElementById('Home').style.height = `${onLoad}px`
+
+    const changeToPixels = () => {
+      var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      if (onChange  <  600) {
+        document.getElementById('body').style.height = `${windowSize}px`
+        document.getElementById('Home').style.height = `${windowSize}px`
+      } 
+      else {
+        document.getElementById('body').style.height = `${onChange}px`
+        document.getElementById('Home').style.height = `${onChange}px`
+      }
+    }
+    window.addEventListener("resize", changeToPixels)
+    return () => window.removeEventListener("resize", changeToPixels)
+  }, [])
 
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />
@@ -101,7 +123,7 @@ function Home(props) {
   const checkIfLiked = (arr) => {
     let liked = false
     arr.forEach(each => {
-      if (each.likeUser === user._id) return liked = true
+      if (each.likeUser === user?._id) return liked = true
     })
     return liked
   }
@@ -109,7 +131,7 @@ function Home(props) {
   const checkIfFollowed = (arr) => {
     let followed = false
     arr.forEach(each => {
-      if (each.follower === user._id) return followed = true
+      if (each.follower === user?._id) return followed = true
     })
     return followed
   }
@@ -142,7 +164,7 @@ function Home(props) {
         setIsLoading
       }}
     >
-      <div className="Home">
+      <div className="Home" id="Home">
         <div className="section-1_feed">
           <div className="section-1a_toggle-feed">
             <div className="toggle-feed-container">
@@ -186,7 +208,7 @@ function Home(props) {
               >
                 <button
                   className={isFollowingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  style={{borderRadius: "5px 30px 30px 5px"}}
+                  style={{borderRadius: "8px 45px 45px 8px"}}
                   onClick={() => {
                     setIsFollowingFeed(true)
                     setIsTrendingFeed(false)
@@ -221,7 +243,7 @@ function Home(props) {
                   <div className="action-btns-container">
                     <button
                       className={`action-btn_shadow-div-outset ${isFollowed ? "liked-followed-commented" : ""}`}
-                      onClick={() => { handlePostFollow(songInView?.songUser._id, songInView._id) }}
+                      onClick={() => { handlePostFollow(songInView?.songUser?._id, songInView?._id) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                     >
                       <div
@@ -229,13 +251,13 @@ function Home(props) {
                         style={{ borderRadius: '40px 4px 4px 40px' }}
                       >
                         <img
-                          className="social-icons si-follow"
+                          className="social-icons follow"
                           src={follow}
                           alt="follow user icon"
                         />
                       </div>
                       <div className="action-btn-container">
-                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
                         </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalFollowers?.length}</p>
@@ -254,10 +276,10 @@ function Home(props) {
                       onClick={() => { handlePostLike("Song", songInView._id, totalFollowsLikesArr) }}
                     >
                       <div className="action-btn-icon_shadow-div-inset">
-                        <img className="social-icons si-like" src={like} alt="like post icon" />
+                        <img className="social-icons like" src={like} alt="like post icon" />
                       </div>
                       <div className="action-btn-container">
-                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
                         </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalLikes?.length}</p>
@@ -274,13 +296,13 @@ function Home(props) {
                     <button className={`action-btn_shadow-div-outset ${poppedUp ? "comment-pressed" : ""}`} onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img
-                          className="social-icons si-comment"
+                          className="social-icons comment"
                           src={comments}
                           alt="comment on post icon"
                         />
                       </div>
                       <div className="action-btn-container">
-                        <div className="button-loading" style={isLoading ? {display: "block"} : {display: "none"}}>
+                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
                         </div>
                         <div className="action-btn-text">
                           <p style={{ color: 'white' }}>{totalComments}</p>
@@ -308,6 +330,7 @@ function Home(props) {
                           to={`/profile/${songInView.songUser?._id}`}
                           className="user-pic_shadow-div-inset"
                         >
+                          <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
                           <img
                             src={songInView.songUser?.picture}
                             alt=""
@@ -320,6 +343,7 @@ function Home(props) {
                     <div className="song-title-container">
                       <div className="song-title_shadow-div-outset">
                         <div className="song-title_shadow-div-inset">
+                          <div className="loading loading-title" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
                           <p id="one">
                             {songInView?.songName}
                           </p>
@@ -330,11 +354,11 @@ function Home(props) {
                         </div>
 
                         <div className="song-caption-container">
-                          <div className="song-date">
+                          <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
                             <FormatDate date={songInView?.songDate} />{' '}
                             <img src={bullet} alt="bullet point" />
                           </div>
-                          <p className="song-caption">
+                          <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
                             {songInView?.songCaption
                               ? songInView?.songCaption
                               : 'no caption for this song'}

@@ -30,6 +30,7 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
       { $push: { songLikes: likedObject } },
       { new: true },
     )
+      .populate('songLikes')
       .then(song => {
         res.status(200).json(song)
         console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
@@ -46,6 +47,7 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
       { $push: { commLikes: likedCommObject } },
       { new: true },
     ) 
+      .populate('commLikes')
       .then(comm => {
         res.status(200).json(comm)
         console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
@@ -74,6 +76,7 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
       { $pull: { songLikes: bodySong.deleteObj._id } },
       { new: true },
     )
+    .populate('songLikes')
       .then(song => {
         res.status(200).json(song)
         console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
@@ -94,6 +97,7 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
       { $pull: { commLikes: bodyComm.deleteObj._id } },
       { new: true },
     )
+      .populate('commLikes')
       .then(comm => {
         res.status(200).json(comm)
         console.log(

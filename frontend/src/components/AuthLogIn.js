@@ -42,6 +42,7 @@ function AuthLogIn(props) {
             <div className="input-container">
               <input 
                 className="login-input-field email-input"
+                ariaRequired="true"
                 type="text"
                 onChange={(e) => setUserName(e.target.value)}
               ></input>
@@ -54,6 +55,7 @@ function AuthLogIn(props) {
             <div className="input-container">
               <input 
                 className="login-input-field password-input"
+                areaRequired="true"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}

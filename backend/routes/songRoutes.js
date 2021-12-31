@@ -3,7 +3,6 @@ const router = express.Router()
 const verifyJWT = require('./verifyToken')
 const Songs = require('../models/Songs')
 
-
 router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
   let song = {
     songURL: req.body.songURL,
@@ -60,7 +59,7 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 })
   
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  // console.log(req.body, 'is this an array?')
+
   await Songs.find({ songUser: req.body })
     .populate('songUser')
     .then(songs => {
@@ -72,13 +71,15 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
     })
 })
 
-router.post(`/getMostLikedSongsRT`, (req, res, next) => {
+router.post(`/getMostLikedSongsRT`, async (req, res, next) => {
   // Songs.find({$sort: {"songTotLikes": -1}})
-  Songs.find({})
-    .populate('songUser')
+  await Songs.find({})
+    .populate('songLikes')
     .populate({ path: 'songComments', populate: 'commUser' })
     .populate({ path: 'songUser', populate: 'followers' })
     .then(songs => {
+      
+      console.log(songs, "what is going on here?")
       res.status(200).json(songs)
     })
     .catch(err => res.status(500).json(err))

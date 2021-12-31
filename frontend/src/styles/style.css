@@ -56,7 +56,7 @@ input, textarea, select, button {
 }
 
 .NavBar {
-  height: 11%;
+  height: 10%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -72,14 +72,15 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  bottom: 10%;
+  z-index: 2;
 }
 
 .NavBar .navbar_section {
   height: 100%;
   width: 100%;
-  border-radius: 40px 40px 0px 0px;
+  border-radius: 37px 37px 0px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -93,68 +94,15 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background: -webkit-gradient(linear, left bottom, left top, from(#c8c5c5), to(#ecf0f3));
-  background: linear-gradient(0deg, #c8c5c5 0%, #ecf0f3 100%);
-  -webkit-box-shadow: 0px -5px 20px 8px #353535;
-          box-shadow: 0px -5px 20px 8px #353535;
+  background: linear-gradient(352deg, #4f4f4f 0%, #757575 100%);
+  -webkit-box-shadow: 0px -8px 30px 0px #222222;
+          box-shadow: 0px -8px 30px 0px #222222;
 }
 
-.NavBarProfile {
-  height: 21%;
-  position: relative;
-}
-
-.NavBarProfile .navbar_section {
-  height: 100%;
-  border-radius: none;
-  background: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.NavBarTestAudio {
-  background: linear-gradient(358deg, #3e3e3e, #5a5a5a);
-  -webkit-box-shadow: 0px -5px 10px 8px #323232;
-          box-shadow: 0px -5px 10px 8px #323232;
-  border-radius: 40px 40px 0px 0px;
-}
-
-.NavBarTestAudio .navbar_section {
-  background: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.NavBarTestAudio .navbar_section .navbar_shadow-div-outset {
-  -webkit-box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
-          box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
-  border: none;
-}
-
-.NavBarTestAudio .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset {
-  -webkit-box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #676767;
-          box-shadow: inset 2px 2px 3px 0px #2c2c2c, inset -2px -2px 3px #676767;
-}
-
-.NavBarTestAudio .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container {
-  -webkit-box-shadow: #5b3746 2px 2px 3px 0px, #6d6d6d -3px -3px 4px;
-          box-shadow: #5b3746 2px 2px 3px 0px, #6d6d6d -3px -3px 4px;
-}
-
-.NavBarTestAudio .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset {
-  -webkit-box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
-          box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
-}
-
-.NavBarTestAudio .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
-  -webkit-box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
-          box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
-}
-
-.navbar_shadow-div-outset {
-  height: 76%;
-  width: 93%;
-  border-radius: 50px;
+.NavBar .navbar_section .navbar_shadow-div-outset {
+  height: 81%;
+  width: 96%;
+  border-radius: 33px 33px 5px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -168,15 +116,14 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
-          box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
-  border: 1px solid #d1d1d1;
+  -webkit-box-shadow: 4px 6px 5px 0px #393939, -2px -2px 2px #989898;
+          box-shadow: 4px 6px 5px 0px #393939, -2px -2px 2px #989898;
 }
 
-.navbar_shadow-div-outset .navbar_shadow-div-inset {
-  height: 84%;
-  width: 97%;
-  border-radius: 55px;
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset {
+  height: 89%;
+  width: 98%;
+  border-radius: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -190,14 +137,14 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #9c9c9c, inset -2px -2px 3px #ffffff;
+  -webkit-box-shadow: inset 3px 3px 4px 0px #363535, inset -2px -2px 2px #808080;
+          box-shadow: inset 3px 3px 4px 0px #363535, inset -2px -2px 2px #808080;
 }
 
-.navbar-btn-container {
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container {
   height: 80%;
-  width: 22.5%;
-  border-radius: 5px;
+  width: 23%;
+  border-radius: 3px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -211,14 +158,25 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
-          box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
   text-decoration: none;
 }
 
-.navbar-btn-container .navbar-btn_shadow-div-inset {
-  height: 85%;
-  width: 50%;
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset {
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
+  height: 100%;
+  width: 100%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -233,42 +191,21 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
-.navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
-  height: 75%;
-  width: 75%;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
-          box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
+  height: 2rem;
+  width: 2rem;
 }
 
-.navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
-  height: 1.5em;
-  width: 1.5em;
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
-.navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset:active {
-  -webkit-box-shadow: inset 2px 2px 3px 0px #b0b1b3, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #b0b1b3, inset -2px -2px 3px #ffffff;
-}
-
-.navbar-btn-container .navbar-btn-text {
+.NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn-text {
   height: 15%;
   width: 100%;
   border-radius: 0px;
@@ -287,22 +224,26 @@ input, textarea, select, button {
           flex-direction: column;
   font-size: 11px;
   color: #ff8ebd;
+  display: none;
+}
+
+.NavBarProfile {
+  position: absolute;
+  bottom: 0%;
 }
 
 .btn-unselected {
   background: initial;
-  -webkit-box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
-          box-shadow: 2px 2px 5px #888888, -3px -3px 3px #ffffff;
+  -webkit-box-shadow: 3px 3px 6px #363535, -2px -2px 2px #8c8c8c;
+          box-shadow: 3px 3px 6px #363535, -2px -2px 2px #8c8c8c;
   border: none;
-  -webkit-transition: all .4s;
-  transition: all .4s;
 }
 
 .btn-unselected .navbar-btn_shadow-div-inset {
-  -webkit-box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #908d8d, inset -2px -2px 3px #ffffff;
-  -webkit-transition: all .4s;
-  transition: all .4s;
+  height: 86%;
+  width: 53%;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
+          box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
 }
 
 .btn-unselected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
@@ -324,15 +265,15 @@ input, textarea, select, button {
   -webkit-box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
           box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
   border: 1px solid #ec6aa0;
-  -webkit-transition: all .4s;
-  transition: all .4s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 
 .btn-selected .navbar-btn_shadow-div-inset {
-  -webkit-box-shadow: #a4416a 3px 3px 5px 0px inset, #f4c4d8 -3px -3px 5px inset;
-          box-shadow: #a4416a 3px 3px 5px 0px inset, #f4c4d8 -3px -3px 5px inset;
-  -webkit-transition: all .4s;
-  transition: all .4s;
+  height: 80%;
+  width: 48%;
+  -webkit-box-shadow: #993b62 2px 2px 2px 0px, #e992b6 -2px -2px 2px;
+          box-shadow: #993b62 2px 2px 2px 0px, #e992b6 -2px -2px 2px;
 }
 
 .btn-selected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
@@ -349,64 +290,8 @@ input, textarea, select, button {
   color: #ffffff;
 }
 
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-unselected {
-  background: initial;
-  -webkit-box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
-          box-shadow: 2px 2px 3px 0px #353535, -3px -3px 4px #787878;
-  border: none;
-  -webkit-transition: all .4s;
-  transition: all .4s;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-unselected .navbar-btn_shadow-div-inset {
-  -webkit-box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
-          box-shadow: #333333 2px 2px 3px 0px inset, #838383 -2px -2px 3px inset;
-  -webkit-transition: all .4s;
-  transition: all .4s;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-unselected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
-  -webkit-box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
-          box-shadow: #333333 2px 2px 3px 0px, #838383 -2px -2px 3px;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-unselected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
-  -webkit-filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
-          filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-unselected .navbar-btn-text {
-  color: #ff8ebd;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-selected {
-  background: #ec6aa0;
-  -webkit-box-shadow: #5c3747 2px 2px 3px inset, #f4c4d8 -2px -2px 3px inset;
-          box-shadow: #5c3747 2px 2px 3px inset, #f4c4d8 -2px -2px 3px inset;
-  border: 1px solid #ec6aa0;
-  -webkit-transition: all .4s;
-  transition: all .4s;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-selected .navbar-btn_shadow-div-inset {
-  -webkit-box-shadow: #5b3746 2px 2px 3px inset, #f4c4d8 -2px -2px 3px inset;
-          box-shadow: #5b3746 2px 2px 3px inset, #f4c4d8 -2px -2px 3px inset;
-  -webkit-transition: all .4s;
-  transition: all .4s;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-selected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-selected .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
-  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-}
-
-.section-2_control-panel .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .record-btn-selected .navbar-btn-text {
-  color: #ffffff;
+.Search {
+  position: relative;
 }
 
 .Search .search-inner {
@@ -1015,10 +900,9 @@ input, textarea, select, button {
 }
 
 .section-1_feed {
-  height: 93%;
+  height: 100%;
   width: 100%;
   position: relative;
-  overflow-y: hidden;
 }
 
 .section-1_feed .section-1a_toggle-feed {
@@ -1039,6 +923,8 @@ input, textarea, select, button {
       -ms-flex-direction: row;
           flex-direction: row;
   background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
+  position: absolute;
+  z-index: 2;
 }
 
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container {
@@ -1062,7 +948,7 @@ input, textarea, select, button {
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container .each-feed_shadow-div-inset {
   height: 83%;
   width: 32%;
-  border-radius: 5px;
+  border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1076,14 +962,14 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #4c4c4c, inset -2px -2px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px #4c4c4c, inset -2px -2px 3px #ffffff;
+  -webkit-box-shadow: inset 2px 2px 3px #484747, inset -2px -2px 2px #ffffff;
+          box-shadow: inset 2px 2px 3px #484747, inset -2px -2px 2px #ffffff;
 }
 
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container .each-feed_shadow-div-inset .each-feed_shadow-div-outset {
-  height: 72%;
-  width: 91%;
-  border-radius: 3px;
+  height: 75%;
+  width: 90%;
+  border-radius: 2px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1097,14 +983,14 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 4px #4c4b4b, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 4px #4c4b4b, -2px -2px 2px #ffffff;
+  -webkit-box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 4px #505050, -2px -2px 2px #ffffff;
 }
 
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container .each-feed_shadow-div-inset .each-feed_shadow-div-outset .each-feed_shadow-div-inset-2 {
   height: 77%;
-  width: 94%;
-  border-radius: 35px;
+  width: 92%;
+  border-radius: 65px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1118,9 +1004,9 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 1px 1px 3px #464646, inset -1px -1px 3px #ffffff;
-          box-shadow: inset 1px 1px 3px #464646, inset -1px -1px 3px #ffffff;
-  font-size: 14px;
+  -webkit-box-shadow: inset 1px 1px 3px #545454, inset -1px -1px 3px #ffffff;
+          box-shadow: inset 1px 1px 3px #545454, inset -1px -1px 3px #ffffff;
+  font-size: 1rem;
   color: #ec6aa0;
   font-weight: bolder;
 }
@@ -1136,7 +1022,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1a_toggle-feed .toggle-feed-container .each-feed_shadow-div-inset .toggle-feed .toggle-feed-2 {
-  height: 73%;
+  height: 68%;
   width: 91%;
   -webkit-box-shadow: inset 1px 1px 3px #6c2341, inset -1px -1px 3px #eab4ca;
           box-shadow: inset 1px 1px 3px #6c2341, inset -1px -1px 3px #eab4ca;
@@ -1144,14 +1030,15 @@ input, textarea, select, button {
 }
 
 .section-1_feed .video-scroll-container {
-  height: 62%;
+  position: absolute;
+  height: 60%;
   width: 100%;
+  margin-top: 8%;
   -ms-scroll-snap-type: y mandatory;
       scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 
 .section-1_feed .video-scroll-container .video-pane {
@@ -1178,7 +1065,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .video-scroll-container .video-pane .last-div {
-  height: 95%;
+  height: 87%;
   width: 94%;
   border-radius: 5px;
   display: -webkit-box;
@@ -1195,6 +1082,7 @@ input, textarea, select, button {
       -ms-flex-direction: column;
           flex-direction: column;
   background: #0000008a;
+  margin-bottom: 3%;
   overflow-y: scroll;
 }
 
@@ -1255,7 +1143,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details {
-  height: 33%;
+  height: 40%;
   width: 100%;
   border-radius: 31px 0px 0px 0px;
   display: -webkit-box;
@@ -1273,11 +1161,13 @@ input, textarea, select, button {
           flex-direction: column;
   background: -webkit-gradient(linear, left top, left bottom, from(#b1b1b1), to(#4f4f4f));
   background: linear-gradient(180deg, #b1b1b1 0%, #4f4f4f 100%);
+  position: absolute;
+  bottom: 0;
   z-index: 2;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions {
-  height: 28%;
+  height: 23%;
   width: 100%;
   border-radius: 0;
   display: -webkit-box;
@@ -1293,7 +1183,6 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  z-index: 2;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset {
@@ -1413,6 +1302,21 @@ input, textarea, select, button {
   list-style-type: none;
 }
 
+.section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset img.follow {
+  height: 3rem;
+  width: 3rem;
+}
+
+.section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset img.like {
+  height: 2rem;
+  width: 2rem;
+}
+
+.section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset img.comment {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-container {
   height: 100%;
   width: 68%;
@@ -1459,6 +1363,7 @@ input, textarea, select, button {
   width: 100%;
   font-size: .9rem;
   color: #ffd6d6;
+  overflow-x: hidden;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .liked-followed-commented {
@@ -1505,7 +1410,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data {
-  height: 72%;
+  height: 77%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -1524,9 +1429,9 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container {
-  height: 75%;
+  height: 60%;
   width: 96%;
-  border-radius: 5px 5px 5px 34px;
+  border-radius: 5px 5px 5px 36px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1545,7 +1450,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section {
-  height: 50%;
+  height: 53%;
   width: 100%;
   border-radius: 0;
   display: -webkit-box;
@@ -1564,9 +1469,9 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container {
-  height: 93%;
-  width: 97%;
-  border-radius: 5px 5px 32px 27px;
+  height: 95%;
+  width: 98%;
+  border-radius: 5px 5px 33px 33px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1645,14 +1550,16 @@ input, textarea, select, button {
   -webkit-box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
           box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
   margin-left: 5%;
+  position: relative;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .user-pic-container .user-pic_shadow-div-outset .user-pic_shadow-div-inset img {
-  height: 77%;
-  width: 67%;
-  border-radius: 40px;
-  margin-left: 10%;
+  height: 74%;
+  width: 71%;
+  border-radius: 50px;
+  margin-left: 11%;
   border: 2px solid #e24f8c;
+  background: #e24f8c;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .song-title-container {
@@ -1715,6 +1622,7 @@ input, textarea, select, button {
   -webkit-box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
           box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
   overflow-x: scroll;
+  position: relative;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .song-title-container .song-title_shadow-div-outset .song-title_shadow-div-inset #one {
@@ -1809,7 +1717,7 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section {
-  height: 50%;
+  height: 47%;
   width: 100%;
   border-radius: 0;
   display: -webkit-box;
@@ -1849,7 +1757,7 @@ input, textarea, select, button {
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container {
   height: 88%;
   width: 89%;
-  border-radius: 10px 70px 70px 86px;
+  border-radius: 10px 70px 70px 90px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1863,13 +1771,13 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 3px 3px #3c3c3c, inset -2px -3px 3px 0px #adadad;
-          box-shadow: inset 2px 3px 3px #3c3c3c, inset -2px -3px 3px 0px #adadad;
+  -webkit-box-shadow: inset 2px 3px 2px #424242, inset -2px -3px 3px 0px #adadad;
+          box-shadow: inset 2px 3px 2px #424242, inset -2px -3px 3px 0px #adadad;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 {
-  height: 81%;
-  width: 85%;
+  height: 78%;
+  width: 82%;
   border-radius: 5px 60px 60px 76px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1905,14 +1813,14 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px #424242, inset -2px -2px 2px 0px #b5b5b5;
-          box-shadow: inset 2px 2px 3px #424242, inset -2px -2px 2px 0px #b5b5b5;
+  -webkit-box-shadow: inset 2px 2px 2px #484848, inset -2px -2px 2px 0px #a1a1a1;
+          box-shadow: inset 2px 2px 2px #484848, inset -2px -2px 2px 0px #a1a1a1;
   margin-left: 18%;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_shadow-div-inset button.play-btn_shadow-div-outset {
-  height: 70%;
-  width: 70%;
+  height: 74%;
+  width: 74%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1927,10 +1835,9 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #464646, -2px -2px 2px 0px #b7b7b7;
-          box-shadow: 2px 2px 3px #464646, -2px -2px 2px 0px #b7b7b7;
+  -webkit-box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
+          box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
   background: initial;
-  border: none;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_shadow-div-inset button.play-btn_shadow-div-outset img {
@@ -1944,6 +1851,11 @@ input, textarea, select, button {
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_shadow-div-inset button.play-btn_shadow-div-outset img.bi-pause {
   margin-left: 3%;
+}
+
+.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_shadow-div-inset button.play-btn_shadow-div-outset:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_shadow-div-inset:active {
@@ -2033,9 +1945,9 @@ input, textarea, select, button {
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-bar_shadow-div-inset .play-slider_shadow-div-inset input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
-  height: 18px;
-  width: 18px;
-  border-radius: 50px;
+  height: 20px;
+  width: 10px;
+  border-radius: 5px;
   cursor: pointer;
   background: #767676;
   -webkit-transition: background-color 1s ease;
@@ -2046,7 +1958,7 @@ input, textarea, select, button {
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-bar-container .play-bar_shadow-div-inset .play-slider_shadow-div-inset .time-text-container {
   height: 35%;
-  width: 85%;
+  width: 88%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2094,14 +2006,14 @@ input, textarea, select, button {
   background: -webkit-gradient(linear, left bottom, left top, from(#a09e9e), to(#b9b9b9));
   background: linear-gradient(0deg, #a09e9e 0%, #b9b9b9 100%);
   position: absolute;
-  bottom: 25%;
-  z-index: 0;
+  bottom: 33%;
+  z-index: 1;
   -webkit-transition: height 0.5s ease-out;
   transition: height 0.5s ease-out;
 }
 
 .comment-pop-out .inner-com {
-  height: 83%;
+  height: 84%;
   width: 96%;
   border-radius: 25px 25px 5px;
   display: -webkit-box;
@@ -7698,8 +7610,8 @@ input, textarea, select, button {
       -ms-flex-direction: column;
           flex-direction: column;
   background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
-  -webkit-box-shadow: 0px 20px 50px 10px #595858;
-          box-shadow: 0px 20px 50px 10px #595858;
+  -webkit-box-shadow: 0px 20px 50px 10px #373737;
+          box-shadow: 0px 20px 50px 10px #373737;
   position: absolute;
   z-index: 1;
 }
@@ -8434,9 +8346,9 @@ input, textarea, select, button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -8444,8 +8356,7 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: -webkit-gradient(linear, left bottom, left top, from(#c6c6c6), to(#e2e2e2));
-  background: linear-gradient(0deg, #c6c6c6 0%, #e2e2e2 100%);
+  background: linear-gradient(314deg, #525252 0%, #9c9c9c 100%);
   position: absolute;
   bottom: 0;
   overflow-y: auto;
@@ -8494,7 +8405,7 @@ input, textarea, select, button {
 }
 
 .section-2_profile .section-2a_songs {
-  height: 79%;
+  height: 77%;
   width: 100%;
   border-radius: 18px;
   display: -webkit-box;
@@ -8513,7 +8424,7 @@ input, textarea, select, button {
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list {
-  height: 87%;
+  height: 86%;
   width: 86%;
   border-radius: 15px;
   display: -webkit-box;
@@ -8548,8 +8459,8 @@ input, textarea, select, button {
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 16px;
-  -webkit-box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
-          box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
+  -webkit-box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 3px #999999;
+          box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 3px #999999;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
@@ -8642,8 +8553,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+  -webkit-box-shadow: 2px 2px 2px 0px #424242, -2px -2px 2px #c9c9c9;
+          box-shadow: 2px 2px 2px 0px #424242, -2px -2px 2px #c9c9c9;
   text-decoration: none;
 }
 
@@ -8668,8 +8579,9 @@ input, textarea, select, button {
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-title-container p {
-  font-size: 14px;
+  font-size: 1.1rem;
   color: #e24f8c;
+  font-weight: bold;
   line-height: 1;
   text-align: start;
   word-break: break-word;
@@ -8695,8 +8607,8 @@ input, textarea, select, button {
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container p {
-  font-size: 11px;
-  color: #747474;
+  font-size: .85rem;
+  color: #c2c2c2;
   text-align: start;
 }
 
@@ -8781,8 +8693,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #424242, -2px -2px 2px #c9c9c9;
+          box-shadow: 2px 2px 3px 0px #424242, -2px -2px 2px #c9c9c9;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset .p-container {
@@ -8816,7 +8728,7 @@ input, textarea, select, button {
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset .p-container .each-line-container .each-line-no {
   font-size: 10px;
-  color: gray;
+  color: #c2c2c2;
   margin-right: 1%;
 }
 
@@ -8856,8 +8768,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #a2a2a2, inset -3px -3px 5px #ffffff;
-          box-shadow: inset 3px 3px 4px #a2a2a2, inset -3px -3px 5px #ffffff;
+  -webkit-box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
+          box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container {
@@ -8915,8 +8827,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #838282, inset -2px -2px 2px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #838282, inset -2px -2px 2px #ffffff;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #a3a3a3;
+          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #a3a3a3;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset {
@@ -8936,8 +8848,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #838383, -2px -2px 2px #ffffff;
-          box-shadow: 2px 2px 3px 0px #838383, -2px -2px 2px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 2px #adadad;
+          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 2px #adadad;
   background: #ec6aa0;
   border: none;
 }
@@ -9091,8 +9003,8 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
-          box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+  -webkit-box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
+          box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
   position: relative;
 }
 
@@ -9846,9 +9758,9 @@ input, textarea, select, button {
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container {
-  height: 32px;
-  width: 32px;
-  border-radius: 50px;
+  height: 56%;
+  width: 12%;
+  border-radius: 8px 30px 30px 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9862,20 +9774,20 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 2px #686868, -2px -2px 2px #d3d3d3;
-          box-shadow: 2px 2px 2px #686868, -2px -2px 2px #d3d3d3;
+  -webkit-box-shadow: 2px 2px 2px #5e5e5e, -1px -1px 2px #eeeeee;
+          box-shadow: 2px 2px 2px #5e5e5e, -1px -1px 2px #eeeeee;
   position: absolute;
   right: 12px;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-eye {
-  height: 2em;
-  width: 2em;
+  height: 2.3rem;
+  width: 2.3rem;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-no-eye {
-  height: 1.7em;
-  width: 1.7em;
+  height: 1.9rem;
+  width: 1.9rem;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .show-password-container:active {
@@ -9884,19 +9796,19 @@ input, textarea, select, button {
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass {
-  height: 23px;
-  width: 23px;
-  right: 11px;
+  height: 56%;
+  width: 10%;
+  right: 10px;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass .password-eye {
-  height: 1.7em;
-  width: 1.7em;
+  height: 1.8rem;
+  width: 1.8rem;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .login-input-container .login-input_shadow-div-outset .input-container .signup-pass .password-no-eye {
-  height: 1.5em;
-  width: 1.5em;
+  height: 1.6rem;
+  width: 1.6rem;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .enter-btn-container {
@@ -11224,8 +11136,8 @@ input, textarea, select, button {
           flex-direction: row;
   position: absolute;
   background: linear-gradient(323deg, #414141, #7d7d7d);
-  top: 2%;
-  right: 2%;
+  top: 6%;
+  right: 2.5%;
   -webkit-box-shadow: -2px 6px 40px #121212;
           box-shadow: -2px 6px 40px #121212;
 }
@@ -11375,17 +11287,33 @@ input, textarea, select, button {
           animation: circleLoader 1.5s infinite ease;
 }
 
-.button-loading {
-  background: linear-gradient(117deg, #fe83b6, #fed1e4);
-  background-size: 200% 100%;
-  height: 85%;
+.loading {
   position: absolute;
+  background: linear-gradient(117deg, #14ba98, #8af3dc);
+  background-size: 200% 100%;
+  -webkit-box-shadow: inset 2px 2px 4px #2d5e54, inset -2px -2px 3px #8af3dc;
+          box-shadow: inset 2px 2px 4px #2d5e54, inset -2px -2px 3px #8af3dc;
+  -webkit-animation: gradient 1s ease infinite;
+          animation: gradient 1s ease infinite;
+}
+
+.loading-btn {
+  height: 85%;
   width: 92%;
   border-radius: 3px;
-  -webkit-box-shadow: inset 2px 2px 4px #7b3552, inset -2px -2px 3px #f9d8e6;
-          box-shadow: inset 2px 2px 4px #7b3552, inset -2px -2px 3px #f9d8e6;
-  -webkit-animation: gradient 2s ease infinite;
-          animation: gradient 2s ease infinite;
+}
+
+.loading-pic {
+  height: 93%;
+  width: 96%;
+  border-radius: 45px 6px 6px 46px;
+}
+
+.loading-title {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px 25px 25px 10px;
+  z-index: 1;
 }
 
 @-webkit-keyframes gradient {

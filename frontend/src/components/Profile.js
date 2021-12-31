@@ -86,7 +86,12 @@ function Profile(props) {
 
     const setFocus = () => {
       // console.log(songListRef.current)
-      songListRef.current.focus()
+      if (document.activeElement === songListRef.current) {
+        console.log('yo wtf')
+        songListRef.current.blur()
+      } else {
+        songListRef.current.focus()
+      }
     }
     
     const deleteCheckHandler = (bool) => {
@@ -127,7 +132,7 @@ function Profile(props) {
     }
 
     return (
-      <li className="each-track-container" ref={setSongRefs} onClick={setFocus}>
+      <li className="each-track-container" ref={setSongRefs} onClick={() => setFocus}>
         {deleteCheck
           ? (
             <>
@@ -473,8 +478,8 @@ function Profile(props) {
           </div>
         </div>
 
-        <NavBar locationClass={'NavBarProfile'} />
       </div>
+      <NavBar locationClass={'NavBarProfile'} />
     </div>
   )
 }

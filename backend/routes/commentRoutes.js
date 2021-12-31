@@ -65,7 +65,6 @@ router.post(`/getCommentsRT`, async (req, res, next) => {
   let body = { id: req.body.id }
   
   await Songs.findById(body.id)
-    .populate('songComments')
     .populate({ path: 'songComments', populate: 'commUser' })
     .then(songComments => {
       res.status(200).json(songComments)

@@ -6,6 +6,7 @@ import datamuse from "datamuse";
 import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
 import RecordingBoothModal from "./RecordingBoothModal";
+import useDebugInformation from "./utils/useDebugInformation"
 import actions from "../api";
 import NavBar from "./NavBar";
 import beat1 from "../assets/beatsTrack1.m4a";
@@ -24,7 +25,8 @@ import shuffle from "../images/shuffle.svg";
 import modal from "../images/modal.svg";
 
 function TestAudio(props) {
-  const { user } = React.useContext(TheContext)
+  useDebugInformation("TestAudio", props)
+  const { user, windowSize } = React.useContext(TheContext)
 
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
@@ -108,6 +110,14 @@ function TestAudio(props) {
       this.songBG = null;
     }
   }
+  useEffect(() => {
+    const changeToPixels = () => {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('TestAudio').style.height = `${windowSize}px`
+    }
+    window.addEventListener("resize", changeToPixels)
+    return () => window.removeEventListener("resize", changeToPixels)
+  }, [])
 
   useEffect(() => {
     if (silent && recorderState.initRecording === true) {
@@ -722,7 +732,7 @@ function TestAudio(props) {
   }
 
   return (
-    <div className="TestAudio">
+    <div className="TestAudio" id="TestAudio">
       <RecordingBoothModal 
        toggleModal={toggleModal} 
        setToggleModal={setToggleModal}
@@ -984,8 +994,8 @@ function TestAudio(props) {
             </div>
           </div>
         </div>
-        <NavBar locationClass={'NavBarTestAudio'} />
       </div>
+      <NavBar />
     </div>
   )
 }

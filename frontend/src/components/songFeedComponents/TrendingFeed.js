@@ -10,11 +10,10 @@ import gifsArr from "../../images/gifs.json";
 
 function TrendingFeed(props) {
   // useDebugInformation("IntersectionTest", props)
-  const { setSongInView } = React.useContext(TheViewContext)
+  const { setSongInView, setIsLoading} = React.useContext(TheViewContext)
   const gifsCopy = [...gifsArr];
   const [trendingFeedArr, setTrendingFeedArr] = useState([]);
   const [trendingDisplayNodes, setTrendingDisplayNodes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
 
   const viewRef = useRef();
 
@@ -97,7 +96,7 @@ function TrendingFeed(props) {
 
   return (
     <ul className="video-scroll-container">
-      <Loading isLoading={isLoading} />
+      <Loading />
       {trendingDisplayNodes}
     </ul>
   )

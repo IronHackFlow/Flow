@@ -21,11 +21,13 @@ function App(props) {
   const [user, setUser] = useState()
   const [userToggle, setUserToggle] = useState(false)
   const [locationIndicator, setLocationIndicator] = useState()
+  const [windowSize, setWindowSize] = useState()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
       document.getElementById("body").style.height = `${h}px`
+      setWindowSize(h)
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -55,6 +57,8 @@ function App(props) {
         setUserToggle,
         locationIndicator,
         setLocationIndicator,
+        windowSize,
+        setWindowSize
       }}
     >
       <div className="App">

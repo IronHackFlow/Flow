@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import { Link, useHistory } from 'react-router-dom'
 import actions from '../api'
@@ -9,10 +9,30 @@ import flowLogo from '../images/FlowLogo.png'
 
 
 const Auth = (props) => {
-  const { userToggle, setUserToggle } = React.useContext(TheContext)
+  const { windowSize, userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()
   const [toggleLogin, setToggleLogin] = useState(true)
 
+  useLayoutEffect(() => {
+    const changeToPixels = () => {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('LogIn').style.height = `${windowSize}px`
+    }
+    window.addEventListener("resize", changeToPixels)
+    return () => window.removeEventListener("resize", changeToPixels)
+  }, [])
+
+  useEffect(() => {
+    actions
+    .isUserAuth()
+    .then(res => {
+      if (res.data.isLoggedIn) {
+        history.push('/')
+      }
+    })
+    .catch(console.error)
+  }, [history, userToggle])
+  
   const onResponse = (response) => {
     actions
       .logInGoogle(response)
@@ -24,19 +44,8 @@ const Auth = (props) => {
       .catch(console.error)
   }
 
-  useEffect(() => {
-    actions
-      .isUserAuth()
-      .then(res => {
-        if (res.data.isLoggedIn) {
-          history.push('/')
-        }
-      })
-      .catch(console.error)
-  }, [history, userToggle])
-
   return (
-    <div className="LogIn">
+    <div className="LogIn" id="LogIn">
       <div className="page-container">
         <div className="upper-container">
           <div className="upper-outset">

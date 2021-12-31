@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../TheContext'
+import useDebugInformation from "./utils/useDebugInformation"
 import mic from '../images/modern-mic.svg'
 import avatar from '../images/avatar.svg'
 import home from '../images/home.svg'
 import search from '../images/search.svg'
 
 function NavBar(props) {
+  useDebugInformation("NavBar", props)
   const { user, locationIndicator } = React.useContext(TheContext)
-  const [unselectedBtns, setUnselectedBtns] = useState('')
   const [selectedBtn, setSelectedBtn] = useState('')
 
   useEffect(() => {
     if (locationIndicator?.pathname === '/') {
       setSelectedBtn('home')
-      setUnselectedBtns('btn-unselected')
     }  else if (locationIndicator?.pathname === '/search') {
       setSelectedBtn('search')
-      setUnselectedBtns('btn-unselected')
     }  else if (locationIndicator?.pathname.slice(0, 8) === '/profile') {
       setSelectedBtn('profile')
-      setUnselectedBtns('btn-unselected')
     } else if (locationIndicator?.pathname === "/recordingBooth") {
       setSelectedBtn('recordBooth')
-      setUnselectedBtns('record-btn-unselected')
     }
   }, [locationIndicator])
 
@@ -33,8 +30,9 @@ function NavBar(props) {
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
             <Link
-              to={user ? "/" : "auth"}
-              className={`navbar-btn-container ${selectedBtn === 'home' ? "btn-selected" : unselectedBtns}`}
+              // to={user ? "/" : "auth"}
+              to="/"
+              className={`navbar-btn-container ${selectedBtn === 'home' ? "btn-selected" : 'btn-unselected'}`}
               style={{ borderRadius: '40px 8px 8px 40px' }}
             >
               <div className="navbar-btn_shadow-div-inset">
@@ -53,7 +51,7 @@ function NavBar(props) {
 
             <Link
               to={"/recordingBooth"}
-              className={`navbar-btn-container ${selectedBtn === 'recordBooth' ? "record-btn-selected" : unselectedBtns}`}
+              className={`navbar-btn-container ${selectedBtn === 'recordBooth' ? "btn-selected" : 'btn-unselected'}`}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
@@ -71,7 +69,7 @@ function NavBar(props) {
 
             <Link 
               to={{pathname: "/search", link: locationIndicator?.pathname }} 
-              className={`navbar-btn-container ${selectedBtn === 'search' ? "btn-selected" : unselectedBtns}`}
+              className={`navbar-btn-container ${selectedBtn === 'search' ? "btn-selected" : 'btn-unselected'}`}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
@@ -89,7 +87,7 @@ function NavBar(props) {
 
             <Link
               to={user?._id ? `/profile/${user._id}` : '/auth'}
-              className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : unselectedBtns}`}
+              className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : 'btn-unselected'}`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >
               <div className="navbar-btn_shadow-div-inset">

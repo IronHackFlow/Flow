@@ -5,11 +5,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
-
 const User = require('../models/User')
-const Songs = require('../models/Songs')
-const Comments = require('../models/Comments')
-const Follows = require('../models/Follows')
 
 router.post(`/signUp`, async (req, res, next) => {
   const user = req.body

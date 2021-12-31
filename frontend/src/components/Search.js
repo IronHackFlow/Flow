@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import actions from '../api'
+import TheContext from '../TheContext'
 import NavBar from './NavBar'
 import search from '../images/search.svg'
 import back from '../images/back.svg'
@@ -8,12 +9,14 @@ import xExit from "../images/exit-x-2.svg"
 import bullet from "../images/bullet-point.svg";
 
 function Search(props) {
+  const { windowSize } = React.useContext(TheContext);
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
   const [searchValue, setSearchValue] = useState();
   const history = useHistory();
   const searchInputRef = useRef();
 
   useEffect(() => {
+    console.log(windowSize, "what it is yo??? do it change?? lemme know")
     if (props.location.searchValue) {
       const value = props.location.searchValue
       searchInputRef.current.focus()
@@ -23,7 +26,8 @@ function Search(props) {
     }
   }, [])
 
-  const closeWindow = () => {
+  const closeWindow = (e) => {
+    e.preventDefault()
     if (history.location.link && history.location.link !== "/search") {
       history.push(history.location.link)
     } else {
@@ -37,6 +41,26 @@ function Search(props) {
     setSearchValue("")
     setSuggestions(<h4>Find Friends & Artists</h4>)
   }
+
+  useLayoutEffect(() => {
+    var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    document.getElementById('body').style.height = `${onLoad}px`
+    document.getElementById('Search').style.height = `${onLoad}px`
+
+    const changeToPixels = () => {
+      var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      if (onChange  <  600) {
+        document.getElementById('body').style.height = `${windowSize}px`
+        document.getElementById('Search').style.height = `${windowSize}px`
+      } 
+      else {
+        document.getElementById('body').style.height = `${onChange}px`
+        document.getElementById('Search').style.height = `${onChange}px`
+      }
+    }
+    window.addEventListener("resize", changeToPixels)
+    return () => window.removeEventListener("resize", changeToPixels)
+  }, [])
 
   const listUsers = e => {
     e.preventDefault()
@@ -131,15 +155,18 @@ function Search(props) {
       return <h4>...thinking</h4>
     }
   }
+  const preventDefault = (e) => {
+    e.preventDefault()
+  }
 
   return (
-    <div className="Search">
-      <div className="search-inner">
+    <div className="Search" id="Search">
+      <div className="search-inner" id="SearchInner">
         <div className="section-1_search-field">
           <div className="search-field_shadow-div-outset">
-            <form className="search-field-form">
+            <form className="search-field-form" onSubmit={(e) => preventDefault(e)}>
               <div className="search-back-btn-container">
-                <button className="search-back-btn" onClick={() => closeWindow()}>
+                <button className="search-back-btn" type="button" onClick={(e) => closeWindow(e)}>
                   <img className="button-icons" src={back} alt="back" />
                 </button>
               </div>
@@ -150,11 +177,12 @@ function Search(props) {
                   ref={searchInputRef}
                   onChange={listUsers}
                   type="text"
+                  inputMode="search"
                   style={{width: `${searchValue ? '82%' : '94%'}`}}
                   placeholder="&#xf002; Search for a user"
                 ></input>
                 {searchValue ? (
-                  <button className="search-clear-btn" onClick={(e) => clearSearchField(e)}>
+                  <button className="search-clear-btn" type="button" onClick={(e) => clearSearchField(e)}>
                     <img className="social-icons" src={xExit} alt="clear search" />
                   </button>                
                 ) : (
@@ -165,7 +193,7 @@ function Search(props) {
           </div>
         </div>
 
-        <div className="section-2_search-results">
+        <div className="section-2_search-results" id="SearchResults">
           <div className="results-1_recent">
           </div>
           <div className="results-2_suggestions">

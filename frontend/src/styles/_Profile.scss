@@ -5,7 +5,7 @@
 .section-1_profile {
   @include flexCenter(50%, 100%, 0px 0px 20px 20px, space-evenly, center, column);
   background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
-  box-shadow: 0px 20px 50px 10px #595858;
+  box-shadow: 0px 20px 50px 10px #373737;
   position: absolute;
   z-index: 1;
 
@@ -257,8 +257,8 @@
 }
 
 .section-2_profile {
-  @include flexCenter(53%, 100%, none, center, center, column);
-  background: linear-gradient(0deg, #c6c6c6 0%, #e2e2e2 100%);
+  @include flexCenter(53%, 100%, none, flex-start, center, column);
+  background: linear-gradient(314deg, #525252 0%, #9c9c9c 100%);
   position: absolute;
   bottom: 0;
   overflow-y: auto;
@@ -275,10 +275,10 @@
   }
 
   .section-2a_songs {
-    @include flexCenter(79%, 100%, 18px, space-evenly, flex-end, row);
+    @include flexCenter(77%, 100%, 18px, space-evenly, flex-end, row);
 
     .songs-1_songs-list {
-      @include flexCenter(87%, 86%, 15px, flex-start, flex-start, column);
+      @include flexCenter(86%, 86%, 15px, flex-start, flex-start, column);
       overflow-y: scroll;
       box-shadow: inset 0px -2px 3px #bebebe;
 
@@ -290,7 +290,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 16px;
-        box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
+        box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 3px #999999;
         scroll-snap-align: start;
         scroll-snap-stop: always;
 
@@ -336,7 +336,7 @@
 
             .song-name-outset {
               @include flexCenter(89%, 95%, 10px 25Px 25px 2px, center, flex-start, column);
-              box-shadow: 2px 2px 2px 0px #b0b1b3, -2px -2px 2px #ffffff;
+              box-shadow: 2px 2px 2px 0px #424242, -2px -2px 2px #c9c9c9;
               text-decoration: none;
 
               .track-title-container {
@@ -344,8 +344,9 @@
                 margin-left: 4%;
 
                 p {
-                  font-size: 14px;
+                  font-size: 1.1rem;
                   color: #e24f8c;
+                  font-weight: bold;
                   line-height: 1;
                   text-align: start;
                   word-break: break-word;
@@ -356,8 +357,8 @@
                 @include flexCenter(60%, 95%, 10px, space-evenly, flex-start, column);
 
                 p {
-                  font-size: 11px;
-                  color: #747474;
+                  font-size: .85rem;
+                  color: #c2c2c2;
                   text-align: start;
                 }
 
@@ -383,7 +384,7 @@
   
             .lyrics-outset {
               @include flexCenter(91%, 95%, 2px 25px 25px 15px, center, center, column);
-              box-shadow: 2px 2px 3px 0px #b0b1b3, -2px -2px 2px #ffffff;
+              box-shadow: 2px 2px 3px 0px #424242, -2px -2px 2px #c9c9c9;
   
               .p-container {
                 height: 90%;
@@ -398,7 +399,7 @@
                   @include flexCenter(initial, 100%, 15px, flex-start, flex-start, row);
                   .each-line-no {
                     font-size: 10px;
-                    color: gray;
+                    color: #c2c2c2;
                     margin-right: 1%;
                   }
                 }
@@ -412,7 +413,7 @@
 
           .buttons-inner {
             @include flexCenter(92%, 90%, 12px, center, center, column);
-            box-shadow: inset 3px 3px 4px #a2a2a2, inset -3px -3px 5px #ffffff;
+            box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
 
             .delete-btn-container {
               @include flexCenter(32%, 100%, 5px 50px 50px 5px, center, center, row);
@@ -423,11 +424,11 @@
 
                 .play-outset {
                   @include flexCenter(95%, 95%, 50%, center, center, row);
-                  box-shadow: inset 2px 2px 3px 0px #838282, inset -2px -2px 2px #ffffff;
+                  box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #a3a3a3;
 
                   .play-inset {
                     @include flexCenter(75%, 75%, 50%, center, center, row);
-                    box-shadow: 2px 2px 3px 0px #838383, -2px -2px 2px #ffffff;
+                    box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 2px #adadad;
                     background: #ec6aa0;
                     border: none;
                     
@@ -490,7 +491,7 @@
 
       .songs-slider-outer {
         @include flexCenter(100%, 80%, 50px, center, center, row);
-        box-shadow: inset 3px 3px 4px #c5c5c5, inset -3px -3px 5px #ffffff;
+        box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
         position: relative;
         
         .songs-slider-bar {

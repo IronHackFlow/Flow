@@ -12,7 +12,7 @@ import gifsArr from "../../images/gifs.json";
 function FollowingFeed(props) {
   // useDebugInformation("IntersectionTest", props)
   const { user } = React.useContext(TheContext)
-  const { setSongInView, isLoading, setIsLoading } = React.useContext(TheViewContext)
+  const { setSongInView, setIsLoading } = React.useContext(TheViewContext)
 
   const gifsCopy = [...gifsArr];
   const [followingFeedArr, setFollowingFeedArr] = useState([]);
@@ -106,7 +106,7 @@ function FollowingFeed(props) {
 
   return (
     <ul className="video-scroll-container">
-      <Loading isLoading={isLoading} />
+      <Loading />
       {followingDisplayNodes}
     </ul>
   )

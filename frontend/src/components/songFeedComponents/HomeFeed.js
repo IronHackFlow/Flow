@@ -13,12 +13,13 @@ function HomeFeed(props) {
   const { 
     setSongInView, 
     setTotalFollowsLikesArr,
-    setCommentsArr
+    setCommentsArr,
+    isLoading,
+    setIsLoading,
   } = React.useContext(TheViewContext)
   const gifsCopy = [...gifsArr];
   const [homeFeedArr, setHomeFeedArr] = useState([]);
   const [homeDisplayNodes, setHomeDisplayNodes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const viewRef = useRef();
 
   const observer = new IntersectionObserver(
@@ -113,7 +114,7 @@ function HomeFeed(props) {
 
   return (
     <ul className="video-scroll-container">
-      <Loading isLoading={isLoading} />
+      <Loading />
       {homeDisplayNodes}
     </ul>
   )

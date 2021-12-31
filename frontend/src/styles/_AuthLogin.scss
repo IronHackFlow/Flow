@@ -147,18 +147,18 @@
                           }
                         }
                         .show-password-container {
-                          @include flexCenter(32px, 32px, 50px, center, center, column);
-                          box-shadow: 2px 2px 2px #686868, -2px -2px 2px #d3d3d3;
+                          @include flexCenter(56%, 12%, 8px 30px 30px 30px, center, center, column);
+                          box-shadow: 2px 2px 2px #5e5e5e, -1px -1px 2px #eeeeee;
                           position: absolute;
                           right: 12px;
 
                           .password-eye {
-                            height: 2em;
-                            width: 2em;
+                            height: 2.3rem;
+                            width: 2.3rem;
                           }
                           .password-no-eye {
-                            height: 1.7em;
-                            width: 1.7em;
+                            height: 1.9rem;
+                            width: 1.9rem;
                           }
 
                           &:active {
@@ -167,16 +167,16 @@
                           }
                         }
                         .signup-pass {
-                          height: 23px;
-                          width: 23px;
-                          right: 11px;
+                          height: 56%;
+                          width: 10%;
+                          right: 10px;
                           .password-eye {
-                            height: 1.7em;
-                            width: 1.7em;
+                            height: 1.8rem;
+                            width: 1.8rem;
                           }
                           .password-no-eye {
-                            height: 1.5em;
-                            width: 1.5em;
+                            height: 1.6rem;
+                            width: 1.6rem;
                           }
                         }
                       }

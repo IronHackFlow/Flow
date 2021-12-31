@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const axios = require('axios')
 const router = express.Router()
 const User = require('../models/User')
 const Songs = require('../models/Songs')
@@ -10,11 +11,11 @@ router.post(`/getAUserRT`, async (req, res, next) => {
     .populate('followers')
     .populate('userFollows')
     .then(user => {
+      console.log(user, "ugh")
       res.status(200).json(user)
     })
     .catch(err => res.status(500).json(err))
 })
-
 
 //search bar bobby
 router.post('/getManySongsAndUsersRT', async (req, res, next) => {
