@@ -8,7 +8,7 @@ import home from '../images/home.svg'
 import search from '../images/search.svg'
 
 function NavBar(props) {
-  useDebugInformation("NavBar", props)
+  // useDebugInformation("NavBar", props)
   const { user, locationIndicator } = React.useContext(TheContext)
   const [selectedBtn, setSelectedBtn] = useState('')
 

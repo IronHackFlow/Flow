@@ -7,7 +7,6 @@ import AuthLogIn from './AuthLogIn'
 import AuthSignUp from './AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
-
 const Auth = (props) => {
   const { windowSize, userToggle, setUserToggle } = React.useContext(TheContext)
   const history = useHistory()

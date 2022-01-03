@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../../TheViewContext'
+import { songData } from './SongData'
 import Loading from '../Loading'
 import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../../api'
@@ -17,10 +18,17 @@ function HomeFeed(props) {
     isLoading,
     setIsLoading,
   } = React.useContext(TheViewContext)
+  const { 
+    homeFeedArrTest, setHomeFeedArrTest
+  } = React.useContext(songData)
   const gifsCopy = [...gifsArr];
   const [homeFeedArr, setHomeFeedArr] = useState([]);
   const [homeDisplayNodes, setHomeDisplayNodes] = useState([])
   const viewRef = useRef();
+
+  useEffect(() => {
+    setHomeFeedArr([...homeFeedArrTest])
+  }, [homeFeedArrTest])
 
   const observer = new IntersectionObserver(
     entries => {
@@ -42,37 +50,37 @@ function HomeFeed(props) {
     }
   )
 
-  useEffect(() => {
-    setIsLoading(true)
-    const controller = new AbortController()
-    const signal = controller.signal
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   const controller = new AbortController()
+  //   const signal = controller.signal
     
-    actions
-    .getMostLikedSongs()
-    .then(res => {
-      console.log(res.data, "lets see this tho?")
-      let commentArray = []
-      let followsLikesArray = []
+  //   actions
+  //   .getMostLikedSongs()
+  //   .then(res => {
+  //     console.log(res.data, "lets see this tho?")
+  //     let commentArray = []
+  //     let followsLikesArray = []
 
-      const songsArray = res.data.map((each, index) => {
-        commentArray.push({ songId: each._id, comments: each.songComments })
-        const likesFollowsObj = {
-          songId: each._id,
-          totalLikes: each.songLikes,
-          totalFollowers: each.songUser.followers
-        }
-        followsLikesArray.push(likesFollowsObj)
-        return { song: each, songVideo: gifsCopy[index].url }
-      }).reverse()
+  //     const songsArray = res.data.map((each, index) => {
+  //       commentArray.push({ songId: each._id, comments: each.songComments })
+  //       const likesFollowsObj = {
+  //         songId: each._id,
+  //         totalLikes: each.songLikes,
+  //         totalFollowers: each.songUser.followers
+  //       }
+  //       followsLikesArray.push(likesFollowsObj)
+  //       return { song: each, songVideo: gifsCopy[index].url }
+  //     }).reverse()
 
-      setTotalFollowsLikesArr(followsLikesArray)
-      setCommentsArr(commentArray)
-      setHomeFeedArr(songsArray)
-      setIsLoading(false)
-    }, signal)
+  //     setTotalFollowsLikesArr(followsLikesArray)
+  //     setCommentsArr(commentArray)
+  //     setHomeFeedArr(songsArray)
+  //     setIsLoading(false)
+  //   }, signal)
 
-    .catch(console.error)
-  }, [])
+  //   .catch(console.error)
+  // }, [])
 
   useEffect(() => {
     let feedNodes = homeFeedArr.map((each) => {

@@ -1,12 +1,34 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import actions from "../../api.js";
+import { songData } from "../songFeedComponents/SongData";
 import TheContext from "../../TheContext.js"
 
-export default function useHandleLike() {
-  const { user } = React.useContext(TheContext);
+export default function usePostLike() {
+  const { 
+    user
+  } = React.useContext(TheContext);
+
+  const { 
+    homeFeedArrTest, setHomeFeedArrTest, 
+    trendingFeedArrTest, setTrendingFeedArrTest, 
+    commentsArrTest, setCommentsArrTest,
+    likesArrTest, setLikesArrTest,
+    followersArrTest, setFollowersArrTest,
+    isLoadingTest, setIsLoadingTest, updateHomeFeed } = React.useContext(songData)
+
   const [totalLikes, setTotalLikes] = useState([]);
   const [totalCommentLikes, setTotalCommentLikes] = useState([]);
   const [returnLikeSongId, setReturnLikeSongId] = useState();
+
+  // const checkSongLikes = (arr, likeUser) => {
+  //   let user = likeUser
+  //   for (let i = 0; i < arr.length; i++) {
+  //     if ()
+  //   }
+  // }
+  // useEffect(() => {
+  //   console.log(homeFeedArrTest[0]?.song?.songLikes, "homefeedTest in the usePOSTLIKE?")
+  // }, [homeFeedArrTest])
 
   const checkSongLikes = (id) => {
     actions
@@ -50,8 +72,24 @@ export default function useHandleLike() {
     actions
     .addLike({ likerSong: id, likeDate: new Date(), commLike: false})
     .then(res => {
-      console.log('added a like to: ', res.data)
+      console.log('added a like to: ', res)
       setTotalLikes(res.data.songLikes)
+      // let newLikesArr = likesArrTest.map(like => {
+      //   if (like.songId === id) {
+      //     return {...like, likes: res.data.songLikes }
+      //   } else {
+      //     return like
+      //   }
+      // })
+      // setLikesArrTest(newLikesArr)
+      let updateArr = homeFeedArrTest.map(each => {
+        if (each.song._id === res.data._id) {
+          return { ...each, song: { ...each.song, songLikes: res.data.songLikes } }
+        } else {
+          return each
+        }
+      })
+      setHomeFeedArrTest(updateArr)
     })
     .catch(console.error)
   }
@@ -76,6 +114,22 @@ export default function useHandleLike() {
     .then(res => {
       console.log(`deleted a like from: `, res.data)
       setTotalLikes(res.data.songLikes)
+      // let newLikesArr = likesArrTest.map(like => {
+      //   if (like.songId === id) {
+      //     return {...like, likes: res.data.songLikes }
+      //   } else {
+      //     return like
+      //   }
+      // })
+      // setLikesArrTest(newLikesArr)
+      let updateArr = homeFeedArrTest.map(each => {
+        if (each.song._id === res.data._id) {
+          return { ...each, song: { ...each.song, songLikes: res.data.songLikes } }
+        } else {
+          return each
+        }
+      })
+      setHomeFeedArrTest(updateArr)
     })
     .catch(console.error)
   }
@@ -93,8 +147,8 @@ export default function useHandleLike() {
   const handlePostLike = (model, id, arr) => {
     console.log(`Gonna handle this ${model} Like`)
     setReturnLikeSongId(id)
-    
-    if (model === "Song") {
+
+    if (model === "song") {
       checkSongLikes(id)
     } else {
       checkCommentLikes(id)

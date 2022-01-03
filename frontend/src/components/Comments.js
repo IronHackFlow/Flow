@@ -27,13 +27,12 @@ function Comments(props) {
         return each
       }
     })
-    console.log(props.commentsArray, "what the fuck?")
     let commentDisplay = commentInView[0]?.comments?.map((each, index) => {
       return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
     })
     setCommState(commentDisplay)
     
-  }, [props.songInView, props.commentsArray])
+  }, [props.commentsArray])
 
   
   const resetCommentsArray = (arr) => {

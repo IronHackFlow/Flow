@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../../TheViewContext'
+import { songData } from './SongData'
 import Loading from '../Loading'
 import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../../api'
@@ -11,12 +12,19 @@ import gifsArr from "../../images/gifs.json";
 function TrendingFeed(props) {
   // useDebugInformation("IntersectionTest", props)
   const { setSongInView, setIsLoading} = React.useContext(TheViewContext)
+  const { 
+    trendingFeedArrTest
+  } = React.useContext(songData)
   const gifsCopy = [...gifsArr];
   const [trendingFeedArr, setTrendingFeedArr] = useState([]);
   const [trendingDisplayNodes, setTrendingDisplayNodes] = useState([])
 
   const viewRef = useRef();
 
+  useEffect(() => {
+    setTrendingFeedArr([...trendingFeedArrTest])
+  }, [trendingFeedArrTest])
+  
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach((entry) => {
@@ -37,24 +45,24 @@ function TrendingFeed(props) {
     }
   )
 
-  useEffect(() => {
-    setIsLoading(true)
-    const controller = new AbortController()
-    const signal = controller.signal
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   const controller = new AbortController()
+  //   const signal = controller.signal
     
-    actions
-    .getMostLikedSongs()
-    .then(res => {
-      const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
-      const trendingArray = sortByLikes.map((each, index) => {   
-        return { song: each, songVideo: gifsCopy[index].url }
-      })
+  //   actions
+  //   .getMostLikedSongs()
+  //   .then(res => {
+  //     const sortByLikes = res.data.sort((a, b) => b.songLikes.length - a.songLikes.length)
+  //     const trendingArray = sortByLikes.map((each, index) => {   
+  //       return { song: each, songVideo: gifsCopy[index].url }
+  //     })
 
-      setTrendingFeedArr(trendingArray)
-      setIsLoading(false)
-    }, signal)
-    .catch(console.error)
-  }, [])
+  //     setTrendingFeedArr(trendingArray)
+  //     setIsLoading(false)
+  //   }, signal)
+  //   .catch(console.error)
+  // }, [])
 
   useEffect(() => {
     let feedNodes = trendingFeedArr.map((each) => {

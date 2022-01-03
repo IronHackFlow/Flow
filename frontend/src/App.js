@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
+import SongData from './components/songFeedComponents/SongData'
+import { songData } from './components/songFeedComponents/SongData'
 import actions from './api'
 import useDebugInformation from "./components/utils/useDebugInformation"
 import Auth from './components/Auth'
@@ -17,6 +19,15 @@ import Search from './components/Search'
 
 function App(props) {
   // useDebugInformation("App", props)
+  const { 
+    homeFeedArrTest, setHomeFeedArrTest, 
+    trendingFeedArrTest, setTrendingFeedArrTest, 
+    commentsArrTest, setCommentsArrTest,
+    likesArrTest, setLikesArrTest,
+    followersArrTest, setFollowersArrTest,
+    isLoadingTest, setIsLoadingTest
+  } = SongData()
+  
   const location = useLocation()
   const [user, setUser] = useState()
   const [userToggle, setUserToggle] = useState(false)
@@ -61,24 +72,33 @@ function App(props) {
         setWindowSize
       }}
     >
-      <div className="App">
-        <Switch>
-          <Route exact path="/" render={props => <Home {...props} />} />
-          <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 
-          <Route exact path="/authLogIn" render={props => <Auth {...props} />} /> 
-          <Route exact path="/auth" render={props => <Auth {...props} />} />
-          <Route exact path="/navBar" render={props => <NavBar {...props} />} />
-          <Route exact path="/profile/:id" render={props => <Profile {...props} />} />
-          <Route exact path="/profile/:id/editLyrics" render={props => <EditLyrics {...props} />} />
-          <Route exact path="/profile" render={props => <Profile {...props} />} />
-          <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
-          <Route exact path="/recordingBooth/editLyrics" render={props => <EditLyrics {...props} />} />
-          <Route exact path="/editprofile-screen" render={props => <EditProfileScreen {...props} />} />
-          <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
-          <Route exact path="/songScreen/:id" render={props => <SongScreen {...props} />} />
-          <Route exact path="/search" render={props => <Search {...props} />} />
-        </Switch>
-      </div>
+      <songData.Provider 
+        value = {{
+          homeFeedArrTest, setHomeFeedArrTest, 
+          trendingFeedArrTest, setTrendingFeedArrTest, 
+          likesArrTest, setLikesArrTest,
+          followersArrTest, setFollowersArrTest
+        }}
+      >
+        <div className="App">
+          <Switch>
+            <Route exact path="/" render={props => <Home {...props} />} />
+            <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 
+            <Route exact path="/authLogIn" render={props => <Auth {...props} />} /> 
+            <Route exact path="/auth" render={props => <Auth {...props} />} />
+            <Route exact path="/navBar" render={props => <NavBar {...props} />} />
+            <Route exact path="/profile/:id" render={props => <Profile {...props} />} />
+            <Route exact path="/profile/:id/editLyrics" render={props => <EditLyrics {...props} />} />
+            <Route exact path="/profile" render={props => <Profile {...props} />} />
+            <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
+            <Route exact path="/recordingBooth/editLyrics" render={props => <EditLyrics {...props} />} />
+            <Route exact path="/editprofile-screen" render={props => <EditProfileScreen {...props} />} />
+            <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
+            <Route exact path="/songScreen/:id" render={props => <SongScreen {...props} />} />
+            <Route exact path="/search" render={props => <Search {...props} />} />
+          </Switch>
+        </div>
+      </songData.Provider>
     </TheContext.Provider>
   )
 }
