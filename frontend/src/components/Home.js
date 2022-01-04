@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
+import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
-import SongData from "./songFeedComponents/SongData"
 import { songData } from "./songFeedComponents/SongData"
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
+import usePostComment from "./utils/usePostComment";
 import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
 import actions from "../api";
@@ -19,87 +18,94 @@ import NavBar from "./NavBar.js";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg"
 import follow from "../images/follow.svg";
-import comments from "../images/comment.svg";
+import commentsvg from "../images/comment.svg";
 import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
   useDebugInformation("Home", props)
+
   const { 
     user, windowSize
-  } = React.useContext(TheContext);
+  } = useContext(TheContext);
+  
   const { 
-    homeFeedArrTest, setHomeFeedArrTest, 
-    likesArrTest, setLikesArrTest 
-  } = React.useContext(songData)
+    likesArrTest, followersArrTest,
+    isLoading, setIsLoading
+  } = useContext(songData)
 
   const { 
     handlePostLike, 
-    returnLikeSongId, 
-    setReturnLikeSongId, 
+    likes, 
+    setLikes
   } = usePostLike();
 
   const { 
     handlePostFollow, 
-    returnFollowSongId, 
-    setReturnFollowSongId, 
-    totalFollowers, 
-    setTotalFollowers,
-    updateFollowFeed
+    followers, 
+    setFollowers,
   } = usePostFollow();
-  
-  const [songInView, setSongInView] = useState({});
-  const [totalFollowsLikesArr, setTotalFollowsLikesArr] = useState([]);
-  const [commentsArr, setCommentsArr] = useState([])
-  const [totalComments, setTotalComments] = useState();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const initialLikes = {
+    'IS_LIKED': false,
+    'ADD_LIKE': false,
+    'DELETE_LIKE': false,
+    'USERS_LIKE_TO_DELETE': null,
+    'TOTAL_LIKES': null,
+  }
+
+  const initialFollowers = {
+    'IS_FOLLOWED': false,
+    'ADD_FOLLOW': false,
+    'DELETE_FOLLOW': false,
+    'USERS_FOLLOW_TO_DELETE': null,
+    'TOTAL_FOLLOWERS': null,
+  }
+
+  const [songInView, setSongInView] = useState({});
+  const [totalComments, setTotalComments] = useState();
   const [isHomeFeed, setIsHomeFeed] = useState(true);
   const [isTrendingFeed, setIsTrendingFeed] = useState(false);
   const [isFollowingFeed, setIsFollowingFeed] = useState(false);
-  const [isLiked, setIsLiked] = useState()
-  const [isFollowed, setIsFollowed] = useState()
   const [isPlaying, setIsPlaying] = useState(false);
   const [poppedUp, setPoppedUp] = useState(false);
   const [home] = useState(`#6d6d6d`);
-  const [totalLikes, setTotalLikes] = useState();
 
   const commentInputRef = useRef();
   const playPauseRef = useRef();
-
-  const [userLikedSong, setUserLikedSong] = useState(false);
   
   useEffect(() => {
+    const songId = songInView?._id
+    setLikes(initialLikes)
+    setFollowers(initialFollowers)
+    setTotalComments(songInView?.songComments?.length)
 
-    const { songLikes } = songInView
-
-    songLikes?.forEach(each => {
-      if (each?.likeUser === user?._id) {
-        setUserLikedSong(true)
+    likesArrTest.forEach(each => {
+      if (each.songId === songId) {
+        const  { liked, likeToDelete } = checkIfLiked(each.likes, user._id)
+        setLikes(prevLikes => ({
+          ...prevLikes,
+          'IS_LIKED': liked,
+          'ADD_LIKE': liked ? false : liked,
+          'DELETE_LIKE': liked ? liked : false,
+          'USERS_LIKE_TO_DELETE': likeToDelete,
+          'TOTAL_LIKES': each.likes.length
+        }))
       }
     })
-    // homeFeedArrTest.forEach((each) => {
-    //   if (each.song._id === songInView._id) {
 
-    //   }
-    // })
-    setTotalFollowers(songInView?.songUser?.followers?.length)
-    setTotalLikes(songLikes?.length)
-  }, [songInView])
-
-  // useEffect(() => {
-  //   likesArrTest?.forEach(each => {
-  //     if (each?.songId === songInView?._id) {
-  //       each.likes.forEach(like => {
-  //         if (like?.likeUser === user?._id) {
-  //           setUserLikedSong(true)
-  //         }
-  //       })
-  //       setTotalLikes(each?.likes?.length)
-  //     }
-  //   })
-  // }, [songInView])
-
+    followersArrTest.forEach(each => {
+      if (each.songId === songId) {
+        const { followed, followToDelete } = checkIfFollowed(each.followers, user._id)
+        setFollowers(prevFollowers => ({
+          ...prevFollowers,
+          'IS_FOLLOWED': followed,
+          'USERS_FOLLOW_TO_DELETE': followToDelete,
+          'TOTAL_FOLLOWERS': each.followers.length
+        }))
+      }
+    })
+  }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
   // this to prevent the mobile keyboard from ruining layout...........
   // gets window height and converts body element and component div height to pixels
@@ -126,57 +132,34 @@ function Home(props) {
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />
     else if (isTrendingFeed) return <TrendingFeed />
-    else if (isFollowingFeed) return <FollowingFeed updateFollowFeed={updateFollowFeed} />
-  }, [isHomeFeed, isTrendingFeed, isFollowingFeed, homeFeedArrTest])
+    else if (isFollowingFeed) return <FollowingFeed />
+  }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
 
-  // useEffect(() => {
-  //   console.log(totalFollowsLikesArr, "gotta see this data")
-  //   let newArr = totalFollowsLikesArr.map((each) => {
-  //     if (each.songId === songInView._id) {
-  //       if (songInView._id === returnLikeSongId || songInView._id === returnFollowSongId) {
-  //         if (each.totalFollowers.length !== totalFollowers.length) {
-  //           let newFollowTotal = totalFollowers
-  //           setIsFollowed(checkIfFollowed(newFollowTotal))
-  //           setTotalFollowers(newFollowTotal)
-  //           return { ...each, totalFollowers: newFollowTotal }
-  //         } else if (each.totalLikes.length !== totalLikes.length) {
-  //           let newLikesTotal  = totalLikes
-  //           setIsLiked(checkIfLiked(newLikesTotal))
-  //           setTotalLikes(newLikesTotal)
-  //           return { ...each, totalLikes: newLikesTotal }
-  //         } else {
-  //           return each
-  //         }
-  //       } else {
-  //         setIsLiked(checkIfLiked(each.totalLikes))
-  //         setIsFollowed(checkIfFollowed(each.totalFollowers))
-  //         setReturnFollowSongId(null)
-  //         setReturnLikeSongId(null)
-  //         setTotalLikes(each.totalLikes)
-  //         setTotalFollowers(each.totalFollowers)
-  //         return each
-  //       }
-  //     } else {
-  //       return each
-  //     }
-  //   })
-  //   setTotalFollowsLikesArr(newArr)
-  // }, [songInView, returnFollowSongId, returnLikeSongId, totalFollowers, totalLikes])
 
-  const checkIfLiked = (arr) => {
+  const checkIfLiked = (likes, userId) => {
     let liked = false
-    arr.forEach(each => {
-      if (each.likeUser === user?._id) return liked = true
+    let likeToDelete = {}
+
+    likes.forEach(each => {
+      if (each.likeUser === userId) {
+        liked = true
+        likeToDelete = each
+      }
     })
-    return liked
+    return { liked, likeToDelete }
   }
 
-  const checkIfFollowed = (arr) => {
+  const checkIfFollowed = (followers, userId) => {
     let followed = false
-    arr.forEach(each => {
-      if (each.follower === user?._id) return followed = true
+    let followToDelete = {}
+
+    followers.forEach(each => {
+      if (each.follower === userId) {
+        followed = true
+        followToDelete = each
+      }
     })
-    return followed
+    return { followed, followToDelete }
   }
 
   const handlePlayPause = (bool) => {
@@ -198,13 +181,11 @@ function Home(props) {
       value={{
         songInView,
         setSongInView,
-        commentsArr,
-        setCommentsArr,
-        totalFollowsLikesArr, 
-        setTotalFollowsLikesArr,
+        totalComments,
+        setTotalComments,
         isFollowingFeed,
         isLoading, 
-        setIsLoading, isHomeFeed
+        setIsLoading, isHomeFeed,
       }}
     >
       <div className="Home" id="Home">
@@ -271,10 +252,8 @@ function Home(props) {
           <Comments
             commentInputRef={commentInputRef}
             songInView={songInView}
-            commentsArray={commentsArr}
-            setCommentsArray={setCommentsArr}
-            totalComments={totalComments}
-            setTotalComments={setTotalComments}
+            // totalComments={totalComments}
+            // setTotalComments={setTotalComments}
             poppedUp={poppedUp}
             whichMenu="Home"
           />
@@ -285,8 +264,8 @@ function Home(props) {
                 <div className="actions_shadow-div-inset">
                   <div className="action-btns-container">
                     <button
-                      className={`action-btn_shadow-div-outset ${isFollowed ? "liked-followed-commented" : ""}`}
-                      onClick={() => { handlePostFollow(songInView?.songUser?._id, songInView?._id) }}
+                      className={`action-btn_shadow-div-outset ${followers?.IS_FOLLOWED ? "liked-followed-commented" : ""}`}
+                      onClick={() => { handlePostFollow(songInView._id, songInView.songUser._id, followers?.IS_FOLLOWED, followers?.USERS_FOLLOW_TO_DELETE) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                     >
                       <div
@@ -303,9 +282,9 @@ function Home(props) {
                         <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
                         </div>
                         <div className="action-btn-text">
-                          <p style={{ color: 'white' }}>{totalFollowers}</p>
+                          <p style={{ color: 'white' }}>{followers?.TOTAL_FOLLOWERS}</p>
                           <p>
-                            {(totalFollowers === 1)
+                            {(followers?.TOTAL_FOLLOWERS === 1)
                               ? "Follow"
                               : "Follows"
                             }
@@ -315,8 +294,10 @@ function Home(props) {
                     </button>
 
                     <button 
-                      className={`action-btn_shadow-div-outset ${isLiked ? "liked-followed-commented" : ""}`} 
-                      onClick={() => { handlePostLike("song", songInView._id, totalFollowsLikesArr) }}
+                      className={`action-btn_shadow-div-outset 
+                        ${likes?.IS_LIKED ? "liked-followed-commented" : ""}
+                      `} 
+                      onClick={() => { handlePostLike(songInView._id, songInView.songUser._id, likes?.IS_LIKED, likes?.USERS_LIKE_TO_DELETE) }}
                     >
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons like" src={like} alt="like post icon" />
@@ -325,9 +306,9 @@ function Home(props) {
                         <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
                         </div>
                         <div className="action-btn-text">
-                          <p style={{ color: 'white' }}>{totalLikes}</p>
+                          <p style={{ color: 'white' }}>{likes?.TOTAL_LIKES}</p>
                           <p>
-                            {(totalLikes === 1) 
+                            {(likes?.TOTAL_LIKES === 1) 
                               ? "Like"
                               : "Likes"
                             }
@@ -335,12 +316,13 @@ function Home(props) {
                         </div>
                       </div>
                     </button>
- {console.log(homeFeedArrTest, "homefeedTest in the HOME COMPONENT?")}
+
+ {/* {console.log( "HEHEHEHEHHEHEHEHEHEHEHEHEHEHE")} */}
                     <button className={`action-btn_shadow-div-outset ${poppedUp ? "comment-pressed" : ""}`} onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset">
                         <img
                           className="social-icons comment"
-                          src={comments}
+                          src={commentsvg}
                           alt="comment on post icon"
                         />
                       </div>

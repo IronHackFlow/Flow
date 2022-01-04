@@ -25,7 +25,7 @@ function App(props) {
     commentsArrTest, setCommentsArrTest,
     likesArrTest, setLikesArrTest,
     followersArrTest, setFollowersArrTest,
-    isLoadingTest, setIsLoadingTest
+    isLoading, setIsLoading
   } = SongData()
   
   const location = useLocation()
@@ -77,7 +77,9 @@ function App(props) {
           homeFeedArrTest, setHomeFeedArrTest, 
           trendingFeedArrTest, setTrendingFeedArrTest, 
           likesArrTest, setLikesArrTest,
-          followersArrTest, setFollowersArrTest
+          followersArrTest, setFollowersArrTest,
+          commentsArrTest, setCommentsArrTest,
+          isLoading, setIsLoading
         }}
       >
         <div className="App">

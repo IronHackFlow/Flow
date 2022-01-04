@@ -11,16 +11,9 @@ import gifsArr from "../../images/gifs.json";
 
 function HomeFeed(props) {
   // useDebugInformation("IntersectionTest", props)
-  const { 
-    setSongInView, 
-    setTotalFollowsLikesArr,
-    setCommentsArr,
-    isLoading,
-    setIsLoading,
-  } = React.useContext(TheViewContext)
-  const { 
-    homeFeedArrTest, setHomeFeedArrTest
-  } = React.useContext(songData)
+  const { setSongInView } = React.useContext(TheViewContext)
+  const { homeFeedArrTest } = React.useContext(songData)
+
   const gifsCopy = [...gifsArr];
   const [homeFeedArr, setHomeFeedArr] = useState([]);
   const [homeDisplayNodes, setHomeDisplayNodes] = useState([])

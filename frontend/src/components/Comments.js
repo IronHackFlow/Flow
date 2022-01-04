@@ -1,13 +1,16 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
+import TheViewContext from '../TheViewContext'
+import { songData } from './songFeedComponents/SongData'
 import FormatDate from './FormatDate'
 import usePostLike from "./utils/usePostLike"
+import usePostComment from "./utils/usePostComment"
 import useDebugInformation from "./utils/useDebugInformation"
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
-import comments from '../images/comment.svg'
+import commentsvg from '../images/comment.svg'
 import edit from '../images/edit.svg'
 import trash from '../images/trashbin.svg'
 import send from '../images/send.svg'
@@ -15,26 +18,45 @@ import share from '../images/share.svg'
 import flag from '../images/flag.svg'
 
 function Comments(props) {
-  const { user } = React.useContext(TheContext)
+  const { user } = useContext(TheContext)
+  const { totalComments, setTotalComments } = useContext(TheViewContext)
+  const { commentsArrTest, setCommentsArrTest } = useContext(songData)
+  const { comments, setComments, postComment, deleteComment } = usePostComment()
+  const initialComments = {
+    'ADD_COMMENT': false,
+    'DELETE_COMMENT': false,
+    'USER_COMMENT_TO_DELETE': null,
+    'TOTAL_COMMENTS': null
+  }
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
   const [commLikesArr, setCommLikesArr] = useState([])
 
+
   useEffect(() => {
-    let commentInView = props.commentsArray.filter((each) => {
-      if (each.songId === props.songInView?._id) {
-        props.setTotalComments(each.comments?.length)
+    let songId = props.songInView?._id
+    setComments(initialComments)
+
+    let commentInView = commentsArrTest.filter(each => {
+      if (each.songId === songId) {
+        setComments(prevComments => ({
+          ...prevComments,
+          'TOTAL_COMMENTS': each.comments.length
+        }))
         return each
       }
     })
+
     let commentDisplay = commentInView[0]?.comments?.map((each, index) => {
       return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
     })
     setCommState(commentDisplay)
-    
-  }, [props.commentsArray])
+  }, [props.songInView])
 
-  
+  useEffect(() => {
+    setTotalComments(comments?.TOTAL_COMMENTS)
+  }, [comments])
+
   const resetCommentsArray = (arr) => {
     props.setCommentsArray((prevArr) => {
       return prevArr.map((each) => {
@@ -63,29 +85,37 @@ function Comments(props) {
       }
     }
   }
-  
-  const handleSubmit = e => {
+  const handleSubmit = (e, commentString, songId) => {
     e.preventDefault()
-    if (comment === undefined) {
-      console.log('please type out your comment')
-      return null
+    if (commentString == null) {
+      console.log('please type out your coment')
+      return
     }
-    actions
-      .addComment({
-        comment: comment,
-        commSong: props.songInView?._id,
-        commDate: new Date(),
-      })
-      .then(res => {
-        if (res.data.songComments.length) {
-          let comments = res.data.songComments
-          resetCommentsArray(comments)
-          props.setTotalComments(res.data.songComments.length)
-        }
-      })
-      .catch(console.error)
+    postComment(commentString, songId)
     props.commentInputRef.current.value = ''
   }
+  // const handleSubmit = e => {
+  //   e.preventDefault()
+  //   if (comment === undefined) {
+  //     console.log('please type out your comment')
+  //     return null
+  //   }
+  //   actions
+  //     .addComment({
+  //       comment: comment,
+  //       commSong: props.songInView?._id,
+  //       commDate: new Date(),
+  //     })
+  //     .then(res => {
+  //       if (res.data.songComments.length) {
+  //         let comments = res.data.songComments
+  //         resetCommentsArray(comments)
+  //         props.setTotalComments(res.data.songComments.length)
+  //       }
+  //     })
+  //     .catch(console.error)
+  //   props.commentInputRef.current.value = ''
+  // }
 
   function GetComments(each) {
     const { handlePostLike, totalCommentLikes, setTotalCommentLikes } = usePostLike()
@@ -262,7 +292,7 @@ function Comments(props) {
                     <div className="comm-likereply-btn clb-2">
                       <img
                         className="social-icons comment"
-                        src={comments}
+                        src={commentsvg}
                         alt="reply"
                       />
                     </div>
@@ -305,7 +335,7 @@ function Comments(props) {
     <div className={getCommentClass()}>
       <div className="inner-com">
         <div className="com-cont-1">
-          <form className="social-comment-form" onSubmit={(e) => handleSubmit(e)}>
+          <form className="social-comment-form" onSubmit={(e) => handleSubmit(e, comment, props.songInView._id)}>
             <div className="social-input-container">
               <input
                 className="social-comment-input"

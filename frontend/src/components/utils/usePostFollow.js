@@ -1,63 +1,76 @@
-import React, { useState, useRef } from "react";
+import { useContext, useState } from "react";
 import actions from "../../api.js";
 import TheContext from "../../TheContext.js"
+import { songData } from "../songFeedComponents/SongData.js"
 
 export default function usePostFollow() {
-  const { user } = React.useContext(TheContext);
-  const [totalFollowers, setTotalFollowers] = useState();
-  const [returnFollowSongId, setReturnFollowSongId] = useState();
-  const [updateFollowFeed, setUpdateFollowFeed] = useState([]);
-
-  const followCheck = (userId) => {
-    if (user._id === userId) {
-      console.log(`You can't follow yourself`)
-    } else {
-      actions
-      .getAUser({ id: userId })
+  const { user } = useContext(TheContext);
+  const { followersArrTest, setFollowersArrTest } = useContext(songData)
+  const [followers, setFollowers] = useState()
+  
+  const postFollow = async (songId, songUserId) => {
+    await actions
+      .addFollow({ followedUser: songUserId, followDate: new Date() })
       .then(res => {
-        let deleteObj = null
-        let followArr = res.data.followers
+        console.log(`ADDED a FOLLOW to: `, res.data.followedData._doc)
+        const songUserFollowers = res.data.followedData._doc.followers
+        const userToDelete = res.data.newFollow
+
+        setFollowers(prevFollowers => ({
+          ...prevFollowers,
+          'IS_FOLLOWED': true,
+          'TOTAL_FOLLOWERS': songUserFollowers.length,
+          'USERS_FOLLOW_TO_DELETE': userToDelete
+        }))
         
-        for (let i = 0; i < followArr.length; i++) {
-          if (followArr[i].follower === user._id) {
-            deleteObj = followArr[i]
+        let newFollowersArr = followersArrTest.map(song => {
+          if (song.songId === songId) {
+            return { ...song, followers: songUserFollowers }
+          } else {
+            return song
           }
-        }
-
-        if (deleteObj) return deleteFollow(userId, deleteObj)
-        else return postFollow(userId)
-      })
-      .catch(console.error)
-    }
-  }
-    
-  const postFollow = (userId) => {
-    actions
-      .addFollow({ followedUser: userId, followDate: new Date() })
-      .then(res => {
-        console.log(`added a follow to: `, res.data.followedData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
+        })
+        setFollowersArrTest(newFollowersArr)
       })
       .catch(console.error)
   }
     
-  const deleteFollow = (userId, deleteObj) => {
-    actions
-      .deleteFollow({ followedUser: userId, deleteObj: deleteObj })
+  const deleteFollow = async (songId, songUserId, toDelete) => {
+    await actions
+      .deleteFollow({ followedUser: songUserId, deleteObj: toDelete })
       .then(res => {
-        console.log(`deleted a follow from: `, res.data.followerData._doc)
-        setTotalFollowers(res.data.followedData._doc.followers)
-        setUpdateFollowFeed(res.data.followerData._doc.userFollows)
+        console.log(`DELETED a FOLLOW from: `, res.data.followedData._doc)
+        const songUserFollowers = res.data.followedData._doc.followers
+
+        setFollowers(prevFollowers => ({
+          ...prevFollowers,
+          'IS_FOLLOWED': false,
+          'TOTAL_FOLLOWERS': songUserFollowers.length,
+          'USERS_FOLLOW_TO_DELETE': null
+        }))
+
+        let newFollowersArr = followersArrTest?.map(song => {
+          if (song.songId === songId) {
+            return {...song, followers: songUserFollowers }
+          } else {
+            return song
+          }
+        })
+        setFollowersArrTest(newFollowersArr)
+        
       })
       .catch(console.error)
   }
 
-  const handlePostFollow = (userId, songId) => {
-    console.log("Gonna handle this Follow", userId)
-    setReturnFollowSongId(songId)
-    followCheck(userId)
+  const handlePostFollow = (songId, songUserId, isFollowed, toDelete) => {
+    if (songUserId === user._id) return 
+    else if (isFollowed) return deleteFollow(songId, songUserId, toDelete)
+    else return postFollow(songId, songUserId)
   }
 
-  return { handlePostFollow, returnFollowSongId, setReturnFollowSongId, totalFollowers, setTotalFollowers, updateFollowFeed }
+  return { 
+    handlePostFollow, 
+    followers, 
+    setFollowers
+  }
 }

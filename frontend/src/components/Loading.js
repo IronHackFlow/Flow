@@ -1,8 +1,8 @@
-import React from 'react'
-import TheViewContext from "../TheViewContext";
+import { useContext } from 'react'
+import { songData } from "./songFeedComponents/SongData";
 
 function Loading(props) {
-  const { isLoading } = React.useContext(TheViewContext)
+  const { isLoading } = useContext(songData)
   return (
     <div className="Loading" style={isLoading === true ? {opacity: "1"} : {opacity: "0"}}>
       <div className="loading_shadow-div-inset">

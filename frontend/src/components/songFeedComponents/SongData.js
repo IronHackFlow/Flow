@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
+import { createContext, useState, useEffect} from "react"
 import actions from "../../api"
 import gifsArr from "../../images/gifs.json"
 
-export const songData = React.createContext(SongData)
+export const songData = createContext(SongData)
 
 export default function SongData() {
   const gifsCopy = [...gifsArr];
@@ -11,10 +11,10 @@ export default function SongData() {
   const [commentsArrTest, setCommentsArrTest] = useState([])
   const [likesArrTest, setLikesArrTest] = useState([]);
   const [followersArrTest, setFollowersArrTest] = useState([]);
-  const [isLoadingTest, setIsLoadingTest] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    setIsLoadingTest(true)
+    setIsLoading(true)
     const controller = new AbortController()
     const signal = controller.signal
     
@@ -29,7 +29,7 @@ export default function SongData() {
        const songsArray = res.data.map((each, index) => {
          commentsArray.push({ songId: each._id, comments: each.songComments })
          likesArray.push({ songId: each._id, likes: each.songLikes })
-         followersArray.push({ songId: each._id, user: each.songUser, userFollowers: each.songUser.followers })
+         followersArray.push({ songId: each._id, followers: each.songUser.followers })
          return { song: each, songVideo: gifsCopy[index].url }
        }).reverse()
 
@@ -43,7 +43,7 @@ export default function SongData() {
        setFollowersArrTest(followersArray)
        setLikesArrTest(likesArray)
        setHomeFeedArrTest(songsArray)
-       setIsLoadingTest(false)
+       setIsLoading(false)
      }, signal)
      .catch(console.error)
   }, [])
@@ -54,6 +54,6 @@ export default function SongData() {
     commentsArrTest, setCommentsArrTest,
     likesArrTest, setLikesArrTest,
     followersArrTest, setFollowersArrTest,
-    isLoadingTest, setIsLoadingTest
+    isLoading, setIsLoading
   }
 }
