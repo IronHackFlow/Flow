@@ -59,7 +59,6 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 })
   
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-
   await Songs.find({ songUser: req.body })
     .populate('songUser')
     .then(songs => {
@@ -72,13 +71,11 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
 })
 
 router.post(`/getMostLikedSongsRT`, async (req, res, next) => {
-  // Songs.find({$sort: {"songTotLikes": -1}})
-  await Songs.find({})
+  const songs = await Songs.find({})
     .populate('songLikes')
     .populate({ path: 'songComments', populate: 'commUser' })
     .populate({ path: 'songUser', populate: 'followers' })
     .then(songs => {
-      
       console.log(songs, "what is going on here?")
       res.status(200).json(songs)
     })
@@ -86,4 +83,3 @@ router.post(`/getMostLikedSongsRT`, async (req, res, next) => {
 })
 
 module.exports = router
-   

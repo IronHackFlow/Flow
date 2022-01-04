@@ -131,7 +131,6 @@
               @include flexCenter(77%, 30.5%, 4px, space-evenly, center, row);
               background: initial;
               box-shadow: 3px 3px 4px #505050, -2px -2px 2px 0px #ffffff;
-              transition: background .2s, box-shadow .2s;
 
               &:active {
                 box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
@@ -180,7 +179,6 @@
             .liked-followed-commented {
               background: #ec6aa0;
               box-shadow: 3px 3px 3px #502939, -1px -2px 2px 0px #fff1f7;
-              transition: background .2s, box-shadow .2s;
               .action-btn-icon_shadow-div-inset {
                 img {
                   filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
@@ -190,7 +188,6 @@
                 box-shadow: inset 1px 1px 3px #3b272f, inset -2px -2px 3px #fdedf4;
                 background: #c85886;
                 color: #ffd1e4;
-                transition: background .2s, box-shadow .2s;
               }
             }
             // class to apply to comment button on press
@@ -646,50 +643,62 @@
                     @include flexCenter(100%, 97%, 30px 5px 15px 30px, flex-start, center, row);
                     box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
 
-                    .comment-likereply-container {
-                      @include flexCenter(100%, 33%, 0px, center, center, row);
+                    .action-buttons-container {
+                      @include flexCenter(100%, 40%, 0px, center, center, row);
                       margin-left: 2%;
 
-                      .comment-likereply_shadow-div-outset {
-                        @include flexCenter(69%, 95%, 4px, center, center, row);
+                      .action-btn_shadow-div-outset {
+                        @include flexCenter(68%, 95%, 4px, center, center, row);
                         box-shadow: 2px 2px 3px #353535, -2px -2px 2px #858585;
 
-                        .comm-likereply-btn {
-                          @include flexCenter(100%, 45%, 0, center, center, row);
+                        .action-btn-icon-container {
+                          @include flexCenter(100%, 32%, 0, center, center, row);
                           // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
 
-                          .likes-number-container {
-                            @include flexCenter(30px, 30px, 100%, center, center, row);
-                            position: absolute;
-                            top: -37%;
-                            left: 32%;
-                            background: none;
-
-                            p {
-                              font-size: .75rem;
-                              font-weight: bold;
-                              color: white;
-                            }
-                          }
-
-                          .comment {
+                          img.comment {
                             height: 1rem;
                           }
-                          .heart {
+                          img.heart {
                             height: 1.5rem;
                           }
-                          .edit {
+                          img.edit {
                             height: 1.4rem;
                           }
                         }
 
-                        .comm-likereply-text {
-                          @include flexCenter(100%, 55%, 0, flex-start, center, row);
-                          font-size: .8rem;
-                          color: white;
-                          font-weight: bold;
+                        .action-btn-text-container {
+                          @include flexCenter(100%, 68%, 0, center, center, row);
+  
+                          p {
+                            @include flexCenter(100%, 50%, 0, center, center, row);
+                            font-weight: bold;
+                            font-size: .8rem;
+                            color: white;
+                          }
+                          p.like-number {
+                            color: pink;
+                            font-size: .75rem;
+                          }
+                          p.reply-text {
+                            width: 60%;
+                          }
+                          p.reply-number {
+                            width: 40%;
+                            color: pink;
+                            font-size: .75rem;
+                          }
+                          p.edit-delete-text {
+                            justify-content: flex-start;
+                            width: 100%;
+                          }
                         }
 
+                        .action-btn-icon-container.edit-delete {
+                          width: 40%;
+                        }
+                        .action-btn-text-container.edit-delete {
+                          width: 60%
+                        }
                         &:active {
                           background: #606060;
                           box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;

@@ -22,12 +22,14 @@ function Comments(props) {
   const { totalComments, setTotalComments } = useContext(TheViewContext)
   const { commentsArrTest, setCommentsArrTest } = useContext(songData)
   const { comments, setComments, postComment, deleteComment } = usePostComment()
+
   const initialComments = {
     'ADD_COMMENT': false,
     'DELETE_COMMENT': false,
     'USER_COMMENT_TO_DELETE': null,
     'TOTAL_COMMENTS': null
   }
+
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
   const [commLikesArr, setCommLikesArr] = useState([])
@@ -38,6 +40,7 @@ function Comments(props) {
     setComments(initialComments)
 
     let commentInView = commentsArrTest.filter(each => {
+      console.log(each.comments, "LOLOLOLOL")
       if (each.songId === songId) {
         setComments(prevComments => ({
           ...prevComments,
@@ -85,6 +88,7 @@ function Comments(props) {
       }
     }
   }
+
   const handleSubmit = (e, commentString, songId) => {
     e.preventDefault()
     if (commentString == null) {
@@ -94,6 +98,7 @@ function Comments(props) {
     postComment(commentString, songId)
     props.commentInputRef.current.value = ''
   }
+
   // const handleSubmit = e => {
   //   e.preventDefault()
   //   if (comment === undefined) {
@@ -118,7 +123,7 @@ function Comments(props) {
   // }
 
   function GetComments(each) {
-    const { handlePostLike, totalCommentLikes, setTotalCommentLikes } = usePostLike()
+    const { handlePostLikeComment, commentLikes, setCommentLikes } = usePostLike()
     const [commentValue, setCommentValue] = useState();
     const [checkCommUser, setCheckCommUser] = useState()
     const [menuBool, setMenuBool] = useState(false)
@@ -133,7 +138,15 @@ function Comments(props) {
     const slideOutRef = useRef()
 
     useEffect(() => {
-      setTotalCommentLikes(each.commLikes.length)
+      const likesArray = each.commLikes
+      likesArray.forEach(each => {
+        console.log(each, "WHAT IS GOING ON??")
+      })
+
+      // setCommentLikes(prevLikes => ({
+      //   ...prevLikes,
+
+      // }))
     }, [])
 
     useEffect(() => {
@@ -216,6 +229,7 @@ function Comments(props) {
               </div>
             </div>
           </div>
+          
           <div className="comment-text-container">
             <div className="comment-list-outer">
               <p className="comment-username">
@@ -245,62 +259,87 @@ function Comments(props) {
         
         <div className="comment-list-buttons" ref={listBtnsRef}>
           <div className="space-filler">
-
           </div>
+
           <div className="comment-btns-container">
             <div className="comment-btns_shadow-div-inset">
-              <div className="comment-likereply-container clc-1">
-                <div className="comment-likereply_shadow-div-outset" style={{borderRadius: "40px 4px 4px 40px"}}>
-                  <div
-                    className="comm-likereply-btn clb-1"
-                    onClick={checkCommUser ? () => deleteComment(each) : () => { handlePostLike("Comment", each._id)}}
-                  >
-                    <img
-                      className="social-icons heart"
-                      src={checkCommUser ? trash : heart2}
-                      alt="delete or like"
-                    />
-                    <div className="likes-number-container">
-                      <p>{checkCommUser ? '' : totalCommentLikes?.length}</p>
-                    </div>
-                  </div>
-
-                  <div className="comm-likereply-text" ref={likeTextRef}>
-                    {checkCommUser ? 'Delete' : 'Like'}
-                  </div>
-                </div>
-              </div>
-
               {checkCommUser ? (
-                <div className="comment-likereply-container clc-2">
-                  <div className="comment-likereply_shadow-div-outset">
-                    <div className="comm-likereply-btn clb-2" onClick={() => setEditCommentBoolean()}>
-                      <img
-                        className="social-icons edit"
-                        src={edit}
-                        alt="edit"
-                      />
-                    </div>
-                    <div className="comm-likereply-text" ref={replyTextRef}>
-                      Edit
-                    </div>
+                <>
+                  <div className="action-buttons-container">
+                    <button 
+                      className="action-btn_shadow-div-outset"
+                      style={{borderRadius: "40px 4px 4px 40px"}}
+                      onClick={() => deleteComment(each)}
+                    >
+                      <div className="action-btn-icon-container edit-delete">
+                        <img
+                          className="social-icons heart"
+                          src={trash}
+                          alt="delete"
+                        />
+                      </div>
+                      <div className="action-btn-text-container edit-delete" ref={likeTextRef}>
+                        <p className="edit-delete-text">Delete</p>
+                      </div>
+                    </button>
                   </div>
-                </div>
+
+                  <div className="action-buttons-container">
+                    <button 
+                      className="action-btn_shadow-div-outset" 
+                      onClick={() => setEditCommentBoolean()}
+                    >
+                      <div className="action-btn-icon-container edit-delete">
+                        <img
+                          className="social-icons edit"
+                          src={edit}
+                          alt="edit"
+                        />
+                      </div>
+                      <div className="action-btn-text-container edit-delete" ref={replyTextRef}>
+                        <p className="edit-delete-text">Edit</p>
+                      </div>
+                    </button>
+                  </div>
+                </>
               ) : (
-                <div className="comment-likereply-container clc-2">
-                  <div className="comment-likereply_shadow-div-outset">
-                    <div className="comm-likereply-btn clb-2">
-                      <img
-                        className="social-icons comment"
-                        src={commentsvg}
-                        alt="reply"
-                      />
-                    </div>
-                    <div className="comm-likereply-text" ref={replyTextRef}>
-                      Reply
-                    </div>
+                <>
+                  <div className="action-buttons-container">
+                    <button 
+                      className="action-btn_shadow-div-outset"
+                      style={{borderRadius: "40px 4px 4px 40px"}}
+                      onClick={() => { handlePostLikeComment(each._id, commentLikes?.IS_LIKED, commentLikes?.USERS_LIKE_TO_DELETE)}}
+                    >
+                      <div className="action-btn-icon-container">
+                        <img
+                          className="social-icons heart"
+                          src={heart2}
+                          alt="like"
+                        />
+                      </div>
+                      <div className="action-btn-text-container" ref={likeTextRef}>
+                        <p className="like-text">Like</p>
+                        <p className="like-number">13</p>
+                      </div>
+                    </button>
                   </div>
-                </div>
+
+                  <div className="action-buttons-container">
+                    <button className="action-btn_shadow-div-outset">
+                      <div className="action-btn-icon-container">
+                        <img
+                          className="social-icons comment"
+                          src={commentsvg}
+                          alt="reply"
+                        />
+                      </div>
+                      <div className="action-btn-text-container" ref={replyTextRef}>
+                        <p className="reply-text" >Reply</p>
+                        <p className="reply-number">{checkCommUser ? '' : '13'}</p>
+                      </div>
+                    </button>
+                  </div>
+                </>
               )}
 
               <div className="comment-popout-container" ref={slideOutRef}>

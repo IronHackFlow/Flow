@@ -6,8 +6,25 @@ import TheContext from "../../TheContext.js"
 export default function usePostLike() {
   const { user } = useContext(TheContext);
   const { likesArrTest, setLikesArrTest } = useContext(songData)
-  const [totalCommentLikes, setTotalCommentLikes] = useState([]);
-  const [likes, setLikes] = useState();
+
+  const initialLikes = {
+    'TYPE': 'SONG',
+    'IS_LIKED': false,
+    'ADD_LIKE': false,
+    'DELETE_LIKE': false,
+    'USERS_LIKE_TO_DELETE': null,
+    'TOTAL_LIKES': null,
+  }
+  const initialCommentLikes = {
+    'TYPE': 'COMMENT',
+    'IS_LIKED': false,
+    'ADD_LIKE': false,
+    'DELETE_LIKE': false,
+    'USERS_LIKE_TO_DELETE': null,
+    'TOTAL_COMMENT_LIKES': null,
+  }
+  const [likes, setLikes] = useState(initialLikes);
+  const [commentLikes, setCommentLikes] = useState(initialCommentLikes);
 
   const checkCommentLikes = (id) => {
     actions
@@ -62,7 +79,7 @@ export default function usePostLike() {
     .addLike({ likedComment: id, likeDate: new Date(), commLike: true})
     .then(res => {
       console.log('added a like to: ', res.data)
-      setTotalCommentLikes(res.data.commLikes)
+      setCommentLikes(res.data.commLikes)
     })
     .catch(console.error)
   }
@@ -103,30 +120,23 @@ export default function usePostLike() {
       .deleteLike({ deleteObj: deleteData, commLike: true })
       .then(res => {
         console.log(`deleted a like from: `, res.data)
-        setTotalCommentLikes(res.data.commLikes)
+        setCommentLikes(res.data.commLikes)
       })
       .catch(console.error)
   }
   
-  const handlePostLike = (songId, songUserId, isLiked, toDelete) => {
+  const handlePostLikeSong = (songId, songUserId, isLiked, toDelete) => {
     if (songUserId === user._id) return 
     else if (isLiked) return deleteLikeSong(songId, toDelete)
     else return addLikeSong(songId)
-
-    // if (model === "ADD_SONGLIKE") {
-    //   addLikeSong(id)
-    // } else if (model === "DELETE_SONGLIKE") {
-    //   deleteLikeSong(id, toDelete)
-    // } else {
-    //   checkCommentLikes(id)
-    // }
   }
 
   return { 
-    handlePostLike, 
+    handlePostLikeSong, 
+    initialLikes,
     likes, 
     setLikes,
-    totalCommentLikes, 
-    setTotalCommentLikes,
+    commentLikes, 
+    setCommentLikes,
   }
 }

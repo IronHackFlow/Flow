@@ -6,8 +6,6 @@ const verifyJWT = require('./verifyToken')
 const User = require('../models/User')
 const Songs = require('../models/Songs')
 const Comments = require('../models/Comments')
-const Follows = require('../models/Follows')
-
 
 router.post(`/addCommentRT`, verifyJWT, async (req, res, next) => {
   let body = {
@@ -17,17 +15,17 @@ router.post(`/addCommentRT`, verifyJWT, async (req, res, next) => {
     commDate: req.body.commDate,
   }
   console.log(body, "what")
-  let comment = await Comments.create(body)
+  let newComment= await Comments.create(body)
   
   await Songs.findByIdAndUpdate(
     body.commSong,
-    { $push: { songComments: comment } },
+    { $push: { songComments: newComment } },
     { new: true },
   )
     .populate({ path: 'songComments', populate: 'commUser' })
     .then(song => {
-      res.status(200).json(song)
-      console.log(`ADDED a comment: `, comment)
+      res.status(200).json({ song: song, userComment: newComment })
+      console.log(`ADDED a comment: `, newComment)
     })
     .catch(err => {
       next(err)

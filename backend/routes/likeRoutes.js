@@ -24,7 +24,8 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
   if (likeCheck === false) {
     let likedObject = await Likes.create(bodySong)
     console.log(`CREATED songLike object: `, likedObject)
-  
+    let returnData = { song: '', songLike: likedObject }
+    
     await Songs.findByIdAndUpdate(
       bodySong.likerSong,
       { $push: { songLikes: likedObject } },
@@ -32,12 +33,13 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
     )
       .populate('songLikes')
       .then(song => {
-        res.status(200).json(song)
+        returnData.song = song
         console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
       })
       .catch(err => {
         next(err)
       })
+    res.status(200).json(returnData)
   } else {
     let likedCommObject = await Likes.create(bodyComm)
     console.log('CREATED commentLike object: ', likedCommObject)

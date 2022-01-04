@@ -35,7 +35,8 @@ function Home(props) {
   } = useContext(songData)
 
   const { 
-    handlePostLike, 
+    handlePostLikeSong, 
+    initialLikes,
     likes, 
     setLikes
   } = usePostLike();
@@ -45,14 +46,6 @@ function Home(props) {
     followers, 
     setFollowers,
   } = usePostFollow();
-
-  const initialLikes = {
-    'IS_LIKED': false,
-    'ADD_LIKE': false,
-    'DELETE_LIKE': false,
-    'USERS_LIKE_TO_DELETE': null,
-    'TOTAL_LIKES': null,
-  }
 
   const initialFollowers = {
     'IS_FOLLOWED': false,
@@ -134,7 +127,6 @@ function Home(props) {
     else if (isTrendingFeed) return <TrendingFeed />
     else if (isFollowingFeed) return <FollowingFeed />
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
-
 
   const checkIfLiked = (likes, userId) => {
     let liked = false
@@ -252,8 +244,6 @@ function Home(props) {
           <Comments
             commentInputRef={commentInputRef}
             songInView={songInView}
-            // totalComments={totalComments}
-            // setTotalComments={setTotalComments}
             poppedUp={poppedUp}
             whichMenu="Home"
           />
@@ -297,7 +287,7 @@ function Home(props) {
                       className={`action-btn_shadow-div-outset 
                         ${likes?.IS_LIKED ? "liked-followed-commented" : ""}
                       `} 
-                      onClick={() => { handlePostLike(songInView._id, songInView.songUser._id, likes?.IS_LIKED, likes?.USERS_LIKE_TO_DELETE) }}
+                      onClick={() => { handlePostLikeSong(songInView._id, songInView.songUser._id, likes?.IS_LIKED, likes?.USERS_LIKE_TO_DELETE) }}
                     >
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons like" src={like} alt="like post icon" />

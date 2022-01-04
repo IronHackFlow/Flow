@@ -6,6 +6,7 @@ const User = require('../models/User')
 const Follows = require('../models/Follows')
 
 router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
+  
   let body = {
     follower: req.user._id,
     followed: req.body.followedUser,
@@ -14,7 +15,7 @@ router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
   let followedObject = await Follows.create(body)
   console.log(`CREATED follow object: `, followedObject)
   
-  let resData = { followerData: '', followedData: '' }
+  let resData = { followerData: '', followedData: '', newFollow: followedObject }
   
   await User.findByIdAndUpdate(
     body.follower,
@@ -56,7 +57,7 @@ router.post(`/deleteFollowRT`, verifyJWT, async (req, res, next) => {
     deleteObj: req.body.deleteObj,
   }
   let resData = { followerData: '', followedData: '' }
-
+  console.log(body.deleteObj, "am i getting something here??? for isdf adlfk")
   await User.findByIdAndUpdate(
     body.follower,
     { $pull: { userFollows: body.deleteObj._id } },

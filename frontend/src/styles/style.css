@@ -1266,10 +1266,6 @@ input, textarea, select, button {
   background: initial;
   -webkit-box-shadow: 3px 3px 4px #505050, -2px -2px 2px 0px #ffffff;
           box-shadow: 3px 3px 4px #505050, -2px -2px 2px 0px #ffffff;
-  -webkit-transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, box-shadow .2s;
-  transition: background .2s, box-shadow .2s, -webkit-box-shadow .2s;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset:active {
@@ -1370,10 +1366,6 @@ input, textarea, select, button {
   background: #ec6aa0;
   -webkit-box-shadow: 3px 3px 3px #502939, -1px -2px 2px 0px #fff1f7;
           box-shadow: 3px 3px 3px #502939, -1px -2px 2px 0px #fff1f7;
-  -webkit-transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, box-shadow .2s;
-  transition: background .2s, box-shadow .2s, -webkit-box-shadow .2s;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .liked-followed-commented .action-btn-icon_shadow-div-inset img {
@@ -1386,10 +1378,6 @@ input, textarea, select, button {
           box-shadow: inset 1px 1px 3px #3b272f, inset -2px -2px 3px #fdedf4;
   background: #c85886;
   color: #ffd1e4;
-  -webkit-transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, -webkit-box-shadow .2s;
-  transition: background .2s, box-shadow .2s;
-  transition: background .2s, box-shadow .2s, -webkit-box-shadow .2s;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .comment-pressed {
@@ -2585,9 +2573,9 @@ input, textarea, select, button {
           box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container {
   height: 100%;
-  width: 33%;
+  width: 40%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2605,8 +2593,8 @@ input, textarea, select, button {
   margin-left: 2%;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset {
-  height: 69%;
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset {
+  height: 68%;
   width: 95%;
   border-radius: 4px;
   display: -webkit-box;
@@ -2626,9 +2614,9 @@ input, textarea, select, button {
           box-shadow: 2px 2px 3px #353535, -2px -2px 2px #858585;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container {
   height: 100%;
-  width: 45%;
+  width: 32%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2645,57 +2633,28 @@ input, textarea, select, button {
           flex-direction: row;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn .likes-number-container {
-  height: 30px;
-  width: 30px;
-  border-radius: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  position: absolute;
-  top: -37%;
-  left: 32%;
-  background: none;
-}
-
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn .likes-number-container p {
-  font-size: .75rem;
-  font-weight: bold;
-  color: white;
-}
-
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn .comment {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.comment {
   height: 1rem;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn .heart {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.heart {
   height: 1.5rem;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-btn .edit {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.edit {
   height: 1.4rem;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset .comm-likereply-text {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container {
   height: 100%;
-  width: 55%;
+  width: 68%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2703,12 +2662,61 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  font-size: .8rem;
-  color: white;
-  font-weight: bold;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .comment-likereply-container .comment-likereply_shadow-div-outset:active {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container p {
+  height: 100%;
+  width: 50%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-weight: bold;
+  font-size: .8rem;
+  color: white;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container p.like-number {
+  color: pink;
+  font-size: .75rem;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container p.reply-text {
+  width: 60%;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container p.reply-number {
+  width: 40%;
+  color: pink;
+  font-size: .75rem;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container p.edit-delete-text {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container.edit-delete {
+  width: 40%;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container.edit-delete {
+  width: 60%;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset:active {
   background: #606060;
   -webkit-box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
           box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
