@@ -262,8 +262,15 @@ function Home(props) {
                   <div className="action-btns-container">
                     <button
                       className={`action-btn_shadow-div-outset ${followers?.IS_FOLLOWED ? "liked-followed-commented" : ""}`}
-                      onClick={() => { handlePostFollow(songInView._id, songInView.songUser._id, followers?.IS_FOLLOWED, followers?.USERS_FOLLOW_TO_DELETE) }}
                       style={{ borderRadius: '50px 5px 5px 50px' }}
+                      onClick={() => { 
+                        handlePostFollow(
+                          songInView._id, 
+                          songInView.songUser._id, 
+                          followers?.IS_FOLLOWED, 
+                          followers?.USERS_FOLLOW_TO_DELETE
+                        ) 
+                      }}
                     >
                       <div
                         className="action-btn-icon_shadow-div-inset"
@@ -294,7 +301,14 @@ function Home(props) {
                       className={`action-btn_shadow-div-outset 
                         ${likes?.IS_LIKED ? "liked-followed-commented" : ""}
                       `} 
-                      onClick={() => { handlePostLikeSong(songInView._id, songInView.songUser._id, likes?.IS_LIKED, likes?.USERS_LIKE_TO_DELETE) }}
+                      onClick={() => { 
+                        handlePostLikeSong(
+                          songInView._id, 
+                          songInView.songUser._id, 
+                          likes?.IS_LIKED, 
+                          likes?.USERS_LIKE_TO_DELETE
+                        ) 
+                      }}
                     >
                       <div className="action-btn-icon_shadow-div-inset">
                         <img className="social-icons like" src={like} alt="like post icon" />
@@ -313,7 +327,6 @@ function Home(props) {
                         </div>
                       </div>
                     </button>
-
  {/* {console.log( "HEHEHEHEHHEHEHEHEHEHEHEHEHEHE")} */}
                     <button className={`action-btn_shadow-div-outset ${poppedUp ? "comment-pressed" : ""}`} onClick={popUpComments}>
                       <div className="action-btn-icon_shadow-div-inset">

@@ -18,7 +18,6 @@ function Search(props) {
   const searchInputRef = useRef();
 
   useEffect(() => {
-    console.log(location, 'fuck this')
     if (location.state !== null) {
       const value = location.state
       searchInputRef.current.focus()

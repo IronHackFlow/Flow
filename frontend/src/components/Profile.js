@@ -196,7 +196,7 @@ function Profile(props) {
                             <div className="play-outset">
                               <Link 
                                 to={`/profile/${user._id}/editLyrics`}
-                                state={{ state: eachSong }}
+                                state={{ propSongTakes: null, propCurrentSong: eachSong }}
                                 className="play-inset"
                               >
                                 <img

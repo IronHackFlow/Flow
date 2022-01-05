@@ -6456,9 +6456,9 @@ input, textarea, select, button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -6470,9 +6470,9 @@ input, textarea, select, button {
           box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
 }
 
-.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .play-beat_shadow-div-outset {
   height: 80%;
-  width: 94%;
+  width: 15%;
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6489,7 +6489,54 @@ input, textarea, select, button {
           flex-direction: column;
   -webkit-box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
           box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
-  margin-right: 2%;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .play-beat_shadow-div-outset .play-beat_shadow-div-inset {
+  height: 70%;
+  width: 70%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+          box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .play-beat_shadow-div-outset .play-beat_shadow-div-inset img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
+  height: 80%;
+  width: 77%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+          box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+  margin: none;
 }
 
 .EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .select-beat-title {

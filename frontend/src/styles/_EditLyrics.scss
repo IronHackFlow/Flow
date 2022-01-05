@@ -409,13 +409,28 @@
                         @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
                         
                         .select-beat_shadow-div-inset {
-                            @include flexCenter(80%, 95%, 8px 40px 40px 50px, flex-end, center, row);
+                            @include flexCenter(80%, 95%, 8px 40px 40px 50px, space-evenly, center, row);
                             box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
-            
-                            .select-beat_shadow-div-outset {
-                                @include flexCenter(80%, 94%, 50px, center, center, column);
+                            
+                            .play-beat_shadow-div-outset {
+                                @include flexCenter(80%, 15%, 50px, center, center, column);
                                 box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
-                                margin-right: 2%;
+
+                                .play-beat_shadow-div-inset {
+                                    @include flexCenter(70%, 70%, 50px, center, center, column);
+                                    box-shadow: 3px 3px 3px 0px #131313, -2px -2px 2px #525252;
+                                    
+                                    img {
+                                        height: 1.5rem;
+                                        width: 1.5rem;
+                                    }
+                                }
+                            }
+
+                            .select-beat_shadow-div-outset {
+                                @include flexCenter(80%, 77%, 50px, center, center, column);
+                                box-shadow: inset 2px 2px 3px 0px #191919, inset -2px -2px 2px #494949;
+                                margin: none;
             
                                 .select-beat-title {
                                     @include flexCenter(33%, 100%, 0px, center, flex-start, column);

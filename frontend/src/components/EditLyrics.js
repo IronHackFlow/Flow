@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
 import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
+import useBeats from './utils/useBeats'
 import edit from "../images/edit.svg";
 import save from "../images/save-disk.svg";
 import del from "../images/delete2.svg";
@@ -12,34 +13,28 @@ import down from "../images/down.svg";
 import pause from "../images/pause.svg";
 import move from "../images/move.svg";
 import play from "../images/play.svg";
-import beat1 from "../assets/beatsTrack1.m4a";
-import beat2 from "../assets/beatsTrack2.m4a";
-import beat3 from "../assets/beatsTrack3.m4a";
-import beat4 from "../assets/beatsTrack4.m4a";
-import beat5 from "../assets/beatsTrack5.m4a";
 
 function EditLyrics(props) {
   const { user } = React.useContext(TheContext)
   const navigate = useNavigate()
+  const location = useLocation()
+  const { propSongTakes, propSongs, propCurrentSong } = location?.state
+  const { 
+    beatOption, 
+    isBeatPlaying,
+    mapBeatOptions,
+    selectBeatOption,
+    playSelectBeat, 
+  } = useBeats()
 
-  const [tracks, setTracks] = useState([
-    { song: beat1, name: "After Dark" },
-    { song: beat2, name: "Futurology" },
-    { song: beat3, name: "Peacock" },
-    { song: beat4, name: "Callback" },
-    { song: beat5, name: "Drained" },
-  ]);
-  const [selectedBeat, setSelectedBeat] = useState(tracks[0].song);
   const [getTakes, setGetTakes] = useState([]);
-  const [thisUserSongs, setThisUserSongs] = useState([])
+  const [userSongs, setUserSongs] = useState([])
   const [currentSong, setCurrentSong] = useState();
   const [lyricsArray, setLyricsArray] = useState([]);
   const [allSongs, setAllSongs] = useState([])
   const [lyricsDisplay, setLyricsDisplay] = useState([]);
-  const [selectedSong, setSelectedSong] = useState();
-  const [audioSrc, setAudioSrc] = useState(null);
+  const [selectedSongURL, setSelectedSongURL] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [linkLocation, setLinkLocation] = useState();
   const [editToggle, setEditToggle] = useState(false);
   const [targetLine, setTargetLine] = useState();
   const [editLyrics] = useState(`#363636`);
@@ -47,58 +42,38 @@ function EditLyrics(props) {
   const lyricsPopUpRef = useRef();
   
   useEffect(() => {
-    if (props.location.pathname === `/recordingBooth/EditLyrics`) {
-      console.log(props.location, "YOYOYOYOYOYO")
-      setLinkLocation(true)
-      setGetTakes([...props.location.songs])
-      setCurrentSong(props.location.currentSong)
-    } else if (props.location.pathname === `/profile/${user?._id}/EditLyrics`) {
-      setLinkLocation(false)
-      setCurrentSong(props.location.currentSong)
-      setSelectedSong(props.location.currentSong.songURL)
-    }
-    console.log(getTakes, "i wanna see this ok?")
-  }, [linkLocation])
-
-  useEffect(() => {
-    setAudioSrc(currentSong?.songURL)
-  }, [currentSong])
-
-  useEffect(() => {
-    if (props.location.currentSong === undefined) {
-      setCurrentSong(thisUserSongs[0])
-    }
-  }, [thisUserSongs])
-  
-  useEffect(() => {
     actions
-      .getUserSongs({ songUser: user._id })
+      .getUserSongs({ songUser: user?._id })
       .then(res => {
-        setThisUserSongs(res.data)
+        setUserSongs(res.data)
       })
       .catch(console.error)
-  }, [])
- 
-  useEffect(() => {
-    if (getTakes?.length > 0) {
-      const combineArr = [...getTakes, ...thisUserSongs]
-      setAllSongs(combineArr)
-    } else {
-      setAllSongs(thisUserSongs)
-    }
-  }, [getTakes, thisUserSongs])
+  }, [])  
 
   useEffect(() => {
-    let lyricArray = currentSong?.songLyricsStr.map((each, index) => {
+    setCurrentSong(propCurrentSong)
+    setGetTakes(propSongTakes)
+    setSelectedSongURL(propCurrentSong?.songURL)
+  }, [])
+  
+  useEffect(() => {
+    if (getTakes !== null) {
+      const combineArr = [...getTakes, ...userSongs]
+      setAllSongs(combineArr)
+    } else {
+      setAllSongs(userSongs)
+    }
+  }, [getTakes, userSongs])
+
+  useEffect(() => {
+    let lyricArray = currentSong?.songLyricsStr?.map((each, index) => {
       if (typeof each === 'string') {
         return { id: `${index + 1}${each}`, array: each.split(' ') }
       } else {
         return { id: `${index + 1}${each}`, array: each }
       }
     })
-    console.log(lyricArray, "wLSKJDFLKSDJFLKSJDFLKSJDFkdkdffkjd DKJFS sdkfj")
     setLyricsArray(lyricArray)
-
   }, [currentSong])
   
   useEffect(() => {
@@ -110,19 +85,13 @@ function EditLyrics(props) {
       })
       setLyricsDisplay(lyricDisplay)
     }
-  }, [props.location, lyricsArray, editToggle, targetLine])
+  }, [lyricsArray, editToggle, targetLine])
 
   const closeWindow = () => {
-    if (linkLocation === true) {
-      navigate({
-        pathname: '/recordingBooth',
-        songs: props.location.songs
-      })
+    if (location.pathname === '/recordingBooth/editLyrics') {
+      navigate('/recordingBooth', { state: { propSongTakes: propSongTakes } })
     } else {
-      navigate({
-        pathname: `/profile/${user?._id}`,
-        songs: props.location.songs
-      })
+      navigate(`/profile/${user._id}`, { state: { propSongs: propSongs }})
     }
   }
 
@@ -251,16 +220,6 @@ function EditLyrics(props) {
     })
   }, [lyricsArray, lyricsDisplay])
 
-  const chooseTrack = () => {
-    return tracks.map((element, index) => {
-      return <option key={`${element}_${index}`} value={element.song}>{element.name}</option>;
-    });
-  };
-
-  const loadTrack = (e) => {
-    setSelectedBeat(e.target.value)
-  };
-
 
   const chooseSongs = () => {
     return allSongs.map((each, index) => {
@@ -273,19 +232,9 @@ function EditLyrics(props) {
   }
 
   const loadSong = (e) => {
-    setSelectedSong(e.target.value)
+    setSelectedSongURL(e.target.value)
     setCurrentSong(allSongs[e.target.selectedIndex])
     console.log(allSongs[e.target.selectedIndex], "sdkfsdkfd")
-    console.log(selectedSong, "what itsdfs fkdjfs")
-  }
-
-  const handlePlayPause = (bool) => {
-    if (bool === true) {
-      setIsPlaying(true)
-    }
-    else {
-      setIsPlaying(false)
-    }
   }
 
   const setLyricsArrayHandler = (e) => {
@@ -330,7 +279,7 @@ function EditLyrics(props) {
                   </div>
                   <select
                     className="select-songs"
-                    value={selectedSong}
+                    value={selectedSongURL}
                     onChange={(e) => loadSong(e)}
                   >
                     {chooseSongs()}
@@ -357,7 +306,7 @@ function EditLyrics(props) {
                         <button
                           className="play-btn_shadow-div-outset play"
                           aria-label="Pause"
-                          onClick={() => handlePlayPause(false)}
+                          onClick={() => setIsPlaying(!isPlaying)}
                         >
                           <img
                             className="button-icons bi-pause"
@@ -369,7 +318,7 @@ function EditLyrics(props) {
                         <button
                           className="play-btn_shadow-div-outset pause"
                           aria-label="Play"
-                          onClick={() => handlePlayPause(true)}
+                          onClick={() => setIsPlaying(!isPlaying)}
                         >
                           <img
                             className="button-icons bi-play"
@@ -404,6 +353,16 @@ function EditLyrics(props) {
             <div className="record-container">
               <div className="record-1_select-beat">
                 <div className="select-beat_shadow-div-inset">
+                  <div className="play-beat_shadow-div-outset">
+                    <div className="play-beat_shadow-div-inset">
+                      <img
+                        className="button-icons bi-play"
+                        src={play}
+                        alt="play icon"
+                      />
+                    </div>
+                  </div>
+
                   <div className="select-beat_shadow-div-outset">
                     <div className="select-beat-title">
                       Select A Beat :
@@ -411,11 +370,11 @@ function EditLyrics(props) {
                     <select 
                       id="selectBox" 
                       className="track-select" 
-                      value={selectedBeat}
-                      onChange={(e) => loadTrack(e)}>
-                      {chooseTrack()}
+                      value={beatOption}
+                      onChange={(e) => selectBeatOption(e)}>
+                      {mapBeatOptions()}
                     </select>
-                    <audio src={selectedBeat} loop={true}></audio>
+                    <audio src={beatOption} loop={true}></audio>
                   </div>
                 </div>
               </div>

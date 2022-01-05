@@ -257,7 +257,18 @@ function SongScreen(props) {
         <div className="social-buttons">
           <div className="social-list">
             <div className="social-button-container">
-              <div className="social-button" onClick={() => { handlePostFollow(thisSong.songUser._id)}} ref={followBtn}>
+              <div 
+                className="social-button" 
+                ref={followBtn}
+                onClick={() => { 
+                  handlePostFollow(
+                    thisSong._id, 
+                    thisSong.songUser._id, 
+                    followers?.IS_FOLLOWED, 
+                    followers?.USERS_FOLLOW_TO_DELETE
+                  ) 
+                }}
+              > 
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="button-title">
@@ -272,7 +283,17 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div className="social-button" onClick={thisSong?._id ?  () => { handlePostLike("Song", thisSong._id) } : null}>
+              <div 
+                className="social-button" 
+                onClick={() => { 
+                  handlePostLike(
+                    thisSong._id, 
+                    thisSong.songUser._id,
+                    likes?.IS_LIKED,
+                    likes?.USERS_LIKE_TO_DELETE
+                  ) 
+                }}
+              >
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
               <div className="button-title">
