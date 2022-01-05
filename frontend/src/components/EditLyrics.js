@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
 import TheContext from "../TheContext";
@@ -20,7 +20,7 @@ import beat5 from "../assets/beatsTrack5.m4a";
 
 function EditLyrics(props) {
   const { user } = React.useContext(TheContext)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [tracks, setTracks] = useState([
     { song: beat1, name: "After Dark" },
@@ -114,12 +114,12 @@ function EditLyrics(props) {
 
   const closeWindow = () => {
     if (linkLocation === true) {
-      history.push({
+      navigate({
         pathname: '/recordingBooth',
         songs: props.location.songs
       })
     } else {
-      history.push({
+      navigate({
         pathname: `/profile/${user?._id}`,
         songs: props.location.songs
       })

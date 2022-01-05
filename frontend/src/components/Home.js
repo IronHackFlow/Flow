@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import { songData } from "./songFeedComponents/SongData"
@@ -28,7 +28,7 @@ function Home(props) {
   const { 
     user, windowSize
   } = useContext(TheContext);
-  
+
   const { 
     likesArrTest, followersArrTest,
     isLoading, setIsLoading
@@ -79,7 +79,7 @@ function Home(props) {
   
       likesArrTest?.forEach(each => {
         if (each.songId === songId) {
-          const  { liked, likeToDelete } = checkIfLiked(each.likes, user._id)
+          const  { liked, likeToDelete } = checkIfLiked(each.likes, user?._id)
           setLikes(prevLikes => ({
             ...prevLikes,
             'IS_LIKED': liked,
@@ -93,7 +93,7 @@ function Home(props) {
   
       followersArrTest?.forEach(each => {
         if (each.songId === songId) {
-          const { followed, followToDelete } = checkIfFollowed(each.followers, user._id)
+          const { followed, followToDelete } = checkIfFollowed(each.followers, user?._id)
           setFollowers(prevFollowers => ({
             ...prevFollowers,
             'IS_FOLLOWED': followed,
@@ -249,6 +249,8 @@ function Home(props) {
           <Comments
             commentInputRef={commentInputRef}
             songInView={songInView}
+            totalComments={totalComments}
+            setTotalComments={setTotalComments}
             poppedUp={poppedUp}
             whichMenu="Home"
           />
@@ -347,12 +349,13 @@ function Home(props) {
                     <div className="user-pic-container">
                       <div className="user-pic_shadow-div-outset">
                         <Link
-                          to={`/profile/${songInView.songUser?._id}`}
+                          to={`/profile/${songInView?.songUser?._id}`}
+                          state={{ state: songInView?.songUser }}
                           className="user-pic_shadow-div-inset"
                         >
                           <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
                           <img
-                            src={songInView.songUser?.picture}
+                            src={songInView?.songUser?.picture}
                             alt=""
                             ref={props.profilePicRef}
                           />
@@ -369,7 +372,7 @@ function Home(props) {
                           </p>
                           <p id="two">
                             <img src={bullet} alt="bullet point" />
-                            {songInView.songUser?.userName}
+                            {songInView?.songUser?.userName}
                           </p>
                         </div>
 

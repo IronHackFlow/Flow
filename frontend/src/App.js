@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
+import { Routes, Route, useLocation, } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import SongData from './components/songFeedComponents/SongData'
@@ -34,6 +34,19 @@ function App(props) {
   const [locationIndicator, setLocationIndicator] = useState()
   const [windowSize, setWindowSize] = useState()
 
+  useEffect(() => {
+    actions
+      .isUserAuth()
+      .then(res => {
+        console.log(res, "does this get anythin?")
+        setUser(res.data.user)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  }, [userToggle])
+
   useLayoutEffect(() => {
     const handleResize = () => {
       var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -44,15 +57,6 @@ function App(props) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  useEffect(() => {
-    actions
-      .isUserAuth()
-      .then(res => {
-        if (res.data.user) return setUser(res.data.user)
-        else return res.redirect('/auth')
-      })
-      .catch(console.error)
-  }, [userToggle])
 
 
   useEffect(() => {
@@ -83,22 +87,22 @@ function App(props) {
         }}
       >
         <div className="App">
-          <Switch>
-            <Route exact path="/" render={props => <Home {...props} />} />
-            <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 
-            <Route exact path="/authLogIn" render={props => <Auth {...props} />} /> 
-            <Route exact path="/auth" render={props => <Auth {...props} />} />
-            <Route exact path="/navBar" render={props => <NavBar {...props} />} />
-            <Route exact path="/profile/:id" render={props => <Profile {...props} />} />
-            <Route exact path="/profile/:id/editLyrics" render={props => <EditLyrics {...props} />} />
-            <Route exact path="/profile" render={props => <Profile {...props} />} />
-            <Route exact path="/recordingBooth" render={props => <TestAudio {...props} />} />
-            <Route exact path="/recordingBooth/editLyrics" render={props => <EditLyrics {...props} />} />
-            <Route exact path="/editprofile-screen" render={props => <EditProfileScreen {...props} />} />
-            <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
-            <Route exact path="/songScreen/:id" render={props => <SongScreen {...props} />} />
-            <Route exact path="/search" render={props => <Search {...props} />} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />}></Route> 
+            {/* <Route exact path="/authSignUp" render={props => <Auth {...props} />} /> 
+            <Route exact path="/authLogIn" render={props => <Auth {...props} />} />  */}
+            <Route path="/auth" element={<Auth />}></Route>
+            <Route path="/navBar" element={<NavBar />}></Route>
+            <Route path="/profile/:id" element={<Profile />}></Route>
+            <Route path="/profile/:id/editLyrics" element={<EditLyrics />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/recordingBooth" element={<TestAudio />}></Route>
+            <Route path="/recordingBooth/editLyrics" element={<EditLyrics />}></Route>
+            <Route path="/editprofile-screen" element={<EditProfileScreen />}></Route>
+            <Route path="/editprofile" element={<EditProfile />}></Route>
+            <Route path="/songScreen/:id" element={<SongScreen />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+          </Routes>
         </div>
       </songData.Provider>
     </TheContext.Provider>

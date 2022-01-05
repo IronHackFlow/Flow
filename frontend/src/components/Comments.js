@@ -19,7 +19,7 @@ import flag from '../images/flag.svg'
 
 function Comments(props) {
   const { user } = useContext(TheContext)
-  const { totalComments, setTotalComments } = useContext(TheViewContext)
+  // const { totalComments, setTotalComments } = useContext(TheViewContext)
   const { commentsArrTest, setCommentsArrTest } = useContext(songData)
   const { comments, setComments, postComment, deleteComment } = usePostComment()
 
@@ -57,6 +57,7 @@ function Comments(props) {
   }, [props.songInView])
 
   useEffect(() => {
+    const setTotalComments = props.setTotalComments
     setTotalComments(comments?.TOTAL_COMMENTS)
   }, [comments])
 
@@ -219,10 +220,8 @@ function Comments(props) {
             <div className="comment-photo-inner">
               <div className="comment-photo-outer">
                 <Link
-                  to={{
-                    pathname: `/profile/${each.commUser?._id}`,
-                    profileInfo: each.commUser,
-                  }}
+                  to={`/profile/${each.commUser._id}`}
+                  state={{state: each.commUser}}
                 >
                   <img src={each.commUser?.picture} alt="user's profile"></img>
                 </Link>

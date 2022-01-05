@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
@@ -21,10 +21,13 @@ import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
   const { user } = React.useContext(TheContext)
-  const { handlePostLike, totalLikes, setTotalLikes } = usePostLike();
-  const { handlePostFollow, totalFollowers, setTotalFollowers } = usePostFollow();
+  const { handlePostLike, likes, setLikes } = usePostLike();
+  const { handlePostFollow, followers, setFollowers } = usePostFollow();
 
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation()
+  const { state, searchValue, link } = location.state
+
   const gifsCopy = [...gifsArr];
   const [thisSong, setThisSong] = useState({});
   const [allSongs, setAllSongs] = useState([]);
@@ -40,11 +43,17 @@ function SongScreen(props) {
   const playPauseRef = useRef();
 
   useEffect(() => {
-    setTotalFollowers(thisSong?.songUser?.followers)
+    setFollowers(prevFollowers => ({
+      ...prevFollowers,
+      'TOTAL_FOLLOWERS': thisSong?.songUser?.followers?.length
+    }))
   }, [thisSong])
 
   useEffect(() => {
-    setTotalLikes(thisSong?.songLikes)
+    setLikes(prevLikes => ({
+      ...prevLikes,
+      'TOTAL_LIKES': thisSong?.songLikes?.length
+    }))
   }, [thisSong])
 
   useEffect(() => {
@@ -52,7 +61,7 @@ function SongScreen(props) {
     const signal = controller.signal
 
     actions
-      .getUserSongs({ songUser: props.location.songInfo?.songUser })
+      .getUserSongs({ songUser: state?.songUser })
       .then(res => {
         setAllSongs(res.data)
         setAllSongs(prevArr => prevArr.map((each, index) => ({
@@ -71,8 +80,7 @@ function SongScreen(props) {
   }, [props.location])
 
   useEffect(() => {
-    console.log(props.location, history.location, "WHAHASFHSLDKFJ")
-    let song = allSongs.filter(each => each._id === props.location.songInfo._id)
+    let song = allSongs.filter(each => each._id === state?._id)
     setThisSong(song[0])
   }, [allSongs])
 
@@ -85,17 +93,12 @@ function SongScreen(props) {
   }
 
   const closeSongWindow = () => {
-    if (props.location.link === '/search') {
-      history.push({
-        pathname: '/search',
-        searchValue: history.location.searchValue
-      })
+    if (link === '/search') {
+      navigate('/search',  { state: searchValue })
     } else {
-      history.push({
-        pathname: `/profile/${thisSong.songUser?._id}`,
-        profileInfo: thisSong.songUser,
-      })
+      navigate(`/profile/${thisSong.songUser?._id}`, { state: thisSong?.songUser })
     }
+    // navigate(-1)
   }
 
   const popUpComments = () => {
@@ -258,9 +261,9 @@ function SongScreen(props) {
                 <img className="social-icons follow" src={follow} alt="follow user icon"></img>
               </div>
               <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{totalFollowers?.length}</p>
+                <p style={{ color: '#ff3b8c' }}>{followers?.TOTAL_FOLLOWERS}</p>
                 <p>
-                  {(totalFollowers?.length === 1)
+                  {(followers?.TOTAL_FOLLOWERS === 1)
                     ? "Follower"
                     : "Followers"
                   }
@@ -273,9 +276,9 @@ function SongScreen(props) {
                 <img className="social-icons heart" src={heart2} alt="like post icon"></img>
               </div>
               <div className="button-title">
-                <p style={{color: '#ff3b8c'}}>{totalLikes?.length}</p>
+                <p style={{color: '#ff3b8c'}}>{likes?.TOTAL_LIKES}</p>
                 <p>
-                  {(totalLikes?.length === 1)
+                  {(likes?.TOTAL_LIKES === 1)
                     ? "Like"
                     : "Likes"
                   }

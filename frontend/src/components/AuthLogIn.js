@@ -1,28 +1,30 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import actions from '../api';
 import TheContext from '../TheContext'
 import eye from "../images/eye.svg"
 import noEye from "../images/no-eye.svg"
 
 function AuthLogIn(props) {
-  const { userToggle, setUserToggle } = React.useContext(TheContext)
+  const navigate = useNavigate()
+
   const [userName, setUserName] = useState()
   const [password, setPassword] = useState()
   const [showPassword, setShowPassword] = useState(false)
 
   const handleLogIn = async (e) => {
     e.preventDefault()
-    const user = {
+    const userObj = {
       userName: userName,
       password: password
     }
     try {
       const res = await actions
-        .logIn(user)
+        .logIn(userObj)
         .then((res) => {
           console.log(res.data, "plz")
           localStorage.setItem('token', res.data.token)
-          setUserToggle(!userToggle)
+          navigate('/')
         })
         .catch(err => console.log(err))
     } catch(err) {

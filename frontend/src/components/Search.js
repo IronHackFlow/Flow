@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 import NavBar from './NavBar'
@@ -12,13 +12,15 @@ function Search(props) {
   const { windowSize } = React.useContext(TheContext);
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
   const [searchValue, setSearchValue] = useState();
-  const history = useHistory();
+  const navigation = useNavigate();
+  const location = useLocation()
+
   const searchInputRef = useRef();
 
   useEffect(() => {
-    console.log(windowSize, "what it is yo??? do it change?? lemme know")
-    if (props.location.searchValue) {
-      const value = props.location.searchValue
+    console.log(location, 'fuck this')
+    if (location.state !== null) {
+      const value = location.state
       searchInputRef.current.focus()
       searchInputRef.current.value = value
       setSearchValue(value)
@@ -28,11 +30,12 @@ function Search(props) {
 
   const closeWindow = (e) => {
     e.preventDefault()
-    if (history.location.link && history.location.link !== "/search") {
-      history.push(history.location.link)
-    } else {
-      history.push("/")
-    }
+    // if (history.location.link && history.location.link !== "/search") {
+    //   history.push(history.location.link)
+    // } else {
+    //   history.push("/")
+    // }
+    navigation("/")
   }
 
   const clearSearchField = e => {
@@ -105,15 +108,8 @@ function Search(props) {
           <li className="suggestions-result-list" key={ele.user ? `${ele.user._id}_${index}` : `${ele.song._id}_${index}`}>
             <Link
               className="result-link-container"
-              to={ele.user ? ({
-                pathname: `/profile/${ele.user._id}`,
-                profileInfo: ele.user
-              }) : ({
-                pathname: `/SongScreen/${ele.song._id}`,
-                songInfo: ele.song,
-                link: "/search",
-                searchValue: searchInputRef.current.value
-              })}
+              to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song_id}`}
+              state={ele.user ? {state: ele.user} : { state: ele.song, searchValue: searchInputRef.current.value, link: "/search" }}
             >
               <div className="result-1_data">
                 <div className="data_shadow-div-outset">

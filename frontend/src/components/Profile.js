@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
 import TheContext from '../TheContext'
@@ -16,34 +16,31 @@ import pause from '../images/pause.svg'
 
 function Profile(props) {
   const { user, setUser, userToggle, setUserToggle } = React.useContext(TheContext)
-  const history = useHistory()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { state } = location.state
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [thisUserLikes, setThisUserLikes] = useState([])
+  const songListRef = useRef()
 
   useEffect(() => {
     actions
-      .getUserSongs({ songUser: props.location.pathname.slice(9) })
+      .getUserSongs({ songUser: state?._id })
       .then(res => {
         setThisUserSongs(res.data)
         // console.log(res.data, 'lol')
       })
       .catch(console.error)
-  }, [props.location])
+  }, [state])
 
   useEffect(() => {
-    if (props.location.pathname.slice(9) === user?._id) {
+    if (state?._id === user?._id) {
       setThisUser(user)
     } else {
-      actions
-        .getAUser({ id: props.location.pathname.slice(9) })
-        .then(res => {
-          setThisUser(res.data)
-          // console.log(res.data, 'shit son, what is the difference here ??')
-        })
-        .catch(console.error)
+      setThisUser(state)
     }
-  }, [props.location, user])
+  }, [state, user])
   
   useEffect(() => {
     actions
@@ -54,13 +51,13 @@ function Profile(props) {
       .catch(console.error)
   }, [thisUser])
 
-  async function logout() {
+  const logout = () => {
     setUser({})
     localStorage.removeItem('token')
     setUserToggle(!userToggle)
-    await history.push('/auth')
+    navigate('/auth')
   }
-  const songListRef = useRef()
+
 
   function ProfileSongs(eachSong, id) {
     const [deleteCheck, setDeleteCheck] = useState(true);
@@ -139,10 +136,8 @@ function Profile(props) {
               <div className="track-details-container">
                 <div className="song-name-container">
                   <Link
-                    to={{
-                      pathname: `/songScreen/${eachSong._id}`,
-                      songInfo: { ...eachSong },
-                    }}
+                    to={`/songScreen/${eachSong._id}`}
+                    state={{ state: eachSong }}
                     className="song-name-outset"
                   >
                     <div className="track-title-container">
@@ -179,7 +174,7 @@ function Profile(props) {
               
               <div className="buttons-container">
                 <div className="buttons-inner">
-                  {props.location.pathname.slice(9) === user._id
+                  {state?._id === user._id
                     ? (
                       <>
                         <div className="delete-btn-container">
@@ -199,7 +194,11 @@ function Profile(props) {
                         <div className="delete-btn-container">
                           <div className="play-container">
                             <div className="play-outset">
-                              <Link to={{pathname: `/profile/${user._id}/editLyrics`, currentSong: eachSong}} className="play-inset">
+                              <Link 
+                                to={`/profile/${user._id}/editLyrics`}
+                                state={{ state: eachSong }}
+                                className="play-inset"
+                              >
                                 <img
                                   className="button-icons"
                                   src={editicon}
@@ -364,7 +363,7 @@ function Profile(props) {
                     <div className="profile-button-inset pbe-1">
                       <p className="number-container">
                         {/* eventually create logic to deal with 4 digit number here */}
-                        {thisUser.followers?.length ? thisUser.followers.length : "0"}
+                        {thisUser?.followers?.length ? thisUser?.followers?.length : "0"}
                       </p>
                       <div className="icon-container">
                         <img className="button-icons logout" src={followers} style={{margin: "12% 0% 0% 8%"}} alt="followers" />
@@ -380,7 +379,7 @@ function Profile(props) {
                   <div className="profile-button-outset" style={{borderRadius: "4px"}}>
                     <div className="profile-button-inset pbe-2">
                       <p className="number-container">
-                        {thisUser.userFollows?.length ? thisUser.userFollows.length : "0"}
+                        {thisUser?.userFollows?.length ? thisUser?.userFollows?.length : "0"}
                       </p>
                       <div className="icon-container">
                         <img className="button-icons logout" src={social} alt="following" />

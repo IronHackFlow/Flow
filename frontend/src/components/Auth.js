@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
 import AuthLogIn from './AuthLogIn'
@@ -9,7 +9,8 @@ import flowLogo from '../images/FlowLogo.png'
 
 const Auth = (props) => {
   const { windowSize, userToggle, setUserToggle } = React.useContext(TheContext)
-  const history = useHistory()
+  const navigate = useNavigate()
+
   const [toggleLogin, setToggleLogin] = useState(true)
 
   useLayoutEffect(() => {
@@ -26,11 +27,11 @@ const Auth = (props) => {
     .isUserAuth()
     .then(res => {
       if (res.data.isLoggedIn) {
-        history.push('/')
+        navigate('/')
       }
     })
     .catch(console.error)
-  }, [history, userToggle])
+  }, [userToggle])
   
   const onResponse = (response) => {
     actions

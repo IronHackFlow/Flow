@@ -86,7 +86,8 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={user?._id ? `/profile/${user._id}` : '/auth'}
+              to={user ? `/profile/${user._id}` : '/auth'}
+              state={{ state: user }}
               className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : 'btn-unselected'}`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >
