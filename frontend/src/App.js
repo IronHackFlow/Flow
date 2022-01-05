@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './TheContext'
 import SongData from './components/songFeedComponents/SongData'
@@ -48,8 +48,8 @@ function App(props) {
     actions
       .isUserAuth()
       .then(res => {
-        setUser(res.data.user)
-        console.log(res.data.user, "is logged in ")
+        if (res.data.user) return setUser(res.data.user)
+        else return res.redirect('/auth')
       })
       .catch(console.error)
   }, [userToggle])

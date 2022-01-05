@@ -66,38 +66,43 @@ function Home(props) {
 
   const commentInputRef = useRef();
   const playPauseRef = useRef();
-  
+
   useEffect(() => {
-    const songId = songInView?._id
-    setLikes(initialLikes)
-    setFollowers(initialFollowers)
-    setTotalComments(songInView?.songComments?.length)
-
-    likesArrTest.forEach(each => {
-      if (each.songId === songId) {
-        const  { liked, likeToDelete } = checkIfLiked(each.likes, user._id)
-        setLikes(prevLikes => ({
-          ...prevLikes,
-          'IS_LIKED': liked,
-          'ADD_LIKE': liked ? false : liked,
-          'DELETE_LIKE': liked ? liked : false,
-          'USERS_LIKE_TO_DELETE': likeToDelete,
-          'TOTAL_LIKES': each.likes.length
-        }))
-      }
-    })
-
-    followersArrTest.forEach(each => {
-      if (each.songId === songId) {
-        const { followed, followToDelete } = checkIfFollowed(each.followers, user._id)
-        setFollowers(prevFollowers => ({
-          ...prevFollowers,
-          'IS_FOLLOWED': followed,
-          'USERS_FOLLOW_TO_DELETE': followToDelete,
-          'TOTAL_FOLLOWERS': each.followers.length
-        }))
-      }
-    })
+    if (likesArrTest == null) return
+    if (followersArrTest == null) return
+    if (songInView == null) return
+    else {
+      const songId = songInView?._id
+      setLikes(initialLikes)
+      setFollowers(initialFollowers)
+      setTotalComments(songInView?.songComments?.length)
+  
+      likesArrTest?.forEach(each => {
+        if (each.songId === songId) {
+          const  { liked, likeToDelete } = checkIfLiked(each.likes, user._id)
+          setLikes(prevLikes => ({
+            ...prevLikes,
+            'IS_LIKED': liked,
+            'ADD_LIKE': liked ? false : liked,
+            'DELETE_LIKE': liked ? liked : false,
+            'USERS_LIKE_TO_DELETE': likeToDelete,
+            'TOTAL_LIKES': each.likes.length
+          }))
+        }
+      })
+  
+      followersArrTest?.forEach(each => {
+        if (each.songId === songId) {
+          const { followed, followToDelete } = checkIfFollowed(each.followers, user._id)
+          setFollowers(prevFollowers => ({
+            ...prevFollowers,
+            'IS_FOLLOWED': followed,
+            'USERS_FOLLOW_TO_DELETE': followToDelete,
+            'TOTAL_FOLLOWERS': each.followers.length
+          }))
+        }
+      })
+    }
   }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
   // this to prevent the mobile keyboard from ruining layout...........
