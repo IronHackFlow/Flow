@@ -131,8 +131,15 @@ export default function usePostLike() {
     else return addLikeSong(songId)
   }
 
+  const handlePostLikeComment = (commentId, commentUserId, isLiked, toDelete) => {
+    if (commentUserId === user._id) return
+    else if (isLiked) return deleteLikeComment()
+    else return addLikeComment()
+  }
+
   return { 
     handlePostLikeSong, 
+    handlePostLikeComment,
     initialLikes,
     likes, 
     setLikes,
