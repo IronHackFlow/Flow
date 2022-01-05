@@ -157,7 +157,6 @@ function TestAudio(props) {
   }, [selectedWordHolder])
 
   useEffect(() => {
-    console.log(process.env)
     if (recorderState.mediaStream) {
       setRecorderState((prevState) => {
         return {
