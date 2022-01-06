@@ -29,7 +29,7 @@ export default function SongData() {
        const songsArray = res.data.map((each, index) => {
          commentsArray.push({ songId: each._id, comments: each.songComments })
          likesArray.push({ songId: each._id, likes: each.songLikes })
-         followersArray.push({ songId: each._id, followers: each.songUser.followers })
+         followersArray.push({ songId: each._id, songUserId: each.songUser._id, followers: each.songUser.followers })
          return { song: each, songVideo: gifsCopy[index].url }
        }).reverse()
 

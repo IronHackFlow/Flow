@@ -51,6 +51,8 @@
             box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #e7e7e7;
 
             .username-text-me {
+              display: flex;
+              align-items: center;
               height: 65%;
               width: 90%;
               font-size: 20px;
@@ -98,6 +100,7 @@
               p {
                 width: 85%;
                 padding-left: 15%;
+                font-size: .8rem;
                 color: white;
                 text-align: start;
                 word-break: break-all;
@@ -110,6 +113,7 @@
               p {
                 height: 80%;
                 width: 90%;
+                font-size: .8rem;
                 color: #ff728a;
                 text-align: start;
                 overflow-y: scroll;

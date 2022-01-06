@@ -20,6 +20,7 @@ router.post(`/getAUserRT`, async (req, res, next) => {
 //search bar bobby
 router.post('/getManySongsAndUsersRT', async (req, res, next) => {
   let searchData = { user: "", songs: "" }
+
   await User.find({ userName: { $regex: req.body.search, $options: '$i' } })
     .then(user => {
       searchData.user = user
@@ -34,7 +35,7 @@ router.post('/getManySongsAndUsersRT', async (req, res, next) => {
       console.log('yo its ya boi 2' + songs)
     })
     .catch(err => res.status(500).json(err))
-  console.log(searchData, "LOL IS IT A OBJECT??")
+
   res.status(200).json(searchData)
 })
 

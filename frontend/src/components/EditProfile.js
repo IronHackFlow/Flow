@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../TheContext'
 import actions from '../api'
 import back from '../images/back.svg'
 
 function EditProfile(props) {
-  const { user, userToggle, setUserToggle } = React.useContext(TheContext)
+  const { user, userToggle, setUserToggle } = useContext(TheContext)
 
-  const [thisUser, setThisUser] = useState([user])
+  const [thisUser, setThisUser] = useState(user)
   const [thisUsersSongs, setThisUsersSongs] = useState([])
 
   const publicSect = useRef()
@@ -22,16 +22,6 @@ function EditProfile(props) {
       [e.target.name]: e.target.value,
     })
   }
-
-  useEffect(() => {
-    actions
-      .getAUser({ id: user._id })
-      .then(thisUserDbData => {
-        setThisUser(thisUserDbData.data)
-        console.log(thisUser)
-      })
-      .catch(console.error)
-  }, [])
 
   useEffect(() => {
     actions
@@ -123,7 +113,7 @@ function EditProfile(props) {
                       autoComplete="off"
                       onChange={handleChange}
                       name="userName"
-                      placeholder={thisUser.userName}
+                      placeholder={thisUser?.userName}
                     ></input>
                   </div>
                 </div>
@@ -136,7 +126,7 @@ function EditProfile(props) {
                       autoComplete="off"
                       onChange={handleChange}
                       name="userAbout"
-                      placeholder={thisUser.userAbout}
+                      placeholder={thisUser?.userAbout}
                     ></input>
                   </div>
                 </div>
@@ -149,7 +139,7 @@ function EditProfile(props) {
                       autoComplete="off"
                       onChange={handleChange}
                       name="userLocation"
-                      placeholder={thisUser.userLocation}
+                      placeholder={thisUser?.userLocation}
                     ></input>
                   </div>
                 </div>
@@ -178,7 +168,7 @@ function EditProfile(props) {
                     autoComplete="nope"
                     onChange={handleChange}
                     name="given_name"
-                    placeholder={thisUser.given_name}
+                    placeholder={thisUser?.given_name}
                   ></input>
                 </div>
               </div>
@@ -191,7 +181,7 @@ function EditProfile(props) {
                     autoComplete="nope"
                     onChange={handleChange}
                     name="family_name"
-                    placeholder={thisUser.family_name}
+                    placeholder={thisUser?.family_name}
                   ></input>
                 </div>
               </div>
@@ -204,7 +194,7 @@ function EditProfile(props) {
                     autoComplete="nope"
                     onChange={handleChange}
                     name="email"
-                    placeholder={thisUser.email}
+                    placeholder={thisUser?.email}
                   ></input>
                 </div>
               </div>
@@ -229,7 +219,7 @@ function EditProfile(props) {
                     autoComplete="off"
                     onChange={handleChange}
                     name="userTwitter"
-                    placeholder={thisUser.userTwitter}
+                    placeholder={thisUser?.userTwitter}
                   ></input>
                 </div>
               </div>
@@ -242,7 +232,7 @@ function EditProfile(props) {
                     autoComplete="off"
                     onChange={handleChange}
                     name="userInstagram"
-                    placeholder={thisUser.userInstagram}
+                    placeholder={thisUser?.userInstagram}
                   ></input>
                 </div>
               </div>
@@ -255,7 +245,7 @@ function EditProfile(props) {
                     autoComplete="off"
                     onChange={handleChange}
                     name="userSoundCloud"
-                    placeholder={thisUser.userSoundCloud}
+                    placeholder={thisUser?.userSoundCloud}
                   ></input>
                 </div>
               </div>
@@ -280,7 +270,8 @@ function EditProfile(props) {
           <div className="back-container">
             <div className="back-inner">
               <Link
-                to={{ pathname: `/profile/${user._id}`, profileInfo: user }}
+                to={`/profile/${user?._id}`}
+                state={{ propSongUser: user }}
                 style={{ height: '100%' }}
               >
                 <img className="button-icons bi-back" src={back} alt="back button icon"></img>

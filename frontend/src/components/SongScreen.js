@@ -1,10 +1,11 @@
-import { useContext, useState, useEffect, useRef } from 'react'
+import { useContext, useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
 import AudioTimeSlider from "./AudioTimeSlider"
 import Comments from "./Comments"
+import useEventListener from './utils/useEventListener'
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
 import HandleLikeAndFollowData from './utils/HandleLikeAndFollowData'
@@ -20,14 +21,24 @@ import heart2 from '../images/heart2.svg'
 import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
-  const { user } = useContext(TheContext)
+  const { user, windowSize } = useContext(TheContext)
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('SongScreen').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('SongScreen').style.height = `${onChange}px`
+    }
+  })
   const { handlePostLikeSong, initialLikes, likes, setLikes } = usePostLike();
   const { handlePostFollow, initialFollowers, followers, setFollowers } = usePostFollow();
   const { getLikeData, getFollowData } = HandleLikeAndFollowData();
 
   const navigate = useNavigate();
   const location = useLocation()
-  const { propCurrentSong, searchValue, link } = location.state
+  const { propCurrentSong, propSearchValue, propReturnLink } = location.state
 
   const gifsCopy = [...gifsArr];
   const [thisSong, setThisSong] = useState();
@@ -37,44 +48,25 @@ function SongScreen(props) {
   const [commentsArray, setCommentsArray] = useState([])
   const [totalComments, setTotalComments] = useState(thisSong?.songComments?.length);
   const [songScreen] = useState(`#353535`);
+  const [songId, setSongId] = useState();
 
   const windowRef = useRef();
   const commentInputRef = useRef();
   const followBtn = useRef();
   const playPauseRef = useRef();
 
-  useEffect(() => {
-    if (thisSong) {
-      const songId = thisSong?._id
-      setLikes(initialLikes)
-      setFollowers(initialFollowers)
-  
-      const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
-      const { followed, followersTotal, followToDelete } = getFollowData(songId)
-  
-      setLikes(prevLikes => ({
-        ...prevLikes,
-        'IS_LIKED': liked,
-        'USERS_LIKE_TO_DELETE': likeToDelete,
-        'TOTAL_LIKES': songLikesTotal
-      }))
-  
-      setFollowers(prevFollowers => ({
-        ...prevFollowers,
-        'IS_FOLLOWED': followed,
-        'USERS_FOLLOW_TO_DELETE': followToDelete,
-        'TOTAL_FOLLOWERS': followersTotal
-      }))
-    }
-  }, [thisSong])
 
+  useEffect(() => {
+    let song = allSongs.filter(each => each._id === propCurrentSong?._id)
+    setThisSong(song[0])
+  }, [allSongs])
 
   useEffect(() => {
     const controller = new AbortController()
     const signal = controller.signal
 
     actions
-      .getUserSongs({ songUser: propCurrentSong?.songUser })
+      .getUserSongs({ songUser: thisSong?.songUser })
       .then(res => {
         setAllSongs(res.data)
         setAllSongs(prevArr => prevArr.map((each, index) => ({
@@ -90,28 +82,50 @@ function SongScreen(props) {
       .catch(console.error)
       
     return () => controller.abort()
-  }, [props.location])
+  }, [thisSong])
 
   useEffect(() => {
-    let song = allSongs.filter(each => each._id === propCurrentSong?._id)
-    setThisSong(song[0])
-  }, [allSongs])
+    console.log(propCurrentSong, "yo what is fucking going on")
+    let songId = ''
 
-  const handlePlayPause = (bool) => {
-    if (bool === true) {
-      setIsPlaying(true)
-    } else {
-      setIsPlaying(false)
+    if (thisSong) {
+      songId = thisSong?._id
+    }  
+    else if (propCurrentSong) {
+      songId = propCurrentSong?._id
     }
-  }
 
-  const closeSongWindow = () => {
-    if (link === '/search') {
-      navigate('/search',  { state: searchValue })
+    console.log(songId, "maybe it did change, but didn't rerender")
+    setLikes(initialLikes)
+    setFollowers(initialFollowers)
+
+    const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
+    const { followed, followersTotal, followToDelete } = getFollowData(songId)
+
+    setLikes(prevLikes => ({
+      ...prevLikes,
+      'IS_LIKED': liked,
+      'USERS_LIKE_TO_DELETE': likeToDelete,
+      'TOTAL_LIKES': songLikesTotal
+    }))
+
+    setFollowers(prevFollowers => ({
+      ...prevFollowers,
+      'IS_FOLLOWED': followed,
+      'USERS_FOLLOW_TO_DELETE': followToDelete,
+      'TOTAL_FOLLOWERS': followersTotal
+    }))
+    
+  }, [thisSong])
+
+
+
+  const onClose = () => {
+    if (propReturnLink === '/search') {
+      navigate('/search',  { state: { propSearchValue: propSearchValue } })
     } else {
       navigate(`/profile/${thisSong.songUser?._id}`, { state: { propSongUser: thisSong?.songUser } })
     }
-    // navigate(-1)
   }
 
   const popUpComments = () => {
@@ -145,6 +159,7 @@ function SongScreen(props) {
 
   return (
     <div
+      id="SongScreen"
       className="SongScreen"
       style={{
         backgroundImage: `url('${gradientbg}'), url(${thisSong?.songVideo})`,
@@ -165,7 +180,7 @@ function SongScreen(props) {
                 <div className="track-title-container">
                   <div className="track-title-outer">
                     <p className="track-name">{thisSong?.songName}</p>
-                    <p className="track-index"><span style={{color: '#ffa6cb'}}>{thisSong?.songIndex}</span> of {allSongs.length}</p>
+                    <p className="track-index"><span style={{color: '#ffa6cb', fontSize: '.8rem'}}>{thisSong?.songIndex}</span> of {allSongs.length}</p>
                   </div>
                 </div>
                 <div className="track-details-container">
@@ -185,7 +200,7 @@ function SongScreen(props) {
           </div>
         </div>
         <div className="close-window-container">
-          <div className="close-window-outer" onClick={closeSongWindow}>
+          <div className="close-window-outer" onClick={onClose}>
             <div className="close-window-inner">
               <img src={close} alt="close window" />
             </div>
@@ -232,14 +247,14 @@ function SongScreen(props) {
                   <div className="play-outer">
                     {isPlaying
                       ? (
-                        <div className="play-inner" onClick={() => handlePlayPause(false)}>
+                        <div className="play-inner" onClick={() => setIsPlaying(false)}>
                           <div className="play-img-container">
                             <img src={pause} ref={playPauseRef} style={{marginLeft: '0%'}} alt="pause icon" />
                           </div>
                         </div>
                       )
                       : (
-                        <div className="play-inner" onClick={() => handlePlayPause(true)}>
+                        <div className="play-inner" onClick={() => setIsPlaying(true)}>
                           <div className="play-img-container">
                             <img src={play} ref={playPauseRef} alt="play icon" />
                           </div>

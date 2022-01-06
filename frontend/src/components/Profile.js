@@ -19,14 +19,21 @@ function Profile(props) {
   const navigate = useNavigate()
   const location = useLocation()
   const { propSongUser } = location.state
-  const [thisUser, setThisUser] = useState([])
+  const [thisUser, setThisUser] = useState(propSongUser ? propSongUser : user)
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [thisUserLikes, setThisUserLikes] = useState([])
   const songListRef = useRef()
+  
+  // useEffect(() => {
+  //   if (propSongUser) {
+  //     setThisUser(propSongUser)
+  //   } else {
+  //     setThisUser(user)
+  //   }
+  // }, [])
 
   useEffect(() => {
     console.log(location, "what is this giving me?")
-    
     actions
       .getUserSongs({ songUser: propSongUser ? propSongUser?._id : user._id })
       .then(res => {
@@ -35,13 +42,6 @@ function Profile(props) {
       .catch(console.error)
   }, [propSongUser])
 
-  useEffect(() => {
-    if (propSongUser) {
-      setThisUser(propSongUser)
-    } else {
-      setThisUser(user)
-    }
-  }, [propSongUser, user])
   
   useEffect(() => {
     actions

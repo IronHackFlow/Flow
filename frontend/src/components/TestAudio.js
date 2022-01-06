@@ -7,6 +7,7 @@ import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
 import RecordingBoothModal from "./RecordingBoothModal";
 import useDebugInformation from "./utils/useDebugInformation"
+import useEventListener from "./utils/useEventListener"
 import useBeats from './utils/useBeats'
 import actions from "../api";
 import NavBar from "./NavBar";
@@ -21,8 +22,18 @@ import shuffle from "../images/shuffle.svg";
 import modal from "../images/modal.svg";
 
 function TestAudio(props) {
-  useDebugInformation("TestAudio", props)
   const { user, windowSize } = React.useContext(TheContext)
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('TestAudio').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('TestAudio').style.height = `${onChange}px`
+    }
+  })
+  useDebugInformation("TestAudio", props)
   const { 
     beatOption, isBeatPlaying,
     mapBeatOptions, selectBeatOption,
@@ -701,7 +712,7 @@ function TestAudio(props) {
   }
 
   return (
-    <div className="TestAudio" id="TestAudio">
+    <div id="TestAudio" className="TestAudio">
       <RecordingBoothModal 
        toggleModal={toggleModal} 
        setToggleModal={setToggleModal}

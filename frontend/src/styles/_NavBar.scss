@@ -100,7 +100,7 @@
     box-shadow: 0px -8px 30px 0px #222222;
 
     .navbar_shadow-div-outset {
-      @include flexCenter(81%, 96%, 33px 33px 5px 5px, center, center, row);
+      @include flexCenter(81%, 96%, 30px 30px 5px 5px, center, center, row);
       box-shadow: 4px 6px 5px 0px #393939, -2px -2px 2px #989898;
     
       .navbar_shadow-div-inset {

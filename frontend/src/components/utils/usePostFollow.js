@@ -31,7 +31,7 @@ export default function usePostFollow() {
         }))
         
         let newFollowersArr = followersArrTest.map(song => {
-          if (song.songId === songId) {
+          if (song.songUserId === songUserId) {
             return { ...song, followers: songUserFollowers }
           } else {
             return song
@@ -57,7 +57,7 @@ export default function usePostFollow() {
         }))
 
         let newFollowersArr = followersArrTest?.map(song => {
-          if (song.songId === songId) {
+          if (song.songUserId === songUserId) {
             return {...song, followers: songUserFollowers }
           } else {
             return song

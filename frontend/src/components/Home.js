@@ -6,6 +6,7 @@ import { songData } from "./songFeedComponents/SongData"
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
 import usePostComment from "./utils/usePostComment";
+import useEventListener from "./utils/useEventListener";
 import HandleLikeAndFollowData from "./utils/HandleLikeAndFollowData";
 import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
@@ -23,9 +24,19 @@ import bullet from "../images/bullet-point.svg";
 import like from "../images/heart2.svg";
 
 function Home(props) {
-  useDebugInformation("Home", props)
   const { user, windowSize } = useContext(TheContext);
   const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
+  useDebugInformation("Home", props)
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('Home').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('Home').style.height = `${onChange}px`
+    }
+  })
   const { 
     handlePostLikeSong, 
     initialLikes,
@@ -80,25 +91,24 @@ function Home(props) {
   
   // this to prevent the mobile keyboard from ruining layout...........
   // gets window height and converts body element and component div height to pixels
-  useLayoutEffect(() => {
-    var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    document.getElementById('body').style.height = `${onLoad}px`
-    document.getElementById('Home').style.height = `${onLoad}px`
-
-    const changeToPixels = () => {
-      var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      if (onChange  <  600) {
-        document.getElementById('body').style.height = `${windowSize}px`
-        document.getElementById('Home').style.height = `${windowSize}px`
-      } 
-      else {
-        document.getElementById('body').style.height = `${onChange}px`
-        document.getElementById('Home').style.height = `${onChange}px`
-      }
-    }
-    window.addEventListener("resize", changeToPixels)
-    return () => window.removeEventListener("resize", changeToPixels)
-  }, [])
+  // useLayoutEffect(() => {
+  //   var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  //   document.getElementById('body').style.height = `${onLoad}px`
+  //   document.getElementById('Home').style.height = `${onLoad}px`
+  //   const changeToPixels = () => {
+  //     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  //     if (onChange  <  600) {
+  //       document.getElementById('body').style.height = `${windowSize}px`
+  //       document.getElementById('Home').style.height = `${windowSize}px`
+  //     } 
+  //     else {
+  //       document.getElementById('body').style.height = `${onChange}px`
+  //       document.getElementById('Home').style.height = `${onChange}px`
+  //     }
+  //   }
+  //   window.addEventListener("resize", changeToPixels)
+  //   return () => window.removeEventListener("resize", changeToPixels)
+  // }, [])
 
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />

@@ -1,9 +1,23 @@
-import React from 'react'
+import { useContext } from 'react'
 import EditProfile from './EditProfile'
+import TheContext from '../TheContext'
+import useEventListener from './utils/useEventListener'
 
 function EditProfileScreen(props) {
+  const { windowSize } = useContext(TheContext)
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('EditProfileScreen').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('EditProfileScreen').style.height = `${onChange}px`
+    }
+  })
+  
   return (
-    <div className="EditProfileScreen">
+    <div id="EditProfileScreen" className="EditProfileScreen">
       <div className="page-container profile-pc">
         <div className="upper-container profile-uc">
           <div className="upper-outset profile-uo">

@@ -3,24 +3,26 @@ import { GoogleLogin } from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
+import useEventListener from './utils/useEventListener'
 import AuthLogIn from './AuthLogIn'
 import AuthSignUp from './AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
 const Auth = (props) => {
   const { windowSize, userToggle, setUserToggle } = React.useContext(TheContext)
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('LogIn').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('LogIn').style.height = `${onChange}px`
+    }
+  })
   const navigate = useNavigate()
 
   const [toggleLogin, setToggleLogin] = useState(true)
-
-  useLayoutEffect(() => {
-    const changeToPixels = () => {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('LogIn').style.height = `${windowSize}px`
-    }
-    window.addEventListener("resize", changeToPixels)
-    return () => window.removeEventListener("resize", changeToPixels)
-  }, [])
 
   useEffect(() => {
     actions

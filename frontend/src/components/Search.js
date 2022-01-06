@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
+import useEventListener from './utils/useEventListener'
 import NavBar from './NavBar'
 import search from '../images/search.svg'
 import back from '../images/back.svg'
@@ -9,22 +10,31 @@ import xExit from "../images/exit-x-2.svg"
 import bullet from "../images/bullet-point.svg";
 
 function Search(props) {
-  const { windowSize } = React.useContext(TheContext);
+  const { windowSize } = useContext(TheContext);
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    if (onChange < 600) {
+      document.getElementById('body').style.height = `${windowSize}px`
+      document.getElementById('Search').style.height = `${windowSize}px`
+    } else {
+      document.getElementById('body').style.height = `${onChange}px`
+      document.getElementById('Search').style.height = `${onChange}px`
+    }
+  })
+  const navigation = useNavigate();
+  const location = useLocation();
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
   const [searchValue, setSearchValue] = useState();
-  const navigation = useNavigate();
-  const location = useLocation()
 
   const searchInputRef = useRef();
 
   useEffect(() => {
-    if (location.state !== null) {
-      const value = location.state
-      searchInputRef.current.focus()
-      searchInputRef.current.value = value
-      setSearchValue(value)
-      grabUsers(value)
-    }
+    if (location?.state?.propSearchValue == null) return
+    const value = location.state.propSearchValue
+    searchInputRef.current.focus()
+    searchInputRef.current.value = value
+    setSearchValue(value)
+    grabUsers(value)
   }, [])
 
   const closeWindow = (e) => {
@@ -43,26 +53,6 @@ function Search(props) {
     setSearchValue("")
     setSuggestions(<h4>Find Friends & Artists</h4>)
   }
-
-  useLayoutEffect(() => {
-    var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    document.getElementById('body').style.height = `${onLoad}px`
-    document.getElementById('Search').style.height = `${onLoad}px`
-
-    const changeToPixels = () => {
-      var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      if (onChange  <  600) {
-        document.getElementById('body').style.height = `${windowSize}px`
-        document.getElementById('Search').style.height = `${windowSize}px`
-      } 
-      else {
-        document.getElementById('body').style.height = `${onChange}px`
-        document.getElementById('Search').style.height = `${onChange}px`
-      }
-    }
-    window.addEventListener("resize", changeToPixels)
-    return () => window.removeEventListener("resize", changeToPixels)
-  }, [])
 
   const listUsers = e => {
     e.preventDefault()
@@ -108,7 +98,7 @@ function Search(props) {
             <Link
               className="result-link-container"
               to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song_id}`}
-              state={ele.user ? {state: ele.user} : { state: ele.song, searchValue: searchInputRef.current.value, link: "/search" }}
+              state={ele.user ? { propSongUser: ele.user } : { propCurrentSong: ele.song, propSearchValue: searchInputRef.current.value, propReturnLink: '/search' }}
             >
               <div className="result-1_data">
                 <div className="data_shadow-div-outset">
@@ -155,7 +145,7 @@ function Search(props) {
   }
 
   return (
-    <div className="Search" id="Search">
+    <div id="Search" className="Search">
       <div className="search-inner" id="SearchInner">
         <div className="section-1_search-field">
           <div className="search-field_shadow-div-outset">

@@ -102,7 +102,7 @@ input, textarea, select, button {
 .NavBar .navbar_section .navbar_shadow-div-outset {
   height: 81%;
   width: 96%;
-  border-radius: 33px 33px 5px 5px;
+  border-radius: 30px 30px 5px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6928,7 +6928,7 @@ input, textarea, select, button {
   width: 80%;
   color: #fa80b3;
   font-weight: bold;
-  font-size: 14px;
+  font-size: .9rem;
   text-align: start;
   text-indent: 5%;
 }
@@ -6936,7 +6936,7 @@ input, textarea, select, button {
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-title-container .track-title-outer .track-index {
   width: 20%;
   color: #cccccc;
-  font-size: 11px;
+  font-size: .8rem;
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-details-container {
@@ -6960,7 +6960,7 @@ input, textarea, select, button {
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-details-container p {
   color: grey;
-  font-size: 13px;
+  font-size: .85rem;
   font-weight: bold;
 }
 
@@ -7844,6 +7844,12 @@ input, textarea, select, button {
 }
 
 .section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset .user-name_shadow-div-inset .username-text-me {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 65%;
   width: 90%;
   font-size: 20px;
@@ -7985,6 +7991,7 @@ input, textarea, select, button {
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-inset .fields_shadow-div-outset .users-details-each .p-1 p {
   width: 85%;
   padding-left: 15%;
+  font-size: .8rem;
   color: white;
   text-align: start;
   word-break: break-all;
@@ -8013,6 +8020,7 @@ input, textarea, select, button {
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-inset .fields_shadow-div-outset .users-details-each .p-2 p {
   height: 80%;
   width: 90%;
+  font-size: .8rem;
   color: #ff728a;
   text-align: start;
   overflow-y: scroll;
