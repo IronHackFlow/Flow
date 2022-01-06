@@ -6,7 +6,14 @@ import { songData } from "../songFeedComponents/SongData.js"
 export default function usePostFollow() {
   const { user } = useContext(TheContext);
   const { followersArrTest, setFollowersArrTest } = useContext(songData)
-  const [followers, setFollowers] = useState()
+  const initialFollowers = {
+    'IS_FOLLOWED': false,
+    'ADD_FOLLOW': false,
+    'DELETE_FOLLOW': false,
+    'USERS_FOLLOW_TO_DELETE': null,
+    'TOTAL_FOLLOWERS': null,
+  }
+  const [followers, setFollowers] = useState(initialFollowers)
   
   const postFollow = async (songId, songUserId) => {
     await actions
@@ -70,6 +77,7 @@ export default function usePostFollow() {
 
   return { 
     handlePostFollow, 
+    initialFollowers,
     followers, 
     setFollowers
   }

@@ -18,29 +18,30 @@ function Profile(props) {
   const { user, setUser, userToggle, setUserToggle } = React.useContext(TheContext)
   const navigate = useNavigate()
   const location = useLocation()
-  const { state } = location.state
+  const { propSongUser } = location.state
   const [thisUser, setThisUser] = useState([])
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [thisUserLikes, setThisUserLikes] = useState([])
   const songListRef = useRef()
 
   useEffect(() => {
+    console.log(location, "what is this giving me?")
+    
     actions
-      .getUserSongs({ songUser: state?._id })
+      .getUserSongs({ songUser: propSongUser ? propSongUser?._id : user._id })
       .then(res => {
         setThisUserSongs(res.data)
-        // console.log(res.data, 'lol')
       })
       .catch(console.error)
-  }, [state])
+  }, [propSongUser])
 
   useEffect(() => {
-    if (state?._id === user?._id) {
-      setThisUser(user)
+    if (propSongUser) {
+      setThisUser(propSongUser)
     } else {
-      setThisUser(state)
+      setThisUser(user)
     }
-  }, [state, user])
+  }, [propSongUser, user])
   
   useEffect(() => {
     actions
@@ -137,7 +138,7 @@ function Profile(props) {
                 <div className="song-name-container">
                   <Link
                     to={`/songScreen/${eachSong._id}`}
-                    state={{ state: eachSong }}
+                    state={{ propCurrentSong: eachSong }}
                     className="song-name-outset"
                   >
                     <div className="track-title-container">
@@ -174,7 +175,7 @@ function Profile(props) {
               
               <div className="buttons-container">
                 <div className="buttons-inner">
-                  {state?._id === user._id
+                  {propSongUser?._id === user._id
                     ? (
                       <>
                         <div className="delete-btn-container">

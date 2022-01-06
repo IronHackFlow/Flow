@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useContext, useState, useEffect, useRef, useCallback } from "react";
 import {useLocation, useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
@@ -15,7 +15,7 @@ import move from "../images/move.svg";
 import play from "../images/play.svg";
 
 function EditLyrics(props) {
-  const { user } = React.useContext(TheContext)
+  const { user } = useContext(TheContext)
   const navigate = useNavigate()
   const location = useLocation()
   const { propSongTakes, propSongs, propCurrentSong } = location?.state
@@ -40,6 +40,7 @@ function EditLyrics(props) {
   const [editLyrics] = useState(`#363636`);
 
   const lyricsPopUpRef = useRef();
+  const playBeatRef = useRef();
   
   useEffect(() => {
     actions
@@ -354,13 +355,16 @@ function EditLyrics(props) {
               <div className="record-1_select-beat">
                 <div className="select-beat_shadow-div-inset">
                   <div className="play-beat_shadow-div-outset">
-                    <div className="play-beat_shadow-div-inset">
+                    <button 
+                      className="play-beat_shadow-div-inset"
+                      onClick={() => playSelectBeat(playBeatRef)}>
                       <img
                         className="button-icons bi-play"
-                        src={play}
-                        alt="play icon"
+                        src={isBeatPlaying ? pause : play }
+                        alt="play or pause icon"
                       />
-                    </div>
+                    </button>
+                    <audio src={beatOption} ref={playBeatRef} />
                   </div>
 
                   <div className="select-beat_shadow-div-outset">

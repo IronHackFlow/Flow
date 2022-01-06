@@ -6,9 +6,9 @@ import { songData } from "./songFeedComponents/SongData"
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
 import usePostComment from "./utils/usePostComment";
+import HandleLikeAndFollowData from "./utils/HandleLikeAndFollowData";
 import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
-import actions from "../api";
 import HomeFeed from "./songFeedComponents/HomeFeed";
 import TrendingFeed from "./songFeedComponents/TrendingFeed";
 import FollowingFeed from "./songFeedComponents/FollowingFeed";
@@ -24,38 +24,23 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   useDebugInformation("Home", props)
-
-  const { 
-    user, windowSize
-  } = useContext(TheContext);
-
-  const { 
-    likesArrTest, followersArrTest,
-    isLoading, setIsLoading
-  } = useContext(songData)
-
+  const { user, windowSize } = useContext(TheContext);
+  const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
   const { 
     handlePostLikeSong, 
     initialLikes,
     likes, 
     setLikes
   } = usePostLike();
-
   const { 
-    handlePostFollow, 
+    handlePostFollow,
+    initialFollowers,
     followers, 
     setFollowers,
   } = usePostFollow();
+  const { getLikeData, getFollowData } = HandleLikeAndFollowData()
 
-  const initialFollowers = {
-    'IS_FOLLOWED': false,
-    'ADD_FOLLOW': false,
-    'DELETE_FOLLOW': false,
-    'USERS_FOLLOW_TO_DELETE': null,
-    'TOTAL_FOLLOWERS': null,
-  }
-
-  const [songInView, setSongInView] = useState({});
+  const [songInView, setSongInView] = useState(homeFeedArrTest[0]?.song);
   const [totalComments, setTotalComments] = useState();
   const [isHomeFeed, setIsHomeFeed] = useState(true);
   const [isTrendingFeed, setIsTrendingFeed] = useState(false);
@@ -68,40 +53,28 @@ function Home(props) {
   const playPauseRef = useRef();
 
   useEffect(() => {
-    if (likesArrTest == null) return
-    if (followersArrTest == null) return
-    if (songInView == null) return
-    else {
+    if (songInView) {
       const songId = songInView?._id
       setLikes(initialLikes)
       setFollowers(initialFollowers)
       setTotalComments(songInView?.songComments?.length)
   
-      likesArrTest?.forEach(each => {
-        if (each.songId === songId) {
-          const  { liked, likeToDelete } = checkIfLiked(each.likes, user?._id)
-          setLikes(prevLikes => ({
-            ...prevLikes,
-            'IS_LIKED': liked,
-            'ADD_LIKE': liked ? false : liked,
-            'DELETE_LIKE': liked ? liked : false,
-            'USERS_LIKE_TO_DELETE': likeToDelete,
-            'TOTAL_LIKES': each.likes.length
-          }))
-        }
-      })
+      const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
+      const { followed, followersTotal, followToDelete } = getFollowData(songId)
   
-      followersArrTest?.forEach(each => {
-        if (each.songId === songId) {
-          const { followed, followToDelete } = checkIfFollowed(each.followers, user?._id)
-          setFollowers(prevFollowers => ({
-            ...prevFollowers,
-            'IS_FOLLOWED': followed,
-            'USERS_FOLLOW_TO_DELETE': followToDelete,
-            'TOTAL_FOLLOWERS': each.followers.length
-          }))
-        }
-      })
+      setLikes(prevLikes => ({
+        ...prevLikes,
+        'IS_LIKED': liked,
+        'USERS_LIKE_TO_DELETE': likeToDelete,
+        'TOTAL_LIKES': songLikesTotal
+      }))
+  
+      setFollowers(prevFollowers => ({
+        ...prevFollowers,
+        'IS_FOLLOWED': followed,
+        'USERS_FOLLOW_TO_DELETE': followToDelete,
+        'TOTAL_FOLLOWERS': followersTotal
+      }))
     }
   }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
@@ -132,32 +105,6 @@ function Home(props) {
     else if (isTrendingFeed) return <TrendingFeed />
     else if (isFollowingFeed) return <FollowingFeed />
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
-
-  const checkIfLiked = (likes, userId) => {
-    let liked = false
-    let likeToDelete = {}
-
-    likes.forEach(each => {
-      if (each.likeUser === userId) {
-        liked = true
-        likeToDelete = each
-      }
-    })
-    return { liked, likeToDelete }
-  }
-
-  const checkIfFollowed = (followers, userId) => {
-    let followed = false
-    let followToDelete = {}
-
-    followers.forEach(each => {
-      if (each.follower === userId) {
-        followed = true
-        followToDelete = each
-      }
-    })
-    return { followed, followToDelete }
-  }
 
   const handlePlayPause = (bool) => {
     if (bool === true) return setIsPlaying(true)
@@ -363,7 +310,7 @@ function Home(props) {
                       <div className="user-pic_shadow-div-outset">
                         <Link
                           to={`/profile/${songInView?.songUser?._id}`}
-                          state={{ state: songInView?.songUser }}
+                          state={{ propSongUser: songInView?.songUser }}
                           className="user-pic_shadow-div-inset"
                         >
                           <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>

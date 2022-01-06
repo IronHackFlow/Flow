@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
@@ -7,7 +7,7 @@ import AudioTimeSlider from "./AudioTimeSlider"
 import Comments from "./Comments"
 import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
-
+import HandleLikeAndFollowData from './utils/HandleLikeAndFollowData'
 import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
@@ -20,16 +20,17 @@ import heart2 from '../images/heart2.svg'
 import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
-  const { user } = React.useContext(TheContext)
-  const { handlePostLike, likes, setLikes } = usePostLike();
-  const { handlePostFollow, followers, setFollowers } = usePostFollow();
+  const { user } = useContext(TheContext)
+  const { handlePostLikeSong, initialLikes, likes, setLikes } = usePostLike();
+  const { handlePostFollow, initialFollowers, followers, setFollowers } = usePostFollow();
+  const { getLikeData, getFollowData } = HandleLikeAndFollowData();
 
   const navigate = useNavigate();
   const location = useLocation()
-  const { state, searchValue, link } = location.state
+  const { propCurrentSong, searchValue, link } = location.state
 
   const gifsCopy = [...gifsArr];
-  const [thisSong, setThisSong] = useState({});
+  const [thisSong, setThisSong] = useState();
   const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [poppedUp, setPoppedUp] = useState(false);
@@ -43,25 +44,37 @@ function SongScreen(props) {
   const playPauseRef = useRef();
 
   useEffect(() => {
-    setFollowers(prevFollowers => ({
-      ...prevFollowers,
-      'TOTAL_FOLLOWERS': thisSong?.songUser?.followers?.length
-    }))
+    if (thisSong) {
+      const songId = thisSong?._id
+      setLikes(initialLikes)
+      setFollowers(initialFollowers)
+  
+      const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
+      const { followed, followersTotal, followToDelete } = getFollowData(songId)
+  
+      setLikes(prevLikes => ({
+        ...prevLikes,
+        'IS_LIKED': liked,
+        'USERS_LIKE_TO_DELETE': likeToDelete,
+        'TOTAL_LIKES': songLikesTotal
+      }))
+  
+      setFollowers(prevFollowers => ({
+        ...prevFollowers,
+        'IS_FOLLOWED': followed,
+        'USERS_FOLLOW_TO_DELETE': followToDelete,
+        'TOTAL_FOLLOWERS': followersTotal
+      }))
+    }
   }, [thisSong])
 
-  useEffect(() => {
-    setLikes(prevLikes => ({
-      ...prevLikes,
-      'TOTAL_LIKES': thisSong?.songLikes?.length
-    }))
-  }, [thisSong])
 
   useEffect(() => {
     const controller = new AbortController()
     const signal = controller.signal
 
     actions
-      .getUserSongs({ songUser: state?.songUser })
+      .getUserSongs({ songUser: propCurrentSong?.songUser })
       .then(res => {
         setAllSongs(res.data)
         setAllSongs(prevArr => prevArr.map((each, index) => ({
@@ -80,7 +93,7 @@ function SongScreen(props) {
   }, [props.location])
 
   useEffect(() => {
-    let song = allSongs.filter(each => each._id === state?._id)
+    let song = allSongs.filter(each => each._id === propCurrentSong?._id)
     setThisSong(song[0])
   }, [allSongs])
 
@@ -96,7 +109,7 @@ function SongScreen(props) {
     if (link === '/search') {
       navigate('/search',  { state: searchValue })
     } else {
-      navigate(`/profile/${thisSong.songUser?._id}`, { state: thisSong?.songUser })
+      navigate(`/profile/${thisSong.songUser?._id}`, { state: { propSongUser: thisSong?.songUser } })
     }
     // navigate(-1)
   }
@@ -286,7 +299,7 @@ function SongScreen(props) {
               <div 
                 className="social-button" 
                 onClick={() => { 
-                  handlePostLike(
+                  handlePostLikeSong(
                     thisSong._id, 
                     thisSong.songUser._id,
                     likes?.IS_LIKED,
