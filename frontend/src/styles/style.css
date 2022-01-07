@@ -11181,6 +11181,27 @@ input, textarea, select, button {
 }
 
 .Loading {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: linear-gradient(345deg, #212121, #606060);
+  position: absolute;
+}
+
+.Loading .loading-background {
   height: 35%;
   width: 95%;
   border-radius: 5px;
@@ -11197,15 +11218,13 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  position: absolute;
   background: linear-gradient(323deg, #414141, #7d7d7d);
-  top: 6%;
-  right: 2.5%;
   -webkit-box-shadow: -2px 6px 40px #121212;
           box-shadow: -2px 6px 40px #121212;
+  margin-top: 10%;
 }
 
-.Loading .loading_shadow-div-inset {
+.Loading .loading-background .loading_shadow-div-inset {
   height: 92%;
   width: 97%;
   border-radius: 6px 6px 70px 70px;
@@ -11226,7 +11245,7 @@ input, textarea, select, button {
           box-shadow: inset 3px 3px 3px #434343, inset -2px -2px 3px #787878;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset {
   height: 91%;
   width: 96%;
   border-radius: 5px 5px 64px 64px;
@@ -11247,7 +11266,7 @@ input, textarea, select, button {
           box-shadow: 3px 3px 3px #353535, -2px -2px 3px #9f9f9f;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset {
   height: 90%;
   width: 38%;
   border-radius: 70px;
@@ -11268,7 +11287,7 @@ input, textarea, select, button {
           box-shadow: inset 4px 4px 7px #3a3a3a, inset -3px -3px 6px #828282;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset {
   height: 75%;
   width: 75%;
   border-radius: 50px;
@@ -11289,7 +11308,7 @@ input, textarea, select, button {
           box-shadow: 5px 5px 6px #393939, -2px -2px 4px #979797;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container {
   height: 87%;
   width: 87%;
   border-radius: 50px;
@@ -11313,7 +11332,7 @@ input, textarea, select, button {
   border: 1px solid #939393;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container .loading-center {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container .loading-center {
   height: 65%;
   width: 65%;
   border-radius: 50px;
@@ -11335,7 +11354,7 @@ input, textarea, select, button {
           box-shadow: 4px 4px 5px #2d5e54, -3px -3px 5px #8af3dc;
 }
 
-.Loading .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container .bubble-traveller {
+.Loading .loading-background .loading_shadow-div-inset .loading_shadow-div-outset .loading-circle_shadow-div-inset .loading-circle_shadow-div-outset .loading-bubble-container .bubble-traveller {
   background: #c7ffee;
   -webkit-box-shadow: inset 1px 1px 1px #ffffff, inset -1px -1px 4px #12745e;
           box-shadow: inset 1px 1px 1px #ffffff, inset -1px -1px 4px #12745e;

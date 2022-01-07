@@ -8,20 +8,20 @@ export default function usePostLike() {
   const { likesArrTest, setLikesArrTest } = useContext(songData)
 
   const initialLikes = {
-    'TYPE': 'SONG',
-    'IS_LIKED': false,
-    'ADD_LIKE': false,
-    'DELETE_LIKE': false,
-    'USERS_LIKE_TO_DELETE': null,
-    'TOTAL_LIKES': null,
+    TYPE: 'SONG',
+    IS_LIKED: false,
+    ADD_LIKE: false,
+    DELETE_LIKE: false,
+    USERS_LIKE_TO_DELETE: null,
+    TOTAL_LIKES: null,
   }
   const initialCommentLikes = {
-    'TYPE': 'COMMENT',
-    'IS_LIKED': false,
-    'ADD_LIKE': false,
-    'DELETE_LIKE': false,
-    'USERS_LIKE_TO_DELETE': null,
-    'TOTAL_COMMENT_LIKES': null,
+    TYPE: 'COMMENT',
+    IS_LIKED: false,
+    ADD_LIKE: false,
+    DELETE_LIKE: false,
+    USERS_LIKE_TO_DELETE: null,
+    TOTAL_COMMENT_LIKES: null,
   }
   const [likes, setLikes] = useState(initialLikes);
   const [commentLikes, setCommentLikes] = useState(initialCommentLikes);
@@ -55,11 +55,11 @@ export default function usePostLike() {
 
         setLikes(prevLikes => ({
           ...prevLikes,
-          'IS_LIKED': true,
-          'ADD_LIKE': true,
-          'DELETE_LIKE': false,
-          'TOTAL_LIKES': songLikes.length,
-          'USERS_LIKE_TO_DELETE': usersSongLike
+          IS_LIKED: true,
+          ADD_LIKE: true,
+          DELETE_LIKE: false,
+          TOTAL_LIKES: songLikes.length,
+          USERS_LIKE_TO_DELETE: usersSongLike
         }))
 
         let newLikesArr = likesArrTest.map(like => {
@@ -97,10 +97,10 @@ export default function usePostLike() {
 
         setLikes(prevLikes => ({
           ...prevLikes,
-          'IS_LIKED': false,
-          'DELETE_LIKE': true,
-          'ADD_LIKE': false,
-          'TOTAL_LIKES': songLikes.length
+          IS_LIKED: false,
+          DELETE_LIKE: true,
+          ADD_LIKE: false,
+          TOTAL_LIKES: songLikes.length
         }))
         
         let newLikesArr = likesArrTest.map(like => {

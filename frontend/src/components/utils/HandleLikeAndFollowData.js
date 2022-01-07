@@ -6,21 +6,22 @@ export default function HandleLikeAndFollowData() {
   const { user } = useContext(TheContext)
   const { homeFeedArrTest, likesArrTest, followersArrTest } = useContext(songData)
 
-  const getLikeData = (songId) => {
-
-    const filterSong = likesArrTest.filter(each => each.songId === songId)
+  async function getLikeData(array, songId) {
+    if (array.length === 0) return
+    const filterSong = array.filter(each => each.songId === songId)
+    console.log(array, songId, "WHATWHATWAHT")
     const songLikes = filterSong[0].likes
     const songLikesTotal = filterSong[0].likes.length
-    const { liked, likeToDelete } = checkIfLiked(songLikes, user._id)
+    const { liked, likeToDelete } = await checkIfLiked(songLikes, user._id)
     return { liked, songLikesTotal, likeToDelete }
   }
 
-  const getFollowData = (songId) => {
-
-    const filterSong = followersArrTest.filter(each => each.songId === songId)
+  async function getFollowData(array, songId) {
+    if (array.length === 0) return
+    const filterSong = array.filter(each => each.songId === songId)
     const followers = filterSong[0].followers
     const followersTotal = filterSong[0].followers.length
-    const { followed, followToDelete } = checkIfFollowed(followers, user._id)
+    const { followed, followToDelete } = await checkIfFollowed(followers, user._id)
     return { followed, followersTotal, followToDelete }
   }
   

@@ -23,6 +23,8 @@ import modal from "../images/modal.svg";
 
 function TestAudio(props) {
   const { user, windowSize } = React.useContext(TheContext)
+  
+  useDebugInformation("TestAudio", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -33,7 +35,7 @@ function TestAudio(props) {
       document.getElementById('TestAudio').style.height = `${onChange}px`
     }
   })
-  useDebugInformation("TestAudio", props)
+
   const { 
     beatOption, isBeatPlaying,
     mapBeatOptions, selectBeatOption,
@@ -47,6 +49,7 @@ function TestAudio(props) {
       matchInterim: true,
     }
   ]
+
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
   const initialState = {
     recordingMinutes: 0,
@@ -101,6 +104,18 @@ function TestAudio(props) {
   const barNumberRef = useRef(1)
   const [recordingBooth] = useState(`#363636`);
 
+  const songObject = {
+    songName: '',
+    songUser: user,
+    songBlob: null,
+    songURL: null,
+    songLyricsStr: [],
+    songDate: null,
+    songDuration: 0,
+    songCaption: '',
+    songBg: null
+  }
+
   class SongData {
     constructor(songName, songBlob, songURL, lyrics, date, songDuration) {
       this.songName = songName;
@@ -114,14 +129,6 @@ function TestAudio(props) {
       this.songBG = null;
     }
   }
-  useEffect(() => {
-    const changeToPixels = () => {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('TestAudio').style.height = `${windowSize}px`
-    }
-    window.addEventListener("resize", changeToPixels)
-    return () => window.removeEventListener("resize", changeToPixels)
-  }, [])
 
   useEffect(() => {
     if (silent && recorderState.initRecording === true) {

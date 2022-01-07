@@ -19,30 +19,25 @@ function Profile(props) {
   const navigate = useNavigate()
   const location = useLocation()
   const { propSongUser } = location.state
-  const [thisUser, setThisUser] = useState(propSongUser ? propSongUser : user)
+  const [thisUser, setThisUser] = useState()
   const [thisUserSongs, setThisUserSongs] = useState([])
   const [thisUserLikes, setThisUserLikes] = useState([])
   const songListRef = useRef()
   
-  // useEffect(() => {
-  //   if (propSongUser) {
-  //     setThisUser(propSongUser)
-  //   } else {
-  //     setThisUser(user)
-  //   }
-  // }, [])
+  useEffect(() => {
+    setThisUser(propSongUser)
+  }, [propSongUser])
 
   useEffect(() => {
     console.log(location, "what is this giving me?")
     actions
-      .getUserSongs({ songUser: propSongUser ? propSongUser?._id : user._id })
+      .getUserSongs({ songUser: thisUser?._id })
       .then(res => {
         setThisUserSongs(res.data)
       })
       .catch(console.error)
-  }, [propSongUser])
+  }, [thisUser])
 
-  
   useEffect(() => {
     actions
       .getUsersLikes({ likeUser: thisUser?._id })
@@ -258,7 +253,7 @@ function Profile(props) {
   }
 
   const showProfileSongs = useCallback(() => {
-    return thisUserSongs.map((eachSong, index) => {
+    return thisUserSongs?.map((eachSong, index) => {
       return <ProfileSongs key={`${uuidv4()}song${eachSong._id}_${index}`} {...eachSong} />
     })
   }, [thisUserSongs])

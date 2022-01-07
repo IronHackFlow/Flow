@@ -1,50 +1,54 @@
 .Loading {
-  @include flexCenter(35%, 95%, 5px, center, center, row);
+  @include flexCenter(100%, 100%, 5px, center, flex-start, row);
+  background: linear-gradient(345deg, #212121, #606060);
   position: absolute;
-  background: linear-gradient(323deg, #414141, #7d7d7d);
-  top: 6%;
-  right: 2.5%;
-  box-shadow: -2px 6px 40px #121212;
 
-  .loading_shadow-div-inset {
-    @include flexCenter(92%, 97%, 6px 6px 70px 70px, center, center, row);
-    box-shadow: inset 3px 3px 3px #434343, inset -2px -2px 3px #787878;
+  .loading-background {
+    @include flexCenter(35%, 95%, 5px, center, center, row);
+    background: linear-gradient(323deg, #414141, #7d7d7d);
+    box-shadow: -2px 6px 40px #121212;
+    margin-top: 10%;
 
-    .loading_shadow-div-outset {
-      @include flexCenter(91%, 96%, 5px 5px 64px 64px, center, center, row);
-      box-shadow: 3px 3px 3px #353535, -2px -2px 3px #9f9f9f;
+    .loading_shadow-div-inset {
+      @include flexCenter(92%, 97%, 6px 6px 70px 70px, center, center, row);
+      box-shadow: inset 3px 3px 3px #434343, inset -2px -2px 3px #787878;
 
-      .loading-circle_shadow-div-inset {
-        @include flexCenter(90%, 38%, 70px, center, center, row);
-        box-shadow: inset 4px 4px 7px #3a3a3a, inset -3px -3px 6px #828282;
-    
-        .loading-circle_shadow-div-outset {
-          @include flexCenter(75%, 75%, 50px, center, center, row);
-          box-shadow: 5px 5px 6px #393939, -2px -2px 4px #979797;  
+      .loading_shadow-div-outset {
+        @include flexCenter(91%, 96%, 5px 5px 64px 64px, center, center, row);
+        box-shadow: 3px 3px 3px #353535, -2px -2px 3px #9f9f9f;
 
-          .loading-bubble-container {
-            @include flexCenter(87%, 87%, 50px, center, center, row);
-            box-shadow: inset 5px 5px 5px #2d5e54, inset -3px -3px 5px #8af3dc;
-            position: relative;
-            background: linear-gradient(317deg, #106e5a, #8af3dc);
-            border: 1px solid #939393;  
+        .loading-circle_shadow-div-inset {
+          @include flexCenter(90%, 38%, 70px, center, center, row);
+          box-shadow: inset 4px 4px 7px #3a3a3a, inset -3px -3px 6px #828282;
+      
+          .loading-circle_shadow-div-outset {
+            @include flexCenter(75%, 75%, 50px, center, center, row);
+            box-shadow: 5px 5px 6px #393939, -2px -2px 4px #979797;  
 
-            .loading-center {
-              @include flexCenter(65%, 65%, 50px, center, center, row);
-              background: #6e6e6e;
-              box-shadow: 4px 4px 5px #2d5e54, -3px -3px 5px #8af3dc;
-            }
-            .bubble-traveller {
-              background: #c7ffee;
-              box-shadow: inset 1px 1px 1px #ffffff, inset -1px -1px 4px #12745e;
-              height: 12px;
-              border: 1px solid #216550;
-              width: 12px;
-              border-radius: 50px;
-              position: absolute;
-              top: 0%;
-              right: 41%;
-              animation: circleLoader 1.5s infinite ease;
+            .loading-bubble-container {
+              @include flexCenter(87%, 87%, 50px, center, center, row);
+              box-shadow: inset 5px 5px 5px #2d5e54, inset -3px -3px 5px #8af3dc;
+              position: relative;
+              background: linear-gradient(317deg, #106e5a, #8af3dc);
+              border: 1px solid #939393;  
+
+              .loading-center {
+                @include flexCenter(65%, 65%, 50px, center, center, row);
+                background: #6e6e6e;
+                box-shadow: 4px 4px 5px #2d5e54, -3px -3px 5px #8af3dc;
+              }
+              .bubble-traveller {
+                background: #c7ffee;
+                box-shadow: inset 1px 1px 1px #ffffff, inset -1px -1px 4px #12745e;
+                height: 12px;
+                border: 1px solid #216550;
+                width: 12px;
+                border-radius: 50px;
+                position: absolute;
+                top: 0%;
+                right: 41%;
+                animation: circleLoader 1.5s infinite ease;
+              }
             }
           }
         }

@@ -1,9 +1,11 @@
-import { useContext, useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
+import { songData } from './songFeedComponents/SongData'
 import AudioTimeSlider from "./AudioTimeSlider"
+import Loading from './Loading'
 import Comments from "./Comments"
 import useEventListener from './utils/useEventListener'
 import usePostLike from "./utils/usePostLike";
@@ -22,6 +24,8 @@ import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
   const { user, windowSize } = useContext(TheContext)
+  const { likesArrTest, followersArrTest, commentsArrTest } = useContext(songData)
+
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -32,76 +36,72 @@ function SongScreen(props) {
       document.getElementById('SongScreen').style.height = `${onChange}px`
     }
   })
+
   const { handlePostLikeSong, initialLikes, likes, setLikes } = usePostLike();
   const { handlePostFollow, initialFollowers, followers, setFollowers } = usePostFollow();
   const { getLikeData, getFollowData } = HandleLikeAndFollowData();
 
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const { propCurrentSong, propSearchValue, propReturnLink } = location.state
 
   const gifsCopy = [...gifsArr];
-  const [thisSong, setThisSong] = useState();
+  const [thisSong, setThisSong] = useState(propCurrentSong);
   const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [poppedUp, setPoppedUp] = useState(false);
   const [commentsArray, setCommentsArray] = useState([])
-  const [totalComments, setTotalComments] = useState(thisSong?.songComments?.length);
+  const [totalComments, setTotalComments] = useState(propCurrentSong?.songComments?.length);
   const [songScreen] = useState(`#353535`);
-  const [songId, setSongId] = useState();
 
   const windowRef = useRef();
   const commentInputRef = useRef();
   const followBtn = useRef();
   const playPauseRef = useRef();
 
-
   useEffect(() => {
-    let song = allSongs.filter(each => each._id === propCurrentSong?._id)
-    setThisSong(song[0])
-  }, [allSongs])
+    setIsLoading(true)
+    let songUserId = propCurrentSong.songUser._id
+    let songId = propCurrentSong._id
 
-  useEffect(() => {
-    const controller = new AbortController()
-    const signal = controller.signal
-
-    actions
-      .getUserSongs({ songUser: thisSong?.songUser })
-      .then(res => {
-        setAllSongs(res.data)
-        setAllSongs(prevArr => prevArr.map((each, index) => ({
-          ...each,
-          songVideo: gifsCopy[index].url,
-          songIndex: index + 1
-        })))
-        let commentArr = res.data.map((each) => {
-          return { songId: each._id, comments: each.songComments }
+    async function getUserSongs(songUserId, songId) {
+      await actions
+        .getUserSongs({ songUser: songUserId })
+        .then(res => {
+          setAllSongs(res.data)
+          setAllSongs(prevArr => prevArr.map((each, index) => {
+            if (each._id === songId) {
+              setThisSong({...each, songVideo: gifsCopy[index].url, songIndex: index + 1})
+            }
+            return {
+              ...each,
+              songVideo: gifsCopy[index].url,
+              songIndex: index + 1
+            }
+          }))
         })
-        setCommentsArray(commentArr)
-      }, signal)
-      .catch(console.error)
-      
-    return () => controller.abort()
+        .catch(console.error)
+        .finally(setIsLoading(false))
+    }
+    getUserSongs(songUserId, songId)
+    setLikesAndFollows(songId)
+  }, [])
+
+
+  useEffect(() => {
+    if (thisSong == null) return 
+    setLikesAndFollows(thisSong?._id)
   }, [thisSong])
 
-  useEffect(() => {
-    console.log(propCurrentSong, "yo what is fucking going on")
-    let songId = ''
-
-    if (thisSong) {
-      songId = thisSong?._id
-    }  
-    else if (propCurrentSong) {
-      songId = propCurrentSong?._id
-    }
-
-    console.log(songId, "maybe it did change, but didn't rerender")
+  async function setLikesAndFollows(songId) {
     setLikes(initialLikes)
     setFollowers(initialFollowers)
 
-    const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
-    const { followed, followersTotal, followToDelete } = getFollowData(songId)
-
+    const { liked, songLikesTotal, likeToDelete } = getLikeData(likesArrTest, songId)
+    const { followed, followersTotal, followToDelete } = getFollowData(followersArrTest, songId)
+    
     setLikes(prevLikes => ({
       ...prevLikes,
       'IS_LIKED': liked,
@@ -115,16 +115,13 @@ function SongScreen(props) {
       'USERS_FOLLOW_TO_DELETE': followToDelete,
       'TOTAL_FOLLOWERS': followersTotal
     }))
-    
-  }, [thisSong])
-
-
+  }
 
   const onClose = () => {
     if (propReturnLink === '/search') {
       navigate('/search',  { state: { propSearchValue: propSearchValue } })
     } else {
-      navigate(`/profile/${thisSong.songUser?._id}`, { state: { propSongUser: thisSong?.songUser } })
+      navigate(`/profile/${propCurrentSong?.songUser._id}`, { state: { propSongUser: propCurrentSong?.songUser } })
     }
   }
 
@@ -208,7 +205,8 @@ function SongScreen(props) {
         </div>
       </div>
 
-      <div className="song-video-frame" ref={windowRef}> 
+      <div className="song-video-frame" ref={windowRef} style={{position: 'relative'}}> 
+        <Loading />
         <div className="song-lyric-container">
           {thisSong?.songLyricsStr?.map((each, index) => {
             return (

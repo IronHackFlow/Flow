@@ -7,11 +7,11 @@ export default function usePostFollow() {
   const { user } = useContext(TheContext);
   const { followersArrTest, setFollowersArrTest } = useContext(songData)
   const initialFollowers = {
-    'IS_FOLLOWED': false,
-    'ADD_FOLLOW': false,
-    'DELETE_FOLLOW': false,
-    'USERS_FOLLOW_TO_DELETE': null,
-    'TOTAL_FOLLOWERS': null,
+    IS_FOLLOWED: false,
+    ADD_FOLLOW: false,
+    DELETE_FOLLOW: false,
+    USERS_FOLLOW_TO_DELETE: null,
+    TOTAL_FOLLOWERS: null,
   }
   const [followers, setFollowers] = useState(initialFollowers)
   
@@ -25,9 +25,9 @@ export default function usePostFollow() {
 
         setFollowers(prevFollowers => ({
           ...prevFollowers,
-          'IS_FOLLOWED': true,
-          'TOTAL_FOLLOWERS': songUserFollowers.length,
-          'USERS_FOLLOW_TO_DELETE': userToDelete
+          IS_FOLLOWED: true,
+          TOTAL_FOLLOWERS: songUserFollowers.length,
+          USERS_FOLLOW_TO_DELETE: userToDelete
         }))
         
         let newFollowersArr = followersArrTest.map(song => {
@@ -51,9 +51,9 @@ export default function usePostFollow() {
 
         setFollowers(prevFollowers => ({
           ...prevFollowers,
-          'IS_FOLLOWED': false,
-          'TOTAL_FOLLOWERS': songUserFollowers.length,
-          'USERS_FOLLOW_TO_DELETE': null
+          IS_FOLLOWED: false,
+          TOTAL_FOLLOWERS: songUserFollowers.length,
+          USERS_FOLLOW_TO_DELETE: null
         }))
 
         let newFollowersArr = followersArrTest?.map(song => {

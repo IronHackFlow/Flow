@@ -25,7 +25,7 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
-  const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
+  const { homeFeedArrTest, likesArrTest, followersArrTest, isLoading, setIsLoading } = useContext(songData)
   useDebugInformation("Home", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -70,8 +70,8 @@ function Home(props) {
       setFollowers(initialFollowers)
       setTotalComments(songInView?.songComments?.length)
   
-      const { liked, songLikesTotal, likeToDelete } = getLikeData(songId)
-      const { followed, followersTotal, followToDelete } = getFollowData(songId)
+      const { liked, songLikesTotal, likeToDelete } = getLikeData(likesArrTest, songId)
+      const { followed, followersTotal, followToDelete } = getFollowData(followersArrTest, songId)
   
       setLikes(prevLikes => ({
         ...prevLikes,
