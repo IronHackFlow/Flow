@@ -35,7 +35,6 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
       .populate({ path:'userLikes', populate: 'song' })
       .then(likes => {
         returnData.user = likes
-        console.log(likes, "YOYOYOYOYOYO DID I WORK THIS CORRECTLY?")
       })
       .catch(err => {
         next(err)
@@ -54,12 +53,12 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
       .catch(err => {
         next(err)
       })
-
     res.status(200).json(returnData)
   } else {
     let likedCommObject = await Likes.create(bodyComm)
     console.log('CREATED commentLike object: ', likedCommObject)
-  
+    let resData = { comment: {}, commentLike: likedCommObject}
+
     await Comments.findByIdAndUpdate(
       bodyComm.likedComment,
       { $push: { commLikes: likedCommObject } },
@@ -67,12 +66,13 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
     ) 
       .populate('commLikes')
       .then(comm => {
-        res.status(200).json(comm)
+        resData.comment = comm
         console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
       })
       .catch(err => {
         next(err)
       })
+    res.status(200).json(resData)
   }
 })
     
@@ -87,7 +87,6 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
     likeUser: req.user._id,
     deleteObj: req.body.deleteObj,
   }
-
   let likeCheck = req.body.commLike
 
   let returnData = { song: '', user: '' }
@@ -101,7 +100,6 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
       .populate({ path:'userLikes', populate: 'song' })
       .then(likes => {
         returnData.user = likes
-        console.log(likes, "YOYOYOYOYOYO DID I WORK THIS CORRECTLY?")
       })
       .catch(err => {
         next(err)

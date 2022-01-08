@@ -32,8 +32,6 @@ function Comments(props) {
 
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
-  const [commLikesArr, setCommLikesArr] = useState([])
-
 
   useEffect(() => {
     let songId = props.songInView?._id
@@ -100,29 +98,6 @@ function Comments(props) {
     props.commentInputRef.current.value = ''
   }
 
-  // const handleSubmit = e => {
-  //   e.preventDefault()
-  //   if (comment === undefined) {
-  //     console.log('please type out your comment')
-  //     return null
-  //   }
-  //   actions
-  //     .addComment({
-  //       comment: comment,
-  //       commSong: props.songInView?._id,
-  //       commDate: new Date(),
-  //     })
-  //     .then(res => {
-  //       if (res.data.songComments.length) {
-  //         let comments = res.data.songComments
-  //         resetCommentsArray(comments)
-  //         props.setTotalComments(res.data.songComments.length)
-  //       }
-  //     })
-  //     .catch(console.error)
-  //   props.commentInputRef.current.value = ''
-  // }
-
   function GetComments(each) {
     const { handlePostLikeComment, commentLikes, setCommentLikes } = usePostLike()
     const [commentValue, setCommentValue] = useState();
@@ -138,19 +113,32 @@ function Comments(props) {
     const dotMenuRef = useRef()
     const slideOutRef = useRef()
 
+    /// problem with not checking if user already liked the comment here
     useEffect(() => {
-      const likesArray = each.commLikes
-      likesArray.forEach(each => {
-        // console.log(each, "WHAT IS GOING ON??")
+      let liked = false
+      let likeToDelete = {}
+      let totalLikes = each.commLikes.length
+
+      user?.userLikes?.filter(like => {
+        if (like.likedComment === each._id) {
+          if (like.likeUser === user._id) {
+            liked = true
+            likeToDelete = like
+          }
+        }
       })
 
-      // setCommentLikes(prevLikes => ({
-      //   ...prevLikes,
+      setCommentLikes(prevCommentLikes => ({
+        ...prevCommentLikes,
+        IS_LIKED: liked,
+        TOTAL_COMMENT_LIKES: totalLikes,
+        USES_COMMENTLIKE_TO_DELETE: likeToDelete
+      }))
 
-      // }))
     }, [])
 
     useEffect(() => {
+      console.log(commentLikes, "what is this shist man?")
       if (each.commUser?._id === user?._id) {
         setCheckCommUser(true)
       } else {
@@ -221,7 +209,7 @@ function Comments(props) {
               <div className="comment-photo-outer">
                 <Link
                   to={`/profile/${each.commUser._id}`}
-                  state={{state: each.commUser}}
+                  state={{propSongUser: each.commUser}}
                 >
                   <img src={each.commUser?.picture} alt="user's profile"></img>
                 </Link>
@@ -307,7 +295,13 @@ function Comments(props) {
                     <button 
                       className="action-btn_shadow-div-outset"
                       style={{borderRadius: "40px 4px 4px 40px"}}
-                      onClick={() => { handlePostLikeComment(each._id, commentLikes?.IS_LIKED, commentLikes?.USERS_LIKE_TO_DELETE)}}
+                      onClick={() => { 
+                        handlePostLikeComment(
+                          each._id, 
+                          commentLikes?.IS_LIKED, 
+                          commentLikes?.USERS_COMMENTLIKE_TO_DELETE
+                        )
+                      }}
                     >
                       <div className="action-btn-icon-container">
                         <img
@@ -318,7 +312,7 @@ function Comments(props) {
                       </div>
                       <div className="action-btn-text-container" ref={likeTextRef}>
                         <p className="like-text">Like</p>
-                        <p className="like-number">13</p>
+                        <p className="like-number">{commentLikes?.TOTAL_COMMENT_LIKES}</p>
                       </div>
                     </button>
                   </div>
@@ -334,7 +328,7 @@ function Comments(props) {
                       </div>
                       <div className="action-btn-text-container" ref={replyTextRef}>
                         <p className="reply-text" >Reply</p>
-                        <p className="reply-number">{checkCommUser ? '' : '13'}</p>
+                        <p className="reply-number">{checkCommUser ? '' : '0'}</p>
                       </div>
                     </button>
                   </div>

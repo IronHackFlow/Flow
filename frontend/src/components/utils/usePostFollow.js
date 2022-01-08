@@ -75,8 +75,37 @@ export default function usePostFollow() {
     else return postFollow(songId, songUserId)
   }
 
+  async function handleInViewFollowers(songId) {
+    if (songId == null) return
+    setFollowers(initialFollowers)
+    let followed = false
+    let followToDelete = {}
+    let totalFollowers
+
+    await followersArrTest.filter(each => {
+      if (each.songId === songId) {
+        totalFollowers = each.followers.length
+
+        each.followers.filter(each => {
+          if (each.follower === user._id) {
+            followed = true
+            followToDelete = each
+          }
+        })
+      }
+    })
+
+    setFollowers(prevFollowers => ({
+      ...prevFollowers,
+      IS_FOLLOWED: followed,
+      TOTAL_FOLLOWERS: totalFollowers,
+      USERS_FOLLOW_TO_DELETE: followToDelete
+    }))
+  }
+
   return { 
     handlePostFollow, 
+    handleInViewFollowers,
     initialFollowers,
     followers, 
     setFollowers

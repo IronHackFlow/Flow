@@ -6729,6 +6729,7 @@ input, textarea, select, button {
   background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
   -webkit-box-shadow: 0px 7px 60px 10px #303030;
           box-shadow: 0px 7px 60px 10px #303030;
+  z-index: 1;
 }
 
 .SongScreen .close-window-frame .song-listing-container {
@@ -7049,6 +7050,7 @@ input, textarea, select, button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .SongScreen .song-video-frame .song-lyric-container {
@@ -7102,6 +7104,14 @@ input, textarea, select, button {
   margin-left: 1%;
   color: #ec6aa0;
   text-align: start;
+}
+
+.SongScreen .show {
+  opacity: 1;
+}
+
+.SongScreen .hide {
+  opacity: 0;
 }
 
 .SongScreen .song-details-container {
@@ -7584,9 +7594,8 @@ input, textarea, select, button {
   color: #ec6aa0;
   list-style-type: none;
   margin-top: 5px;
-  background-color: #333333;
+  background: #333333;
   border: none;
-  background: linear-gradient(145deg, #323232, #3b3b3b);
   -webkit-box-shadow: 4px 4px 6px #282828, -4px -4px 6px #4f4f4f;
           box-shadow: 4px 4px 6px #282828, -4px -4px 6px #4f4f4f;
 }
@@ -7604,20 +7613,6 @@ input, textarea, select, button {
 
 .SongScreen .song-details-container .social-buttons .social-list .social-button-container .social-button .comment {
   height: 1.5rem;
-}
-
-.SongScreen .song-details-container .social-buttons .social-list .social-button-container .social-button:active {
-  -webkit-box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
-          box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
-  background: #ec6aa0;
-  border: 1px solid #e24f8c;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-}
-
-.SongScreen .song-details-container .social-buttons .social-list .social-button-container .social-button:active img {
-  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .SongScreen .song-details-container .social-buttons .social-list .social-button-container .pushed {
@@ -11367,6 +11362,15 @@ input, textarea, select, button {
   right: 41%;
   -webkit-animation: circleLoader 1.5s infinite ease;
           animation: circleLoader 1.5s infinite ease;
+}
+
+.LoadingSongScreen {
+  height: 50%;
+  top: 14%;
+}
+
+.LoadingSongScreen .loading-background {
+  height: 42%;
 }
 
 .loading {

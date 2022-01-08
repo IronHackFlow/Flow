@@ -24,7 +24,7 @@ import gradientbg from '../images/gradient-bg-2.png'
 
 function SongScreen(props) {
   const { user, windowSize } = useContext(TheContext)
-  const { likesArrTest, followersArrTest, commentsArrTest } = useContext(songData)
+  const { isLoading, setIsLoading } = useContext(songData)
 
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -37,9 +37,8 @@ function SongScreen(props) {
     }
   })
 
-  const { handlePostLikeSong, initialLikes, likes, setLikes } = usePostLike();
-  const { handlePostFollow, initialFollowers, followers, setFollowers } = usePostFollow();
-  const { getLikeData, getFollowData } = HandleLikeAndFollowData();
+  const { handlePostLikeSong, handleInViewLikes, likes } = usePostLike();
+  const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,7 +48,7 @@ function SongScreen(props) {
   const [thisSong, setThisSong] = useState(propCurrentSong);
   const [allSongs, setAllSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const [poppedUp, setPoppedUp] = useState(false);
   const [commentsArray, setCommentsArray] = useState([])
@@ -81,41 +80,20 @@ function SongScreen(props) {
               songIndex: index + 1
             }
           }))
+          setIsLoading(false)
         })
         .catch(console.error)
-        .finally(setIsLoading(false))
     }
     getUserSongs(songUserId, songId)
-    setLikesAndFollows(songId)
   }, [])
 
-
   useEffect(() => {
-    if (thisSong == null) return 
-    setLikesAndFollows(thisSong?._id)
+    if (thisSong) {
+      const songId = thisSong?._id
+      handleInViewLikes(songId)
+      handleInViewFollowers(songId)
+    }
   }, [thisSong])
-
-  async function setLikesAndFollows(songId) {
-    setLikes(initialLikes)
-    setFollowers(initialFollowers)
-
-    const { liked, songLikesTotal, likeToDelete } = getLikeData(likesArrTest, songId)
-    const { followed, followersTotal, followToDelete } = getFollowData(followersArrTest, songId)
-    
-    setLikes(prevLikes => ({
-      ...prevLikes,
-      'IS_LIKED': liked,
-      'USERS_LIKE_TO_DELETE': likeToDelete,
-      'TOTAL_LIKES': songLikesTotal
-    }))
-
-    setFollowers(prevFollowers => ({
-      ...prevFollowers,
-      'IS_FOLLOWED': followed,
-      'USERS_FOLLOW_TO_DELETE': followToDelete,
-      'TOTAL_FOLLOWERS': followersTotal
-    }))
-  }
 
   const onClose = () => {
     if (propReturnLink === '/search') {
@@ -135,7 +113,7 @@ function SongScreen(props) {
   }
 
   const findCurrentSong = direction => {
-    allSongs.forEach((each, index) => {
+    allSongs.filter((each, index) => {
       if (each._id === thisSong?._id) {
         if (direction === 'back') {
           if (index === 0) {
@@ -153,7 +131,7 @@ function SongScreen(props) {
       }
     })
   }
-
+  const socialBtnRef = useRef();
   return (
     <div
       id="SongScreen"
@@ -162,6 +140,7 @@ function SongScreen(props) {
         backgroundImage: `url('${gradientbg}'), url(${thisSong?.songVideo})`,
       }}
     >
+      <Loading addClass={'LoadingSongScreen'} />
       <div className="close-window-frame">
         <div className="song-listing-container">
           <div className="song-listing-outer">
@@ -205,8 +184,11 @@ function SongScreen(props) {
         </div>
       </div>
 
-      <div className="song-video-frame" ref={windowRef} style={{position: 'relative'}}> 
-        <Loading />
+      <div 
+        className="song-video-frame"
+        ref={windowRef}
+        style={isLoading === true ? {opacity: "0"} : {opacity: "1"}}
+      >
         <div className="song-lyric-container">
           {thisSong?.songLyricsStr?.map((each, index) => {
             return (
@@ -284,7 +266,7 @@ function SongScreen(props) {
           <div className="social-list">
             <div className="social-button-container">
               <div 
-                className="social-button" 
+                className={`social-button ${followers.IS_FOLLOWED ? "pushed" : ""}`} 
                 ref={followBtn}
                 onClick={() => { 
                   handlePostFollow(
@@ -310,8 +292,9 @@ function SongScreen(props) {
 
             <div className="social-button-container">
               <div 
-                className="social-button" 
-                onClick={() => { 
+                className={`social-button ${likes.IS_LIKED ? "pushed" : ""}`} 
+                onClick={(e) => { 
+                  e.target.style.transition = "all .2s ease-in"
                   handlePostLikeSong(
                     thisSong._id, 
                     thisSong.songUser._id,
@@ -334,7 +317,7 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div className={poppedUp ? "social-button pushed" : "social-button"} onClick={popUpComments}>
+              <div className={`social-button ${poppedUp ? "pushed" : ""}`} onClick={popUpComments}>
                 <img
                   className="social-icons comment"
                   src={comments}

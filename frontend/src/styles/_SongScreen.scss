@@ -9,6 +9,7 @@
     @include flexCenter(15%, 100%, 0px, space-evenly, center, row);
     background: linear-gradient(323deg, #333333 0%, #4f4f4f 100%);
     box-shadow: 0px 7px 60px 10px #303030;
+    z-index: 1;
 
     .song-listing-container {
       @include flexCenter(100%, 90%, 0px, center, center, column);
@@ -112,6 +113,7 @@
 
   .song-video-frame {
     @include flexCenter(40%, 100%, 40px 40px 0px 0px, center, center, column);
+    position: relative;
 
     .song-lyric-container {
       @include flexCenter(94%, 95%, 7px, flex-start, flex-start, column);
@@ -136,6 +138,12 @@
         }
       }
     }
+  }
+  .show {
+    opacity: 1;
+  }
+  .hide {
+    opacity: 0;
   }
 
   .song-details-container {
@@ -298,9 +306,9 @@
             color: #ec6aa0;
             list-style-type: none;
             margin-top: 5px;
-            background-color: #333333;
+            background: #333333;
             border: none;
-            background: linear-gradient(145deg, #323232, #3b3b3b);
+            // background: linear-gradient(145deg, #323232, #3b3b3b);
             box-shadow: 4px 4px 6px #282828, -4px -4px 6px #4f4f4f;
 
             .follow {
@@ -315,27 +323,27 @@
             .comment {
               height: 1.5rem;
             }
-            &:active {
-              box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
-              background: #ec6aa0;
-              border: 1px solid #e24f8c;
-              transition: all 0.2s ease-out;
+            // &:active {
+            //   box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
+            //   background: #ec6aa0;
+            //   border: 1px solid #e24f8c;
+            //   transition: all 0.2s ease-out;
 
-              img {
-                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                  contrast(103%);
-              }
-            }
+            //   img {
+            //     filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+            //       contrast(103%);
+            //   }
+            // }
           }
 
           .pushed {
             box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
             background: #ec6aa0;
             border: 1px solid #e24f8c;
+            // transition: all 0.2s ease-in;
 
             img {
-              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                contrast(103%);
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)contrast(103%);
             }
           }
 

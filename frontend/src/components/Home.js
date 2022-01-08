@@ -8,7 +8,6 @@ import usePostLike from "./utils/usePostLike";
 import usePostFollow from "./utils/usePostFollow";
 import usePostComment from "./utils/usePostComment";
 import useEventListener from "./utils/useEventListener";
-import HandleLikeAndFollowData from "./utils/HandleLikeAndFollowData";
 import useDebugInformation from "./utils/useDebugInformation"
 import FormatDate from "./FormatDate"
 import HomeFeed from "./songFeedComponents/HomeFeed";
@@ -26,7 +25,7 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
-  const { homeFeedArrTest, likesArrTest, followersArrTest, isLoading, setIsLoading } = useContext(songData)
+  const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
   
   useDebugInformation("Home", props)
   useEventListener('resize', e => {
@@ -40,20 +39,8 @@ function Home(props) {
     }
   })
 
-  const { 
-    handlePostLikeSong, 
-    handleLikeData,
-    initialLikes,
-    likes, 
-    setLikes
-  } = usePostLike();
-  const { 
-    handlePostFollow,
-    initialFollowers,
-    followers, 
-    setFollowers,
-  } = usePostFollow();
-  const { getLikeData, getFollowData } = HandleLikeAndFollowData()
+  const { handlePostLikeSong, handleInViewLikes, likes } = usePostLike();
+  const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
 
   const [songInView, setSongInView] = useState(homeFeedArrTest[0]?.song);
   const [totalComments, setTotalComments] = useState();
@@ -70,14 +57,11 @@ function Home(props) {
   useEffect(() => {
     if (songInView) {
       const songId = songInView?._id
-      setLikes(initialLikes)
-      setFollowers(initialFollowers)
-      setTotalComments(songInView?.songComments?.length)
-      handleLikeData(songId)
+      handleInViewLikes(songId)
+      handleInViewFollowers(songId)
     }
   }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
-
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />
     else if (isTrendingFeed) return <TrendingFeed />
@@ -96,16 +80,6 @@ function Home(props) {
     } else {
       setPoppedUp(false)
     }
-  }
-
-  const updateEachUserLikes = (id) => {
-    console.log(id, "am i getting an id?")
-    actions
-      .updateEachUserLikes({ likeUser: id })
-      .then(res => {
-        console.log(res.data, "LETS DO THIS!!!!!!!!")
-      })
-      .catch(console.error)
   }
 
   return (
@@ -178,21 +152,7 @@ function Home(props) {
               </div>
             </div>
           </div>
-          <button
-            style={{
-              position: 'absolute', 
-              height: "50px",
-              width: "50px",
-              background: "#e24f8c", 
-              borderRadius: '50px', 
-              color: "white", 
-              top: "30%", 
-              right: "50%",
-              zIndex: '5',
-            }}
-            onClick={() => updateEachUserLikes(songInView?.songUser?._id)}>
-            Update
-          </button>
+
           {showFeedInDisplay()}
 
           <Comments
