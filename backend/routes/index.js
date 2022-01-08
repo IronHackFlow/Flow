@@ -4,6 +4,35 @@ const axios = require('axios')
 const router = express.Router()
 const User = require('../models/User')
 const Songs = require('../models/Songs')
+const Likes = require('../models/Likes')
+
+//update all users likes with new Schema model for User--- userLikes
+router.post(`/updateEachUserLikes`, async (req, res, next) => {
+  let resData = { likes: [], user: {} }
+  await Likes.find({ likeUser: req.body.likeUser })
+    .then(likes => {
+      console.log(likes, "should be an array of likes")
+      resData.likes = likes
+    })
+    .catch(err => {
+      next(err)
+    })
+
+  await User.findByIdAndUpdate(
+    req.body.likeUser,
+    {$push: { userLikes: resData.likes}},
+    { new: true },
+  )
+    .populate({ path:'userLikes', populate: 'song' })
+    .then(likes => {
+      resData.user = likes
+      console.log(likes, "should be an updated User with userLikes")
+    })
+    .catch(err => {
+      next(err)
+    })
+  res.status(200).json(resData)
+})
 
 router.post(`/getAUserRT`, async (req, res, next) => {
   console.log('Grabbing a user: ', req.body)

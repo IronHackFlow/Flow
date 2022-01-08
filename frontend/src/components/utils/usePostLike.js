@@ -15,6 +15,7 @@ export default function usePostLike() {
     USERS_LIKE_TO_DELETE: null,
     TOTAL_LIKES: null,
   }
+
   const initialCommentLikes = {
     TYPE: 'COMMENT',
     IS_LIKED: false,
@@ -23,6 +24,7 @@ export default function usePostLike() {
     USERS_LIKE_TO_DELETE: null,
     TOTAL_COMMENT_LIKES: null,
   }
+
   const [likes, setLikes] = useState(initialLikes);
   const [commentLikes, setCommentLikes] = useState(initialCommentLikes);
 
@@ -93,7 +95,7 @@ export default function usePostLike() {
       })
       .then(res => {
         console.log(`deleted a like from: `, res.data)
-        const songLikes = res.data.songLikes
+        const songLikes = res.data.song.songLikes
 
         setLikes(prevLikes => ({
           ...prevLikes,
@@ -126,20 +128,51 @@ export default function usePostLike() {
   }
   
   const handlePostLikeSong = (songId, songUserId, isLiked, toDelete) => {
-    if (songUserId === user._id) return 
+    console.log(isLiked, toDelete, "HEY WHAT IS THIS GSFJLK")
+    if (songUserId === user?._id) return 
     else if (isLiked) return deleteLikeSong(songId, toDelete)
     else return addLikeSong(songId)
   }
 
   const handlePostLikeComment = (commentId, commentUserId, isLiked, toDelete) => {
-    if (commentUserId === user._id) return
+    if (commentUserId === user?._id) return
     else if (isLiked) return deleteLikeComment()
     else return addLikeComment()
+  }
+
+  async function handleLikeData(songId) {
+    if (songId == null) return
+    const filterSong = likesArrTest.filter(each => each.songId === songId)
+    console.log(filterSong, songId, "WHATWHATWAHT")
+    const songLikes = filterSong[0].likes
+    const songLikesTotal = filterSong[0].likes.length
+    const { liked, likeToDelete } = await checkIfLiked(songLikes, user?._id)
+    console.log(songLikes, liked, likeToDelete, "FUCK THIS SHIT OMG")
+    setLikes(prevLikes => ({
+      ...prevLikes,
+      IS_LIKED: liked,
+      USERS_LIKE_TO_DELETE: likeToDelete,
+      TOTAL_LIKES: songLikesTotal
+    }))
+  }
+
+  function checkIfLiked(likes, userId) {
+    let liked = false
+    let likeToDelete = {}
+
+    likes.forEach(each => {
+      if (each.likeUser === userId) {
+        liked = true
+        likeToDelete = each
+      }
+    })
+    return { liked, likeToDelete }
   }
 
   return { 
     handlePostLikeSong, 
     handlePostLikeComment,
+    handleLikeData,
     initialLikes,
     likes, 
     setLikes,

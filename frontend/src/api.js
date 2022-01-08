@@ -51,6 +51,10 @@ const actions = {
   getBeat: async () => {
     return await axios.get(`${baseURL}/getBeatRT`, resetHead())
   },
+  
+  updateEachUserLikes: async (id) => {
+    return await axios.post(`${baseURL}/updateEachUserLikes`, id, resetHead())
+  },
 
   getUserSongs: async theUser => {
     return await axios.post(`${baseURL}/getUserSongsRT`, theUser, resetHead())

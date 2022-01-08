@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { Link, Redirect } from "react-router-dom";
+import actions from "../api";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
 import { songData } from "./songFeedComponents/SongData"
@@ -26,6 +27,7 @@ import like from "../images/heart2.svg";
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
   const { homeFeedArrTest, likesArrTest, followersArrTest, isLoading, setIsLoading } = useContext(songData)
+  
   useDebugInformation("Home", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -37,8 +39,10 @@ function Home(props) {
       document.getElementById('Home').style.height = `${onChange}px`
     }
   })
+
   const { 
     handlePostLikeSong, 
+    handleLikeData,
     initialLikes,
     likes, 
     setLikes
@@ -69,46 +73,10 @@ function Home(props) {
       setLikes(initialLikes)
       setFollowers(initialFollowers)
       setTotalComments(songInView?.songComments?.length)
-  
-      const { liked, songLikesTotal, likeToDelete } = getLikeData(likesArrTest, songId)
-      const { followed, followersTotal, followToDelete } = getFollowData(followersArrTest, songId)
-  
-      setLikes(prevLikes => ({
-        ...prevLikes,
-        'IS_LIKED': liked,
-        'USERS_LIKE_TO_DELETE': likeToDelete,
-        'TOTAL_LIKES': songLikesTotal
-      }))
-  
-      setFollowers(prevFollowers => ({
-        ...prevFollowers,
-        'IS_FOLLOWED': followed,
-        'USERS_FOLLOW_TO_DELETE': followToDelete,
-        'TOTAL_FOLLOWERS': followersTotal
-      }))
+      handleLikeData(songId)
     }
   }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
-  // this to prevent the mobile keyboard from ruining layout...........
-  // gets window height and converts body element and component div height to pixels
-  // useLayoutEffect(() => {
-  //   var onLoad = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  //   document.getElementById('body').style.height = `${onLoad}px`
-  //   document.getElementById('Home').style.height = `${onLoad}px`
-  //   const changeToPixels = () => {
-  //     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  //     if (onChange  <  600) {
-  //       document.getElementById('body').style.height = `${windowSize}px`
-  //       document.getElementById('Home').style.height = `${windowSize}px`
-  //     } 
-  //     else {
-  //       document.getElementById('body').style.height = `${onChange}px`
-  //       document.getElementById('Home').style.height = `${onChange}px`
-  //     }
-  //   }
-  //   window.addEventListener("resize", changeToPixels)
-  //   return () => window.removeEventListener("resize", changeToPixels)
-  // }, [])
 
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) return <HomeFeed />
@@ -128,6 +96,16 @@ function Home(props) {
     } else {
       setPoppedUp(false)
     }
+  }
+
+  const updateEachUserLikes = (id) => {
+    console.log(id, "am i getting an id?")
+    actions
+      .updateEachUserLikes({ likeUser: id })
+      .then(res => {
+        console.log(res.data, "LETS DO THIS!!!!!!!!")
+      })
+      .catch(console.error)
   }
 
   return (
@@ -200,7 +178,21 @@ function Home(props) {
               </div>
             </div>
           </div>
-
+          <button
+            style={{
+              position: 'absolute', 
+              height: "50px",
+              width: "50px",
+              background: "#e24f8c", 
+              borderRadius: '50px', 
+              color: "white", 
+              top: "30%", 
+              right: "50%",
+              zIndex: '5',
+            }}
+            onClick={() => updateEachUserLikes(songInView?.songUser?._id)}>
+            Update
+          </button>
           {showFeedInDisplay()}
 
           <Comments
@@ -260,8 +252,8 @@ function Home(props) {
                       `} 
                       onClick={() => { 
                         handlePostLikeSong(
-                          songInView._id, 
-                          songInView.songUser._id, 
+                          songInView?._id, 
+                          songInView?.songUser?._id, 
                           likes?.IS_LIKED, 
                           likes?.USERS_LIKE_TO_DELETE
                         ) 

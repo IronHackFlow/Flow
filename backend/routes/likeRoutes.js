@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
 
+const User = require('../models/User')
 const Songs = require('../models/Songs')
 const Comments = require('../models/Comments')
 const Likes = require('../models/Likes')
@@ -24,8 +25,22 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
   if (likeCheck === false) {
     let likedObject = await Likes.create(bodySong)
     console.log(`CREATED songLike object: `, likedObject)
-    let returnData = { song: '', songLike: likedObject }
+    let returnData = { song: '', user: '', songLike: likedObject }
     
+    await User.findByIdAndUpdate(
+      bodySong.likeUser,
+      {$push: { userLikes: likedObject}},
+      { new: true },
+    )
+      .populate({ path:'userLikes', populate: 'song' })
+      .then(likes => {
+        returnData.user = likes
+        console.log(likes, "YOYOYOYOYOYO DID I WORK THIS CORRECTLY?")
+      })
+      .catch(err => {
+        next(err)
+      })
+
     await Songs.findByIdAndUpdate(
       bodySong.likerSong,
       { $push: { songLikes: likedObject } },
@@ -39,6 +54,7 @@ router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
       .catch(err => {
         next(err)
       })
+
     res.status(200).json(returnData)
   } else {
     let likedCommObject = await Likes.create(bodyComm)
@@ -66,33 +82,54 @@ router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
     likerSong: req.body.likerSong,
     deleteObj: req.body.deleteObj,
   }
+
   let bodyComm = {
     likeUser: req.user._id,
     deleteObj: req.body.deleteObj,
   }
+
   let likeCheck = req.body.commLike
-  
+
+  let returnData = { song: '', user: '' }
+
   if (likeCheck === false) {
+    await User.findByIdAndUpdate(
+      bodySong.likeUser,
+      {$pull: { userLikes: bodySong.deleteObj._id}},
+      { new: true },
+    )
+      .populate({ path:'userLikes', populate: 'song' })
+      .then(likes => {
+        returnData.user = likes
+        console.log(likes, "YOYOYOYOYOYO DID I WORK THIS CORRECTLY?")
+      })
+      .catch(err => {
+        next(err)
+      })
+
     await Songs.findByIdAndUpdate(
       bodySong.likerSong,
       { $pull: { songLikes: bodySong.deleteObj._id } },
       { new: true },
     )
-    .populate('songLikes')
+      .populate('songLikes')
       .then(song => {
-        res.status(200).json(song)
+        returnData.song = song
         console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
       })
       .catch(err => {
         next(err)
       })
-    await Likes.findByIdAndDelete(bodySong.deleteObj._id)
+
+      await Likes.findByIdAndDelete(bodySong.deleteObj._id)
       .then(res => {
         console.log('this songLike has been eliminated!', res)
       })
       .catch(err => {
         next(err)
       })
+      res.status(200).json(returnData)
+      
   } else {
     await Comments.findByIdAndUpdate(
       bodyComm.deleteObj.likedComment,
@@ -127,5 +164,5 @@ router.post(`/getUsersLikes`, async (req, res, next) => {
     })
     .catch(err => res.status(500).json(err))
 })
-  
+
 module.exports = router

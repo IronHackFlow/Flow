@@ -40,7 +40,7 @@ function Comments(props) {
     setComments(initialComments)
 
     let commentInView = commentsArrTest.filter(each => {
-      console.log(each.comments, "LOLOLOLOL")
+      // console.log(each.comments, "LOLOLOLOL")
       if (each.songId === songId) {
         setComments(prevComments => ({
           ...prevComments,
@@ -141,7 +141,7 @@ function Comments(props) {
     useEffect(() => {
       const likesArray = each.commLikes
       likesArray.forEach(each => {
-        console.log(each, "WHAT IS GOING ON??")
+        // console.log(each, "WHAT IS GOING ON??")
       })
 
       // setCommentLikes(prevLikes => ({

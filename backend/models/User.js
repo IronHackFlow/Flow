@@ -18,6 +18,7 @@ const User = model(
     userSoundCloud: String,
     followers: [{ type: Schema.Types.ObjectId, ref: 'Follows' }],
     userFollows: [{ type: Schema.Types.ObjectId, ref: 'Follows' }],
+    userLikes: [{ type: Schema.Types.ObjectId, ref: 'Likes' }],
   }),
 )
 module.exports = User
