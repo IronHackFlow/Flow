@@ -6,24 +6,31 @@ import TheContext from "../../TheContext"
 export default function usePostComment() {
   const { user } = useContext(TheContext)
   const { commentsArrTest, setCommentsArrTest } = useContext(songData)
-  const [comments, setComments] = useState()
 
-  const postComment = (commentString, songId) => {
+  const initialComments = {
+    ADD_COMMENT: false,
+    DELETE_COMMENT: false,
+    USER_COMMENT_TO_DELETE: null,
+    TOTAL_COMMENTS: null
+  }
+  const [comments, setComments] = useState(initialComments)
+
+  const handlePostComment = (songId, commentString) => {
     actions
       .addComment({
+        songId: songId,
         comment: commentString,
-        commSong: songId,
-        commDate: new Date(),
+        date: new Date(),
       })
       .then(res => {
-        const songComments = res.data.song.songComments
-        const userCommentToDelete = res.data.userComment
-        console.log(songComments, "new comments comin at ya")
+        console.log(`ADDED a COMMENT: ---`, res.data.comment, `--- to ${res.data.song.name}'s song_comments: `, res.data.song.song_comments)
+        const songComments = res.data.song.song_comments
+        const commentToDelete = res.data.comment
 
         setComments(prevComments => ({
             ...prevComments,
-            'TOTAL_COMMENTS': songComments.length,
-            'USER_COMMENT_TO_DELETE': userCommentToDelete,
+            TOTAL_COMMENTS: songComments,
+            USER_COMMENT_TO_DELETE: commentToDelete,
         }))
         
         let newCommentsArr = commentsArrTest.map(comment => {
@@ -33,47 +40,44 @@ export default function usePostComment() {
               return comment
             }
           })
+
         setCommentsArrTest(newCommentsArr)
       })
       .catch(console.error)
-
   }
 
-  const deleteComment = (toDelete, songId) => {
-    if (user._id === toDelete.commUser._id) {
-      actions
-        .deleteComment({ deleteObj: toDelete, songId: songId })
-        .then(res => {
-          const songComments = res.data.songComments
-        //   resetCommentsArray(comments)
-          setComments(prevComments => ({
-            ...prevComments,
-            'TOTAL_COMMENTS': songComments.length
-          }))
-  
-          let newCommentsArr = commentsArrTest.map(comment => {
-            if (comment.songId === songId) {
-              return {...comment, comments: songComments }
-            } else {
-              return comment
-            }
-          })
-          setCommentsArrTest(newCommentsArr)
-        
+  const handleDeleteComment = (songId, toDelete) => {
+    if (user?._id !== toDelete.user._id) return
+    actions
+      .deleteComment({ songId: songId, commentToDelete: toDelete })
+      .then(res => {
+        console.log(`DELETED a COMMENT: ---`, res.data.comment, `--- from ${res.data.song.name}'s song_comments: `, res.data.song.song_comments)
+        const songComments = res.data.song.song_comments
+
+        setComments(prevComments => ({
+          ...prevComments,
+          TOTAL_COMMENTS: songComments,
+          USER_COMMENT_TO_DELETE: null
+        }))
+
+        let newCommentsArr = commentsArrTest.map(comment => {
+          if (comment.songId === songId) {
+            return {...comment, comments: songComments }
+          } else {
+            return comment
+          }
         })
-        .catch(console.error)
-    } else {
-      console.log("You can't delete your friend's comments jerk!")
-    }
+
+        setCommentsArrTest(newCommentsArr)
+      
+      })
+      .catch(console.error)
   }
 
-  const handlePostComment = (e,  songId, commentString, toDelete) => {
-
-  }
   return {
     handlePostComment,
-    postComment,
-    deleteComment,
+    handleDeleteComment,
+    initialComments,
     comments,
     setComments
   }

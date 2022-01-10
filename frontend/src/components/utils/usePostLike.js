@@ -5,7 +5,7 @@ import TheContext from "../../TheContext.js"
 
 export default function usePostLike() {
   const { user } = useContext(TheContext)
-  const { likesArrTest, setLikesArrTest } = useContext(songData)
+  const { likesArrTest, setLikesArrTest, commentsArrTest, setCommentsArrTest } = useContext(songData)
 
   const initialLikes = {
     TYPE: 'SONG',
@@ -15,7 +15,6 @@ export default function usePostLike() {
     USERS_LIKE_TO_DELETE: null,
     TOTAL_LIKES: null,
   }
-
   const initialCommentLikes = {
     TYPE: 'COMMENT',
     IS_LIKED: false,
@@ -24,36 +23,16 @@ export default function usePostLike() {
     USERS_COMMENTLIKE_TO_DELETE: null,
     TOTAL_COMMENT_LIKES: null,
   }
-
   const [likes, setLikes] = useState(initialLikes);
   const [commentLikes, setCommentLikes] = useState(initialCommentLikes);
 
-  const checkCommentLikes = (id) => {
-    actions
-      .getAComment({ id: id })
-      .then(res => {
-        let deleteData = null
-        let commLikes = res.data.commLikes
-
-        for (let i = 0; i < commLikes.length; i++) {
-          if (commLikes[i].likeUser === user._id) {
-            deleteData = commLikes[i]
-          }
-        }
-
-        if (deleteData) return deleteLikeComment(deleteData)
-        else return addLikeComment(id)
-      })
-      .catch(console.error)
-  }
-
-  const addLikeSong = async (songId) => {
+  const addSongLike = async (songId) => {
     await actions
-      .addLike({ likerSong: songId, likeDate: new Date(), commLike: false})
+      .addSongLike({ songId: songId, date: new Date() })
       .then(res => {
-        console.log('added a like to: ', res.data)
-        const songLikes = res.data.song.songLikes
-        const usersSongLike = res.data.songLike
+        const songLikes = res.data.song.song_likes
+        const likeToDelete = res.data.like
+        console.log(`ADDED a SONGLIKE: ---`, res.data.like, `--- to ${res.data.song.name}'s song_likes: `, res.data.song.song_likes)
 
         setLikes(prevLikes => ({
           ...prevLikes,
@@ -61,49 +40,20 @@ export default function usePostLike() {
           ADD_LIKE: true,
           DELETE_LIKE: false,
           TOTAL_LIKES: songLikes.length,
-          USERS_LIKE_TO_DELETE: usersSongLike
+          USERS_LIKE_TO_DELETE: likeToDelete,
         }))
 
-        let newLikesArr = likesArrTest.map(like => {
-          if (like.songId === songId) {
-            return {...like, likes: songLikes }
-          } else {
-            return like
-          }
-        })
-        setLikesArrTest(newLikesArr)
+        updateLikesArr(songId, songLikes)
       })
       .catch(console.error)
   }
 
-  const addLikeComment = (id) => {
-    actions
-    .addLike({ likedComment: id, likeDate: new Date(), commLike: true})
-    .then(res => {
-      console.log('added a like to: ', res.data)
-      const totalCommentLikes = res.data.comment.commLikes.length
-      const likeToDelete = res.data.commentLike
-
-      setCommentLikes(prevCommentLikes => ({
-        ...prevCommentLikes,
-        IS_LIKED: true,
-        TOTAL_COMMENT_LIKES: totalCommentLikes,
-        USERS_COMMENTLIKE_TO_DELETE: likeToDelete
-      }))
-    })
-    .catch(console.error)
-  }
-
-  const deleteLikeSong = async (songId, toDelete) => {
+  const deleteSongLike = async (songId, toDelete) => {
     await actions
-      .deleteLike({
-        likerSong: songId,
-        deleteObj: toDelete,
-        commLike: false,
-      })
+      .deleteSongLike({ songId: songId, likeToDelete: toDelete })
       .then(res => {
-        console.log(`deleted a like from: `, res.data)
-        const songLikes = res.data.song.songLikes
+        console.log(`DELETED a SONGLIKE: ---`, res.data.like, `--- from ${res.data.song.name}'s song_likes: `, res.data.song.song_likes)
+        const songLikes = res.data.song.song_likes
 
         setLikes(prevLikes => ({
           ...prevLikes,
@@ -112,78 +62,145 @@ export default function usePostLike() {
           ADD_LIKE: false,
           TOTAL_LIKES: songLikes.length
         }))
-        
-        let newLikesArr = likesArrTest.map(like => {
-          if (like.songId === songId) {
-            return {...like, likes: songLikes }
-          } else {
-            return like
-          }
-        })
-        setLikesArrTest(newLikesArr)
+
+        updateLikesArr(songId, songLikes)
       })
       .catch(console.error)
   }
 
-  const deleteLikeComment = (deleteData) => {
-    actions
-      .deleteLike({ deleteObj: deleteData, commLike: true })
+  const addCommentLike = async (commentId, songId) => {
+    await actions
+      .addCommentLike({ commentId: commentId, date: new Date() })
       .then(res => {
-        console.log(`deleted a like from: `, res.data)
-        const totalCommentLikes = res.data.commLikes.length
+        console.log(`ADDED a COMMENTLIKE: ---`, res.data.like, `--- to ${res.data.comment._id}'s likes: `, res.data.comment.likes)
+        const commentLikes = res.data.comment.likes
+        const likeToDelete = res.data.like
+
+        setCommentLikes(prevCommentLikes => ({
+          ...prevCommentLikes,
+          IS_LIKED: true,
+          TOTAL_COMMENT_LIKES: commentLikes.length,
+          USERS_COMMENTLIKE_TO_DELETE: likeToDelete
+        }))
+
+        updateCommentsArr(commentId, songId, commentLikes)
+      })
+      .catch(console.error)
+  }
+
+  const deleteCommentLike = async (commentId, toDelete, songId) => {
+    await actions
+      .deleteCommentLike({ commentId: commentId, likeToDelete: toDelete })
+      .then(res => {
+        console.log(`DELETED a COMMENTLIKE: ---`, res.data.like, `--- from ${res.data.comment._id}'s likes: `, res.data.comment.likes)
+        const commentLikes = res.data.comment.likes
 
         setCommentLikes(prevCommentLikes => ({
           ...prevCommentLikes,
           IS_LIKED: false,
-          TOTAL_COMMENT_LIKES: totalCommentLikes,
+          TOTAL_COMMENT_LIKES: commentLikes.length,
+          USERS_COMMENTLIKE_TO_DELETE: null,
         }))
+
+        updateCommentsArr(commentId, songId, commentLikes)
       })
       .catch(console.error)
   }
-  
-  const handlePostLikeSong = (songId, songUserId, isLiked, toDelete) => {
-    if (songUserId === user?._id) return 
-    else if (isLiked) return deleteLikeSong(songId, toDelete)
-    else return addLikeSong(songId)
-  }
 
-  const handlePostLikeComment = (commentId, isLiked, toDelete) => {
-    if (isLiked) return deleteLikeComment(toDelete)
-    else return addLikeComment(commentId)
-  }
-
-  async function handleInViewLikes(songId) {
-    if (songId == null) return
-    setLikes(initialLikes)
-    let liked = false
-    let likeToDelete = {}
-    let totalLikes
-
-    await likesArrTest.filter(each => {
-      if (each.songId === songId) {
-        totalLikes = each.likes.length
-
-        each.likes.filter(each => {
-          if (each.likeUser === user._id) {
-            liked = true
-            likeToDelete = each
-          }
-        })
+  const updateLikesArr = (songId, newLikes) => {
+    let newLikesArr = likesArrTest.map(like => {
+      if (like.songId === songId) {
+        return {...like, likes: newLikes }
+      } else {
+        return like
       }
     })
+    setLikesArrTest(newLikesArr)
+  }
+
+  const updateCommentsArr = (commentId, songId, newLikes) => {
+    let newCommentArr = commentsArrTest.map(song => {
+      if (song.songId === songId) {
+
+        let newCommentLikes = song.comments.map(comment => {
+          if (comment._id === commentId) {
+            return {...comment, likes: newLikes }
+          } else {
+            return comment
+          }
+        })
+        return {...song, comments: newCommentLikes }
+      } else {
+        return song 
+      }
+    })
+    setCommentsArrTest(newCommentArr)
+  }
+
+  const handleInViewCommentLikes = async (commentId, songId) => {
+    if (commentId == null) return
+
+    let likeData = await commentsArrTest.filter(song => song.songId === songId)
+
+    const { liked, likeToDelete, likesArr } = await filterLikesArray(likeData[0]?.comments, '_id', commentId)
+
+    setCommentLikes(prevCommentLikes => ({
+      ...prevCommentLikes,
+      IS_LIKED: liked,
+      TOTAL_COMMENT_LIKES: likesArr?.length,
+      USERS_COMMENTLIKE_TO_DELETE: likeToDelete
+    }))
+  }
+
+  const handleInViewLikes = async (songId) => {
+    if (songId == null) return
+    setLikes(initialLikes)
+
+    const { liked, likeToDelete, likesArr } = await filterLikesArray(likesArrTest, 'songId', songId)
 
     setLikes(prevLikes => ({
       ...prevLikes,
       IS_LIKED: liked,
-      TOTAL_LIKES: totalLikes,
+      TOTAL_LIKES: likesArr.length,
       USERS_LIKE_TO_DELETE: likeToDelete
     }))
   }
 
+  const filterLikesArray = (array, key, id) => {
+    let liked = false
+    let likeToDelete = null
+    let likesArr = []
+
+    array.filter(each => {
+      if (each[key] === id) {
+        likesArr = each.likes
+        likesArr.filter(like => {
+          console.log(like, "i feel somethings wrong here")
+          if (like.user === user._id) {
+            liked = true
+            likeToDelete = like
+          }
+        })
+      }
+    })
+    return { liked, likeToDelete, likesArr }
+  }
+
+  const handlePostLike = (like, commentId, songId, songUserId) => {
+    if (like.TYPE === "SONG") {
+      if (songUserId === user?._id) return 
+      else if (like.IS_LIKED) return deleteSongLike(songId, like.USERS_LIKE_TO_DELETE)
+      else return addSongLike(songId)
+    } else {
+      if (like.IS_LIKED) return deleteCommentLike(commentId, like.USERS_COMMENTLIKE_TO_DELETE, songId)
+      else return addCommentLike(commentId, songId)
+    }
+  }
+
   return { 
-    handlePostLikeSong, 
-    handlePostLikeComment,
+    handlePostLike,
     handleInViewLikes,
+    handleInViewCommentLikes,
     initialLikes,
     likes, 
     setLikes,

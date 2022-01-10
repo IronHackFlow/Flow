@@ -40,7 +40,6 @@ const actions = {
   },
 
   getUser: async () => {
-    //This will go get our user every time we refresh
     return await axios.get(`${baseURL}/user`, resetHead())
   },
 
@@ -83,24 +82,40 @@ const actions = {
     return await axios.post(`${baseURL}/getMostLikedSongsRT`, resetHead())
   },
 
-  addLike: async likePassed => {
-    return await axios.post(`${baseURL}/addLikeRT`, likePassed, resetHead())
+  addSongLike: async like => {
+    return await axios.post(`${baseURL}/addSongLike`, like, resetHead())
   },
 
-  deleteLike: async delLike => {
-    return await axios.post(`${baseURL}/deleteLikeRT`, delLike, resetHead())
+  deleteSongLike: async like => {
+    return await axios.post(`${baseURL}/deleteSongLike`, like, resetHead())
+  },
+
+  addCommentLike: async like => {
+    return await axios.post(`${baseURL}/addCommentLike`, like, resetHead())
+  },
+
+  deleteCommentLike: async like => {
+    return await axios.post(`${baseURL}/deleteCommentLike`, like, resetHead())
+  },
+
+  addComment: async comment => {
+    return await axios.post(`${baseURL}/addComment`, comment, resetHead())
+  },
+
+  deleteComment: async comment => {
+    return await axios.post(`${baseURL}/deleteComment`, comment, resetHead())
   },
 
   getUsersLikes: async user => {
     return await axios.post(`${baseURL}/getUsersLikes`, user, resetHead())
   },
 
-  addFollow: async followDat => {
-    return await axios.post(`${baseURL}/addFollowRT`, followDat, resetHead())
+  addFollow: async follow => {
+    return await axios.post(`${baseURL}/addFollow`, follow, resetHead())
   },
 
-  deleteFollow: async delFollow => {
-    return await axios.post(`${baseURL}/deleteFollowRT`, delFollow, resetHead())
+  deleteFollow: async follow => {
+    return await axios.post(`${baseURL}/deleteFollow`, follow, resetHead())
   },
 
   addSong: async song => {
@@ -145,14 +160,6 @@ const actions = {
 
   getAComment: async aComm => {
     return await axios.post(`${baseURL}/getACommentRT`, aComm, resetHead())
-  },
-
-  addComment: async addComm => {
-    return await axios.post(`${baseURL}/addCommentRT`, addComm, resetHead())
-  },
-
-  deleteComment: async delComm => {
-    return await axios.post(`${baseURL}/deleteCommentRT`, delComm, resetHead())
   },
 
   getUserComments: async () => {

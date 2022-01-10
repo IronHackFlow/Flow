@@ -23,6 +23,7 @@ function App(props) {
     homeFeedArrTest, setHomeFeedArrTest, 
     trendingFeedArrTest, setTrendingFeedArrTest, 
     commentsArrTest, setCommentsArrTest,
+    commentLikesArrTest, setCommentLikesArrTest,
     likesArrTest, setLikesArrTest,
     followersArrTest, setFollowersArrTest,
     isLoading, setIsLoading
@@ -79,10 +80,11 @@ function App(props) {
       <songData.Provider 
         value = {{
           homeFeedArrTest, setHomeFeedArrTest, 
-          trendingFeedArrTest, setTrendingFeedArrTest, 
+          trendingFeedArrTest, setTrendingFeedArrTest,
+          commentsArrTest, setCommentsArrTest,
+          commentLikesArrTest, setCommentLikesArrTest,
           likesArrTest, setLikesArrTest,
           followersArrTest, setFollowersArrTest,
-          commentsArrTest, setCommentsArrTest,
           isLoading, setIsLoading
         }}
       >

@@ -79,7 +79,7 @@ function FollowingFeed(props) {
           }}
         >
           <div className="last-div">
-            {each.song.songLyricsStr?.map((each, index) => {
+            {each.song.lyrics.map((each, index) => {
               return (
                 <div className="each-lyric-container" key={`${uuidv4()}_${index}_songlyrics`}>
                   <p className="each-lyric-no">{index + 1}</p>

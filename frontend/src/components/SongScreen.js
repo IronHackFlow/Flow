@@ -52,7 +52,7 @@ function SongScreen(props) {
 
   const [poppedUp, setPoppedUp] = useState(false);
   const [commentsArray, setCommentsArray] = useState([])
-  const [totalComments, setTotalComments] = useState(propCurrentSong?.songComments?.length);
+  const [totalComments, setTotalComments] = useState(propCurrentSong?.song_comments?.length);
   const [songScreen] = useState(`#353535`);
 
   const windowRef = useRef();
@@ -62,12 +62,12 @@ function SongScreen(props) {
 
   useEffect(() => {
     setIsLoading(true)
-    let songUserId = propCurrentSong.songUser._id
+    let songUserId = propCurrentSong.song_user._id
     let songId = propCurrentSong._id
 
     async function getUserSongs(songUserId, songId) {
       await actions
-        .getUserSongs({ songUser: songUserId })
+        .getUserSongs({ song_user: songUserId })
         .then(res => {
           setAllSongs(res.data)
           setAllSongs(prevArr => prevArr.map((each, index) => {
@@ -99,7 +99,7 @@ function SongScreen(props) {
     if (propReturnLink === '/search') {
       navigate('/search',  { state: { propSearchValue: propSearchValue } })
     } else {
-      navigate(`/profile/${propCurrentSong?.songUser._id}`, { state: { propSongUser: propCurrentSong?.songUser } })
+      navigate(`/profile/${propCurrentSong?.song_user._id}`, { state: { propSongUser: propCurrentSong?.song_user } })
     }
   }
 
@@ -148,28 +148,28 @@ function SongScreen(props) {
               <div className="listing-photo-container">
                 <div className="listing-photo-outer">
                   <div className="listing-photo-inner">
-                    <img src={thisSong?.songUser?.picture} alt="song user" />
+                    <img src={thisSong?.song_user?.picture} alt="song user" />
                   </div>
                 </div>
               </div>
               <div className="listing-track-container">
                 <div className="track-title-container">
                   <div className="track-title-outer">
-                    <p className="track-name">{thisSong?.songName}</p>
+                    <p className="track-name">{thisSong?.name}</p>
                     <p className="track-index"><span style={{color: '#ffa6cb', fontSize: '.8rem'}}>{thisSong?.songIndex}</span> of {allSongs.length}</p>
                   </div>
                 </div>
                 <div className="track-details-container">
                   <p>
-                    {thisSong?.songCaption
-                      ? thisSong?.songCaption
+                    {thisSong?.caption
+                      ? thisSong?.caption
                       : "No caption for this song"
                     }
                   </p>
                   <p>
-                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.songUser?.userName}</span>
+                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.song_user?.userName}</span>
                   </p>
-                  <p>on: {moment(thisSong?.songDate).format('LL')}</p>
+                  <p>on: {moment(thisSong?.date).format('LL')}</p>
                 </div>
               </div>
             </div>
@@ -190,7 +190,7 @@ function SongScreen(props) {
         style={isLoading === true ? {opacity: "0"} : {opacity: "1"}}
       >
         <div className="song-lyric-container">
-          {thisSong?.songLyricsStr?.map((each, index) => {
+          {thisSong?.lyrics?.map((each, index) => {
             return (
               <div className="each-lyric-container" key={`${each}_${index}`}>
                 <p className="each-lyric-no">{index + 1}</p>
@@ -297,7 +297,7 @@ function SongScreen(props) {
                   e.target.style.transition = "all .2s ease-in"
                   handlePostLikeSong(
                     thisSong._id, 
-                    thisSong.songUser._id,
+                    thisSong.song_user._id,
                     likes?.IS_LIKED,
                     likes?.USERS_LIKE_TO_DELETE
                   ) 

@@ -31,7 +31,7 @@ function Profile(props) {
   useEffect(() => {
     console.log(location, "what is this giving me?")
     actions
-      .getUserSongs({ songUser: thisUser?._id })
+      .getUserSongs({ song_user: thisUser?._id })
       .then(res => {
         setThisUserSongs(res.data)
       })
@@ -40,7 +40,7 @@ function Profile(props) {
 
   useEffect(() => {
     actions
-      .getUsersLikes({ likeUser: thisUser?._id })
+      .getUsersLikes({ user: thisUser?._id })
       .then((res) => {
         setThisUserLikes(res.data)
       })
@@ -114,7 +114,7 @@ function Profile(props) {
     }, [])
 
     const showLyrics = () => {
-      return eachSong?.songLyricsStr?.map((eachLine, index) => {
+      return eachSong?.lyrics?.map((eachLine, index) => {
         return (
           <div className="each-line-container" key={`${eachLine}lyrics${index}`}>
             <p className="each-line-no">{index + 1}</p>
@@ -137,7 +137,7 @@ function Profile(props) {
                     className="song-name-outset"
                   >
                     <div className="track-title-container">
-                      <p>{eachSong.songName}</p>
+                      <p>{eachSong.name}</p>
                     </div>
                     <div className="track-data-container">
                       <div className="track-caption-container">
@@ -146,16 +146,16 @@ function Profile(props) {
                         </p>
                       </div>
                       <div className="track-social-container">
-                        <FormatDate date={eachSong.songDate} />
+                        <FormatDate date={eachSong.date} />
                         <p>
-                          {eachSong.songLikes.length === 1
-                            ? `${eachSong.songLikes.length} Like`
-                            : `${eachSong.songLikes.length} Likes`}
+                          {eachSong.song_likes.length === 1
+                            ? `${eachSong.song_likes.length} Like`
+                            : `${eachSong.song_likes.length} Likes`}
                         </p>
                         <p>
-                          {eachSong.songComments.length === 1
-                            ? `${eachSong.songComments.length} Comment`
-                            : `${eachSong.songComments.length} Comments`}
+                          {eachSong.song_comments.length === 1
+                            ? `${eachSong.song_comments.length} Comment`
+                            : `${eachSong.song_comments.length} Comments`}
                         </p>
                       </div>
                     </div>
@@ -228,7 +228,7 @@ function Profile(props) {
           ) : (
             <div className="delete-container">
               <div className="delete-question-container">
-               <p>Are you sure you want to delete <span style={{color: '#e24f8c'}}>{eachSong.songName}</span>?</p>
+               <p>Are you sure you want to delete <span style={{color: '#e24f8c'}}>{eachSong.name}</span>?</p>
               </div>
               <div className="delete-btn-container">
                 <div className="delete-btn_shadow-div-inset">
@@ -308,7 +308,7 @@ function Profile(props) {
                     <p>Town: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.userLocation}</p>
+                    <p>{thisUser?.location}</p>
                   </div>
                 </div>
 
@@ -317,7 +317,7 @@ function Profile(props) {
                     <p>Bio: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.userAbout}</p>
+                    <p>{thisUser?.about}</p>
                   </div>
                 </div>
 
@@ -326,7 +326,7 @@ function Profile(props) {
                     <p>Twttr: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.userTwitter}</p>
+                    <p>{thisUser?.user_Twitter}</p>
                   </div>
                 </div>
 
@@ -335,7 +335,7 @@ function Profile(props) {
                     <p>Insta: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.userInstagram}</p>
+                    <p>{thisUser?.user_Instagram}</p>
                   </div>
                 </div>
 
@@ -344,7 +344,7 @@ function Profile(props) {
                     <p>Sound Cloud: </p>
                   </div>
                   <div className="p-2">
-                    <p>{thisUser?.userSoundCloud}</p>
+                    <p>{thisUser?.user_SoundCloud}</p>
                   </div>
                 </div>
               </div>
@@ -375,7 +375,7 @@ function Profile(props) {
                   <div className="profile-button-outset" style={{borderRadius: "4px"}}>
                     <div className="profile-button-inset pbe-2">
                       <p className="number-container">
-                        {thisUser?.userFollows?.length ? thisUser?.userFollows?.length : "0"}
+                        {thisUser?.user_follows?.length ? thisUser?.user_follows?.length : "0"}
                       </p>
                       <div className="icon-container">
                         <img className="button-icons logout" src={social} alt="following" />

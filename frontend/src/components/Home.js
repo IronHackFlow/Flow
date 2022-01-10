@@ -27,7 +27,7 @@ function Home(props) {
   const { user, windowSize } = useContext(TheContext);
   const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
   
-  useDebugInformation("Home", props)
+  // useDebugInformation("Home", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -39,7 +39,7 @@ function Home(props) {
     }
   })
 
-  const { handlePostLikeSong, handleInViewLikes, likes } = usePostLike();
+  const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
 
   const [songInView, setSongInView] = useState(homeFeedArrTest[0]?.song);
@@ -174,8 +174,7 @@ function Home(props) {
                       style={{ borderRadius: '50px 5px 5px 50px' }}
                       onClick={() => { 
                         handlePostFollow(
-                          songInView._id, 
-                          songInView.songUser._id, 
+                          songInView.song_user._id, 
                           followers?.IS_FOLLOWED, 
                           followers?.USERS_FOLLOW_TO_DELETE
                         ) 
@@ -211,11 +210,11 @@ function Home(props) {
                         ${likes?.IS_LIKED ? "liked-followed-commented" : ""}
                       `} 
                       onClick={() => { 
-                        handlePostLikeSong(
+                        handlePostLike(
+                          likes,
+                          null,
                           songInView?._id, 
-                          songInView?.songUser?._id, 
-                          likes?.IS_LIKED, 
-                          likes?.USERS_LIKE_TO_DELETE
+                          songInView?.song_user?._id, 
                         ) 
                       }}
                     >
@@ -271,13 +270,13 @@ function Home(props) {
                     <div className="user-pic-container">
                       <div className="user-pic_shadow-div-outset">
                         <Link
-                          to={`/profile/${songInView?.songUser?._id}`}
-                          state={{ propSongUser: songInView?.songUser }}
+                          to={`/profile/${songInView?.song_user?._id}`}
+                          state={{ propSongUser: songInView?.song_user }}
                           className="user-pic_shadow-div-inset"
                         >
                           <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
                           <img
-                            src={songInView?.songUser?.picture}
+                            src={songInView?.song_user?.picture}
                             alt=""
                             ref={props.profilePicRef}
                           />
@@ -290,22 +289,22 @@ function Home(props) {
                         <div className="song-title_shadow-div-inset">
                           <div className="loading loading-title" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
                           <p id="one">
-                            {songInView?.songName}
+                            {songInView?.name}
                           </p>
                           <p id="two">
                             <img src={bullet} alt="bullet point" />
-                            {songInView?.songUser?.userName}
+                            {songInView?.song_user?.userName}
                           </p>
                         </div>
 
                         <div className="song-caption-container">
                           <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            <FormatDate date={songInView?.songDate} />{' '}
+                            <FormatDate date={songInView?.date} />{' '}
                             <img src={bullet} alt="bullet point" />
                           </div>
                           <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            {songInView?.songCaption
-                              ? songInView?.songCaption
+                            {songInView?.caption
+                              ? songInView?.caption
                               : 'no caption for this song'}
                           </p>
                         </div>

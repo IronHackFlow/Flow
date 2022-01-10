@@ -704,6 +704,23 @@
                           box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
                         }
                       }
+
+                      .comment-like-btn-pressed {
+                        box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
+                        background: #ec6aa0;
+          
+                        .action-btn-container {
+                          img {
+                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                          }
+                        }
+                        
+                        &:active {
+                          background: #606060;
+                          box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
+                          transition: all .3s ease-in;
+                        }
+                      }
                     }
                     .clc-2 {
                       justify-content: flex-start;
@@ -745,6 +762,7 @@
     }
   }
 }
+
 /* --- Comment tweaks for SongScreen menu --- */
 .songScreen-pop-out {
   bottom: 40%;

@@ -20,56 +20,33 @@ import flag from '../images/flag.svg'
 function Comments(props) {
   const { user } = useContext(TheContext)
   // const { totalComments, setTotalComments } = useContext(TheViewContext)
-  const { commentsArrTest, setCommentsArrTest } = useContext(songData)
-  const { comments, setComments, postComment, deleteComment } = usePostComment()
-
-  const initialComments = {
-    'ADD_COMMENT': false,
-    'DELETE_COMMENT': false,
-    'USER_COMMENT_TO_DELETE': null,
-    'TOTAL_COMMENTS': null
-  }
+  const { commentsArrTest } = useContext(songData)
+  const { comments, setComments, handlePostComment, handleDeleteComment } = usePostComment()
 
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
 
   useEffect(() => {
-    let songId = props.songInView?._id
-    setComments(initialComments)
-
-    let commentInView = commentsArrTest.filter(each => {
-      // console.log(each.comments, "LOLOLOLOL")
-      if (each.songId === songId) {
-        setComments(prevComments => ({
-          ...prevComments,
-          'TOTAL_COMMENTS': each.comments.length
-        }))
-        return each
-      }
-    })
-
-    let commentDisplay = commentInView[0]?.comments?.map((each, index) => {
-      return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
-    })
-    setCommState(commentDisplay)
+    const songId = props.songInView?._id
+    let filtered = commentsArrTest.filter(each => each.songId === songId)
+  
+    setComments(prevComments => ({
+      ...prevComments,
+      TOTAL_COMMENTS: filtered[0]?.comments
+    }))
   }, [props.songInView])
 
   useEffect(() => {
     const setTotalComments = props.setTotalComments
-    setTotalComments(comments?.TOTAL_COMMENTS)
+    setTotalComments(comments?.TOTAL_COMMENTS?.length)
+    renderComments()
   }, [comments])
 
-  const resetCommentsArray = (arr) => {
-    props.setCommentsArray((prevArr) => {
-      return prevArr.map((each) => {
-        if (each.songId === props.songInView?._id) {
-          each.comments = arr
-          return each
-        } else {
-          return each
-        }
-      })
-    })
+  const renderComments = () => {
+    let commentDisplay = comments?.TOTAL_COMMENTS?.map((each, index) => {
+      return <GetComments key={`${uuidv4()}comm${each._id}ent${index}`}  {...each} />
+    }).reverse()
+    setCommState(commentDisplay)
   }
 
   const getCommentClass = () => {
@@ -91,15 +68,18 @@ function Comments(props) {
   const handleSubmit = (e, commentString, songId) => {
     e.preventDefault()
     if (commentString == null) {
-      console.log('please type out your coment')
-      return
+      return console.log('please type out your comment')
     }
-    postComment(commentString, songId)
+    handlePostComment(songId, commentString)
     props.commentInputRef.current.value = ''
   }
 
   function GetComments(each) {
-    const { handlePostLikeComment, commentLikes, setCommentLikes } = usePostLike()
+    const { 
+      handlePostLike, 
+      handleInViewCommentLikes,
+      commentLikes, 
+    } = usePostLike()
     const [commentValue, setCommentValue] = useState();
     const [checkCommUser, setCheckCommUser] = useState()
     const [menuBool, setMenuBool] = useState(false)
@@ -113,33 +93,14 @@ function Comments(props) {
     const dotMenuRef = useRef()
     const slideOutRef = useRef()
 
-    /// problem with not checking if user already liked the comment here
     useEffect(() => {
-      let liked = false
-      let likeToDelete = {}
-      let totalLikes = each.commLikes.length
-
-      user?.userLikes?.filter(like => {
-        if (like.likedComment === each._id) {
-          if (like.likeUser === user._id) {
-            liked = true
-            likeToDelete = like
-          }
-        }
-      })
-
-      setCommentLikes(prevCommentLikes => ({
-        ...prevCommentLikes,
-        IS_LIKED: liked,
-        TOTAL_COMMENT_LIKES: totalLikes,
-        USES_COMMENTLIKE_TO_DELETE: likeToDelete
-      }))
-
+      if (each == null) return 
+      const commentId = each._id
+      handleInViewCommentLikes(commentId, props.songInView._id)
     }, [])
 
     useEffect(() => {
-      console.log(commentLikes, "what is this shist man?")
-      if (each.commUser?._id === user?._id) {
+      if (each?.user?._id === user?._id) {
         setCheckCommUser(true)
       } else {
         setCheckCommUser(false)
@@ -153,13 +114,13 @@ function Comments(props) {
     }, [editCommentText])
 
     const deleteComment = each => {
-      if (user._id === each.commUser._id) {
+      if (user._id === each.user._id) {
         actions
-          .deleteComment({ deleteObj: each, songId: props.songInView?._id })
+          .deleteComment({ commentToDelete: each, songId: props.songInView?._id })
           .then(res => {
-            let comments = res.data.songComments
-            resetCommentsArray(comments)
-            props.setTotalComments(res.data.songComments.length)
+            let comments = res.data.song_comments
+
+            props.setTotalComments(res.data.song_comments.length)
           })
           .catch(console.error)
       } else {
@@ -208,10 +169,10 @@ function Comments(props) {
             <div className="comment-photo-inner">
               <div className="comment-photo-outer">
                 <Link
-                  to={`/profile/${each.commUser._id}`}
-                  state={{propSongUser: each.commUser}}
+                  to={`/profile/${each.user?._id}`}
+                  state={{propSongUser: each.user}}
                 >
-                  <img src={each.commUser?.picture} alt="user's profile"></img>
+                  <img src={each.user?.picture} alt="user's profile"></img>
                 </Link>
               </div>
             </div>
@@ -220,13 +181,13 @@ function Comments(props) {
           <div className="comment-text-container">
             <div className="comment-list-outer">
               <p className="comment-username">
-                {each.commUser?.userName}
+                {each.user?.userName}
                 <span style={{ color: 'white', fontWeight: 'bold', fontSize: '11px' }}>
-                  {props.songInView?.songUser?._id === each.commUser?._id ? ' 𑁦 song author' : null}
+                  {props.songInView?.songUser?._id === each.user?._id ? ' 𑁦 song author' : null}
                 </span>
               </p>
               <div className="comment-date">
-                <FormatDate date={each.commDate} />
+                <FormatDate date={each.date} />
               </div>
               {editCommentText ? (
                 <textarea 
@@ -256,7 +217,7 @@ function Comments(props) {
                     <button 
                       className="action-btn_shadow-div-outset"
                       style={{borderRadius: "40px 4px 4px 40px"}}
-                      onClick={() => deleteComment(each)}
+                      onClick={() => { handleDeleteComment(props.songInView._id, each) }}
                     >
                       <div className="action-btn-icon-container edit-delete">
                         <img
@@ -293,13 +254,14 @@ function Comments(props) {
                 <>
                   <div className="action-buttons-container">
                     <button 
-                      className="action-btn_shadow-div-outset"
+                      className={`action-btn_shadow-div-outset ${commentLikes.IS_LIKED ? "comment-like-btn-pressed" : ""}`}
                       style={{borderRadius: "40px 4px 4px 40px"}}
                       onClick={() => { 
-                        handlePostLikeComment(
+                        handlePostLike(
+                          commentLikes,
                           each._id, 
-                          commentLikes?.IS_LIKED, 
-                          commentLikes?.USERS_COMMENTLIKE_TO_DELETE
+                          props.songInView._id,
+                          null
                         )
                       }}
                     >

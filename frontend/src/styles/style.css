@@ -2722,6 +2722,25 @@ input, textarea, select, button {
           box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
 }
 
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .comment-like-btn-pressed {
+  -webkit-box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
+          box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
+  background: #ec6aa0;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .comment-like-btn-pressed .action-btn-container img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .comment-like-btn-pressed:active {
+  background: #606060;
+  -webkit-box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
+          box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
+  -webkit-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+}
+
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .clc-2 {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
