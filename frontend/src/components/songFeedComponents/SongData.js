@@ -6,16 +6,16 @@ export const songData = createContext(SongData)
 
 export default function SongData() {
   const gifsCopy = [...gifsArr];
-  const [homeFeedArrTest, setHomeFeedArrTest] = useState([]);
-  const [trendingFeedArrTest, setTrendingFeedArrTest] = useState([]);
-  const [commentsArrTest, setCommentsArrTest] = useState([])
-  const [commentLikesArrTest, setCommentLikesArrTest] = useState([])
-  const [likesArrTest, setLikesArrTest] = useState([]);
-  const [followersArrTest, setFollowersArrTest] = useState([]);
+  const [homeFeedSongs, setHomeFeedSongs] = useState([]);
+  const [trendingFeedSongs, setTrendingFeedSongs] = useState([]);
+  const [allSongComments, setAllSongComments] = useState([])
+  const [allSongCommentLikes, setAllSongCommentLikes] = useState([])
+  const [allSongLikes, setAllSongLikes] = useState([]);
+  const [allSongFollowers, setAllSongFollowers] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    console.time('HOW SLOW IS THIS SONGDATA??')
+    console.time('HOW SLOW IS THIS SONG DATA??')
     setIsLoading(true)
     const controller = new AbortController()
     const signal = controller.signal
@@ -33,9 +33,6 @@ export default function SongData() {
         commentsArray.push({ songId: each._id, comments: each.song_comments })
         likesArray.push({ songId: each._id, likes: each.song_likes })
         followersArray.push({ songId: each._id, songUserId: each.song_user._id, followers: each.song_user.followers })
-        // each.song_comments.forEach(each => {
-        //   commentLikesArray.push({ commentId: each._id, userId: each.user._id,  likes: each.likes })
-        // })
         return { song: each, songVideo: gifsCopy[index].url }
       }).reverse()
 
@@ -44,28 +41,26 @@ export default function SongData() {
         return { song: each, songVideo: gifsCopy[index].url }
       })
 
-
-
-      setHomeFeedArrTest(songsArray)
-      setTrendingFeedArrTest(trendingArray)
-      setCommentsArrTest(commentsArray)
-      setCommentLikesArrTest(commentLikesArray)
-      setLikesArrTest(likesArray)
-      setFollowersArrTest(followersArray)
+      setHomeFeedSongs(songsArray)
+      setTrendingFeedSongs(trendingArray)
+      setAllSongComments(commentsArray)
+      setAllSongCommentLikes(commentLikesArray)
+      setAllSongLikes(likesArray)
+      setAllSongFollowers(followersArray)
       setIsLoading(false)
+      console.timeEnd('HOW SLOW IS THIS SONG DATA??')
     }, signal)
     .catch(console.error)
 
-  console.timeEnd('HOW SLOW IS THIS SONG DATA??')
   }, [])
 
   return { 
-    homeFeedArrTest, setHomeFeedArrTest, 
-    trendingFeedArrTest, setTrendingFeedArrTest, 
-    commentsArrTest, setCommentsArrTest,
-    commentLikesArrTest, setCommentLikesArrTest,
-    likesArrTest, setLikesArrTest,
-    followersArrTest, setFollowersArrTest,
+    homeFeedSongs, setHomeFeedSongs, 
+    trendingFeedSongs, setTrendingFeedSongs, 
+    allSongComments, setAllSongComments,
+    allSongCommentLikes, setAllSongCommentLikes,
+    allSongLikes, setAllSongLikes,
+    allSongFollowers, setAllSongFollowers,
     isLoading, setIsLoading
   }
 }

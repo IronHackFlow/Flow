@@ -1,32 +1,29 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { useInView, observe } from 'react-intersection-observer'
+import { useContext, useState, useEffect, useRef, useCallback } from 'react'
 import { v4 as uuidv4 } from "uuid";
 import TheViewContext from '../../TheViewContext'
 import { songData } from './SongData'
 import Loading from '../Loading'
-import useDebugInformation from "../utils/useDebugInformation"
-import actions from '../../api'
+import useDebugInformation from "../../utils/useDebugInformation"
 import gradientbg from '../../images/gradient-bg-2.png'
-import gifsArr from "../../images/gifs.json";
+
 
 function HomeFeed(props) {
   // useDebugInformation("IntersectionTest", props)
-  const { setSongInView } = React.useContext(TheViewContext)
-  const { homeFeedArrTest } = React.useContext(songData)
-
-  const [homeFeedArr, setHomeFeedArr] = useState([]);
+  const { setSongInView } = useContext(TheViewContext)
+  const { homeFeedSongs } = useContext(songData)
+  const [homeFeedSongsCopy, setHomeFeedSongsCopy] = useState([]);
   const [homeDisplayNodes, setHomeDisplayNodes] = useState([])
   const viewRef = useRef();
 
   useEffect(() => {
-    setHomeFeedArr([...homeFeedArrTest])
-  }, [homeFeedArrTest])
+    setHomeFeedSongsCopy([...homeFeedSongs])
+  }, [homeFeedSongs])
 
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          homeFeedArr.forEach((each) => {
+          homeFeedSongsCopy.forEach((each) => {
             if (each.song._id === entry.target.id) {
               setSongInView(each.song)
               entry.target.style.backgroundImage = `url('${each.songVideo}')`
@@ -67,7 +64,7 @@ function HomeFeed(props) {
 
   //     setTotalFollowsLikesArr(followsLikesArray)
   //     setCommentsArr(commentArray)
-  //     setHomeFeedArr(songsArray)
+  //     sethomeFeedSongsCopy(songsArray)
   //     setIsLoading(false)
   //   }, signal)
 
@@ -75,7 +72,7 @@ function HomeFeed(props) {
   // }, [])
 
   useEffect(() => {
-    let feedNodes = homeFeedArr.map((each) => {
+    let feedNodes = homeFeedSongsCopy.map((each) => {
       return (
         <li
           id={each.song._id}
@@ -100,7 +97,7 @@ function HomeFeed(props) {
       )
     })
     setHomeDisplayNodes(feedNodes)
-  }, [homeFeedArr])
+  }, [homeFeedSongsCopy])
 
   const setRefs = useCallback(
     node => {
@@ -109,7 +106,7 @@ function HomeFeed(props) {
         observer.observe(viewRef.current)
       }
     },
-    [homeFeedArr],
+    [homeFeedSongsCopy],
   )
 
   return (

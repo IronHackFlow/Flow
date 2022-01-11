@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import EditProfile from './EditProfile'
 import TheContext from '../TheContext'
-import useEventListener from './utils/useEventListener'
+import useEventListener from '../utils/useEventListener'
 
 function EditProfileScreen(props) {
   const { windowSize } = useContext(TheContext)

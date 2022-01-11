@@ -4,7 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
 import TheContext from "../TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
-import useBeats from './utils/useBeats'
+import useBeats from '../utils/useBeats'
 import edit from "../images/edit.svg";
 import save from "../images/save-disk.svg";
 import del from "../images/delete2.svg";

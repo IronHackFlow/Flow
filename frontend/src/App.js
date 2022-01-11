@@ -5,27 +5,27 @@ import TheContext from './TheContext'
 import SongData from './components/songFeedComponents/SongData'
 import { songData } from './components/songFeedComponents/SongData'
 import actions from './api'
-import useDebugInformation from "./components/utils/useDebugInformation"
-import Auth from './components/Auth'
-import Home from './components/Home'
+import useDebugInformation from "./utils/useDebugInformation"
+import Auth from './pages/Auth'
+import Home from './pages/Home'
 import NavBar from './components/NavBar'
-import TestAudio from './components/TestAudio'
+import TestAudio from './pages/TestAudio'
 import EditLyrics from './components/EditLyrics'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
-import Profile from './components/Profile'
-import SongScreen from './components/SongScreen'
-import Search from './components/Search'
+import Profile from './pages/Profile'
+import SongScreen from './pages/SongScreen'
+import Search from './pages/Search'
 
 function App(props) {
   // useDebugInformation("App", props)
   const { 
-    homeFeedArrTest, setHomeFeedArrTest, 
-    trendingFeedArrTest, setTrendingFeedArrTest, 
-    commentsArrTest, setCommentsArrTest,
-    commentLikesArrTest, setCommentLikesArrTest,
-    likesArrTest, setLikesArrTest,
-    followersArrTest, setFollowersArrTest,
+    homeFeedSongs, setHomeFeedSongs, 
+    trendingFeedSongs, setTrendingFeedSongs, 
+    allSongComments, setAllSongComments,
+    allSongCommentLikes, setAllSongCommentLikes,
+    allSongLikes, setAllSongLikes,
+    allSongFollowers, setAllSongFollowers,
     isLoading, setIsLoading
   } = SongData()
   
@@ -79,12 +79,12 @@ function App(props) {
     >
       <songData.Provider 
         value = {{
-          homeFeedArrTest, setHomeFeedArrTest, 
-          trendingFeedArrTest, setTrendingFeedArrTest,
-          commentsArrTest, setCommentsArrTest,
-          commentLikesArrTest, setCommentLikesArrTest,
-          likesArrTest, setLikesArrTest,
-          followersArrTest, setFollowersArrTest,
+          homeFeedSongs, setHomeFeedSongs, 
+          trendingFeedSongs, setTrendingFeedSongs,
+          allSongComments, setAllSongComments,
+          allSongCommentLikes, setAllSongCommentLikes,
+          allSongLikes, setAllSongLikes,
+          allSongFollowers, setAllSongFollowers,
           isLoading, setIsLoading
         }}
       >

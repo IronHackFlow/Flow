@@ -1,11 +1,11 @@
 import { useContext, useState } from "react"
-import actions from "../../api"
-import { songData } from "../songFeedComponents/SongData"
-import TheContext from "../../TheContext"
+import actions from "../api"
+import { songData } from "../components/songFeedComponents/SongData"
+import TheContext from "../TheContext"
 
 export default function usePostComment() {
   const { user } = useContext(TheContext)
-  const { commentsArrTest, setCommentsArrTest } = useContext(songData)
+  const { allSongComments, setAllSongComments } = useContext(songData)
 
   const initialComments = {
     ADD_COMMENT: false,
@@ -33,7 +33,7 @@ export default function usePostComment() {
             USER_COMMENT_TO_DELETE: commentToDelete,
         }))
         
-        let newCommentsArr = commentsArrTest.map(comment => {
+        let newCommentsArr = allSongComments.map(comment => {
             if (comment.songId === songId) {
               return {...comment, comments: songComments }
             } else {
@@ -41,7 +41,7 @@ export default function usePostComment() {
             }
           })
 
-        setCommentsArrTest(newCommentsArr)
+        setAllSongComments(newCommentsArr)
       })
       .catch(console.error)
   }
@@ -60,7 +60,7 @@ export default function usePostComment() {
           USER_COMMENT_TO_DELETE: null
         }))
 
-        let newCommentsArr = commentsArrTest.map(comment => {
+        let newCommentsArr = allSongComments.map(comment => {
           if (comment.songId === songId) {
             return {...comment, comments: songComments }
           } else {
@@ -68,7 +68,7 @@ export default function usePostComment() {
           }
         })
 
-        setCommentsArrTest(newCommentsArr)
+        setAllSongComments(newCommentsArr)
       
       })
       .catch(console.error)

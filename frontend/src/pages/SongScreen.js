@@ -3,14 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
-import { songData } from './songFeedComponents/SongData'
-import AudioTimeSlider from "./AudioTimeSlider"
-import Loading from './Loading'
-import Comments from "./Comments"
-import useEventListener from './utils/useEventListener'
-import usePostLike from "./utils/usePostLike";
-import usePostFollow from "./utils/usePostFollow";
-import HandleLikeAndFollowData from './utils/HandleLikeAndFollowData'
+import { songData } from '../components/songFeedComponents/SongData'
+import AudioTimeSlider from "../components/AudioTimeSlider"
+import Loading from '../components/Loading'
+import Comments from "../components/Comments"
+import useEventListener from '../utils/useEventListener'
+import usePostLike from "../utils/usePostLike";
+import usePostFollow from "../utils/usePostFollow";
 import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
@@ -37,7 +36,7 @@ function SongScreen(props) {
     }
   })
 
-  const { handlePostLikeSong, handleInViewLikes, likes } = usePostLike();
+  const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
 
   const navigate = useNavigate();
@@ -47,10 +46,8 @@ function SongScreen(props) {
   const gifsCopy = [...gifsArr];
   const [thisSong, setThisSong] = useState(propCurrentSong);
   const [allSongs, setAllSongs] = useState([]);
-  const [isPlaying, setIsPlaying] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  const [poppedUp, setPoppedUp] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [poppedUp, setPoppedUp] = useState(false)
   const [commentsArray, setCommentsArray] = useState([])
   const [totalComments, setTotalComments] = useState(propCurrentSong?.song_comments?.length);
   const [songScreen] = useState(`#353535`);
@@ -131,7 +128,7 @@ function SongScreen(props) {
       }
     })
   }
-  const socialBtnRef = useRef();
+
   return (
     <div
       id="SongScreen"
@@ -270,8 +267,7 @@ function SongScreen(props) {
                 ref={followBtn}
                 onClick={() => { 
                   handlePostFollow(
-                    thisSong._id, 
-                    thisSong.songUser._id, 
+                    thisSong?.song_user?._id, 
                     followers?.IS_FOLLOWED, 
                     followers?.USERS_FOLLOW_TO_DELETE
                   ) 
@@ -295,11 +291,11 @@ function SongScreen(props) {
                 className={`social-button ${likes.IS_LIKED ? "pushed" : ""}`} 
                 onClick={(e) => { 
                   e.target.style.transition = "all .2s ease-in"
-                  handlePostLikeSong(
+                  handlePostLike(
+                    likes,
+                    null,
                     thisSong._id, 
                     thisSong.song_user._id,
-                    likes?.IS_LIKED,
-                    likes?.USERS_LIKE_TO_DELETE
                   ) 
                 }}
               >

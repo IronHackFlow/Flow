@@ -4,13 +4,13 @@ import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognitio
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../TheContext";
-import AudioTimeSlider from "./AudioTimeSlider";
-import RecordingBoothModal from "./RecordingBoothModal";
-import useDebugInformation from "./utils/useDebugInformation"
-import useEventListener from "./utils/useEventListener"
-import useBeats from './utils/useBeats'
+import AudioTimeSlider from "../components/AudioTimeSlider";
+import RecordingBoothModal from "../components/RecordingBoothModal";
+import useDebugInformation from "../utils/useDebugInformation"
+import useEventListener from "../utils/useEventListener"
+import useBeats from '../utils/useBeats'
 import actions from "../api";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 import mic from "../images/modern-mic.svg";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";

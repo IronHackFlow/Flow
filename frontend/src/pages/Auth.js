@@ -3,9 +3,9 @@ import { GoogleLogin } from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../TheContext'
-import useEventListener from './utils/useEventListener'
-import AuthLogIn from './AuthLogIn'
-import AuthSignUp from './AuthSignUp'
+import useEventListener from '../utils/useEventListener'
+import AuthLogIn from '../components/AuthLogIn'
+import AuthSignUp from '../components/AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
 const Auth = (props) => {

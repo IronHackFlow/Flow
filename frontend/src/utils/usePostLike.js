@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import actions from "../../api.js";
-import { songData } from "../songFeedComponents/SongData";
-import TheContext from "../../TheContext.js"
+import actions from "../api.js";
+import { songData } from "../components/songFeedComponents/SongData";
+import TheContext from "../TheContext.js"
 
 export default function usePostLike() {
   const { user } = useContext(TheContext)
-  const { likesArrTest, setLikesArrTest, commentsArrTest, setCommentsArrTest } = useContext(songData)
+  const { allSongLikes, setAllSongLikes, allSongComments, setAllSongComments } = useContext(songData)
 
   const initialLikes = {
     TYPE: 'SONG',
@@ -108,18 +108,18 @@ export default function usePostLike() {
   }
 
   const updateLikesArr = (songId, newLikes) => {
-    let newLikesArr = likesArrTest.map(like => {
+    let newLikesArr = allSongLikes.map(like => {
       if (like.songId === songId) {
         return {...like, likes: newLikes }
       } else {
         return like
       }
     })
-    setLikesArrTest(newLikesArr)
+    setAllSongLikes(newLikesArr)
   }
 
   const updateCommentsArr = (commentId, songId, newLikes) => {
-    let newCommentArr = commentsArrTest.map(song => {
+    let newCommentArr = allSongComments.map(song => {
       if (song.songId === songId) {
 
         let newCommentLikes = song.comments.map(comment => {
@@ -134,13 +134,13 @@ export default function usePostLike() {
         return song 
       }
     })
-    setCommentsArrTest(newCommentArr)
+    setAllSongComments(newCommentArr)
   }
 
   const handleInViewCommentLikes = async (commentId, songId) => {
     if (commentId == null) return
 
-    let likeData = await commentsArrTest.filter(song => song.songId === songId)
+    let likeData = await allSongComments.filter(song => song.songId === songId)
 
     const { liked, likeToDelete, likesArr } = await filterLikesArray(likeData[0]?.comments, '_id', commentId)
 
@@ -156,27 +156,26 @@ export default function usePostLike() {
     if (songId == null) return
     setLikes(initialLikes)
 
-    const { liked, likeToDelete, likesArr } = await filterLikesArray(likesArrTest, 'songId', songId)
+    const { liked, likeToDelete, likesArr } = await filterLikesArray(allSongLikes, 'songId', songId)
 
     setLikes(prevLikes => ({
       ...prevLikes,
       IS_LIKED: liked,
-      TOTAL_LIKES: likesArr.length,
+      TOTAL_LIKES: likesArr?.length,
       USERS_LIKE_TO_DELETE: likeToDelete
     }))
   }
 
-  const filterLikesArray = (array, key, id) => {
+  const filterLikesArray = async (array, key, id) => {
     let liked = false
     let likeToDelete = null
     let likesArr = []
 
-    array.filter(each => {
+    await array.filter(each => {
       if (each[key] === id) {
         likesArr = each.likes
-        likesArr.filter(like => {
-          console.log(like, "i feel somethings wrong here")
-          if (like.user === user._id) {
+        likesArr?.filter(like => {
+          if (like.user === user?._id) {
             liked = true
             likeToDelete = like
           }

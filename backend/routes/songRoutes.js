@@ -10,7 +10,7 @@ router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
     songBG: req.body.songBG,
     songDate: req.body.songDate,
     songDuration: req.body.songDuration,
-    songName: req.body.songName,
+    songName: req.body.sssongName,
     songLyricsStr: req.body.songLyricsStr,
     songPBR: req.body.songPBR,
     songBPM: null,
@@ -24,13 +24,12 @@ router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
 })
   
 router.post(`/deleteSongRT`, verifyJWT, async (req, res, next) => {
-  let body = req.body.song
+  const body = req.body.song
 
-  if (body.songUser._id === req.user._id) {
+  if (body.song_user._id === req.user._id) {
     await Songs.findOneAndDelete({ _id: body._id })
-    .then(res.status(200).json({ message: "Deleted" }))
-    .catch(err => next(err));
-
+      .then(res.status(200).json({ message: "Deleted" }))
+      .catch(err => next(err));s
   } else {
     console.log("Can't delete due to User not being the songUser")
   }
@@ -38,8 +37,8 @@ router.post(`/deleteSongRT`, verifyJWT, async (req, res, next) => {
 
 router.post(`/getSongRT`, async (req, res, next) => {
   await Songs.findById(req.body.id)
-    .populate('songUser')
-    .populate('songLikes')
+    .populate('song_user')
+    .populate('song_likes')
     .then(song => {
       res.status(200).json(song)
     })
@@ -47,11 +46,10 @@ router.post(`/getSongRT`, async (req, res, next) => {
 })
 
 router.post(`/getUserSongsRT`, async (req, res, next) => {
-  console.log(req.body, 'wha')
-  let body = req.body
-  await Songs.find({ songUser: body.songUser })
-    .populate('songUser')
-    .populate({ path: 'songComments', populate: 'commUser' })
+  const body = req.body
+  await Songs.find({ song_user: body.song_user })
+    .populate('song_user')
+    .populate({ path: 'song_comments', populate: 'user' })
     .then(songs => {
       res.status(200).json(songs)
     })
@@ -59,8 +57,8 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
 })
   
 router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  await Songs.find({ songUser: req.body })
-    .populate('songUser')
+  await Songs.find({ song_user: req.body })
+    .populate('song_user')
     .then(songs => {
       // songs.forEach(each => console.log(each.songName))
       res.status(200).json(songs)
@@ -72,11 +70,13 @@ router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
 
 router.post(`/getMostLikedSongsRT`, async (req, res, next) => {
   const songs = await Songs.find({})
-    .populate('songLikes')
-    .populate({ path: 'songComments', populate: 'commUser' })
-    .populate({ path: 'songUser', populate: 'followers' })
+    .populate('song_likes')
+    .populate({ 
+      path: 'song_comments', 
+      populate: [{ path: 'user' }, { path: 'likes' }]
+    })
+    .populate({ path: 'song_user', populate: 'followers' })
     .then(songs => {
-      // console.log(songs, "what is going on here?")
       res.status(200).json(songs)
     })
     .catch(err => res.status(500).json(err))

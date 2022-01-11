@@ -5,99 +5,74 @@ const verifyJWT = require('./verifyToken')
 const User = require('../models/User')
 const Follows = require('../models/Follows')
 
-router.post(`/addFollowRT`, verifyJWT, async (req, res, next) => {
-  
-  let body = {
-    follower: req.user._id,
-    followed: req.body.followedUser,
-    followDate: req.body.followDate,
+router.post(`/addFollow`, verifyJWT, async (req, res, next) => {
+  const body = {
+    user: req.user._id,
+    followed_user: req.body.followed_user,
+    date: req.body.date,
   }
-  let followedObject = await Follows.create(body)
-  console.log(`CREATED follow object: `, followedObject)
+  const follow = await Follows.create(body)
+  let response = { user: '', followed_user: '', follow: follow }
   
-  let resData = { followerData: '', followedData: '', newFollow: followedObject }
+  console.log(`CREATED A FOLLOW: `, follow)
   
   await User.findByIdAndUpdate(
-    body.follower,
-    { $push: { userFollows: followedObject } },
+    body.user,
+    { $push: { user_follows: follow } },
     { new: true },
   )
-    .populate('userFollows')
-    .then(authUser => {
-      resData.followerData = { ...authUser }
-      console.log(
-        `ADDED a follow to User: ${authUser.userName}'s userFollows: `,
-        authUser.userFollows,
-      )
-    })
-    .catch(err => {
-      next(err)
-    })
+    .populate('user_follows')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
   
   await User.findByIdAndUpdate(
-    body.followed,
-    { $push: { followers: followedObject } },
+    body.followed_user,
+    { $push: { followers: follow } },
     { new: true },
   )
     .populate('followers')
     .then(user => {
-      resData.followedData = { ...user }
-      console.log(`ADDED a follow to User: ${user.userName}'s followers: `, user.followers)
+      response.followed_user = user 
+      console.log(`ADDED a FOLLOW: ---`, follow, `--- by ${response.user.user_name} to ${user.user_name}'s FOLLOWERS: `, user.followers)
     })
-    .catch(err => {
-      next(err)
-    })
-  res.status(200).json(resData)
+    .catch(err => next(err))
+
+  res.status(200).json(response)
 })
     
-router.post(`/deleteFollowRT`, verifyJWT, async (req, res, next) => {
-  let body = {
-    follower: req.user._id,
-    followed: req.body.followedUser,
-    deleteObj: req.body.deleteObj,
+router.post(`/deleteFollow`, verifyJWT, async (req, res, next) => {
+  const body = {
+    user: req.user._id,
+    followed_user: req.body.followed_user,
+    followToDelete: req.body.followToDelete,
   }
-  let resData = { followerData: '', followedData: '' }
-  console.log(body.deleteObj, "am i getting something here??? for isdf adlfk")
-  await User.findByIdAndUpdate(
-    body.follower,
-    { $pull: { userFollows: body.deleteObj._id } },
-    { new: true },
-  )
-    .populate('userFollows')
-    .then(authUser => {
-      resData.followerData = { ...authUser }
-      console.log(
-        `DELETED a follow from User: ${authUser.userName}'s userFollows: `,
-        authUser.userFollows,
-      )
-    })
-    .catch(err => {
-      next(err)
-    })
+  let response = { user: '', followed_user: '', follow: body.followToDelete }
 
   await User.findByIdAndUpdate(
-    body.followed,
-    { $pull: { followers: body.deleteObj._id } },
+    body.user,
+    { $pull: { user_follows: body.followToDelete._id } },
+    { new: true },
+  )
+    .populate('user_follows')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
+
+  await User.findByIdAndUpdate(
+    body.followed_user,
+    { $pull: { followers: body.followToDelete._id } },
     { new: true },
   )
     .populate('followers')
     .then(user => {
-      resData.followedData = { ...user }
-      console.log(`DELETED a follow from User: ${user.userName}'s followers: `, user.followers)
+      response.followed_user = user
+      console.log(`DELETED a FOLLOW: ---`, response.follow, `--- by ${response.user.user_name} from ${user.user_name}'s FOLLOWERS`, user.followers)
     })
-    .catch(err => {
-      next(err)
-    })
+    .catch(err => next(err))
 
-  await Follows.findByIdAndDelete(body.deleteObj._id)
-    .then(res => {
-      console.log('this follow has been eliminated!', res)
-    })
-    .catch(err => {
-      next(err)
-    })
+  res.status(200).json(response)
 
-  res.status(200).json(resData)
+  Follows.findByIdAndDelete(body.followToDelete._id)
+    .catch(err => console.log(err))
 })
 
 module.exports = router

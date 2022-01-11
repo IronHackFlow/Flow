@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import actions from "../../api.js";
-import TheContext from "../../TheContext.js"
-import { songData } from "../songFeedComponents/SongData.js"
+import actions from "../api.js";
+import TheContext from "../TheContext.js"
+import { songData } from "../components/songFeedComponents/SongData.js"
 
 export default function usePostFollow() {
   const { user } = useContext(TheContext);
-  const { followersArrTest, setFollowersArrTest } = useContext(songData)
+  const { allSongFollowers, setAllSongFollowers } = useContext(songData)
 
   const initialFollowers = {
     IS_FOLLOWED: false,
@@ -31,14 +31,14 @@ export default function usePostFollow() {
           USERS_FOLLOW_TO_DELETE: followToDelete
         }))
         
-        let newFollowersArr = followersArrTest.map(song => {
+        let newFollowersArr = allSongFollowers.map(song => {
           if (song.songUserId === songUserId) {
             return { ...song, followers: songUserFollowers }
           } else {
             return song
           }
         })
-        setFollowersArrTest(newFollowersArr)
+        setAllSongFollowers(newFollowersArr)
       })
       .catch(console.error)
   }
@@ -57,14 +57,14 @@ export default function usePostFollow() {
           USERS_FOLLOW_TO_DELETE: null
         }))
 
-        let newFollowersArr = followersArrTest?.map(song => {
+        let newFollowersArr = allSongFollowers?.map(song => {
           if (song.songUserId === songUserId) {
             return {...song, followers: songUserFollowers }
           } else {
             return song
           }
         })
-        setFollowersArrTest(newFollowersArr)
+        setAllSongFollowers(newFollowersArr)
         
       })
       .catch(console.error)
@@ -74,16 +74,17 @@ export default function usePostFollow() {
     if (songId == null) return
     setFollowers(initialFollowers)
     let followed = false
-    let followToDelete = {}
-    let totalFollowers
+    let followToDelete = null
+    let totalFollowers = null
 
-    await followersArrTest.filter(each => {
+    await allSongFollowers.filter(each => {
       if (each.songId === songId) {
         totalFollowers = each.followers.length
 
         each.followers.filter(each => {
-          if (each.user === user._id) {
+          if (each.user === user?._id) {
             followed = true
+            console.log(each, "WTF NOW ")
             followToDelete = each
           }
         })

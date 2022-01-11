@@ -38,7 +38,7 @@ function UseAudioPlayer(props) {
   }, [currentProgressRef.current])
     
   useEffect(() => {
-    let filteredDuration = Math.round(props.currentSong?.songDuration / 1000)
+    let filteredDuration = Math.round(props.currentSong?.duration / 1000)
     setSongDuration(filteredDuration)
     
     if (filteredDuration >= 60) {

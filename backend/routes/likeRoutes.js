@@ -8,155 +8,157 @@ const Songs = require('../models/Songs')
 const Comments = require('../models/Comments')
 const Likes = require('../models/Likes')
 
-router.post(`/addLikeRT`, verifyJWT, async (req, res, next) => {
-  console.log(req.body, "what am i getting here?")
-  let bodySong = {
-    likeUser: req.user._id,
-    likerSong: req.body.likerSong,
-    likeDate: req.body.likeDate,
+
+router.post(`/addSongLike`, verifyJWT, async (req, res, next) => {
+  const body = {
+    user: req.user._id,
+    song: req.body.songId,
+    date: req.body.date,
   }
-  let bodyComm = {
-    likeUser: req.user._id,
-    likedComment: req.body.likedComment,
-    likeDate: req.body.likeDate,
-  }
-  let likeCheck = req.body.commLike
+  const like = await Likes.create(body)
+  let response = { user: '', song: '', like: like }
+
+  console.log(`CREATED a SONGLIKE: `, like)
   
-  if (likeCheck === false) {
-    let likedObject = await Likes.create(bodySong)
-    console.log(`CREATED songLike object: `, likedObject)
-    let returnData = { song: '', user: '', songLike: likedObject }
-    
-    await User.findByIdAndUpdate(
-      bodySong.likeUser,
-      {$push: { userLikes: likedObject}},
-      { new: true },
-    )
-      .populate({ path:'userLikes', populate: 'song' })
-      .then(likes => {
-        returnData.user = likes
-      })
-      .catch(err => {
-        next(err)
-      })
+  await User.findByIdAndUpdate(
+    body.user,
+    {$push: { user_likes: like }},
+    { new: true },
+  )
+    .populate('user_likes')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
 
-    await Songs.findByIdAndUpdate(
-      bodySong.likerSong,
-      { $push: { songLikes: likedObject } },
-      { new: true },
-    )
-      .populate('songLikes')
-      .then(song => {
-        returnData.song = song
-        console.log(`ADDED a like to Song: ${song.songName}'s likes: `, song.songLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-    res.status(200).json(returnData)
-  } else {
-    let likedCommObject = await Likes.create(bodyComm)
-    console.log('CREATED commentLike object: ', likedCommObject)
-    let resData = { comment: {}, commentLike: likedCommObject}
+  await Songs.findByIdAndUpdate(
+    body.song,
+    { $push: { song_likes: like } },
+    { new: true },
+  )
+    .populate('song_likes')
+    .then(song => {
+      response.song = song
+      console.log(`ADDED SONGLIKE: ---`, like, `---  by ${response.user.user_name} to ${song.name}'s song_likes: `, song.song_likes)
+    })
+    .catch(err => next(err))
 
-    await Comments.findByIdAndUpdate(
-      bodyComm.likedComment,
-      { $push: { commLikes: likedCommObject } },
-      { new: true },
-    ) 
-      .populate('commLikes')
-      .then(comm => {
-        resData.comment = comm
-        console.log(`ADDED a like to CommentUser: ${comm.commUser}'s likes: `, comm.commLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-    res.status(200).json(resData)
-  }
+  res.status(200).json(response)
 })
-    
-router.post(`/deleteLikeRT`, verifyJWT, async (req, res, next) => {
-  let bodySong = {
-    likeUser: req.user._id,
-    likerSong: req.body.likerSong,
-    deleteObj: req.body.deleteObj,
+
+
+
+router.post(`/deleteSongLike`, verifyJWT, async (req, res, next) => {
+  const body = {
+    user: req.user._id,
+    song: req.body.songId,
+    likeToDelete: req.body.likeToDelete,
   }
+  let response = { user: '', song: '', like: body.likeToDelete }
 
-  let bodyComm = {
-    likeUser: req.user._id,
-    deleteObj: req.body.deleteObj,
-  }
-  let likeCheck = req.body.commLike
+  await User.findByIdAndUpdate(
+    body.user,
+    {$pull: { user_likes: body.likeToDelete._id}},
+    { new: true },
+  )
+    .populate('user_likes')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
 
-  let returnData = { song: '', user: '' }
+  await Songs.findByIdAndUpdate(
+    body.song,
+    { $pull: { song_likes: body.likeToDelete._id } },
+    { new: true },
+  )
+    .populate('song_likes')
+    .then(song => {
+      response.song = song
+      console.log(`DELETED SONGLIKE: ---`, response.like, `---  by ${response.user.user_name} from ${song.name}'s song_likes: `, song.song_likes)
+    })
+    .catch(err => next(err))
 
-  if (likeCheck === false) {
-    await User.findByIdAndUpdate(
-      bodySong.likeUser,
-      {$pull: { userLikes: bodySong.deleteObj._id}},
-      { new: true },
-    )
-      .populate({ path:'userLikes', populate: 'song' })
-      .then(likes => {
-        returnData.user = likes
-      })
-      .catch(err => {
-        next(err)
-      })
+  res.status(200).json(response)
 
-    await Songs.findByIdAndUpdate(
-      bodySong.likerSong,
-      { $pull: { songLikes: bodySong.deleteObj._id } },
-      { new: true },
-    )
-      .populate('songLikes')
-      .then(song => {
-        returnData.song = song
-        console.log(`DELETED a like from Song: ${song.songName}'s likes: `, song.songLikes)
-      })
-      .catch(err => {
-        next(err)
-      })
-
-      await Likes.findByIdAndDelete(bodySong.deleteObj._id)
-      .then(res => {
-        console.log('this songLike has been eliminated!', res)
-      })
-      .catch(err => {
-        next(err)
-      })
-      res.status(200).json(returnData)
-      
-  } else {
-    await Comments.findByIdAndUpdate(
-      bodyComm.deleteObj.likedComment,
-      { $pull: { commLikes: bodyComm.deleteObj._id } },
-      { new: true },
-    )
-      .populate('commLikes')
-      .then(comm => {
-        res.status(200).json(comm)
-        console.log(
-          `DELETED a like from CommentUser: ${comm.commUser}'s likes: `,
-          comm.commLikes,
-        )
-      })
-      .catch(err => {
-        next(err)
-      })
-    await Likes.findByIdAndDelete(bodyComm.deleteObj._id)
-      .then(res => {
-        console.log('this commentLike has been eliminated!', res)
-      })
-      .catch(err => {
-        next(err)
-      })
-  }
+  await Likes.findByIdAndDelete(body.likeToDelete._id)
+    .catch(err => next(err))
 })
+
+
+
+router.post(`/addCommentLike`, verifyJWT, async (req, res, next) => {
+  const body = { 
+    user: req.user._id, 
+    comment: req.body.commentId, 
+    date: req.body.date 
+  }
+  const like = await Likes.create(body)
+  let response = { user: {}, comment: {}, like: like }
+
+  console.log(`CREATED a COMMENTLIKE: `, like)
+
+  await User.findByIdAndUpdate(
+    body.user,
+    {$push: { user_likes: like }},
+    { new: true },
+  )
+    .populate('user_likes')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
+
+  await Comments.findByIdAndUpdate(
+    body.comment,
+    { $push: { likes: like } },
+    { new: true },
+  ) 
+    .populate('likes')
+    .then(comment => {
+      response.comment = comment
+      console.log(`ADDED COMMENTLIKE: ---`, like, `---  by ${response.user.user_name} to ${comment._id}'s likes: `, comment.likes)
+    })
+    .catch(err => next(err))
+
+  res.status(200).json(response)
+})
+
+
+
+router.post(`/deleteCommentLike`, verifyJWT, async (req, res, next) => {
+  const body = { 
+    user: req.user._id,
+    commentId: req.body.commentId, 
+    likeToDelete: req.body.likeToDelete 
+  }
+  let response = { user: {}, comment: {}, like: body.likeToDelete }
+
+  await User.findByIdAndUpdate(
+    body.user,
+    { $pull: { user_likes: body.likeToDelete._id } },
+    { new: true },
+  )
+    .populate('user_likes')
+    .then(authUser => response.user = authUser)
+    .catch(err => next(err))
+
+  await Comments.findByIdAndUpdate(
+    body.commentId,
+    { $pull: { likes: body.likeToDelete._id } },
+    { new: true },
+  )
+    .populate('likes')
+    .then(comments => {
+      response.comment = comments
+      console.log(`DELETED COMMENTLIKE: ---`, response.like, `---  by ${response.user.user_name} from ${comments._id}'s likes: `, comments.likes)
+    })
+    .catch(err => next(err))
+
+  res.status(200).json(response)
+
+  Likes.findByIdAndDelete(body.likeToDelete._id)
+    .catch(err => console.log(err))
+})
+
+
 
 router.post(`/getUsersLikes`, async (req, res, next) => {
-  await Likes.find({ likeUser: req.body.likeUser })
+  await Likes.find({ user: req.body.user })
     .then(likes => {
       res.status(200).json(likes)
     })

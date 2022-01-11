@@ -1,21 +1,19 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { Link, Redirect } from "react-router-dom";
-import actions from "../api";
 import TheContext from "../TheContext";
 import TheViewContext from "../TheViewContext";
-import { songData } from "./songFeedComponents/SongData"
-import usePostLike from "./utils/usePostLike";
-import usePostFollow from "./utils/usePostFollow";
-import usePostComment from "./utils/usePostComment";
-import useEventListener from "./utils/useEventListener";
-import useDebugInformation from "./utils/useDebugInformation"
-import FormatDate from "./FormatDate"
-import HomeFeed from "./songFeedComponents/HomeFeed";
-import TrendingFeed from "./songFeedComponents/TrendingFeed";
-import FollowingFeed from "./songFeedComponents/FollowingFeed";
-import AudioTimeSlider from "./AudioTimeSlider.js";
-import Comments from "./Comments.js";
-import NavBar from "./NavBar.js";
+import { songData } from "../components/songFeedComponents/SongData"
+import usePostLike from "../utils/usePostLike";
+import usePostFollow from "../utils/usePostFollow";
+import useEventListener from "../utils/useEventListener";
+import useDebugInformation from "../utils/useDebugInformation";
+import useFormatDate from "../components/useFormatDate";
+import HomeFeed from "../components/songFeedComponents/HomeFeed";
+import TrendingFeed from "../components/songFeedComponents/TrendingFeed";
+import FollowingFeed from "../components/songFeedComponents/FollowingFeed";
+import AudioTimeSlider from "../components/AudioTimeSlider.js";
+import Comments from "../components/Comments.js";
+import NavBar from "../components/NavBar.js";
 import play from "../images/play.svg";
 import pause from "../images/pause.svg"
 import follow from "../images/follow.svg";
@@ -25,9 +23,10 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
-  const { homeFeedArrTest, isLoading, setIsLoading } = useContext(songData)
+  const { homeFeedSongs, isLoading, setIsLoading } = useContext(songData)
+  const { formatDate } = useFormatDate()
   
-  // useDebugInformation("Home", props)
+  useDebugInformation("Home", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -42,7 +41,7 @@ function Home(props) {
   const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
 
-  const [songInView, setSongInView] = useState(homeFeedArrTest[0]?.song);
+  const [songInView, setSongInView] = useState(homeFeedSongs[0]?.song);
   const [totalComments, setTotalComments] = useState();
   const [isHomeFeed, setIsHomeFeed] = useState(true);
   const [isTrendingFeed, setIsTrendingFeed] = useState(false);
@@ -68,11 +67,6 @@ function Home(props) {
     else if (isFollowingFeed) return <FollowingFeed />
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
 
-  const handlePlayPause = (bool) => {
-    if (bool === true) return setIsPlaying(true)
-    else return setIsPlaying(false)
-  }
-
   const popUpComments = () => {
     if (poppedUp === false) {
       setPoppedUp(true)
@@ -90,8 +84,7 @@ function Home(props) {
         totalComments,
         setTotalComments,
         isFollowingFeed,
-        isLoading, 
-        setIsLoading, isHomeFeed,
+        isHomeFeed,
       }}
     >
       <div className="Home" id="Home">
@@ -299,7 +292,7 @@ function Home(props) {
 
                         <div className="song-caption-container">
                           <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            <FormatDate date={songInView?.date} />{' '}
+                            {/* <FormatDate date={songInView?.date} />{' '} */}<p>{formatDate(songInView?.date, 'y')}</p>
                             <img src={bullet} alt="bullet point" />
                           </div>
                           <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
@@ -318,32 +311,17 @@ function Home(props) {
                     <div className="play-btn-container">
                       <div className="play-btn-container-2">
                         <div className="play-btn_shadow-div-inset">
-                          {isPlaying ? 
-                            (
-                              <button 
-                                className="play-btn_shadow-div-outset" 
-                                onClick={() => handlePlayPause(false)}
-                              >
-                                <img
-                                  className="button-icons bi-pause"
-                                  src={pause}
-                                  ref={playPauseRef}
-                                  alt="pause"
-                                />
-                              </button>
-                            ) : (
-                              <button 
-                                className="play-btn_shadow-div-outset" 
-                                onClick={() => handlePlayPause(true)}
-                              >
-                                <img
-                                  className="button-icons bi-play"
-                                  src={play}
-                                  ref={playPauseRef}
-                                  alt="play"
-                                />
-                              </button>
-                            )}
+                          <button 
+                            className="play-btn_shadow-div-outset" 
+                            onClick={() => setIsPlaying(!isPlaying)}
+                          >
+                            <img
+                              className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
+                              src={isPlaying ? pause : play}
+                              ref={playPauseRef}
+                              alt="play or pause"
+                            />
+                          </button>
                         </div>
                       </div>
                     </div>

@@ -132,8 +132,8 @@ router.post(`/logInGoogle`, async (req, res, next) => {
 
 router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
   User.findById(req.user._id)
-    .populate('userFollows')
-    .populate('userLikes')
+    .populate('user_follows')
+    .populate('user_likes')
     .then(user => {
       console.log(user, "this user is authorized")
       res.status(200).json({ isLoggedIn: true, user })

@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
 import TheViewContext from '../TheViewContext'
 import { songData } from './songFeedComponents/SongData'
-import FormatDate from './FormatDate'
-import usePostLike from "./utils/usePostLike"
-import usePostComment from "./utils/usePostComment"
-import useDebugInformation from "./utils/useDebugInformation"
+import useFormatDate from './useFormatDate'
+import usePostLike from "../utils/usePostLike"
+import usePostComment from "../utils/usePostComment"
+import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../api'
 import heart2 from '../images/heart2.svg'
 import commentsvg from '../images/comment.svg'
@@ -20,15 +20,16 @@ import flag from '../images/flag.svg'
 function Comments(props) {
   const { user } = useContext(TheContext)
   // const { totalComments, setTotalComments } = useContext(TheViewContext)
-  const { commentsArrTest } = useContext(songData)
+  const { allSongComments } = useContext(songData)
   const { comments, setComments, handlePostComment, handleDeleteComment } = usePostComment()
+  const { formatDate } = useFormatDate()
 
   const [comment, setComment] = useState()
   const [commState, setCommState] = useState([])
 
   useEffect(() => {
     const songId = props.songInView?._id
-    let filtered = commentsArrTest.filter(each => each.songId === songId)
+    let filtered = allSongComments.filter(each => each.songId === songId)
   
     setComments(prevComments => ({
       ...prevComments,
@@ -187,7 +188,8 @@ function Comments(props) {
                 </span>
               </p>
               <div className="comment-date">
-                <FormatDate date={each.date} />
+                {/* <FormatDate date={each.date} /> */}
+                {formatDate(each.date, 'y')}
               </div>
               {editCommentText ? (
                 <textarea 
