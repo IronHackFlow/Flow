@@ -1,6 +1,6 @@
 .Home {
   background: linear-gradient(345deg, #000000, #606060);
-
+  position: relative;
 }
 
 .section-1_feed {
@@ -764,15 +764,6 @@
 }
 
 /* --- Comment tweaks for SongScreen menu --- */
-.songScreen-pop-out {
-  bottom: 40%;
-  justify-content: flex-start;
-  .inner-com {
-    height: 85%;
-    margin-top: 2%;
-  }
-}
-
 .comment-popped {
   height: 53%;
   transition: all .3s ease-in;
@@ -800,7 +791,6 @@
     }
   }
 }
-
 .comment-menu-down {
   height: 8%;
   border-radius: 31px 0px 0px 0px;
@@ -822,6 +812,14 @@
   }
 }
 
+.songScreen-pop-out {
+  bottom: 40%;
+  justify-content: flex-start;
+  .inner-com {
+    height: 85%;
+    margin-top: 2%;
+  }
+}
 .songScreen-popped {
   height: 44%;
   transition: all .3s ease-in;
@@ -829,12 +827,16 @@
     .com-cont-1 {
       opacity: 1;
       .social-comment-form {
-        .social-comment-input {
-          opacity: 1;
+        .social-input-container {
+          .social-comment-input {
+            opacity: 1;
+          }          
         }
-        .comment-button {
-          opacity: 1;
-          transition: all .5s;
+        .comment-btn-container {
+          .comment-button {
+            opacity: 1;
+            transition: all .5s;
+          }
         }
       }
     }

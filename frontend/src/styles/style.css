@@ -897,6 +897,7 @@ input, textarea, select, button {
 
 .Home {
   background: linear-gradient(345deg, #000000, #606060);
+  position: relative;
 }
 
 .section-1_feed {
@@ -2826,18 +2827,6 @@ input, textarea, select, button {
 }
 
 /* --- Comment tweaks for SongScreen menu --- */
-.songScreen-pop-out {
-  bottom: 40%;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-.songScreen-pop-out .inner-com {
-  height: 85%;
-  margin-top: 2%;
-}
-
 .comment-popped {
   height: 53%;
   -webkit-transition: all .3s ease-in;
@@ -2894,6 +2883,18 @@ input, textarea, select, button {
   transition: opacity .2s;
 }
 
+.songScreen-pop-out {
+  bottom: 40%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.songScreen-pop-out .inner-com {
+  height: 85%;
+  margin-top: 2%;
+}
+
 .songScreen-popped {
   height: 44%;
   -webkit-transition: all .3s ease-in;
@@ -2904,11 +2905,11 @@ input, textarea, select, button {
   opacity: 1;
 }
 
-.songScreen-popped .inner-com .com-cont-1 .social-comment-form .social-comment-input {
+.songScreen-popped .inner-com .com-cont-1 .social-comment-form .social-input-container .social-comment-input {
   opacity: 1;
 }
 
-.songScreen-popped .inner-com .com-cont-1 .social-comment-form .comment-button {
+.songScreen-popped .inner-com .com-cont-1 .social-comment-form .comment-btn-container .comment-button {
   opacity: 1;
   -webkit-transition: all .5s;
   transition: all .5s;
@@ -3936,6 +3937,8 @@ input, textarea, select, button {
 }
 
 .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset img {
+  height: 85%;
+  width: 85%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }

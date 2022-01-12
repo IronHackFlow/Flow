@@ -7,8 +7,9 @@ import usePostLike from "../utils/usePostLike";
 import usePostFollow from "../utils/usePostFollow";
 import useEventListener from "../utils/useEventListener";
 import useDebugInformation from "../utils/useDebugInformation";
-import useFormatDate from "../components/useFormatDate";
+import useFormatDate from "../utils/useFormatDate";
 import HomeFeed from "../components/songFeedComponents/HomeFeed";
+import Feed from "../components/Feed"
 import TrendingFeed from "../components/songFeedComponents/TrendingFeed";
 import FollowingFeed from "../components/songFeedComponents/FollowingFeed";
 import AudioTimeSlider from "../components/AudioTimeSlider.js";
@@ -23,9 +24,8 @@ import like from "../images/heart2.svg";
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
-  const { homeFeedSongs, isLoading, setIsLoading } = useContext(songData)
-  const { formatDate } = useFormatDate()
-  
+  const { homeFeedSongs, trendingFeedSongs, followingFeedSongs, isLoading, setIsLoading } = useContext(songData)
+
   useDebugInformation("Home", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -33,14 +33,24 @@ function Home(props) {
       document.getElementById('body').style.height = `${windowSize}px`
       document.getElementById('Home').style.height = `${windowSize}px`
     } else {
-      document.getElementById('body').style.height = `${onChange}px`
-      document.getElementById('Home').style.height = `${onChange}px`
+      setTimeout(() => {
+        document.getElementById('body').style.height = `${onChange}px`
+        document.getElementById('Home').style.height = `${onChange}px`
+      }, 1000)
     }
   })
 
   const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
+  const { formatDate } = useFormatDate()
 
+  const initialInView = {
+    homeFeed: null,
+    trendingFeed: null,
+    followingFeed: null
+  }
+
+  const [trackInView, setTrackInView] = useState(initialInView)
   const [songInView, setSongInView] = useState(homeFeedSongs[0]?.song);
   const [totalComments, setTotalComments] = useState();
   const [isHomeFeed, setIsHomeFeed] = useState(true);
@@ -49,7 +59,6 @@ function Home(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [poppedUp, setPoppedUp] = useState(false);
   const [home] = useState(`#6d6d6d`);
-
   const commentInputRef = useRef();
   const playPauseRef = useRef();
 
@@ -61,11 +70,47 @@ function Home(props) {
     }
   }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
   
-  const showFeedInDisplay = useCallback(() => {
-    if (isHomeFeed) return <HomeFeed />
-    else if (isTrendingFeed) return <TrendingFeed />
-    else if (isFollowingFeed) return <FollowingFeed />
+  const [feedTracker, setFeedTracker] = useState('home')
+
+  useEffect(() => {
+    if (isHomeFeed) {
+      setFeedTracker('home')
+    } else if (isTrendingFeed) {
+      setFeedTracker('trending')
+    } else {
+      setFeedTracker('following')
+    }
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
+
+  const showFeedInDisplay = useCallback(() => {
+    if (isHomeFeed) {
+      // setTrackInView(prev => ({
+      //   ...prev,
+      //   homeFeed: songInView
+      // }))
+      // if (trackInView.homeFeed !== null) {
+      //   setSongInView(trackInView.homeFeed)
+      // }
+      console.log(trackInView, "home")
+      return <Feed feedSongs={homeFeedSongs} setSongInView={setSongInView} />
+    }
+    else if (isTrendingFeed) {
+      // if (trackInView.trendingFeed !== null) {
+      //   setSongInView(trackInView.trendingFeed)
+      // }
+      console.log(trackInView, "trending")
+
+      return <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} />
+    }
+    else if (isFollowingFeed) {
+      // if (trackInView.followingFeed !== null) {
+      //   setSongInView(trackInView.followingFeed)
+      // }
+      console.log(trackInView, "following")
+
+      return <Feed feedSongs={followingFeedSongs} setSongInView={setSongInView} />
+    }
+  }, [homeFeedSongs, trendingFeedSongs, isHomeFeed, isTrendingFeed, isFollowingFeed])
 
   const popUpComments = () => {
     if (poppedUp === false) {
@@ -73,6 +118,58 @@ function Home(props) {
       commentInputRef.current.focus()
     } else {
       setPoppedUp(false)
+    }
+  }
+
+  const setHomeFeed = () => {
+    setSongInView(trackInView.homeFeed)
+    setIsHomeFeed(true)
+    setIsTrendingFeed(false)
+    setIsFollowingFeed(false)
+    if (feedTracker === "trending") {
+      setTrackInView(prev => ({
+        ...prev,
+        trendingFeed: songInView
+      }))
+    } else {
+      setTrackInView(prev => ({
+        ...prev,
+        followingFeed: songInView
+      }))
+    }
+  }
+  const setTrendingFeed = () => {
+    setSongInView(trackInView.trendingFeed)
+    setIsTrendingFeed(true)
+    setIsHomeFeed(false)
+    setIsFollowingFeed(false)
+    if (feedTracker === "home") {
+      setTrackInView(prev => ({
+        ...prev,
+        homeFeed: songInView
+      }))
+    } else {
+      setTrackInView(prev => ({
+        ...prev,
+        followingFeed: songInView
+      }))
+    }
+  }
+  const setFollowingFeed = () => {
+    setSongInView(trackInView.followingFeed)
+    setIsFollowingFeed(true)
+    setIsHomeFeed(false)
+    setIsTrendingFeed(false)
+    if (feedTracker === "trending") {
+      setTrackInView(prev => ({
+        ...prev,
+        trendingFeed: songInView
+      }))
+    } else {
+      setTrackInView(prev => ({
+        ...prev,
+        homeFeed: songInView
+      }))
     }
   }
 
@@ -98,11 +195,7 @@ function Home(props) {
                 <button
                   className={isHomeFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   style={{borderRadius: "30px 5px 5px 30px"}}
-                  onClick={() => {
-                    setIsHomeFeed(true)
-                    setIsTrendingFeed(false)
-                    setIsFollowingFeed(false)
-                  }}
+                  onClick={() => setHomeFeed()}
                 >
                   <div className={isHomeFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Feed
@@ -113,11 +206,7 @@ function Home(props) {
               <div className="each-feed_shadow-div-inset">
                 <button
                   className={isTrendingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  onClick={() => {
-                    setIsTrendingFeed(true)
-                    setIsHomeFeed(false)
-                    setIsFollowingFeed(false)
-                  }}
+                  onClick={() => setTrendingFeed()}
                 >
                   <div className={isTrendingFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Trending
@@ -132,11 +221,7 @@ function Home(props) {
                 <button
                   className={isFollowingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
                   style={{borderRadius: "8px 45px 45px 8px"}}
-                  onClick={() => {
-                    setIsFollowingFeed(true)
-                    setIsTrendingFeed(false)
-                    setIsHomeFeed(false)
-                  }}
+                  onClick={() => setFollowingFeed()}
                 >
                   <div className={isFollowingFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
                     Following
@@ -292,7 +377,7 @@ function Home(props) {
 
                         <div className="song-caption-container">
                           <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            {/* <FormatDate date={songInView?.date} />{' '} */}<p>{formatDate(songInView?.date, 'y')}</p>
+                            <p>{formatDate(songInView?.date, 'm')}</p>
                             <img src={bullet} alt="bullet point" />
                           </div>
                           <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>

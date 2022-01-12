@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import TheContext from '../TheContext'
 import TheViewContext from '../TheViewContext'
 import { songData } from './songFeedComponents/SongData'
-import useFormatDate from './useFormatDate'
+import useFormatDate from '../utils/useFormatDate'
 import usePostLike from "../utils/usePostLike"
 import usePostComment from "../utils/usePostComment"
 import useDebugInformation from "../utils/useDebugInformation"
@@ -189,7 +189,7 @@ function Comments(props) {
               </p>
               <div className="comment-date">
                 {/* <FormatDate date={each.date} /> */}
-                {formatDate(each.date, 'y')}
+                {formatDate(each.date, 'm')}
               </div>
               {editCommentText ? (
                 <textarea 

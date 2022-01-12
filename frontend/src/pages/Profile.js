@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
 import TheContext from '../TheContext'
-import FormatDate from '../components/useFormatDate'
+import useFormatDate from '../utils/useFormatDate'
 import NavBar from '../components/NavBar'
 import social from '../images/social.svg'
 import followers from '../images/followers.svg'
@@ -16,6 +16,7 @@ import pause from '../images/pause.svg'
 
 function Profile(props) {
   const { user, setUser, userToggle, setUserToggle } = React.useContext(TheContext)
+  const { formatDate } = useFormatDate()
   const navigate = useNavigate()
   const location = useLocation()
   const { propSongUser } = location.state
@@ -146,7 +147,7 @@ function Profile(props) {
                         </p>
                       </div>
                       <div className="track-social-container">
-                        <FormatDate date={eachSong.date} />
+                        <p>{formatDate(eachSong.date, 'm')}</p>
                         <p>
                           {eachSong.song_likes.length === 1
                             ? `${eachSong.song_likes.length} Like`

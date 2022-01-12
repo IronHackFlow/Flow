@@ -11,6 +11,7 @@ import bullet from "../images/bullet-point.svg";
 
 function Search(props) {
   const { windowSize } = useContext(TheContext);
+
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -21,6 +22,7 @@ function Search(props) {
       document.getElementById('Search').style.height = `${onChange}px`
     }
   })
+
   const navigation = useNavigate();
   const location = useLocation();
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
@@ -97,7 +99,7 @@ function Search(props) {
           <li className="suggestions-result-list" key={ele.user ? `${ele.user._id}_${index}` : `${ele.song._id}_${index}`}>
             <Link
               className="result-link-container"
-              to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song_id}`}
+              to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song._id}`}
               state={ele.user ? { propSongUser: ele.user } : { propCurrentSong: ele.song, propSearchValue: searchInputRef.current.value, propReturnLink: '/search' }}
             >
               <div className="result-1_data">
@@ -107,17 +109,17 @@ function Search(props) {
                   </div>
                   <div className="data-container">
                     <div className="data-1_titles">
-                      <p className="data-title">{`${ele.user ? ele.user.userName : ele.song.songName}`}</p>
+                      <p className="data-title">{`${ele.user ? ele.user.user_name : ele.song.name}`}</p>
                       {ele.user ? (
                         <p className="data-type">
                           Artist
                         </p>
                       ) : (
-                        <p className="data-type">Song <img src={bullet} alt="bulletpoint" /> {`${ele.song.songUser.userName}`}</p>
+                        <p className="data-type">Song <img src={bullet} alt="bulletpoint" /> {`${ele.song.song_user.user_name}`}</p>
                       )}
                     </div>
                     <div className="data-2_caption">
-                      <p>{ele.user ? "" : `${ele.song.songCaption ? ele.song.songCaption : ""}`}</p>
+                      <p>{ele.user ? "" : `${ele.song.caption ? ele.song.caption : ""}`}</p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +129,7 @@ function Search(props) {
                 <div className="search-prof-inset">
                   <div className="search-prof-outset">
                     <div className="search-results-link">
-                      <img className="prof-pic" src={ele.user ? ele.user.picture : ele.song.songUser.picture} alt=""></img>
+                      <img className="prof-pic" src={ele.user ? ele.user.picture : ele.song.song_user.picture} alt=""></img>
                     </div>
                   </div>
                 </div>

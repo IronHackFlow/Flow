@@ -6,33 +6,6 @@ const User = require('../models/User')
 const Songs = require('../models/Songs')
 const Likes = require('../models/Likes')
 
-//update all users likes with new Schema model for User--- userLikes
-router.post(`/updateEachUserLikes`, async (req, res, next) => {
-  let resData = { likes: [], user: {} }
-  await Likes.find({ likeUser: req.body.likeUser })
-    .then(likes => {
-      console.log(likes, "should be an array of likes")
-      resData.likes = likes
-    })
-    .catch(err => {
-      next(err)
-    })
-
-  await User.findByIdAndUpdate(
-    req.body.likeUser,
-    {$push: { userLikes: resData.likes}},
-    { new: true },
-  )
-    .populate({ path:'userLikes', populate: 'song' })
-    .then(likes => {
-      resData.user = likes
-      console.log(likes, "should be an updated User with userLikes")
-    })
-    .catch(err => {
-      next(err)
-    })
-  res.status(200).json(resData)
-})
 
 router.post(`/getAUserRT`, async (req, res, next) => {
   console.log('Grabbing a user: ', req.body)
@@ -50,15 +23,15 @@ router.post(`/getAUserRT`, async (req, res, next) => {
 router.post('/getManySongsAndUsersRT', async (req, res, next) => {
   let searchData = { user: "", songs: "" }
 
-  await User.find({ userName: { $regex: req.body.search, $options: '$i' } })
+  await User.find({ user_name: { $regex: req.body.search, $options: '$i' } })
     .then(user => {
       searchData.user = user
       console.log('yo its ya boi' + user)
     })
     .catch(err => res.status(500).json(err))
 
-  await Songs.find({ songName: { $regex: req.body.search, $options: '$i' } })
-    .populate('songUser')
+  await Songs.find({ name: { $regex: req.body.search, $options: '$i' } })
+    .populate('song_user')
     .then(songs => {
       searchData.songs = songs
       console.log('yo its ya boi 2' + songs)

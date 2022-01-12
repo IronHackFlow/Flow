@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import moment from 'moment'
 import actions from '../api'
 import TheContext from '../TheContext'
 import { songData } from '../components/songFeedComponents/SongData'
@@ -8,8 +7,9 @@ import AudioTimeSlider from "../components/AudioTimeSlider"
 import Loading from '../components/Loading'
 import Comments from "../components/Comments"
 import useEventListener from '../utils/useEventListener'
-import usePostLike from "../utils/usePostLike";
-import usePostFollow from "../utils/usePostFollow";
+import usePostLike from "../utils/usePostLike"
+import usePostFollow from "../utils/usePostFollow"
+import useFormatDate from "../utils/useFormatDate"
 import gifsArr from '../images/gifs.json'
 import follow from '../images/follow.svg'
 import comments from '../images/comment.svg'
@@ -38,7 +38,7 @@ function SongScreen(props) {
 
   const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
-
+  const { formatDate } = useFormatDate()
   const navigate = useNavigate();
   const location = useLocation();
   const { propCurrentSong, propSearchValue, propReturnLink } = location.state
@@ -166,7 +166,7 @@ function SongScreen(props) {
                   <p>
                     by: <span style={{ color: '#b7a2a6' }}>{thisSong?.song_user?.userName}</span>
                   </p>
-                  <p>on: {moment(thisSong?.date).format('LL')}</p>
+                  <p>on: {formatDate(thisSong?.date, "MMMM Dth YYYY")}</p>
                 </div>
               </div>
             </div>

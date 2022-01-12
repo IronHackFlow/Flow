@@ -8,6 +8,7 @@ import AudioTimeSlider from "../components/AudioTimeSlider";
 import RecordingBoothModal from "../components/RecordingBoothModal";
 import useDebugInformation from "../utils/useDebugInformation"
 import useEventListener from "../utils/useEventListener"
+import useRefilterProfanity from "../utils/useRefilterProfanity"
 import useBeats from '../utils/useBeats'
 import actions from "../api";
 import NavBar from "../components/NavBar";
@@ -35,7 +36,8 @@ function TestAudio(props) {
       document.getElementById('TestAudio').style.height = `${onChange}px`
     }
   })
-
+  
+  const { refilterProfanity } = useRefilterProfanity()
   const { 
     beatOption, isBeatPlaying,
     mapBeatOptions, selectBeatOption,
@@ -239,49 +241,50 @@ function TestAudio(props) {
     scrollLyrics.scrollTop = scrollLyrics.scrollHeight
   }
 
-  const profanityRefilter = (curse) => {
-    let regexp = /\b\w\**(\*)/gm
-    let curseWord = curse.match(regexp)
+  // const profanityRefilter = (curse) => {
+  //   let regexp = /\b\w\**(\*)/gm
+  //   let curseWord = curse.match(regexp)
 
-    if (curseWord[0].charAt(0) === "f") {
-      if (curseWord[0].length === 4) {
-        return "fuck"
-      } else if (curseWord[0].length === 7) {
-        return "fucking"
-      } else {
-        return "fucked"
-      }
-    } else if (curseWord[0].charAt(0) === "b") {
-      if (curseWord[0].length === 5) {
-        return "bitch"
-      } else {
-        return "bitches"
-      }
-    } else if (curseWord[0].charAt(0) === "c") {
-      if (curseWord[0].length === 4) {
-        return "cunt"
-      } else {
-        return "cunts"
-      }
-    } else if (curseWord[0].charAt(0) === "p") {
-      return "pussy"
-    } else if (curseWord[0].charAt(0) === "a") {
-      return "asshole"
-    } else if (curseWord[0].charAt(0) === "s") {
-      return "shit"
-    } else if (curseWord[0].charAt(0) === "n") {
-      if (curseWord[0].length === 6) {
-        return "niggas"
-      } else if (curseWord[0].length === 7) {
-        return "niggas"
-      }
-    }
-  }
+  //   if (curseWord[0].charAt(0) === "f") {
+  //     if (curseWord[0].length === 4) {
+  //       return "fuck"
+  //     } else if (curseWord[0].length === 7) {
+  //       return "fucking"
+  //     } else {
+  //       return "fucked"
+  //     }
+  //   } else if (curseWord[0].charAt(0) === "b") {
+  //     if (curseWord[0].length === 5) {
+  //       return "bitch"
+  //     } else {
+  //       return "bitches"
+  //     }
+  //   } else if (curseWord[0].charAt(0) === "c") {
+  //     if (curseWord[0].length === 4) {
+  //       return "cunt"
+  //     } else {
+  //       return "cunts"
+  //     }
+  //   } else if (curseWord[0].charAt(0) === "p") {
+  //     return "pussy"
+  //   } else if (curseWord[0].charAt(0) === "a") {
+  //     return "asshole"
+  //   } else if (curseWord[0].charAt(0) === "s") {
+  //     return "shit"
+  //   } else if (curseWord[0].charAt(0) === "n") {
+  //     if (curseWord[0].length === 6) {
+  //       return "niggas"
+  //     } else if (curseWord[0].length === 7) {
+  //       return "niggas"
+  //     }
+  //   }
+  // }
 
   async function getActionWords(regex) {
     let finalWord = regex
     if (regex.includes("*")) {
-      finalWord = profanityRefilter(regex)
+      // finalWord = profanityRefilter(regex)
+      finalWord = refilterProfanity(regex)
     }
 
     const getData = await datamuse.request(`words?rel_trg=${finalWord}&max=20`)
@@ -310,7 +313,8 @@ function TestAudio(props) {
         finalWord = lastWord.split("'").join('')
       }
       if (lastWord.includes("*")) {
-        finalWord = profanityRefilter(lastWord)
+        finalWord = refilterProfanity(lastWord)
+        // finalWord = profanityRefilter(lastWord)
       }
 
       setRhymeWordHolder(finalWord)

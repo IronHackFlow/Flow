@@ -84,7 +84,6 @@ export default function usePostFollow() {
         each.followers.filter(each => {
           if (each.user === user?._id) {
             followed = true
-            console.log(each, "WTF NOW ")
             followToDelete = each
           }
         })

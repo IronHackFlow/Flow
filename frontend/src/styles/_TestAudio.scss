@@ -23,6 +23,7 @@
             filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
         }
     }
+
     .scroll-rhymes-container {
         @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
         overflow-y: scroll;
@@ -379,6 +380,8 @@
                             box-shadow: 2px 2px 4px #232323, -2px -2px 2px #8f8f8f;
                             
                             img {
+                                height: 85%;
+                                width: 85%;
                                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                             }
                             

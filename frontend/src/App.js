@@ -5,7 +5,8 @@ import TheContext from './TheContext'
 import SongData from './components/songFeedComponents/SongData'
 import { songData } from './components/songFeedComponents/SongData'
 import actions from './api'
-import useDebugInformation from "./utils/useDebugInformation"
+import useDebugInformation from './utils/useDebugInformation'
+import useEventListener from './utils/useEventListener'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 import NavBar from './components/NavBar'
@@ -28,6 +29,12 @@ function App(props) {
     allSongFollowers, setAllSongFollowers,
     isLoading, setIsLoading
   } = SongData()
+
+  useEventListener('resize', e => {
+    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    document.getElementById('body').style.height = `${onChange}px`
+    setWindowSize(onChange)
+  })
   
   const location = useLocation()
   const [user, setUser] = useState()
@@ -39,7 +46,7 @@ function App(props) {
     actions
       .isUserAuth()
       .then(res => {
-        console.log(res, "does this get anythin?")
+        console.log(res, "I GOT AN AUTH USER HERE")
         setUser(res.data.user)
       })
       .catch((err) => {
@@ -47,16 +54,16 @@ function App(props) {
       })
 
   }, [userToggle])
-
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      document.getElementById("body").style.height = `${h}px`
-      setWindowSize(h)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  
+  // useLayoutEffect(() => {
+  //   const handleResize = () => {
+  //     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  //     document.getElementById("body").style.height = `${h}px`
+  //     setWindowSize(h)
+  //   }
+  //   window.addEventListener('resize', handleResize)
+  //   return () => window.removeEventListener('resize', handleResize)
+  // }, [])
 
 
 
