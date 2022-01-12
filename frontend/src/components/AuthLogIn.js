@@ -1,7 +1,6 @@
-import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import actions from '../api';
-import TheContext from '../TheContext'
 import eye from "../images/eye.svg"
 import noEye from "../images/no-eye.svg"
 

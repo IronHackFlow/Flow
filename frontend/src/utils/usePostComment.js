@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import actions from "../api"
-import { songData } from "../components/songFeedComponents/SongData"
-import TheContext from "../TheContext"
+import { songData } from "../contexts/SongData"
+import TheContext from "../contexts/TheContext"
 
 export default function usePostComment() {
   const { user } = useContext(TheContext)

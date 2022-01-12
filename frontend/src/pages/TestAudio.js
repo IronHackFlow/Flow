@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
-import TheContext from "../TheContext";
+import TheContext from "../contexts/TheContext";
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import RecordingBoothModal from "../components/RecordingBoothModal";
 import useDebugInformation from "../utils/useDebugInformation"

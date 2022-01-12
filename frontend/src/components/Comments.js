@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
-import TheContext from '../TheContext'
-import TheViewContext from '../TheViewContext'
-import { songData } from './songFeedComponents/SongData'
+import TheContext from '../contexts/TheContext'
+import TheViewContext from '../contexts/TheViewContext'
+import { songData } from '../contexts/SongData'
 import useFormatDate from '../utils/useFormatDate'
 import usePostLike from "../utils/usePostLike"
 import usePostComment from "../utils/usePostComment"
@@ -81,10 +81,11 @@ function Comments(props) {
       handleInViewCommentLikes,
       commentLikes, 
     } = usePostLike()
-    const [commentValue, setCommentValue] = useState();
-    const [checkCommUser, setCheckCommUser] = useState()
+    const [commentValue, setCommentValue] = useState()
+    const [isCommenterAuthor, setIsCommenterAuthor] = useState(false)
+    const [isCommenterUser, setIsCommenterUser] = useState(false)
     const [menuBool, setMenuBool] = useState(false)
-    const [editCommentText, setEditCommentText] = useState(false);
+    const [editCommentText, setEditCommentText] = useState(false)
 
     const likeTextRef = useRef()
     const replyTextRef = useRef()
@@ -95,39 +96,35 @@ function Comments(props) {
     const slideOutRef = useRef()
 
     useEffect(() => {
-      if (each == null) return 
+      const songId = props.songInView?._id
+      const songUserId = props.songInView?.song_user?._id
       const commentId = each._id
-      handleInViewCommentLikes(commentId, props.songInView._id)
+      const commentUserId = each.user._id
+
+      handleInViewCommentLikes(commentId, songId)
+
+      if (commentUserId === user?._id) {
+        setIsCommenterUser(true)
+      }
+
+      if (songUserId === commentUserId) {
+        setIsCommenterAuthor(true)
+      }
     }, [])
 
-    useEffect(() => {
-      if (each?.user?._id === user?._id) {
-        setCheckCommUser(true)
-      } else {
-        setCheckCommUser(false)
-      }
-    }, [commState])
+    // useEffect(() => {
+    //   if (each?.user?._id === user?._id) {
+    //     setCheckCommUser(true)
+    //   } else {
+    //     setCheckCommUser(false)
+    //   }
+    // }, [commState])
 
     useEffect(() => {
       if (editCommentText) {
         document.querySelector(".comment-text-input").focus()
       }
     }, [editCommentText])
-
-    const deleteComment = each => {
-      if (user._id === each.user._id) {
-        actions
-          .deleteComment({ commentToDelete: each, songId: props.songInView?._id })
-          .then(res => {
-            let comments = res.data.song_comments
-
-            props.setTotalComments(res.data.song_comments.length)
-          })
-          .catch(console.error)
-      } else {
-        console.log("You can't delete your friend's comments jerk!")
-      }
-    }
 
     const menuAnimations = () => {
       if (menuBool === false) {
@@ -184,11 +181,10 @@ function Comments(props) {
               <p className="comment-username">
                 {each.user?.userName}
                 <span style={{ color: 'white', fontWeight: 'bold', fontSize: '11px' }}>
-                  {props.songInView?.songUser?._id === each.user?._id ? ' 𑁦 song author' : null}
+                  {isCommenterAuthor ? ' 𑁦 song author' : null}
                 </span>
               </p>
               <div className="comment-date">
-                {/* <FormatDate date={each.date} /> */}
                 {formatDate(each.date, 'm')}
               </div>
               {editCommentText ? (
@@ -213,7 +209,7 @@ function Comments(props) {
 
           <div className="comment-btns-container">
             <div className="comment-btns_shadow-div-inset">
-              {checkCommUser ? (
+              {isCommenterUser ? (
                 <>
                   <div className="action-buttons-container">
                     <button 
@@ -292,7 +288,7 @@ function Comments(props) {
                       </div>
                       <div className="action-btn-text-container" ref={replyTextRef}>
                         <p className="reply-text" >Reply</p>
-                        <p className="reply-number">{checkCommUser ? '' : '0'}</p>
+                        <p className="reply-number">{isCommenterUser ? '' : '0'}</p>
                       </div>
                     </button>
                   </div>
@@ -350,14 +346,6 @@ function Comments(props) {
         </div>
 
         <div className="com-cont-2">
-          {/* <div className="comments-title">
-            <div className="comments-title-inner">
-              <p>
-                Comments - <span style={{ color: '#e5bdcd' }}>{props.totalComments}</span>
-              </p>
-            </div>
-          </div> */}
-
           <div className="comments-container">
             <div className="comment-list-container">
               <div className="comment-list-cont">

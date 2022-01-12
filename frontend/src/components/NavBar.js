@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import useDebugInformation from "../utils/useDebugInformation"
 import mic from '../images/modern-mic.svg'
 import avatar from '../images/avatar.svg'

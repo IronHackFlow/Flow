@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import useEventListener from '../utils/useEventListener'
 import NavBar from '../components/NavBar'
 import search from '../images/search.svg'

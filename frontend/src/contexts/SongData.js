@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect} from "react"
-import actions from "../../api"
-import gifsArr from "../../images/gifs.json"
+import actions from "../api"
+import gifsArr from "../images/gifs.json"
 
 export const songData = createContext(SongData)
 

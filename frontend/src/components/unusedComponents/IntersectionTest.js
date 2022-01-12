@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useInView, observe } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
-import TheViewContext from '../TheViewContext'
-import TheContext from '../TheContext'
+import TheViewContext from '../../TheViewContext'
+import TheContext from '../../TheContext'
 import useDebugInformation from "./utils/useDebugInformation"
-import actions from '../api'
+import actions from '../../api'
 import gradientbg from '../images/gradient-bg-2.png'
-import gifsArr from "../images/gifs.json";
+import gifsArr from "../../images/gifs.json";
 
 function IntersectionTest(props) {
   // useDebugInformation("IntersectionTest", props)

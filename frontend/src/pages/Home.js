@@ -1,17 +1,14 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { Link, Redirect } from "react-router-dom";
-import TheContext from "../TheContext";
-import TheViewContext from "../TheViewContext";
-import { songData } from "../components/songFeedComponents/SongData"
+import TheContext from "../contexts/TheContext";
+import TheViewContext from "../contexts/TheViewContext";
+import { songData } from "../contexts/SongData"
 import usePostLike from "../utils/usePostLike";
 import usePostFollow from "../utils/usePostFollow";
 import useEventListener from "../utils/useEventListener";
 import useDebugInformation from "../utils/useDebugInformation";
 import useFormatDate from "../utils/useFormatDate";
-import HomeFeed from "../components/songFeedComponents/HomeFeed";
 import Feed from "../components/Feed"
-import TrendingFeed from "../components/songFeedComponents/TrendingFeed";
-import FollowingFeed from "../components/songFeedComponents/FollowingFeed";
 import AudioTimeSlider from "../components/AudioTimeSlider.js";
 import Comments from "../components/Comments.js";
 import NavBar from "../components/NavBar.js";
@@ -92,12 +89,8 @@ function Home(props) {
       return <Feed feedSongs={homeFeedSongs} setSongInView={setSongInView} />
     }
     else if (isTrendingFeed) {
-      // if (trackInView.trendingFeed !== null) {
-      //   setSongInView(trackInView.trendingFeed)
-      // }
-      console.log(trackInView, "trending")
 
-      return <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} />
+      return <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} setObserver={trackInView ? trackInView?.trendingFeed?._id : null}/>
     }
     else if (isFollowingFeed) {
       // if (trackInView.followingFeed !== null) {
@@ -135,6 +128,7 @@ function Home(props) {
       }))
     }
   }
+
   const setTrendingFeed = () => {
     setSongInView(trackInView.trendingFeed)
     setIsTrendingFeed(true)

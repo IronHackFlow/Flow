@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { songData } from "./songFeedComponents/SongData";
+import { songData } from "../contexts/SongData";
 
 function Loading(props) {
   const { isLoading } = useContext(songData)

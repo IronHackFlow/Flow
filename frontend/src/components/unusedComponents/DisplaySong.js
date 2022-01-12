@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { v4 as uuidv4 } from "uuid";
 import gradientbg from '../images/gradient-bg-2.png'
-import TheViewContext from '../TheViewContext'
+import TheViewContext from '../../TheViewContext'
 
 function DisplaySong(props) {
   const {

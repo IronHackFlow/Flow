@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import EditProfile from './EditProfile'
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import useEventListener from '../utils/useEventListener'
 
 function EditProfileScreen(props) {

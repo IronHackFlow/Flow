@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import actions from '../api';
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import eye from "../images/eye.svg"
 import noEye from "../images/no-eye.svg"
 

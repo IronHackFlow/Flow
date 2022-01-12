@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import actions from "../api.js";
-import { songData } from "../components/songFeedComponents/SongData";
-import TheContext from "../TheContext.js"
+import { songData } from "../contexts/SongData";
+import TheContext from "../contexts/TheContext.js"
 
 export default function usePostLike() {
   const { user } = useContext(TheContext)
@@ -10,16 +10,12 @@ export default function usePostLike() {
   const initialLikes = {
     TYPE: 'SONG',
     IS_LIKED: false,
-    ADD_LIKE: false,
-    DELETE_LIKE: false,
     USERS_LIKE_TO_DELETE: null,
     TOTAL_LIKES: null,
   }
   const initialCommentLikes = {
     TYPE: 'COMMENT',
     IS_LIKED: false,
-    ADD_LIKE: false,
-    DELETE_LIKE: false,
     USERS_COMMENTLIKE_TO_DELETE: null,
     TOTAL_COMMENT_LIKES: null,
   }
@@ -37,8 +33,6 @@ export default function usePostLike() {
         setLikes(prevLikes => ({
           ...prevLikes,
           IS_LIKED: true,
-          ADD_LIKE: true,
-          DELETE_LIKE: false,
           TOTAL_LIKES: songLikes.length,
           USERS_LIKE_TO_DELETE: likeToDelete,
         }))
@@ -58,9 +52,8 @@ export default function usePostLike() {
         setLikes(prevLikes => ({
           ...prevLikes,
           IS_LIKED: false,
-          DELETE_LIKE: true,
-          ADD_LIKE: false,
-          TOTAL_LIKES: songLikes.length
+          TOTAL_LIKES: songLikes.length,
+          USERS_LIKE_TO_DELETE: null,
         }))
 
         updateLikesArr(songId, songLikes)

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import actions from "../api.js";
-import TheContext from "../TheContext.js"
-import { songData } from "../components/songFeedComponents/SongData.js"
+import TheContext from "../contexts/TheContext.js"
+import { songData } from "../contexts/SongData.js"
 
 export default function usePostFollow() {
   const { user } = useContext(TheContext);
@@ -9,8 +9,6 @@ export default function usePostFollow() {
 
   const initialFollowers = {
     IS_FOLLOWED: false,
-    ADD_FOLLOW: false,
-    DELETE_FOLLOW: false,
     USERS_FOLLOW_TO_DELETE: null,
     TOTAL_FOLLOWERS: null,
   }

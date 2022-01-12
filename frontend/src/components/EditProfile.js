@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import actions from '../api'
 import back from '../images/back.svg'
 

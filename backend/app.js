@@ -33,17 +33,11 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 app.use('/api', indexRoutes)
-// app.use('/ProductionApi', indexRoutes)
 app.use('/api', authRoutes)
-// app.use('/ProductionApi', authRoutes)
 app.use('/api', songRoutes)
-// app.use('/ProductionApi', songRoutes)
 app.use('/api', likeRoutes)
-// app.use('/ProductionApi', likeRoutes)
 app.use('/api', followRoutes)
-// app.use('/ProductionApi', followRoutes)
 app.use('/api', commentRoutes)
-// app.use('/ProductionApi', commentRoutes)
 
 const PORT = process.env.PORT || 5000
 

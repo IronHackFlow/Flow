@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
-import TheContext from '../TheContext'
-import { songData } from '../components/songFeedComponents/SongData'
+import TheContext from '../contexts/TheContext'
+import { songData } from '../contexts/SongData'
 import AudioTimeSlider from "../components/AudioTimeSlider"
 import Loading from '../components/Loading'
 import Comments from "../components/Comments"

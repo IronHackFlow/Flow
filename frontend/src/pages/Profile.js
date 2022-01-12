@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
+import { useContext,useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
-import TheContext from '../TheContext'
+import TheContext from '../contexts/TheContext'
 import useFormatDate from '../utils/useFormatDate'
 import NavBar from '../components/NavBar'
 import social from '../images/social.svg'
@@ -15,7 +15,7 @@ import play from '../images/play.svg'
 import pause from '../images/pause.svg'
 
 function Profile(props) {
-  const { user, setUser, userToggle, setUserToggle } = React.useContext(TheContext)
+  const { user, setUser, userToggle, setUserToggle } = useContext(TheContext)
   const { formatDate } = useFormatDate()
   const navigate = useNavigate()
   const location = useLocation()
@@ -30,7 +30,6 @@ function Profile(props) {
   }, [propSongUser])
 
   useEffect(() => {
-    console.log(location, "what is this giving me?")
     actions
       .getUserSongs({ song_user: thisUser?._id })
       .then(res => {

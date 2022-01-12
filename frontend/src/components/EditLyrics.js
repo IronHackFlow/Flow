@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef, useCallback } from "react";
 import {useLocation, useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
-import TheContext from "../TheContext";
+import TheContext from "../contexts/TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
 import useBeats from '../utils/useBeats'
 import edit from "../images/edit.svg";
