@@ -84,10 +84,7 @@ function Home(props) {
 
   const showFeedInDisplay = useCallback(() => {
     if (isHomeFeed) {
-      // setTrackInView(prev => ({
-      //   ...prev,
-      //   homeFeed: songInView
-      // }))
+
       // if (trackInView.homeFeed !== null) {
       //   setSongInView(trackInView.homeFeed)
       // }
