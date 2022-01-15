@@ -5,7 +5,7 @@ function UseAudioPlayer(props) {
   const [songDuration, setSongDuration] = useState(0);
   const [songMinutes, setSongMinutes] = useState(0);
 
-  const audioRef = useRef();
+  const audioRef = useRef(props.currentSong?.song_URL);
   const intervalRef = useRef();
   const secondsRef = useRef();
   const currentProgressRef = useRef(0);
@@ -18,7 +18,7 @@ function UseAudioPlayer(props) {
     } else {
       clearInterval(intervalRef.current);
       clearInterval(secondsRef.current)
-      audioRef.current.pause();
+      audioRef.current.pause()
     }
   }, [props.isPlaying])
   
@@ -57,7 +57,7 @@ function UseAudioPlayer(props) {
   
   useEffect(() => {
     audioRef.current.pause();
-    audioRef.current.src = props.currentSong?.songURL
+    audioRef.current.src = props.currentSong?.song_URL
     setTrackProgress(audioRef.current.currentTime);
     currentProgressRef.current = 0
   }, [props.currentSong])
@@ -131,7 +131,7 @@ function UseAudioPlayer(props) {
           {songDuration >= 60 ? songMinutes : `${songDuration}`}
         </div>
       </div>
-      <audio ref={audioRef} src={props.currentSong?.songURL} />
+      <audio ref={audioRef} src={props.currentSong?.song_URL} />
     </div>
   )
 }

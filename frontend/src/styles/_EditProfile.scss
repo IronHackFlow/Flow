@@ -249,3 +249,126 @@
     opacity: 0;
   }
 }
+
+.ProfileEditModal {
+  @include flexCenter(100%, 100%, 0, center, center, column);
+  background: #000000b3;
+
+  .profile-mi {
+    @include flexCenter(85%, 85%, 10px, center, center, column);
+    background: #686a6b;
+  
+    .profile-lc {
+      background: #686a6b;
+      display: flex;
+      justify-content: flex-start;
+      box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+
+      .input-sections-container {
+        @include flexCenter(90%, 100%, 0px, flex-start, center, column);
+
+        .public-section-container {
+          @include flexCenter(70%, 90%, 20px, center, center, column);
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          margin: 5% 0% 5% 0%;
+
+          .public-input-container {
+            display: flex;
+            .edit-photo-section {
+              @include flexCenter(30%, 100%, 0px, center, center, row);
+
+              .edit-photo-inner {
+                @include flexCenter(90px, 90px, 100px, center, center, column);
+                box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+
+                .edit-photo-outer {
+                  @include flexCenter(80%, 80%, 100px, center, center, column);
+                  overflow: hidden;
+                  box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+
+                  img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                  }
+                }
+              }
+            }
+            .public-sections {
+              @include flexCenter(70%, 100%, 0px, center, center, column);
+              .input-sections {
+              }
+            }
+          }
+        }
+        .personal-section-container {
+          @include flexCenter(5%, 90%, 20px, center, center, column);
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          margin-bottom: 5%;
+          color: white;
+          .public-input-container {
+            height: 0;
+            opacity: 0;
+            display: none;
+          }
+        }
+        .social-section-container {
+          @include flexCenter(5%, 90%, 20px, center, center, column);
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          margin-bottom: 5%;
+          color: white;
+          .public-input-container {
+            height: 0;
+            opacity: 0;
+            display: none;
+          }
+        }
+        .songs-section-container {
+          @include flexCenter(5%, 90%, 20px, center, center, column);
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          margin-bottom: 5%;
+          color: white;
+          .public-input-container {
+            height: 0;
+            opacity: 0;
+            display: none;
+          }
+        }
+      }
+    }
+    .save-back-container {
+      @include flexCenter(10%, 100%, 0px, space-between, center, row);
+
+      .back-container {
+        @include flexCenter(40px, 40px, 100px, center, center, row);
+        box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
+        margin-left: 4%;
+
+        .back-inner {
+          @include flexCenter(70%, 70%, 100px, center, center, row);
+          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+
+          img {
+            height: 1.7em;
+            width: 1.7em;
+          }
+        }
+      }
+      .submit-button-edit {
+        border: none;
+        border-radius: 20px;
+        background: rgb(46, 194, 145);
+        width: 70px;
+        height: 40px;
+        margin-right: 4%;
+        color: white;
+        box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+
+        &:active {
+          outline: none !important;
+          border: 2px solid white;
+        }
+      }
+    }
+  }
+}

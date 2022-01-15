@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { v4 as uuidv4 } from "uuid";
 import Loading from './Loading'
+import { songData } from '../contexts/SongData'
 import gradientbg from '../images/gradient-bg-2.png'
+import useEventListener from '../utils/useEventListener';
 
 
-export default function HomeFeed({ feedSongs, setSongInView }) {
+export default function Feed({ feedSongs, setSongInView, trackInView, isHomeFeed, isTrendingFeed, isFollowingFeed }) {
   const [feedSongsCopy, setFeedSongsCopy] = useState([]);
   const [displayElements, setDisplayElements] = useState([])
   const viewRef = useRef();
@@ -15,16 +17,35 @@ export default function HomeFeed({ feedSongs, setSongInView }) {
 
   const observer = new IntersectionObserver(
     entries => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          feedSongsCopy.forEach((each) => {
-            if (each.song._id === entry.target.id) {
-              setSongInView(each.song)
-              entry.target.style.backgroundImage = `url('${each.songVideo}')`
-            }
-          })
-        } 
-      })
+      if (trackInView !== null) {
+        let getScroll = entries.filter(entry => entry.target.id === trackInView?._id)
+        getScroll[0]?.target.scrollIntoView({ behavior: 'smooth' })
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            feedSongsCopy.forEach((each) => {
+              if (each.song._id === entry.target.id) {
+                setSongInView(each.song)
+                entry.target.style.backgroundImage = `url('${each.songVideo}')`
+              }
+            })
+          } 
+        })
+      } else {
+        let getFirst = entries.filter(entry => entry.target.id === feedSongs[0]?.song?._id)
+        getFirst[0]?.target.scrollIntoView({ behavior: 'smooth' })
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            feedSongsCopy.forEach((each) => {
+              if (each.song._id === entry.target.id) {
+                setSongInView(each.song)
+                entry.target.style.backgroundImage = `url('${each.songVideo}')`
+              }
+            })
+          } 
+        })
+      }
     },
     {
       threshold: .9,
@@ -32,6 +53,17 @@ export default function HomeFeed({ feedSongs, setSongInView }) {
       rootMargin: "0px 0px 200px 0px"
     }
   )
+
+  const setRefs = useCallback(
+    node => {
+      viewRef.current = node
+      if (viewRef.current !== null) {
+        observer.observe(viewRef.current)
+      }
+    },
+    [feedSongsCopy],
+  )
+
 
   useEffect(() => {
     let elements = feedSongsCopy.map((each) => {
@@ -59,16 +91,13 @@ export default function HomeFeed({ feedSongs, setSongInView }) {
     setDisplayElements(elements)
   }, [feedSongsCopy])
 
-  const setRefs = useCallback(
-    node => {
-      viewRef.current = node
-      if (viewRef.current !== null) {
-        observer.observe(viewRef.current)
-      }
-    },
-    [feedSongsCopy],
-  )
-
+  // useEventListener('DOMContentLoaded', () => {
+  //   for (let i = 0; i < feedSongs?.length; i++) {
+  //     console.log(feedSongs[i].song._id, "I hope this worked")
+  //     observer.observe(document.getElementById(`${feedSongs[i].song._id}`))
+  //   }
+  // })
+  
   return (
     <ul className="video-scroll-container">
       <Loading />

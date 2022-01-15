@@ -147,8 +147,8 @@
                   width: 3rem;
                 }
                 img.like {
-                  height: 2rem;
-                  width: 2rem;
+                  height: 1.85rem;
+                  width: 1.85rem;
                 }
                 img.comment {
                   height: 1.5rem;
@@ -659,10 +659,13 @@
                             height: 1rem;
                           }
                           img.heart {
-                            height: 1.5rem;
+                            height: 1.3rem;
                           }
                           img.edit {
                             height: 1.4rem;
+                          }
+                          img.delete {
+                            height: 1.6rem;
                           }
                         }
 
@@ -709,7 +712,7 @@
                         box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
                         background: #ec6aa0;
           
-                        .action-btn-container {
+                        .action-btn-icon-container {
                           img {
                             filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                           }

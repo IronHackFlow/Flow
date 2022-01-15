@@ -17,7 +17,7 @@ import pause from "../images/pause.svg"
 import follow from "../images/follow.svg";
 import commentsvg from "../images/comment.svg";
 import bullet from "../images/bullet-point.svg";
-import like from "../images/heart2.svg";
+import like from "../images/like-thumb-up.svg";
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
@@ -80,25 +80,18 @@ function Home(props) {
   }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
 
   const showFeedInDisplay = useCallback(() => {
-    if (isHomeFeed) {
+    let homeFeed = <Feed feedSongs={homeFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.homeFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
+    let trendFeed = <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.trendingFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
+    let followFeed = <Feed feedSongs={followingFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.followingFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
 
-      // if (trackInView.homeFeed !== null) {
-      //   setSongInView(trackInView.homeFeed)
-      // }
-      console.log(trackInView, "home")
-      return <Feed feedSongs={homeFeedSongs} setSongInView={setSongInView} />
+    if (isHomeFeed) {
+      return homeFeed
     }
     else if (isTrendingFeed) {
-
-      return <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} setObserver={trackInView ? trackInView?.trendingFeed?._id : null}/>
+      return trendFeed
     }
     else if (isFollowingFeed) {
-      // if (trackInView.followingFeed !== null) {
-      //   setSongInView(trackInView.followingFeed)
-      // }
-      console.log(trackInView, "following")
-
-      return <Feed feedSongs={followingFeedSongs} setSongInView={setSongInView} />
+      return followFeed
     }
   }, [homeFeedSongs, trendingFeedSongs, isHomeFeed, isTrendingFeed, isFollowingFeed])
 
@@ -112,10 +105,6 @@ function Home(props) {
   }
 
   const setHomeFeed = () => {
-    setSongInView(trackInView.homeFeed)
-    setIsHomeFeed(true)
-    setIsTrendingFeed(false)
-    setIsFollowingFeed(false)
     if (feedTracker === "trending") {
       setTrackInView(prev => ({
         ...prev,
@@ -127,13 +116,12 @@ function Home(props) {
         followingFeed: songInView
       }))
     }
+    setIsHomeFeed(true)
+    setIsTrendingFeed(false)
+    setIsFollowingFeed(false)
   }
 
   const setTrendingFeed = () => {
-    setSongInView(trackInView.trendingFeed)
-    setIsTrendingFeed(true)
-    setIsHomeFeed(false)
-    setIsFollowingFeed(false)
     if (feedTracker === "home") {
       setTrackInView(prev => ({
         ...prev,
@@ -145,12 +133,13 @@ function Home(props) {
         followingFeed: songInView
       }))
     }
-  }
-  const setFollowingFeed = () => {
-    setSongInView(trackInView.followingFeed)
-    setIsFollowingFeed(true)
+
+    setIsTrendingFeed(true)
     setIsHomeFeed(false)
-    setIsTrendingFeed(false)
+    setIsFollowingFeed(false)
+  }
+
+  const setFollowingFeed = () => {
     if (feedTracker === "trending") {
       setTrackInView(prev => ({
         ...prev,
@@ -162,6 +151,11 @@ function Home(props) {
         homeFeed: songInView
       }))
     }
+
+    setIsFollowingFeed(true)
+    setIsHomeFeed(false)
+    setIsTrendingFeed(false)
+
   }
 
   return (

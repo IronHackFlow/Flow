@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../contexts/TheContext";
+import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import RecordingBoothModal from "../components/RecordingBoothModal";
 import useDebugInformation from "../utils/useDebugInformation"
@@ -24,8 +25,8 @@ import modal from "../images/modal.svg";
 
 function TestAudio(props) {
   const { user, windowSize } = React.useContext(TheContext)
-  
-  useDebugInformation("TestAudio", props)
+  const navigate = useNavigate()
+  // useDebugInformation("TestAudio", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -106,29 +107,31 @@ function TestAudio(props) {
   const barNumberRef = useRef(1)
   const [recordingBooth] = useState(`#363636`);
 
-  const songObject = {
-    songName: '',
-    songUser: user,
-    songBlob: null,
-    songURL: null,
-    songLyricsStr: [],
-    songDate: null,
-    songDuration: 0,
-    songCaption: '',
-    songBg: null
+  const initialSongObject = {
+    name: '',
+    song_user: user,
+    song_blob: null,
+    song_URL: null,
+    lyrics: [],
+    date: null,
+    duration: 0,
+    caption: '',
+    video: null
   }
 
+  const [currentSong, setCurrentSong] = useState(initialSongObject)
+
   class SongData {
-    constructor(songName, songBlob, songURL, lyrics, date, songDuration) {
-      this.songName = songName;
-      this.songBlob = songBlob;
-      this.songURL = songURL;
-      this.songLyricsStr = lyrics;
-      this.songDate = date;
-      this.songDuration = songDuration
-      this.songUser = user;
-      this.songCaption = null;
-      this.songBG = null;
+    constructor(name, song_blob, song_URL, lyrics, date, duration) {
+      this.name = name;
+      this.song_blob = song_blob;
+      this.song_URL = song_URL;
+      this.lyrics = lyrics;
+      this.date = date;
+      this.duration = duration
+      this.song_user = user;
+      this.caption = null;
+      this.video = null;
     }
   }
 
@@ -139,20 +142,36 @@ function TestAudio(props) {
       setLyricsHandler()
     }
   }, [silent])
-
+  // AWSAccessKeyId=AKIAIF3VAQEPSXKKE32Q
+  // AWSSecretKey=hc59\/4vd13EjjnHZqsFYCZSs5bjHlytLfoXDf29J
+  // Bucket=ironflowbkt
   useEffect(() => {
     if (Object.keys(blobData).length !== 0) {
       const songDate = new Date();
       const songDuration = (dateAfter - dateBefore) - 200;
-      const songObject = new SongData(blobData.songName, blobData.songBlob, blobData.songURL, [...lyricsArr], songDate, songDuration)
-      setAudioSrc(songObject.songURL)
-      setSelectedOption(songObject.songURL)
-      setSongUploadObject(songObject)
-      setAllTakes(eachTake => [...eachTake, {...songObject}])
+      // const songObject = new SongData(blobData.song_name, blobData.song_blob, blobData.song_URL, [...lyricsArr], songDate, songDuration)
+      setAudioSrc(blobData.song_URL)
+      setSelectedOption(blobData.song_URL)
+      const songObject = {
+        name: blobData.name,
+        song_user: user,
+        song_blob: blobData.song_blob,
+        song_URL: blobData.song_URL,
+        lyrics: [...lyricsArr],
+        date: songDate,
+        duration: songDuration,
+        caption: '',
+        video: null
+      }
+      setCurrentSong(songObject)
+      setSongUploadObject(currentSong)
       setBlobData({})
+
+      setAllTakes(eachTake => [...eachTake, {...songObject}])
     }
-    console.log('Check out the updated AllTakes: ', allTakes)
+    console.log('Check out the updated AllTakes: ', allTakes, currentSong)
   }, [blobData])
+  
 
   useEffect(() => {
     setRetrievedSelectedRhymes([])
@@ -197,7 +216,7 @@ function TestAudio(props) {
         const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
         const url = window.URL.createObjectURL(mpegBlob);
         keyRef.current++
-        setBlobData({ songName: `Take ${keyRef.current}`, songBlob: mpegBlob, songURL: url })
+        setBlobData({ name: `Take ${keyRef.current}`, song_blob: mpegBlob, song_URL: url })
         chunks = []
   
         setRecorderState((prevState) => {
@@ -374,7 +393,7 @@ function TestAudio(props) {
     } else {
       return (
         <>
-          {loadSelectedTake?.songLyricsStr.map((row, index) => {
+          {loadSelectedTake?.lyrics.map((row, index) => {
             return (
               <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
                 <div className="transcript-bar-no">
@@ -499,6 +518,7 @@ function TestAudio(props) {
 
   const resetSuggestions = () => {
     setRecordingDisplay(true)
+    setCurrentSong(initialSongObject)
     setLyricsArr([])
     setShowLyricsLine([])
     setRhymeWordHolder(null)
@@ -587,16 +607,16 @@ function TestAudio(props) {
     else {
       return allTakes.map((element, index) => {
         return (
-          <option value={element.songURL} key={`${index}_${element.songURL}`}>
-            {element.songName}
+          <option value={element.song_URL} key={`${index}_${element.song_URL}`}>
+            {element.name}
           </option>
         )
       })
     }
-  }, [allTakes, songNameUpdate])
+  }, [allTakes])
 
   const deleteOneTake = () => {
-    setAllTakes(eachTake => eachTake.filter(item => item.songURL !== selectedOption))
+    setAllTakes(eachTake => eachTake.filter(item => item.song_URL !== selectedOption))
   }
 
   const handleSaveSong = (e) => {
@@ -604,28 +624,37 @@ function TestAudio(props) {
     if (allTakes.length === 0) {
       console.log('You have no Flows to save')
     } else {
-      const fileName = songUploadObject.songUser._id + songNameInput.replaceAll(" ", "-")
-      songUploadObject.songName = songNameInput
-      songUploadObject.songCaption = songCaptionInput
-      songUploadObject.songDate = new Date()
+      const fileName = user._id + songNameInput.replaceAll(" ", "-")
+      let takeName = selectedOption.name
+      currentSong.caption = songCaptionInput
+      currentSong.name = songNameInput
+      currentSong.date = new Date()
+
+      // songUploadObject.songName = songNameInput
+      // songUploadObject.songCaption = songCaptionInput
+      // songUploadObject.songDate = new Date()
 
       actions
         .uploadFile(
           {
             fileName: fileName,
             fileType: 'audio/mpeg-3',
-            file: songUploadObject.songURL,
+            file: currentSong.song_URL,
             kind: 'song',
           },
-          songUploadObject,
+          currentSong,
         )
         .then(res => {
           console.log(res)
+          setAllTakes(prevTakes => prevTakes.map(each => {
+            if (each.name === takeName) return currentSong
+            else return each
+          }))
+
         })
         .catch(console.error)
     }
     setSaveSongMenu(false)
-    setSongNameUpdate(songUploadObject.songName)
     songNameInputRef.current.value =  ""
     songCaptionInputRef.current.value =  ""
   }
@@ -721,6 +750,26 @@ function TestAudio(props) {
       )
     }
   }
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const navigateToEditLyrics = () => {
+    actions
+    .getUserSongs({ song_user: user?._id })
+    .then(res => {
+      let userSongs = res.data
+      let recordBoothTakes = allTakes
+      console.log(userSongs.length, "ok of course it's not working")
+      if (userSongs.length === 0 && recordBoothTakes.length === 0) {
+        setShowErrorModal(true)
+      }
+      else {
+        navigate("/recordingBooth/editLyrics", { state: { propSongTakes: recordBoothTakes, propCurrentSong: songUploadObject, propUserSongs: userSongs }})
+        // return <Link to="/recordingBooth/editLyrics" state={{ propSongTakes: recordBoothTakes, propCurrentSong: songUploadObject, propUserSongs: userSongs}}></Link>
+      }
+    })
+    .catch(console.error)
+
+  }
 
   return (
     <div id="TestAudio" className="TestAudio">
@@ -731,6 +780,7 @@ function TestAudio(props) {
        focusBorder={focusBorder}
        setFocusBorder={setFocusBorder}
       />
+      <ErrorModal showErrorModal={showErrorModal} setShowErrorModal={setShowErrorModal} />
       <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
       <div className="section-1_speech">
         <button 
@@ -847,13 +897,19 @@ function TestAudio(props) {
  
               <div className="rhyme-lock-button rlb-3">
                 <div className="rhyme-lock-outset">
-                  <Link 
+                  <button 
+                    className="rhyme-lock-btn"
+                    onClick={() => navigateToEditLyrics()}
+                  >
+                    EditLyrics
+                  </button>
+                  {/* <Link 
                     to="/recordingBooth/editLyrics" 
                     state={{ propSongTakes: allTakes, propCurrentSong: songUploadObject}} 
                     className="rhyme-lock-btn"
                   >
                     Edit Lyrics
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

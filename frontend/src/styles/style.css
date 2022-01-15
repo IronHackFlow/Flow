@@ -1305,8 +1305,8 @@ input, textarea, select, button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset img.like {
-  height: 2rem;
-  width: 2rem;
+  height: 1.85rem;
+  width: 1.85rem;
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-icon_shadow-div-inset img.comment {
@@ -2639,11 +2639,15 @@ input, textarea, select, button {
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.heart {
-  height: 1.5rem;
+  height: 1.3rem;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.edit {
   height: 1.4rem;
+}
+
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-icon-container img.delete {
+  height: 1.6rem;
 }
 
 .comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .action-btn_shadow-div-outset .action-btn-text-container {
@@ -2729,7 +2733,7 @@ input, textarea, select, button {
   background: #ec6aa0;
 }
 
-.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .comment-like-btn-pressed .action-btn-container img {
+.comment-pop-out .inner-com .com-cont-2 .comments-container .comment-list-container .comment-list-cont .comment-list .comment-list-buttons .comment-btns-container .comment-btns_shadow-div-inset .action-buttons-container .comment-like-btn-pressed .action-btn-icon-container img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
@@ -10587,6 +10591,364 @@ input, textarea, select, button {
   }
 }
 
+.ProfileEditModal {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #000000b3;
+}
+
+.ProfileEditModal .profile-mi {
+  height: 85%;
+  width: 85%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #686a6b;
+}
+
+.ProfileEditModal .profile-mi .profile-lc {
+  background: #686a6b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container {
+  height: 90%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container {
+  height: 70%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin: 5% 0% 5% 0%;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section {
+  height: 30%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner {
+  height: 90px;
+  width: 90px;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer {
+  height: 80%;
+  width: 80%;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .public-sections {
+  height: 70%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .personal-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .personal-section-container .public-input-container {
+  height: 0;
+  opacity: 0;
+  display: none;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .social-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .social-section-container .public-input-container {
+  height: 0;
+  opacity: 0;
+  display: none;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .songs-section-container {
+  height: 5%;
+  width: 90%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.ProfileEditModal .profile-mi .profile-lc .input-sections-container .songs-section-container .public-input-container {
+  height: 0;
+  opacity: 0;
+  display: none;
+}
+
+.ProfileEditModal .profile-mi .save-back-container {
+  height: 10%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .profile-mi .save-back-container .back-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
+          box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
+  margin-left: 4%;
+}
+
+.ProfileEditModal .profile-mi .save-back-container .back-container .back-inner {
+  height: 70%;
+  width: 70%;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+}
+
+.ProfileEditModal .profile-mi .save-back-container .back-container .back-inner img {
+  height: 1.7em;
+  width: 1.7em;
+}
+
+.ProfileEditModal .profile-mi .save-back-container .submit-button-edit {
+  border: none;
+  border-radius: 20px;
+  background: #2ec291;
+  width: 70px;
+  height: 40px;
+  margin-right: 4%;
+  color: white;
+  -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+          box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+}
+
+.ProfileEditModal .profile-mi .save-back-container .submit-button-edit:active {
+  outline: none !important;
+  border: 2px solid white;
+}
+
 .button-icons {
   height: 100%;
   width: 100%;
@@ -11620,5 +11982,240 @@ input, textarea, select, button {
     top: 0%;
     right: 41%;
   }
+}
+
+.ErrorModal {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  background: #00000066;
+  opacity: 0;
+}
+
+.error-container {
+  height: 50px;
+  width: 96%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
+  position: absolute;
+  top: 58.5%;
+}
+
+.error-container .error_shadow-div-inset {
+  height: 84%;
+  width: 97.5%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 3px 3px 4px #3e3e3e, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 3px 3px 4px #3e3e3e, inset -2px -2px 3px #ffffff;
+}
+
+.error-container .error_shadow-div-inset .error-icon-container {
+  height: 100%;
+  width: 20%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.error-container .error_shadow-div-inset .error-icon-container .error-icon_shadow-div-outset {
+  height: 80%;
+  width: 92%;
+  border-radius: 30px 5px 5px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 2px #545454, -2px -2px 2px #f7f7f7;
+          box-shadow: 2px 2px 2px #545454, -2px -2px 2px #f7f7f7;
+}
+
+.error-container .error_shadow-div-inset .error-icon-container .error-icon_shadow-div-outset .error-icon_shadow-div-inset {
+  height: 86%;
+  width: 91%;
+  border-radius: 30px 5px 5px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 2px #707070, inset -2px -2px 2px #eeeeee;
+          box-shadow: inset 2px 2px 2px #707070, inset -2px -2px 2px #eeeeee;
+}
+
+.error-container .error_shadow-div-inset .error-icon-container .error-icon_shadow-div-outset .error-icon_shadow-div-inset .error-icon_shadow-div-outset_2 {
+  height: 73%;
+  width: 76%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 2px #606060, -1px -1px 2px #f2f2f2;
+          box-shadow: 2px 2px 2px #606060, -1px -1px 2px #f2f2f2;
+  background: #f25f5f;
+}
+
+.error-container .error_shadow-div-inset .error-icon-container .error-icon_shadow-div-outset .error-icon_shadow-div-inset .error-icon_shadow-div-outset_2 img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.error-container .error_shadow-div-inset .error-text-container {
+  height: 100%;
+  width: 80%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.error-container .error_shadow-div-inset .error-text-container .error-text_shadow-div-outset {
+  height: 78%;
+  width: 96%;
+  border-radius: 5px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #444444, -2px -2px 2px #ffffff;
+          box-shadow: 2px 2px 3px #444444, -2px -2px 2px #ffffff;
+  background: #f25f5f;
+}
+
+.error-container .error_shadow-div-inset .error-text-container .error-text_shadow-div-outset h5 {
+  height: 40%;
+  width: 95%;
+  border-radius: 5px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: white;
+}
+
+.error-container .error_shadow-div-inset .error-text-container .error-text_shadow-div-outset p {
+  height: 60%;
+  width: 95%;
+  border-radius: 5px 30px 30px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: .9rem;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

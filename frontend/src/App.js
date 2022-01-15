@@ -23,6 +23,7 @@ function App(props) {
   const { 
     homeFeedSongs, setHomeFeedSongs, 
     trendingFeedSongs, setTrendingFeedSongs, 
+    followingFeedSongs, setFollowingFeedSongs,
     allSongComments, setAllSongComments,
     allSongCommentLikes, setAllSongCommentLikes,
     allSongLikes, setAllSongLikes,
@@ -88,6 +89,7 @@ function App(props) {
         value = {{
           homeFeedSongs, setHomeFeedSongs, 
           trendingFeedSongs, setTrendingFeedSongs,
+          followingFeedSongs, setFollowingFeedSongs,
           allSongComments, setAllSongComments,
           allSongCommentLikes, setAllSongCommentLikes,
           allSongLikes, setAllSongLikes,

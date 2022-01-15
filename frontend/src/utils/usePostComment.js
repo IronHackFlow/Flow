@@ -8,8 +8,7 @@ export default function usePostComment() {
   const { allSongComments, setAllSongComments } = useContext(songData)
 
   const initialComments = {
-    ADD_COMMENT: false,
-    DELETE_COMMENT: false,
+    USERS_COMMENT: false,
     USER_COMMENT_TO_DELETE: null,
     TOTAL_COMMENTS: null
   }

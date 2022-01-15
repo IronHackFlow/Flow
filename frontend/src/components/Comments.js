@@ -9,10 +9,10 @@ import usePostLike from "../utils/usePostLike"
 import usePostComment from "../utils/usePostComment"
 import useDebugInformation from "../utils/useDebugInformation"
 import actions from '../api'
-import heart2 from '../images/heart2.svg'
+import likesvg from '../images/like-thumb-up.svg'
 import commentsvg from '../images/comment.svg'
 import edit from '../images/edit.svg'
-import trash from '../images/trashbin.svg'
+import deletesvg from '../images/delete-bin-filled.svg'
 import send from '../images/send.svg'
 import share from '../images/share.svg'
 import flag from '../images/flag.svg'
@@ -111,14 +111,6 @@ function Comments(props) {
         setIsCommenterAuthor(true)
       }
     }, [])
-
-    // useEffect(() => {
-    //   if (each?.user?._id === user?._id) {
-    //     setCheckCommUser(true)
-    //   } else {
-    //     setCheckCommUser(false)
-    //   }
-    // }, [commState])
 
     useEffect(() => {
       if (editCommentText) {
@@ -219,8 +211,8 @@ function Comments(props) {
                     >
                       <div className="action-btn-icon-container edit-delete">
                         <img
-                          className="social-icons heart"
-                          src={trash}
+                          className="social-icons delete"
+                          src={deletesvg}
                           alt="delete"
                         />
                       </div>
@@ -266,7 +258,7 @@ function Comments(props) {
                       <div className="action-btn-icon-container">
                         <img
                           className="social-icons heart"
-                          src={heart2}
+                          src={likesvg}
                           alt="like"
                         />
                       </div>

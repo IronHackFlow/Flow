@@ -44,9 +44,10 @@ function EditLyrics(props) {
   
   useEffect(() => {
     actions
-      .getUserSongs({ songUser: user?._id })
+      .getUserSongs({ song_user: user?._id })
       .then(res => {
         setUserSongs(res.data)
+        console.log(res.data, "lolol")
       })
       .catch(console.error)
   }, [])  
@@ -58,8 +59,9 @@ function EditLyrics(props) {
   }, [])
   
   useEffect(() => {
-    if (getTakes !== null) {
+    if (getTakes !== null || getTakes.length > 0) {
       const combineArr = [...getTakes, ...userSongs]
+      console.log(getTakes, combineArr, allSongs, "lololooool")
       setAllSongs(combineArr)
     } else {
       setAllSongs(userSongs)
@@ -67,7 +69,7 @@ function EditLyrics(props) {
   }, [getTakes, userSongs])
 
   useEffect(() => {
-    let lyricArray = currentSong?.songLyricsStr?.map((each, index) => {
+    let lyricArray = currentSong?.lyrics?.map((each, index) => {
       if (typeof each === 'string') {
         return { id: `${index + 1}${each}`, array: each.split(' ') }
       } else {
@@ -226,7 +228,7 @@ function EditLyrics(props) {
     return allSongs.map((each, index) => {
       return (
         <option value={each.songURL} key={`${index}+${each._id}`}>
-          {each.songName}
+          {each.name}
         </option>
       )
     })
