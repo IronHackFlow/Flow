@@ -5,11 +5,11 @@ import actions from '../api'
 import back from '../images/back.svg'
 
 export default function EditProfile(props) {
-  const { user, userToggle, setUserToggle } = useContext(TheContext)
+  const { user } = useContext(TheContext)
 
   const [thisUser, setThisUser] = useState(user)
   const [thisUsersSongs, setThisUsersSongs] = useState([])
-
+  // TODO: states for each input being edited. Or one state with an object
   const publicSect = useRef()
   const personalSect = useRef()
   const socialSect = useRef()
@@ -39,7 +39,6 @@ export default function EditProfile(props) {
       .addUserProf(thisUser)
       .then(newUserUpdate => {
         console.log('new new user update!', newUserUpdate)
-        setUserToggle(!userToggle)
       })
       .catch(console.error)
   }
@@ -114,7 +113,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userName"
-                        placeholder={thisUser?.userName}
+                        placeholder={thisUser?.user_name}
                         ></input>
                     </div>
                     </div>
@@ -127,7 +126,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userAbout"
-                        placeholder={thisUser?.userAbout}
+                        placeholder={thisUser?.about}
                         ></input>
                     </div>
                     </div>
@@ -140,7 +139,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userLocation"
-                        placeholder={thisUser?.userLocation}
+                        placeholder={thisUser?.location}
                         ></input>
                     </div>
                     </div>
@@ -220,7 +219,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userTwitter"
-                        placeholder={thisUser?.userTwitter}
+                        placeholder={thisUser?.user_Twitter}
                     ></input>
                     </div>
                 </div>
@@ -233,7 +232,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userInstagram"
-                        placeholder={thisUser?.userInstagram}
+                        placeholder={thisUser?.user_Instagram}
                     ></input>
                     </div>
                 </div>
@@ -246,7 +245,7 @@ export default function EditProfile(props) {
                         autoComplete="off"
                         onChange={handleChange}
                         name="userSoundCloud"
-                        placeholder={thisUser?.userSoundCloud}
+                        placeholder={thisUser?.user_SoundCloud}
                     ></input>
                     </div>
                 </div>
