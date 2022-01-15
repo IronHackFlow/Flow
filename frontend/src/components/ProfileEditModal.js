@@ -5,11 +5,11 @@ import actions from '../api'
 import back from '../images/back.svg'
 
 export default function EditProfile(props) {
-  const { user, userToggle, setUserToggle } = useContext(TheContext)
+  const { user } = useContext(TheContext)
 
   const [thisUser, setThisUser] = useState(user)
   const [thisUsersSongs, setThisUsersSongs] = useState([])
-
+  // TODO: states for each input being edited. Or one state with an object
   const publicSect = useRef()
   const personalSect = useRef()
   const socialSect = useRef()
@@ -39,7 +39,6 @@ export default function EditProfile(props) {
       .addUserProf(thisUser)
       .then(newUserUpdate => {
         console.log('new new user update!', newUserUpdate)
-        setUserToggle(!userToggle)
       })
       .catch(console.error)
   }
