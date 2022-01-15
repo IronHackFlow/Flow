@@ -24,6 +24,7 @@ app.use(
   cors({
     credentials: true,
     origin: ['http://localhost:3000', 'https://iron-flow.herokuapp.com'], //Swap this with the client url
+    optionSuccessStatus: 200,
   }),
 )
 

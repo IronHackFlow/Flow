@@ -16,7 +16,7 @@ function AuthSignUp(props) {
     e.preventDefault()
 
     const user = {
-      userName: userName,
+      user_name: userName,
       email: email,
       password: password
     }

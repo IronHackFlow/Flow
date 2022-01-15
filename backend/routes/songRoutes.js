@@ -2,21 +2,21 @@ const express = require('express')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
 const Songs = require('../models/Songs')
+const User = require('../models/User')
 
 router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
   let song = {
-    songURL: req.body.songURL,
-    songUser: req.body.songUser,
-    songBG: req.body.songBG,
-    songDate: req.body.songDate,
-    songDuration: req.body.songDuration,
-    songName: req.body.sssongName,
-    songLyricsStr: req.body.songLyricsStr,
-    songPBR: req.body.songPBR,
-    songBPM: null,
-    songTotLikes: req.body.songTotLikes,
-    songCaption: req.body.songCaption,
-    songBeatTrack: req.body.songBeatTrack,
+    song_URL: req.body.song_URL,
+    song_user: req.body.song_user,
+    video: req.body.video,
+    date: req.body.date,
+    duration: req.body.duration,
+    name: req.body.name,
+    lyrics: req.body.lyrics,
+    song_PBR: req.body.song_PBR,
+    song_BPM: null,
+    caption: req.body.caption,
+    song_beattrack: req.body.song_beattrack,
   }
 
   const newSong = await Songs.create(song)
@@ -29,7 +29,7 @@ router.post(`/deleteSongRT`, verifyJWT, async (req, res, next) => {
   if (body.song_user._id === req.user._id) {
     await Songs.findOneAndDelete({ _id: body._id })
       .then(res.status(200).json({ message: "Deleted" }))
-      .catch(err => next(err));s
+      .catch(err => next(err));
   } else {
     console.log("Can't delete due to User not being the songUser")
   }
@@ -56,8 +56,18 @@ router.post(`/getUserSongsRT`, async (req, res, next) => {
     .catch(err => res.status(500).json(err))
 })
   
-router.post(`/getUserFollowsSongsRT`, async (req, res, next) => {
-  await Songs.find({ song_user: req.body })
+router.post(`/getUserFollowsSongsRT`, verifyJWT, async (req, res, next) => {
+  let followers = []
+  await User.findById(req.user._id)
+    .populate('user_follows')
+    .then(user => {
+      user.user_follows.forEach(each => {
+        followers.push(each.followed_user)
+      })
+    })
+    .catch(err => next(err))
+
+  await Songs.find({ song_user: followers })
     .populate('song_user')
     .then(songs => {
       // songs.forEach(each => console.log(each.songName))

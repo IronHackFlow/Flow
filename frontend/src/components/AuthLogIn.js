@@ -14,7 +14,7 @@ function AuthLogIn(props) {
   const handleLogIn = async (e) => {
     e.preventDefault()
     const userObj = {
-      userName: userName,
+      user_name: userName,
       password: password
     }
     try {

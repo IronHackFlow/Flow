@@ -10,7 +10,7 @@ const User = require('../models/User')
 router.post(`/signUp`, async (req, res, next) => {
   const user = req.body
 
-  const takenUserName = await User.findOne({ userName: user.userName.toLowerCase() })
+  const takenUserName = await User.findOne({ user_name: user.user_name.toLowerCase() })
   const takenEmail = await User.findOne({ email: user.email.toLowerCase() })
 
   if (takenUserName || takenEmail) {
@@ -19,7 +19,7 @@ router.post(`/signUp`, async (req, res, next) => {
     user.password = await bcrypt.hash(req.body.password, 10)
 
     const dbUser = {
-      userName: user.userName.toLowerCase(),
+      user_name: user.user_name.toLowerCase(),
       email: user.email.toLowerCase(),
       password: user.password,
       picture: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/100/100`
@@ -32,7 +32,7 @@ router.post(`/signUp`, async (req, res, next) => {
 router.post(`/logIn`, async (req, res, next) => {
   const userLoggingIn = req.body
 
-  User.findOne({ userName: userLoggingIn.userName.toLowerCase() })
+  User.findOne({ user_name: userLoggingIn.user_name.toLowerCase() })
     .select('+password')
     .then(dbUser => {
       if (!dbUser) {
@@ -43,7 +43,7 @@ router.post(`/logIn`, async (req, res, next) => {
           if (isCorrect) {
             const payload = {
               _id: dbUser._id,
-              userName: dbUser.userName
+              user_name: dbUser.user_name
             }
             jwt.sign(
               payload,
@@ -93,14 +93,14 @@ router.post(`/logInGoogle`, async (req, res, next) => {
     const allCharsBeforeAt = /^.*?(?=\@)/gm
     const validChars = /[a-zA-Z0-9]/gm
     let splitEmail = email.match(allCharsBeforeAt)
-    let userName = splitEmail[0].match(validChars).join('')
-    return userName
+    let user_name = splitEmail[0].match(validChars).join('')
+    return user_name
   }
   
   const userData = {
     email,
     password: `thisisnotvalid`,
-    userName: emailToUserName(email),
+    user_name: emailToUserName(email),
     email_verified,
     picture,
     given_name,
@@ -116,7 +116,7 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   
   const payload = {
     _id: user._id,
-    userName: user.userName
+    user_name: user.user_name
   }
   
   jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 86400}, (err, token) => {

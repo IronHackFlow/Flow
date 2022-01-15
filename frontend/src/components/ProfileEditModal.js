@@ -82,209 +82,294 @@ export default function EditProfile(props) {
     })
   }
 
+  const editSectionObject = {
+    title: "Personal",
+    item_one: "First Name",
+    item_two: "Last Name",
+    item_three: "Email",
+    item_four: null,
+    item_five: null,
+    input_name_one: "given_name",
+    input_name_two: "family_name",
+    input_name_three: "email",
+    placeholder_one: thisUser?.give_name,
+    placeholder_two: thisUser?.family_name,
+    placeholder_three: thisUser?.email,
+  }
+
+  const EditSection = ({ sectionObject }, ref) => {
+    return (
+      <div
+        className="edit-section"
+        onClick={e => expandSection(ref)}
+        ref={ref}
+      >
+        <div className="edit-section__header">
+          <div className="edit-section__header--shadow-outset">
+            <h3>{sectionObject.title}</h3>
+          </div>
+        </div>
+          
+        <ul className="edit-section__list">
+          <li className="edit-section__item">
+            <p>{sectionObject.item_one}</p>
+            <div className="edit-section__input-container">
+              <input
+                className="edit-section__input"
+                type="text"
+                autoComplete="nope"
+                onChange={handleChange}
+                name={editSectionObject.input_name_one}
+                placeholder={editSectionObject.placeholder_one}
+              ></input>
+            </div>
+          </li>
+
+          <li className="edit-section__item">
+            <p>{sectionObject.item_two}</p>
+            <div className="edit-section__input-container">
+              <input
+                className="edit-section__input"
+                type="text"
+                autoComplete="nope"
+                onChange={handleChange}
+                name={editSectionObject.input_name_two}
+                placeholder={editSectionObject.placeholder_two}
+              ></input>
+            </div>
+          </li>
+
+          <li className="edit-section__item">
+            <p>{sectionObject.item_three}</p>
+            <div className="edit-section__input-container">
+              <input
+                className="edit-section__input"
+                type="text"
+                autoComplete="nope"
+                onChange={handleChange}
+                name={editSectionObject.input_name_three}
+                placeholder={editSectionObject.placeholder_three}
+              ></input>
+            </div>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="ProfileEditModal">
       <div className="mid-inset profile-mi">
         <form className="login-container profile-lc" onSubmit={submit}>
-            <div className="input-sections-container">
+          <div className="input-sections-container">
             <div
-                className="public-section-container"
-                onClick={e => expandSection(publicSect)}
-                ref={publicSect}
+              className="public-section-container"
+              onClick={e => expandSection(publicSect)}
+              ref={publicSect}
             >
-                <div className="section-header">
-                <div className="section-header-inner">Public</div>
+              <div className="section-header">
+                <div className="section-header-inner">
+                  Public
                 </div>
-                <div className="public-input-container hide-public">
+              </div>
+              <div className="public-input-container hide-public">
                 <div className="edit-photo-section">
-                    <div className="edit-photo-inner">
+                  <div className="edit-photo-inner">
                     <div className="edit-photo-outer">
-                        <img src={thisUser?.picture} alt="profile"></img>
+                      <img src={thisUser?.picture} alt="profile"></img>
                     </div>
-                    </div>
+                  </div>
                 </div>
-
-                <div className="public-sections">
-                    <div className="input-sections">
-                    <p>Username</p>
+              <div className="public-sections">
+                <div className="input-sections">
+                  <p>Username</p>
+                  <div className="user-input profile-user-i">
+                    <input
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      name="userName"
+                      placeholder={thisUser?.user_name}
+                    ></input>
+                  </div>
+                </div>
+                  <div className="input-sections">
+                  <p>About</p>
                     <div className="user-input profile-user-i">
-                        <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        name="userName"
-                        placeholder={thisUser?.userName}
-                        ></input>
-                    </div>
-                    </div>
-                    <div className="input-sections">
-                    <p>About</p>
-                    <div className="user-input profile-user-i">
-                        <input
+                      <input
                         className="user-text profile-user-t"
                         type="text"
                         autoComplete="off"
                         onChange={handleChange}
                         name="userAbout"
-                        placeholder={thisUser?.userAbout}
-                        ></input>
+                        placeholder={thisUser?.about}
+                      ></input>
                     </div>
-                    </div>
-                    <div className="input-sections">
+                  </div>
+                  <div className="input-sections">
                     <p>Location</p>
                     <div className="user-input profile-user-i">
-                        <input
+                      <input
                         className="user-text profile-user-t"
                         type="text"
                         autoComplete="off"
                         onChange={handleChange}
                         name="userLocation"
-                        placeholder={thisUser?.userLocation}
-                        ></input>
+                        placeholder={thisUser?.location}
+                      ></input>
                     </div>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
 
             <div
-                className="personal-section-container"
-                onClick={e => expandSection(personalSect)}
-                ref={personalSect}
+              className="personal-section-container"
+              onClick={e => expandSection(personalSect)}
+              ref={personalSect}
             >
-                <div className="section-header">
-                <div className="section-header-inner">Personal</div>
-                {/* <div className="expand-toggle" onClick={(e) => toggleExpand(personalSect)}>
-                            x
-                        </div> */}
+              <div className="section-header">
+                <div className="section-header-inner">
+                  Personal
                 </div>
-                <div className="public-input-container hide-personal">
+              </div>
+                
+              <div className="public-input-container hide-personal">
+
                 <div className="input-sections">
-                    <p>First Name</p>
-                    <div className="user-input profile-user-i">
+                  <p>First Name</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="nope"
-                        onChange={handleChange}
-                        name="given_name"
-                        placeholder={thisUser?.given_name}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="nope"
+                      onChange={handleChange}
+                      name="given_name"
+                      placeholder={thisUser?.given_name}
                     ></input>
-                    </div>
+                  </div>
                 </div>
+
                 <div className="input-sections">
-                    <p>Last Name</p>
-                    <div className="user-input profile-user-i">
+                  <p>Last Name</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="nope"
-                        onChange={handleChange}
-                        name="family_name"
-                        placeholder={thisUser?.family_name}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="nope"
+                      onChange={handleChange}
+                      name="family_name"
+                      placeholder={thisUser?.family_name}
                     ></input>
-                    </div>
+                  </div>
                 </div>
+
                 <div className="input-sections">
-                    <p>Email</p>
-                    <div className="user-input profile-user-i">
+                  <p>Email</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="nope"
-                        onChange={handleChange}
-                        name="email"
-                        placeholder={thisUser?.email}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="nope"
+                      onChange={handleChange}
+                      name="email"
+                      placeholder={thisUser?.email}
                     ></input>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
 
             <div
-                className="social-section-container"
-                onClick={e => expandSection(socialSect)}
-                ref={socialSect}
+              className="social-section-container"
+              onClick={e => expandSection(socialSect)}
+              ref={socialSect}
             >
-                <div className="section-header">
-                <div className="section-header-inner">Social</div>
+              <div className="section-header">
+                <div className="section-header-inner">
+                  Social
                 </div>
-                <div className="public-input-container hide-social">
+              </div>
+              <div className="public-input-container hide-social">
                 <div className="input-sections">
-                    <p>Twitter</p>
-                    <div className="user-input profile-user-i">
+                  <p>Twitter</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        name="userTwitter"
-                        placeholder={thisUser?.userTwitter}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      name="userTwitter"
+                      placeholder={thisUser?.user_Twitter}
                     ></input>
-                    </div>
+                  </div>
                 </div>
+
                 <div className="input-sections">
-                    <p>Instagram</p>
-                    <div className="user-input profile-user-i">
+                  <p>Instagram</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        name="userInstagram"
-                        placeholder={thisUser?.userInstagram}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      name="userInstagram"
+                      placeholder={thisUser?.user_Instagram}
                     ></input>
-                    </div>
+                  </div>
                 </div>
+
                 <div className="input-sections">
-                    <p>Soundcloud</p>
-                    <div className="user-input profile-user-i">
+                  <p>Soundcloud</p>
+                  <div className="user-input profile-user-i">
                     <input
-                        className="user-text profile-user-t"
-                        type="text"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        name="userSoundCloud"
-                        placeholder={thisUser?.userSoundCloud}
+                      className="user-text profile-user-t"
+                      type="text"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      name="userSoundCloud"
+                      placeholder={thisUser?.user_SoundCloud}
                     ></input>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
 
             <div
-                className="songs-section-container"
-                onClick={e => expandSection(songsSect)}
-                ref={songsSect}
+              className="songs-section-container"
+              onClick={e => expandSection(songsSect)}
+              ref={songsSect}
             >
-                <div className="section-header">
-                <div className="section-header-inner">Songs</div>
+              <div className="section-header">
+                <div className="section-header-inner">
+                  Songs
                 </div>
-                <div className="public-input-container hide-songs" style={{ overflow: 'scroll' }}>
+              </div>
+              <div className="public-input-container hide-songs" style={{ overflow: 'scroll' }}>
                 {songsToEdit()}
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
 
-            <div className="save-back-container">
+          <div className="save-back-container">
             <div className="back-container">
-                <div className="back-inner">
+              <div className="back-inner">
                 <Link
-                    to={`/profile/${user?._id}`}
-                    state={{ propSongUser: user }}
-                    style={{ height: '100%' }}
+                  to={`/profile/${user?._id}`}
+                  state={{ propSongUser: user }}
+                  style={{ height: '100%' }}
                 >
-                    <img className="button-icons bi-back" src={back} alt="back button icon"></img>
+                  <img className="button-icons bi-back" src={back} alt="back button icon"></img>
                 </Link>
-                </div>
+              </div>
             </div>
             <button type="submit" className="submit-button-edit">
-                Save
+              Save
             </button>
-            </div>
+          </div>
         </form>
-        </div>
+      </div>
     </div>
   )
 }
