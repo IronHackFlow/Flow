@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
         })
         req.user = {}
         req.user._id = decoded._id
-        req.user.userName = decoded.userName
+        req.user.user_name = decoded.user_name
         next()
       })
     } else {

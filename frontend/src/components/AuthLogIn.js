@@ -21,7 +21,7 @@ function AuthLogIn(props) {
       const res = await actions
         .logIn(userObj)
         .then((res) => {
-          console.log(res.data, "plz")
+          console.log(res, "plz")
           localStorage.setItem('token', res.data.token)
           navigate('/')
         })

@@ -99,7 +99,7 @@ export default function EditProfile(props) {
   const EditSection = ({ sectionObject }, ref) => {
     return (
       <div
-        className="edit-section"
+        className={`edit-section edit-section--${editSectionObject.title}`}
         onClick={e => expandSection(ref)}
         ref={ref}
       >
@@ -159,7 +159,10 @@ export default function EditProfile(props) {
   return (
     <div className="ProfileEditModal">
       <div className="mid-inset profile-mi">
-        <form className="login-container profile-lc" onSubmit={submit}>
+        <form 
+          className="login-container profile-lc" 
+          onSubmit={submit}
+        >
           <div className="input-sections-container">
             <div
               className="public-section-container"
@@ -188,20 +191,20 @@ export default function EditProfile(props) {
                       type="text"
                       autoComplete="off"
                       onChange={handleChange}
-                      name="userName"
+                      name="user_name"
                       placeholder={thisUser?.user_name}
                     ></input>
                   </div>
                 </div>
                   <div className="input-sections">
-                  <p>About</p>
+                    <p>About</p>
                     <div className="user-input profile-user-i">
                       <input
                         className="user-text profile-user-t"
                         type="text"
                         autoComplete="off"
                         onChange={handleChange}
-                        name="userAbout"
+                        name="user_about"
                         placeholder={thisUser?.about}
                       ></input>
                     </div>
@@ -214,7 +217,7 @@ export default function EditProfile(props) {
                         type="text"
                         autoComplete="off"
                         onChange={handleChange}
-                        name="userLocation"
+                        name="user_location"
                         placeholder={thisUser?.location}
                       ></input>
                     </div>

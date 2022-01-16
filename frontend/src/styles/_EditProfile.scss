@@ -267,6 +267,25 @@
       .input-sections-container {
         @include flexCenter(90%, 100%, 0px, flex-start, center, column);
 
+        .edit-section {
+          @include flexCenter(70%, 90%, 20px, center, center, column);
+          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
+          margin-bottom: 5%;
+        }
+        .edit-section--Public {
+          height: 70%;
+          margin-top: 5%;
+        }
+        // .edit-section--Personal {
+
+        // }
+        // .edit-section--Social {
+
+        // }
+        // .edit-section--Songs {
+
+        // }
+
         .public-section-container {
           @include flexCenter(70%, 90%, 20px, center, center, column);
           box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
@@ -274,6 +293,7 @@
 
           .public-input-container {
             display: flex;
+            
             .edit-photo-section {
               @include flexCenter(30%, 100%, 0px, center, center, row);
 
