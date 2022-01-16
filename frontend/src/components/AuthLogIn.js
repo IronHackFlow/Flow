@@ -6,22 +6,16 @@ import noEye from "../images/no-eye.svg"
 
 function AuthLogIn(props) {
   const navigate = useNavigate()
-
-  const [userName, setUserName] = useState()
-  const [password, setPassword] = useState()
+  const [userData, setUserData] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
   const handleLogIn = async (e) => {
     e.preventDefault()
-    const userObj = {
-      user_name: userName,
-      password: password
-    }
     try {
       const res = await actions
-        .logIn(userObj)
+        .logIn(userData)
         .then((res) => {
-          console.log(res, "plz")
+          console.log(res.data, "LOGGED IN")
           localStorage.setItem('token', res.data.token)
           navigate('/')
         })
@@ -43,23 +37,26 @@ function AuthLogIn(props) {
             <div className="input-container">
               <input 
                 className="login-input-field email-input"
-                ariaRequired="true"
+                ariarequired="true"
                 type="text"
-                onChange={(e) => setUserName(e.target.value)}
+                name="user_name"
+                onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value}))}
               ></input>
             </div>
           </div>
         </div>
+
         <div className="login-input-container password-container">
           <div className="login-input_shadow-div-outset password" style={{borderRadius: "5px 5px 13px 13px"}}>
             <p>Password</p>
             <div className="input-container">
               <input 
                 className="login-input-field password-input"
-                areaRequired="true"
+                arearequired="true"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value}))}
               ></input>
               <div className="show-password-container" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? (
@@ -71,6 +68,7 @@ function AuthLogIn(props) {
             </div>
           </div>
         </div>
+
         <div className="enter-btn-container">
           <button
             type="submit"
@@ -80,14 +78,6 @@ function AuthLogIn(props) {
               <h4>Log In</h4>
             </div>
           </button>
-          {/* <Link 
-            to ="/" 
-            className="login-link"
-          >
-            <div className="login-button">
-              <h4>Log In</h4>
-            </div>
-          </Link> */}
         </div>
       </form>
     </div>

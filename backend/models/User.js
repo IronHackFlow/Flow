@@ -3,8 +3,9 @@ const User = model(
   'User',
   new Schema({
     email: { type: String, required: true },
-    user_name: { type: String, },
+    user_name: { type: String, required: true },
     password: { type: String, required: true, select: false },
+    userName: String,
     googleId: String,
     picture: String,
     given_name: String,

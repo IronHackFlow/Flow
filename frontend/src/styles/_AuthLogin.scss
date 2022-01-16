@@ -64,7 +64,7 @@
               box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
 
               .user-login-1_title {
-                @include flexCenter(15%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
+                @include flexCenter(12%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
                 
                 .title_shadow-div-inset {
                   @include flexCenter(80%, 95%, 40px, center, center, column);
@@ -76,7 +76,7 @@
               }
               
               .user-login-2_other-logins {
-                @include flexCenter(20%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
+                @include flexCenter(23%, 100%, 5px 5px 20px 20px, space-evenly, center, column);
                 
                 .other-logins-1_google-btn {
                   @include flexCenter(78%, 100%, 5px 5px 20px 20px, space-evenly, center, column);

@@ -9,7 +9,7 @@ const User = require('../models/User')
 
 router.post(`/signUp`, async (req, res, next) => {
   const user = req.body
-
+  console.log(user, "am i getting no information here?")
   const takenUserName = await User.findOne({ user_name: user.user_name.toLowerCase() })
   const takenEmail = await User.findOne({ email: user.email.toLowerCase() })
 
@@ -31,7 +31,6 @@ router.post(`/signUp`, async (req, res, next) => {
   
 router.post(`/logIn`, async (req, res, next) => {
   const userLoggingIn = req.body
-
   User.findOne({ user_name: userLoggingIn.user_name.toLowerCase() })
     .select('+password')
     .then(dbUser => {
@@ -131,7 +130,7 @@ router.post(`/logInGoogle`, async (req, res, next) => {
 })
 
 router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
-  User.findById(req.user._id)
+  User.findOne({ _id:  req.user._id })
     .populate('user_follows')
     .populate('user_likes')
     .then(user => {

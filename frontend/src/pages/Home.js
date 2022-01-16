@@ -356,7 +356,7 @@ function Home(props) {
                           </p>
                           <p id="two">
                             <img src={bullet} alt="bullet point" />
-                            {songInView?.song_user?.userName}
+                            {songInView?.song_user?.user_name}
                           </p>
                         </div>
 

@@ -11,7 +11,7 @@ export default function ErrorModal({ showErrorModal, setShowErrorModal }) {
   return (
     <div 
       className="ErrorModal" 
-      style={showErrorModal ? {opacity: "1", zIndex: "5"} : {opacity: "0", zIndex: "0"}}
+      style={showErrorModal ? {opacity: "1", zIndex: "2"} : {opacity: "0", zIndex: "0"}}
       onClick={() => setShowErrorModal(false)}    
     >
       <div className="error-container">

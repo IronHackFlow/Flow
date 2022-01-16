@@ -15,7 +15,7 @@ import play from '../images/play.svg'
 import pause from '../images/pause.svg'
 
 function Profile(props) {
-  const { user, setUser, userToggle, setUserToggle } = useContext(TheContext)
+  const { user, setUser } = useContext(TheContext)
   const { formatDate } = useFormatDate()
   const navigate = useNavigate()
   const location = useLocation()
@@ -50,7 +50,6 @@ function Profile(props) {
   const logout = () => {
     setUser({})
     localStorage.removeItem('token')
-    setUserToggle(!userToggle)
     navigate('/auth')
   }
 
@@ -170,7 +169,7 @@ function Profile(props) {
               
               <div className="buttons-container">
                 <div className="buttons-inner">
-                  {propSongUser?._id === user._id
+                  {propSongUser?._id === user?._id
                     ? (
                       <>
                         <div className="delete-btn-container">
@@ -274,7 +273,7 @@ function Profile(props) {
             <div className="user-name-container">
               <div className="user-name_shadow-div-outset">
                 <div className="user-name_shadow-div-inset">
-                  <p className="username-text-me">{thisUser?.userName}</p>
+                  <p className="username-text-me">{thisUser?.user_name}</p>
                 </div>
               </div>
             </div>

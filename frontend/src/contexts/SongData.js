@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect} from "react"
 import actions from "../api"
-import TheContext from "./TheContext"
 import gifsArr from "../images/gifs.json"
 
 export const songData = createContext(SongData)

@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation, } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './contexts/TheContext'
 import SongData from './contexts/SongData'
 import { songData } from './contexts/SongData'
 import actions from './api'
-import useDebugInformation from './utils/useDebugInformation'
 import useEventListener from './utils/useEventListener'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
@@ -19,7 +18,6 @@ import SongScreen from './pages/SongScreen'
 import Search from './pages/Search'
 
 function App(props) {
-  // useDebugInformation("App", props)
   const { 
     homeFeedSongs, setHomeFeedSongs, 
     trendingFeedSongs, setTrendingFeedSongs, 
@@ -39,7 +37,6 @@ function App(props) {
   
   const location = useLocation()
   const [user, setUser] = useState()
-  const [userToggle, setUserToggle] = useState(false)
   const [locationIndicator, setLocationIndicator] = useState()
   const [windowSize, setWindowSize] = useState()
 
@@ -53,8 +50,7 @@ function App(props) {
       .catch((err) => {
         console.log(err)
       })
-
-  }, [userToggle])
+  }, [])
   
   // useLayoutEffect(() => {
   //   const handleResize = () => {
@@ -66,8 +62,6 @@ function App(props) {
   //   return () => window.removeEventListener('resize', handleResize)
   // }, [])
 
-
-
   useEffect(() => {
     setLocationIndicator(location)
   }, [location])
@@ -77,8 +71,6 @@ function App(props) {
       value={{
         user,
         setUser,
-        userToggle,
-        setUserToggle,
         locationIndicator,
         setLocationIndicator,
         windowSize,

@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import actions from '../api';
-import TheContext from '../contexts/TheContext'
 import eye from "../images/eye.svg"
 import noEye from "../images/no-eye.svg"
 
 function AuthSignUp(props) {
-  const { userToggle, setUserToggle } = React.useContext(TheContext)
-
-  const [email, setEmail] = useState()
-  const [userName, setUserName] = useState()
-  const [password, setPassword] = useState()
+  const navigate = useNavigate()
+  const [userData, setUserData] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
   const signUpHandler = async (e) => {
     e.preventDefault()
-
-    const user = {
-      user_name: userName,
-      email: email,
-      password: password
-    }
-
     actions
-      .signUp(user)
+      .signUp(userData)
       .then(res => {
-        console.log(res)
+        console.log(res.data)
         if (res.data.message === "Success") {
           actions
-            .logIn(user)
+            .logIn(userData)
             .then((res) => {
-              console.log(res.data, "plz")
+              console.log(res.data, "SIGNED UP AND NOW LOGGED IN!")
               localStorage.setItem('token', res.data.token)
-              setUserToggle(!userToggle)
+              navigate('/')
             })
             .catch(console.error)
         }
@@ -49,7 +39,8 @@ function AuthSignUp(props) {
               <input 
                 className="login-input-field email-input"
                 type="text"
-                onChange={(e) => setUserName(e.target.value)}
+                name="user_name"
+                onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
               ></input>
             </div>
           </div>
@@ -62,7 +53,8 @@ function AuthSignUp(props) {
               <input 
                 className="login-input-field email-input"
                 type="email"
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
               ></input>
             </div>
           </div>
@@ -76,7 +68,8 @@ function AuthSignUp(props) {
                 className="login-input-field password-input"
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
               ></input>
               <div className="show-password-container signup-pass" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? (

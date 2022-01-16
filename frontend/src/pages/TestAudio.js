@@ -6,6 +6,7 @@ import datamuse from "datamuse";
 import TheContext from "../contexts/TheContext";
 import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
+import SaveSongModal from "../components/SaveSongModal";
 import RecordingBoothModal from "../components/RecordingBoothModal";
 import useDebugInformation from "../utils/useDebugInformation"
 import useEventListener from "../utils/useEventListener"
@@ -69,6 +70,7 @@ function TestAudio(props) {
   const [saveSongMenu, setSaveSongMenu] = useState(false);
   const [recordingDisplay, setRecordingDisplay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showSaveSongModal, setShowSaveSongModal] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
   const [songUploadObject, setSongUploadObject] = useState();
   const [selectedOption, setSelectedOption] = useState();
@@ -780,8 +782,16 @@ function TestAudio(props) {
        focusBorder={focusBorder}
        setFocusBorder={setFocusBorder}
       />
+      <SaveSongModal 
+        allTakes={allTakes} 
+        currentSong={currentSong} 
+        showSaveSongModal={showSaveSongModal} 
+        setShowSaveSongModal={setShowSaveSongModal}
+        songNameInputRef={songNameInputRef}
+      />
       <ErrorModal showErrorModal={showErrorModal} setShowErrorModal={setShowErrorModal} />
       <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
+      
       <div className="section-1_speech">
         <button 
           className="modal-toggle-btn"
@@ -997,7 +1007,10 @@ function TestAudio(props) {
                         <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
                           <div 
                             className="actions-btn_shadow-div-outset ab-save" 
-                            onClick={toggleSaveSongMenu}>
+                            onClick={() => {
+                              songNameInputRef.current.focus()
+                              setShowSaveSongModal(true)
+                            }}>
                             <img className="button-icons bi-help" src={save} alt="save icon" />
                           </div>
                         </div>
