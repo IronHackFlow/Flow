@@ -1,59 +1,80 @@
 import { useContext, useEffect, useState, useRef, useCallback } from "react";
 import actions from "../api";
+import axios from "axios";
 import TheContext from "../contexts/TheContext"
 import AudioTimeSlider from "../components/AudioTimeSlider";
+import useDebugInformation from "../utils/useDebugInformation"
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import xExit from "../images/exit-x-2.svg";
 
 
-export default function SaveSongModal({allTakes, currentSong, showSaveSongModal, setShowSaveSongModal, songNameInputRef}) {
+export default function SaveSongModal({allTakes, currentSong, setCurrentSong, showSaveSongModal, setShowSaveSongModal}) {
+  useDebugInformation('SaveSongModal', {allTakes, showSaveSongModal, setShowSaveSongModal})
   const { user } = useContext(TheContext)
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songNameInput, setSongNameInput] = useState();
-  const [songCaptionInput, setSongCaptionInput] = useState();
+  const [selectedOption, setSelectedOption] = useState();
+
   const songCaptionInputRef = useRef();
+  const songNameInputRef = useRef()
   const buttonCloseRef = useRef();
   const saveSongPopUpRef = useRef();
-  const [selectedOption, setSelectedOption] = useState();
   const selectTakesRef = useRef();
 
-  const handleSaveSong = (e) => {
+  useEffect(() => {
+    if (showSaveSongModal) {
+      songNameInputRef.current.focus()
+    }
+  }, [showSaveSongModal])
+
+  const handleInputChange = (e) => {
+    e.preventDefault()
+    const { name, value } = e.target
+    setCurrentSong({
+      ...currentSong,
+      [name]: value
+    })
+  }
+
+  const handleSaveSong = async (e) => {
     e.preventDefault()
     if (allTakes.length === 0) {
       console.log('You have no Flows to save')
     } else {
-      const fileName = user._id + songNameInput.replaceAll(" ", "-")
-    //   let takeName = selectedOption.name
-      currentSong.caption = songCaptionInput
-      currentSong.name = songNameInput
-      currentSong.date = new Date()
-
-      // songUploadObject.songName = songNameInput
-      // songUploadObject.songCaption = songCaptionInput
-      // songUploadObject.songDate = new Date()
+      const fileName = user?._id + currentSong.name.replaceAll(" ", "-")
+      const fileType = "audio/mpeg-3"
+      const file = currentSong.blob
 
       actions
-        .uploadFile(
-          {
-            fileName: fileName,
-            fileType: 'audio/mpeg-3',
-            file: currentSong.song_URL,
-            kind: 'song',
-          },
-          currentSong,
-        )
-        .then(res => {
-          console.log(res)
-        //   setAllTakes(prevTakes => prevTakes.map(each => {
-        //     if (each.name === takeName) return currentSong
-        //     else return each
-        //   }))
+        .getSignedS3({fileName: fileName, fileType: fileType})
+          .then(async res => {
+            console.log(res.data)
+            if (res.data.success) {
+              const signedURL = res.data.signedRequest.signed_URL
+              const awsURL = res.data.signedRequest.aws_URL
+              const options = {
+                headers: {
+                  'Content-Type': "audio/mpeg-3"
+                }
+              }
 
-        })
-        .catch(console.error)
+              return axios.put(signedURL, file, options)
+                .then(res => {
+                  actions
+                    .addSong({currentSong, awsURL})
+                      .then(res => {
+                        if (res.data.success) {
+                          console.log(res.data.song, res.data.message)
+                          setShowSaveSongModal(false)
+                        }
+                      })
+                      .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
+            }
+          })
+          .catch(err => console.log(err))
     }
-    // setSaveSongMenu(false)
     songNameInputRef.current.value =  ""
     songCaptionInputRef.current.value =  ""
   }
@@ -92,7 +113,7 @@ export default function SaveSongModal({allTakes, currentSong, showSaveSongModal,
             </div>
             <div className="save-song_btn-container">
               <button
-                className="save-song_btn"
+                className="save-song_btn--close"
                 ref={buttonCloseRef}
                 type="button"
                 onClick={() => setShowSaveSongModal(false)}
@@ -131,7 +152,7 @@ export default function SaveSongModal({allTakes, currentSong, showSaveSongModal,
                     <AudioTimeSlider
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
-                      // currentSong={songUploadObject}
+                      currentSong={currentSong}
                       // location={recordingBooth}
                     />
                   </div>
@@ -175,8 +196,9 @@ export default function SaveSongModal({allTakes, currentSong, showSaveSongModal,
                           className="song-name-input"
                           ref={songNameInputRef}
                           type="text"
+                          name="name"
                           placeholder="Name this flow.."
-                          onChange={(e) => setSongNameInput(e.target.value)}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -185,15 +207,16 @@ export default function SaveSongModal({allTakes, currentSong, showSaveSongModal,
                           className="song-caption-input"
                           ref={songCaptionInputRef}
                           type="text"
+                          name="caption"
                           placeholder="Caption this flow.."
-                          onChange={e => setSongCaptionInput(e.target.value)}
+                          onChange={handleInputChange}
                         />
                       </div>  
                     </div>
 
                     <div className="buttons-container">
                       <div className="buttons-container_shadow-div-inset">
-                        <button className="save-song-button" type="submit">
+                        <button className="save-song-button--submit" type="submit">
                           Save
                         </button>
                       </div>

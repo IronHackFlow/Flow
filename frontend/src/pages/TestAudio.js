@@ -49,9 +49,14 @@ function TestAudio(props) {
   const commands = [
     {
       command: /\b(\w(\S{4,}))/g, 
-      callback: (command) => getActionWords(command),
+      callback: (command) => getActionWords(`${command}`),
       matchInterim: true,
-    }
+    },
+    // {
+    //   command: /(?:\w[*]+)/,
+    //   callback: (command) => refilterProfanity(command),
+    //   matchInterim: true,
+    // }
   ]
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
@@ -63,20 +68,28 @@ function TestAudio(props) {
     mediaRecorder: null,
     audio: null,
   }
+  const initialSongObject = {
+    name: '',
+    song_user: user,
+    blob: null,
+    song_URL: null,
+    lyrics: [],
+    date: null,
+    duration: 0,
+    caption: '',
+    video: null
+  }
   const [recorderState, setRecorderState] = useState(initialState);
+  const [currentSong, setCurrentSong] = useState(initialSongObject)
   const [audioSrc, setAudioSrc] = useState(null);
-
   const [silent, setSilent] = useState(false);
-  const [saveSongMenu, setSaveSongMenu] = useState(false);
   const [recordingDisplay, setRecordingDisplay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showSaveSongModal, setShowSaveSongModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
   const [songUploadObject, setSongUploadObject] = useState();
   const [selectedOption, setSelectedOption] = useState();
-  const [songNameUpdate, setSongNameUpdate] = useState();
-  const [songNameInput, setSongNameInput] = useState();
-  const [songCaptionInput, setSongCaptionInput] = useState();
   const [lyricsArr, setLyricsArr] = useState([]);
   const [rhymeWordHolder, setRhymeWordHolder] = useState("");
   const [lockRhymeHolder, setLockRhymeHolder] = useState();
@@ -100,42 +113,10 @@ function TestAudio(props) {
   const playBeatRef = useRef();
   const recordAudioRef = useRef();
   const scrollRef = useRef();
-  const saveSongPopUpRef = useRef();
-  const songNameInputRef = useRef();
-  const songCaptionInputRef = useRef();
-  const buttonCloseRef = useRef();
   const selectTakesRef = useRef();
   const keyRef = useRef(0);
   const barNumberRef = useRef(1)
   const [recordingBooth] = useState(`#363636`);
-
-  const initialSongObject = {
-    name: '',
-    song_user: user,
-    song_blob: null,
-    song_URL: null,
-    lyrics: [],
-    date: null,
-    duration: 0,
-    caption: '',
-    video: null
-  }
-
-  const [currentSong, setCurrentSong] = useState(initialSongObject)
-
-  class SongData {
-    constructor(name, song_blob, song_URL, lyrics, date, duration) {
-      this.name = name;
-      this.song_blob = song_blob;
-      this.song_URL = song_URL;
-      this.lyrics = lyrics;
-      this.date = date;
-      this.duration = duration
-      this.song_user = user;
-      this.caption = null;
-      this.video = null;
-    }
-  }
 
   useEffect(() => {
     if (silent && recorderState.initRecording === true) {
@@ -144,20 +125,15 @@ function TestAudio(props) {
       setLyricsHandler()
     }
   }, [silent])
-  // AWSAccessKeyId=AKIAIF3VAQEPSXKKE32Q
-  // AWSSecretKey=hc59\/4vd13EjjnHZqsFYCZSs5bjHlytLfoXDf29J
-  // Bucket=ironflowbkt
+
   useEffect(() => {
     if (Object.keys(blobData).length !== 0) {
       const songDate = new Date();
       const songDuration = (dateAfter - dateBefore) - 200;
-      // const songObject = new SongData(blobData.song_name, blobData.song_blob, blobData.song_URL, [...lyricsArr], songDate, songDuration)
-      setAudioSrc(blobData.song_URL)
-      setSelectedOption(blobData.song_URL)
       const songObject = {
         name: blobData.name,
         song_user: user,
-        song_blob: blobData.song_blob,
+        blob: blobData.blob,
         song_URL: blobData.song_URL,
         lyrics: [...lyricsArr],
         date: songDate,
@@ -165,10 +141,12 @@ function TestAudio(props) {
         caption: '',
         video: null
       }
+
+      setAudioSrc(songObject.song_URL)
+      setSelectedOption(songObject.song_URL)
       setCurrentSong(songObject)
       setSongUploadObject(currentSong)
       setBlobData({})
-
       setAllTakes(eachTake => [...eachTake, {...songObject}])
     }
     console.log('Check out the updated AllTakes: ', allTakes, currentSong)
@@ -203,24 +181,23 @@ function TestAudio(props) {
 
   useEffect(() => {
     const recorder = recorderState.mediaRecorder
-    let chunks = []
 
     if (recorder && recorder.state === "inactive") {
-      recorder.start()
       setDateBefore(Date.now())
+      recorder.start()
+      let chunks = []
+      let url
 
-      recorder.ondataavailable = (e) => {
-        chunks.push(e.data)
+      recorder.ondataavailable = (event) => {
+        setDateAfter(Date.now())
+        chunks.push(event.data)
+        let mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
+        url = URL.createObjectURL(mpegBlob);
+        keyRef.current++
+        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, song_URL: url })
       }
       
       recorder.onstop = () => {
-        setDateAfter(Date.now())
-        const mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
-        const url = window.URL.createObjectURL(mpegBlob);
-        keyRef.current++
-        setBlobData({ name: `Take ${keyRef.current}`, song_blob: mpegBlob, song_URL: url })
-        chunks = []
-  
         setRecorderState((prevState) => {
           if (prevState.mediaRecorder) {
             return {
@@ -249,6 +226,7 @@ function TestAudio(props) {
       setToggleModal(true)
     }
   }
+
   const displayActionWords = useCallback(() => {
     return retrievedActionRhymes.slice(0, 5).map((each, index) => {
       return (
@@ -262,49 +240,9 @@ function TestAudio(props) {
     scrollLyrics.scrollTop = scrollLyrics.scrollHeight
   }
 
-  // const profanityRefilter = (curse) => {
-  //   let regexp = /\b\w\**(\*)/gm
-  //   let curseWord = curse.match(regexp)
-
-  //   if (curseWord[0].charAt(0) === "f") {
-  //     if (curseWord[0].length === 4) {
-  //       return "fuck"
-  //     } else if (curseWord[0].length === 7) {
-  //       return "fucking"
-  //     } else {
-  //       return "fucked"
-  //     }
-  //   } else if (curseWord[0].charAt(0) === "b") {
-  //     if (curseWord[0].length === 5) {
-  //       return "bitch"
-  //     } else {
-  //       return "bitches"
-  //     }
-  //   } else if (curseWord[0].charAt(0) === "c") {
-  //     if (curseWord[0].length === 4) {
-  //       return "cunt"
-  //     } else {
-  //       return "cunts"
-  //     }
-  //   } else if (curseWord[0].charAt(0) === "p") {
-  //     return "pussy"
-  //   } else if (curseWord[0].charAt(0) === "a") {
-  //     return "asshole"
-  //   } else if (curseWord[0].charAt(0) === "s") {
-  //     return "shit"
-  //   } else if (curseWord[0].charAt(0) === "n") {
-  //     if (curseWord[0].length === 6) {
-  //       return "niggas"
-  //     } else if (curseWord[0].length === 7) {
-  //       return "niggas"
-  //     }
-  //   }
-  // }
-
   async function getActionWords(regex) {
     let finalWord = regex
     if (regex.includes("*")) {
-      // finalWord = profanityRefilter(regex)
       finalWord = refilterProfanity(regex)
     }
 
@@ -335,7 +273,6 @@ function TestAudio(props) {
       }
       if (lastWord.includes("*")) {
         finalWord = refilterProfanity(lastWord)
-        // finalWord = profanityRefilter(lastWord)
       }
 
       setRhymeWordHolder(finalWord)
@@ -374,13 +311,14 @@ function TestAudio(props) {
         </div>
         <div className="transcript-word-container">
           {transcript.map((each, index) => {
+            let isCurse = refilterProfanity(each)
             return (
               <p 
                 className="prev-transcript-word" 
                 key={`transcript${uuidv4()}and${index}`}
                 onClick={(e) => showSelectedWord(e)}
                 >
-                  {each}
+                  {isCurse ? isCurse : each}
               </p>
             )
           })}
@@ -621,138 +559,54 @@ function TestAudio(props) {
     setAllTakes(eachTake => eachTake.filter(item => item.song_URL !== selectedOption))
   }
 
-  const handleSaveSong = (e) => {
-    e.preventDefault()
-    if (allTakes.length === 0) {
-      console.log('You have no Flows to save')
-    } else {
-      const fileName = user._id + songNameInput.replaceAll(" ", "-")
-      let takeName = selectedOption.name
-      currentSong.caption = songCaptionInput
-      currentSong.name = songNameInput
-      currentSong.date = new Date()
+  // const handleSaveSong = (e) => {
+  //   e.preventDefault()
+  //   if (allTakes.length === 0) {
+  //     console.log('You have no Flows to save')
+  //   } else {
+  //     const fileName = user?._id + songNameInput.replaceAll(" ", "-")
+  //     let takeName = selectedOption.name
+  //     currentSong.caption = songCaptionInput
+  //     currentSong.name = songNameInput
+  //     currentSong.date = new Date()
 
-      // songUploadObject.songName = songNameInput
-      // songUploadObject.songCaption = songCaptionInput
-      // songUploadObject.songDate = new Date()
+  //     // songUploadObject.songName = songNameInput
+  //     // songUploadObject.songCaption = songCaptionInput
+  //     // songUploadObject.songDate = new Date()
 
-      actions
-        .uploadFile(
-          {
-            fileName: fileName,
-            fileType: 'audio/mpeg-3',
-            file: currentSong.song_URL,
-            kind: 'song',
-          },
-          currentSong,
-        )
-        .then(res => {
-          console.log(res)
-          setAllTakes(prevTakes => prevTakes.map(each => {
-            if (each.name === takeName) return currentSong
-            else return each
-          }))
+  //     actions
+  //       .uploadFile(
+  //         {
+  //           fileName: fileName,
+  //           fileType: 'audio/mpeg-3',
+  //           file: currentSong.song_blob,
+  //           kind: 'song',
+  //         },
+  //         currentSong,
+  //       )
+  //       .then(res => {
+  //         console.log(res)
+  //         setAllTakes(prevTakes => prevTakes.map(each => {
+  //           if (each.name === takeName) return currentSong
+  //           else return each
+  //         }))
 
-        })
-        .catch(console.error)
-    }
-    setSaveSongMenu(false)
-    songNameInputRef.current.value =  ""
-    songCaptionInputRef.current.value =  ""
-  }
+  //       })
+  //       .catch(console.error)
+  //   }
+  //   setSaveSongMenu(false)
+  //   songNameInputRef.current.value =  ""
+  //   songCaptionInputRef.current.value =  ""
+  // }
 
-  const toggleSaveSongMenu = () => {
-    if (saveSongMenu === false) {
-      setSaveSongMenu(true)
-    } else {
-      setSaveSongMenu(false)
-    }
-  }
+  // const toggleSaveSongMenu = () => {
+  //   if (saveSongMenu === false) {
+  //     setSaveSongMenu(true)
+  //   } else {
+  //     setSaveSongMenu(false)
+  //   }
+  // }
   
-  const saveSongDisplay = () => {
-    if (saveSongMenu === true) {
-      return (
-        <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
-          <form className="song-inputs-container" onSubmit={(e) => handleSaveSong(e)}>
-            <div className="section-title">
-              Upload A Take
-            </div>
-
-            <div className="section-1_song-name">
-              <input
-                className="song-name-input"
-                ref={songNameInputRef}
-                type="text"
-                placeholder="Name this flow.."
-                onChange={(e) => setSongNameInput(e.target.value)}
-                autoFocus
-                />
-            </div>
-
-            <div className="section-2_song-caption">
-              <input
-                className="song-caption-input"
-                ref={songCaptionInputRef}
-                type="text"
-                placeholder="Caption this flow.."
-                onChange={e => setSongCaptionInput(e.target.value)}
-              ></input>
-            </div>
-
-            <div className="buttons-container">
-              <div className="buttons-container_shadow-div-inset">
-                <button
-                  className="cancel-save-button"
-                  ref={buttonCloseRef}
-                  type="button"
-                  onClick={toggleSaveSongMenu}
-                >
-                  <img className="button-icons" src={xExit} alt="exit" />
-                </button>
-                <button className="save-song-button" type="submit">
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      )
-    } else {
-      return (
-        <div className="actions-2_record">
-          <div className="record-container">
-            <div className="record-1_select-beat">
-              <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
-                <div className="select-beat_play-container">
-                  <button 
-                    className="select-beat_play-btn"
-                    onClick={() => playSelectBeat(playBeatRef)}
-                    >
-                    <img className="button-icons" src={isBeatPlaying ? pause : play} alt="play or pause" />
-                  </button>
-                  <audio src={beatOption} ref={playBeatRef} />
-                </div>
-                <div className="select-beat_shadow-div-outset">
-                  <div className="select-beat-title">
-                    Select A Beat :
-                  </div>
-                  <select 
-                    id="selectBox" 
-                    className="track-select" 
-                    value={beatOption} 
-                    onChange={(e) => selectBeatOption(e)}
-                  >
-                    {mapBeatOptions()}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
-  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const navigateToEditLyrics = () => {
     actions
@@ -770,7 +624,6 @@ function TestAudio(props) {
       }
     })
     .catch(console.error)
-
   }
 
   return (
@@ -785,9 +638,9 @@ function TestAudio(props) {
       <SaveSongModal 
         allTakes={allTakes} 
         currentSong={currentSong} 
+        setCurrentSong={setCurrentSong}
         showSaveSongModal={showSaveSongModal} 
         setShowSaveSongModal={setShowSaveSongModal}
-        songNameInputRef={songNameInputRef}
       />
       <ErrorModal showErrorModal={showErrorModal} setShowErrorModal={setShowErrorModal} />
       <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
@@ -809,7 +662,7 @@ function TestAudio(props) {
         </div>
       </div>
       
-      <div className={saveSongMenu ? "section-2_control-panel save-menu-active" : "section-2_control-panel"}>
+      <div className="section-2_control-panel">
         <div className="section-2a_flow-suggestions">
           <div className="next-bar-container">
             <div className="action-word-container">
@@ -1007,10 +860,7 @@ function TestAudio(props) {
                         <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
                           <div 
                             className="actions-btn_shadow-div-outset ab-save" 
-                            onClick={() => {
-                              songNameInputRef.current.focus()
-                              setShowSaveSongModal(true)
-                            }}>
+                            onClick={() => setShowSaveSongModal(true)}>
                             <img className="button-icons bi-help" src={save} alt="save icon" />
                           </div>
                         </div>
@@ -1022,13 +872,42 @@ function TestAudio(props) {
                       </div>
                     </div>
                   </div>
-                  {saveSongDisplay()}
+                  <div className="actions-2_record">
+                    <div className="record-container">
+                      <div className="record-1_select-beat">
+                        <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
+                          <div className="select-beat_play-container">
+                            <button 
+                              className="select-beat_play-btn"
+                              onClick={() => playSelectBeat(playBeatRef)}
+                              >
+                              <img className="button-icons" src={isBeatPlaying ? pause : play} alt="play or pause" />
+                            </button>
+                            <audio src={beatOption} ref={playBeatRef} />
+                          </div>
+                          <div className="select-beat_shadow-div-outset">
+                            <div className="select-beat-title">
+                              Select A Beat :
+                            </div>
+                            <select 
+                              id="selectBox" 
+                              className="track-select" 
+                              value={beatOption} 
+                              onChange={(e) => selectBeatOption(e)}
+                            >
+                              {mapBeatOptions()}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className={`record-2_record-btn ${saveSongMenu ? "slideOut" : "slideIn"}`}>
+          <div className="record-2_record-btn">
             <div className={`record-btn_shadow-div-inset ${focusBorder === 11 ? "focus-border" : ""}`}>
               {recorderState.initRecording ? (
                 <button

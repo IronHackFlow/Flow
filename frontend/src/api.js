@@ -179,6 +179,10 @@ const actions = {
     return resFromOurDB
   },
 
+  getSignedS3: async ({ fileName, fileType }) => {
+    return await axios.post(`${baseURL}/getSignedS3`, { fileName, fileType }, resetHead())
+  },
+
   uploadFile: async ({ fileName, fileType, file, kind }, songData) => {
     console.log(songData)
     axios

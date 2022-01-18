@@ -5,39 +5,50 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
+const { registerValidation, logInValidation } = require('../validation')
 const User = require('../models/User')
 
 router.post(`/signUp`, async (req, res, next) => {
-  const user = req.body
-  console.log(user, "am i getting no information here?")
-  const takenUserName = await User.findOne({ user_name: user.user_name.toLowerCase() })
-  const takenEmail = await User.findOne({ email: user.email.toLowerCase() })
+  const userName = req.body.user_name.toLowerCase()
+  const email = req.body.email.toLowerCase()
+  let password = req.body.password
+  console.log(userName, email, "am i getting no information here?")
+
+  const takenUserName = await User.findOne({ user_name: userName })
+  const takenEmail = await User.findOne({ email: email })
 
   if (takenUserName || takenEmail) {
-    res.status(400).json({ message: "Username or email has already been taken" })
+    return res.json({ success: false, message: "Username or email has already been taken" })
   } else {
-    user.password = await bcrypt.hash(req.body.password, 10)
+    password = await bcrypt.hash(password, 10)
 
     const dbUser = {
-      user_name: user.user_name.toLowerCase(),
-      email: user.email.toLowerCase(),
-      password: user.password,
+      user_name: userName,
+      email:email,
+      password: password,
       picture: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/100/100`
     }
     const newUser = User.create(dbUser)
-    res.status(200).json({message: "Success"})
+    res.status(200).json({success: true, message: "You have signed up successfully"})
   }
 })
   
 router.post(`/logIn`, async (req, res, next) => {
-  const userLoggingIn = req.body
-  User.findOne({ user_name: userLoggingIn.user_name.toLowerCase() })
+  const logInUser = { 
+    user_name: req.body.user_name,
+    password: req.body.password 
+  }
+
+  const { error } = logInValidation(logInUser)
+  if (error) return res.json({ success: false, message: error.details[0].message })
+
+  User.findOne({ user_name: logInUser.user_name.toLowerCase() })
     .select('+password')
     .then(dbUser => {
       if (!dbUser) {
-        return res.status(400).json({ message: "Invalid Username or Password" })
+        return res.json({ success: false, message: "Invalid username or email" })
       }
-      bcrypt.compare(userLoggingIn.password, dbUser.password)
+      bcrypt.compare(logInUser.password, dbUser.password)
         .then(isCorrect => {
           if (isCorrect) {
             const payload = {
@@ -49,17 +60,18 @@ router.post(`/logIn`, async (req, res, next) => {
               process.env.JWT_SECRET,
               {expiresIn: 86400},
               (err, token) => {
-                if (err) return res.json({ message: err })
+                if (err) return res.json({ success: false, error: err, message: "Couldn't create token" })
                 else {
                   return res.json({
-                    message: "Success",
+                    success: true,
+                    message: "You have successfully logged in",
                     token: token
                   })
                 }
               }
             )
           } else {
-            return res.status(400).json({ message: "Invalid Username or Password"})
+            return res.json({ success: false, message: "Password is incorrect"})
           }
         })
     })
@@ -68,24 +80,27 @@ router.post(`/logIn`, async (req, res, next) => {
 router.post(`/logInGoogle`, async (req, res, next) => {
   const tokenId = req.header('X-Google-Token')
   console.log(tokenId, "google token")
+
   if (!tokenId) {
-    res.status(401).json({ msg: 'Mising Google JWT' })
+    res.json({ success: false, message: 'Missing Google token' })
   }
+
   const googleResponse = await axios.get(
     `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${encodeURI(tokenId)}`,
   )
-  const { email, 
-          email_verified, 
-          picture, 
-          given_name, 
-          family_name, 
-          error_description 
+  const { 
+    email, 
+    email_verified, 
+    picture, 
+    given_name, 
+    family_name, 
+    error_description 
   } = googleResponse.data
   
   if (!email || error_description) {
-    res.status(400).json({ msg: error_description })
+    res.json({ success: false, error: error_description, message: "Error awaiting response from Google" })
   } else if (!email_verified) {
-    res.status(401).json({ msg: 'Email not verified with google' })
+    res.json({ success: false, message: 'Email not verified with Google' })
   }
   
   const emailToUserName = (email) => {
@@ -119,9 +134,10 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   }
   
   jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 86400}, (err, token) => {
-    if (err) return res.json({ message: err })
+    if (err) return res.json({ success: false, error: err, message: "Couldn't verify token" })
     else {
       return res.json({
+        success: true,
         message: "Success",
         token: token
       })
@@ -135,16 +151,16 @@ router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
     .populate('user_likes')
     .then(user => {
       console.log(user, "this user is authorized")
-      res.status(200).json({ isLoggedIn: true, user })
+      res.status(200).json({ success: true, isLoggedIn: true, user })
     })
-    .catch(err => res.status(500).json(err))
+    .catch(err => res.status(500).json({ success: false, error: err, message: "Could not authorize user"}))
 })
 
 router.post(`/addUserProfRT`, verifyJWT, async (req, res, next) => {
   const body = req.body
   await User.findByIdAndUpdate(req.user._id, body)
-    .then(ppl => {
-      res.status(200).json(ppl)
+    .then(user => {
+      res.status(200).json(user)
     })
     .catch(err => res.status(500).json(err))
 })

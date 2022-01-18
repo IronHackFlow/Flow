@@ -3,11 +3,12 @@ require('dotenv').config()
 
 module.exports = function verifyJWT(req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1]
-    console.log(token, "---TOKEN---")
+    console.log(req.headers, "---TOKEN---")
     if (token) {
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) return res.status(400).json({
-          message: "Failed to Authenticate",
+        if (err) return res.json({
+          success: false,
+          message: "Failed to authenticate user token",
           isLoggedIn: false
         })
         req.user = {}
@@ -16,6 +17,6 @@ module.exports = function verifyJWT(req, res, next) {
         next()
       })
     } else {
-      res.status(403).json({ message: "Incorrect Token Given", isLoggedIn: false })
+      res.json({ success: false, message: "Incorrect Token Given", isLoggedIn: false })
     }
 }

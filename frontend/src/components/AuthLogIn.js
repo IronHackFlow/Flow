@@ -8,20 +8,33 @@ function AuthLogIn(props) {
   const navigate = useNavigate()
   const [userData, setUserData] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-
+  function parseJSONSafely(str) {
+    try {
+       return JSON.parse(str);
+    }
+    catch (e) {
+       console.err(e);
+       // Return a default object, or null based on use case.
+       return {}
+    }
+ }
   const handleLogIn = async (e) => {
     e.preventDefault()
     try {
       const res = await actions
         .logIn(userData)
         .then((res) => {
-          console.log(res.data, "LOGGED IN")
-          localStorage.setItem('token', res.data.token)
-          navigate('/')
+          if (res.data.success) {
+            localStorage.setItem('token', res.data.token)
+            navigate('/')
+          } else {
+            // TODO: create an error here to display on screen
+            console.log(res.data)
+          }
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err, "what could've gone wrong?"))
     } catch(err) {
-      console.log(err)
+      console.log(err, "i was caught in the TRY CATCH")
     }
   }
 

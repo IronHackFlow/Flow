@@ -1,27 +1,70 @@
 const express = require('express')
+const axios = require('axios')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
+const sign_s3 = require('../sign_s3')
 const Songs = require('../models/Songs')
 const User = require('../models/User')
 
 router.post(`/addSongRT`, verifyJWT, async (req, res, next) => {
-  let song = {
-    song_URL: req.body.song_URL,
-    song_user: req.body.song_user,
-    video: req.body.video,
-    date: req.body.date,
-    duration: req.body.duration,
-    name: req.body.name,
-    lyrics: req.body.lyrics,
-    song_PBR: req.body.song_PBR,
+  const songData = req.body.currentSong
+  const awsURL = req.body.awsURL
+
+  const song = {
+    song_URL: awsURL,
+    song_user: songData.song_user,
+    video: songData.video,
+    date: songData.date,
+    duration: songData.duration,
+    name: songData.name,
+    lyrics: songData.lyrics,
+    song_PBR: songData.song_PBR,
     song_BPM: null,
-    caption: req.body.caption,
-    song_beattrack: req.body.song_beattrack,
+    caption: songData.caption,
+    song_beattrack: songData.song_beattrack,
   }
 
-  const newSong = await Songs.create(song)
-  res.status(200).json(newSong)
+  await Songs.create(song)
+    .then(song => {
+      res.status(200).json({ success: true, song: song, message: "Your song was successfully uploaded!" })
+    })
+    .catch(err => res.json({ success: false, error: err, message: "Unable to create new song"}))
+
 })
+  
+// router.post(`/addSongRT`, verifyJWT, sign_s3, async (req, res, next) => {
+//   const songData = req.signedRequest.currentSong
+//   const signedURL = req.signedRequest.signedURL
+//   const bucketURL = req.signedRequest.bucketURL
+//   const options = req.signedRequest.options
+//   const songFile = req.body.fileBlob
+//   console.log(req.body.fileBlob, "FUCK YOU OK FUCK OFF YOU SON OF  ")
+//   axios.put(signedURL, songFile, options)
+//     .then(async result => {
+//       const song = {
+//         song_URL: bucketURL,
+//         song_user: songData.song_user,
+//         video: songData.video,
+//         date: songData.date,
+//         duration: songData.duration,
+//         name: songData.name,
+//         lyrics: songData.lyrics,
+//         song_PBR: songData.song_PBR,
+//         song_BPM: null,
+//         caption: songData.caption,
+//         song_beattrack: songData.song_beattrack,
+//       }
+
+//       await Songs.create(song)
+//         .then(song => {
+//           res.status(200).json(song)
+//         })
+//         .catch(err => res.json({ success: false, error: err, message: "Unable to create new song"}))
+//     })
+//     .catch(err => {
+//       res.json({success: false, error: err, message: "Unable to axios PUT signedURL"})
+//     })
+// })
   
 router.post(`/deleteSongRT`, verifyJWT, async (req, res, next) => {
   const body = req.body.song

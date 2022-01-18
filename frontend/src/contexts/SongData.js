@@ -48,10 +48,11 @@ export default function SongData() {
       setAllSongCommentLikes(commentLikesArray)
       setAllSongLikes(likesArray)
       setAllSongFollowers(followersArray)
-      setIsLoading(false)
+
       console.timeEnd('HOW SLOW IS THIS SONG DATA??')
     }, signal)
     .catch(console.error)
+    .finally(() => setIsLoading(false))
   }, [])
 
   useEffect(() => {

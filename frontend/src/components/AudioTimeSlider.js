@@ -5,7 +5,7 @@ function UseAudioPlayer(props) {
   const [songDuration, setSongDuration] = useState(0);
   const [songMinutes, setSongMinutes] = useState(0);
 
-  const audioRef = useRef(props.currentSong?.song_URL);
+  const audioRef = useRef();
   const intervalRef = useRef();
   const secondsRef = useRef();
   const currentProgressRef = useRef(0);

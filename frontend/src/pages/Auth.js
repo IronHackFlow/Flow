@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
@@ -9,7 +9,7 @@ import AuthSignUp from '../components/AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
 const Auth = (props) => {
-  const { windowSize, userToggle, setUserToggle } = React.useContext(TheContext)
+  const { windowSize } = useContext(TheContext)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (onChange < 600) {
@@ -33,15 +33,20 @@ const Auth = (props) => {
       }
     })
     .catch(console.error)
-  }, [userToggle])
+  }, [])
   
   const onResponse = (response) => {
     actions
       .logInGoogle(response)
       .then(res => {
-        console.log("THIS", res)
-        localStorage.setItem('token', res.data.token)
-        setUserToggle(!userToggle)
+        if (res.data.success) {
+          console.log(res.data, "SUCCESSFUL GOOGLE LOGIN")
+          localStorage.setItem('token', res.data.token)
+          navigate('/')
+        } else {
+          //TODO: add errors to display to user
+          console.log(res.data.message)
+        }
       })
       .catch(console.error)
   }

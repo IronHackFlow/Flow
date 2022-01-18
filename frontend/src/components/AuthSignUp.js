@@ -11,22 +11,32 @@ function AuthSignUp(props) {
 
   const signUpHandler = async (e) => {
     e.preventDefault()
-    actions
-      .signUp(userData)
-      .then(res => {
-        console.log(res.data)
-        if (res.data.message === "Success") {
-          actions
-            .logIn(userData)
-            .then((res) => {
-              console.log(res.data, "SIGNED UP AND NOW LOGGED IN!")
-              localStorage.setItem('token', res.data.token)
-              navigate('/')
-            })
-            .catch(console.error)
-        }
-      })
-      .catch(console.error)
+    try {
+      actions
+        .signUp(userData)
+        .then(res => {
+          if (res.data.success) {
+            actions
+              .logIn(userData)
+              .then((res) => {
+                if (res.data.success) {
+                  localStorage.setItem('token', res.data.token)
+                  navigate('/')
+                } else {
+                  // TODO: create an error here to display on screen
+                  console.log(res.data.message)
+                }
+              })
+              .catch(console.error)
+          } else {
+            //TODO: Dynamic error modal
+            console.log(res.data.message)
+          }
+        })
+        .catch(console.error)
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   return (

@@ -12397,7 +12397,7 @@ input, textarea, select, button {
           flex-direction: row;
 }
 
-.SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_btn-container .save-song_btn {
+.SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_btn-container .save-song_btn--close {
   height: 67%;
   width: 58%;
   border-radius: 50px;
@@ -12420,7 +12420,7 @@ input, textarea, select, button {
   background: #e24f8c;
 }
 
-.SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_btn-container .save-song_btn img {
+.SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_btn-container .save-song_btn--close img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
@@ -13354,7 +13354,7 @@ input, textarea, select, button {
           box-shadow: inset 3px 3px 3px #2c2c2c, inset -2px -2px 2px 0px #848484;
 }
 
-.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .save-song-button {
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .save-song-button--submit {
   height: 70%;
   width: 99%;
   border-radius: 50px;
@@ -13376,7 +13376,15 @@ input, textarea, select, button {
   background: #63debc;
   border: 1px solid #e0fff6;
   color: white;
+  font-size: 1.3rem;
   font-weight: bold;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset .save-song-button--submit:active {
+  -webkit-box-shadow: inset 3px 3px 3px #424242, inset -2px -2px 2px #e0fff6;
+          box-shadow: inset 3px 3px 3px #424242, inset -2px -2px 2px #e0fff6;
+  background: #adadad;
+  color: #63debc;
 }
 
 .SaveSongModal .save-song_modal-container--transition-in {
