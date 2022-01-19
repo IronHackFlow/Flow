@@ -60,3 +60,93 @@
     }
   }
 }
+
+// red error box
+.ErrorModal {
+  @include flexCenter(100%, 100%, 0, center, stretch, row);
+  position: absolute;
+  background: #00000000;
+  top: 0;
+  opacity: 0;
+
+  .error-container--red {
+    @include flexCenter(50px, 81%, 50px, center, center, row);
+    position: absolute;
+    background: #f97171;
+    top: 25.5%;
+    box-shadow: -2px 7px 10px 1px #000000a1;
+
+    .error--shadow-inset {
+      @include flexCenter(82%, 97%, 50px, center, center, row);
+      box-shadow: inset 2px 2px 3px #7f4545, inset -2px -2px 2px 0px #ffe5e5;
+
+      .icon-container {
+        @include flexCenter(100%, 14%, 50px, center, center, row);
+
+        .icon--shadow-outset {
+          @include flexCenter(70%, 67%, 50px, center, center, row);
+          box-shadow: 2px 2px 3px #633535, -2px -2px 2px 0px #ffd9d9;
+
+          img {
+            height: 80%;
+            width: 80%;
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          }
+
+          &:active {
+            background: #ffbdbd;
+            box-shadow: inset 2px 2px 4px #7c2626, inset -2px -2px 4px 0px #ffffff;
+            transition: all .2s;
+            img {
+              filter: invert(51%) sepia(90%) saturate(1015%) hue-rotate(322deg) brightness(118%) contrast(95%);
+            }
+          }
+        }
+      }
+      .text-container {
+        @include flexCenter(100%, 86%, 50px, center, flex-start, column);
+
+        .text--shadow-outset {
+          @include flexCenter(74%, 98%, 50px, center, center, row);
+          box-shadow:2px 2px 3px #944b4b, -2px -2px 2px 0px #fdc4c4;
+
+          .text-err-icon-container {
+            @include flexCenter(100%, 13%, 50px, center, center, column);
+
+            .text-err-icon--shadow-inset {
+              @include flexCenter(85%, 82%, 50px, center, center, column);
+              box-shadow: inset 2px 2px 2px #8a5252, inset -2px -2px 2px 0px #ffdddd;
+
+              img {
+                height: 85%;
+                width: 85%;
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+              }
+            }
+          }
+          .text-err-container {
+            @include flexCenter(100%, 87%, 50px, center, flex-start, column);
+
+            h6 {
+              width: 94%;
+              text-align: start;
+              white-space: nowrap;
+              text-indent: 2%;
+              color: white;
+            }
+            p {
+              width: 94%;
+              text-align: start;
+              white-space: nowrap;
+              text-indent: 2%;
+              line-height: .95;
+              color: #ffe0e0;
+              font-size: .9rem;
+              overflow-x: scroll;
+            }
+          }
+        }
+      }
+    }
+  }
+}

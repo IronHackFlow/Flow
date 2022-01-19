@@ -47,3 +47,23 @@
 .si-send {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
+
+
+.ButtonClearText {
+  @include flexCenter(100%, 0%, 0, flex-start, center, row);
+
+  .btn-clear--shadow-inset {
+    @include flexCenter(80%, 90%, 50px, center, center, row);
+    box-shadow: inset 3px 3px 5px #282828, inset -2px -2px 2px 0px #bcbaba;
+
+    .btn-clear--shadow-outset {
+      @include flexCenter(73%, 73%, 50px, center, center, row);
+      box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
+
+      img {
+        height: 90%;
+        width: 90%;
+      }
+    }
+  }
+}

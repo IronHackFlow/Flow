@@ -559,54 +559,10 @@ function TestAudio(props) {
     setAllTakes(eachTake => eachTake.filter(item => item.song_URL !== selectedOption))
   }
 
-  // const handleSaveSong = (e) => {
-  //   e.preventDefault()
-  //   if (allTakes.length === 0) {
-  //     console.log('You have no Flows to save')
-  //   } else {
-  //     const fileName = user?._id + songNameInput.replaceAll(" ", "-")
-  //     let takeName = selectedOption.name
-  //     currentSong.caption = songCaptionInput
-  //     currentSong.name = songNameInput
-  //     currentSong.date = new Date()
-
-  //     // songUploadObject.songName = songNameInput
-  //     // songUploadObject.songCaption = songCaptionInput
-  //     // songUploadObject.songDate = new Date()
-
-  //     actions
-  //       .uploadFile(
-  //         {
-  //           fileName: fileName,
-  //           fileType: 'audio/mpeg-3',
-  //           file: currentSong.song_blob,
-  //           kind: 'song',
-  //         },
-  //         currentSong,
-  //       )
-  //       .then(res => {
-  //         console.log(res)
-  //         setAllTakes(prevTakes => prevTakes.map(each => {
-  //           if (each.name === takeName) return currentSong
-  //           else return each
-  //         }))
-
-  //       })
-  //       .catch(console.error)
-  //   }
-  //   setSaveSongMenu(false)
-  //   songNameInputRef.current.value =  ""
-  //   songCaptionInputRef.current.value =  ""
-  // }
-
-  // const toggleSaveSongMenu = () => {
-  //   if (saveSongMenu === false) {
-  //     setSaveSongMenu(true)
-  //   } else {
-  //     setSaveSongMenu(false)
-  //   }
-  // }
-  
+  const handleSaveSongMenu = () => {
+    if (allTakes.length === 0) return setShowErrorModal(true)
+    setShowSaveSongModal(true)
+  }
 
   const navigateToEditLyrics = () => {
     actions
@@ -635,6 +591,7 @@ function TestAudio(props) {
        focusBorder={focusBorder}
        setFocusBorder={setFocusBorder}
       />
+
       <SaveSongModal 
         allTakes={allTakes} 
         currentSong={currentSong} 
@@ -642,7 +599,6 @@ function TestAudio(props) {
         showSaveSongModal={showSaveSongModal} 
         setShowSaveSongModal={setShowSaveSongModal}
       />
-      <ErrorModal showErrorModal={showErrorModal} setShowErrorModal={setShowErrorModal} />
       <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
       
       <div className="section-1_speech">
@@ -860,9 +816,19 @@ function TestAudio(props) {
                         <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
                           <div 
                             className="actions-btn_shadow-div-outset ab-save" 
-                            onClick={() => setShowSaveSongModal(true)}>
+                            onClick={handleSaveSongMenu}>
                             <img className="button-icons bi-help" src={save} alt="save icon" />
                           </div>
+                          <ErrorModal 
+                            isOpen={showErrorModal} 
+                            onClose={setShowErrorModal} 
+                            title={"No Recorded Takes to Save"}
+                            nextActions={"Press the green mic button to begin Flowing!"}
+                            opacity={true}
+                            modHeight={56}
+                            modWidth={99}
+                            placement={.5}
+                          />
                         </div>
                         <div className="actions-btn-container">
                           <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>

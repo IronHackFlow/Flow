@@ -3,17 +3,20 @@ import actions from "../api";
 import axios from "axios";
 import TheContext from "../contexts/TheContext"
 import AudioTimeSlider from "../components/AudioTimeSlider";
+import ErrorModal from "./ErrorModal"
+import ButtonClearText from "../components/ButtonClearText";
 import useDebugInformation from "../utils/useDebugInformation"
 import play from "../images/play.svg";
 import pause from "../images/pause.svg";
 import xExit from "../images/exit-x-2.svg";
 
 
-export default function SaveSongModal({allTakes, currentSong, setCurrentSong, showSaveSongModal, setShowSaveSongModal}) {
-  useDebugInformation('SaveSongModal', {allTakes, showSaveSongModal, setShowSaveSongModal})
+export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, showSaveSongModal, setShowSaveSongModal }) {
+  useDebugInformation('SaveSongModal', {allTakes})
   const { user } = useContext(TheContext)
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedOption, setSelectedOption] = useState();
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   const songCaptionInputRef = useRef();
   const songNameInputRef = useRef()
@@ -21,9 +24,14 @@ export default function SaveSongModal({allTakes, currentSong, setCurrentSong, sh
   const saveSongPopUpRef = useRef();
   const selectTakesRef = useRef();
 
+
   useEffect(() => {
+    console.log(songCaptionInputRef.current.value, "this should be empty on reopen")
     if (showSaveSongModal) {
       songNameInputRef.current.focus()
+    } else {
+      songNameInputRef.current.value = ""
+      songCaptionInputRef.current.value = ""
     }
   }, [showSaveSongModal])
 
@@ -38,9 +46,8 @@ export default function SaveSongModal({allTakes, currentSong, setCurrentSong, sh
 
   const handleSaveSong = async (e) => {
     e.preventDefault()
-    if (allTakes.length === 0) {
-      console.log('You have no Flows to save')
-    } else {
+    if (!songNameInputRef.current.value) return setShowErrorModal(true)
+    else {
       const fileName = user?._id + currentSong.name.replaceAll(" ", "-")
       const fileType = "audio/mpeg-3"
       const file = currentSong.blob
@@ -74,9 +81,11 @@ export default function SaveSongModal({allTakes, currentSong, setCurrentSong, sh
             }
           })
           .catch(err => console.log(err))
+          .finally(() => {
+            songNameInputRef.current.value =  ""
+            songCaptionInputRef.current.value =  ""
+          })
     }
-    songNameInputRef.current.value =  ""
-    songCaptionInputRef.current.value =  ""
   }
   
   const loadTake = (e) => {
@@ -104,6 +113,16 @@ export default function SaveSongModal({allTakes, currentSong, setCurrentSong, sh
   return (
     <div className={`SaveSongModal ${showSaveSongModal ? "SaveSongModal--show" : "SaveSongModal--hide"}`}> 
       <div className={`save-song_modal-container ${showSaveSongModal ? "save-song_modal-container--transition-in" : "save-song_modal-container--transition-out"}`}>
+      <ErrorModal 
+        isOpen={showErrorModal} 
+        onClose={setShowErrorModal} 
+        title={"Name is Required"}
+        nextActions={"Please add a name to save"}
+        opacity={false}
+        modHeight={50}
+        modWidth={81}
+        placement={25.5}
+      />
         <div className="save-song_header">
           <div className="save-song_header-shadow-inset">
             <div className="save-song_header-container">
@@ -187,29 +206,46 @@ export default function SaveSongModal({allTakes, currentSong, setCurrentSong, sh
                 <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
                   <form className="song-inputs-container" onSubmit={(e) => handleSaveSong(e)}>
                     <div className="section-title">
-                        Upload A Take
+                      <h2>Upload Your Flow</h2>
                     </div>
-
                     <div className="section-inputs">
-                      <div className="section-1_song-name">
-                        <input
-                          className="song-name-input"
-                          ref={songNameInputRef}
-                          type="text"
-                          name="name"
-                          placeholder="Name this flow.."
-                          onChange={handleInputChange}
+                      <div className="input-container">
+                        <div className="input-field-container">
+                          <input
+                            className="input-field"
+                            ref={songNameInputRef}
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            autoComplete="off"
+                            onChange={handleInputChange}
+                          />
+                        </div>
+
+                        <ButtonClearText 
+                          containerWidth={19} 
+                          inset={true} 
+                          inputRef={songNameInputRef}
                         />
                       </div>
 
-                      <div className="section-2_song-caption">
-                        <input
-                          className="song-caption-input"
-                          ref={songCaptionInputRef}
-                          type="text"
-                          name="caption"
-                          placeholder="Caption this flow.."
-                          onChange={handleInputChange}
+                      <div className="input-container">
+                        <div className="input-field-container">
+                          <input
+                            className="input-field"
+                            ref={songCaptionInputRef}
+                            type="text"
+                            name="caption"
+                            placeholder="Caption"
+                            autoComplete="off"
+                            onChange={handleInputChange}
+                          />
+                        </div>
+
+                        <ButtonClearText 
+                          containerWidth={19} 
+                          inset={true} 
+                          inputRef={songCaptionInputRef}
                         />
                       </div>  
                     </div>

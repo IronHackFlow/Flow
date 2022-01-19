@@ -171,7 +171,7 @@ function Comments(props) {
           <div className="comment-text-container">
             <div className="comment-list-outer">
               <p className="comment-username">
-                {each.user?.userName}
+                {each.user?.user_name}
                 <span style={{ color: 'white', fontWeight: 'bold', fontSize: '11px' }}>
                   {isCommenterAuthor ? ' 𑁦 song author' : null}
                 </span>

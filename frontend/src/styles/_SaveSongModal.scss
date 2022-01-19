@@ -277,65 +277,47 @@
                                 box-shadow: 3px 3px 3px #2f2f2f, -2px -2px 2px 0px #afafaf;
                         
                                 .section-title {
-                                    height: 25%;
-                                    width: 100%;
-                                    text-align: start;
-                                    text-indent: 3%;
-                                    color: pink;
-                                    font-size: 14px;
-                                    opacity: 0;
-                                    animation: opacityTransition 1s forwards;
+                                    @include flexCenter(25%, 100%, 0, flex-end, center, column);
+                                    
+                                    h2 {
+                                        width: 100%;
+                                        color: pink;
+                                        text-align: start;
+                                        text-indent: 4%;
+                                        margin-bottom: 3%;
+                                    }
                                 }
 
                                 .section-inputs {
                                     @include flexCenter(53%, 100%, 0, space-evenly, center, column);
 
-                                    .section-1_song-name {
+                                    .input-container {
                                         @include flexCenter(40%, 94%, 5px 50px 50px 5px, center, center, row);
                                         box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
-                                        opacity: 0;
-                                        animation: opacityTransition 1s forwards;
-                            
-                                        .song-name-input {
-                                            @include flexCenter(80%, 92%, 40px, center, center, row);
-                                            // opacity: 0;
-                                            border: none;
-                                            outline: none;
-                                            box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
-                                            background: initial;
-                                            padding-left: 4%;
-                            
-                                            &::placeholder {
-                                                color: white;
-                                            }
-                                            &:focus {
-                                                color: white;
-                                                border: 2px solid pink;
-                                                outline: none !important;
-                                            }
-                                        }
-                                    }
+
+                                        .input-field-container {
+                                            @include flexCenter(100%, 100%, 40px, center, center, row);
+                                            width: fill-available;
+
+                                            .input-field {
+                                                @include flexCenter(80%, 92%, 40px, center, center, row);
+                                                border: none;
+                                                outline: none;
+                                                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
+                                                background: initial;
+                                                padding-left: 4%;
                                 
-                                    .section-2_song-caption {
-                                        @include flexCenter(40%, 94%, 5px 50px 50px 5px, center, center, row);
-                                        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
-                                        opacity: 0;
-                                        animation: opacityTransition 1s forwards;
-                                        
-                                        .song-caption-input {
-                                            @include flexCenter(80%, 92%, 40px, center, center, row);
-                                            box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
-                                            background: initial;
-                                            border: none;
-                                            padding-left: 4%;
-                            
-                                            &::placeholder {
-                                                color: white;
-                                            }
-                                            &:focus {
-                                                color: white;
-                                                border: 2px solid pink;
-                                                outline: none !important;
+                                                &::placeholder {
+                                                    color: white;
+                                                }
+                                                &:focus {
+                                                    color: white;
+                                                    border: 2px solid pink;
+                                                    outline: none !important;
+                                                }
+                                                &:defined {
+                                                    color: pink;
+                                                }
                                             }
                                         }
                                     }
