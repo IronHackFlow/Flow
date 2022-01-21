@@ -14,7 +14,7 @@ export default function ErrorModal({
   else {
     setTimeout(() => {
       onClose(false)
-    }, 3000)
+    }, 3000) 
   }
 
   const bgSpecs = { 
@@ -25,26 +25,23 @@ export default function ErrorModal({
   const modalSpecs = {
     top: `${placement}%`,
     width: `${modWidth}%`,
-    height: `${modHeight}px`
+    height: `${modHeight}px`,
   }
-
+  
   return ReactDOM.createPortal(
     <div 
       className="ErrorModal" 
       style={bgSpecs}
-      onClick={() => onClose(false)}    
+      onClick={() => onClose()}
     >
-      <div 
-        className="error-container--red"
-        style={modalSpecs}
-      >
+      <div className="error-container--red" style={modalSpecs}>
         <div className="error--shadow-inset">
           <div className="icon-container">
             {/* <div className="error-icon_shadow-div-outset">
               <div className="error-icon_shadow-div-inset"> */}
                 <button 
                   className="icon--shadow-outset"
-                  onClick={() => onClose(false)}  
+                  onClick={() => onClose()}  
                 >
                   <img className="button-icons" src={xExit} alt="exit x button" />
                 </button>

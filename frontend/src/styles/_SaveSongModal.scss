@@ -199,6 +199,11 @@
                                                 border: none;
                                                 color: white;
 
+                                                .select-options {
+                                                    background: gray;
+                                                    color: white;
+                                                }
+
                                                 &:focus {
                                                     outline: none !important;
                                                 }
@@ -300,23 +305,33 @@
                                             width: fill-available;
 
                                             .input-field {
-                                                @include flexCenter(80%, 92%, 40px, center, center, row);
+                                                @include flexCenter(80%, 97%, 40px, center, center, row);
                                                 border: none;
                                                 outline: none;
                                                 box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
                                                 background: initial;
-                                                padding-left: 4%;
-                                
+                                                text-indent: 4%;
+                                                
+                                                &::placeholder {
+                                                    color: rgb(214, 214, 214);
+                                                }
+                                                &:focus {
+                                                    color: white;
+                                                    border: 2px solid #ffa1c9;
+                                                    outline: none !important;
+                                                }
+                                                &:defined {
+                                                    color: #ffa1c9;
+                                                }
+                                            }
+                                            .required {
                                                 &::placeholder {
                                                     color: white;
                                                 }
                                                 &:focus {
-                                                    color: white;
-                                                    border: 2px solid pink;
-                                                    outline: none !important;
-                                                }
-                                                &:defined {
-                                                    color: pink;
+                                                    background: #ff7a7a;
+                                                    border: 2px solid #ff4949;
+                                                    box-shadow: inset 3px 3px 5px #8b3d3d, inset -2px -2px 2px 0px #fdcece;
                                                 }
                                             }
                                         }

@@ -1,0 +1,118 @@
+.select-takes_shadow-div-outset {
+    @include flexCenter(100%, 91%, 30px, center, center, column);
+    // box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+    background: linear-gradient(266deg, #6D6D6D, #828282);
+    border: none;
+    color: white;
+
+    .select-options {
+        background: gray;
+        color: white;
+    }
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+.SelectSongMenuModal {
+    @include flexCenter(100%, 100%, 0, center, center, column);
+    position: absolute;
+    background: #00000078;
+    z-index: -4;
+    opacity: 0;
+    top: 0;
+    // .select-menu__in-display--shadow-outset {
+    //     @include flexCenter(70%, 95%, 40px, center, center, column);
+    //     box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #aeaeae;
+
+    //     .select-menu__text-container {
+    //         @include flexCenter(100%, 87%, 0, center, center, column);
+
+    //         p {
+
+    //         }
+    //     }
+    //     .select-menu__menu-btn-container {
+    //         @include flexCenter(100%, 13%, 0, center, center, column);
+
+    //         .select-menu__menu-btn {
+    //             @include flexCenter(80%, 80%, 30px, center, center, column);
+    //             box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+
+    //             img {
+    
+    //             }
+    //         }
+    //     }
+    // }
+
+    .select-menu__list {
+        @include flexCenter(auto, 85%, 10px, center, center, column);
+        background: linear-gradient(327deg, #5b5b5b 0%, #cdcdcd 100%);
+        position: absolute;
+        top: 41.5%;
+        padding: 1.5% 0% 1.5% 0%;
+
+        .select-menu__list--shadow-inset {
+            @include flexCenter(auto, 96%, 8px, center, center, column);
+            box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+            padding: 1% 0% 1% 0%;
+
+            .select-menu__item-container {
+                @include flexCenter(52px, 100%, 0, center, center, column);
+
+                .select-menu__item--shadow-outset {
+                    @include flexCenter(85%, 96%, 6px, center, center, column);
+                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #f6f6f6;
+                    
+                    .select-menu__item--shadow-inset {
+                        @include flexCenter(80%, 95%, 20px, center, center, column);
+                        box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+                        
+
+                        .select-menu__item-content-container {
+                            @include flexCenter(64%, 96%, 30px, center, center, row);
+                            box-shadow: 3px 3px 5px #2e2e2e, -2px -2px 2px 0px #ededed;
+                            color: white;
+
+                            .select-menu__item-bullet {
+                                @include flexCenter(100%, 8%, 0, center, center, column);
+        
+                                .select-menu__item-bullet--shadow-inset {
+                                    @include flexCenter(60%, 60%, 50px, center, center, column);
+                                    box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+            
+                                }
+                            }
+                            .select-menu__item-text {
+                                @include flexCenter(100%, 92%, 0, center, center, column);
+
+                                h2 {
+                                    height: 85%;
+                                    width: 100%;
+                                    text-indent: 3%;
+                                    text-align: start;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .selected {
+                .select-menu__item--shadow-outset {
+                    box-shadow: 3px 3px 5px #581d36, -2px -2px 2px 0px #ffcfe3;
+                    background: #e24f8c;
+                    .select-menu__item--shadow-inset {
+                        box-shadow: inset 3px 3px 3px 0px #7e1f47, inset -2px -2px 2px #ffcee2;
+                        .select-menu__item-content-container {
+                            box-shadow: 3px 3px 5px #7e1f47, -2px -2px 2px 0px #ffc3dc;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

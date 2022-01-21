@@ -13241,6 +13241,11 @@ input, textarea, select, button {
   color: white;
 }
 
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-1_select-takes .select-takes-container_shadow-div-outset .select-takes-container .select-takes_shadow-div-inset .select-takes_shadow-div-outset .select-options {
+  background: gray;
+  color: white;
+}
+
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-1_select-takes .select-takes-container_shadow-div-outset .select-takes-container .select-takes_shadow-div-inset .select-takes_shadow-div-outset:focus {
   outline: none !important;
 }
@@ -13549,7 +13554,7 @@ input, textarea, select, button {
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field {
   height: 80%;
-  width: 92%;
+  width: 97%;
   border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13569,33 +13574,56 @@ input, textarea, select, button {
   -webkit-box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
           box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
   background: initial;
-  padding-left: 4%;
+  text-indent: 4%;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field::-webkit-input-placeholder {
-  color: white;
+  color: #d6d6d6;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field:-ms-input-placeholder {
-  color: white;
+  color: #d6d6d6;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field::-ms-input-placeholder {
-  color: white;
+  color: #d6d6d6;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field::placeholder {
-  color: white;
+  color: #d6d6d6;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field:focus {
   color: white;
-  border: 2px solid pink;
+  border: 2px solid #ffa1c9;
   outline: none !important;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .input-field:defined {
-  color: pink;
+  color: #ffa1c9;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .required::-webkit-input-placeholder {
+  color: white;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .required:-ms-input-placeholder {
+  color: white;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .required::-ms-input-placeholder {
+  color: white;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .required::placeholder {
+  color: white;
+}
+
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .section-inputs .input-container .input-field-container .required:focus {
+  background: #ff7a7a;
+  border: 2px solid #ff4949;
+  -webkit-box-shadow: inset 3px 3px 5px #8b3d3d, inset -2px -2px 2px 0px #fdcece;
+          box-shadow: inset 3px 3px 5px #8b3d3d, inset -2px -2px 2px 0px #fdcece;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .buttons-container {
@@ -13704,5 +13732,270 @@ input, textarea, select, button {
   z-index: -1;
   -webkit-transition: all .3s .42s ease-in;
   transition: all .3s .42s ease-in;
+}
+
+.select-takes_shadow-div-outset {
+  height: 100%;
+  width: 91%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(266deg, #6D6D6D, #828282);
+  border: none;
+  color: white;
+}
+
+.select-takes_shadow-div-outset .select-options {
+  background: gray;
+  color: white;
+}
+
+.select-takes_shadow-div-outset:focus {
+  outline: none !important;
+}
+
+.SelectSongMenuModal {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  background: #00000078;
+  z-index: -4;
+  opacity: 0;
+  top: 0;
+}
+
+.SelectSongMenuModal .select-menu__list {
+  height: auto;
+  width: 85%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(327deg, #5b5b5b 0%, #cdcdcd 100%);
+  position: absolute;
+  top: 41.5%;
+  padding: 1.5% 0% 1.5% 0%;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset {
+  height: auto;
+  width: 96%;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+          box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+  padding: 1% 0% 1% 0%;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container {
+  height: 52px;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset {
+  height: 85%;
+  width: 96%;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #f6f6f6;
+          box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #f6f6f6;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset {
+  height: 80%;
+  width: 95%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+          box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container {
+  height: 64%;
+  width: 96%;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 5px #2e2e2e, -2px -2px 2px 0px #ededed;
+          box-shadow: 3px 3px 5px #2e2e2e, -2px -2px 2px 0px #ededed;
+  color: white;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container .select-menu__item-bullet {
+  height: 100%;
+  width: 8%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container .select-menu__item-bullet .select-menu__item-bullet--shadow-inset {
+  height: 60%;
+  width: 60%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+          box-shadow: inset 3px 3px 3px 0px #4a4a4a, inset -2px -2px 2px #dbdbdb;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container .select-menu__item-text {
+  height: 100%;
+  width: 92%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container .select-menu__item-text h2 {
+  height: 85%;
+  width: 100%;
+  text-indent: 3%;
+  text-align: start;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .selected .select-menu__item--shadow-outset {
+  -webkit-box-shadow: 3px 3px 5px #581d36, -2px -2px 2px 0px #ffcfe3;
+          box-shadow: 3px 3px 5px #581d36, -2px -2px 2px 0px #ffcfe3;
+  background: #e24f8c;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .selected .select-menu__item--shadow-outset .select-menu__item--shadow-inset {
+  -webkit-box-shadow: inset 3px 3px 3px 0px #7e1f47, inset -2px -2px 2px #ffcee2;
+          box-shadow: inset 3px 3px 3px 0px #7e1f47, inset -2px -2px 2px #ffcee2;
+}
+
+.SelectSongMenuModal .select-menu__list .select-menu__list--shadow-inset .selected .select-menu__item--shadow-outset .select-menu__item--shadow-inset .select-menu__item-content-container {
+  -webkit-box-shadow: 3px 3px 5px #7e1f47, -2px -2px 2px 0px #ffc3dc;
+          box-shadow: 3px 3px 5px #7e1f47, -2px -2px 2px 0px #ffc3dc;
 }
 /*# sourceMappingURL=style.css.map */

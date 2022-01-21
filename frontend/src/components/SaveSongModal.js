@@ -3,6 +3,7 @@ import actions from "../api";
 import axios from "axios";
 import TheContext from "../contexts/TheContext"
 import AudioTimeSlider from "../components/AudioTimeSlider";
+import SelectSongMenuModal from "../components/SelectSongMenuModal";
 import ErrorModal from "./ErrorModal"
 import ButtonClearText from "../components/ButtonClearText";
 import useDebugInformation from "../utils/useDebugInformation"
@@ -15,8 +16,10 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
   useDebugInformation('SaveSongModal', {allTakes})
   const { user } = useContext(TheContext)
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(allTakes[0]);
   const [showErrorModal, setShowErrorModal] = useState(false)
+  const [nameRequired, setNameRequired] = useState(false)
+  const [showSelectMenu, setShowSelectMenu] = useState(false)
 
   const songCaptionInputRef = useRef();
   const songNameInputRef = useRef()
@@ -26,7 +29,6 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
 
 
   useEffect(() => {
-    console.log(songCaptionInputRef.current.value, "this should be empty on reopen")
     if (showSaveSongModal) {
       songNameInputRef.current.focus()
     } else {
@@ -35,6 +37,23 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
     }
   }, [showSaveSongModal])
 
+  useEffect(() => {
+    if (showErrorModal) {
+      setNameRequired(true)
+      songNameInputRef.current.focus()
+    } else {
+      songNameInputRef.current.focus()
+      setNameRequired(false)
+    }
+  }, [showErrorModal])
+  
+  
+  const onErrorModalClose = () => {
+    setShowErrorModal(false)
+    setNameRequired(false)
+    songNameInputRef.current.focus()
+  }
+  
   const handleInputChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
@@ -43,11 +62,12 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
       [name]: value
     })
   }
-
   const handleSaveSong = async (e) => {
     e.preventDefault()
-    if (!songNameInputRef.current.value) return setShowErrorModal(true)
-    else {
+    if (!songNameInputRef.current.value) {
+      setShowErrorModal(true)
+      // songNameInputRef.current.focus()
+    } else {
       const fileName = user?._id + currentSong.name.replaceAll(" ", "-")
       const fileType = "audio/mpeg-3"
       const file = currentSong.blob
@@ -92,7 +112,6 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
     console.log('allTakes index log:', allTakes[e.target.selectedIndex])
     setSelectedOption(e.target.value)
     songNameInputRef.current.focus()
-    // setLoadSelectedTake(allTakes[e.target.selectedIndex])
   };
 
   const chooseTake = useCallback(() => {
@@ -102,7 +121,7 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
     else {
       return allTakes.map((element, index) => {
         return (
-          <option value={element.song_URL} key={`${index}_${element.song_URL}`}>
+          <option className="select-options" value={element.song_URL} key={`${index}_${element.song_URL}`}>
             {element.name}
           </option>
         )
@@ -115,7 +134,7 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
       <div className={`save-song_modal-container ${showSaveSongModal ? "save-song_modal-container--transition-in" : "save-song_modal-container--transition-out"}`}>
       <ErrorModal 
         isOpen={showErrorModal} 
-        onClose={setShowErrorModal} 
+        onClose={onErrorModalClose} 
         title={"Name is Required"}
         nextActions={"Please add a name to save"}
         opacity={false}
@@ -188,15 +207,21 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
                     <div className="select-takes-container_shadow-div-outset">
                       <div className="select-takes-container">
                         <div className="select-takes_shadow-div-inset">
-                          <select 
+                          <div 
                             id="takes" 
                             className="select-takes_shadow-div-outset" 
-                            value={selectedOption}
                             ref={selectTakesRef}
-                            onChange={(e) => loadTake(e)}
+                            onClick={() => setShowSelectMenu(true)}
                           >
-                            {chooseTake()}
-                          </select>
+                            <p>{selectedOption?.name}</p>
+                          </div>
+                          <SelectSongMenuModal 
+                            songArray={allTakes}
+                            isOpen={showSelectMenu}
+                            onClose={setShowSelectMenu}
+                            option={selectedOption}
+                            setOption={setSelectedOption}
+                          />
                         </div>
                       </div>
                     </div>
@@ -208,11 +233,12 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
                     <div className="section-title">
                       <h2>Upload Your Flow</h2>
                     </div>
+
                     <div className="section-inputs">
                       <div className="input-container">
                         <div className="input-field-container">
                           <input
-                            className="input-field"
+                            className={`input-field ${nameRequired ? "required" : ""}`}
                             ref={songNameInputRef}
                             type="text"
                             name="name"

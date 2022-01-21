@@ -816,9 +816,11 @@ function TestAudio(props) {
                         <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
                           <div 
                             className="actions-btn_shadow-div-outset ab-save" 
-                            onClick={handleSaveSongMenu}>
+                            onClick={handleSaveSongMenu}
+                          >
                             <img className="button-icons bi-help" src={save} alt="save icon" />
                           </div>
+                          
                           <ErrorModal 
                             isOpen={showErrorModal} 
                             onClose={setShowErrorModal} 
