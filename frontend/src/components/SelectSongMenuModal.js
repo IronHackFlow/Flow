@@ -1,43 +1,27 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
+import RecordBoothContext from "../contexts/RecordBoothContext"
 import SelectSongItem from "./SelectSongItem"
 import dropDown from "../images/select-down.svg"
 
-export default function SelectSongMenuModal({ songArray, isOpen, onClose, option, setOption }) {
-
-  const handleOptionChange = (e) => {
-    let getSong = songArray.filter(each => each.name === e.currentTarget.id)
-    option = getSong[0]
-    setOption(option)
-    console.log(getSong[0], option, "what is this actulall??")
-    onClose(false)
-  }
-
-  const handleSelected = useCallback(node => {
-
-  }, [])
-
-  const mapOptions = useCallback(() => {
-    if (songArray.length === 0) {
-      return <option>Your Takes</option>
-    } 
-    else {
-      return songArray.map((element, index) => {
-        let addSelect = false
-        if (element.name === option?.name) {
-          addSelect = true
-        }
-        return (
-          <SelectSongItem 
-            key={`${element.name}_${index}`}
-            option={option}
-            element={element}
-            onSelect={handleOptionChange}
-            isSelected={addSelect ? true : false}
-          />
-        )
-      })
-    }
-  }, [songArray])
+export default function SelectSongMenuModal({positionTop, positionY, isOpen, onClose}) {
+  const { allTakes, currentSong } = useContext(RecordBoothContext)
+  
+  const displayOptions = useCallback(() => {
+    return allTakes.map((element, index) => {
+      let isSelected = false
+      if (element.name === currentSong?.name) {
+        isSelected = true
+      } 
+      return (
+        <SelectSongItem 
+          key={`${element.name}_${index}`}
+          element={element}
+          onClose={onClose}
+          isSelected={isSelected ? true : false}
+        />
+      )
+    })
+  }, [allTakes, currentSong])
   
   return (
     <div 
@@ -54,9 +38,12 @@ export default function SelectSongMenuModal({ songArray, isOpen, onClose, option
           </div>
         </div>
       </div> */}
-      <div className="select-menu__list">
+      <div 
+        className="select-menu__list"
+        style={positionTop ? {top: `${positionY}%`} : {bottom: `${positionY}%`}}
+      >
         <ul className="select-menu__list--shadow-inset">
-          {mapOptions()}
+          {displayOptions()}
         </ul>
       </div>
     </div>

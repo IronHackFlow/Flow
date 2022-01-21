@@ -4,6 +4,8 @@ import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognitio
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../contexts/TheContext";
+import RecordBoothContext from "../contexts/RecordBoothContext";
+import SelectSongMenuModal from "../components/SelectSongMenuModal";
 import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import SaveSongModal from "../components/SaveSongModal";
@@ -26,7 +28,6 @@ import modal from "../images/modal.svg";
 
 function TestAudio(props) {
   const { user, windowSize } = React.useContext(TheContext)
-  const navigate = useNavigate()
   // useDebugInformation("TestAudio", props)
   useEventListener('resize', e => {
     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -39,6 +40,7 @@ function TestAudio(props) {
     }
   })
   
+  const navigate = useNavigate()
   const { refilterProfanity } = useRefilterProfanity()
   const { 
     beatOption, isBeatPlaying,
@@ -86,6 +88,7 @@ function TestAudio(props) {
   const [recordingDisplay, setRecordingDisplay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showSaveSongModal, setShowSaveSongModal] = useState(false);
+  const [showSelectMenu, setShowSelectMenu] = useState(false)
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
   const [songUploadObject, setSongUploadObject] = useState();
@@ -108,6 +111,7 @@ function TestAudio(props) {
   const [dateAfter, setDateAfter] = useState();
   const [toggleModal, setToggleModal] = useState(false);
   const [focusBorder, setFocusBorder] = useState(null)
+  const [selectTitle, setSelectTitle] = useState("")
 
   const modalBtnRef = useRef();
   const playBeatRef = useRef();
@@ -218,6 +222,12 @@ function TestAudio(props) {
       }
     }
   }, [recorderState.mediaRecorder])
+
+  useEffect(() => {
+    if (recorderState.initRecording) return setSelectTitle('Recording...')
+    else if (currentSong.name === "" && !recorderState.initRecording) return setSelectTitle("No Flows")
+    else return setSelectTitle(`${currentSong.name}`)
+  }, [currentSong, recorderState.initRecording])
 
   const toggleModalHandler = () => {
     if (toggleModal) {
@@ -497,6 +507,7 @@ function TestAudio(props) {
           mediaStream: dest.stream,
         }
       })
+
     } catch (err) {
       console.log(err)
     }
@@ -531,30 +542,6 @@ function TestAudio(props) {
     }
   }
 
-  const loadTake = (e) => {
-    console.log('allTakes index log:', allTakes[e.target.selectedIndex])
-    setSelectedOption(e.target.value)
-    setLoadSelectedTake(allTakes[e.target.selectedIndex])
-    setAudioSrc(e.target.value)
-    setSongUploadObject(allTakes[e.target.selectedIndex])
-    setRecordingDisplay(false)
-  };
-
-  const chooseTake = useCallback(() => {
-    if (allTakes.length === 0) {
-      return <option>Your Takes</option>
-    } 
-    else {
-      return allTakes.map((element, index) => {
-        return (
-          <option value={element.song_URL} key={`${index}_${element.song_URL}`}>
-            {element.name}
-          </option>
-        )
-      })
-    }
-  }, [allTakes])
-
   const deleteOneTake = () => {
     setAllTakes(eachTake => eachTake.filter(item => item.song_URL !== selectedOption))
   }
@@ -583,288 +570,293 @@ function TestAudio(props) {
   }
 
   return (
-    <div id="TestAudio" className="TestAudio">
-      <RecordingBoothModal 
-       toggleModal={toggleModal} 
-       setToggleModal={setToggleModal}
-       modalBtnRef={modalBtnRef}
-       focusBorder={focusBorder}
-       setFocusBorder={setFocusBorder}
-      />
+    <RecordBoothContext.Provider value={{
+      allTakes, setAllTakes,
+      currentSong, setCurrentSong,
+      showSaveSongModal, setShowSaveSongModal
+    }}>
+      <div id="TestAudio" className="TestAudio">
+        <RecordingBoothModal 
+          toggleModal={toggleModal} 
+          setToggleModal={setToggleModal}
+          modalBtnRef={modalBtnRef}
+          focusBorder={focusBorder}
+          setFocusBorder={setFocusBorder}
+          />
 
-      <SaveSongModal 
-        allTakes={allTakes} 
-        currentSong={currentSong} 
-        setCurrentSong={setCurrentSong}
-        showSaveSongModal={showSaveSongModal} 
-        setShowSaveSongModal={setShowSaveSongModal}
-      />
-      <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
-      
-      <div className="section-1_speech">
-        <button 
-          className="modal-toggle-btn"
-          ref={modalBtnRef} 
-          onClick={() => toggleModalHandler()}
-        >
-          <img className="button-icons" src={modal} alt="modal" />
-        </button>
+        <SaveSongModal 
+          allTakes={allTakes} 
+          currentSong={currentSong} 
+          setCurrentSong={setCurrentSong}
+          showSaveSongModal={showSaveSongModal} 
+          setShowSaveSongModal={setShowSaveSongModal}
+        />
 
-        <div className={`scroll-rhymes-container ${focusBorder === 31 ? "focus-border" : ""}`} id="currentTranscript" ref={scrollRef}>
-          {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
+        <SelectSongMenuModal
+          positionTop={false}
+          positionY={25}
+          isOpen={showSelectMenu}
+          onClose={setShowSelectMenu}
+        />
+
+        <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
+        
+        <div className="section-1_speech">
+          <button 
+            className="modal-toggle-btn"
+            ref={modalBtnRef} 
+            onClick={() => toggleModalHandler()}
+          >
+            <img className="button-icons" src={modal} alt="modal" />
+          </button>
+
+          <div className={`scroll-rhymes-container ${focusBorder === 31 ? "focus-border" : ""}`} id="currentTranscript" ref={scrollRef}>
+            {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
+          </div>
+          <div className={`scroll-rhymes-line ${focusBorder === 30 ? "focus-border" : ""}`}>
+            <p className="transcript-line-2">{transcript}</p>
+          </div>
         </div>
-        <div className={`scroll-rhymes-line ${focusBorder === 30 ? "focus-border" : ""}`}>
-          <p className="transcript-line-2">{transcript}</p>
-        </div>
-      </div>
-      
-      <div className="section-2_control-panel">
-        <div className="section-2a_flow-suggestions">
-          <div className="next-bar-container">
-            <div className="action-word-container">
-              {(retrievedActionRhymes && recordingDisplay) ? displayActionWords() : <p className="initial-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>}
-            </div>
-          </div>
-
-          <div className={`suggestions ${focusBorder === 20 ? "focus-border" : ""}`}>
-            <div className="custom-rhyme">
-              <div className="rhymed-word_shadow-div-inset">
-                {(rhymeWordHolder && recordingDisplay) ? <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p> : <p>Top Rhymes</p>}
+        
+        <div className="section-2_control-panel">
+          <div className="section-2a_flow-suggestions">
+            <div className="next-bar-container">
+              <div className="action-word-container">
+                {(retrievedActionRhymes && recordingDisplay) ? displayActionWords() : <p className="initial-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>}
               </div>
-              <div className="custom-rhyme-inner">
-                <div className="custom-rhyme_shadow-div-inset">
-                  <div className="top-rhymes-container">
-                    {(rhymeWordHolder && recordingDisplay) ? showRhymes(retrievedRhymes) : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
+            </div>
+
+            <div className={`suggestions ${focusBorder === 20 ? "focus-border" : ""}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset">
+                  {(rhymeWordHolder && recordingDisplay) ? <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p> : <p>Top Rhymes</p>}
+                </div>
+                <div className="custom-rhyme-inner">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {(rhymeWordHolder && recordingDisplay) ? showRhymes(retrievedRhymes) : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedRhymes, "topRhymes")}>
+                      <img className="button-icons" src={shuffle} alt="shuffle" />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="rhyme-lock-container">
-              <div className="rhyme-lock-button">
-                <div className="rhyme-lock-outset">
-                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedRhymes, "topRhymes")}>
-                    <img className="button-icons" src={shuffle} alt="shuffle" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={`suggestions ${focusBorder === 21 ? "focus-border" : ""}`}>
-            <div className="custom-rhyme">
-              <div className="rhymed-word_shadow-div-inset rw-two">
-                  {(lockRhymeHolder && recordingDisplay) ? <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p> : <p>Locked Rhymes</p>}
-                </div>
-              <div className="custom-rhyme-inner" id="lockedRhyme">
-                <div className="custom-rhyme_shadow-div-inset">
-                  <div className="top-rhymes-container">
-                    {(lockRhymeHolder && recordingDisplay) ? showRhymes(lockedRhymes) : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
+            <div className={`suggestions ${focusBorder === 21 ? "focus-border" : ""}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset rw-two">
+                    {(lockRhymeHolder && recordingDisplay) ? <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p> : <p>Locked Rhymes</p>}
+                  </div>
+                <div className="custom-rhyme-inner" id="lockedRhyme">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {(lockRhymeHolder && recordingDisplay) ? showRhymes(lockedRhymes) : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
-            <div className="rhyme-lock-container">
-              <div className="rhyme-lock-button">
-                <div className="rhyme-lock-outset">
-                  <button className="rhyme-lock-btn" onClick={lockSuggestion}>
-                    <img className="button-icons" src={locked} alt="lock" />
-                  </button>
-                </div>
               </div>
-            </div>
-          </div>
-
-          <div className={`suggestions ${focusBorder === 22 ? "focus-border" : ""}`}>
-            <div className="custom-rhyme">
-              <div className="rhymed-word_shadow-div-inset rw-three">
-                {(selectedWordHolder && recordingDisplay) ? <p className="selected-word-holder">{selectedWordHolder}</p> : <p>Selected Rhymes</p>}
-              </div>
-              <div className="custom-rhyme-inner" id="lockedRhyme">
-                <div className="custom-rhyme_shadow-div-inset">
-                  <div className="top-rhymes-container">
-                    {(selectedWordHolder && recordingDisplay) ? showRhymes(retrievedSelectedRhymes) : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button className="rhyme-lock-btn" onClick={lockSuggestion}>
+                      <img className="button-icons" src={locked} alt="lock" />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="rhyme-lock-container">
-              <div className="rhyme-lock-button">
-                <div className="rhyme-lock-outset">
-                  <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, "selectedRhymes")}>
-                    <img className="button-icons" src={shuffle} alt="shuffle" />
-                  </button>
+
+            <div className={`suggestions ${focusBorder === 22 ? "focus-border" : ""}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset rw-three">
+                  {(selectedWordHolder && recordingDisplay) ? <p className="selected-word-holder">{selectedWordHolder}</p> : <p>Selected Rhymes</p>}
+                </div>
+                <div className="custom-rhyme-inner" id="lockedRhyme">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {(selectedWordHolder && recordingDisplay) ? showRhymes(retrievedSelectedRhymes) : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, "selectedRhymes")}>
+                      <img className="button-icons" src={shuffle} alt="shuffle" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="suggestion-button-container">
-            <div className="rhyme-lock-container">
-              <div className="rhyme-lock-button rlb-1">
-                <div className="rhyme-lock-outset">
-                  <select 
-                    className="rhyme-lock-btn select-no" 
-                    value={selectedRhymeNo}
-                    onChange={(e) => setSelectedRhymeNo(e.target.value)}
+            <div className="suggestion-button-container">
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button rlb-1">
+                  <div className="rhyme-lock-outset">
+                    <select 
+                      className="rhyme-lock-btn select-no" 
+                      value={selectedRhymeNo}
+                      onChange={(e) => setSelectedRhymeNo(e.target.value)}
+                      >
+                        {rhymeOptionNoHandler()}
+                    </select>
+                  </div>
+                </div>
+  
+                <div className="rhyme-lock-button rlb-3">
+                  <div className="rhyme-lock-outset">
+                    <button 
+                      className="rhyme-lock-btn"
+                      onClick={() => navigateToEditLyrics()}
                     >
-                      {rhymeOptionNoHandler()}
-                  </select>
-                </div>
-              </div>
- 
-              <div className="rhyme-lock-button rlb-3">
-                <div className="rhyme-lock-outset">
-                  <button 
-                    className="rhyme-lock-btn"
-                    onClick={() => navigateToEditLyrics()}
-                  >
-                    EditLyrics
-                  </button>
-                  {/* <Link 
-                    to="/recordingBooth/editLyrics" 
-                    state={{ propSongTakes: allTakes, propCurrentSong: songUploadObject}} 
-                    className="rhyme-lock-btn"
-                  >
-                    Edit Lyrics
-                  </Link> */}
+                      EditLyrics
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="section-2b_flow-controls"> 
-          <div className="flow-controls-container">
-            <div className="flow-controls-1_playback-display">
-              <div className="play-btn-container">
-                <div className="play-btn-container_shadow-div-outset">
-                  <div className="play-btn-container_shadow-div-inset">
-                    {isPlaying ? (
-                      <button
-                        className="play-btn_shadow-div-outset play"
-                        aria-label="Pause"
-                        onClick={() => handlePlayPause(false)}
+          <div className="section-2b_flow-controls"> 
+            <div className="flow-controls-container">
+              <div className="flow-controls-1_playback-display">
+                <div className="play-btn-container">
+                  <div className="play-btn-container_shadow-div-outset">
+                    <div className="play-btn-container_shadow-div-inset">
+                      {isPlaying ? (
+                        <button
+                          className="play-btn_shadow-div-outset play"
+                          aria-label="Pause"
+                          onClick={() => handlePlayPause(false)}
+                        >
+                          <img
+                            className="button-icons bi-pause"
+                            id="play-stop-img"
+                            src={pause}
+                            alt="pause icon"
+                          />
+                        </button>
+                      ) : (
+                        <button
+                        className="play-btn_shadow-div-outset pause"
+                        aria-label="Play"
+                        onClick={() => handlePlayPause(true)}
                       >
                         <img
-                          className="button-icons bi-pause"
+                          className="button-icons bi-play"
                           id="play-stop-img"
-                          src={pause}
-                          alt="pause icon"
+                          src={play}
+                          alt="play icon"
                         />
                       </button>
-                    ) : (
-                      <button
-                      className="play-btn_shadow-div-outset pause"
-                      aria-label="Play"
-                      onClick={() => handlePlayPause(true)}
-                    >
-                      <img
-                        className="button-icons bi-play"
-                        id="play-stop-img"
-                        src={play}
-                        alt="play icon"
-                      />
-                    </button>
-                    )
-                  }
+                      )
+                    }
+                    </div>
+                  </div>
+                </div>
+
+                <div className="play-slider-container">
+                  <div className="play-slider-container_shadow-div-outset">
+                    <div className="play-slider-container_shadow-div-inset">
+                      <div className="play-slider_shadow-div-outset">
+                        <AudioTimeSlider
+                          isPlaying={isPlaying}
+                          setIsPlaying={setIsPlaying}
+                          currentSong={currentSong}
+                          location={recordingBooth}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="play-slider-container">
-                <div className="play-slider-container_shadow-div-outset">
-                  <div className="play-slider-container_shadow-div-inset">
-                    <div className="play-slider_shadow-div-outset">
-                      <AudioTimeSlider
-                        isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
-                        currentSong={songUploadObject}
-                        location={recordingBooth}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flow-controls-2_actions">
-              <div className="actions-container_shadow-div-outset">
-                <div className="actions-container_shadow-div-inset">
-                  <div className="actions-1_flow-takes">
-                    <div className="flow-takes-1_select-takes">
-                      <div className="select-takes-container_shadow-div-outset">
-                        <div className="select-takes-container">
-                          <div className="select-takes_shadow-div-inset">
-                            <select 
-                              id="takes" 
-                              className="select-takes_shadow-div-outset" 
-                              value={selectedOption}
-                              ref={selectTakesRef}
-                              onChange={(e) => loadTake(e)}
-                            >
-                              {chooseTake()}
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flow-takes-2_takes-actions">
-                      <div className="takes-actions-container">
-                        <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
-                          <div 
-                            className="actions-btn_shadow-div-outset ab-save" 
-                            onClick={handleSaveSongMenu}
-                          >
-                            <img className="button-icons bi-help" src={save} alt="save icon" />
-                          </div>
-                          
-                          <ErrorModal 
-                            isOpen={showErrorModal} 
-                            onClose={setShowErrorModal} 
-                            title={"No Recorded Takes to Save"}
-                            nextActions={"Press the green mic button to begin Flowing!"}
-                            opacity={true}
-                            modHeight={56}
-                            modWidth={99}
-                            placement={.5}
-                          />
-                        </div>
-                        <div className="actions-btn-container">
-                          <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>
-                            <img className="button-icons" src={xExit} alt="delete bin icon" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="actions-2_record">
-                    <div className="record-container">
-                      <div className="record-1_select-beat">
-                        <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
-                          <div className="select-beat_play-container">
-                            <button 
-                              className="select-beat_play-btn"
-                              onClick={() => playSelectBeat(playBeatRef)}
+              <div className="flow-controls-2_actions">
+                <div className="actions-container_shadow-div-outset">
+                  <div className="actions-container_shadow-div-inset">
+                    <div className="actions-1_flow-takes">
+                      <div className="flow-takes-1_select-takes">
+                        <div className="select-takes-container_shadow-div-outset">
+                          <div className="select-takes-container">
+                            <div className="select-takes_shadow-div-inset">
+                              <div 
+                                className="select-takes_shadow-div-outset" 
+                                ref={selectTakesRef}
+                                onClick={() => allTakes?.length !== 0 ? setShowSelectMenu(true) : null}
                               >
-                              <img className="button-icons" src={isBeatPlaying ? pause : play} alt="play or pause" />
-                            </button>
-                            <audio src={beatOption} ref={playBeatRef} />
-                          </div>
-                          <div className="select-beat_shadow-div-outset">
-                            <div className="select-beat-title">
-                              Select A Beat :
+                                <p>{selectTitle}</p>
+                              </div>
                             </div>
-                            <select 
-                              id="selectBox" 
-                              className="track-select" 
-                              value={beatOption} 
-                              onChange={(e) => selectBeatOption(e)}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flow-takes-2_takes-actions">
+                        <div className="takes-actions-container">
+                          <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
+                            <div 
+                              className="actions-btn_shadow-div-outset ab-save" 
+                              onClick={handleSaveSongMenu}
                             >
-                              {mapBeatOptions()}
-                            </select>
+                              <img className="button-icons bi-help" src={save} alt="save icon" />
+                            </div>
+                            
+                            <ErrorModal 
+                              isOpen={showErrorModal} 
+                              onClose={setShowErrorModal} 
+                              title={"No Recorded Takes to Save"}
+                              nextActions={"Press the green mic button to begin Flowing!"}
+                              opacity={true}
+                              modHeight={56}
+                              modWidth={99}
+                              placement={.5}
+                            />
+                          </div>
+                          <div className="actions-btn-container">
+                            <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>
+                              <img className="button-icons" src={xExit} alt="delete bin icon" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="actions-2_record">
+                      <div className="record-container">
+                        <div className="record-1_select-beat">
+                          <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
+                            <div className="select-beat_play-container">
+                              <button 
+                                className="select-beat_play-btn"
+                                onClick={() => playSelectBeat(playBeatRef)}
+                                >
+                                <img className="button-icons" src={isBeatPlaying ? pause : play} alt="play or pause" />
+                              </button>
+                              <audio src={beatOption} ref={playBeatRef} />
+                            </div>
+                            <div className="select-beat_shadow-div-outset">
+                              <div className="select-beat-title">
+                                Select A Beat :
+                              </div>
+                              <select 
+                                id="selectBox" 
+                                className="track-select" 
+                                value={beatOption} 
+                                onChange={(e) => selectBeatOption(e)}
+                              >
+                                {mapBeatOptions()}
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -873,41 +865,41 @@ function TestAudio(props) {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="record-2_record-btn">
-            <div className={`record-btn_shadow-div-inset ${focusBorder === 11 ? "focus-border" : ""}`}>
-              {recorderState.initRecording ? (
-                <button
-                  className="record-btn_shadow-div-outset"
-                  onClick={stopRecording}
-                >
-                  <img
-                    className="button-icons"
-                    id="record-stop-img"
-                    src={stop}
-                    alt="record stop icon"
-                    />
-                </button>
-              ) : (
-                <button
-                  className="record-btn_shadow-div-outset"
-                  onClick={startRecording}
-                >
-                  <img
-                    className="button-icons"
-                    id="record-stop-img"
-                    src={mic}
-                    alt="record mic icon"
-                    />
-                </button>
-              )}
+            <div className="record-2_record-btn">
+              <div className={`record-btn_shadow-div-inset ${focusBorder === 11 ? "focus-border" : ""}`}>
+                {recorderState.initRecording ? (
+                  <button
+                    className="record-btn_shadow-div-outset"
+                    onClick={stopRecording}
+                  >
+                    <img
+                      className="button-icons"
+                      id="record-stop-img"
+                      src={stop}
+                      alt="record stop icon"
+                      />
+                  </button>
+                ) : (
+                  <button
+                    className="record-btn_shadow-div-outset"
+                    onClick={startRecording}
+                  >
+                    <img
+                      className="button-icons"
+                      id="record-stop-img"
+                      src={mic}
+                      alt="record mic icon"
+                      />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
+        <NavBar />
       </div>
-      <NavBar />
-    </div>
+    </RecordBoothContext.Provider>
   )
 }
 export default TestAudio;

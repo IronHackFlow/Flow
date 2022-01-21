@@ -52,8 +52,8 @@ body, #root {
 .App {
   position: relative;
   text-align: center;
-
 }
+
 a {
   text-decoration: none
 }
@@ -61,6 +61,9 @@ input, textarea, select, button {
   font-family: inherit; 
   border: none;
   background: initial;
+}
+button {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {
@@ -74,9 +77,10 @@ input, textarea, select, button {
 }
 
 
+@import './Loading';
+@import './Home';
 @import './NavBar';
 @import './Search';
-@import './Home';
 @import './TestAudio';
 @import './EditLyrics';
 @import './SongScreen';
@@ -85,7 +89,6 @@ input, textarea, select, button {
 @import './EditProfile';
 @import './Buttons';
 @import './RecordingBoothModal';
-@import './Loading';
 @import './ErrorModal';
 @import './SaveSongModal';
 @import './SelectSongMenuModal';

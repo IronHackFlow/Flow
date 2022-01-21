@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef, useCallback } from "react";
 import actions from "../api";
 import axios from "axios";
 import TheContext from "../contexts/TheContext"
+import RecordBoothContext from "../contexts/RecordBoothContext"
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import SelectSongMenuModal from "../components/SelectSongMenuModal";
 import ErrorModal from "./ErrorModal"
@@ -12,11 +13,15 @@ import pause from "../images/pause.svg";
 import xExit from "../images/exit-x-2.svg";
 
 
-export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, showSaveSongModal, setShowSaveSongModal }) {
-  useDebugInformation('SaveSongModal', {allTakes})
+export default function SaveSongModal(props) {
   const { user } = useContext(TheContext)
+  const { 
+    allTakes, setAllTakes, 
+    currentSong, setCurrentSong, 
+    showSaveSongModal, setShowSaveSongModal 
+  } = useContext(RecordBoothContext)
+
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(allTakes[0]);
   const [showErrorModal, setShowErrorModal] = useState(false)
   const [nameRequired, setNameRequired] = useState(false)
   const [showSelectMenu, setShowSelectMenu] = useState(false)
@@ -62,11 +67,11 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
       [name]: value
     })
   }
+
   const handleSaveSong = async (e) => {
     e.preventDefault()
     if (!songNameInputRef.current.value) {
       setShowErrorModal(true)
-      // songNameInputRef.current.focus()
     } else {
       const fileName = user?._id + currentSong.name.replaceAll(" ", "-")
       const fileType = "audio/mpeg-3"
@@ -108,27 +113,6 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
     }
   }
   
-  const loadTake = (e) => {
-    console.log('allTakes index log:', allTakes[e.target.selectedIndex])
-    setSelectedOption(e.target.value)
-    songNameInputRef.current.focus()
-  };
-
-  const chooseTake = useCallback(() => {
-    if (allTakes.length === 0) {
-      return <option>Your Takes</option>
-    } 
-    else {
-      return allTakes.map((element, index) => {
-        return (
-          <option className="select-options" value={element.song_URL} key={`${index}_${element.song_URL}`}>
-            {element.name}
-          </option>
-        )
-      })
-    }
-  }, [allTakes])
-
   return (
     <div className={`SaveSongModal ${showSaveSongModal ? "SaveSongModal--show" : "SaveSongModal--hide"}`}> 
       <div className={`save-song_modal-container ${showSaveSongModal ? "save-song_modal-container--transition-in" : "save-song_modal-container--transition-out"}`}>
@@ -208,19 +192,18 @@ export default function SaveSongModal({ allTakes, currentSong, setCurrentSong, s
                       <div className="select-takes-container">
                         <div className="select-takes_shadow-div-inset">
                           <div 
-                            id="takes" 
                             className="select-takes_shadow-div-outset" 
                             ref={selectTakesRef}
                             onClick={() => setShowSelectMenu(true)}
                           >
-                            <p>{selectedOption?.name}</p>
+                            <p>{currentSong?.name}</p>
                           </div>
+
                           <SelectSongMenuModal 
-                            songArray={allTakes}
+                            positionTop={true}
+                            positionY={41.5}
                             isOpen={showSelectMenu}
                             onClose={setShowSelectMenu}
-                            option={selectedOption}
-                            setOption={setSelectedOption}
                           />
                         </div>
                       </div>
