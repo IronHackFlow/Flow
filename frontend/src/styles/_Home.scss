@@ -341,12 +341,12 @@
                 box-shadow: 1px 2px 3px #3c3c3c, -1px -2px 3px 0px #c9c9c9;
 
                 .play-btn_shadow-div-inset {
-                  @include flexCenter(88%, 70%, 50px, center, center, column);
+                  @include flexCenter(88%, 70%, 100vh, center, center, column);
                   box-shadow: inset 2px 2px 2px #484848, inset -2px -2px 2px 0px #a1a1a1;
                   margin-left: 18%;
 
                   button.play-btn_shadow-div-outset {
-                    @include flexCenter(74%, 74%, 50px, center, center, column);
+                    @include flexCenter(74%, 74%, 100vh, center, center, column);
                     box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
                     background: initial;
 
