@@ -15,6 +15,7 @@ function AuthSignUp(props) {
       actions
         .signUp(userData)
         .then(res => {
+          console.log(res.data)
           if (res.data.success) {
             actions
               .logIn(userData)

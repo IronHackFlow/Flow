@@ -3,6 +3,7 @@ import {useLocation, useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 import actions from "../api"
 import TheContext from "../contexts/TheContext";
+import RecordBoothContext from "../contexts/RecordBoothContext"
 import AudioTimeSlider from "./AudioTimeSlider";
 import useBeats from '../utils/useBeats'
 import edit from "../images/edit.svg";
@@ -16,6 +17,7 @@ import play from "../images/play.svg";
 
 function EditLyrics(props) {
   const { user } = useContext(TheContext)
+  // const { allTakes, currentSong } = useContext(RecordBoothContext)
   const navigate = useNavigate()
   const location = useLocation()
   const { propSongTakes, propSongs, propCurrentSong } = location?.state
@@ -249,6 +251,7 @@ function EditLyrics(props) {
   return (
     <div className="EditLyrics">
       <div className="section-1_profile-el">
+        <h1 style={{position: "absolute", top: "10px", left: "30px", color: "white", fontSize: "16px"}}>This is A Work In Progress</h1>
         <button className="close-screen" onClick={closeWindow}>
           <img className="button-icons" src={exit} alt="exit" />
         </button>

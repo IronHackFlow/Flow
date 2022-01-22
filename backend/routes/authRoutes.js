@@ -127,7 +127,7 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   if (!user) {
     user = await User.create(userData)
   }
-  
+  console.log(user, "what could go wrong herre??")
   const payload = {
     _id: user._id,
     user_name: user.user_name
