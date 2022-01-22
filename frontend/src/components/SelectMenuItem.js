@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import RecordBoothContext from '../contexts/RecordBoothContext'
 
 
-export default function SelectSongItem({element, onClose, isSelected}) {
-  const { allTakes, setCurrentSong } = useContext(RecordBoothContext)
+export default function SelectMenuItem({type, element, onClose, isSelected}) {
+  const { allTakes, setCurrentSong, beats, setCurrentBeat } = useContext(RecordBoothContext)
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
@@ -15,8 +15,13 @@ export default function SelectSongItem({element, onClose, isSelected}) {
   }, [isSelected])
 
   const handleOptionChange = (e) => {
-    let getSong = allTakes?.filter(each => each.name === e.currentTarget.id)
-    setCurrentSong(getSong[0])
+    if (type === "song") {
+      let getSong = allTakes?.filter(each => each.name === e.currentTarget.id)
+      setCurrentSong(getSong[0])
+    } else {
+      let getBeat = beats?.filter(each => each.name === e.currentTarget.id)
+      setCurrentBeat(getBeat[0])
+    }
     onClose(false)
   }
 

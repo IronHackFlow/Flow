@@ -757,7 +757,6 @@
                         margin-left: 8%;
                     }
                     .track-select {
-                        background-color: #595959;
                         color: white;
                         border: none;
                         height: 60%;
@@ -766,6 +765,15 @@
                         &:focus {
                             outline: none !important;
                         }
+                    }
+                    &:focus {
+                        background: #787878;
+                        box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+
+                    }
+                    &:active {
+                        background: #787878;
+                        box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
                     }
                 }
             }

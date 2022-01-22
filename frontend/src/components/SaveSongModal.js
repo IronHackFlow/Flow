@@ -4,7 +4,7 @@ import axios from "axios";
 import TheContext from "../contexts/TheContext"
 import RecordBoothContext from "../contexts/RecordBoothContext"
 import AudioTimeSlider from "../components/AudioTimeSlider";
-import SelectSongMenuModal from "../components/SelectSongMenuModal";
+import SelectMenuModal from "../components/SelectMenuModal";
 import ErrorModal from "./ErrorModal"
 import ButtonClearText from "../components/ButtonClearText";
 import useDebugInformation from "../utils/useDebugInformation"
@@ -16,7 +16,6 @@ import xExit from "../images/exit-x-2.svg";
 export default function SaveSongModal(props) {
   const { user } = useContext(TheContext)
   const { 
-    allTakes, setAllTakes, 
     currentSong, setCurrentSong, 
     showSaveSongModal, setShowSaveSongModal 
   } = useContext(RecordBoothContext)
@@ -199,7 +198,8 @@ export default function SaveSongModal(props) {
                             <p>{currentSong?.name}</p>
                           </div>
 
-                          <SelectSongMenuModal 
+                          <SelectMenuModal 
+                            type={"song"}
                             positionTop={true}
                             positionY={41.5}
                             isOpen={showSelectMenu}

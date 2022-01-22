@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../contexts/TheContext";
 import RecordBoothContext from "../contexts/RecordBoothContext";
-import SelectSongMenuModal from "../components/SelectSongMenuModal";
+import SelectMenuModal from "../components/SelectMenuModal";
 import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import SaveSongModal from "../components/SaveSongModal";
@@ -26,6 +26,12 @@ import locked from "../images/locked.svg";
 import shuffle from "../images/shuffle.svg";
 import modal from "../images/modal.svg";
 
+import beat1 from '../assets/beatsTrack1.m4a'
+import beat2 from '../assets/beatsTrack2.m4a'
+import beat3 from '../assets/beatsTrack3.m4a'
+import beat4 from '../assets/beatsTrack4.m4a'
+import beat5 from '../assets/beatsTrack5.m4a'
+
 function TestAudio(props) {
   const { user, windowSize } = React.useContext(TheContext)
   // useDebugInformation("TestAudio", props)
@@ -42,11 +48,12 @@ function TestAudio(props) {
   
   const navigate = useNavigate()
   const { refilterProfanity } = useRefilterProfanity()
-  const { 
-    beatOption, isBeatPlaying,
-    mapBeatOptions, selectBeatOption,
-    playSelectBeat
-  } = useBeats()
+  // const { 
+  //   beats, 
+  //   beatOption, isBeatPlaying,
+  //   mapBeatOptions, selectBeatOption,
+  //   playSelectBeat
+  // } = useBeats()
 
   const commands = [
     {
@@ -81,14 +88,25 @@ function TestAudio(props) {
     caption: '',
     video: null
   }
+  const [beats, setBeats] = useState([
+    { song: beat1, name: 'After Dark' },
+    { song: beat2, name: 'Futurology' },
+    { song: beat3, name: 'Peacock' },
+    { song: beat4, name: 'Callback' },
+    { song: beat5, name: 'Drained' },
+  ])
+
   const [recorderState, setRecorderState] = useState(initialState);
   const [currentSong, setCurrentSong] = useState(initialSongObject)
+  const [currentBeat, setCurrentBeat] = useState(beats[0])
   const [audioSrc, setAudioSrc] = useState(null);
   const [silent, setSilent] = useState(false);
   const [recordingDisplay, setRecordingDisplay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBeatPlaying, setIsBeatPlaying] = useState(false);
   const [showSaveSongModal, setShowSaveSongModal] = useState(false);
-  const [showSelectMenu, setShowSelectMenu] = useState(false)
+  const [showSelectSongMenu, setShowSelectSongMenu] = useState(false)
+  const [showSelectBeatMenu, setShowSelectBeatMenu] = useState(false)
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
   const [songUploadObject, setSongUploadObject] = useState();
@@ -123,7 +141,7 @@ function TestAudio(props) {
   const [recordingBooth] = useState(`#363636`);
 
   useEffect(() => {
-    if (silent && recorderState.initRecording === true) {
+    if (silent && recorderState.initRecording) {
       setRetrievedActionRhymes([])
       getDatamuseRhymes()
       setLyricsHandler()
@@ -198,10 +216,12 @@ function TestAudio(props) {
         let mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
         url = URL.createObjectURL(mpegBlob);
         keyRef.current++
-        setBlobData({ name: `Take ${keyRef.current}`, blob: mpegBlob, song_URL: url })
+        setBlobData({ name: `Flow ${keyRef.current}`, blob: mpegBlob, song_URL: url })
       }
       
       recorder.onstop = () => {
+        chunks = []
+        recorderState.otherMediaStream.getAudioTracks().forEach(track => track.stop())
         setRecorderState((prevState) => {
           if (prevState.mediaRecorder) {
             return {
@@ -224,10 +244,19 @@ function TestAudio(props) {
   }, [recorderState.mediaRecorder])
 
   useEffect(() => {
-    if (recorderState.initRecording) return setSelectTitle('Recording...')
-    else if (currentSong.name === "" && !recorderState.initRecording) return setSelectTitle("No Flows")
+    if (allTakes.length === 0 && !recorderState.initRecording) return setSelectTitle("No Recorded Flows")
+    if (recorderState.initRecording) return setSelectTitle("Recording...")
+    else if (currentSong.name === "" && !recorderState.initRecording) return setSelectTitle("No Recorded Flows")
     else return setSelectTitle(`${currentSong.name}`)
-  }, [currentSong, recorderState.initRecording])
+  }, [allTakes, currentSong, recorderState.initRecording])
+
+  useEffect(() => {
+    if (isBeatPlaying) {
+      playBeatRef.current.play()
+    } else {
+      playBeatRef.current.pause()
+    }
+  }, [isBeatPlaying])
 
   const toggleModalHandler = () => {
     if (toggleModal) {
@@ -489,22 +518,22 @@ function TestAudio(props) {
 
       var audio = document.getElementById("song").captureStream();
       document.getElementById("song").play();
-
+      
       detectSilence(stream1)
-
       const audioContext = new AudioContext();
       let audioIn_01 = audioContext.createMediaStreamSource(stream1)
       let audioIn_02 = audioContext.createMediaStreamSource(audio)
       let dest = audioContext.createMediaStreamDestination()
-
+      
       audioIn_01.connect(dest)
       audioIn_02.connect(dest)
-
+      console.log(dest, "wok asdlfkjwe flaksdjflas flskdfj")
       setRecorderState((prevState) => {
         return {
           ...prevState,
           initRecording: true,
           mediaStream: dest.stream,
+          otherMediaStream: stream1
         }
       })
 
@@ -514,6 +543,7 @@ function TestAudio(props) {
   }
 
   const stopRecording = () => {
+    console.log(recorderState.otherMediaStream, "ugh")
     if (recorderState.mediaRecorder !== null) {
       if (recorderState.mediaRecorder.state !== "inactive") {
         SpeechRecognition.stopListening();
@@ -541,9 +571,29 @@ function TestAudio(props) {
       }
     }
   }
+  //TODO: find better method of playing, pausing, and stopping audio
+  const handlePlayBeat = () => {
+    if (isBeatPlaying) {
+      playBeatRef.current.pause()
+      setIsBeatPlaying(false)
+    } else {
+      playBeatRef.current.play()
+      setIsBeatPlaying(true)
+    }
+  }
 
-  const deleteOneTake = () => {
-    setAllTakes(eachTake => eachTake.filter(item => item.song_URL !== selectedOption))
+  const handleDeleteFlow = () => {
+    let newTakes = allTakes.filter((each, index) => {
+      if (each.name === currentSong.name) {
+        if (allTakes[index - 1] == null) setCurrentSong(allTakes[index + 1])
+        else setCurrentSong(allTakes[index - 1])
+      } else {
+        return each
+      }
+    })
+    setAllTakes(newTakes)
+
+    if (newTakes.length === 0) keyRef.current = 0
   }
 
   const handleSaveSongMenu = () => {
@@ -551,19 +601,18 @@ function TestAudio(props) {
     setShowSaveSongModal(true)
   }
 
-  const navigateToEditLyrics = () => {
-    actions
+  const navigateToEditLyrics = async () => {
+    await actions
     .getUserSongs({ song_user: user?._id })
     .then(res => {
       let userSongs = res.data
       let recordBoothTakes = allTakes
-      console.log(userSongs.length, "ok of course it's not working")
+
       if (userSongs.length === 0 && recordBoothTakes.length === 0) {
         setShowErrorModal(true)
       }
       else {
         navigate("/recordingBooth/editLyrics", { state: { propSongTakes: recordBoothTakes, propCurrentSong: songUploadObject, propUserSongs: userSongs }})
-        // return <Link to="/recordingBooth/editLyrics" state={{ propSongTakes: recordBoothTakes, propCurrentSong: songUploadObject, propUserSongs: userSongs}}></Link>
       }
     })
     .catch(console.error)
@@ -573,7 +622,8 @@ function TestAudio(props) {
     <RecordBoothContext.Provider value={{
       allTakes, setAllTakes,
       currentSong, setCurrentSong,
-      showSaveSongModal, setShowSaveSongModal
+      showSaveSongModal, setShowSaveSongModal,
+      beats, currentBeat, setCurrentBeat
     }}>
       <div id="TestAudio" className="TestAudio">
         <RecordingBoothModal 
@@ -592,15 +642,24 @@ function TestAudio(props) {
           setShowSaveSongModal={setShowSaveSongModal}
         />
 
-        <SelectSongMenuModal
+        <SelectMenuModal
+          type={"song"}
           positionTop={false}
           positionY={25}
-          isOpen={showSelectMenu}
-          onClose={setShowSelectMenu}
+          isOpen={showSelectSongMenu}
+          onClose={setShowSelectSongMenu}
         />
 
-        <audio id="song" src={beatOption} loop={true} ref={recordAudioRef}></audio>
-        
+        <SelectMenuModal 
+          type={"beat"}
+          positionTop={false}
+          positionY={20}
+          isOpen={showSelectBeatMenu}
+          onClose={setShowSelectBeatMenu}
+        />
+
+        <audio id="song" src={currentBeat?.song} loop={true} ref={recordAudioRef}></audio>
+
         <div className="section-1_speech">
           <button 
             className="modal-toggle-btn"
@@ -790,13 +849,13 @@ function TestAudio(props) {
                         <div className="select-takes-container_shadow-div-outset">
                           <div className="select-takes-container">
                             <div className="select-takes_shadow-div-inset">
-                              <div 
+                              <button 
                                 className="select-takes_shadow-div-outset" 
                                 ref={selectTakesRef}
-                                onClick={() => allTakes?.length !== 0 ? setShowSelectMenu(true) : null}
+                                onClick={() => allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null}
                               >
                                 <p>{selectTitle}</p>
-                              </div>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -805,12 +864,12 @@ function TestAudio(props) {
                       <div className="flow-takes-2_takes-actions">
                         <div className="takes-actions-container">
                           <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
-                            <div 
+                            <button 
                               className="actions-btn_shadow-div-outset ab-save" 
                               onClick={handleSaveSongMenu}
                             >
                               <img className="button-icons bi-help" src={save} alt="save icon" />
-                            </div>
+                            </button>
                             
                             <ErrorModal 
                               isOpen={showErrorModal} 
@@ -824,9 +883,9 @@ function TestAudio(props) {
                             />
                           </div>
                           <div className="actions-btn-container">
-                            <div className="actions-btn_shadow-div-outset" onClick={deleteOneTake}>
+                            <button className="actions-btn_shadow-div-outset" onClick={handleDeleteFlow}>
                               <img className="button-icons" src={xExit} alt="delete bin icon" />
-                            </div>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -838,25 +897,24 @@ function TestAudio(props) {
                             <div className="select-beat_play-container">
                               <button 
                                 className="select-beat_play-btn"
-                                onClick={() => playSelectBeat(playBeatRef)}
+                                onClick={handlePlayBeat}
                                 >
                                 <img className="button-icons" src={isBeatPlaying ? pause : play} alt="play or pause" />
                               </button>
-                              <audio src={beatOption} ref={playBeatRef} />
+                              <audio src={currentBeat?.song} ref={playBeatRef} />
                             </div>
-                            <div className="select-beat_shadow-div-outset">
+                            <button className="select-beat_shadow-div-outset">
                               <div className="select-beat-title">
                                 Select A Beat :
                               </div>
-                              <select 
+                              <div 
                                 id="selectBox" 
                                 className="track-select" 
-                                value={beatOption} 
-                                onChange={(e) => selectBeatOption(e)}
+                                onClick={() => setShowSelectBeatMenu(true)}
                               >
-                                {mapBeatOptions()}
-                              </select>
-                            </div>
+                                {currentBeat?.name}
+                              </div>
+                            </button>
                           </div>
                         </div>
                       </div>
