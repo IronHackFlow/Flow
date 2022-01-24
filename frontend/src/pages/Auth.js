@@ -101,10 +101,19 @@ const Auth = (props) => {
                 </div>
               </div>
             </div>
-            <div className="mid-inset-bottom">
-              <div className="bottom_shadow-div-outset">
-                <p>{toggleLogin ? "Don't have an account?" : "Already a member of Flow?"}</p>
-                <button onClick={() => setToggleLogin(!toggleLogin)}>{toggleLogin ? "SignUp" : "Log In"}</button>
+
+            <div className="switch--container">
+              <div className="switch--shadow-outset">
+                <div className="switch--shadow-inset">
+                  <div className="switch__text--container">
+                    <p className="switch__text">{toggleLogin ? "Don't have an account?" : "Already a member of Flow?"}</p>
+                  </div>
+                  <div className="switch__btn--container">
+                    <button className="switch__btn" onClick={() => setToggleLogin(!toggleLogin)}>
+                      {toggleLogin ? "SignUp" : "Log In"}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

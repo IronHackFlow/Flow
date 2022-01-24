@@ -1,0 +1,56 @@
+$font-color: (
+  primary: (
+    100: #ffffff,
+    200: #ffafd0,
+    300: #ec6aa0,
+    400: #e24f8c,
+    500: #c52d6c,
+  ),
+  secondary: (
+    100: #ffffff,
+    200: #6bbba5,
+    300: #58e4bc,
+    400: #28c095,
+    500: #00bf87,
+  )
+  thirdary: (
+    100: #ffffff,
+    200: #7dc3bc,
+    300: #5cd3c8,
+    400: #2cc1b4,
+    500: #00b1a1,
+  )
+);
+
+$filter-svg-color: (
+  white: (
+    100: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%),
+  ),
+  primary: (
+    300: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%),
+    400: invert(48%) sepia(32%) saturate(3043%) hue-rotate(305deg) brightness(92%) contrast(93%)
+  ),
+  secondary: (
+    300: invert(59%) sepia(98%) saturate(315%) hue-rotate(112deg) brightness(96%) contrast(90%),
+  ),
+  thirdary: (
+    300: invert(60%) sepia(96%) saturate(337%) hue-rotate(125deg) brightness(89%) contrast(86%),
+  ),
+);
+
+$background-linear-color: (
+  dark-light: (
+    background: linear-gradient(323deg, #4b4b4b 0%, #757575 100%),
+  )
+  dark-dark: (
+    background: linear-gradient(323deg, #262626 0%, #474646 100%),
+  )
+  light-dark: (
+    recordBooth: linear-gradient(315deg, #858585 0%, #a7a7a7 100%),
+    home: linear-gradient(315deg, #4f4f4f 0%, #b1b1b1 100%),
+    search: linear-gradient(315deg, #b1b1b1 0%, #828282 100%),
+  )
+  light-light: (
+    auth: linear-gradient(315deg, #666666 0%,  #b1b1b1 100%),
+  )
+)

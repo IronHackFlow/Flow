@@ -64,7 +64,6 @@ export default function Feed({ feedSongs, setSongInView, trackInView, isHomeFeed
     [feedSongsCopy],
   )
 
-
   useEffect(() => {
     let elements = feedSongsCopy.map((each) => {
       return (

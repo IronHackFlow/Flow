@@ -1,39 +1,30 @@
-import { useContext, useState, useRef, useCallback } from 'react'
-import RecordBoothContext from "../contexts/RecordBoothContext"
+import { useCallback } from 'react'
 import SelectMenuItem from "./SelectMenuItem"
-import dropDown from "../images/select-down.svg"
-import useBeats from '../utils/useBeats'
 
-export default function SelectMenuModal({type, positionTop, positionY, isOpen, onClose}) {
-  const { allTakes, currentSong, beats, currentBeat } = useContext(RecordBoothContext)
-  const arrayRef = useRef([])
-  const currentRef = useRef({})
 
-  const displayOptions = useCallback(() => {
-    if (type === "song") {
-      arrayRef.current = allTakes
-      currentRef.current = currentSong
-    } else {
-      arrayRef.current = beats
-      currentRef.current = currentBeat
-    }
+export default function SelectMenuModal({
+  positionTop, positionY, maxHeight, list, currentItem, setCurrentItem, isOpen, onClose
+}) {
 
-    return arrayRef.current.map((element, index) => {
+  const displayItems = useCallback(() => {
+    if (list == null) return
+    return list.map((element, index) => {
       let isSelected = false
-      if (element.name === currentRef?.current?.name) {
+      if (element.name === currentItem.name) {
         isSelected = true
       } 
       return (
         <SelectMenuItem 
-          type={type}
           key={`${element.name}_${index}`}
           element={element}
+          list={list}
+          setCurrentItem={setCurrentItem}
           onClose={onClose}
           isSelected={isSelected ? true : false}
         />
       )
     })
-  }, [allTakes, currentBeat, currentSong])
+  }, [list, currentItem])
   
   return (
     <div 
@@ -42,12 +33,14 @@ export default function SelectMenuModal({type, positionTop, positionY, isOpen, o
       onClick={() => onClose(false)}
     >
       <div 
-        className="select-menu__list"
-        style={positionTop ? {top: `${positionY}%`} : {bottom: `${positionY}%`}}
+        className="select-menu__list--container"
+        style={positionTop ? {top: `${positionY}%`, maxHeight: `${maxHeight}%`} : {bottom: `${positionY}%`,  maxHeight: `${maxHeight}%`}}
       >
-        <ul className="select-menu__list--shadow-inset">
-          {displayOptions()}
-        </ul>
+        <div className="select-menu__list--shadow-inset">
+          <ul className="select-menu__list">
+            {displayItems()}
+          </ul>
+        </div>
       </div>
     </div>
   )

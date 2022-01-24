@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import useHover from "../utils/useHover"
+import { useContext, useState, useEffect } from 'react';
+import RecordBoothContext from '../contexts/RecordBoothContext'
+import { beatList } from '../constants/index'
 
-export default function SelectMenuItem({
-  element, list, setCurrentItem, onClose, isSelected
-}) {
-  const [hoverRef, isHovered] = useHover()
+export default function SelectMenuItem({type, element, onClose, isSelected}) {
+  const { allTakes, setCurrentSong, setCurrentBeat } = useContext(RecordBoothContext)
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
@@ -16,17 +15,23 @@ export default function SelectMenuItem({
   }, [isSelected])
 
   const handleOptionChange = (e) => {
-    let getSong = list.filter(each => each.name === e.currentTarget.id)
-    setCurrentItem(getSong[0])
+    if (type === "song") {
+      let getSong = allTakes?.filter(each => each.name === e.currentTarget.id)
+      setCurrentSong(getSong[0])
+    } else {
+      let getBeat = beatList.filter(each => each.name === e.currentTarget.id)
+      setCurrentBeat(getBeat[0])
+    }
     onClose(false)
   }
 
   return (
     <li 
       id={`${element?.name}`} 
-      ref={hoverRef}
-      className={`select-menu__item-container ${selected ? "selected" : isHovered ? "selected" : ""}`}
+      className={`select-menu__item-container ${selected ? "selected" : ""}`}
       onClick={(e) => handleOptionChange(e)}
+      onMouseOver={() => !isSelected ? setSelected(true) : null}
+      onMouseOut={() => !isSelected ? setSelected(false) : null}
     >
       <div className="select-menu__item--shadow-outset selected_2">
         <div className="select-menu__item--shadow-inset selected_3">

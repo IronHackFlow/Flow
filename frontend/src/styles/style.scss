@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 @mixin flexCenter(
   $height: 100%,
@@ -17,78 +16,22 @@
   flex-direction: $direction;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import '0-base/layout';
+@import '1-pages/AuthLogin';
+@import '1-pages/Home';
+@import '1-pages/Profile';
+@import '1-pages/TestAudio';
+@import '1-pages/Search';
+@import '1-pages/EditLyrics';
+@import '1-pages/SongScreen';
+@import '2-components/NavBar';
+@import '2-components/Buttons';
+@import '2-components/Loading';
+@import '2-components/ErrorModal';
+@import '2-components/EditProfile';
+@import '2-components/RecordingBoothModal';
+@import '2-components/SaveSongModal';
+@import '2-components/SelectMenuModal';
+@import '3-helpers/mixins';
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-
-html,
-body,
-#root,
-.App,
-.Home,
-.TestAudio,
-.EditLyrics,
-.Profile,
-.EditProfileScreen,
-.SongScreen,
-.Search,
-.LogIn {
-  height: 100%;
-  width: 100%;
-  font-family: 'Roboto', sans-serif;
-}
-
-body, #root {
-  position: relative;
-}
-
-.App {
-  position: relative;
-  text-align: center;
-}
-
-a {
-  text-decoration: none
-}
-input, textarea, select, button { 
-  font-family: inherit; 
-  border: none;
-  background: initial;
-}
-button {
-  cursor: pointer;
-}
-
-@media screen and (min-width: 500px) {
-  html {
-    background: #282727;
-    margin: auto;
-    height: 100vh;
-    width: (100vh * .46);
-    font-family: 'Roboto', sans-serif;
-  }
-}
-
-
-@import './Loading';
-@import './Home';
-@import './NavBar';
-@import './Search';
-@import './TestAudio';
-@import './SaveSongModal';
-@import './SelectMenuModal';
-@import './EditLyrics';
-@import './SongScreen';
-@import './Profile';
-@import './AuthLogin';
-@import './EditProfile';
-@import './Buttons';
-@import './RecordingBoothModal';
-@import './ErrorModal';

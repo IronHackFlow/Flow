@@ -16,7 +16,6 @@ import xExit from "../images/exit-x-2.svg";
 export default function SaveSongModal(props) {
   const { user } = useContext(TheContext)
   const { 
-    allTakes,
     currentSong, setCurrentSong, 
     showSaveSongModal, setShowSaveSongModal 
   } = useContext(RecordBoothContext)
@@ -200,12 +199,9 @@ export default function SaveSongModal(props) {
                           </div>
 
                           <SelectMenuModal 
+                            type={"song"}
                             positionTop={true}
                             positionY={41.5}
-                            maxHeight={96 - 41.5}
-                            list={allTakes}
-                            currentItem={currentSong}
-                            setCurrentItem={setCurrentSong}
                             isOpen={showSelectMenu}
                             onClose={setShowSelectMenu}
                           />
@@ -238,7 +234,6 @@ export default function SaveSongModal(props) {
                         <ButtonClearText 
                           containerWidth={19} 
                           inset={true} 
-                          shadowColors={["#282828", "#bcbaba", "#282828", "#a7a7a7"]}
                           inputRef={songNameInputRef}
                         />
                       </div>
@@ -259,7 +254,6 @@ export default function SaveSongModal(props) {
                         <ButtonClearText 
                           containerWidth={19} 
                           inset={true} 
-                          shadowColors={["#282828", "#bcbaba", "#282828", "#a7a7a7"]}
                           inputRef={songCaptionInputRef}
                         />
                       </div>  

@@ -95,16 +95,16 @@
   z-index: 2;
 
   .navbar_section {
-    @include flexCenter(100%, 100%, 37px 37px 0px 0px, center, center, row);
+    @include flexCenter(100%, 100%, 4.7vh 4.7vh 0vh 0vh, center, center, row);
     background: linear-gradient(352deg, #4f4f4f 0%, #757575 100%);
     box-shadow: 0px -8px 30px 0px #222222;
 
     .navbar_shadow-div-outset {
-      @include flexCenter(81%, 96%, 30px 30px 5px 5px, center, center, row);
+      @include flexCenter(81%, 96%, 4vh 4vh .5vh .5vh, center, center, row);
       box-shadow: 4px 6px 5px 0px #393939, -2px -2px 2px #989898;
     
       .navbar_shadow-div-inset {
-        @include flexCenter(89%, 98%, 100px, space-evenly, center, row);
+        @include flexCenter(87%, 97%, 100vh, space-evenly, center, row);
         box-shadow: inset 3px 3px 4px 0px #363535, inset -2px -2px 2px #808080;
 
         .navbar-btn-container {
@@ -113,7 +113,7 @@
           text-decoration: none;
         
           .navbar-btn_shadow-div-inset {
-            border-radius: 50px;
+            border-radius: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -158,8 +158,8 @@
   border: none;
   // transition: all .4s;
   .navbar-btn_shadow-div-inset {
-    height: 86%;
-    width: 53%;
+    height: 2.6rem;
+    width: 2.5rem;
     box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
     // transition: all .4s;
     .navbar-btn_shadow-div-outset {
@@ -181,8 +181,8 @@
   border: 1px solid #ec6aa0;
   transition: all .3s;
   .navbar-btn_shadow-div-inset {
-    height: 80%;
-    width: 48%;
+    height: 2.3rem;
+    width: 2.3rem;
     // box-shadow: #a4416a 2px 2px 3px 0px inset, #f4c4d8 -2px -2px 3px inset;
     box-shadow: #993b62 2px 2px 2px 0px, #e992b6 -2px -2px 2px;
     .navbar-btn_shadow-div-outset {

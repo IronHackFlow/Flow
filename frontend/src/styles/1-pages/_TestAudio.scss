@@ -1,3 +1,4 @@
+
 .TestAudio {
   position: absolute;
 }
@@ -89,12 +90,12 @@
 
     .section-2a_flow-suggestions {
         //height:49%
-        @include flexCenter(35%, 100%, 0px 0px 29px 29px, space-evenly, center, column);
+        @include flexCenter(35%, 100%, 0vh 0vh 3.5vh 3.5vh, space-evenly, center, column);
         position: absolute;
         background: linear-gradient(314deg, #858585 0%, #a7a7a7 100%);
         z-index: 1;
         box-shadow: 0px 12px 30px 10px #2a2a2a;
-        border-top: 1px solid #c4c4c4;
+        // border-top: 1px solid #c4c4c4;
         transition: height .5s;
 
         .next-bar-container {
@@ -125,7 +126,7 @@
             transition: height .5s;
 
             .custom-rhyme {
-                @include flexCenter(100%, 100%, 50px, space-evenly, flex-start, column);
+                @include flexCenter(100%, 83%, 0, space-evenly, flex-start, column);
                 opacity: 1;
                 transition: opacity .3s .3s;
 
@@ -221,29 +222,28 @@
             }
 
             .rhyme-lock-container {
-                @include flexCenter(100%, 24%, 50px, flex-end, center, row);
+                @include flexCenter(100%, 17%, 0, flex-end, center, row);
                 opacity: 1;
                 transition: opacity .3s .3s;
 
                 .rhyme-lock-button {
-                    @include flexCenter(78%, 70%, 50px, center, center, row);
-                    box-shadow: 2px 2px 3px #444444, -2px -2px 2px #cacaca;
+                    @include flexCenter(80%, calc(100vh * .06), 100vh, center, center, row);
+                    box-shadow: 2px 2px 3px #5e5e5e, -2px -2px 2px #d3d3d3;
                     margin-right: 10%;
 
                     .rhyme-lock-outset {
-                        @include flexCenter(90%, 90%, 50px, center, center, row);
-                        box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #d3d3d3;
+                        @include flexCenter(88%, 88%, 100vh, center, center, row);
+                        box-shadow: inset 2px 2px 2px 0px #5e5e5e, inset -2px -2px 3px #d3d3d3;
                     
                         .rhyme-lock-btn {
-                            @include flexCenter(72%, 72%, 50px, center, center, row);
-                            border: none;
-                            background-color: initial;
-                            box-shadow: 2px 2px 3px 0px #464545, -2px -2px 2px #dedede;
+                            @include flexCenter(73%, 73%, 100vh, center, center, row);
+                            background-color: #e24f8c;
+                            box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
                             
                             img {
-                                height: 1.7em;
-                                width: 1.7em;
-                                filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+                                height: 70%;
+                                width: 70%;
+                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
                             }
                             
                             &:active {
@@ -288,7 +288,7 @@
                             @include flexCenter(100%, 100%, 50px, center, center, row);
                             background-color: #ec6aa0;
                             box-shadow: inset 2px 2px 5px 0px #b74b78, inset -2px -2px 5px #ffcfe3;
-                            border: 1px solid #ec6aa0;
+                            // border: 1px solid #ec6aa0;
                             color: white;
 
                             img {
@@ -346,7 +346,7 @@
     bottom: 0;
 
     .flow-controls-container {
-        @include flexCenter(55%, 96%, 10px, center, center, column);
+        @include flexCenter(55%, 96%, .7vh, center, center, column);
         // box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
         box-shadow: inset 3px 3px 3px 0px #343434, inset -3px -3px 4px #929292;
         position: absolute;
@@ -362,21 +362,22 @@
                 @include flexCenter(100%, 17%, 50px, center, flex-end, row);
 
                 .play-btn-container_shadow-div-outset {
-                    @include flexCenter(87%, 84%, 50px 8px 8px 50px, center, center, row);
+                    @include flexCenter(85%, 84%, 5vh 0.2vh .2vh 5vh, flex-end, center, row);
                     box-shadow: 3px 3px 5px #2c2c2c, -2px -2px 2px 0px #a0a0a0;
 
+
                     .play-btn-container_shadow-div-inset {
-                        @include flexCenter(85%, 87%, 50px 8px 8px 50px, flex-start, center, row);
+                        @include flexCenter(84%, 85%, 5vh 0.2vh .2vh 5vh, flex-start, center, row);
                         box-shadow: inset 2px 2px 3px 0px #242424, inset -2px -2px 3px #a3a3a3;
+                        margin-right: 8.5%;
 
                         .play-btn_shadow-div-outset {
-                            @include flexCenter(76%, 74%, 50px, center, center,row);
+                            @include flexCenter(77%, calc(100vh * .035), 100vh, center, center,row);
                             text-align: center;
                             font-weight: bold;
                             background: #e24f8c;
-                            margin-left: 14%;
-                            border: none;
-                            box-shadow: 2px 2px 4px #232323, -2px -2px 2px #b8b8b8;
+                            margin-left: 13%;
+                            box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
                             
                             img {
                                 height: 85%;
@@ -394,10 +395,10 @@
             }
 
             .play-slider-container {
-                @include flexCenter(100%, 80%, 0px, center, flex-end, row);
+                @include flexCenter(100%, 81%, 0px, center, flex-end, row);
 
                 .play-slider-container_shadow-div-outset {
-                    @include flexCenter(87%, 97%, 8px 50px 50px 8px, center, center, row);
+                    @include flexCenter(85%, 97%, 8px 50px 50px 8px, center, center, row);
                     box-shadow: 3px 3px 5px #282828, -1px -2px 3px 0px #c6c6c6;
 
                     .play-slider-container_shadow-div-inset {
@@ -459,12 +460,12 @@
             transition: height .5s;
 
             .actions-container_shadow-div-outset {
-                @include flexCenter(88%, 96%, 35px 35px 5px 5px, center, center, column);
+                @include flexCenter(88%, 96%, 4.4vh 4.4vh .5vh .5vh, center, center, column);
                 box-shadow: 3px 3px 5px #202020, -2px -2px 2px 0px #808080;
                 transition: height .5s;
 
                 .actions-container_shadow-div-inset {
-                    @include flexCenter(94%, 98%, 32px 32px 5px 5px, space-evenly, center, column);
+                    @include flexCenter(92%, 97.5%, 4vh 4vh 0.4vh 0.4vh, space-evenly, center, column);
                     box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
                     transition: height .5s;
 
@@ -477,24 +478,23 @@
                             transition: width .5s;
             
                             .select-takes-container_shadow-div-outset {
-                                @include flexCenter(79%, 94%, 48px 30px 30px 5px, center, center, row);
+                                @include flexCenter(79%, 94%, 14.5vh 10vh 10vh 0vh, center, center, row);
                                 box-shadow: 3px 3px 5px #323232, -2px -2px 2px 0px #8b8b8b;
                                 
                                 .select-takes-container {
-                                    @include flexCenter(80%, 96%, 63px 38px 38px 10px, center, flex-end, column);
+                                    @include flexCenter(80%, 95.7%, 15.5vh 10vh 10vh 0.5vh, center, flex-end, column);
                                     transition: width .5s;
                                     box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
                                     margin-right: 1%;
 
                                     .select-takes_shadow-div-inset {
-                                        @include flexCenter(65%, 90%, 40px, center, center, column);
+                                        @include flexCenter(65%, 90%, 100vh, center, center, column);
                                         box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #8c8c8c;
                                         margin-right: 3%;
 
                                         .select-takes_shadow-div-outset {
                                             @include flexCenter(100%, 91%, 30px, center, center, column);
                                             // box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
-                                            border: none;
                                             color: white;
 
                                             &:focus {
@@ -536,7 +536,7 @@
                                 @include flexCenter(83%, 90%, 50px, space-evenly, center, row);
                                 
                                 .actions-btn-container {
-                                    @include flexCenter(95%, 40%, 50%, center, center, row);
+                                    @include flexCenter(95%, 39%, 50%, center, center, row);
                                     box-shadow: inset 2px 2px 3px 0px #2a2a2a, inset -2px -2px 2px #a0a0a0;
 
                                     .actions-btn_shadow-div-outset {
@@ -596,110 +596,6 @@
     }
 }
 
-.SaveSongDisplay {
-    @include flexCenter(80%, 100%, 0px, flex-start, center, column);
-    transition: height .5s;
-
-    .song-inputs-container {
-        @include flexCenter(97%, 95%, 5px 25px 25px 25px, space-evenly, center, column);
-        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-
-        .section-title {
-            height: 9%;
-            width: 100%;
-            text-align: start;
-            text-indent: 3%;
-            color: pink;
-            font-size: 14px;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-        }
-      
-        .section-1_song-name {
-            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-
-            .song-name-input {
-                @include flexCenter(80%, 92%, 40px, center, center, row);
-                // opacity: 0;
-                border: none;
-                outline: none;
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
-                background: initial;
-                padding-left: 4%;
-
-                &::placeholder {
-                    color: white;
-                }
-                &:focus {
-                    color: white;
-                    border: 2px solid pink;
-                    outline: none !important;
-                }
-            }
-        }
-    
-        .section-2_song-caption {
-            @include flexCenter(25%, 94%, 5px 50px 50px 5px, center, center, row);
-            box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-            
-            .song-caption-input {
-                @include flexCenter(80%, 92%, 40px, center, center, row);
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
-                background: initial;
-                border: none;
-                padding-left: 4%;
-
-                &::placeholder {
-                    color: white;
-                }
-                &:focus {
-                    color: white;
-                    border: 2px solid pink;
-                    outline: none !important;
-                }
-            }
-        }
-
-        .buttons-container {
-            @include flexCenter(20%, 100%, 0px, center, center, row);
-            opacity: 0;
-            animation: opacityTransition 1s forwards;
-
-            .buttons-container_shadow-div-inset {
-                @include flexCenter(100%, 93%, 40px, space-between, center, row);
-                box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #6b6b6b;
-                padding: 0% 2%;
-
-                .cancel-save-button {
-                    @include flexCenter(70%, 11%, 30px, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #6b6b6b;
-                    background: initial;
-                    border: none;
-                    color: white;
-                    
-                    &:active {
-                        box-shadow: inset 2px 2px 3px #3d3f3f, 
-                                    inset -2px -2px 3px #989898;
-                    }
-                }
-
-                .save-song-button {
-                    @include flexCenter(60%, 50%, 30px, center, center, row);
-                    box-shadow: 3px 3px 4px #3e3e3e, -2px -2px 3px #9c9c9c;
-                    background: #63debc;
-                    border: 1px solid #e0fff6;
-                    color: #676767;
-                    font-weight: bold;
-                }
-            }
-        }
-    } 
-}
 
 @keyframes opacityTransition {
     0% {
@@ -715,28 +611,31 @@
     // animation: opacityTransition 1s forwards;
 
     .record-container {
-        @include flexCenter(89%, 96%, 10px 50px 50px 50px, space-between, center, row);
+        @include flexCenter(89%, 96%, 1.2vh 10vh 10vh 11.5vh, space-between, center, row);
         box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #939393;
 
         .record-1_select-beat {
             @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
             
             .select-beat_shadow-div-inset {
-                @include flexCenter(85%, 97%, 8px 40px 40px 50px, flex-end, center, row);
+                @include flexCenter(85%, 97%, 2vh 10vh 10vh 12.5vh, flex-end, center, row);
                 box-shadow: inset 3px 3px 3px 0px #2c2c2c, inset -2px -2px 2px #9c9c9c;
                 
                 .select-beat_play-container {
-                    @include flexCenter(100%, 20%, 8px 40px 40px 50px, center, center, row);
+                    @include flexCenter(100%, 17%, 0, flex-end, center, row);
 
                     .select-beat_play-btn {
-                        @include flexCenter(75%, 70%, 50px, center, center, row);
+                        @include flexCenter(calc(100vh * .031), calc(100vh * .031), 100vh, center, center, row);
                         box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8f8f8f;
-                        background: initial;
-                        border: none;
+                        background: #e24f8c;
+                        margin-right: 9%;
 
                         img {
-                            height: 1.7em;
-                            width: 1.7em;
+                            height: 80%;
+                            width: 80%;
+                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                        }
+                        .play {
                             margin-left: 3px;
                         }
                         &:active {
@@ -745,35 +644,37 @@
                         }
                     }
                 }
-                .select-beat_shadow-div-outset {
-                    @include flexCenter(72%, 80%, 50px, center, center, column);
-                    box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
-                    margin-right: 3%;
+                .select-beat_container {
+                    @include flexCenter(100%, 83%, 0, flex-start, center, row);
 
-                    .select-beat-title {
-                        @include flexCenter(40%, 92%, 0px, center, flex-start, column);
-                        color: pink;
-                        font-size: 10px;
-                        margin-left: 8%;
-                    }
-                    .track-select {
-                        color: white;
-                        border: none;
-                        height: 60%;
-                        width: 90%;
-
-                        &:focus {
-                            outline: none !important;
+                    .select-beat_shadow-div-outset {
+                        @include flexCenter(70%, 96%, 100vh, center, center, column);
+                        box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
+    
+                        .select-beat-title {
+                            @include flexCenter(40%, 92%, 0px, center, flex-start, column);
+                            color: pink;
+                            font-size: 10px;
+                            margin-left: 8%;
                         }
-                    }
-                    &:focus {
-                        background: #787878;
-                        box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
-
-                    }
-                    &:active {
-                        background: #787878;
-                        box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+                        .track-select {
+                            color: white;
+                            height: 60%;
+                            width: 90%;
+    
+                            &:focus {
+                                outline: none !important;
+                            }
+                        }
+                        &:focus {
+                            background: #787878;
+                            box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+    
+                        }
+                        &:active {
+                            background: #787878;
+                            box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+                        }
                     }
                 }
             }

@@ -59,7 +59,7 @@ function RecordingBoothModal(props) {
 
   useEffect(() => {
     if (props.toggleModal === true) {
-      modalWindowRef.current.style.zIndex = 2
+      modalWindowRef.current.style.zIndex = 3
       modalWindowRef.current.style.opacity = 1
       modalWindowRef.current.style.transition = "opacity .3s"
       props.modalBtnRef.current.style.opacity = 0

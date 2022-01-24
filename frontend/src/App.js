@@ -97,10 +97,10 @@ function App(props) {
             <Route path="/auth" element={<Auth />}></Route>
             <Route path="/navBar" element={<NavBar />}></Route>
             <Route path="/profile/:id" element={<Profile />}></Route>
-            <Route path="/profile/:id/editLyrics" element={<EditLyrics />}></Route>
+            {/* <Route path="/profile/:id/editLyrics" element={<EditLyrics />}></Route> */}
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/recordingBooth" element={<TestAudio />}></Route>
-            <Route path="/recordingBooth/editLyrics" element={<EditLyrics />}></Route>
+            <Route path="/editLyrics" element={<EditLyrics />}></Route>
             <Route path="/editprofile-screen" element={<EditProfileScreen />}></Route>
             <Route path="/editprofile" element={<EditProfile />}></Route>
             <Route path="/songScreen/:id" element={<SongScreen />}></Route>

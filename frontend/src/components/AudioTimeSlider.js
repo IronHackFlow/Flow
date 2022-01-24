@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from "react";
 
-function UseAudioPlayer(props) {
+function UseAudioPlayer({isPlaying, setIsPlaying, currentSong, bgColor}) {
   const [trackProgress, setTrackProgress] = useState(0);
   const [songDuration, setSongDuration] = useState(0);
   const [songMinutes, setSongMinutes] = useState(0);
@@ -12,7 +12,7 @@ function UseAudioPlayer(props) {
   const currentMinutesRef = useRef();
 
   useEffect(() => {
-    if (props.isPlaying) {
+    if (isPlaying) {
       audioRef.current.play()
       startTimer();
     } else {
@@ -20,7 +20,7 @@ function UseAudioPlayer(props) {
       clearInterval(secondsRef.current)
       audioRef.current.pause()
     }
-  }, [props.isPlaying])
+  }, [isPlaying])
   
   useEffect(() => {
     if (currentProgressRef.current >= 60) {
@@ -38,7 +38,7 @@ function UseAudioPlayer(props) {
   }, [currentProgressRef.current])
     
   useEffect(() => {
-    let filteredDuration = Math.round(props.currentSong?.duration / 1000)
+    let filteredDuration = Math.round(currentSong?.duration / 1000)
     setSongDuration(filteredDuration)
     
     if (filteredDuration >= 60) {
@@ -53,18 +53,18 @@ function UseAudioPlayer(props) {
         setSongMinutes(`${getMinutes}:${getSeconds}`)
       }
     } 
-  }, [props.currentSong])
+  }, [currentSong])
   
   useEffect(() => {
     audioRef.current.pause();
-    audioRef.current.src = props.currentSong?.song_URL
+    audioRef.current.src = currentSong?.song_URL
     setTrackProgress(audioRef.current.currentTime);
     currentProgressRef.current = 0
-  }, [props.currentSong])
+  }, [currentSong])
   
   const currentPercentage = songDuration ? `${(trackProgress / songDuration) * 100}%` : '0%';
   const trackStyling = `
-    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #63DEBC), color-stop(${currentPercentage}, ${props.location}))
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #63DEBC), color-stop(${currentPercentage}, ${bgColor}))
   `;
   
   const startTimer = () => {
@@ -74,7 +74,7 @@ function UseAudioPlayer(props) {
     
       intervalRef.current = setInterval(() => {
         if (audioRef.current?.ended) {
-          props.setIsPlaying(false)
+          setIsPlaying(false)
           currentProgressRef.current = 0
         } 
         else {
@@ -101,8 +101,8 @@ function UseAudioPlayer(props) {
   }
   
   const onScrubEnd = () => {
-    if (!props.isPlaying) {
-      props.setIsPlaying(true)
+    if (!isPlaying) {
+      setIsPlaying(true)
     }
     startTimer()
   }
@@ -131,7 +131,7 @@ function UseAudioPlayer(props) {
           {songDuration >= 60 ? songMinutes : `${songDuration}`}
         </div>
       </div>
-      <audio ref={audioRef} src={props.currentSong?.song_URL} />
+      <audio ref={audioRef} src={currentSong?.song_URL} />
     </div>
   )
 }

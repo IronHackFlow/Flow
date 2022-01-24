@@ -55,7 +55,6 @@ function Home(props) {
   const [isFollowingFeed, setIsFollowingFeed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [poppedUp, setPoppedUp] = useState(false);
-  const [home] = useState(`#6d6d6d`);
   const commentInputRef = useRef();
   const playPauseRef = useRef();
 
@@ -175,11 +174,11 @@ function Home(props) {
             <div className="toggle-feed-container">
               <div 
                 className="each-feed_shadow-div-inset"
-                style={{borderRadius: "3px 3px 3px 19px"}}
+                style={{borderRadius: "0.3vh 0.3vh 0.3vh 2.5vh"}}
               >
                 <button
                   className={isHomeFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  style={{borderRadius: "30px 5px 5px 30px"}}
+                  style={{borderRadius: "4vh .2vh .2vh 4vh"}}
                   onClick={() => setHomeFeed()}
                 >
                   <div className={isHomeFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
@@ -201,11 +200,11 @@ function Home(props) {
 
               <div
                 className="each-feed_shadow-div-inset"
-                style={{ borderRadius: '3px 3px 19px 3px' }}
+                style={{ borderRadius: '.3vh .3vh 2.5vh .3vh' }}
               >
                 <button
                   className={isFollowingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  style={{borderRadius: "8px 45px 45px 8px"}}
+                  style={{borderRadius: ".2vh 4vh 4vh .2vh"}}
                   onClick={() => setFollowingFeed()}
                 >
                   <div className={isFollowingFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
@@ -380,18 +379,20 @@ function Home(props) {
                   <div className="play-song-container">
                     <div className="play-btn-container">
                       <div className="play-btn-container-2">
-                        <div className="play-btn_shadow-div-inset">
-                          <button 
-                            className="play-btn_shadow-div-outset" 
-                            onClick={() => setIsPlaying(!isPlaying)}
-                          >
-                            <img
-                              className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
-                              src={isPlaying ? pause : play}
-                              ref={playPauseRef}
-                              alt="play or pause"
-                            />
-                          </button>
+                        <div className="play-btn_inset-container">
+                          <div className="play-btn_shadow-div-inset">
+                            <button 
+                              className="play-btn_shadow-div-outset" 
+                              onClick={() => setIsPlaying(!isPlaying)}
+                            >
+                              <img
+                                className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
+                                src={isPlaying ? pause : play}
+                                ref={playPauseRef}
+                                alt="play or pause"
+                              />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -403,7 +404,7 @@ function Home(props) {
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
                         currentSong={songInView}
-                        location={home}
+                        bgColor={`#6d6d6d`}
                       />
                     </div>
                   </div>
@@ -413,7 +414,7 @@ function Home(props) {
           </div>
         </div>
 
-        <NavBar locationClass={'NavBarHome'}/>
+        <NavBar />
       </div>
     </TheViewContext.Provider>
   )
