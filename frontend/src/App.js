@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Routes, Route, useLocation, } from 'react-router-dom'
 import './styles/style.css'
 import TheContext from './contexts/TheContext'
@@ -16,6 +16,7 @@ import EditProfile from './components/EditProfile'
 import Profile from './pages/Profile'
 import SongScreen from './pages/SongScreen'
 import Search from './pages/Search'
+import { set } from 'mongoose'
 
 function App(props) {
   const { 
@@ -29,15 +30,28 @@ function App(props) {
     isLoading, setIsLoading
   } = SongData()
 
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    document.getElementById('body').style.height = `${onChange}px`
-    setWindowSize(onChange)
-  })
-  
+  // useEventListener('resize', e => {
+  //     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  //     document.getElementById("body").style.height = `${onChange}px`
+  //     setWindowSize(onChange)
+  // })
+
+  // useEventListener('resize',  e => {
+  //   var onChange = visualViewport.height
+  //   console.log(onChange, "YOOOOOOOOOOOOOOOOOOO")
+  //   setWindowSizeChange(onChange)
+  // }, visualViewport)
+
+  // useLayoutEffect(() => {
+  //   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  //   document.getElementById("body").style.height = `${h}px`
+  //   setWindowSize(h)
+  // }, [])
+  const [keyboardOut, setKeyboardOut] = useState(false)
   const location = useLocation()
   const [user, setUser] = useState()
   const [locationIndicator, setLocationIndicator] = useState()
+  const [windowSizeChange, setWindowSizeChange] = useState()
   const [windowSize, setWindowSize] = useState()
 
   useEffect(() => {
@@ -52,6 +66,7 @@ function App(props) {
       })
   }, [])
   
+
   // useLayoutEffect(() => {
   //   const handleResize = () => {
   //     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -74,7 +89,8 @@ function App(props) {
         locationIndicator,
         setLocationIndicator,
         windowSize,
-        setWindowSize
+        setWindowSize,
+        windowSizeChange
       }}
     >
       <songData.Provider 

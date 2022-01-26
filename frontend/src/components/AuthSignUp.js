@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import actions from '../api';
+import useHandleOSK from '../utils/useHandleOSK';
 import ButtonClearText from "./ButtonClearText"
-import eye from "../images/eye.svg"
-import noEye from "../images/no-eye.svg"
+import ButtonShowPassword from "./ButtonShowPassword"
 
-function AuthSignUp(props) {
+function AuthSignUp({showError, onError}) {
+  const { handleOnFocus } = useHandleOSK()
   const navigate = useNavigate()
-  const [userData, setUserData] = useState({})
-  const [showPassword, setShowPassword] = useState(false)
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordType, setPasswordType] = useState("password")
 
   const userNameInputRef = useRef()
   const emailInputRef = useRef()
@@ -16,6 +19,22 @@ function AuthSignUp(props) {
 
   const signUpHandler = async (e) => {
     e.preventDefault()
+    const userData = { user_name: username, email: email, password: password }
+    if (username === "") {
+      onError("Username field is required")
+      userNameInputRef.current.focus()
+      return showError(true)
+    } 
+    if (email === "") {
+      onError("Email field is required")
+      emailInputRef.current.focus()
+      return showError(true)
+    } 
+    if (password === "") {
+      onError("Password field is required")
+      passwordInputRef.current.focus()
+      return showError(true)
+    }
     try {
       actions
         .signUp(userData)
@@ -47,7 +66,7 @@ function AuthSignUp(props) {
 
   return (
     <div className="user-login-3_form">
-      <form className="login-form" autocomplete="off" onSubmit={(e) => signUpHandler(e)}>
+      <form className="login-form" onSubmit={(e) => signUpHandler(e)}>
         <div className="user-form-container">
           <div className="login-input-container email-container">
             <div className="login-input_shadow-div-outset email" style={{borderRadius: "2.8vh 2.8vh 0.5vh 0.5vh"}}>
@@ -56,17 +75,20 @@ function AuthSignUp(props) {
                   className="login-input-field email-input"
                   ref={userNameInputRef}
                   placeholder="Username"
+                  autoComplete="off"
                   type="text"
                   name="user_name"
-                  onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
-                />
-                <ButtonClearText
-                  containerWidth={2.6}
-                  inset={true}
-                  shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
-                  inputRef={userNameInputRef}
+                  onFocus={() => handleOnFocus()}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
+              <ButtonClearText
+                inset={true}
+                shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
+                inputRef={userNameInputRef}
+                value={username}
+                setValue={setUsername}
+              />
             </div>
           </div>
 
@@ -77,17 +99,20 @@ function AuthSignUp(props) {
                   className="login-input-field email-input"
                   ref={emailInputRef}
                   placeholder="Email"
+                  autoComplete="off"
                   type="email"
                   name="email"
-                  onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
-                />
-                <ButtonClearText
-                  containerWidth={2.6}
-                  inset={true}
-                  shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
-                  inputRef={emailInputRef}
+                  onFocus={() => handleOnFocus()}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+              <ButtonClearText
+                inset={true}
+                shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
+                inputRef={emailInputRef}
+                value={email}
+                setValue={setEmail}
+              />
             </div>
           </div>
 
@@ -98,25 +123,24 @@ function AuthSignUp(props) {
                   className="login-input-field password-input"
                   ref={passwordInputRef}
                   placeholder="Password"
-                  type={showPassword ? "text" : "password"}
-                  autocomplete="new-password"
+                  type={passwordType}
+                  autoComplete="new-password"
                   name="password"
-                  onChange={(e) => setUserData(prev => ({...prev, [e.target.name]: e.target.value }))}
+                  onFocus={() => handleOnFocus()}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <ButtonClearText
-                  containerWidth={2.6}
-                  inset={true}
-                  shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
-                  inputRef={passwordInputRef}
+                <ButtonShowPassword 
+                  setType={setPasswordType}
+                  password={password}
                 />
-                <button className="show-password-container signup-pass" onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? (
-                    <img className="button-icons password-no-eye" src={noEye} alt="hide password" />
-                  ) : (
-                    <img className="button-icons password-eye" src={eye} alt="show password" />
-                  )}
-                </button>
               </div>
+              <ButtonClearText
+                inset={true}
+                shadowColors={["#6c6b6b", "#e7e7e7", "#5f5f5f", "#fafafa"]}
+                inputRef={passwordInputRef}
+                value={password}
+                setValue={setPassword}
+              />
             </div>
           </div>
         </div>

@@ -50,21 +50,50 @@
 
 
 .ButtonClearText {
-  @include flexCenter(100%, 0%, 0, flex-end, center, row);
+  @include flexCenter(100%, 0%, 0, center, center, row);
+  transition: width .3s;
 
   .btn-clear--shadow-inset {
-    @include flexCenter(95%, calc(100vh * 0.055), 100vh, center, center, row);
+    @include flexCenter(80%, 80%, 100vh, center, center, row);
     box-shadow: inset 3px 3px 5px #282828, inset -2px -2px 2px 0px #bcbaba;
-    margin-right: 10%;
-    
+    opacity: 1;
+
     .btn-clear--shadow-outset {
       @include flexCenter(73%, 73%, 100vh, center, center, row);
-      box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
+      // box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
 
       img {
         height: 90%;
         width: 90%;
       }
+    }
+
+    &:active {
+      background: #9b9b9b;
+      .btn-clear--shadow-outset {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.ButtonShowPassword {
+  @include flexCenter(100%, auto, 100vh, center, center, column);
+  position: absolute;
+  right: 4%;
+
+  .show-password-btn {
+    @include flexCenter(70%, auto, 100vh, center, center, column);
+    box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
+  
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  
+    &:active {
+      box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+  
     }
   }
 }

@@ -60,7 +60,6 @@ button {
 }
 
 .LogIn {
-  z-index: 100;
   position: absolute;
 }
 
@@ -533,7 +532,7 @@ button {
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset {
   height: 90%;
-  width: 96%;
+  width: 91%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -544,17 +543,20 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
           box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+  padding: 0% 2% 0% 2%;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container {
   height: 80%;
-  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -574,9 +576,7 @@ button {
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .login-input-field {
   height: 95%;
-  width: -webkit-fill-available;
-  width: -moz-available;
-  width: fill-available;
+  width: 95%;
   border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -595,7 +595,6 @@ button {
           box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
   padding-left: 5%;
   background: #919191;
-  margin: 0% 2.3% 0% 2.3%;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .login-input-field:defined {
@@ -623,48 +622,7 @@ button {
   outline: none !important;
   color: white;
   border-radius: 30px;
-}
-
-.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .show-password-container {
-  height: 70%;
-  width: calc(100vh * 0.041);
-  border-radius: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
-          box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
-  position: absolute;
-  right: 4%;
-}
-
-.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-eye {
-  height: 100%;
-  width: 100%;
-}
-
-.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .show-password-container .password-no-eye {
-  height: 90%;
-  width: 90%;
-}
-
-.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .show-password-container:active {
-  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
-          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
-}
-
-.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .user-form-container .login-input-container .login-input_shadow-div-outset .input-container .signup-pass {
-  width: calc(100vh * 0.033);
+  padding-right: 20%;
 }
 
 .page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .enter-btn-container {
@@ -728,6 +686,12 @@ button {
           flex-direction: row;
 }
 
+.page-container .middle-container .mid-outset .mid-inset .login-container .user-input-container .user-login_shadow-div-outset .user-login-3_form .login-form .enter-btn-container .login-link:active {
+  background: linear-gradient(45deg, #2ec291, #68d3b0);
+  -webkit-box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
+          box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
+}
+
 .page-container .middle-container .mid-outset .switch--container {
   height: 13%;
   width: 100%;
@@ -771,7 +735,7 @@ button {
 
 .page-container .middle-container .mid-outset .switch--container .switch--shadow-outset .switch--shadow-inset {
   height: 80%;
-  width: 95%;
+  width: 86%;
   border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -811,7 +775,7 @@ button {
 
 .page-container .middle-container .mid-outset .switch--container .switch--shadow-outset .switch--shadow-inset .switch__text--container .switch__text {
   color: white;
-  font-size: .95rem;
+  font-size: .85rem;
 }
 
 .page-container .middle-container .mid-outset .switch--container .switch--shadow-outset .switch__btn--container {
@@ -855,6 +819,12 @@ button {
   font-weight: bold;
   -webkit-box-shadow: 2px 2px 3px #585858, -1px -1px 2px #e6e6e6;
           box-shadow: 2px 2px 3px #585858, -1px -1px 2px #e6e6e6;
+}
+
+.page-container .middle-container .mid-outset .switch--container .switch--shadow-outset .switch__btn--container .switch__btn:active {
+  background: linear-gradient(45deg, #e24f8c, #e57da7);
+  -webkit-box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
+          box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
 }
 
 .Home {
@@ -9905,9 +9875,9 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -9915,11 +9885,13 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-transition: width .3s;
+  transition: width .3s;
 }
 
 .ButtonClearText .btn-clear--shadow-inset {
-  height: 95%;
-  width: calc(100vh * 0.055);
+  height: 80%;
+  width: 80%;
   border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -9936,7 +9908,7 @@ button {
           flex-direction: row;
   -webkit-box-shadow: inset 3px 3px 5px #282828, inset -2px -2px 2px 0px #bcbaba;
           box-shadow: inset 3px 3px 5px #282828, inset -2px -2px 2px 0px #bcbaba;
-  margin-right: 10%;
+  opacity: 1;
 }
 
 .ButtonClearText .btn-clear--shadow-inset .btn-clear--shadow-outset {
@@ -9956,13 +9928,72 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
-          box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
 }
 
 .ButtonClearText .btn-clear--shadow-inset .btn-clear--shadow-outset img {
   height: 90%;
   width: 90%;
+}
+
+.ButtonClearText .btn-clear--shadow-inset:active {
+  background: #9b9b9b;
+}
+
+.ButtonClearText .btn-clear--shadow-inset:active .btn-clear--shadow-outset {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.ButtonShowPassword {
+  height: 100%;
+  width: auto;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  right: 4%;
+}
+
+.ButtonShowPassword .show-password-btn {
+  height: 70%;
+  width: auto;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
+          box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
+}
+
+.ButtonShowPassword .show-password-btn img {
+  height: 100%;
+  width: 100%;
+}
+
+.ButtonShowPassword .show-password-btn:active {
+  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
 }
 
 .Loading {

@@ -1,28 +1,20 @@
-import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../contexts/TheContext'
-import useEventListener from '../utils/useEventListener'
+import ErrorModal from '../components/ErrorModal'
 import AuthLogIn from '../components/AuthLogIn'
 import AuthSignUp from '../components/AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
 const Auth = (props) => {
-  const { windowSize } = useContext(TheContext)
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    if (onChange < 600) {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('LogIn').style.height = `${windowSize}px`
-    } else {
-      document.getElementById('body').style.height = `${onChange}px`
-      document.getElementById('LogIn').style.height = `${onChange}px`
-    }
-  })
-  const navigate = useNavigate()
+  const { windowSize, windowSizeChange } = useContext(TheContext)
 
+  const navigate = useNavigate()
   const [toggleLogin, setToggleLogin] = useState(true)
+  const [errorMessage, setErrorMessage] = useState()
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
     actions
@@ -53,6 +45,15 @@ const Auth = (props) => {
 
   return (
     <div className="LogIn" id="LogIn">
+      <ErrorModal 
+        isOpen={showErrorModal}
+        onClose={setShowErrorModal}
+        title={errorMessage}
+        opacity={false}
+        modHeight={40}
+        modWidth={77}
+        placement={26.5}
+      />
       <div className="page-container">
         <div className="upper-container">
           <div className="upper-outset">
@@ -74,7 +75,7 @@ const Auth = (props) => {
                   <div className="user-login_shadow-div-outset">
                     <div className="user-login-1_title">
                       <div className="title_shadow-div-inset">
-                        {toggleLogin ? "Log In" : "Sign Up"}
+                        {toggleLogin ? `Log In` : `Sign In`}
                       </div>
                     </div>
                     <div className="user-login-2_other-logins">
@@ -83,20 +84,23 @@ const Auth = (props) => {
                           <p>Continue with </p>
                           <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLEID}
-                            buttonText="Signup"
+                            buttonText={toggleLogin ? "Sign Up" : "Log In"}
                             onSuccess={onResponse}
                             onFailure={onResponse}
                             cookiePolicy={"single_host_origin"}
                           />
                         </div>
                       </div>
-                      <div className="other-logins-2_or-container">
+                      <div 
+                        className="other-logins-2_or-container"
+                        style={showErrorModal ? {height: "18%"} : {height: "25%"}}
+                      >
                         <div className="border"></div>
                         <p>or</p>
                         <div className="border"></div>
                       </div>
                     </div>
-                    {toggleLogin ? (<AuthLogIn />) : (<AuthSignUp />)}
+                    {toggleLogin ? (<AuthLogIn showError={setShowErrorModal} onError={setErrorMessage} />) : (<AuthSignUp showError={setShowErrorModal} onError={setErrorMessage} />)}
                   </div>
                 </div>
               </div>
@@ -110,7 +114,7 @@ const Auth = (props) => {
                   </div>
                   <div className="switch__btn--container">
                     <button className="switch__btn" onClick={() => setToggleLogin(!toggleLogin)}>
-                      {toggleLogin ? "SignUp" : "Log In"}
+                      {toggleLogin ? "Sign Up" : "Log In"}
                     </button>
                   </div>
                 </div>

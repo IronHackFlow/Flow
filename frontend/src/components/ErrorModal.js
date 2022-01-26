@@ -12,9 +12,9 @@ export default function ErrorModal({
 {
   if (!isOpen) return null
   else {
-    setTimeout(() => {
-      onClose(false)
-    }, 3000) 
+    // setTimeout(() => {
+    //   onClose(false)
+    // }, 3000) 
   }
 
   const bgSpecs = { 

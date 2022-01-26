@@ -23,12 +23,8 @@ const logInValidation = (data) => {
   const schema = {
     user_name: Joi.string()
       .alphanum()
-      .min(5)
-      .max(30)
       .required(),
     password: Joi.string()
-      .min(6)
-      .max(30)
       .required()
   }
   return Joi.validate(data, schema)

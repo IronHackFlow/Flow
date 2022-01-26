@@ -24,18 +24,18 @@ function Home(props) {
   const { homeFeedSongs, trendingFeedSongs, followingFeedSongs, isLoading, setIsLoading } = useContext(songData)
 
   useDebugInformation("Home", props)
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    if (onChange < 600) {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('Home').style.height = `${windowSize}px`
-    } else {
-      setTimeout(() => {
-        document.getElementById('body').style.height = `${onChange}px`
-        document.getElementById('Home').style.height = `${onChange}px`
-      }, 1000)
-    }
-  })
+  // useEventListener('resize', e => {
+  //   var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  //   if (onChange < 600) {
+  //     document.getElementById('body').style.height = `${windowSize}px`
+  //     document.getElementById('Home').style.height = `${windowSize}px`
+  //   } else {
+  //     setTimeout(() => {
+  //       document.getElementById('body').style.height = `${onChange}px`
+  //       document.getElementById('Home').style.height = `${onChange}px`
+  //     }, 1000)
+  //   }
+  // })
 
   const { handlePostLike, handleInViewLikes, likes } = usePostLike();
   const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
