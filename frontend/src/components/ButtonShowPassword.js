@@ -39,6 +39,7 @@ export default function ButtonShowPassword({ setType, password }) {
             className="show-password-btn" 
             onMouseDown={(e) => e.preventDefault()}
             onClick={(e) => hidePasswordHandler(e)}
+            tabIndex="-1"
           >
             <img className="button-icons password-no-eye" src={noEye} alt="hide password" />
           </button>
@@ -48,6 +49,7 @@ export default function ButtonShowPassword({ setType, password }) {
             className="show-password-btn" 
             onMouseDown={(e) => e.preventDefault()}
             onClick={(e) => showPasswordHandler(e)}
+            tabIndex="-1"
           >
             <img className="button-icons password-eye" src={eye} alt="show password" />
           </button>

@@ -34,19 +34,16 @@ export default function ErrorModal({
       style={bgSpecs}
       onClick={() => onClose()}
     >
-      <div className="error-container--red" style={modalSpecs}>
+      {/* <div className="error-container--red" style={modalSpecs}>
         <div className="error--shadow-inset">
           <div className="icon-container">
-            {/* <div className="error-icon_shadow-div-outset">
-              <div className="error-icon_shadow-div-inset"> */}
+
                 <button 
                   className="icon--shadow-outset"
                   onClick={() => onClose()}  
                 >
                   <img className="button-icons" src={xExit} alt="exit x button" />
                 </button>
-              {/* </div>
-            </div> */}
           </div>
           <div className="text-container">
             <div className="text--shadow-outset">
@@ -63,12 +60,77 @@ export default function ErrorModal({
             </div>
           </div>
         </div>
+      </div> */}
+          <div className="error-container--input-err" style={modalSpecs}>
+      <div className="error--shadow-inset">
+        <div 
+          className="icon-container"
+        >
+          {/* <div className="error-icon_shadow-div-outset">
+            <div className="error-icon_shadow-div-inset"> */}
+              <button 
+                className="icon--shadow-outset"
+                onClick={() => onClose()}  
+              >
+                <img className="button-icons" src={errorExclamation} alt="exit x button" />
+              </button>
+            {/* </div>
+          </div> */}
+        </div>
+        <div className="text-container">
+          <div className="text--shadow-outset">
+            <div className="text-err-container">
+              <h6>{title}</h6>
+              <p>{nextActions}</p>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
       {children}
     </div>,
     document.body
   )
 }
+
+// const InputErrorModal = () => {
+  
+
+//   return (
+//     <div className="error-container--input-err" style={modalSpecs}>
+//       <div className="error--shadow-inset">
+//         <div 
+//           className="icon-container"
+//         >
+//           {/* <div className="error-icon_shadow-div-outset">
+//             <div className="error-icon_shadow-div-inset"> */}
+//               <button 
+//                 className="icon--shadow-outset"
+//                 onClick={() => onClose()}  
+//               >
+//                 <img className="button-icons" src={xExit} alt="exit x button" />
+//               </button>
+//             {/* </div>
+//           </div> */}
+//         </div>
+//         <div className="text-container">
+//           <div className="text--shadow-outset">
+//             <div className="text-err-icon-container">
+//               <div className="text-err-icon--shadow-inset">
+//                 <img className="button-icons" src={errorExclamation} alt="error exclamation" />
+//               </div>
+//             </div>
+
+//             <div className="text-err-container">
+//               <h6>{title}</h6>
+//               <p>{nextActions}</p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 // export default function ErrorModal({ showErrorModal, setShowErrorModal }) {
 //   // slightly blur entire screen
 //   // take in text to specify the problem

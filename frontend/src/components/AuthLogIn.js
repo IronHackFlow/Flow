@@ -1,67 +1,100 @@
-import { useState, useRef } from 'react'
+import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import actions from '../api'
+import TheContext from "../contexts/TheContext"
 import useHandleOSK from '../utils/useHandleOSK'
 import ButtonClearText from "./ButtonClearText"
 import ButtonShowPassword from "./ButtonShowPassword"
+import { logInSchema } from "../utils/validationSchemas"
+
 
 function AuthLogIn({showError, onError}) {
+  const { setUser } = useContext(TheContext)
   const navigate = useNavigate()
   const { handleOnFocus } = useHandleOSK()
+
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [passwordType, setPasswordType] = useState("password")
+  const [errorPath, setErrorPath] = useState("")
 
   const userNameInputRef = useRef()
   const passwordInputRef = useRef()
 
-  const handleLogIn = async (e) => {
+  const validateInputs = (e) => {
     e.preventDefault()
     const userData = { user_name: username, password: password }
-    if (username === "") {
-      onError("Username field is required")
-      userNameInputRef.current.focus()
-      return showError(true)
+    logInSchema
+      .validate(userData, { abortEarly: false })
+      .then(valid => {
+        setErrorPath("")
+        handleLogIn(valid)
+      })
+      .catch(err => {
+        setErrorFocus(err.inner[0].path)
+        setErrorPath(err.inner[0].path)
+        onError(err.errors[0])
+        showError(true)
+      })
+  }
+
+  const setErrorFocus = (errorPath) => {
+    let username = userNameInputRef.current
+    let password = passwordInputRef.current
+
+    if (errorPath === "user_name") {
+      username.focus()
+    } else if (errorPath === "password") {
+      password.focus()
     } 
-    if (password === "") {
-      onError("Password field is required")
-      passwordInputRef.current.focus()
-      return showError(true)
-    }
+  }
+
+  const handleLogIn = async (userData) => {
     try {
       const res = await actions
       .logIn(userData)
-      .then((res) => {
+      .then(async res => {
         if (res.data.success) {
           localStorage.setItem('token', res.data.token)
-          navigate('/')
+
+          await actions
+            .isUserAuth()
+            .then(res => {
+              if (res.data.isLoggedIn) {
+                setUser(res.data.user)
+                navigate('/')
+              }
+            })
+            .catch(console.error)
         } else {
-          // TODO: create an error here to display on screen
-          console.log(res.data)
-          onError(res.data.message)
-          showError(true)
+          if (res.data.path) {
+            setErrorFocus(res.data.path)
+            setErrorPath(res.data.path)
+            onError(res.data.message)
+            showError(true)
+          }
         }
       })
-      .catch(err => console.log(err, "what could've gone wrong?"))
+      .catch(err => console.log(err))
     } catch(err) {
-      console.log(err, "i was caught in the TRY CATCH")
+      console.log(err)
     }
   }
-  
-
 
   return (
     <div className="user-login-3_form">
       <form 
         className="login-form"
-        onSubmit={(e) => handleLogIn(e)}
-      > {console.log(username, userNameInputRef?.current?.value, "these things changing together or naw??")}
+        onSubmit={(e) => validateInputs(e)}
+      >
         <div className="user-form-container" style={{justifyContent: "flex-start"}}>
           <div className="login-input-container email-container" style={{height: "40%"}}>
             <div className="login-input_shadow-div-outset email" style={{borderRadius: "2.8vh 2.8vh .5vh .5vh"}}>
               <div className="input-container">
+                <input style={{display: "none"}} type="submit" name="prevent-enter-submit" onClick={() => false} />
                 <input 
                   className="login-input-field email-input"
+                  style={errorPath === "user_name" ? {border: "3px solid #ff6e6e"} : {}}
                   ref={userNameInputRef}
                   ariarequired="true"
                   placeholder="Username"
@@ -87,6 +120,7 @@ function AuthLogIn({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field password-input"
+                  style={errorPath === "password" ? {border: "3px solid #ff6e6e"} : {}}
                   ref={passwordInputRef}
                   arearequired="true"
                   placeholder="Password"
@@ -113,15 +147,22 @@ function AuthLogIn({showError, onError}) {
           </div>
         </div>
 
-        <div className="enter-btn-container">
-          <button
-            type="submit"
-            className="login-link"
-          >
-            <div className="login-button">
+        <div className="form__enter-btn--container">
+          {/* {username !== "" && password !== "" 
+          ? ( */}
+            <button
+              className="form__enter-btn"
+              type="submit"
+            >
+              <h4>Log In</h4>
+            </button>
+          {/* ) : (
+            <div
+              className="form__enter-btn inactive"
+            >
               <h4>Log In</h4>
             </div>
-          </button>
+          )} */}
         </div>
       </form>
     </div>

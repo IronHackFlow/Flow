@@ -3,13 +3,13 @@ import { GoogleLogin } from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../contexts/TheContext'
-import ErrorModal from '../components/ErrorModal'
+import InputError from '../components/InputError'
 import AuthLogIn from '../components/AuthLogIn'
 import AuthSignUp from '../components/AuthSignUp'
 import flowLogo from '../images/FlowLogo.png'
 
-const Auth = (props) => {
-  const { windowSize, windowSizeChange } = useContext(TheContext)
+const Auth = () => {
+  const { setUser } = useContext(TheContext)
 
   const navigate = useNavigate()
   const [toggleLogin, setToggleLogin] = useState(true)
@@ -17,24 +17,25 @@ const Auth = (props) => {
   const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
-    actions
-    .isUserAuth()
-    .then(res => {
-      if (res.data.isLoggedIn) {
-        navigate('/')
-      }
-    })
-    .catch(console.error)
-  }, [])
-  
+    setShowErrorModal(false)
+  }, [toggleLogin])
+
   const onResponse = (response) => {
     actions
       .logInGoogle(response)
-      .then(res => {
+      .then(async res => {
         if (res.data.success) {
           console.log(res.data, "SUCCESSFUL GOOGLE LOGIN")
           localStorage.setItem('token', res.data.token)
-          navigate('/')
+          await actions
+            .isUserAuth()
+            .then(res => {
+              if (res.data.isLoggedIn) {
+                setUser(res.data.user)
+                navigate('/')
+              }
+          })
+          .catch(console.error)
         } else {
           //TODO: add errors to display to user
           console.log(res.data.message)
@@ -45,15 +46,6 @@ const Auth = (props) => {
 
   return (
     <div className="LogIn" id="LogIn">
-      <ErrorModal 
-        isOpen={showErrorModal}
-        onClose={setShowErrorModal}
-        title={errorMessage}
-        opacity={false}
-        modHeight={40}
-        modWidth={77}
-        placement={26.5}
-      />
       <div className="page-container">
         <div className="upper-container">
           <div className="upper-outset">
@@ -79,6 +71,15 @@ const Auth = (props) => {
                       </div>
                     </div>
                     <div className="user-login-2_other-logins">
+                      <InputError
+                        isOpen={showErrorModal}
+                        onClose={setShowErrorModal}
+                        message={errorMessage}
+                        modHeight={50}
+                        modWidth={74}
+                        top={26.5}
+                        left={13}
+                      />
                       <div className="other-logins-1_google-btn">
                         <div className="google-btn_shadow-div-outset">
                           <p>Continue with </p>

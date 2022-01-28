@@ -1,52 +1,81 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import actions from '../api';
+import TheContext from '../contexts/TheContext'
 import useHandleOSK from '../utils/useHandleOSK';
+import { signUpSchema } from '../utils/validationSchemas'
 import ButtonClearText from "./ButtonClearText"
 import ButtonShowPassword from "./ButtonShowPassword"
 
 function AuthSignUp({showError, onError}) {
+  const { user, setUser } = useContext(TheContext)
   const { handleOnFocus } = useHandleOSK()
   const navigate = useNavigate()
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordType, setPasswordType] = useState("password")
+  const [errorPath, setErrorPath] = useState("")
 
   const userNameInputRef = useRef()
   const emailInputRef = useRef()
   const passwordInputRef = useRef()
 
-  const signUpHandler = async (e) => {
-    e.preventDefault()
+  const validateInputs = (e) => {
     const userData = { user_name: username, email: email, password: password }
-    if (username === "") {
-      onError("Username field is required")
-      userNameInputRef.current.focus()
-      return showError(true)
+    signUpSchema
+    .validate(userData, { abortEarly: false })
+    .then(valid => {
+      setErrorPath("")
+      signUpHandler(userData)
+    })
+    .catch(err => {
+      handleErrorFocus(err.inner[0].path)
+      setErrorPath(err.inner[0].path)
+      onError(err.errors[0])
+      showError(true)
+    })
+    e.preventDefault()
+  }
+
+
+  const handleErrorFocus = (errorPath) => {
+    let username = userNameInputRef.current
+    let email = emailInputRef.current
+    let password = passwordInputRef.current
+
+    if (errorPath === "user_name") {
+      username.focus()
+    } else if (errorPath === "email") {
+      email.focus()
+    } else if (errorPath === "password") {
+      password.focus()
     } 
-    if (email === "") {
-      onError("Email field is required")
-      emailInputRef.current.focus()
-      return showError(true)
-    } 
-    if (password === "") {
-      onError("Password field is required")
-      passwordInputRef.current.focus()
-      return showError(true)
-    }
+  }
+
+  /// hahahahahahahahha wow that's a lot of async 
+  const signUpHandler = async (userData) => {
     try {
       actions
         .signUp(userData)
-        .then(res => {
+        .then(async res => {
           console.log(res.data)
           if (res.data.success) {
-            actions
+            await actions
               .logIn(userData)
-              .then((res) => {
+              .then(async res => {
                 if (res.data.success) {
                   localStorage.setItem('token', res.data.token)
-                  navigate('/')
+                  await actions
+                  .isUserAuth()
+                  .then(res => {
+                    console.log(res, "I GOT AN AUTH USER HERE")
+                    setUser(res.data.user)
+                    navigate('/')
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                  })
                 } else {
                   // TODO: create an error here to display on screen
                   console.log(res.data.message)
@@ -54,7 +83,12 @@ function AuthSignUp({showError, onError}) {
               })
               .catch(console.error)
           } else {
-            //TODO: Dynamic error modal
+            if (res.data.path) {
+              handleErrorFocus(res.data.path)
+              setErrorPath(res.data.path)
+              onError(res.data.message)
+              showError(true)
+            }
             console.log(res.data.message)
           }
         })
@@ -66,13 +100,15 @@ function AuthSignUp({showError, onError}) {
 
   return (
     <div className="user-login-3_form">
-      <form className="login-form" onSubmit={(e) => signUpHandler(e)}>
+      <form className="login-form" onSubmit={(e) => validateInputs(e)}>
         <div className="user-form-container">
           <div className="login-input-container email-container">
             <div className="login-input_shadow-div-outset email" style={{borderRadius: "2.8vh 2.8vh 0.5vh 0.5vh"}}>
               <div className="input-container">
+                <input style={{display: "none"}} type="submit" name="prevent-enter-submit" onClick={() => false} />
                 <input 
                   className="login-input-field email-input"
+                  style={errorPath === "user_name" ? {border: "3px solid #ff6e6e"} : {}}
                   ref={userNameInputRef}
                   placeholder="Username"
                   autoComplete="off"
@@ -97,6 +133,7 @@ function AuthSignUp({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field email-input"
+                  style={errorPath === "email" ? {border: "3px solid #ff6e6e"} : {}}
                   ref={emailInputRef}
                   placeholder="Email"
                   autoComplete="off"
@@ -121,6 +158,7 @@ function AuthSignUp({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field password-input"
+                  style={errorPath === "password" ? {border: "3px solid #ff6e6e"} : {}}
                   ref={passwordInputRef}
                   placeholder="Password"
                   type={passwordType}
@@ -145,14 +183,29 @@ function AuthSignUp({showError, onError}) {
           </div>
         </div>
 
-        <div className="enter-btn-container">
+        <div className="form__enter-btn--container">
+          {/* {username !== "" && password !== "" && email !== ""
+            ? (
+              <button
+                className="form__enter-btn"
+                type="submit"
+              >
+                <h4>Sign In</h4>
+              </button>
+            ) : (
+              <div
+                className="form__enter-btn inactive"
+              >
+                <h4>Sign In</h4>
+              </div>
+            )} */}
           <button
-            type="submit" 
-            className="login-link"
+            className="form__enter-btn"
+            type="submit"
+            onMouseDown={(e) => e.preventDefault()}
+            onKeyDown={(e) => e.preventDefault()}
           >
-            <div className="login-button">
-              <h4>Sign Up</h4>
-            </div>
+            <h4>Sign In</h4>
           </button>
         </div>
       </form>

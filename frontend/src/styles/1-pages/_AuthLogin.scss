@@ -143,7 +143,16 @@
                               border: 2px solid pink;
                               outline: none !important;
                               color: white;
-                              border-radius: 30px;
+                              border-radius: 100vh;
+                              padding-right: 20%;
+                            }
+                          }
+                          .input-error {
+                            &:focus {
+                              border: 2px solid red;
+                              outline: none !important;
+                              color: white;
+                              border-radius: 100vh;
                               padding-right: 20%;
                             }
                           }
@@ -152,22 +161,33 @@
                     }
                   }
 
-                  .enter-btn-container {
+                  .form__enter-btn--container {
                     @include flexCenter(24%, 100%, 0, space-evenly, center, column);
                     
-                    .login-link {
+                    .form__enter-btn {
                       @include flexCenter(70%, 94%, 100vh, center, center, column);
-                      color: white;
                       box-shadow: 2px 2px 3px #545454, -1px -1px 2px #ffffff;
                       background: linear-gradient(315deg,#2ec291, #68d3b0);
                       
-                      .login-button {
-                        @include flexCenter(100%, 100%, 20px, center, center, row);
+                      h4 {
+                        color: white
                       }
 
                       &:active {
                         background: linear-gradient(45deg,#2ec291, #68d3b0);
                         box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
+                      }
+
+                    }
+
+                    .inactive {
+                      background: linear-gradient(315deg, #4f7468, #6c8a80);
+                      h4 {
+                        color: #a6a6a6;
+                      }
+                      &:active {
+                        background: linear-gradient(315deg, #4f7468, #6c8a80);
+                        box-shadow: 2px 2px 3px #545454, -1px -1px 2px #ffffff;
                       }
                     }
                   }

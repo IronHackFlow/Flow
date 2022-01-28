@@ -302,29 +302,71 @@
           background: pink;
         }
         &:hover {
-          background: pink;
+          background: #ec6aa0;
+          box-shadow: inset 2px 2px 2px 0px #532739, inset -2px -2px 2px #ffd5e6;
           .track-details-container {
             .song-name-container {
               .song-name-outset {
-                box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+                box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
+                .track-title-container {
+                  p {
+                    color: white
+                  }
+                }
+                .track-data-container {
+                  .track-caption-container {
+                    p {
+                      color: #e0e0e0;
+                    }
+                  }
+                }
               }
             }
             .lyrics-container {
               .lyrics-outset {
-                box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+                box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
               }
             }
           }
           .buttons-container {
             .buttons-inner {
-              box-shadow: inset 2px 2px 2px 0px #b294a0, inset -2px -2px 2px #ffe2ee;
+              box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
               .delete-btn-container {
                 .play-container {
                   .play-outset {
-                    box-shadow: inset 2px 2px 2px 0px #b294a0, inset -2px -2px 2px #fdeaf2;
+                    box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
                     .play-inset {
-                      box-shadow: 2px 2px 2px 0px #b294a0, -2px -2px 2px #ffe2ee;
+                      box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
                     }
+                  }
+                }
+              }
+            }
+          }
+          .delete-container {
+            box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #ffd2e4;
+            .delete-question-container {
+              p {
+                color: white;
+                span {
+                  color: #b13c6d;
+                }
+              }
+            }
+            .delete-btn-container {
+              .delete-btn_shadow-div-inset {
+                box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
+                .cancel-btn-container {
+                  .cancel-btn_shadow-div-outset {
+                    box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
+                    color: #d1d1d1;
+                  }
+                }
+                .confirm-btn-container {
+                  .confirm-btn_shadow-div-outset {
+                    box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
+                    color: white;
+                    border: 2px solid white;
                   }
                 }
               }
@@ -395,7 +437,7 @@
                 width: 95%;
                 font-size: 13px;
                 line-height: 1.2;
-                color: #ff728a;
+                color: #ffb2bf;
                 overflow-y: scroll;
                 text-align: start;
   
@@ -515,14 +557,17 @@
 }
 .delete-container {
   @include flexCenter(90%, 95%, 11px, center, center, column);
-  box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+  box-shadow: 3px 3px 3px #4a4a4a, -2px -2px 2px #bebebe;
 
   .delete-question-container {
     @include flexCenter(60%, 100%, 11px, center, center, row);
 
     p {
       font-size: 13px;
-      color: gray;
+      color: white;
+      span {
+        color: #e24f8c;
+      }
     }
   }
   .delete-btn-container {
@@ -530,7 +575,7 @@
 
     .delete-btn_shadow-div-inset {
       @include flexCenter(86%, 97%, 11px, center, center, row);
-      box-shadow: inset 3px 3px 4px #959595, inset -3px -3px 3px #f1f1f1;
+      box-shadow: inset 3px 3px 4px #5a5a5a, inset -2px -2px 3px #b6b6b6;
 
       .space-container {
         width: 40%
@@ -540,8 +585,8 @@
         
         .cancel-btn_shadow-div-outset {
           @include flexCenter(70%, 90%, 20px, center, center, row);
-          box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
-          color: gray;
+          box-shadow: 3px 3px 3px #545454, -2px -2px 3px #a6a6a6;
+          color: #b9b9b9;
 
         }
       }
@@ -550,7 +595,7 @@
 
         .confirm-btn_shadow-div-outset {
           @include flexCenter(70%, 90%, 20px, center, center, row);
-          box-shadow: 3px 3px 4px #959595, -3px -3px 3px #f1f1f1;
+          box-shadow: 3px 3px 3px #545454, -2px -2px 2px #acacac;
           background: #ec6aa0;
           color: white;
         }

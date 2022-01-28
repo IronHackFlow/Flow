@@ -76,13 +76,11 @@ function Profile(props) {
       }
     }
 
-    const setFocus = () => {
-      // console.log(songListRef.current)
-      if (document.activeElement === songListRef.current) {
-        console.log('yo wtf')
-        songListRef.current.blur()
+    const setFocus = (e) => {
+      if (document.activeElement === e.currentTarget) {
+        e.currentTarget.blur()
       } else {
-        songListRef.current.focus()
+        e.currentTarget.focus()
       }
     }
     
@@ -124,7 +122,11 @@ function Profile(props) {
     }
 
     return (
-      <li className="each-track-container" ref={setSongRefs} onClick={() => setFocus}>
+      <li 
+        className="each-track-container" 
+        ref={setSongRefs} 
+        onClick={(e) => setFocus(e)}
+      >
         {deleteCheck
           ? (
             <>
@@ -175,14 +177,14 @@ function Profile(props) {
                         <div className="delete-btn-container">
                           <div className="play-container">
                             <div className="play-outset">
-                              <div className="play-inset">
+                              <button className="play-inset">
                                 <img
                                   className="button-icons"
                                   src={xExit}
                                   onClick={() => deleteCheckHandler(false)}
                                   alt="exit"
                                 />
-                              </div>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -227,20 +229,20 @@ function Profile(props) {
           ) : (
             <div className="delete-container">
               <div className="delete-question-container">
-               <p>Are you sure you want to delete <span style={{color: '#e24f8c'}}>{eachSong.name}</span>?</p>
+               <p>Are you sure you want to delete <span>{eachSong.name}</span>?</p>
               </div>
               <div className="delete-btn-container">
                 <div className="delete-btn_shadow-div-inset">
                   <div className="space-container"></div>
                   <div className="cancel-btn-container">
-                    <div className="cancel-btn_shadow-div-outset" onClick={() => deleteCheckHandler(true)}>
+                    <button className="cancel-btn_shadow-div-outset" onClick={() => deleteCheckHandler(true)}>
                       Cancel
-                    </div>
+                    </button>
                   </div>
                   <div className="confirm-btn-container">
-                    <div className="confirm-btn_shadow-div-outset" onClick={() => deleteSong(eachSong)}>
+                    <button className="confirm-btn_shadow-div-outset" onClick={() => deleteSong(eachSong)}>
                       Delete
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>

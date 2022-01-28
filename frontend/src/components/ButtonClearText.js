@@ -40,6 +40,7 @@ export default function ButtonClearText({ inset, shadowColors, buttonSize = 68, 
         style={!inset ? {boxShadow: "none"} : {boxShadow: `inset 2px 2px 3px ${shadowColors[0]}, inset -2px -2px 2px ${shadowColors[1]}`}}
         onMouseDown={(e) => e.preventDefault()}
         onClick={(e) => clearInput(e)}
+        tabIndex="-1"
       >
         <div 
           className="btn-clear--shadow-outset"

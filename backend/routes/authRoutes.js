@@ -12,13 +12,12 @@ router.post(`/signUp`, async (req, res, next) => {
   const userName = req.body.user_name.toLowerCase()
   const email = req.body.email.toLowerCase()
   let password = req.body.password
-  console.log(userName, email, "am i getting no information here?")
-
+  console.log(userName, email, password, "are these legit values??")
   const takenUserName = await User.findOne({ user_name: userName })
   const takenEmail = await User.findOne({ email: email })
 
   if (takenUserName || takenEmail) {
-    return res.json({ success: false, message: "Username or email has already been taken" })
+    return res.json({ success: false, path: "user_name", message: "username or email has already been taken" })
   } else {
     password = await bcrypt.hash(password, 10)
 
@@ -28,25 +27,27 @@ router.post(`/signUp`, async (req, res, next) => {
       password: password,
       picture: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/100/100`
     }
-    const newUser = User.create(dbUser)
-    res.status(200).json({success: true, message: "You have signed up successfully"})
+    const newUser = await User.create(dbUser)
+    res.status(200).json({success: true, message: "user has signed up successfully"})
   }
 })
   
 router.post(`/logIn`, async (req, res, next) => {
+  let userToLower = req.body.user_name.toLowerCase()
   const logInUser = { 
-    user_name: req.body.user_name,
+    user_name: userToLower,
     password: req.body.password 
   }
-
+  console.log(logInUser, "lets see what i'm getting here")
   const { error } = logInValidation(logInUser)
   if (error) return res.json({ success: false, message: error.details[0].message })
 
-  User.findOne({ user_name: logInUser.user_name.toLowerCase() })
+  await User.findOne({ user_name: logInUser.user_name })
     .select('+password')
     .then(dbUser => {
+
       if (!dbUser) {
-        return res.json({ success: false, message: "Invalid username or email" })
+        return res.json({ success: false, path: "user_name", message: "invalid username or email" })
       }
       bcrypt.compare(logInUser.password, dbUser.password)
         .then(isCorrect => {
@@ -60,18 +61,18 @@ router.post(`/logIn`, async (req, res, next) => {
               process.env.JWT_SECRET,
               {expiresIn: 86400},
               (err, token) => {
-                if (err) return res.json({ success: false, error: err, message: "Couldn't create token" })
+                if (err) return res.json({ success: false, error: err, message: "couldn't create token" })
                 else {
                   return res.json({
                     success: true,
-                    message: "You have successfully logged in",
+                    message: "user has successfully logged in",
                     token: token
                   })
                 }
               }
             )
           } else {
-            return res.json({ success: false, message: "Password is incorrect"})
+            return res.json({ success: false, path: "password", message: "password is incorrect"})
           }
         })
     })
@@ -82,7 +83,7 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   console.log(tokenId, "google token")
 
   if (!tokenId) {
-    res.json({ success: false, message: 'Missing Google token' })
+    res.json({ success: false, message: 'missing Google token' })
   }
 
   const googleResponse = await axios.get(
@@ -98,9 +99,9 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   } = googleResponse.data
   
   if (!email || error_description) {
-    res.json({ success: false, error: error_description, message: "Error awaiting response from Google" })
+    res.json({ success: false, error: error_description, message: "error awaiting response from Google" })
   } else if (!email_verified) {
-    res.json({ success: false, message: 'Email not verified with Google' })
+    res.json({ success: false, message: 'email not verified with Google' })
   }
   
   const emailToUserName = (email) => {
@@ -134,7 +135,7 @@ router.post(`/logInGoogle`, async (req, res, next) => {
   }
   
   jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 86400}, (err, token) => {
-    if (err) return res.json({ success: false, error: err, message: "Couldn't verify token" })
+    if (err) return res.json({ success: false, error: err, message: "couldn't verify token" })
     else {
       return res.json({
         success: true,
