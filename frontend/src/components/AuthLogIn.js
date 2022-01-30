@@ -80,6 +80,12 @@ function AuthLogIn({showError, onError}) {
       console.log(err)
     }
   }
+  
+  const errorStyles = {
+    border: "2px solid #ff6e6e",
+    background: "#fc94a1",
+    boxShadow: "inset 2px 2px 3px #775656, inset -2px -2px 3px #ffbaba"
+  }
 
   return (
     <div className="user-login-3_form">
@@ -94,7 +100,7 @@ function AuthLogIn({showError, onError}) {
                 <input style={{display: "none"}} type="submit" name="prevent-enter-submit" onClick={() => false} />
                 <input 
                   className="login-input-field email-input"
-                  style={errorPath === "user_name" ? {border: "3px solid #ff6e6e"} : {}}
+                  style={errorPath === "user_name" ? errorStyles : {}}
                   ref={userNameInputRef}
                   ariarequired="true"
                   placeholder="Username"
@@ -120,7 +126,7 @@ function AuthLogIn({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field password-input"
-                  style={errorPath === "password" ? {border: "3px solid #ff6e6e"} : {}}
+                  style={errorPath === "password" ? errorStyles : {}}
                   ref={passwordInputRef}
                   arearequired="true"
                   placeholder="Password"

@@ -46,33 +46,3 @@ export let saveSongSchema = yup.object().shape({
       .string()
       .max(40)
 })
-// export const useValidateInput = ({type}) => {
-//   let schema = type === "signUp" ? signUpSchema : logInSchema
-
-
-//   const validateAll = (toValidate) => {
-//     schema.validate(toValidate, { abortEarly: false})
-//       .then(res => {
-
-//       })
-//       .catch(err => {
-
-//       })
-//   }
-
-//   const validateOne = (error, setError)  => {
-//     let errors = []
-//     yup.reach(schema, error?.name).validate(error?.state)
-//       .then(res => {
-
-//       })
-//       .catch(err => {
-//         err.errors.forEach(error => {
-//           errors.push(error)
-//         })
-//       })
-//     return { errors, }
-//   }
-
-//   return { validateOne, validateAll }
-// }

@@ -1,24 +1,24 @@
 import { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react'
 import { GoogleLogin } from 'react-google-login'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../contexts/TheContext'
 import InputError from '../components/InputError'
 import AuthLogIn from '../components/AuthLogIn'
 import AuthSignUp from '../components/AuthSignUp'
+import { useToggle } from '../hooks/useToggle'
 import flowLogo from '../images/FlowLogo.png'
 
 const Auth = () => {
   const { setUser } = useContext(TheContext)
-
   const navigate = useNavigate()
-  const [toggleLogin, setToggleLogin] = useState(true)
+  const [isLogIn, setIsLogIn] = useToggle(false)
   const [errorMessage, setErrorMessage] = useState()
   const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
     setShowErrorModal(false)
-  }, [toggleLogin])
+  }, [isLogIn])
 
   const onResponse = (response) => {
     actions
@@ -67,7 +67,7 @@ const Auth = () => {
                   <div className="user-login_shadow-div-outset">
                     <div className="user-login-1_title">
                       <div className="title_shadow-div-inset">
-                        {toggleLogin ? `Log In` : `Sign In`}
+                        {isLogIn ? `Sign Up` : `Log In` }
                       </div>
                     </div>
                     <div className="user-login-2_other-logins">
@@ -85,7 +85,7 @@ const Auth = () => {
                           <p>Continue with </p>
                           <GoogleLogin 
                             clientId={process.env.REACT_APP_GOOGLEID}
-                            buttonText={toggleLogin ? "Sign Up" : "Log In"}
+                            buttonText={isLogIn ? "Sign Up" : "Log In" }
                             onSuccess={onResponse}
                             onFailure={onResponse}
                             cookiePolicy={"single_host_origin"}
@@ -94,14 +94,14 @@ const Auth = () => {
                       </div>
                       <div 
                         className="other-logins-2_or-container"
-                        style={showErrorModal ? {height: "18%"} : {height: "25%"}}
+                        style={showErrorModal ? {height: "15%"} : {height: "25%"}}
                       >
                         <div className="border"></div>
                         <p>or</p>
                         <div className="border"></div>
                       </div>
                     </div>
-                    {toggleLogin ? (<AuthLogIn showError={setShowErrorModal} onError={setErrorMessage} />) : (<AuthSignUp showError={setShowErrorModal} onError={setErrorMessage} />)}
+                    {isLogIn ? (<AuthSignUp showError={setShowErrorModal} onError={setErrorMessage} />) : (<AuthLogIn showError={setShowErrorModal} onError={setErrorMessage} />) }
                   </div>
                 </div>
               </div>
@@ -111,11 +111,11 @@ const Auth = () => {
               <div className="switch--shadow-outset">
                 <div className="switch--shadow-inset">
                   <div className="switch__text--container">
-                    <p className="switch__text">{toggleLogin ? "Don't have an account?" : "Already a member of Flow?"}</p>
+                    <p className="switch__text">{ isLogIn ? "Already a member of Flow?" : "Don't have an account?" }</p>
                   </div>
                   <div className="switch__btn--container">
-                    <button className="switch__btn" onClick={() => setToggleLogin(!toggleLogin)}>
-                      {toggleLogin ? "Sign Up" : "Log In"}
+                    <button className="switch__btn" onClick={() => setIsLogIn()}>
+                      {isLogIn ? "Log In" : "Sign Up"} 
                     </button>
                   </div>
                 </div>

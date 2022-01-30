@@ -98,6 +98,12 @@ function AuthSignUp({showError, onError}) {
     }
   }
 
+  const errorStyles = {
+    border: "2px solid #ff6e6e",
+    background: "#fc94a1",
+    boxShadow: "inset 2px 2px 3px #775656, inset -2px -2px 3px #ffbaba"
+  }
+
   return (
     <div className="user-login-3_form">
       <form className="login-form" onSubmit={(e) => validateInputs(e)}>
@@ -108,7 +114,7 @@ function AuthSignUp({showError, onError}) {
                 <input style={{display: "none"}} type="submit" name="prevent-enter-submit" onClick={() => false} />
                 <input 
                   className="login-input-field email-input"
-                  style={errorPath === "user_name" ? {border: "3px solid #ff6e6e"} : {}}
+                  style={errorPath === "user_name" ? errorStyles : {}}
                   ref={userNameInputRef}
                   placeholder="Username"
                   autoComplete="off"
@@ -133,7 +139,7 @@ function AuthSignUp({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field email-input"
-                  style={errorPath === "email" ? {border: "3px solid #ff6e6e"} : {}}
+                  style={errorPath === "email" ? errorStyles : {}}
                   ref={emailInputRef}
                   placeholder="Email"
                   autoComplete="off"
@@ -158,7 +164,7 @@ function AuthSignUp({showError, onError}) {
               <div className="input-container">
                 <input 
                   className="login-input-field password-input"
-                  style={errorPath === "password" ? {border: "3px solid #ff6e6e"} : {}}
+                  style={errorPath === "password" ? errorStyles : {}}
                   ref={passwordInputRef}
                   placeholder="Password"
                   type={passwordType}
@@ -205,7 +211,7 @@ function AuthSignUp({showError, onError}) {
             onMouseDown={(e) => e.preventDefault()}
             onKeyDown={(e) => e.preventDefault()}
           >
-            <h4>Sign In</h4>
+            <h4>Sign Up</h4>
           </button>
         </div>
       </form>

@@ -7,6 +7,7 @@ export default function ButtonClearText({ inset, shadowColors, buttonSize = 68, 
 
   useEffect(() => {
     if (value) {
+      console.log("shit htis is firing off man", value)
       buttonContainerRef.current.style.width = `${buttonContainerRef.current.getBoundingClientRect().height + 15}px`
       buttonRef.current.style.opacity = "1"
     } else {

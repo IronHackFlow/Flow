@@ -386,16 +386,17 @@
               text-decoration: none;
 
               .track-title-container {
-                @include flexCenter(40%, 95%, 10px, space-evenly, flex-start, column);
-                margin-left: 4%;
+                @include flexCenter(40%, 100%, 0, center, flex-start, column);
 
                 p {
-                  font-size: 1.1rem;
+                  width: 90%;
                   color: #e24f8c;
+                  text-indent: 4%;
+                  font-size: 1rem;
                   font-weight: bold;
-                  line-height: 1;
                   text-align: start;
-                  word-break: break-word;
+                  white-space: nowrap;
+                  overflow-x: scroll;
                 }
               }
 

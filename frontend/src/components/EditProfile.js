@@ -45,6 +45,7 @@ function EditProfile(props) {
   }
 
   const expandSection = e => {
+    console.log(e.current, "what is diss??")
     sectionRefsArray.forEach(each => {
       if (e.current !== each.current) {
         each.current.style.height = '5%'

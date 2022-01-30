@@ -157,9 +157,11 @@ router.get(`/isUserAuth`, verifyJWT, (req, res, next) => {
     .catch(err => res.status(500).json({ success: false, error: err, message: "Could not authorize user"}))
 })
 
+
 router.post(`/addUserProfRT`, verifyJWT, async (req, res, next) => {
   const body = req.body
-  await User.findByIdAndUpdate(req.user._id, body)
+  console.log(body, "oh boy here we go")
+  await User.findByIdAndUpdate(req.user._id, body, { new: true})
     .then(user => {
       res.status(200).json(user)
     })

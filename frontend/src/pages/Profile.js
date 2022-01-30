@@ -1,4 +1,4 @@
-import { useContext,useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
+import { useContext,useState, useEffect, useRef, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import actions from '../api'
@@ -36,7 +36,7 @@ function Profile(props) {
         setThisUserSongs(res.data)
       })
       .catch(console.error)
-  }, [thisUser])
+  }, [thisUser, user])
 
   useEffect(() => {
     actions
@@ -410,25 +410,25 @@ function Profile(props) {
               {thisUser?._id === user?._id ? (
                 <div className="edit-logout_shadow-div-inset">
                   <div className="each-button-container ebc-4">
-                    <div className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
-                      <Link to="/editprofile-screen" className="profile-button-inset pbe-4">
+                    <button className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
+                      <Link to="/profileEditModal" className="profile-button-inset pbe-4">
                         <img className="button-icons edit" src={editicon} style={{margin: "12% 0% 0% 11%"}} alt="edit" />
                       </Link>
                       <div className="btn-title">
                         Edit
                       </div>
-                    </div>
+                    </button>
                   </div>
 
                   <div className="each-button-container ebc-5">
-                    <div className="profile-button-outset" style={{borderRadius: "4px 4px 4px 35px"}}>
+                    <button className="profile-button-outset" style={{borderRadius: "4px 4px 4px 35px"}}>
                       <div className="btn-title">
                         Log Out
                       </div>
                       <div className="profile-button-inset pbe-5" onClick={() => logout()}>
                         <img className="button-icons logout" src={logouticon} style={{margin: "0% 0% 18% 9%"}} alt="log out" />
                       </div>
-                    </div>
+                    </button>
                   </div>
                 </div>
               ) : null}

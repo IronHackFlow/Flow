@@ -5,18 +5,17 @@ import TheContext from './contexts/TheContext'
 import SongData from './contexts/SongData'
 import { songData } from './contexts/SongData'
 import actions from './api'
-import useEventListener from './utils/useEventListener'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 import NavBar from './components/NavBar'
 import TestAudio from './pages/TestAudio'
 import EditLyrics from './components/EditLyrics'
+import ProfileEditModal from './components/EditProfile/EditProfileModal'
 import EditProfileScreen from './components/EditProfileScreen'
 import EditProfile from './components/EditProfile'
 import Profile from './pages/Profile'
 import SongScreen from './pages/SongScreen'
 import Search from './pages/Search'
-import { set } from 'mongoose'
 
 function App(props) {
   const { 
@@ -30,29 +29,9 @@ function App(props) {
     isLoading, setIsLoading
   } = SongData()
 
-  // useEventListener('resize', e => {
-  //     var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  //     document.getElementById("body").style.height = `${onChange}px`
-  //     setWindowSize(onChange)
-  // })
-
-  // useEventListener('resize',  e => {
-  //   var onChange = visualViewport.height
-  //   console.log(onChange, "YOOOOOOOOOOOOOOOOOOO")
-  //   setWindowSizeChange(onChange)
-  // }, visualViewport)
-
-  // useLayoutEffect(() => {
-  //   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  //   document.getElementById("body").style.height = `${h}px`
-  //   setWindowSize(h)
-  // }, [])
-  const [keyboardOut, setKeyboardOut] = useState(false)
   const location = useLocation()
   const [user, setUser] = useState()
   const [locationIndicator, setLocationIndicator] = useState()
-  const [windowSizeChange, setWindowSizeChange] = useState()
-  const [windowSize, setWindowSize] = useState()
 
   useEffect(() => {
     actions
@@ -61,22 +40,9 @@ function App(props) {
         console.log(res, "I GOT AN AUTH USER HERE")
         setUser(res.data.user)
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      .catch(err => console.log(err))
   }, [])
   
-
-  // useLayoutEffect(() => {
-  //   const handleResize = () => {
-  //     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  //     document.getElementById("body").style.height = `${h}px`
-  //     setWindowSize(h)
-  //   }
-  //   window.addEventListener('resize', handleResize)
-  //   return () => window.removeEventListener('resize', handleResize)
-  // }, [])
-
   useEffect(() => {
     setLocationIndicator(location)
   }, [location])
@@ -88,9 +54,6 @@ function App(props) {
         setUser,
         locationIndicator,
         setLocationIndicator,
-        windowSize,
-        setWindowSize,
-        windowSizeChange
       }}
     >
       <songData.Provider 
@@ -119,6 +82,7 @@ function App(props) {
             <Route path="/editLyrics" element={<EditLyrics />}></Route>
             <Route path="/editprofile-screen" element={<EditProfileScreen />}></Route>
             <Route path="/editprofile" element={<EditProfile />}></Route>
+            <Route path="/profileEditModal" element={<ProfileEditModal />}></Route>
             <Route path="/songScreen/:id" element={<SongScreen />}></Route>
             <Route path="/search" element={<Search />}></Route>
           </Routes>

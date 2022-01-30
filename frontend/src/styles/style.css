@@ -3910,14 +3910,14 @@ button {
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-title-container {
   height: 40%;
-  width: 95%;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -3925,16 +3925,17 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 4%;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-title-container p {
-  font-size: 1.1rem;
+  width: 90%;
   color: #e24f8c;
+  text-indent: 4%;
+  font-size: 1rem;
   font-weight: bold;
-  line-height: 1;
   text-align: start;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container {
@@ -11663,36 +11664,30 @@ button {
 
 @-webkit-keyframes editOpacityIn {
   0% {
-    height: 90%;
+    height: 65%;
     opacity: 0;
   }
-  50% {
-  }
   100% {
-    height: 90%;
+    height: 65%;
     opacity: 1;
   }
 }
 
 @keyframes editOpacityIn {
   0% {
-    height: 90%;
+    height: 65%;
     opacity: 0;
   }
-  50% {
-  }
   100% {
-    height: 90%;
+    height: 65%;
     opacity: 1;
   }
 }
 
 @-webkit-keyframes editOpacityOut {
   0% {
-    height: 90%;
+    height: 65%;
     opacity: 1;
-  }
-  50% {
   }
   100% {
     height: 0%;
@@ -11702,10 +11697,8 @@ button {
 
 @keyframes editOpacityOut {
   0% {
-    height: 90%;
+    height: 65%;
     opacity: 1;
-  }
-  50% {
   }
   100% {
     height: 0%;
@@ -11716,6 +11709,155 @@ button {
 .ProfileEditModal {
   height: 100%;
   width: 100%;
+  border-radius: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: -webkit-gradient(linear, left top, left bottom, from(#b1b1b1), to(#666666));
+  background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
+}
+
+.ProfileEditModal .edit-profile__body {
+  height: 75%;
+  width: 96%;
+  border-radius: 5vh 5vh 0.5vh 0.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
+          box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
+  margin-top: 2%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset {
+  height: 98.3%;
+  width: 97%;
+  border-radius: 4.4vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
+          box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form {
+  height: 87%;
+  width: 96%;
+  border-radius: 4vh 4vh 0.5vh 0.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: -webkit-gradient(linear, left top, left bottom, from(#c7c7c7), to(#939393));
+  background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
+  -webkit-box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
+          box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
+  margin-top: 2.3%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset {
+  height: 98.3%;
+  width: 97%;
+  border-radius: 3.3vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header {
+  height: 11%;
+  width: 100%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset {
+  height: 86%;
+  width: 95%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+          box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back {
+  height: 100%;
+  width: 16%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11730,119 +11872,12 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #000000b3;
 }
 
-.ProfileEditModal .profile-mi {
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset {
   height: 85%;
   width: 85%;
-  border-radius: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background: #686a6b;
-}
-
-.ProfileEditModal .profile-mi .profile-lc {
-  background: #686a6b;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container {
-  height: 90%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .edit-section {
-  height: 70%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .edit-section--Public {
-  height: 70%;
-  margin-top: 5%;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container {
-  height: 70%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin: 5% 0% 5% 0%;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section {
-  height: 30%;
-  width: 100%;
-  border-radius: 0px;
+  border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11856,209 +11891,14 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 }
 
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner {
-  height: 90px;
-  width: 90px;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer {
-  height: 80%;
-  width: 80%;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  overflow: hidden;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .public-sections {
-  height: 70%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .personal-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .personal-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .social-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .social-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .songs-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.ProfileEditModal .profile-mi .profile-lc .input-sections-container .songs-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.ProfileEditModal .profile-mi .save-back-container {
-  height: 10%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.ProfileEditModal .profile-mi .save-back-container .back-container {
-  height: 40px;
-  width: 40px;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-          box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-  margin-left: 4%;
-}
-
-.ProfileEditModal .profile-mi .save-back-container .back-container .back-inner {
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset {
   height: 70%;
   width: 70%;
-  border-radius: 100px;
+  border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12072,30 +11912,706 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+  -webkit-box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+          box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+  background: #ec6aa0;
 }
 
-.ProfileEditModal .profile-mi .save-back-container .back-container .back-inner img {
-  height: 1.7em;
-  width: 1.7em;
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset img {
+  height: 85%;
+  width: 85%;
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.ProfileEditModal .profile-mi .save-back-container .submit-button-edit {
-  border: none;
-  border-radius: 20px;
-  background: #2ec291;
-  width: 70px;
-  height: 40px;
-  margin-right: 4%;
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active {
+  -webkit-box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
+  background: white;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active img {
+  -webkit-filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
+          filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title {
+  height: 100%;
+  width: 84%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset {
+  height: 85%;
+  width: 97%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+          box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+  margin-left: 1%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container {
+  height: 100%;
+  width: 83%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 {
+  width: 90%;
+  height: 80%;
+  padding-left: 10%;
   color: white;
-  -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-          box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
+  line-height: .95;
+  text-align: start;
 }
 
-.ProfileEditModal .profile-mi .save-back-container .submit-button-edit:active {
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 span {
+  color: #ec6aa0;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container {
+  height: 100%;
+  width: 17%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset {
+  height: 75%;
+  width: 68%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
+          box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
+  overflow: hidden;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset img {
+  height: 90%;
+  width: 90%;
+  border-radius: 100vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section {
+  height: 89%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset {
+  height: 5%;
+  width: 95%;
+  border-radius: 0.6vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+          box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__header {
+  height: 10%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #e24f8c;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__error--container {
+  height: 25%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container {
+  height: 65%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form {
+  height: 96%;
+  width: 97%;
+  border-radius: 3.4vh 3.4vh 2.4vh 2.4vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
+          box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list {
+  height: 77%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item {
+  height: 32%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style-type: none;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset {
+  height: 90%;
+  width: 91%;
+  border-radius: 2.8vh 2.8vh 0.5vh 0.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+          box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+  padding: 0% 2% 0% 2%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container {
+  height: 77%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  -webkit-box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
+          box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
+  background: #919191;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container p {
+  position: absolute;
+  top: 2px;
+  height: 10px;
+  width: 90%;
+  font-size: .8rem;
+  color: #d1d1d1;
+  text-align: start;
+  text-indent: 1%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input {
+  height: 70%;
+  width: 95%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 6%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:defined {
+  color: pink;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-webkit-input-placeholder {
+  color: #fafafa;
+  font-size: .9rem;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:-ms-input-placeholder {
+  color: #fafafa;
+  font-size: .9rem;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-ms-input-placeholder {
+  color: #fafafa;
+  font-size: .9rem;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::placeholder {
+  color: #fafafa;
+  font-size: .9rem;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:focus {
+  border: none;
   outline: none !important;
-  border: 2px solid white;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .input-error:focus {
+  border: 2px solid red;
+  outline: none !important;
+  color: white;
+  border-radius: 100vh;
+  padding-right: 20%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container:focus-within {
+  border: 2px solid pink;
+  outline: none !important;
+  color: white;
+  border-radius: 100vh;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container {
+  height: 23%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container {
+  height: 100%;
+  width: 30%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel {
+  height: 70%;
+  width: 85%;
+  border-radius: 5vh 1vh 1vh 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #545454, -1px -1px 2px #e7e7e7;
+          box-shadow: 2px 2px 3px #545454, -1px -1px 2px #e7e7e7;
+  color: #636363;
+  font-size: .9rem;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel:active {
+  background: #8e8e8e;
+  -webkit-box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
+          box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container {
+  height: 100%;
+  width: 70%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save {
+  height: 70%;
+  width: 96%;
+  border-radius: 1vh 5vh 5vh 1vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(315deg, #e24f8c, #e57da7);
+  -webkit-box-shadow: 2px 2px 3px #585858, -1px -1px 2px #e6e6e6;
+          box-shadow: 2px 2px 3px #585858, -1px -1px 2px #e6e6e6;
+  color: white;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save:active {
+  background: linear-gradient(45deg, #e24f8c, #e57da7);
+  -webkit-box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
+          box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Public {
+  height: 75%;
+  border-radius: 3vh 3vh 0.6vh 0.6vh;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__header {
+  height: 100%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__error--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__form--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__header {
+  height: 100%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__error--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__form--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs {
+  border-radius: 0.6vh 0.6vh 3vh 3vh;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__header {
+  height: 100%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__error--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__form--container {
+  opacity: 0;
+  height: 0%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all {
+  height: 13%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset {
+  height: 81%;
+  width: 96%;
+  border-radius: 0.2vh 0.2vh 3.8vh 3.8vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
+          box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
+  background: #939393;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset {
+  height: 85%;
+  width: 97%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #c4c4c4;
+          box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #c4c4c4;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn {
+  height: 75%;
+  width: 95%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: linear-gradient(315deg, #2ec291, #68d3b0);
+  -webkit-box-shadow: 2px 2px 3px #545454, -1px -1px 2px #ffffff;
+          box-shadow: 2px 2px 3px #545454, -1px -1px 2px #ffffff;
+  color: white;
+  font-weight: bold;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn:active {
+  background: linear-gradient(45deg, #2ec291, #68d3b0);
+  -webkit-box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
+          box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
 }
 
 .RecordBoothModal {
@@ -14076,5 +14592,235 @@ button {
 
 .SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected .selected_2 .selected_3 .selected_4 .selected_5 .selected_6 .selected_7 {
   background: #77ffc9;
+}
+
+.ContinueModal {
+  height: 100%;
+  width: 100%;
+  background: #00000085;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+}
+
+.continue--container {
+  height: 65px;
+  width: 100%;
+  border-radius: 0vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
+  -webkit-box-shadow: 0px 10px 25px #000000cc;
+          box-shadow: 0px 10px 25px #000000cc;
+  position: absolute;
+  top: 0;
+}
+
+.continue--container .continue--shadow-inset {
+  height: 84%;
+  width: 97.5%;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px #3e3e3e, inset -2px -2px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px #3e3e3e, inset -2px -2px 3px #ffffff;
+}
+
+.continue--container .continue--shadow-inset .continue__header--container {
+  height: 100%;
+  width: 65%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.continue--container .continue--shadow-inset .continue__header--container .continue__header--shadow-outset {
+  height: 78%;
+  width: 94%;
+  border-radius: 10vh 1vh 1vh 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+          box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+  margin-left: 3%;
+}
+
+.continue--container .continue--shadow-inset .continue__header--container .continue__header--shadow-outset .continue__title {
+  height: 40%;
+  width: 86%;
+  padding-right: 5%;
+  color: #ec6aa0;
+  text-align: start;
+}
+
+.continue--container .continue--shadow-inset .continue__header--container .continue__header--shadow-outset .continue__text {
+  height: 60%;
+  width: 86%;
+  padding-right: 5%;
+  color: #ffd6d6;
+  text-align: start;
+  font-size: .8rem;
+  line-height: .95;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container {
+  height: 100%;
+  width: 35%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__cancel--container {
+  height: 100%;
+  width: 50%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__cancel--container .continue__cancel--shadow-outset {
+  height: 78%;
+  width: 90%;
+  border-radius: 0.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+          box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+  font-size: .85rem;
+  color: white;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__cancel--container .continue__cancel--shadow-outset:active {
+  background: #8e8e8e;
+  -webkit-box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
+          box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__exit--container {
+  height: 100%;
+  width: 50%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__exit--container .continue__exit--shadow-outset {
+  height: 78%;
+  width: 90%;
+  border-radius: 1vh 5vh 5vh 1vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+          box-shadow: 2px 2px 3px #4e4e4e, -1px -1px 2px #ffffff;
+  font-size: .85rem;
+  background: #ec6aa0;
+  color: white;
+}
+
+.continue--container .continue--shadow-inset .continue__btns--container .continue__exit--container .continue__exit--shadow-outset:active {
+  color: #ec6aa0;
+  -webkit-box-shadow: inset 2px 2px 3px #6c6c6c, inset -2px -2px 3px #dcdcdc;
+          box-shadow: inset 2px 2px 3px #6c6c6c, inset -2px -2px 3px #dcdcdc;
+  background: #ababab;
 }
 /*# sourceMappingURL=style.css.map */
