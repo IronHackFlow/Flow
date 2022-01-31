@@ -1,17 +1,19 @@
 import React, { useContext, useState, useCallback } from 'react'
-import EditProfileItem from "./EditProfileItem"
-import TheContext from '../../contexts/TheContext'
 import actions from '../../api'
+import TheContext from '../../contexts/TheContext'
+import EditProfileItem from "./EditProfileItem"
+import useDebugInformation from "../../utils/useDebugInformation"
 
 const MemoizedCard = React.memo(function EditProfileCard({ 
     title, items = [], 
     sectionRef, expandSection,
 }) { 
+  useDebugInformation("EditProfileCard", { title, items, sectionRef, expandSection })
   const { setUser } = useContext(TheContext)
-  const [updateItems, setUpdateItems] = useState([])
+  const [updateList, setUpdateList] = useState([])
 
   const displayItems = useCallback(() => {
-    return items?.map(inputData => <EditProfileItem inputData={inputData} key={inputData.name} onUpdate={updateItems} />)
+    return items?.map(inputData => <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />)
   }, [items])
 
   const handleExpandCard = useCallback((e, sectionRef) => {
@@ -37,7 +39,7 @@ const MemoizedCard = React.memo(function EditProfileCard({
       .addUserProf(inputData)
       .then(async res => {
         console.log(res)
-        setUpdateItems(Object.keys(inputData))
+        setUpdateList(Object.keys(inputData))
 
         await actions
           .isUserAuth()
@@ -99,7 +101,13 @@ const MemoizedCard = React.memo(function EditProfileCard({
     </div>
   )
 }, (prevProps, nextProps) => {
-  if (nextProps.items !== prevProps.items) return false
+  // console.log(prevProps, nextProps, "OH BOY WHAT IS THIS???")
+  if (nextProps.items == null) return false
+  else if (
+    nextProps?.items[0]?.value !== prevProps?.items[0]?.value ||
+    nextProps?.items[1]?.value !== prevProps?.items[1]?.value ||
+    nextProps?.items[2]?.value !== prevProps?.items[2]?.value 
+  ) return false
   return true
 })
 

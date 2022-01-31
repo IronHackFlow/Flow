@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function useHandleOSK() {
   const [windowSize, setWindowSize] = useState();
@@ -9,7 +9,7 @@ export default function useHandleOSK() {
     setWindowSize(windowSize)
   }, [])
 
-  const handleOnFocus = () => {
+  const handleOnFocus = useCallback(() => {
     const getSize = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     if (!refIsFocused) {
         setRefIsFocused(true)
@@ -19,7 +19,7 @@ export default function useHandleOSK() {
             document.getElementById('body').style.height = `${getSize}px`
         }
     } 
-  }
+  }, [])
 
   return { handleOnFocus }
 }

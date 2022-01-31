@@ -60,12 +60,15 @@ function AuthSignUp({showError, onError}) {
         .signUp(userData)
         .then(async res => {
           console.log(res.data)
+
           if (res.data.success) {
             await actions
               .logIn(userData)
               .then(async res => {
+
                 if (res.data.success) {
                   localStorage.setItem('token', res.data.token)
+
                   await actions
                   .isUserAuth()
                   .then(res => {
@@ -73,9 +76,7 @@ function AuthSignUp({showError, onError}) {
                     setUser(res.data.user)
                     navigate('/')
                   })
-                  .catch((err) => {
-                    console.log(err)
-                  })
+                  .catch(err => console.log(err))
                 } else {
                   // TODO: create an error here to display on screen
                   console.log(res.data.message)
@@ -83,13 +84,14 @@ function AuthSignUp({showError, onError}) {
               })
               .catch(console.error)
           } else {
+            console.log(res.data.message)
+
             if (res.data.path) {
               handleErrorFocus(res.data.path)
               setErrorPath(res.data.path)
               onError(res.data.message)
               showError(true)
             }
-            console.log(res.data.message)
           }
         })
         .catch(console.error)
