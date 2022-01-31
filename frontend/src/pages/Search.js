@@ -4,10 +4,8 @@ import actions from '../api'
 import TheContext from '../contexts/TheContext'
 import useEventListener from '../utils/useEventListener'
 import NavBar from '../components/NavBar'
-import search from '../images/search.svg'
-import back from '../images/back.svg'
-import xExit from "../images/exit-x-2.svg"
-import bullet from "../images/bullet-point.svg";
+import { searchIcon, goBackIcon, closeIcon, bulletPointIcon } from '../assets/images/_icons'
+
 
 function Search(props) {
   const { windowSize } = useContext(TheContext);
@@ -105,7 +103,7 @@ function Search(props) {
               <div className="result-1_data">
                 <div className="data_shadow-div-outset">
                   <div className="search-icon-container">
-                    <img className="button-icons" src={search} alt="search icon" />
+                    <img className="button-icons" src={searchIcon} alt="search icon" />
                   </div>
                   <div className="data-container">
                     <div className="data-1_titles">
@@ -115,7 +113,7 @@ function Search(props) {
                           Artist
                         </p>
                       ) : (
-                        <p className="data-type">Song <img src={bullet} alt="bulletpoint" /> {`${ele.song.song_user.user_name}`}</p>
+                        <p className="data-type">Song <img src={bulletPointIcon} alt="bulletpoint" /> {`${ele.song.song_user.user_name}`}</p>
                       )}
                     </div>
                     <div className="data-2_caption">
@@ -154,7 +152,7 @@ function Search(props) {
             <form className="search-field-form" onSubmit={(e) => preventDefault(e)}>
               <div className="search-back-btn-container">
                 <button className="search-back-btn" type="button" onClick={(e) => closeWindow(e)}>
-                  <img className="button-icons" src={back} alt="back" />
+                  <img className="button-icons" src={goBackIcon} alt="back" />
                 </button>
               </div>
 
@@ -170,7 +168,7 @@ function Search(props) {
                 ></input>
                 {searchValue ? (
                   <button className="search-clear-btn" type="button" onClick={(e) => clearSearchField(e)}>
-                    <img className="social-icons" src={xExit} alt="clear search" />
+                    <img className="social-icons" src={closeIcon} alt="clear search" />
                   </button>                
                 ) : (
                   <></>

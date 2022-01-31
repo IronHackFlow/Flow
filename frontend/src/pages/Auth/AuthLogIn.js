@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import { useContext, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import actions from '../api'
-import TheContext from "../contexts/TheContext"
-import useHandleOSK from '../utils/useHandleOSK'
-import ButtonClearText from "./ButtonClearText"
-import ButtonShowPassword from "./ButtonShowPassword"
-import { logInSchema } from "../utils/validationSchemas"
+import actions from '../../api'
+import TheContext from "../../contexts/TheContext"
+import useHandleOSK from '../../utils/useHandleOSK'
+import ButtonClearText from "../../components/ButtonClearText"
+import ButtonShowPassword from "../../components/ButtonShowPassword"
+import { logInSchema } from "../../utils/validationSchemas"
 
 
 function AuthLogIn({showError, onError}) {

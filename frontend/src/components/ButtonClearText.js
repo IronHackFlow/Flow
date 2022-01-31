@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import xExit from '../images/exit-x-2.svg'
+import { closeIcon } from '../assets/images/_icons'
+
 
 export default function ButtonClearText({ inset, shadowColors, buttonSize = 68, inputRef, value, setValue }) {
   const buttonContainerRef = useRef();
@@ -47,7 +48,7 @@ export default function ButtonClearText({ inset, shadowColors, buttonSize = 68, 
           className="btn-clear--shadow-outset"
           style={insetStyles}
         >
-          <img className="button-icons" src={xExit} alt="clear text button" />
+          <img className="button-icons" src={closeIcon} alt="clear text button" />
         </div>
       </button>
     </div>

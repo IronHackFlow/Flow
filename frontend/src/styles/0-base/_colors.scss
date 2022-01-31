@@ -1,7 +1,7 @@
 $font-color: (
   primary: (
     100: #ffffff,
-    200: #ffafd0,
+    200: #ffd6d6,
     300: #ec6aa0,
     400: #e24f8c,
     500: #c52d6c,
@@ -52,5 +52,6 @@ $background-linear-color: (
   )
   light-light: (
     auth: linear-gradient(315deg, #666666 0%,  #b1b1b1 100%),
+    selectMenu: linear-gradient(315deg, #8f8f8f 0%, #cdcdcd 100%),
   )
 )

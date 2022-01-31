@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../contexts/TheContext'
-import useDebugInformation from "../utils/useDebugInformation"
-import mic from '../images/modern-mic.svg'
-import avatar from '../images/avatar.svg'
-import home from '../images/home.svg'
-import search from '../images/search.svg'
+import { homeIcon, micIcon, searchIcon, profileIcon } from '../assets/images/_icons'
 
 function NavBar(props) {
   // useDebugInformation("NavBar", props)
@@ -39,7 +35,7 @@ function NavBar(props) {
                 <div className="navbar-btn_shadow-div-outset">
                   <img
                     className="button-icons bi-social"
-                    src={home}
+                    src={homeIcon}
                     alt="social feed icon"
                   />
                 </div>
@@ -57,7 +53,7 @@ function NavBar(props) {
                 <div className="navbar-btn_shadow-div-outset">
                   <img
                     className="button-icons bi-record"
-                    src={mic}
+                    src={micIcon}
                     alt="record song icon"
                   />
                 </div>
@@ -75,7 +71,7 @@ function NavBar(props) {
                 <div className="navbar-btn_shadow-div-outset">
                   <img
                     className="button-icons"
-                    src={search}
+                    src={searchIcon}
                     alt="search icon"
                   />
                 </div>
@@ -95,7 +91,7 @@ function NavBar(props) {
                 <div className="navbar-btn_shadow-div-outset">
                   <img
                     className="button-icons bi-profile"
-                    src={avatar}
+                    src={profileIcon}
                     alt="user profile icon"
                   />
                 </div>

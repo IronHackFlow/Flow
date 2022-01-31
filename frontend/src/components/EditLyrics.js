@@ -5,16 +5,10 @@ import TheContext from "../contexts/TheContext";
 import AudioTimeSlider from "./AudioTimeSlider";
 import SelectMenuModal from "./SelectMenuModal"
 import { beatList } from '../constants/index'
-import edit from "../images/edit.svg";
-import save from "../images/save-disk.svg";
-import del from "../images/delete2.svg";
-import exit from "../images/exit-x-2.svg";
-import down from "../images/down.svg";
-import pause from "../images/pause.svg";
-import move from "../images/move.svg";
-import play from "../images/play.svg";
+import { editIcon, saveIcon, deleteIcon, closeIcon, downIcon, playIcon, pauseIcon, moveIcon } from "../assets/images/_icons"
 
-function EditLyrics(props) {
+
+function EditLyrics() {
   const { user } = useContext(TheContext)
   const navigate = useNavigate()
   const location = useLocation()
@@ -74,12 +68,6 @@ function EditLyrics(props) {
   }
 
   const closeWindow = () => {
-    console.log(location, "what is this?")
-    // if (location.pathname === '/recordingBooth/editLyrics') {
-    //   navigate('/recordingBooth', { state: { allTakes: propAllTakes } })
-    // } else {
-    //   navigate(`/profile/${user._id}`)
-    // }
     navigate(-1)
   }
 
@@ -140,11 +128,11 @@ function EditLyrics(props) {
                   <div className="buttons_shadow-div-inset">
                     {(editToggle && (targetLine.id === each.id)) ? (
                       <button className="buttons_shadow-div-outset" onClick={() => saveLyricLine(each)}>
-                        <img className="button-icons" src={save} alt="save" />
+                        <img className="button-icons" src={saveIcon} alt="save" />
                       </button>
                     ) : (
                       <button className="buttons_shadow-div-outset" onClick={() => editLyricLine(each)}>
-                        <img className="button-icons" src={edit} alt="edit" />
+                        <img className="button-icons" src={editIcon} alt="edit" />
                       </button>
                     )}
                   </div>
@@ -176,7 +164,7 @@ function EditLyrics(props) {
               <div className="close-btn-container">
                 <div className="close-btn_shadow-div-inset">
                   <button className="close-btn_shadow-div-outset" onClick={() => setDeleteBool(true)}>
-                    <img className="button-icons" src={del} alt="delete" />
+                    <img className="button-icons" src={deleteIcon} alt="delete" />
                   </button>
                 </div>
               </div>
@@ -185,7 +173,7 @@ function EditLyrics(props) {
 
           <div className="list-item-2_lyric-suggestions">
             <div className="handle">
-              <img className="button-icons" src={move} alt="move" />
+              <img className="button-icons" src={moveIcon} alt="move" />
             </div>
           </div>
         </div>
@@ -243,7 +231,7 @@ function EditLyrics(props) {
       <div className="section-1_profile-el">
         <h1 style={{position: "absolute", top: "10px", left: "30px", color: "white", fontSize: "16px"}}>This is A Work In Progress</h1>
         <button className="close-screen" onClick={closeWindow}>
-          <img className="button-icons" src={exit} alt="exit" />
+          <img className="button-icons" src={closeIcon} alt="exit" />
         </button>
       </div>
 
@@ -306,7 +294,7 @@ function EditLyrics(props) {
                         >
                           <img
                             className="button-icons bi-pause"
-                            src={pause}
+                            src={pauseIcon}
                             alt="pause icon"
                           />
                         </button>
@@ -318,7 +306,7 @@ function EditLyrics(props) {
                         >
                           <img
                             className="button-icons bi-play"
-                            src={play}
+                            src={playIcon}
                             alt="play icon"
                           />
                         </button>
@@ -355,7 +343,7 @@ function EditLyrics(props) {
                       onClick={handlePlayBeat}>
                       <img
                         className="button-icons bi-play"
-                        src={isBeatPlaying ? pause : play }
+                        src={isBeatPlaying ? pauseIcon : playIcon }
                         alt="play or pause icon"
                       />
                     </button>
@@ -387,7 +375,7 @@ function EditLyrics(props) {
         </div>
         <div className="menu-down-container">
           <button className="menu-down-btn">
-            <img className="button-icons" src={down} alt="menu down" />
+            <img className="button-icons" src={downIcon} alt="menu down" />
           </button>
         </div>
       </div>

@@ -2,24 +2,16 @@ import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../contexts/TheContext'
-import TheViewContext from '../contexts/TheViewContext'
 import { songData } from '../contexts/SongData'
 import useFormatDate from '../utils/useFormatDate'
 import usePostLike from "../utils/usePostLike"
 import usePostComment from "../utils/usePostComment"
 import useDebugInformation from "../utils/useDebugInformation"
-import actions from '../api'
-import likesvg from '../images/like-thumb-up.svg'
-import commentsvg from '../images/comment.svg'
-import edit from '../images/edit.svg'
-import deletesvg from '../images/delete-bin-filled.svg'
-import send from '../images/send.svg'
-import share from '../images/share.svg'
-import flag from '../images/flag.svg'
+import { thumbsUpIcon, commentIcon, editIcon, deleteIcon, sendIcon, shareIcon } from '../assets/images/_icons'
+
 
 function Comments(props) {
   const { user } = useContext(TheContext)
-  // const { totalComments, setTotalComments } = useContext(TheViewContext)
   const { allSongComments } = useContext(songData)
   const { comments, setComments, handlePostComment, handleDeleteComment } = usePostComment()
   const { formatDate } = useFormatDate()
@@ -212,7 +204,7 @@ function Comments(props) {
                       <div className="action-btn-icon-container edit-delete">
                         <img
                           className="social-icons delete"
-                          src={deletesvg}
+                          src={deleteIcon}
                           alt="delete"
                         />
                       </div>
@@ -230,7 +222,7 @@ function Comments(props) {
                       <div className="action-btn-icon-container edit-delete">
                         <img
                           className="social-icons edit"
-                          src={edit}
+                          src={editIcon}
                           alt="edit"
                         />
                       </div>
@@ -258,7 +250,7 @@ function Comments(props) {
                       <div className="action-btn-icon-container">
                         <img
                           className="social-icons heart"
-                          src={likesvg}
+                          src={thumbsUpIcon}
                           alt="like"
                         />
                       </div>
@@ -274,7 +266,7 @@ function Comments(props) {
                       <div className="action-btn-icon-container">
                         <img
                           className="social-icons comment"
-                          src={commentsvg}
+                          src={commentIcon}
                           alt="reply"
                         />
                       </div>
@@ -331,7 +323,7 @@ function Comments(props) {
             </div>
             <div className="comment-btn-container">
               <button className="comment-button">
-                <img className="social-icons si-send" src={send} alt="send" />
+                <img className="social-icons si-send" src={sendIcon} alt="send" />
               </button>
             </div>
           </form>

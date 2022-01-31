@@ -1,13 +1,13 @@
 import { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
-import actions from '../api'
-import TheContext from '../contexts/TheContext'
-import InputError from '../components/InputError'
-import AuthLogIn from '../components/AuthLogIn'
-import AuthSignUp from '../components/AuthSignUp'
-import { useToggle } from '../hooks/useToggle'
-import flowLogo from '../images/FlowLogo.png'
+import actions from '../../api'
+import TheContext from '../../contexts/TheContext'
+import InputError from '../../components/InputError'
+import AuthLogIn from './AuthLogIn'
+import AuthSignUp from './AuthSignUp'
+import { useToggle } from '../../hooks/useToggle'
+import flowLogo from '../../assets/images/FlowLogo.png'
 
 const Auth = () => {
   const { setUser } = useContext(TheContext)

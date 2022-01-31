@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import errorExclamation from "../images/error-exclamation-fill.svg";
+import { errorIcon } from "../assets/images/_icons"
+
 
 export default function InputError({
     isOpen, onClose, 
@@ -26,7 +27,7 @@ export default function InputError({
             className="icon--shadow-outset"
             onClick={() => onClose()}  
           >
-            <img className="button-icons" src={errorExclamation} alt="exit x button" />
+            <img className="button-icons" src={errorIcon} alt="exit x button" />
           </button>
         </div>
 

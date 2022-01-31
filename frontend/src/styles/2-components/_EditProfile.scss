@@ -1,254 +1,29 @@
-.EditProfileScreen {
-  // height: 100%;
-  // width: 100%;
-  position: absolute;
-}
-
-.profile-pc {
-  background: #686a6b;
-
-  .profile-uc {
-    .profile-uo {
-      background: #686a6b;
-      width: 70%;
-      box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-
-      .profile-ui {
-        width: 92.5%;
-
-        color: #ec6aa0;
-        box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-      }
-    }
-  }
-
-  .profile-mc {
-    height: 85%;
-    background: #686a6b;
-    box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-
-    .profile-mo {
-      border: 1px solid rgb(105, 105, 105);
-      background-image: url('https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif');
-
-      .profile-mi {
-        height: 94%;
-        width: 90%;
-        background: #686a6b;
-        box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
-
-        .profile-lc {
-          background: #686a6b;
-          display: flex;
-          justify-content: flex-start;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-
-          .input-sections-container {
-            @include flexCenter(90%, 100%, 0px, flex-start, center, column);
-
-            .public-section-container {
-              @include flexCenter(70%, 90%, 20px, center, center, column);
-              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-              margin: 5% 0% 5% 0%;
-
-              .public-input-container {
-                display: flex;
-                .edit-photo-section {
-                  @include flexCenter(30%, 100%, 0px, center, center, row);
-
-                  .edit-photo-inner {
-                    @include flexCenter(90px, 90px, 100px, center, center, column);
-                    box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-
-                    .edit-photo-outer {
-                      @include flexCenter(80%, 80%, 100px, center, center, column);
-                      overflow: hidden;
-                      box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-
-                      img {
-                        height: 100%;
-                        width: 100%;
-                        object-fit: cover;
-                      }
-                    }
-                  }
-                }
-                .public-sections {
-                  @include flexCenter(70%, 100%, 0px, center, center, column);
-                  .input-sections {
-                  }
-                }
-              }
-            }
-            .personal-section-container {
-              @include flexCenter(5%, 90%, 20px, center, center, column);
-              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-              margin-bottom: 5%;
-              color: white;
-              .public-input-container {
-                height: 0;
-                opacity: 0;
-                display: none;
-              }
-            }
-            .social-section-container {
-              @include flexCenter(5%, 90%, 20px, center, center, column);
-              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-              margin-bottom: 5%;
-              color: white;
-              .public-input-container {
-                height: 0;
-                opacity: 0;
-                display: none;
-              }
-            }
-            .songs-section-container {
-              @include flexCenter(5%, 90%, 20px, center, center, column);
-              box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-              margin-bottom: 5%;
-              color: white;
-              .public-input-container {
-                height: 0;
-                opacity: 0;
-                display: none;
-              }
-            }
-          }
-        }
-        .save-back-container {
-          @include flexCenter(10%, 100%, 0px, space-between, center, row);
-
-          .back-container {
-            @include flexCenter(40px, 40px, 100px, center, center, row);
-            box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-            margin-left: 4%;
-
-            .back-inner {
-              @include flexCenter(70%, 70%, 100px, center, center, row);
-              box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-
-              img {
-                height: 1.7em;
-                width: 1.7em;
-              }
-            }
-          }
-          .submit-button-edit {
-            border: none;
-            border-radius: 20px;
-            background: rgb(46, 194, 145);
-            width: 70px;
-            height: 40px;
-            margin-right: 4%;
-            color: white;
-            box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-
-            &:active {
-              outline: none !important;
-              border: 2px solid white;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .profile-bc {
-    height: 5%;
-
-    .profile-ub {
-      height: 30%;
-      width: 100%;
-      box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-    }
-  }
-}
-
-.section-header {
-  @include flexCenter(10%, 100%, 0px, center, center, row);
-  .section-header-inner {
-    @include flexCenter(90%, 100%, 0px, center, center, row);
-    color: white;
-  }
-  .expand-toggle {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    left: 73%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.public-input-container {
-  @include flexCenter(90%, 100%, 0px, flex-start, center, column);
-}
-
-.input-sections {
-  @include flexCenter(50px, 90%, 0px, space-between, stretch, column);
-  font-size: 12px;
-  color: white;
-
-  p {
-    text-align: start;
-    padding-left: 2%;
-  }
-
-  .profile-user-i {
-    height: 100%;
-    width: 100%;
-    padding: 0px;
-    border-radius: 20px;
-    box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-
-    .profile-user-t {
-      background: none;
-      border: none;
-      height: 95%;
-      width: 87%;
-      border-radius: 20px;
-      padding-left: 12%;
-
-      &::placeholder {
-        color: rgb(165, 164, 164);
-      }
-      &:defined {
-        color: pink;
-      }
-      &:focus {
-        border: 2px solid pink;
-        outline: none !important;
-        color: white;
-        border-radius: 20px;
-      }
-    }
-  }
-}
 
 @keyframes editOpacityIn {
   0% {
     height: 65%;
     opacity: 0;
+    visibility: hidden;
   }
   100% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
 }
 @keyframes editOpacityOut {
   0% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
   100% {
     height: 0%;
     opacity: 0;
+    visibility: hidden;
   }
 }
 
-
-/// for new edit profile 
 .ProfileEditModal {
   @include flexCenter(100%, 100%, none, flex-start, center, column);
   background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
@@ -258,11 +33,11 @@
     box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
     margin-top: 2%;
 
-    .edit-profile__body--shadow-inset{
+    .edit-profile__form {
       @include flexCenter(98.3%, 97%, 4.4vh, center, center, column);
       box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
       
-      .edit-profile__form {
+      .edit-profile__form--shadow-outset {
         @include flexCenter(87%, 96%, 4vh 4vh .5vh .5vh, center, center, row);
         background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
         box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
@@ -273,81 +48,82 @@
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
           .edit-profile__header {
-            @include flexCenter(11%, 100%, 0px, flex-end, center, column);
+            @include flexCenter(11%, 100%, 0px, center, center, row);
             
-            .edit-profile__header--shadow-outset {
-              @include flexCenter(86%, 95%, 100vh, center, center, row);
-              box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+            .edit-profile__header--container {
+              @include flexCenter(100%, 80%, 0, flex-end, flex-end, row);
 
-              .edit-profile__go-back {
-                @include flexCenter(100%, 16%, 0, center, center, column);
+              .edit-profile__header--shadow-outset {
+                @include flexCenter(86%, 97%, 100vh, center, center, row);
+                box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
 
-                .edit-profile__go-back--shadow-inset {
-                  @include flexCenter(85%, 85%, 100vh, center, center, row);
-                  box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+                .edit-profile__go-back {
+                  @include flexCenter(100%, 20%, 0, center, center, column);
 
-                  .edit-profile__go-back--shadow-outset {
-                    @include flexCenter(70%, 70%, 100vh, center, center, row);
-                    box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
-                    background: #ec6aa0;
+                  .edit-profile__go-back--shadow-inset {
+                    @include flexCenter(85%, 85%, 100vh, center, center, row);
+                    box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
-                    img {
-                      height: 85%;
-                      width: 85%;
-                      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                    }
-                    &:active {
-                      box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
-                      background: white;
+                    .edit-profile__go-back--shadow-outset {
+                      @include flexCenter(70%, 70%, 100vh, center, center, row);
+                      box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+                      background: #ec6aa0;
+
                       img {
-                        filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
+                        height: 85%;
+                        width: 85%;
+                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                      }
+                      &:active {
+                        box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
+                        background: white;
+                        img {
+                          filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
+                        }
+                      }
+                    }
+                  }
+                }
+
+                .edit-profile__user-title {
+                  @include flexCenter(100%, 80%, 0, center, flex-start, column);
+
+                  .edit-profile__user-title--shadow-inset {
+                    @include flexCenter(85%, 97%, 100vh, center, center, row);
+                    box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
+                    margin-left: 1%;
+
+                    .edit-profile__user-title--container {
+                      @include flexCenter(100%, 83%, 0, center, center, row);
+                      
+                      h3 {
+                        height: 80%;
+                        width: 95%;
+                        color: #ec6aa0;
+                        line-height: .9;
+                        text-align: start;
+
+                        span {
+                          color: white;
+                        }
                       }
                     }
                   }
                 }
               }
+            }
 
-              .edit-profile__user-title {
-                @include flexCenter(100%, 84%, 0, center, flex-start, column);
+            .edit-profile__user-pic--container {
+              @include flexCenter(100%, 20%, 0, center, flex-end, row);
 
-                .edit-profile__user-title--shadow-inset {
-                  @include flexCenter(85%, 97%, 100vh, center, center, row);
-                  box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
-                  margin-left: 1%;
+              .edit-profile__user-pic--shadow-outset {
+                @include flexCenter(86%, 74%, 100vh, center, center, row);
+                box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
 
-                  .edit-profile__user-title--container {
-                    @include flexCenter(100%, 83%, 0, center, center, row);
-                    
-                    h3 {
-                      width: 90%;
-                      height: 80%;
-                      padding-left: 10%;
-                      color: white;
-                      line-height: .95;
-                      text-align: start;
-
-                      span {
-                        color: #ec6aa0;
-                      }
-                    }
-                  }
-
-                  .edit-profile__user-pic--container {
-                    @include flexCenter(100%, 17%, 0, center, center, row);
-
-                    .edit-profile__user-pic--shadow-outset {
-                      @include flexCenter(75%, 68%, 100vh, center, center, row);
-                      box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
-                      overflow: hidden;
-
-                      img {
-                        height: 90%;
-                        width: 90%;
-                        border-radius: 100vh;
-                        object-fit: contain;
-                      }
-                    }
-                  }
+                img {
+                  height: 86%;
+                  width: 86%;
+                  border-radius: 100vh;
                 }
               }
             }
@@ -402,6 +178,7 @@
                             color: #d1d1d1;
                             text-align: start;
                             text-indent: 1%;
+                            pointer-events: none;
                           }
                           .edit-section__item-input {
                             @include flexCenter(70%, 95%, 100vh, center, center, column);
@@ -484,43 +261,43 @@
               border-radius: 3vh 3vh 0.6vh 0.6vh;
             }
             .Personal {
-              .edit-section__header {
-                height: 100%;
-              }
-              .edit-section__error--container {
-                opacity: 0;
-                height: 0%;
-              }
-              .edit-section__form--container {
-                opacity: 0;
-                height: 0%;
-              }
             }
             .Social {
-              .edit-section__header {
-                height: 100%;
-              }
-              .edit-section__error--container {
-                opacity: 0;
-                height: 0%;
-              }
-              .edit-section__form--container {
-                opacity: 0;
-                height: 0%;
-              }
             }
             .Songs {
               border-radius: 0.6vh 0.6vh 3vh 3vh;
+            }
+
+            .shrink-card {
+              height: 5%;
+              transition: all .4s;
               .edit-section__header {
-                height: 100%;
+                height: 100%
               }
               .edit-section__error--container {
-                opacity: 0;
                 height: 0%;
               }
               .edit-section__form--container {
-                opacity: 0;
                 height: 0%;
+                opacity: 0;
+                visibility: hidden;
+                transition: all .4s;
+              }
+            }
+            
+            .expand-card {
+              height: 75%;
+              transition: all .4s;
+              .edit-section__header {
+                height: 10%;
+              }
+              .edit-section__error--container {
+                height: 25%;
+              }
+              .edit-section__form--container {
+                height: 65%;
+                opacity: 1;
+                visibility: visibile;
               }
             }
           }

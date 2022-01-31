@@ -396,7 +396,8 @@
                   font-weight: bold;
                   text-align: start;
                   white-space: nowrap;
-                  overflow-x: scroll;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
                 }
               }
 
@@ -413,6 +414,7 @@
                   @include flexCenter(50%, 95%, 10px, space-evenly, flex-start, row);
                   margin-left: 4%;
                   overflow: hidden;
+                  text-overflow: ellipsis;
                 }
                 .track-social-container {
                   @include flexCenter(50%, 95%, 10px, flex-start, flex-start, row);

@@ -3935,7 +3935,8 @@ button {
   font-weight: bold;
   text-align: start;
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container {
@@ -3982,6 +3983,7 @@ button {
           flex-direction: row;
   margin-left: 4%;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container .track-social-container {
@@ -7046,25 +7048,44 @@ button {
 }
 
 .Search .search-inner .section-2_search-results .results-2_suggestions .suggestions_shadow-div-inset .suggestions_shadow-div-outset .suggestions-result-list .result-link-container .result-1_data .data_shadow-div-outset .data-container .data-1_titles .data-title {
-  font-size: 14px;
+  height: 50%;
+  width: 100%;
+  font-size: .95rem;
   color: #ec6aa0;
   font-weight: 700;
   text-align: start;
-  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Search .search-inner .section-2_search-results .results-2_suggestions .suggestions_shadow-div-inset .suggestions_shadow-div-outset .suggestions-result-list .result-link-container .result-1_data .data_shadow-div-outset .data-container .data-1_titles .data-type {
-  font-size: 12px;
+  height: 50%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: .85rem;
   color: white;
   text-align: start;
-  width: 100%;
 }
 
 .Search .search-inner .section-2_search-results .results-2_suggestions .suggestions_shadow-div-inset .suggestions_shadow-div-outset .suggestions-result-list .result-link-container .result-1_data .data_shadow-div-outset .data-container .data-1_titles .data-type img {
   height: 5px;
   width: 5px;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
   -webkit-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(272deg) brightness(104%) contrast(105%);
           filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(272deg) brightness(104%) contrast(105%);
 }
@@ -7076,9 +7097,9 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -7089,9 +7110,11 @@ button {
 }
 
 .Search .search-inner .section-2_search-results .results-2_suggestions .suggestions_shadow-div-inset .suggestions_shadow-div-outset .suggestions-result-list .result-link-container .result-1_data .data_shadow-div-outset .data-container .data-2_caption p {
-  font-size: 12px;
-  color: gray;
+  width: 100%;
+  font-size: .8rem;
+  color: #8f8f8f;
   text-align: start;
+  line-height: .7;
 }
 
 .Search .search-inner .section-2_search-results .results-2_suggestions .suggestions_shadow-div-inset .suggestions_shadow-div-outset .suggestions-result-list .result-link-container .result-2_picture {
@@ -8867,7 +8890,7 @@ button {
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-title-container {
-  height: 30%;
+  height: 45%;
   width: 90%;
   border-radius: 0px;
   display: -webkit-box;
@@ -8912,22 +8935,30 @@ button {
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-title-container .track-title-outer .track-name {
-  width: 80%;
+  width: 75%;
   color: #fa80b3;
   font-weight: bold;
   font-size: .9rem;
   text-align: start;
   text-indent: 5%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-title-container .track-title-outer .track-index {
-  width: 20%;
+  width: 25%;
   color: #cccccc;
-  font-size: .8rem;
+  font-size: .7rem;
+}
+
+.SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-title-container .track-title-outer .track-index span {
+  color: #ffa6cb;
+  font-size: .7rem;
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-details-container {
-  height: 70%;
+  height: 55%;
   width: 90%;
   border-radius: 0px;
   display: -webkit-box;
@@ -8946,9 +8977,29 @@ button {
 }
 
 .SongScreen .close-window-frame .song-listing-container .song-listing-outer .song-listing-inner .listing-track-container .track-details-container p {
+  height: 33%;
+  width: 90%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   color: grey;
-  font-size: .85rem;
+  font-size: .75rem;
   font-weight: bold;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .SongScreen .close-window-frame .close-window-container {
@@ -11146,530 +11197,16 @@ button {
   overflow-x: scroll;
 }
 
-.EditProfileScreen {
-  position: absolute;
-}
-
-.profile-pc {
-  background: #686a6b;
-}
-
-.profile-pc .profile-uc .profile-uo {
-  background: #686a6b;
-  width: 70%;
-  -webkit-box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-}
-
-.profile-pc .profile-uc .profile-uo .profile-ui {
-  width: 92.5%;
-  color: #ec6aa0;
-  -webkit-box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-}
-
-.profile-pc .profile-mc {
-  height: 85%;
-  background: #686a6b;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-}
-
-.profile-pc .profile-mc .profile-mo {
-  border: 1px solid dimgray;
-  background-image: url("https://media.giphy.com/media/320D33H2y2BW3U3GKL/source.gif");
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi {
-  height: 94%;
-  width: 90%;
-  background: #686a6b;
-  -webkit-box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
-          box-shadow: -7px 8px 9px #00000073, 0px 0px 0px #fdfeff;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc {
-  background: #686a6b;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container {
-  height: 90%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container {
-  height: 70%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin: 5% 0% 5% 0%;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section {
-  height: 30%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner {
-  height: 90px;
-  width: 90px;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer {
-  height: 80%;
-  width: 80%;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  overflow: hidden;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .edit-photo-section .edit-photo-inner .edit-photo-outer img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .public-section-container .public-input-container .public-sections {
-  height: 70%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .personal-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .personal-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .social-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .social-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .songs-section-container {
-  height: 5%;
-  width: 90%;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 4px 4px 5px #3d3f3f, -2px -2px 3px #939597;
-  margin-bottom: 5%;
-  color: white;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .profile-lc .input-sections-container .songs-section-container .public-input-container {
-  height: 0;
-  opacity: 0;
-  display: none;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container {
-  height: 10%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container .back-container {
-  height: 40px;
-  width: 40px;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-          box-shadow: inset 1px 1px 3px #4f5050, inset -1px -1px 3px #8c8f90;
-  margin-left: 4%;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container .back-container .back-inner {
-  height: 70%;
-  width: 70%;
-  border-radius: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-          box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container .back-container .back-inner img {
-  height: 1.7em;
-  width: 1.7em;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container .submit-button-edit {
-  border: none;
-  border-radius: 20px;
-  background: #2ec291;
-  width: 70px;
-  height: 40px;
-  margin-right: 4%;
-  color: white;
-  -webkit-box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-          box-shadow: 2px 2px 4px #283e35, -1px -1px 1px #98efbf;
-}
-
-.profile-pc .profile-mc .profile-mo .profile-mi .save-back-container .submit-button-edit:active {
-  outline: none !important;
-  border: 2px solid white;
-}
-
-.profile-pc .profile-bc {
-  height: 5%;
-}
-
-.profile-pc .profile-bc .profile-ub {
-  height: 30%;
-  width: 100%;
-  -webkit-box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #484b4c, inset -3px -3px 4px #8c8f90;
-}
-
-.section-header {
-  height: 10%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.section-header .section-header-inner {
-  height: 90%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  color: white;
-}
-
-.section-header .expand-toggle {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: 73%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.public-input-container {
-  height: 90%;
-  width: 100%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.input-sections {
-  height: 50px;
-  width: 90%;
-  border-radius: 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  font-size: 12px;
-  color: white;
-}
-
-.input-sections p {
-  text-align: start;
-  padding-left: 2%;
-}
-
-.input-sections .profile-user-i {
-  height: 100%;
-  width: 100%;
-  padding: 0px;
-  border-radius: 20px;
-  -webkit-box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-          box-shadow: inset 3px 3px 4px #4f5050, inset -3px -3px 4px #8c8f90;
-}
-
-.input-sections .profile-user-i .profile-user-t {
-  background: none;
-  border: none;
-  height: 95%;
-  width: 87%;
-  border-radius: 20px;
-  padding-left: 12%;
-}
-
-.input-sections .profile-user-i .profile-user-t::-webkit-input-placeholder {
-  color: #a5a4a4;
-}
-
-.input-sections .profile-user-i .profile-user-t:-ms-input-placeholder {
-  color: #a5a4a4;
-}
-
-.input-sections .profile-user-i .profile-user-t::-ms-input-placeholder {
-  color: #a5a4a4;
-}
-
-.input-sections .profile-user-i .profile-user-t::placeholder {
-  color: #a5a4a4;
-}
-
-.input-sections .profile-user-i .profile-user-t:defined {
-  color: pink;
-}
-
-.input-sections .profile-user-i .profile-user-t:focus {
-  border: 2px solid pink;
-  outline: none !important;
-  color: white;
-  border-radius: 20px;
-}
-
 @-webkit-keyframes editOpacityIn {
   0% {
     height: 65%;
     opacity: 0;
+    visibility: hidden;
   }
   100% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -11677,10 +11214,12 @@ button {
   0% {
     height: 65%;
     opacity: 0;
+    visibility: hidden;
   }
   100% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -11688,10 +11227,12 @@ button {
   0% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
   100% {
     height: 0%;
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -11699,10 +11240,12 @@ button {
   0% {
     height: 65%;
     opacity: 1;
+    visibility: visible;
   }
   100% {
     height: 0%;
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -11749,7 +11292,7 @@ button {
   margin-top: 2%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form {
   height: 98.3%;
   width: 97%;
   border-radius: 4.4vh;
@@ -11770,7 +11313,7 @@ button {
           box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset {
   height: 87%;
   width: 96%;
   border-radius: 4vh 4vh 0.5vh 0.5vh;
@@ -11794,7 +11337,7 @@ button {
   margin-top: 2.3%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset {
   height: 98.3%;
   width: 97%;
   border-radius: 3.3vh;
@@ -11815,28 +11358,47 @@ button {
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header {
   height: 11%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container {
+  height: 100%;
+  width: 80%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset {
   height: 86%;
-  width: 95%;
+  width: 97%;
   border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11855,9 +11417,9 @@ button {
           box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back {
   height: 100%;
-  width: 16%;
+  width: 20%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11874,7 +11436,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset {
   height: 85%;
   width: 85%;
   border-radius: 100vh;
@@ -11895,7 +11457,7 @@ button {
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset {
   height: 70%;
   width: 70%;
   border-radius: 100vh;
@@ -11917,27 +11479,27 @@ button {
   background: #ec6aa0;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset img {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset img {
   height: 85%;
   width: 85%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active {
   -webkit-box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
           box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
   background: white;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active img {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__go-back .edit-profile__go-back--shadow-inset .edit-profile__go-back--shadow-outset:active img {
   -webkit-filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
           filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__user-title {
   height: 100%;
-  width: 84%;
+  width: 80%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11954,7 +11516,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset {
   height: 85%;
   width: 97%;
   border-radius: 100vh;
@@ -11976,7 +11538,7 @@ button {
   margin-left: 1%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container {
   height: 100%;
   width: 83%;
   border-radius: 0;
@@ -11995,22 +11557,21 @@ button {
           flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 {
-  width: 90%;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 {
   height: 80%;
-  padding-left: 10%;
-  color: white;
-  line-height: .95;
+  width: 95%;
+  color: #ec6aa0;
+  line-height: .9;
   text-align: start;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 span {
-  color: #ec6aa0;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--container .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-title--container h3 span {
+  color: white;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__user-pic--container {
   height: 100%;
-  width: 17%;
+  width: 20%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12018,18 +11579,18 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset {
-  height: 75%;
-  width: 68%;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset {
+  height: 86%;
+  width: 74%;
   border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12046,18 +11607,15 @@ button {
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
           box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
-  overflow: hidden;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__header--shadow-outset .edit-profile__user-title .edit-profile__user-title--shadow-inset .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset img {
-  height: 90%;
-  width: 90%;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-profile__header .edit-profile__user-pic--container .edit-profile__user-pic--shadow-outset img {
+  height: 86%;
+  width: 86%;
   border-radius: 100vh;
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section {
   height: 89%;
   width: 100%;
   border-radius: 0;
@@ -12076,7 +11634,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset {
   height: 5%;
   width: 95%;
   border-radius: 0.6vh;
@@ -12097,7 +11655,7 @@ button {
           box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__header {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__header {
   height: 10%;
   width: 100%;
   border-radius: 0;
@@ -12117,7 +11675,7 @@ button {
   color: #e24f8c;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__error--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__error--container {
   height: 25%;
   width: 100%;
   border-radius: 0;
@@ -12136,7 +11694,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container {
   height: 65%;
   width: 100%;
   border-radius: 0;
@@ -12155,7 +11713,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form {
   height: 96%;
   width: 97%;
   border-radius: 3.4vh 3.4vh 2.4vh 2.4vh;
@@ -12176,7 +11734,7 @@ button {
           box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list {
   height: 77%;
   width: 100%;
   border-radius: 0;
@@ -12195,7 +11753,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item {
   height: 32%;
   width: 100%;
   border-radius: 0;
@@ -12215,7 +11773,7 @@ button {
   list-style-type: none;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset {
   height: 90%;
   width: 91%;
   border-radius: 2.8vh 2.8vh 0.5vh 0.5vh;
@@ -12237,7 +11795,7 @@ button {
   padding: 0% 2% 0% 2%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container {
   height: 77%;
   width: -webkit-fill-available;
   width: -moz-available;
@@ -12262,7 +11820,7 @@ button {
   background: #919191;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container p {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container p {
   position: absolute;
   top: 2px;
   height: 10px;
@@ -12271,9 +11829,10 @@ button {
   color: #d1d1d1;
   text-align: start;
   text-indent: 1%;
+  pointer-events: none;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input {
   height: 70%;
   width: 95%;
   border-radius: 100vh;
@@ -12293,36 +11852,36 @@ button {
   padding-left: 6%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:defined {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:defined {
   color: pink;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-webkit-input-placeholder {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-webkit-input-placeholder {
   color: #fafafa;
   font-size: .9rem;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:-ms-input-placeholder {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:-ms-input-placeholder {
   color: #fafafa;
   font-size: .9rem;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-ms-input-placeholder {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::-ms-input-placeholder {
   color: #fafafa;
   font-size: .9rem;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::placeholder {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input::placeholder {
   color: #fafafa;
   font-size: .9rem;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:focus {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .edit-section__item-input:focus {
   border: none;
   outline: none !important;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .input-error:focus {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container .input-error:focus {
   border: 2px solid red;
   outline: none !important;
   color: white;
@@ -12330,14 +11889,14 @@ button {
   padding-right: 20%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container:focus-within {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__list .edit-section__item .edit-section__item--shadow-outset .edit-section__item-input-container:focus-within {
   border: 2px solid pink;
   outline: none !important;
   color: white;
   border-radius: 100vh;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container {
   height: 23%;
   width: 100%;
   border-radius: 0;
@@ -12356,7 +11915,7 @@ button {
           flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container {
   height: 100%;
   width: 30%;
   border-radius: 0;
@@ -12375,7 +11934,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel {
   height: 70%;
   width: 85%;
   border-radius: 5vh 1vh 1vh 5vh;
@@ -12398,13 +11957,13 @@ button {
   font-size: .9rem;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel:active {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-cancel--container .edit-section__btn-cancel:active {
   background: #8e8e8e;
   -webkit-box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
           box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container {
   height: 100%;
   width: 70%;
   border-radius: 0;
@@ -12423,7 +11982,7 @@ button {
           flex-direction: column;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save {
   height: 70%;
   width: 96%;
   border-radius: 1vh 5vh 5vh 1vh;
@@ -12446,64 +12005,64 @@ button {
   color: white;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save:active {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .edit-section--shadow-inset .edit-section__form--container .edit-section__form .edit-section__btn--container .edit-section__btn-save--container .edit-section__btn-save:active {
   background: linear-gradient(45deg, #e24f8c, #e57da7);
   -webkit-box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
           box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Public {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .Public {
   height: 75%;
   border-radius: 3vh 3vh 0.6vh 0.6vh;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__header {
-  height: 100%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__error--container {
-  opacity: 0;
-  height: 0%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Personal .edit-section__form--container {
-  opacity: 0;
-  height: 0%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__header {
-  height: 100%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__error--container {
-  opacity: 0;
-  height: 0%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Social .edit-section__form--container {
-  opacity: 0;
-  height: 0%;
-}
-
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .Songs {
   border-radius: 0.6vh 0.6vh 3vh 3vh;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__header {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .shrink-card {
+  height: 5%;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .shrink-card .edit-section__header {
   height: 100%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__error--container {
-  opacity: 0;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .shrink-card .edit-section__error--container {
   height: 0%;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__form .edit-profile__form--shadow-inset .edit-section .Songs .edit-section__form--container {
-  opacity: 0;
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .shrink-card .edit-section__form--container {
   height: 0%;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all .4s;
+  transition: all .4s;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .expand-card {
+  height: 75%;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .expand-card .edit-section__header {
+  height: 10%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .expand-card .edit-section__error--container {
+  height: 25%;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__form--shadow-outset .edit-profile__form--shadow-inset .edit-section .expand-card .edit-section__form--container {
+  height: 65%;
+  opacity: 1;
+  visibility: visibile;
+}
+
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all {
   height: 13%;
   width: 100%;
   border-radius: 0;
@@ -12522,7 +12081,7 @@ button {
           flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all .switch--shadow-outset {
   height: 81%;
   width: 96%;
   border-radius: 0.2vh 0.2vh 3.8vh 3.8vh;
@@ -12544,7 +12103,7 @@ button {
   background: #939393;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset {
   height: 85%;
   width: 97%;
   border-radius: 100vh;
@@ -12565,7 +12124,7 @@ button {
           box-shadow: inset 2px 2px 3px #6a6a6a, inset -2px -2px 3px #c4c4c4;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container {
   height: 100%;
   width: 100%;
   border-radius: 0;
@@ -12584,7 +12143,7 @@ button {
           flex-direction: row;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn {
   height: 75%;
   width: 95%;
   border-radius: 100vh;
@@ -12608,7 +12167,7 @@ button {
   font-weight: bold;
 }
 
-.ProfileEditModal .edit-profile__body .edit-profile__body--shadow-inset .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn:active {
+.ProfileEditModal .edit-profile__body .edit-profile__form .edit-profile__submit-all .switch--shadow-outset .switch--shadow-inset .switch__btn--container .switch__btn:active {
   background: linear-gradient(45deg, #2ec291, #68d3b0);
   -webkit-box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
           box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;

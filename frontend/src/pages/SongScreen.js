@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
 import TheContext from '../contexts/TheContext'
@@ -10,16 +10,9 @@ import useEventListener from '../utils/useEventListener'
 import usePostLike from "../utils/usePostLike"
 import usePostFollow from "../utils/usePostFollow"
 import useFormatDate from "../utils/useFormatDate"
-import gifsArr from '../images/gifs.json'
-import follow from '../images/follow.svg'
-import comments from '../images/comment.svg'
-import play from '../images/play.svg'
-import pause from '../images/pause.svg'
-import backward from '../images/backward.svg'
-import forward from '../images/forward.svg'
-import close from '../images/close.svg'
-import heart2 from '../images/heart2.svg'
-import gradientbg from '../images/gradient-bg-2.png'
+import gifsArr from '../assets/images/gifs.json'
+import gradientbg from '../assets/images/gradient-bg-2.png'
+import { followIcon, commentIcon, playIcon, pauseIcon, previousIcon, forwardIcon, closeIcon, thumbsUpIcon } from '../assets/images/_icons'
 
 function SongScreen(props) {
   const { user, windowSize } = useContext(TheContext)
@@ -153,7 +146,7 @@ function SongScreen(props) {
                 <div className="track-title-container">
                   <div className="track-title-outer">
                     <p className="track-name">{thisSong?.name}</p>
-                    <p className="track-index"><span style={{color: '#ffa6cb', fontSize: '.8rem'}}>{thisSong?.songIndex}</span> of {allSongs.length}</p>
+                    <p className="track-index"><span>{thisSong?.songIndex}</span> of {allSongs.length}</p>
                   </div>
                 </div>
                 <div className="track-details-container">
@@ -164,20 +157,20 @@ function SongScreen(props) {
                     }
                   </p>
                   <p>
-                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.song_user?.userName}</span>
+                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.song_user?.user_name}</span>
                   </p>
-                  <p>on: {formatDate(thisSong?.date, "MMMM Dth YYYY")}</p>
+                  <p>on: {formatDate(thisSong?.date, "MMMM_Dth_YYYY")}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="close-window-container">
-          <div className="close-window-outer" onClick={onClose}>
+          <button className="close-window-outer" onClick={onClose}>
             <div className="close-window-inner">
-              <img src={close} alt="close window" />
+              <img src={closeIcon} alt="close window" />
             </div>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -215,35 +208,35 @@ function SongScreen(props) {
             <div className="song-play-outer">
               <div className="play-buttons-container">
                 <div className="play-buttons-left">
-                  <div className="play-arrow-container" onClick={() => findCurrentSong('back')}>
-                    <img src={backward} alt="go back" />
-                  </div>
+                  <button className="play-arrow-container" onClick={() => findCurrentSong('back')}>
+                    <img src={previousIcon} alt="go back" />
+                  </button>
                 </div>
 
                 <div className="play-buttons-middle">
                   <div className="play-outer">
                     {isPlaying
                       ? (
-                        <div className="play-inner" onClick={() => setIsPlaying(false)}>
+                        <button className="play-inner" onClick={() => setIsPlaying(false)}>
                           <div className="play-img-container">
-                            <img src={pause} ref={playPauseRef} style={{marginLeft: '0%'}} alt="pause icon" />
+                            <img src={pauseIcon} ref={playPauseRef} style={{marginLeft: '0%'}} alt="pause icon" />
                           </div>
-                        </div>
+                        </button>
                       )
                       : (
-                        <div className="play-inner" onClick={() => setIsPlaying(true)}>
+                        <button className="play-inner" onClick={() => setIsPlaying(true)}>
                           <div className="play-img-container">
-                            <img src={play} ref={playPauseRef} alt="play icon" />
+                            <img src={playIcon} ref={playPauseRef} alt="play icon" />
                           </div>
-                        </div>
+                        </button>
                       )}
                   </div>
                 </div>
 
                 <div className="play-buttons-right">
-                  <div className="play-arrow-container" onClick={() => findCurrentSong('next')}>
-                    <img src={forward} alt="go forward" />
-                  </div>
+                  <button className="play-arrow-container" onClick={() => findCurrentSong('next')}>
+                    <img src={forwardIcon} alt="go forward" />
+                  </button>
                 </div>
               </div>
 
@@ -262,7 +255,7 @@ function SongScreen(props) {
         <div className="social-buttons">
           <div className="social-list">
             <div className="social-button-container">
-              <div 
+              <button 
                 className={`social-button ${followers.IS_FOLLOWED ? "pushed" : ""}`} 
                 ref={followBtn}
                 onClick={() => { 
@@ -273,8 +266,8 @@ function SongScreen(props) {
                   ) 
                 }}
               > 
-                <img className="social-icons follow" src={follow} alt="follow user icon"></img>
-              </div>
+                <img className="social-icons follow" src={followIcon} alt="follow user icon"></img>
+              </button>
               <div className="button-title">
                 <p style={{ color: '#ff3b8c' }}>{followers?.TOTAL_FOLLOWERS}</p>
                 <p>
@@ -287,7 +280,7 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div 
+              <button 
                 className={`social-button ${likes.IS_LIKED ? "pushed" : ""}`} 
                 onClick={(e) => { 
                   e.target.style.transition = "all .2s ease-in"
@@ -299,8 +292,8 @@ function SongScreen(props) {
                   ) 
                 }}
               >
-                <img className="social-icons heart" src={heart2} alt="like post icon"></img>
-              </div>
+                <img className="social-icons heart" src={thumbsUpIcon} alt="like post icon"></img>
+              </button>
               <div className="button-title">
                 <p style={{color: '#ff3b8c'}}>{likes?.TOTAL_LIKES}</p>
                 <p>
@@ -313,13 +306,13 @@ function SongScreen(props) {
             </div>
 
             <div className="social-button-container">
-              <div className={`social-button ${poppedUp ? "pushed" : ""}`} onClick={popUpComments}>
+              <button className={`social-button ${poppedUp ? "pushed" : ""}`} onClick={popUpComments}>
                 <img
                   className="social-icons comment"
-                  src={comments}
+                  src={commentIcon}
                   alt="comment on post icon"
                 ></img>
-              </div>
+              </button>
               <div className="button-title">
                 <p style={{color: '#ff3b8c'}}>{totalComments}</p>
                 <p>

@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback }
 import { v4 as uuidv4 } from "uuid";
 import Loading from './Loading'
 import { songData } from '../contexts/SongData'
-import gradientbg from '../images/gradient-bg-2.png'
+import gradientbg from '../assets/images/gradient-bg-2.png'
 import useEventListener from '../utils/useEventListener';
 
 

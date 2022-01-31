@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import eye from "../images/eye.svg"
-import noEye from "../images/no-eye.svg"
+import { eyeIcon, noEyeIcon } from "../assets/images/_icons"
+
 
 export default function ButtonShowPassword({ setType, password }) {
   const [showPassword, setShowPassword] = useState(false)
@@ -41,7 +41,7 @@ export default function ButtonShowPassword({ setType, password }) {
             onClick={(e) => hidePasswordHandler(e)}
             tabIndex="-1"
           >
-            <img className="button-icons password-no-eye" src={noEye} alt="hide password" />
+            <img className="button-icons password-no-eye" src={noEyeIcon} alt="hide password" />
           </button>
         )
         : (
@@ -51,7 +51,7 @@ export default function ButtonShowPassword({ setType, password }) {
             onClick={(e) => showPasswordHandler(e)}
             tabIndex="-1"
           >
-            <img className="button-icons password-eye" src={eye} alt="show password" />
+            <img className="button-icons password-eye" src={eyeIcon} alt="show password" />
           </button>
         )
       }

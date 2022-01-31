@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import xExit from "../images/exit-x-2.svg";
-import errorExclamation from "../images/error-exclamation-fill.svg";
+import { errorIcon, closeIcon } from "../assets/images/_icons"
+
 
 export default function ErrorModal({ 
   isOpen, onClose, 
@@ -25,7 +25,7 @@ export default function ErrorModal({
   const modalSpecs = {
     top: `${placement}%`,
     width: `${modWidth}%`,
-    height: `${modHeight}px`,
+    height: `${modHeight * window.innerHeight}px `,
   }
   
   return ReactDOM.createPortal(
@@ -72,7 +72,7 @@ export default function ErrorModal({
                 className="icon--shadow-outset"
                 onClick={() => onClose()}  
               >
-                <img className="button-icons" src={errorExclamation} alt="exit x button" />
+                <img className="button-icons" src={errorIcon} alt="exit x button" />
               </button>
             {/* </div>
           </div> */}

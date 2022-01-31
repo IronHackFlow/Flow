@@ -132,35 +132,41 @@
                         @include flexCenter(60%, 100%, 7px, center, center, column);
 
                         .data-title {
-                          font-size: 14px;
+                          height: 50%;
+                          width: 100%;
+                          font-size: .95rem;
                           color: #ec6aa0;
                           font-weight: 700;
                           text-align: start;
-                          width: 100%;
+                          white-space: nowrap;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
                         }
                         .data-type {
-                          font-size: 12px;
+                          @include flexCenter(50%, 100%, 0, flex-start, center, row);
+                          font-size: .85rem;
                           color: white;
                           text-align: start;
-                          width: 100%;
 
                           img {
                             height: 5px;
                             width: 5px;
-                            margin-left: 2px;
-                            margin-right: 2px;
+                            margin-left: 3px;
+                            margin-right: 3px;
                             filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(272deg) brightness(104%) contrast(105%);
                           }
                         }
                       }
 
                       .data-2_caption {
-                        @include flexCenter(40%, 100%, 7px, center, center, column);
+                        @include flexCenter(40%, 100%, 7px, flex-start, center, column);
                         
                         p {
-                          font-size: 12px;
-                          color: gray;
+                          width: 100%;
+                          font-size: .8rem;
+                          color: #8f8f8f;
                           text-align: start;
+                          line-height: .7;
                         }
                       }
                     }

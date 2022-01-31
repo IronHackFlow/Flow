@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import actions from '../api';
-import TheContext from '../contexts/TheContext'
-import useHandleOSK from '../utils/useHandleOSK';
-import { signUpSchema } from '../utils/validationSchemas'
-import ButtonClearText from "./ButtonClearText"
-import ButtonShowPassword from "./ButtonShowPassword"
+import actions from '../../api';
+import TheContext from '../../contexts/TheContext'
+import useHandleOSK from '../../utils/useHandleOSK';
+import { signUpSchema } from '../../utils/validationSchemas'
+import ButtonClearText from "../../components/ButtonClearText"
+import ButtonShowPassword from "../../components/ButtonShowPassword"
 
 function AuthSignUp({showError, onError}) {
   const { user, setUser } = useContext(TheContext)

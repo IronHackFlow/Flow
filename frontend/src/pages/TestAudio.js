@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
 import TheContext from "../contexts/TheContext";
 import RecordBoothContext from "../contexts/RecordBoothContext";
-import EditLyrics from "../components/EditLyrics"
 import SelectMenuModal from "../components/SelectMenuModal";
 import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
@@ -17,15 +16,7 @@ import useRefilterProfanity from "../utils/useRefilterProfanity"
 import { beatList } from '../constants/index'
 import actions from "../api";
 import NavBar from "../components/NavBar";
-import mic from "../images/modern-mic.svg";
-import play from "../images/play.svg";
-import pause from "../images/pause.svg";
-import stop from "../images/stop.svg";
-import xExit from "../images/exit-x-2.svg";
-import save from "../images/save-disk.svg";
-import locked from "../images/locked.svg";
-import shuffle from "../images/shuffle.svg";
-import modal from "../images/modal.svg";
+import { micIcon, playIcon, pauseIcon, stopIcon, closeIcon, saveIcon, lockedIcon, shuffleIcon, guideIcon } from '../assets/images/_icons'
 
 function TestAudio(props) {
   const { user, windowSize } = React.useContext(TheContext)
@@ -648,7 +639,7 @@ function TestAudio(props) {
             ref={modalBtnRef} 
             onClick={() => toggleModalHandler()}
           >
-            <img className="button-icons" src={modal} alt="modal" />
+            <img className="button-icons" src={guideIcon} alt="modal" />
           </button>
 
           <div className={`scroll-rhymes-container ${focusBorder === 31 ? "focus-border" : ""}`} id="currentTranscript" ref={scrollRef}>
@@ -685,7 +676,7 @@ function TestAudio(props) {
                 <div className="rhyme-lock-button">
                   <div className="rhyme-lock-outset">
                     <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedRhymes, "topRhymes")}>
-                      <img className="button-icons" src={shuffle} alt="shuffle" />
+                      <img className="button-icons" src={shuffleIcon} alt="shuffle" />
                     </button>
                   </div>
                 </div>
@@ -710,7 +701,7 @@ function TestAudio(props) {
                 <div className="rhyme-lock-button">
                   <div className="rhyme-lock-outset">
                     <button className="rhyme-lock-btn" onClick={lockSuggestion}>
-                      <img className="button-icons" src={locked} alt="lock" />
+                      <img className="button-icons" src={lockedIcon} alt="lock" />
                     </button>
                   </div>
                 </div>
@@ -734,7 +725,7 @@ function TestAudio(props) {
                 <div className="rhyme-lock-button">
                   <div className="rhyme-lock-outset">
                     <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, "selectedRhymes")}>
-                      <img className="button-icons" src={shuffle} alt="shuffle" />
+                      <img className="button-icons" src={shuffleIcon} alt="shuffle" />
                     </button>
                   </div>
                 </div>
@@ -784,7 +775,7 @@ function TestAudio(props) {
                           <img
                             className="button-icons bi-pause"
                             id="play-stop-img"
-                            src={pause}
+                            src={pauseIcon}
                             alt="pause icon"
                           />
                         </button>
@@ -797,7 +788,7 @@ function TestAudio(props) {
                         <img
                           className="button-icons bi-play"
                           id="play-stop-img"
-                          src={play}
+                          src={playIcon}
                           alt="play icon"
                         />
                       </button>
@@ -850,7 +841,7 @@ function TestAudio(props) {
                               className="actions-btn_shadow-div-outset ab-save" 
                               onClick={handleSaveSongMenu}
                             >
-                              <img className="button-icons bi-help" src={save} alt="save icon" />
+                              <img className="button-icons bi-help" src={saveIcon} alt="save icon" />
                             </button>
                             
                             <ErrorModal 
@@ -866,7 +857,7 @@ function TestAudio(props) {
                           </div>
                           <div className="actions-btn-container">
                             <button className="actions-btn_shadow-div-outset" onClick={handleDeleteFlow}>
-                              <img className="button-icons" src={xExit} alt="delete bin icon" />
+                              <img className="button-icons" src={closeIcon} alt="delete bin icon" />
                             </button>
                           </div>
                         </div>
@@ -881,7 +872,7 @@ function TestAudio(props) {
                                 className="select-beat_play-btn"
                                 onClick={handlePlayBeat}
                                 >
-                                <img className={`button-icons ${isBeatPlaying ? "pause" : "play"}`} src={isBeatPlaying ? pause : play} alt="play or pause" />
+                                <img className={`button-icons ${isBeatPlaying ? "pause" : "play"}`} src={isBeatPlaying ? pauseIcon : playIcon} alt="play or pause" />
                               </button>
                               <audio src={currentBeat?.song} ref={playBeatRef} />
                             </div>
@@ -917,7 +908,7 @@ function TestAudio(props) {
                     <img
                       className="button-icons"
                       id="record-stop-img"
-                      src={stop}
+                      src={stopIcon}
                       alt="record stop icon"
                       />
                   </button>
@@ -929,7 +920,7 @@ function TestAudio(props) {
                     <img
                       className="button-icons"
                       id="record-stop-img"
-                      src={mic}
+                      src={micIcon}
                       alt="record mic icon"
                       />
                   </button>

@@ -1,31 +1,34 @@
 import { useContext, useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import actions from '../../api'
-import EditProfileCard from './EditProfileCard'
 import TheContext from '../../contexts/TheContext'
 import useDebugInformation from '../../utils/useDebugInformation'
-import ContinueModal from '../ContinueModal'
-import back from '../../images/back.svg'
-
+import EditProfileCard from './EditProfileCard'
+import ContinueModal from '../../components/ContinueModal'
+import { goBackIcon } from '../../assets/images/_icons'
 
 export default function EditProfile(props) {
-  useDebugInformation('EditProfileModal', props)
+  useDebugInformation('EditProfile', props)
   const { user } = useContext(TheContext)
   const navigate = useNavigate()
 
   const [thisUser, setThisUser] = useState()
   const [thisUsersSongs, setThisUsersSongs] = useState([])
   const [showExitModal, setShowExitModal] = useState(false)
+  const [isExpanded, setIsExpanded] = useState("Public")
 
-  const publicSect = useRef()
-  const personalSect = useRef()
-  const socialSect = useRef()
-  const songsSect = useRef()
-  const sectionRefsArray = [publicSect, personalSect, socialSect, songsSect]
-  
   useEffect(() => {
     setThisUser(user)
   }, [user])
+  
+  useEffect(() => {
+    actions
+      .getUserSongs(thisUser)
+      .then(res => {
+        setThisUsersSongs(res.data)
+      })
+      .catch(console.error)
+  }, [thisUser])
 
   const closeWindowHandler = (e) => {
     e.preventDefault()
@@ -46,45 +49,18 @@ export default function EditProfile(props) {
     navigate(`/profile/${user?._id}`, { state: { propSongUser: user }})
   }
 
-  useEffect(() => {
-    actions
-      .getUserSongs(thisUser)
-      .then(res => {
-        setThisUsersSongs(res.data)
-      })
-      .catch(console.error)
-  }, [thisUser])
-
   const submit = e => {
     e.preventDefault()
+    const form = e.target
+    console.log(form[1].value, "what is going on with this submit shit yo")
 
-    actions
-      .addUserProf(thisUser)
-      .then(newUserUpdate => {
-        console.log('new new user update!', newUserUpdate)
-      })
-      .catch(console.error)
-  }
-
-  const expandSection = (e, ref) => {
-    e.stopPropagation()
-    sectionRefsArray.forEach(each => {
-      if (ref !== each) {
-        each.current.style.height = '5%'
-        each.current.style.transition = 'height .5s'
-        each.current.children[0].style.height = '100%'
-        each.current.children[1].style.height = '0%'
-        each.current.children[2].style.animation = 'none'
-        each.current.children[2].style.animation = 'editOpacityOut .5s forwards'
-      } else {
-        ref.current.children[0].style.height = '10%'
-        ref.current.children[1].style.height = '25%'
-        ref.current.children[2].style.animation = 'none'
-        ref.current.children[2].style.animation = 'editOpacityIn .5s forwards'
-        ref.current.style.height = '75%'
-        ref.current.style.transition = 'height .5s'
-      }
-    })
+    
+    // actions
+    //   .addUserProf(thisUser)
+    //   .then(newUserUpdate => {
+    //     console.log('new new user update!', newUserUpdate)
+    //   })
+    //   .catch(console.error)
   }
 
   const songsToEdit = () => {
@@ -117,7 +93,6 @@ export default function EditProfile(props) {
   const twitterInputRef = useRef()
   const instagramInputRef = useRef()
   const soundcloudInputRef = useRef()
-
 
   const [username, setUsername] = useState("")
   const [about, setAbout] = useState("")
@@ -247,36 +222,39 @@ export default function EditProfile(props) {
         onExit={onExitHandler}
       /> 
       <div className="edit-profile__body">
-        <div className="edit-profile__body--shadow-inset">
-          <form 
-            className="edit-profile__form"
-            onSubmit={submit}
-            >
+        <form 
+          className="edit-profile__form"
+          onSubmit={(e) => submit(e)}
+        >
+          <div className="edit-profile__form--shadow-outset">
             <div className="edit-profile__form--shadow-inset">
               <div className="edit-profile__header">
-                <div className="edit-profile__header--shadow-outset">
-                  <div className="edit-profile__go-back">
-                    <div className="edit-profile__go-back--shadow-inset">
-                      <button 
-                        className="edit-profile__go-back--shadow-outset"
-                        type="button"
-                        onClick={(e) => closeWindowHandler(e)}
-                        >
-                        <img className="button-icons" src={back} alt="back" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="edit-profile__user-title">
-                    <div className="edit-profile__user-title--shadow-inset">
-                      <div className="edit-profile__user-title--container">
-                        <h3>Edit Your Profile <span>{thisUser?.user_name}</span></h3>
+                <div className="edit-profile__header--container">
+                  <div className="edit-profile__header--shadow-outset">
+                    <div className="edit-profile__go-back">
+                      <div className="edit-profile__go-back--shadow-inset">
+                        <button 
+                          className="edit-profile__go-back--shadow-outset"
+                          type="button"
+                          onClick={(e) => closeWindowHandler(e)}
+                          >
+                          <img className="button-icons" src={goBackIcon} alt="back" />
+                        </button>
                       </div>
-                      <div className="edit-profile__user-pic--container">
-                        <div className="edit-profile__user-pic--shadow-outset">
-                          <img src={thisUser?.picture ? thisUser?.picture : null} alt="profile"></img>
+                    </div>
+                    <div className="edit-profile__user-title">
+                      <div className="edit-profile__user-title--shadow-inset">
+                        <div className="edit-profile__user-title--container">
+                          <h3>Edit Your Profile <span>{thisUser?.user_name}</span></h3>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                <div className="edit-profile__user-pic--container">
+                  <div className="edit-profile__user-pic--shadow-outset">
+                    <img src={thisUser?.picture ? thisUser?.picture : null} alt="profile"></img>
                   </div>
                 </div>
               </div>
@@ -284,42 +262,48 @@ export default function EditProfile(props) {
                 <EditProfileCard 
                   title="Public" 
                   items={PUBLIC_SECTION} 
-                  sectionRef={publicSect} 
-                  expandSection={expandSection} 
+                  isExpanded={isExpanded}
+                  onExpand={setIsExpanded}
                 />
                 <EditProfileCard 
                   title="Personal" 
                   items={PERSONAL_SECTION} 
-                  sectionRef={personalSect} 
-                  expandSection={expandSection} 
+                  isExpanded={isExpanded}
+                  onExpand={setIsExpanded}
                 />
                 <EditProfileCard 
                   title="Social" 
                   items={SOCIAL_SECTION} 
-                  sectionRef={socialSect} 
-                  expandSection={expandSection} 
+                  isExpanded={isExpanded}
+                  onExpand={setIsExpanded}
                 />
                 <EditProfileCard 
                   title="Songs" 
-                  sectionRef={songsSect} 
-                  expandSection={expandSection} 
+                  items={[]}
+                  isExpanded={isExpanded}
+                  onExpand={setIsExpanded}
                 />
               </div>
             </div>
-          </form>
+          </div>
 
           <div className="edit-profile__submit-all">
             <div className="switch--shadow-outset">
               <div className="switch--shadow-inset">
                 <div className="switch__btn--container">
-                  <button className="switch__btn">
+                  <button 
+                    className="switch__btn" 
+                    type="submit"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onKeyDown={(e) => e.preventDefault()}
+                  >
                     Save All
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )

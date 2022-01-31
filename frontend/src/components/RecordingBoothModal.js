@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
-import xExit from "../images/exit-x-2.svg"
+import { closeIcon } from "../assets/images/_icons"
 
 function RecordingBoothModal(props) {
   let modalObjArr = [
@@ -221,7 +221,7 @@ function RecordingBoothModal(props) {
 
       <div className="close-window-container">
         <button className="close-window-btn" onClick={() => closeWindowHandler()}>
-          <img className="button-icons" src={xExit} alt="exit" />
+          <img className="button-icons" src={closeIcon} alt="exit" />
         </button>
       </div>
 

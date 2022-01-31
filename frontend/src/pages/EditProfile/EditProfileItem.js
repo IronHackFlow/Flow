@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState, useCallback, memo } from 'react'
 import TheContext from '../../contexts/TheContext'
-import ButtonClearText from '../ButtonClearText'
+import { errorStyles } from '../../constants/index'
 import useHandleOSK from '../../utils/useHandleOSK'
 import useDebugInformation from '../../utils/useDebugInformation'
-import { errorStyles } from '../../constants/index'
+import ButtonClearText from '../../components/ButtonClearText'
 
 const MemoizedItem = memo(function EditProfileItem({ inputData, updateList }) {
 
@@ -38,8 +38,8 @@ const MemoizedItem = memo(function EditProfileItem({ inputData, updateList }) {
             type={type}
             autoComplete={autoComplete}
             value={value}
-            onFocus={() => { handleOnFocus() }}
-            onChange={handleInputChange}
+            onFocus={() => handleOnFocus()}
+            onChange={(e) => handleInputChange(e)}
           />
         </label> 
 

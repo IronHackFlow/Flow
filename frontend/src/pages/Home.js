@@ -1,5 +1,5 @@
-import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { useContext, useState, useEffect, useRef, useCallback } from "react";
+import { Link } from "react-router-dom";
 import TheContext from "../contexts/TheContext";
 import TheViewContext from "../contexts/TheViewContext";
 import { songData } from "../contexts/SongData"
@@ -12,16 +12,11 @@ import Feed from "../components/Feed"
 import AudioTimeSlider from "../components/AudioTimeSlider.js";
 import Comments from "../components/Comments.js";
 import NavBar from "../components/NavBar.js";
-import play from "../images/play.svg";
-import pause from "../images/pause.svg"
-import follow from "../images/follow.svg";
-import commentsvg from "../images/comment.svg";
-import bullet from "../images/bullet-point.svg";
-import like from "../images/like-thumb-up.svg";
+import { playIcon, pauseIcon, followIcon, commentIcon, bulletPointIcon, thumbsUpIcon } from "../assets/images/_icons"
 
 function Home(props) {
   const { user, windowSize } = useContext(TheContext);
-  const { homeFeedSongs, trendingFeedSongs, followingFeedSongs, isLoading, setIsLoading } = useContext(songData)
+  const { homeFeedSongs, trendingFeedSongs, followingFeedSongs, isLoading } = useContext(songData)
 
   useDebugInformation("Home", props)
   // useEventListener('resize', e => {
@@ -248,7 +243,7 @@ function Home(props) {
                       >
                         <img
                           className="social-icons follow"
-                          src={follow}
+                          src={followIcon}
                           alt="follow user icon"
                         />
                       </div>
@@ -281,7 +276,7 @@ function Home(props) {
                       }}
                     >
                       <div className="action-btn-icon_shadow-div-inset">
-                        <img className="social-icons like" src={like} alt="like post icon" />
+                        <img className="social-icons like" src={thumbsUpIcon} alt="like post icon" />
                       </div>
                       <div className="action-btn-container">
                         <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
@@ -302,7 +297,7 @@ function Home(props) {
                       <div className="action-btn-icon_shadow-div-inset">
                         <img
                           className="social-icons comment"
-                          src={commentsvg}
+                          src={commentIcon}
                           alt="comment on post icon"
                         />
                       </div>
@@ -354,7 +349,7 @@ function Home(props) {
                             {songInView?.name}
                           </p>
                           <p id="two">
-                            <img src={bullet} alt="bullet point" />
+                            <img src={bulletPointIcon} alt="bullet point" />
                             {songInView?.song_user?.user_name}
                           </p>
                         </div>
@@ -362,7 +357,7 @@ function Home(props) {
                         <div className="song-caption-container">
                           <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
                             <p>{formatDate(songInView?.date, 'm')}</p>
-                            <img src={bullet} alt="bullet point" />
+                            <img src={bulletPointIcon} alt="bullet point" />
                           </div>
                           <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
                             {songInView?.caption
@@ -387,7 +382,7 @@ function Home(props) {
                             >
                               <img
                                 className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
-                                src={isPlaying ? pause : play}
+                                src={isPlaying ? pauseIcon : playIcon}
                                 ref={playPauseRef}
                                 alt="play or pause"
                               />

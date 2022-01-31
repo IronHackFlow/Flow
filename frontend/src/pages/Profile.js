@@ -5,14 +5,8 @@ import actions from '../api'
 import TheContext from '../contexts/TheContext'
 import useFormatDate from '../utils/useFormatDate'
 import NavBar from '../components/NavBar'
-import social from '../images/social.svg'
-import followers from '../images/followers.svg'
-import heart from '../images/heart2.svg'
-import editicon from '../images/edit.svg'
-import logouticon from '../images/logout2.svg'
-import xExit from "../images/exit-x-2.svg"
-import play from '../images/play.svg'
-import pause from '../images/pause.svg'
+import { followersIcon, followingIcon, thumbsUpIcon, editIcon, logOutIcon, closeIcon, playIcon, pauseIcon } from '../assets/images/_icons'
+
 
 function Profile(props) {
   const { user, setUser } = useContext(TheContext)
@@ -180,7 +174,7 @@ function Profile(props) {
                               <button className="play-inset">
                                 <img
                                   className="button-icons"
-                                  src={xExit}
+                                  src={closeIcon}
                                   onClick={() => deleteCheckHandler(false)}
                                   alt="exit"
                                 />
@@ -198,7 +192,7 @@ function Profile(props) {
                               >
                                 <img
                                   className="button-icons"
-                                  src={editicon}
+                                  src={editIcon}
                                   alt="edit"
                                 />
                               </Link>
@@ -215,7 +209,7 @@ function Profile(props) {
                         <button className="play-inset">
                           <img
                             className="button-icons bi-play-2"
-                            src={isPlaying ? pause : play}
+                            src={isPlaying ? pauseIcon : playIcon}
                             onClick={() => handlePlayPause()}
                             alt="play"
                           />
@@ -363,7 +357,7 @@ function Profile(props) {
                         {thisUser?.followers?.length ? thisUser?.followers?.length : "0"}
                       </p>
                       <div className="icon-container">
-                        <img className="button-icons logout" src={followers} style={{margin: "12% 0% 0% 8%"}} alt="followers" />
+                        <img className="button-icons logout" src={followersIcon} style={{margin: "12% 0% 0% 8%"}} alt="followers" />
                       </div>
                     </div>
                     <div className="btn-title">
@@ -379,7 +373,7 @@ function Profile(props) {
                         {thisUser?.user_follows?.length ? thisUser?.user_follows?.length : "0"}
                       </p>
                       <div className="icon-container">
-                        <img className="button-icons logout" src={social} alt="following" />
+                        <img className="button-icons logout" src={followingIcon} alt="following" />
                       </div>
                     </div>
                     <div className="btn-title">
@@ -398,7 +392,7 @@ function Profile(props) {
                         {thisUserLikes ? thisUserLikes.length : "0"}
                       </p>
                       <div className="icon-container">
-                        <img className="button-icons logout" src={heart} style={{margin: "0% 0% 20% 5%"}} alt="likes" />
+                        <img className="button-icons logout" src={thumbsUpIcon} style={{margin: "0% 0% 20% 5%"}} alt="likes" />
                       </div>
                     </div>
                   </div>
@@ -411,8 +405,8 @@ function Profile(props) {
                 <div className="edit-logout_shadow-div-inset">
                   <div className="each-button-container ebc-4">
                     <button className="profile-button-outset" style={{borderRadius: "35px 4px 4px 4px"}}>
-                      <Link to="/profileEditModal" className="profile-button-inset pbe-4">
-                        <img className="button-icons edit" src={editicon} style={{margin: "12% 0% 0% 11%"}} alt="edit" />
+                      <Link to="/editProfile" className="profile-button-inset pbe-4">
+                        <img className="button-icons edit" src={editIcon} style={{margin: "12% 0% 0% 11%"}} alt="edit" />
                       </Link>
                       <div className="btn-title">
                         Edit
@@ -426,7 +420,7 @@ function Profile(props) {
                         Log Out
                       </div>
                       <div className="profile-button-inset pbe-5" onClick={() => logout()}>
-                        <img className="button-icons logout" src={logouticon} style={{margin: "0% 0% 18% 9%"}} alt="log out" />
+                        <img className="button-icons logout" src={logOutIcon} style={{margin: "0% 0% 18% 9%"}} alt="log out" />
                       </div>
                     </button>
                   </div>

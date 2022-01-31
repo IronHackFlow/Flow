@@ -1,24 +1,24 @@
 import React, { useContext, useState, useCallback } from 'react'
 import actions from '../../api'
 import TheContext from '../../contexts/TheContext'
-import EditProfileItem from "./EditProfileItem"
 import useDebugInformation from "../../utils/useDebugInformation"
+import EditProfileItem from "./EditProfileItem"
 
 const MemoizedCard = React.memo(function EditProfileCard({ 
-    title, items = [], 
-    sectionRef, expandSection,
+    title, items, 
+    isExpanded, onExpand
 }) { 
-  useDebugInformation("EditProfileCard", { title, items, sectionRef, expandSection })
+  useDebugInformation("EditProfileCard", { title, items, isExpanded, onExpand })
   const { setUser } = useContext(TheContext)
   const [updateList, setUpdateList] = useState([])
 
   const displayItems = useCallback(() => {
-    return items?.map(inputData => <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />)
+    return items.map(inputData => <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />)
   }, [items])
 
-  const handleExpandCard = useCallback((e, sectionRef) => {
-    expandSection(e, sectionRef)
-  }, [expandSection])
+  const handleExpandCard = useCallback((title) => {
+    onExpand(title)
+  }, [onExpand])
 
   const clearInputValue = useCallback(setValue => {
     setValue("")
@@ -54,13 +54,12 @@ const MemoizedCard = React.memo(function EditProfileCard({
 
   return (
     <div 
-      className={`edit-section--shadow-inset ${title}`}
-      ref={sectionRef}
+      className={`edit-section--shadow-inset ${title} ${isExpanded === title ? "expand-card" : "shrink-card"}`}
     >
       <button 
         className="edit-section__header"
         type="button"
-        onClick={(e) => handleExpandCard(e, sectionRef)}
+        onClick={() => handleExpandCard(title)}
       >
         <div className="edit-section__header--shadow-outset">
           <h3>{title}</h3>
@@ -101,14 +100,13 @@ const MemoizedCard = React.memo(function EditProfileCard({
     </div>
   )
 }, (prevProps, nextProps) => {
-  // console.log(prevProps, nextProps, "OH BOY WHAT IS THIS???")
-  if (nextProps.items == null) return false
-  else if (
+  if (
     nextProps?.items[0]?.value !== prevProps?.items[0]?.value ||
     nextProps?.items[1]?.value !== prevProps?.items[1]?.value ||
-    nextProps?.items[2]?.value !== prevProps?.items[2]?.value 
+    nextProps?.items[2]?.value !== prevProps?.items[2]?.value ||
+    nextProps?.isExpanded !== prevProps?.isExpanded 
   ) return false
-  return true
+    return true
 })
 
 export default MemoizedCard

@@ -9,10 +9,7 @@ import { saveSongSchema } from "../utils/validationSchemas"
 import InputError from "./InputError"
 import ButtonClearText from "../components/ButtonClearText";
 import useDebugInformation from "../utils/useDebugInformation"
-import play from "../images/play.svg";
-import pause from "../images/pause.svg";
-import xExit from "../images/exit-x-2.svg";
-
+import { playIcon, pauseIcon, closeIcon } from "../assets/images/_icons"
 
 export default function SaveSongModal(props) {
   const { user } = useContext(TheContext)
@@ -145,7 +142,7 @@ export default function SaveSongModal(props) {
                   setShowSaveSongModal(false)
                 }}
               >
-                <img className="button-icons" src={xExit} alt="exit" />
+                <img className="button-icons" src={closeIcon} alt="exit" />
               </button>
             </div>
           </div>
@@ -164,7 +161,7 @@ export default function SaveSongModal(props) {
                     <img
                       className={`button-icons ${isPlaying ? "bi-pause" : "bi-play"}`}
                       id="play-stop-img"
-                      src={isPlaying ? pause : play}
+                      src={isPlaying ? pauseIcon : playIcon}
                       alt="play or pause icon"
                     />
                   </button>
