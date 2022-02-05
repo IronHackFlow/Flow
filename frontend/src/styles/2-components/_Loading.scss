@@ -2,6 +2,7 @@
   @include flexCenter(100%, 100%, 0, center, flex-start, row);
   background: linear-gradient(345deg, #212121, #606060);
   position: absolute;
+  top: 0;
 
   .loading-background {
     @include flexCenter(10em, 95%, .7vh, center, center, row);

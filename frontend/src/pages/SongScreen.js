@@ -1,125 +1,87 @@
 import { useContext, useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import actions from '../api'
-import TheContext from '../contexts/TheContext'
-import { songData } from '../contexts/SongData'
-import AudioTimeSlider from "../components/AudioTimeSlider"
+import { SongDataContext } from '../contexts/SongData'
 import Loading from '../components/Loading'
-import Comments from "../components/Comments"
-import useEventListener from '../utils/useEventListener'
-import usePostLike from "../utils/usePostLike"
-import usePostFollow from "../utils/usePostFollow"
+import LikeButton from "../components/LikeButton"
+import FollowButton from "../components/FollowButton"
+import ButtonSocialAction from "../components/ButtonSocialAction"
+import usePostFollow from '../utils/usePostFollow';
+import usePostLike from '../utils/usePostLike';
+import CommentButton from "../components/CommentButton"
+import CommentMenu from "../components/CommentMenu"
+import CommentInputModal from "../components/CommentInputModal"
+import AudioTimeSlider from "../components/AudioTimeSlider"
 import useFormatDate from "../utils/useFormatDate"
 import gifsArr from '../assets/images/gifs.json'
 import gradientbg from '../assets/images/gradient-bg-2.png'
 import { followIcon, commentIcon, playIcon, pauseIcon, previousIcon, forwardIcon, closeIcon, thumbsUpIcon } from '../assets/images/_icons'
 
-function SongScreen(props) {
-  const { user, windowSize } = useContext(TheContext)
-  const { isLoading, setIsLoading } = useContext(songData)
-
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    if (onChange < 600) {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('SongScreen').style.height = `${windowSize}px`
-    } else {
-      document.getElementById('body').style.height = `${onChange}px`
-      document.getElementById('SongScreen').style.height = `${onChange}px`
-    }
-  })
-
-  const { handlePostLike, handleInViewLikes, likes } = usePostLike();
-  const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
+export default function SongScreen() {
+  const { homeFeedSongs, isLoading } = useContext(SongDataContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { currentSong, returnValue } = location.state
   const { formatDate } = useFormatDate()
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { propCurrentSong, propSearchValue, propReturnLink } = location.state
+  const { addSongLike, deleteSongLike } = usePostLike()
+  const { postFollow, deleteFollow } = usePostFollow()
 
-  const gifsCopy = [...gifsArr];
-  const [thisSong, setThisSong] = useState(propCurrentSong);
-  const [allSongs, setAllSongs] = useState([]);
+  const gifsCopy = [...gifsArr]
+  const [songInView, setSongInView] = useState({ song: currentSong, songVideo: gifsCopy[0].url })
+  const [usersSongs, setUsersSongs] = useState([])
   const [isPlaying, setIsPlaying] = useState(false)
-  const [poppedUp, setPoppedUp] = useState(false)
+  const [showCommentInputModal, setShowCommentInputModal] = useState(false)
+  const [showCommentMenu, setShowCommentMenu] = useState(false)
   const [commentsArray, setCommentsArray] = useState([])
-  const [totalComments, setTotalComments] = useState(propCurrentSong?.song_comments?.length);
-  const [songScreen] = useState(`#353535`);
+  const [totalComments, setTotalComments] = useState(currentSong?.song_comments?.length)
+  const [songScreen] = useState(`#353535`)
 
-  const windowRef = useRef();
-  const commentInputRef = useRef();
-  const followBtn = useRef();
-  const playPauseRef = useRef();
+  const commentInputRef = useRef()
+  const playPauseRef = useRef()
 
-  useEffect(() => {
-    setIsLoading(true)
-    let songUserId = propCurrentSong.song_user._id
-    let songId = propCurrentSong._id
-
-    async function getUserSongs(songUserId, songId) {
-      await actions
-        .getUserSongs({ song_user: songUserId })
-        .then(res => {
-          setAllSongs(res.data)
-          setAllSongs(prevArr => prevArr.map((each, index) => {
-            if (each._id === songId) {
-              setThisSong({...each, songVideo: gifsCopy[index].url, songIndex: index + 1})
-            }
-            return {
-              ...each,
-              songVideo: gifsCopy[index].url,
-              songIndex: index + 1
-            }
-          }))
-          setIsLoading(false)
-        })
-        .catch(console.error)
-    }
-    getUserSongs(songUserId, songId)
-  }, [])
 
   useEffect(() => {
-    if (thisSong) {
-      const songId = thisSong?._id
-      handleInViewLikes(songId)
-      handleInViewFollowers(songId)
-    }
-  }, [thisSong])
-
-  const onClose = () => {
-    if (propReturnLink === '/search') {
-      navigate('/search',  { state: { propSearchValue: propSearchValue } })
-    } else {
-      navigate(`/profile/${propCurrentSong?.song_user._id}`, { state: { propSongUser: propCurrentSong?.song_user } })
-    }
-  }
+    let filterSongs = homeFeedSongs?.filter(each => each.song?.song_user?._id === currentSong?.song_user?._id)
+    setUsersSongs(filterSongs)
+  }, [homeFeedSongs])
 
   const popUpComments = () => {
-    if (poppedUp === false) {
-      setPoppedUp(true)
-      commentInputRef.current.focus()
-    } else {
-      setPoppedUp(false)
-    }
+    setShowCommentMenu(true)
+    setShowCommentInputModal(true)
   }
 
   const findCurrentSong = direction => {
-    allSongs.filter((each, index) => {
-      if (each._id === thisSong?._id) {
+    usersSongs.filter((each, index) => {
+      if (each.song._id === songInView?.song?._id) {
         if (direction === 'back') {
           if (index === 0) {
             return null
           } else {
-            setThisSong(allSongs[index - 1])
+            setSongInView(usersSongs[index - 1])
+            console.log(songInView, "back")
           }
         } else {
-          if (index === allSongs.length - 1) {
+          if (index === usersSongs.length - 1) {
             return null
           } else {
-            setThisSong(allSongs[index + 1])
+            setSongInView(usersSongs[index + 1])
           }
         }
       }
     })
+  }
+  
+  const getSongIndex = (array, current) => {
+    let index = array.map((each, index) => {
+      if (each.song._id === current.song._id) {
+        return index + 1
+      }
+    })
+    return index
+  }
+
+  const onClose = () => {
+    if (returnValue) navigate("/search", { state: { returnValue: returnValue }})
+    else navigate(-1)
   }
 
   return (
@@ -127,10 +89,24 @@ function SongScreen(props) {
       id="SongScreen"
       className="SongScreen"
       style={{
-        backgroundImage: `url('${gradientbg}'), url(${thisSong?.songVideo})`,
+        backgroundImage: `url('${gradientbg}'), url(${songInView?.songVideo})`,
       }}
     >
       <Loading addClass={'LoadingSongScreen'} />
+      <CommentInputModal isOpen={showCommentInputModal} onClose={setShowCommentInputModal} />
+      <CommentMenu
+        commentInputRef={commentInputRef}
+        songInView={songInView}
+        commentsArray={commentsArray}
+        setCommentsArray={setCommentsArray}
+        totalComments={totalComments}
+        setTotalComments={setTotalComments}
+        isOpen={showCommentMenu}
+        onClose={setShowCommentMenu}
+        onCloseInput={setShowCommentInputModal}
+      />
+
+      <div className="song-screen--container">
       <div className="close-window-frame">
         <div className="song-listing-container">
           <div className="song-listing-outer">
@@ -138,35 +114,42 @@ function SongScreen(props) {
               <div className="listing-photo-container">
                 <div className="listing-photo-outer">
                   <div className="listing-photo-inner">
-                    <img src={thisSong?.song_user?.picture} alt="song user" />
+                    <img src={songInView?.song?.song_user?.picture} alt="song user" />
                   </div>
                 </div>
               </div>
+
               <div className="listing-track-container">
                 <div className="track-title-container">
                   <div className="track-title-outer">
-                    <p className="track-name">{thisSong?.name}</p>
-                    <p className="track-index"><span>{thisSong?.songIndex}</span> of {allSongs.length}</p>
+                    <p className="track-name">{songInView?.song?.name}</p>
+                    <p className="track-index">
+                      <span>
+                        {getSongIndex(usersSongs, songInView)}
+                      </span>
+                      of {usersSongs?.length}
+                    </p>
                   </div>
                 </div>
                 <div className="track-details-container">
                   <p>
-                    {thisSong?.caption
-                      ? thisSong?.caption
+                    {songInView?.song?.caption
+                      ? songInView?.song?.caption
                       : "No caption for this song"
                     }
                   </p>
                   <p>
-                    by: <span style={{ color: '#b7a2a6' }}>{thisSong?.song_user?.user_name}</span>
+                    by: <span style={{ color: '#b7a2a6' }}>{songInView?.song?.song_user?.user_name}</span>
                   </p>
-                  <p>on: {formatDate(thisSong?.date, "MMMM_Dth_YYYY")}</p>
+                  <p>on: {formatDate(songInView?.song?.date, "MMMM_Dth_YYYY")}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="close-window-container">
-          <button className="close-window-outer" onClick={onClose}>
+          <button className="close-window-outer" onClick={() => onClose()}>
             <div className="close-window-inner">
               <img src={closeIcon} alt="close window" />
             </div>
@@ -176,11 +159,10 @@ function SongScreen(props) {
 
       <div 
         className="song-video-frame"
-        ref={windowRef}
         style={isLoading === true ? {opacity: "0"} : {opacity: "1"}}
       >
         <div className="song-lyric-container">
-          {thisSong?.lyrics?.map((each, index) => {
+          {songInView?.song?.lyrics?.map((each, index) => {
             return (
               <div className="each-lyric-container" key={`${each}_${index}`}>
                 <p className="each-lyric-no">{index + 1}</p>
@@ -190,17 +172,6 @@ function SongScreen(props) {
           })}
         </div>
       </div>
-
-      <Comments
-        commentInputRef={commentInputRef}
-        poppedUp={poppedUp}
-        songInView={thisSong}
-        commentsArray={commentsArray}
-        setCommentsArray={setCommentsArray}
-        totalComments={totalComments}
-        setTotalComments={setTotalComments}
-        whichMenu="SongScreen"
-      />
 
       <div className="song-details-container">
         <div className="song-details">
@@ -244,7 +215,7 @@ function SongScreen(props) {
                 <AudioTimeSlider
                   isPlaying={isPlaying}
                   setIsPlaying={setIsPlaying}
-                  currentSong={thisSong}
+                  currentSong={songInView}
                   location={songScreen}
                 />
               </div>
@@ -254,79 +225,25 @@ function SongScreen(props) {
 
         <div className="social-buttons">
           <div className="social-list">
-            <div className="social-button-container">
-              <button 
-                className={`social-button ${followers.IS_FOLLOWED ? "pushed" : ""}`} 
-                ref={followBtn}
-                onClick={() => { 
-                  handlePostFollow(
-                    thisSong?.song_user?._id, 
-                    followers?.IS_FOLLOWED, 
-                    followers?.USERS_FOLLOW_TO_DELETE
-                  ) 
-                }}
-              > 
-                <img className="social-icons follow" src={followIcon} alt="follow user icon"></img>
-              </button>
-              <div className="button-title">
-                <p style={{ color: '#ff3b8c' }}>{followers?.TOTAL_FOLLOWERS}</p>
-                <p>
-                  {(followers?.TOTAL_FOLLOWERS === 1)
-                    ? "Follower"
-                    : "Followers"
-                  }
-                </p>
-              </div>
-            </div>
-
-            <div className="social-button-container">
-              <button 
-                className={`social-button ${likes.IS_LIKED ? "pushed" : ""}`} 
-                onClick={(e) => { 
-                  e.target.style.transition = "all .2s ease-in"
-                  handlePostLike(
-                    likes,
-                    null,
-                    thisSong._id, 
-                    thisSong.song_user._id,
-                  ) 
-                }}
-              >
-                <img className="social-icons heart" src={thumbsUpIcon} alt="like post icon"></img>
-              </button>
-              <div className="button-title">
-                <p style={{color: '#ff3b8c'}}>{likes?.TOTAL_LIKES}</p>
-                <p>
-                  {(likes?.TOTAL_LIKES === 1)
-                    ? "Like"
-                    : "Likes"
-                  }
-                </p>
-              </div>
-            </div>
-
-            <div className="social-button-container">
-              <button className={`social-button ${poppedUp ? "pushed" : ""}`} onClick={popUpComments}>
-                <img
-                  className="social-icons comment"
-                  src={commentIcon}
-                  alt="comment on post icon"
-                ></img>
-              </button>
-              <div className="button-title">
-                <p style={{color: '#ff3b8c'}}>{totalComments}</p>
-                <p>
-                  {(totalComments === 1)
-                    ? "Comment"
-                    : "Comments"
-                  }
-                </p>
-              </div>
-            </div>
+            <ButtonSocialAction 
+              type="follow"
+              songInView={{id: songInView?.song?.song_user?._id, list: songInView?.song?.song_user?.followers}}
+              btnStyle="songScreen"
+              action={{ add: postFollow, delete: deleteFollow }}
+            />
+            <ButtonSocialAction 
+              type="like"
+              songInView={{id: songInView?.song?._id, list: songInView?.song?.song_likes }}
+              btnStyle="songScreen"
+              action={{ add: addSongLike, delete: deleteSongLike }}
+            />
+            {/* <FollowButton songInView={songInView.song} btnStyle="songScreen" />
+            <LikeButton songInView={songInView.song} btnStyle="songScreen" /> */}
+            <CommentButton songInView={songInView.song} btnStyle="songScreen" isPushed={showCommentMenu} onClose={popUpComments} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
 }
-export default SongScreen

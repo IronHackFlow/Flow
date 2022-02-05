@@ -16,16 +16,10 @@ export default function ButtonShowPassword({ setType, password }) {
     }
   }, [password])
 
-  const showPasswordHandler = (e) => {
+  const showPasswordHandler = (e, type, isShowing) => {
     e.preventDefault()
-    setType("text")
-    setShowPassword(true)
-  }
-
-  const hidePasswordHandler = (e) => {
-    e.preventDefault()
-    setType("password")
-    setShowPassword(false)
+    setType(type)
+    setShowPassword(isShowing)
   }
 
   return (
@@ -38,7 +32,7 @@ export default function ButtonShowPassword({ setType, password }) {
           <button 
             className="show-password-btn" 
             onMouseDown={(e) => e.preventDefault()}
-            onClick={(e) => hidePasswordHandler(e)}
+            onClick={(e) => showPasswordHandler(e, "password", false)}
             tabIndex="-1"
           >
             <img className="button-icons password-no-eye" src={noEyeIcon} alt="hide password" />
@@ -48,7 +42,7 @@ export default function ButtonShowPassword({ setType, password }) {
           <button 
             className="show-password-btn" 
             onMouseDown={(e) => e.preventDefault()}
-            onClick={(e) => showPasswordHandler(e)}
+            onClick={(e) => showPasswordHandler(e, "text", true)}
             tabIndex="-1"
           >
             <img className="button-icons password-eye" src={eyeIcon} alt="show password" />

@@ -7,12 +7,11 @@ export default function SelectMenuModal({
 }) {
 
   const displayItems = useCallback(() => {
-    if (list == null) return
+    if (list == null || list.length === 0) return
+    
     return list.map((element, index) => {
       let isSelected = false
-      if (element.name === currentItem.name) {
-        isSelected = true
-      } 
+      if (element.name === currentItem.name) isSelected = true
       return (
         <SelectMenuItem 
           key={`${element.name}_${index}`}
@@ -29,7 +28,7 @@ export default function SelectMenuModal({
   return (
     <div 
       className="SelectMenuModal"
-      style={isOpen ? {opacity: "1", zIndex: "4"} : {opacity: "0", zIndex: "-4"}}
+      style={isOpen && list.length !== 0 ? {opacity: "1", zIndex: "4"} : {opacity: "0", zIndex: "-4"}}
       onClick={() => onClose(false)}
     >
       <div 

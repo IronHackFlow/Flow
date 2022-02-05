@@ -5,6 +5,7 @@
     z-index: -4;
     opacity: 0;
     top: 0;
+    left: 0;
 
     .select-menu__list--container {
         @include flexCenter(auto, 96%, 1vh, center, center, column);

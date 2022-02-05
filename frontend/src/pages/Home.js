@@ -1,418 +1,262 @@
-import { useContext, useState, useEffect, useRef, useCallback } from "react";
+import { useContext, useState, useEffect, useRef, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
 import TheContext from "../contexts/TheContext";
-import TheViewContext from "../contexts/TheViewContext";
-import { songData } from "../contexts/SongData"
-import usePostLike from "../utils/usePostLike";
-import usePostFollow from "../utils/usePostFollow";
-import useEventListener from "../utils/useEventListener";
+import { SongDataContext } from "../contexts/SongData"
 import useDebugInformation from "../utils/useDebugInformation";
 import useFormatDate from "../utils/useFormatDate";
+import usePostFollow from '../utils/usePostFollow';
+import usePostLike from '../utils/usePostLike';
 import Feed from "../components/Feed"
-import AudioTimeSlider from "../components/AudioTimeSlider.js";
-import Comments from "../components/Comments.js";
 import NavBar from "../components/NavBar.js";
-import { playIcon, pauseIcon, followIcon, commentIcon, bulletPointIcon, thumbsUpIcon } from "../assets/images/_icons"
+import ButtonSocialAction from "../components/ButtonSocialAction"
+import FollowButton from "../components/FollowButton"
+import LikeButton from "../components/LikeButton"
+import CommentButton from "../components/CommentButton"
+import CommentMenu from "../components/CommentMenu.js";
+import CommentInputModal from "../components/CommentInputModal"
+import AudioTimeSlider from "../components/AudioTimeSlider.js";
+import { playIcon, pauseIcon,  bulletPointIcon } from "../assets/images/_icons"
 
-function Home(props) {
-  const { user, windowSize } = useContext(TheContext);
-  const { homeFeedSongs, trendingFeedSongs, followingFeedSongs, isLoading } = useContext(songData)
-
-  useDebugInformation("Home", props)
-  // useEventListener('resize', e => {
-  //   var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  //   if (onChange < 600) {
-  //     document.getElementById('body').style.height = `${windowSize}px`
-  //     document.getElementById('Home').style.height = `${windowSize}px`
-  //   } else {
-  //     setTimeout(() => {
-  //       document.getElementById('body').style.height = `${onChange}px`
-  //       document.getElementById('Home').style.height = `${onChange}px`
-  //     }, 1000)
-  //   }
-  // })
-
-  const { handlePostLike, handleInViewLikes, likes } = usePostLike();
-  const { handlePostFollow, handleInViewFollowers, followers } = usePostFollow();
+const MemoizedHome = memo(function Home(props) {
+  const { user } = useContext(TheContext)
+  const { homeFeedSongs, isLoading } = useContext(SongDataContext)
   const { formatDate } = useFormatDate()
+  useDebugInformation("Home", props)
+  const { addSongLike, deleteSongLike } = usePostLike()
+  const { postFollow, deleteFollow } = usePostFollow()
 
-  const initialInView = {
-    homeFeed: null,
-    trendingFeed: null,
-    followingFeed: null
-  }
-
-  const [trackInView, setTrackInView] = useState(initialInView)
   const [songInView, setSongInView] = useState(homeFeedSongs[0]?.song);
-  const [totalComments, setTotalComments] = useState();
-  const [isHomeFeed, setIsHomeFeed] = useState(true);
-  const [isTrendingFeed, setIsTrendingFeed] = useState(false);
-  const [isFollowingFeed, setIsFollowingFeed] = useState(false);
+  const [toggleFeed, setToggleFeed] = useState("home")
+  const [trackInView, setTrackInView] = useState({ home: null, trending: null, following: null })
   const [isPlaying, setIsPlaying] = useState(false);
-  const [poppedUp, setPoppedUp] = useState(false);
+  const [showCommentMenu, setShowCommentMenu] = useState(false)
+  const [showCommentInputModal, setShowCommentInputModal] = useState(false)
+  const [totalComments, setTotalComments] = useState();
+  const [currentInView, setCurrentInView] = useState(null)
+
   const commentInputRef = useRef();
   const playPauseRef = useRef();
 
   useEffect(() => {
-    if (songInView) {
-      const songId = songInView?._id
-      handleInViewLikes(songId)
-      handleInViewFollowers(songId)
+    if (currentInView) {
+      let viewSong = homeFeedSongs.filter(each => each.song._id === currentInView)
+      setSongInView(viewSong[0].song)
     }
-  }, [songInView, isHomeFeed, isTrendingFeed, isFollowingFeed])
-  
-  const [feedTracker, setFeedTracker] = useState('home')
-
-  useEffect(() => {
-    if (isHomeFeed) {
-      setFeedTracker('home')
-    } else if (isTrendingFeed) {
-      setFeedTracker('trending')
-    } else {
-      setFeedTracker('following')
-    }
-  }, [isHomeFeed, isTrendingFeed, isFollowingFeed])
+  }, [currentInView])
 
   const showFeedInDisplay = useCallback(() => {
-    let homeFeed = <Feed feedSongs={homeFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.homeFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
-    let trendFeed = <Feed feedSongs={trendingFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.trendingFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
-    let followFeed = <Feed feedSongs={followingFeedSongs} setSongInView={setSongInView} trackInView={trackInView?.followingFeed} isHomeFeed={isHomeFeed} isTrendingFeed={isTrendingFeed} isFollowingFeed={isFollowingFeed} />
+    let trendingFeed = [...homeFeedSongs].sort((a, b) => b.song.song_likes.length - a.song.song_likes.length)
+    let filterUserFollows = user?.user_follows.map(each => { return (each.followed_user)})
+    let followingFeed = homeFeedSongs.filter(each => {
+      let followedUser = false
+      filterUserFollows?.forEach(user => {
+        if (each.song.song_user._id === user) {
+          followedUser = true
+        }
+      })
+      if (followedUser) return each
+    })
 
-    if (isHomeFeed) {
-      return homeFeed
-    }
-    else if (isTrendingFeed) {
-      return trendFeed
-    }
-    else if (isFollowingFeed) {
-      return followFeed
-    }
-  }, [homeFeedSongs, trendingFeedSongs, isHomeFeed, isTrendingFeed, isFollowingFeed])
+    if (toggleFeed === "home") return <Feed songArray={homeFeedSongs} trackInView={trackInView?.home} letScroll={showCommentMenu} onInView={setCurrentInView} />
+    else if (toggleFeed === "trending") return <Feed songArray={trendingFeed} trackInView={trackInView?.trending ? trackInView?.trending : trendingFeed[0].song} letScroll={showCommentMenu} onInView={setCurrentInView} />
+    else return <Feed songArray={followingFeed} trackInView={trackInView?.following ? trackInView.following : followingFeed[0].song} letScroll={showCommentMenu} onInView={setCurrentInView} />
+
+  }, [homeFeedSongs, toggleFeed, showCommentMenu])
 
   const popUpComments = () => {
-    if (poppedUp === false) {
-      setPoppedUp(true)
-      commentInputRef.current.focus()
-    } else {
-      setPoppedUp(false)
-    }
+    setShowCommentMenu(true)
+    setShowCommentInputModal(true)
   }
 
-  const setHomeFeed = () => {
-    if (feedTracker === "trending") {
-      setTrackInView(prev => ({
-        ...prev,
-        trendingFeed: songInView
-      }))
-    } else {
-      setTrackInView(prev => ({
-        ...prev,
-        followingFeed: songInView
-      }))
-    }
-    setIsHomeFeed(true)
-    setIsTrendingFeed(false)
-    setIsFollowingFeed(false)
-  }
-
-  const setTrendingFeed = () => {
-    if (feedTracker === "home") {
-      setTrackInView(prev => ({
-        ...prev,
-        homeFeed: songInView
-      }))
-    } else {
-      setTrackInView(prev => ({
-        ...prev,
-        followingFeed: songInView
-      }))
-    }
-
-    setIsTrendingFeed(true)
-    setIsHomeFeed(false)
-    setIsFollowingFeed(false)
-  }
-
-  const setFollowingFeed = () => {
-    if (feedTracker === "trending") {
-      setTrackInView(prev => ({
-        ...prev,
-        trendingFeed: songInView
-      }))
-    } else {
-      setTrackInView(prev => ({
-        ...prev,
-        homeFeed: songInView
-      }))
-    }
-
-    setIsFollowingFeed(true)
-    setIsHomeFeed(false)
-    setIsTrendingFeed(false)
-
+  const showFeedHandler = (feed) => {
+    setTrackInView(prev => ({
+      ...prev,
+      [toggleFeed]: songInView
+    }))
+    setToggleFeed(feed)
   }
 
   return (
-    <TheViewContext.Provider
-      value={{
-        songInView,
-        setSongInView,
-        totalComments,
-        setTotalComments,
-        isFollowingFeed,
-        isHomeFeed,
-      }}
-    >
-      <div className="Home" id="Home">
-        <div className="section-1_feed">
-          <div className="section-1a_toggle-feed">
-            <div className="toggle-feed-container">
-              <div 
-                className="each-feed_shadow-div-inset"
-                style={{borderRadius: "0.3vh 0.3vh 0.3vh 2.5vh"}}
-              >
-                <button
-                  className={isHomeFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  style={{borderRadius: "4vh .2vh .2vh 4vh"}}
-                  onClick={() => setHomeFeed()}
-                >
-                  <div className={isHomeFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
-                    Feed
-                  </div>
-                </button>
-              </div>
-              
-              <div className="each-feed_shadow-div-inset">
-                <button
-                  className={isTrendingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  onClick={() => setTrendingFeed()}
-                >
-                  <div className={isTrendingFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
-                    Trending
-                  </div>
-                </button>
-              </div>
+    <div className="Home" id="Home">
+      
+      <CommentInputModal 
+        isOpen={showCommentInputModal} 
+        onClose={setShowCommentInputModal} 
+      />
+      <CommentMenu
+        commentInputRef={commentInputRef}
+        songInView={songInView}
+        totalComments={totalComments}
+        setTotalComments={setTotalComments}
+        isOpen={showCommentMenu}
+        onClose={setShowCommentMenu}
+        onCloseInput={setShowCommentInputModal}
+      />
 
-              <div
-                className="each-feed_shadow-div-inset"
-                style={{ borderRadius: '.3vh .3vh 2.5vh .3vh' }}
+      <div className="section-1_feed">
+        <div 
+          className="section-1a_toggle-feed"
+          style={showCommentMenu ? {height: "0%", visibility: "hidden"} : {}}
+        >
+          <div className="toggle-feed-container">
+            <div 
+              className="each-feed_shadow-div-inset"
+              style={{borderRadius: "0.3vh 0.3vh 0.3vh 2.5vh"}}
+            >
+              <button
+                className={toggleFeed === "home" ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
+                onClick={() => showFeedHandler("home")}
+                style={{borderRadius: "4vh .2vh .2vh 4vh"}}
               >
-                <button
-                  className={isFollowingFeed ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
-                  style={{borderRadius: ".2vh 4vh 4vh .2vh"}}
-                  onClick={() => setFollowingFeed()}
-                >
-                  <div className={isFollowingFeed ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
-                    Following
-                  </div>
-                </button>
+                <div className={toggleFeed === "home" ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
+                  Feed
+                </div>
+              </button>
+            </div>
+            
+            <div className="each-feed_shadow-div-inset">
+              <button
+                className={toggleFeed === "trending" ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
+                onClick={() => showFeedHandler("trending")}
+              >
+                <div className={toggleFeed === "trending" ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
+                  Trending
+                </div>
+              </button>
+            </div>
+            <div
+              className="each-feed_shadow-div-inset"
+              style={{ borderRadius: '.3vh .3vh 2.5vh .3vh' }}
+            >
+              <button
+                className={toggleFeed === "following" ? "each-feed_shadow-div-outset toggle-feed" : "each-feed_shadow-div-outset"}
+                style={{borderRadius: ".2vh 4vh 4vh .2vh"}}
+                onClick={() => showFeedHandler("following")}
+              >
+                <div className={toggleFeed === "following" ? "each-feed_shadow-div-inset-2 toggle-feed-2" : "each-feed_shadow-div-inset-2"}>
+                  Following
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {showFeedInDisplay()}
+
+        <div className="section-1c_song-details">
+          <div className="song-details-1_actions">
+            <div className="actions_shadow-div-outset">
+              <div className="actions_shadow-div-inset">
+                <div className="action-btns-container">
+
+                  <ButtonSocialAction 
+                    type="follow"
+                    songInView={{id: songInView?.song_user?._id, list: songInView?.song_user?.followers}}
+                    btnStyle="home"
+                    action={{ add: postFollow, delete: deleteFollow }}
+                  />
+
+                  <ButtonSocialAction 
+                    type="like"
+                    songInView={{id: songInView?._id, list: songInView?.song_likes }}
+                    btnStyle="home"
+                    action={{ add: addSongLike, delete: deleteSongLike }}
+                  />
+                  {/* <FollowButton songInView={songInView} btnStyle="home" />
+                  <LikeButton songInView={songInView} btnStyle="home" /> */}
+                  <CommentButton songInView={songInView} btnStyle="home" isPushed={showCommentMenu} onClose={popUpComments} />
+                </div>
               </div>
             </div>
           </div>
 
-          {showFeedInDisplay()}
-
-          <Comments
-            commentInputRef={commentInputRef}
-            songInView={songInView}
-            totalComments={totalComments}
-            setTotalComments={setTotalComments}
-            poppedUp={poppedUp}
-            whichMenu="Home"
-          />
-
-          <div className="section-1c_song-details">
-            <div className="song-details-1_actions">
-              <div className="actions_shadow-div-outset">
-                <div className="actions_shadow-div-inset">
-                  <div className="action-btns-container">
-                    <button
-                      className={`action-btn_shadow-div-outset ${followers?.IS_FOLLOWED ? "liked-followed-commented" : ""}`}
-                      style={{ borderRadius: '50px 5px 5px 50px' }}
-                      onClick={() => { 
-                        handlePostFollow(
-                          songInView.song_user._id, 
-                          followers?.IS_FOLLOWED, 
-                          followers?.USERS_FOLLOW_TO_DELETE
-                        ) 
-                      }}
-                    >
-                      <div
-                        className="action-btn-icon_shadow-div-inset"
-                        style={{ borderRadius: '40px 4px 4px 40px' }}
+          <div className="song-details-2_song-data">
+            <div className="song-data-container">
+              <div className="song-user-section">
+                <div className="song-user-container">
+                  <div className="user-pic-container">
+                    <div className="user-pic_shadow-div-outset">
+                      <Link
+                        to={`/profile/${songInView?.song_user?._id}`}
+                        state={{ propSongUser: songInView?.song_user }}
+                        className="user-pic_shadow-div-inset"
                       >
-                        <img
-                          className="social-icons follow"
-                          src={followIcon}
-                          alt="follow user icon"
-                        />
-                      </div>
-                      <div className="action-btn-container">
-                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
-                        </div>
-                        <div className="action-btn-text">
-                          <p style={{ color: 'white' }}>{followers?.TOTAL_FOLLOWERS}</p>
-                          <p>
-                            {(followers?.TOTAL_FOLLOWERS === 1)
-                              ? "Follow"
-                              : "Follows"
-                            }
-                          </p>
-                        </div>
-                      </div>
-                    </button>
+                        <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
+                        <img src={songInView?.song_user?.picture} alt="song user profile" />
+                      </Link>
+                    </div>
+                  </div>
 
-                    <button 
-                      className={`action-btn_shadow-div-outset 
-                        ${likes?.IS_LIKED ? "liked-followed-commented" : ""}
-                      `} 
-                      onClick={() => { 
-                        handlePostLike(
-                          likes,
-                          null,
-                          songInView?._id, 
-                          songInView?.song_user?._id, 
-                        ) 
-                      }}
-                    >
-                      <div className="action-btn-icon_shadow-div-inset">
-                        <img className="social-icons like" src={thumbsUpIcon} alt="like post icon" />
+                  <div className="song-title-container">
+                    <div className="song-title_shadow-div-outset">
+                      <div className="song-title_shadow-div-inset">
+                        <div className="loading loading-title" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
+                        <p id="one">
+                          {songInView?.name}
+                        </p>
+                        <p id="two">
+                          <img src={bulletPointIcon} alt="bullet point" />
+                          {songInView?.song_user?.user_name}
+                        </p>
                       </div>
-                      <div className="action-btn-container">
-                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
+                      <div className="song-caption-container">
+                        <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
+                          <p>{formatDate(songInView?.date, 'm')}</p>
+                          <img src={bulletPointIcon} alt="bullet point" />
                         </div>
-                        <div className="action-btn-text">
-                          <p style={{ color: 'white' }}>{likes?.TOTAL_LIKES}</p>
-                          <p>
-                            {(likes?.TOTAL_LIKES === 1) 
-                              ? "Like"
-                              : "Likes"
-                            }
-                          </p>
-                        </div>
+                        <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
+                          {songInView?.caption
+                            ? songInView?.caption
+                            : 'no caption for this song'}
+                        </p>
                       </div>
-                    </button>
- {/* {console.log( "HEHEHEHEHHEHEHEHEHEHEHEHEHEHE")} */}
-                    <button className={`action-btn_shadow-div-outset ${poppedUp ? "comment-pressed" : ""}`} onClick={popUpComments}>
-                      <div className="action-btn-icon_shadow-div-inset">
-                        <img
-                          className="social-icons comment"
-                          src={commentIcon}
-                          alt="comment on post icon"
-                        />
-                      </div>
-                      <div className="action-btn-container">
-                        <div className="loading loading-btn" style={isLoading ? {opacity: "1"} : {opacity: "0"}}>
-                        </div>
-                        <div className="action-btn-text">
-                          <p style={{ color: 'white' }}>{totalComments}</p>
-                          <p>
-                            {(totalComments === 1) 
-                              ? "Comment"
-                              : "Comments"
-                            }
-                          </p>
-                        </div>
-                      </div>
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="song-details-2_song-data">
-              <div className="song-data-container">
-                <div className="song-user-section">
-                  <div className="song-user-container">
-                    <div className="user-pic-container">
-                      <div className="user-pic_shadow-div-outset">
-                        <Link
-                          to={`/profile/${songInView?.song_user?._id}`}
-                          state={{ propSongUser: songInView?.song_user }}
-                          className="user-pic_shadow-div-inset"
-                        >
-                          <div className="loading loading-pic" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
-                          <img
-                            src={songInView?.song_user?.picture}
-                            alt=""
-                            ref={props.profilePicRef}
-                          />
-                        </Link>
-                      </div>
-                    </div>
-
-                    <div className="song-title-container">
-                      <div className="song-title_shadow-div-outset">
-                        <div className="song-title_shadow-div-inset">
-                          <div className="loading loading-title" style={isLoading ? {opacity: "1"} : {opacity: "0"}}></div>
-                          <p id="one">
-                            {songInView?.name}
-                          </p>
-                          <p id="two">
-                            <img src={bulletPointIcon} alt="bullet point" />
-                            {songInView?.song_user?.user_name}
-                          </p>
-                        </div>
-
-                        <div className="song-caption-container">
-                          <div className="song-date" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            <p>{formatDate(songInView?.date, 'm')}</p>
-                            <img src={bulletPointIcon} alt="bullet point" />
-                          </div>
-                          <p className="song-caption" style={isLoading ? {opacity: "0"} : {opacity: "1"}}>
-                            {songInView?.caption
-                              ? songInView?.caption
-                              : 'no caption for this song'}
-                          </p>
+              <div className="song-play-section">
+                <div className="play-song-container">
+                  <div className="play-btn-container">
+                    <div className="play-btn-container-2">
+                      <div className="play-btn_inset-container">
+                        <div className="play-btn_shadow-div-inset">
+                          <button 
+                            className="play-btn_shadow-div-outset" 
+                            onClick={() => setIsPlaying(!isPlaying)}
+                          >
+                            <img
+                              className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
+                              src={isPlaying ? pauseIcon : playIcon}
+                              ref={playPauseRef}
+                              alt="play or pause"
+                            />
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div className="song-play-section">
-                  <div className="play-song-container">
-                    <div className="play-btn-container">
-                      <div className="play-btn-container-2">
-                        <div className="play-btn_inset-container">
-                          <div className="play-btn_shadow-div-inset">
-                            <button 
-                              className="play-btn_shadow-div-outset" 
-                              onClick={() => setIsPlaying(!isPlaying)}
-                            >
-                              <img
-                                className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
-                                src={isPlaying ? pauseIcon : playIcon}
-                                ref={playPauseRef}
-                                alt="play or pause"
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="play-bar-container">
-                    <div className="play-bar_shadow-div-inset">
-                      <AudioTimeSlider
-                        isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
-                        currentSong={songInView}
-                        bgColor={`#6d6d6d`}
-                      />
-                    </div>
+                
+                <div className="play-bar-container">
+                  <div className="play-bar_shadow-div-inset">
+                    <AudioTimeSlider
+                      isPlaying={isPlaying}
+                      setIsPlaying={setIsPlaying}
+                      currentSong={songInView}
+                      bgColor={`#6d6d6d`}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <NavBar />
       </div>
-    </TheViewContext.Provider>
-  )
-}
+      <NavBar isVisible={showCommentMenu} />
+    </div>
 
-export default Home
+  )
+})
+
+export default MemoizedHome

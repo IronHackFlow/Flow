@@ -51,7 +51,7 @@
     background: #282727;
     margin: auto;
     height: 100vh;
-    width: (100vh * .46);
+    width: calc(100vh * .46);
     font-family: 'Roboto', sans-serif;
   }
 }

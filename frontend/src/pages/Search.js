@@ -1,51 +1,28 @@
 import { useContext, useEffect, useState, useRef } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
-import TheContext from '../contexts/TheContext'
-import useEventListener from '../utils/useEventListener'
+import useHandleOSK from '../utils/useHandleOSK'
 import NavBar from '../components/NavBar'
 import { searchIcon, goBackIcon, closeIcon, bulletPointIcon } from '../assets/images/_icons'
 
 
-function Search(props) {
-  const { windowSize } = useContext(TheContext);
-
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    if (onChange < 600) {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('Search').style.height = `${windowSize}px`
-    } else {
-      document.getElementById('body').style.height = `${onChange}px`
-      document.getElementById('Search').style.height = `${onChange}px`
-    }
-  })
-
-  const navigation = useNavigate();
+function Search() {
+  const { handleOnFocus } = useHandleOSK()  
+  const navigate = useNavigate();
   const location = useLocation();
+  const { returnValue } = location.state
   const [suggestions, setSuggestions] = useState(<h4>Find Friends & Artists</h4>)
   const [searchValue, setSearchValue] = useState();
 
   const searchInputRef = useRef();
 
   useEffect(() => {
-    if (location?.state?.propSearchValue == null) return
-    const value = location.state.propSearchValue
+    if (returnValue == null) return
     searchInputRef.current.focus()
-    searchInputRef.current.value = value
-    setSearchValue(value)
-    grabUsers(value)
+    searchInputRef.current.value = returnValue
+    setSearchValue(returnValue)
+    grabUsers(returnValue)
   }, [])
-
-  const closeWindow = (e) => {
-    e.preventDefault()
-    // if (history.location.link && history.location.link !== "/search") {
-    //   history.push(history.location.link)
-    // } else {
-    //   history.push("/")
-    // }
-    navigation("/")
-  }
 
   const clearSearchField = e => {
     e.preventDefault()
@@ -95,10 +72,14 @@ function Search(props) {
       return searchArr.map((ele, index) => {
         return (
           <li className="suggestions-result-list" key={ele.user ? `${ele.user._id}_${index}` : `${ele.song._id}_${index}`}>
-            <Link
+            <button
               className="result-link-container"
-              to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song._id}`}
-              state={ele.user ? { propSongUser: ele.user } : { propCurrentSong: ele.song, propSearchValue: searchInputRef.current.value, propReturnLink: '/search' }}
+              onClick={() => {
+                if (ele.user) navigate(`/profile/${ele.user._id}`, { state: { propSongUser: ele.user}})
+                else navigate(`/songScreen/${ele.song._id}`, { state: { currentSong: ele.song, returnValue: searchInputRef.current.value }})
+              }}
+              // to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song._id}`}
+              // state={ele.user ? { propSongUser: ele.user } : { propCurrentSong: ele.song, propSearchValue: searchInputRef.current.value, propReturnLink: '/search' }}
             >
               <div className="result-1_data">
                 <div className="data_shadow-div-outset">
@@ -132,7 +113,7 @@ function Search(props) {
                   </div>
                 </div>
               </div>
-            </Link>
+            </button>
           </li>
         )
       })
@@ -140,18 +121,18 @@ function Search(props) {
       return <h4>...thinking</h4>
     }
   }
-  const preventDefault = (e) => {
-    e.preventDefault()
+  const onClose = () => {
+    if (returnValue) navigate('/')
+    else navigate(-1)
   }
-
   return (
     <div id="Search" className="Search">
       <div className="search-inner" id="SearchInner">
         <div className="section-1_search-field">
           <div className="search-field_shadow-div-outset">
-            <form className="search-field-form" onSubmit={(e) => preventDefault(e)}>
+            <form className="search-field-form" onSubmit={(e) => e.preventDefault()}>
               <div className="search-back-btn-container">
-                <button className="search-back-btn" type="button" onClick={(e) => closeWindow(e)}>
+                <button className="search-back-btn" type="button" onClick={() => onClose()}>
                   <img className="button-icons" src={goBackIcon} alt="back" />
                 </button>
               </div>
@@ -165,6 +146,7 @@ function Search(props) {
                   inputMode="search"
                   style={{width: `${searchValue ? '82%' : '94%'}`}}
                   placeholder="&#xf002; Search for a user"
+                  onFocus={() => handleOnFocus()}
                 ></input>
                 {searchValue ? (
                   <button className="search-clear-btn" type="button" onClick={(e) => clearSearchField(e)}>

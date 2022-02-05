@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import TheContext from '../contexts/TheContext'
 import { homeIcon, micIcon, searchIcon, profileIcon } from '../assets/images/_icons'
 
-function NavBar(props) {
+function NavBar({locationClass, isVisible}) {
   // useDebugInformation("NavBar", props)
   const { user, locationIndicator } = React.useContext(TheContext)
   const [selectedBtn, setSelectedBtn] = useState('')
@@ -21,12 +21,14 @@ function NavBar(props) {
   }, [locationIndicator])
 
   return (
-    <div className={`NavBar ${props.locationClass}`}>
+    <div 
+      className={`NavBar ${locationClass}`}
+      style={isVisible ? {height: "0%", visibility: "hidden"} : {}}
+    >
       <div className="navbar_section">
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
             <Link
-              // to={user ? "/" : "auth"}
               to="/"
               className={`navbar-btn-container ${selectedBtn === 'home' ? "btn-selected" : 'btn-unselected'}`}
               style={{ borderRadius: '40px 8px 8px 40px' }}
@@ -46,7 +48,7 @@ function NavBar(props) {
             </Link>
 
             <Link
-              to={"/recordingBooth"}
+              to="/recordingBooth"
               className={`navbar-btn-container ${selectedBtn === 'recordBooth' ? "btn-selected" : 'btn-unselected'}`}
             >
               <div className="navbar-btn_shadow-div-inset">
@@ -64,7 +66,8 @@ function NavBar(props) {
             </Link>
 
             <Link 
-              to={{pathname: "/search", link: locationIndicator?.pathname }} 
+              to="/search"
+              state={{returnValue: null}}
               className={`navbar-btn-container ${selectedBtn === 'search' ? "btn-selected" : 'btn-unselected'}`}
             >
               <div className="navbar-btn_shadow-div-inset">

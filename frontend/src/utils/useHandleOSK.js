@@ -5,12 +5,19 @@ export default function useHandleOSK() {
   const [refIsFocused, setRefIsFocused] = useState(false);
 
   useEffect(() => {
-    const windowSize = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    // let clientHeight = Math.round(document.documentElement.clientHeight * 10) / 10
+    // let innerHeight = Math.round(window.innerHeight * 10) / 10
+    // console.log(window.visualViewport.height, innerHeight, "LOL")
+    // const windowSize = Math.max(clientHeight, innerHeight || 0)
+    const windowSize = Math.round(window.visualViewport.height * 10) / 10
     setWindowSize(windowSize)
   }, [])
 
   const handleOnFocus = () => {
-    const getSize = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    // let clientHeight = Math.round(document.documentElement.clientHeight * 10) / 10
+    // let innerHeight = Math.round(window.innerHeight * 10) / 10
+    // const getSize = Math.max(clientHeight, innerHeight || 0)
+    const getSize = Math.round(window.visualViewport.height * 10) / 10
     if (!refIsFocused) {
         setRefIsFocused(true)
         if (getSize !== windowSize) {

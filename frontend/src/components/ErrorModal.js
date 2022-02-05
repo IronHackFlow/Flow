@@ -25,7 +25,7 @@ export default function ErrorModal({
   const modalSpecs = {
     top: `${placement}%`,
     width: `${modWidth}%`,
-    height: `${modHeight * window.innerHeight}px `,
+    height: `${modHeight}px `,
   }
   
   return ReactDOM.createPortal(

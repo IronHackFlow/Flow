@@ -1,108 +1,42 @@
-import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
-import { v4 as uuidv4 } from "uuid";
+import { useContext, useState, useEffect, memo } from 'react'
+import { SongDataContext } from "../contexts/SongData"
 import Loading from './Loading'
-import { songData } from '../contexts/SongData'
-import gradientbg from '../assets/images/gradient-bg-2.png'
-import useEventListener from '../utils/useEventListener';
+import Video from './Video'
+import useDebugInformation from '../utils/useDebugInformation';
 
 
-export default function Feed({ feedSongs, setSongInView, trackInView, isHomeFeed, isTrendingFeed, isFollowingFeed }) {
-  const [feedSongsCopy, setFeedSongsCopy] = useState([]);
-  const [displayElements, setDisplayElements] = useState([])
-  const viewRef = useRef();
+const MemoizedFeed = memo(function Feed({ songArray, trackInView, letScroll, onInView }) {
+  const { isLoading } = useContext(SongDataContext)
+  useDebugInformation("Feed", { songArray, letScroll})
 
   useEffect(() => {
-    setFeedSongsCopy([...feedSongs])
-  }, [feedSongs])
+    let scrollTo = document.getElementById(`${trackInView?._id}`)
+    scrollTo?.scrollIntoView({ behavior: "instant"})
+  }, [trackInView])
 
-  const observer = new IntersectionObserver(
-    entries => {
-      if (trackInView !== null) {
-        let getScroll = entries.filter(entry => entry.target.id === trackInView?._id)
-        getScroll[0]?.target.scrollIntoView({ behavior: 'smooth' })
-
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            feedSongsCopy.forEach((each) => {
-              if (each.song._id === entry.target.id) {
-                setSongInView(each.song)
-                entry.target.style.backgroundImage = `url('${each.songVideo}')`
-              }
-            })
-          } 
-        })
-      } else {
-        let getFirst = entries.filter(entry => entry.target.id === feedSongs[0]?.song?._id)
-        getFirst[0]?.target.scrollIntoView({ behavior: 'smooth' })
-
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            feedSongsCopy.forEach((each) => {
-              if (each.song._id === entry.target.id) {
-                setSongInView(each.song)
-                entry.target.style.backgroundImage = `url('${each.songVideo}')`
-              }
-            })
-          } 
-        })
-      }
-    },
-    {
-      threshold: .9,
-      root: document.querySelector('.video-scroll-container'),
-      rootMargin: "0px 0px 200px 0px"
-    }
-  )
-
-  const setRefs = useCallback(
-    node => {
-      viewRef.current = node
-      if (viewRef.current !== null) {
-        observer.observe(viewRef.current)
-      }
-    },
-    [feedSongsCopy],
-  )
-
-  useEffect(() => {
-    let elements = feedSongsCopy.map((each) => {
-      return (
-        <li
-          id={each.song._id}
-          ref={setRefs}
-          className="video-pane"
-          key={`${uuidv4()}_${each.song._id}`}
-          style={{ backgroundImage: `url('${gradientbg}'), url('')` }}
-        >
-          <div className="last-div">
-            {each.song.lyrics.map((each, index) => {
-              return (
-                <div className="each-lyric-container" key={`${uuidv4()}_${index}_songlyrics`}>
-                  <p className="each-lyric-no">{index + 1}</p>
-                  <p className="each-lyric-line">{each}</p>
-                </div>
-              )
-            })}
-          </div>
-        </li>
-      )
-    })
-    setDisplayElements(elements)
-  }, [feedSongsCopy])
-
-  // useEventListener('DOMContentLoaded', () => {
-  //   for (let i = 0; i < feedSongs?.length; i++) {
-  //     console.log(feedSongs[i].song._id, "I hope this worked")
-  //     observer.observe(document.getElementById(`${feedSongs[i].song._id}`))
-  //   }
-  // })
-  
   return (
-    <ul className="video-scroll-container">
-      <Loading />
-      {displayElements}
+    <ul 
+      className="video-scroll-container" 
+      style={letScroll ? {overflowY: "hidden"} : {overflowY: "scroll"}}
+      >
+      <Loading isLoading={isLoading} />
+      {songArray?.map(item => {
+        return (
+          <Video 
+            key={item.song?._id} 
+            song={item.song} 
+            video={item.songVideo} 
+            onInView={onInView}
+          />
+        )
+      })}
     </ul>
   )
-}
+}, (prevProps, nextProps) => {
+  if (nextProps.songArray !== prevProps.songArray || nextProps.onInView !== prevProps.onInView || nextProps.letScroll !== prevProps.letScroll) {
+    return false
+  }
+  return true
+})
 
-  
+export default MemoizedFeed

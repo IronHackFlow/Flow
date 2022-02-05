@@ -2,17 +2,16 @@ import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import TheContext from '../contexts/TheContext'
-import { songData } from '../contexts/SongData'
+import { SongDataContext } from '../contexts/SongData'
 import useFormatDate from '../utils/useFormatDate'
 import usePostLike from "../utils/usePostLike"
 import usePostComment from "../utils/usePostComment"
-import useDebugInformation from "../utils/useDebugInformation"
-import { thumbsUpIcon, commentIcon, editIcon, deleteIcon, sendIcon, shareIcon } from '../assets/images/_icons'
+import { thumbsUpIcon, commentIcon, editIcon, deleteIcon, goBackIcon, sendIcon, shareIcon } from '../assets/images/_icons'
 
 
-function Comments(props) {
+export default function CommentMenu({songInView, setTotalComments, commentInputRef, isOpen, onClose, onCloseInput}) {
   const { user } = useContext(TheContext)
-  const { allSongComments } = useContext(songData)
+  const { allSongComments } = useContext(SongDataContext)
   const { comments, setComments, handlePostComment, handleDeleteComment } = usePostComment()
   const { formatDate } = useFormatDate()
 
@@ -20,17 +19,17 @@ function Comments(props) {
   const [commState, setCommState] = useState([])
 
   useEffect(() => {
-    const songId = props.songInView?._id
+    const songId = songInView?._id
     let filtered = allSongComments.filter(each => each.songId === songId)
   
     setComments(prevComments => ({
       ...prevComments,
       TOTAL_COMMENTS: filtered[0]?.comments
     }))
-  }, [props.songInView])
+  }, [songInView])
 
   useEffect(() => {
-    const setTotalComments = props.setTotalComments
+    // const setTotalComments = setTotalComments
     setTotalComments(comments?.TOTAL_COMMENTS?.length)
     renderComments()
   }, [comments])
@@ -42,29 +41,13 @@ function Comments(props) {
     setCommState(commentDisplay)
   }
 
-  const getCommentClass = () => {
-    if (props.whichMenu === "Home") {
-      if (props.poppedUp === true) {
-        return "comment-pop-out comment-popped"
-      } else {
-        return "comment-pop-out comment-menu-down"
-      }
-    } else {
-      if (props.poppedUp === true) {
-        return "comment-pop-out songScreen-pop-out songScreen-popped"
-      } else {
-        return "comment-pop-out songScreen-pop-out"
-      }
-    }
-  }
-
   const handleSubmit = (e, commentString, songId) => {
     e.preventDefault()
     if (commentString == null) {
       return console.log('please type out your comment')
     }
     handlePostComment(songId, commentString)
-    props.commentInputRef.current.value = ''
+    commentInputRef.current.value = ''
   }
 
   function GetComments(each) {
@@ -88,8 +71,8 @@ function Comments(props) {
     const slideOutRef = useRef()
 
     useEffect(() => {
-      const songId = props.songInView?._id
-      const songUserId = props.songInView?.song_user?._id
+      const songId = songInView?._id
+      const songUserId = songInView?.song_user?._id
       const commentId = each._id
       const commentUserId = each.user._id
 
@@ -145,7 +128,7 @@ function Comments(props) {
     }
 
     return (
-      <div className="comment-list">
+      <li className="comments__item">
         <div className="comment-list-inner">
           <div className="comment-list-photo">
             <div className="comment-photo-inner">
@@ -199,7 +182,7 @@ function Comments(props) {
                     <button 
                       className="action-btn_shadow-div-outset"
                       style={{borderRadius: "40px 4px 4px 40px"}}
-                      onClick={() => { handleDeleteComment(props.songInView._id, each) }}
+                      onClick={() => { handleDeleteComment(songInView._id, each) }}
                     >
                       <div className="action-btn-icon-container edit-delete">
                         <img
@@ -242,7 +225,7 @@ function Comments(props) {
                         handlePostLike(
                           commentLikes,
                           each._id, 
-                          props.songInView._id,
+                          songInView._id,
                           null
                         )
                       }}
@@ -303,37 +286,39 @@ function Comments(props) {
             </div>
           </div>
         </div>
-      </div>
+      </li>
     )
   }
 
   return (
-    <div className={getCommentClass()}>
-      <div className="inner-com">
-        <div className="com-cont-1">
-          <form className="social-comment-form" onSubmit={(e) => handleSubmit(e, comment, props.songInView._id)}>
-            <div className="social-input-container">
-              <input
-                className="social-comment-input"
-                ref={props.commentInputRef}
-                onChange={e => setComment(e.target.value)}
-                type="text"
-                placeholder="Make a comment..."
-              ></input>
-            </div>
-            <div className="comment-btn-container">
-              <button className="comment-button">
-                <img className="social-icons si-send" src={sendIcon} alt="send" />
+    <div className={`CommentMenu ${isOpen ? "show-menu" : "hide-menu"}`}>
+      <div className="comments__list--container">
+        <div className="comments__list--shadow-outset">
+          <div className="comments__list--shadow-inset">
+            <ul className="comments__list">
+              {commState}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="comments__header--container">
+        <div className="comments__header--shadow-outset">
+          <div className="comments__header--shadow-inset">
+            <div className="comments__back-btn--container">
+              <button 
+                className="comments__back-btn" 
+                type="button"
+                onClick={() => {onClose(false); onCloseInput(false)}}
+              >
+                <img className="button-icons" src={goBackIcon} alt="go back" />
               </button>
             </div>
-          </form>
-        </div>
 
-        <div className="com-cont-2">
-          <div className="comments-container">
-            <div className="comment-list-container">
-              <div className="comment-list-cont">
-                {commState}
+            <div className="comments__title--container">
+              <div className="comments__title--shadow-outset">
+                <h3 className="comments__text">Comments </h3>
+                <p>{commState?.length}</p>
               </div>
             </div>
           </div>
@@ -342,5 +327,3 @@ function Comments(props) {
     </div>
   )
 }
-
-export default Comments

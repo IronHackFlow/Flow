@@ -172,12 +172,15 @@
                           p {
                             position: absolute;
                             top: 2px;
-                            height: 10px;
+                            height: 12px;
                             width: 90%;
-                            font-size: .8rem;
+                            font-size: .75rem;
                             color: #d1d1d1;
                             text-align: start;
                             text-indent: 1%;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
                             pointer-events: none;
                           }
                           .edit-section__item-input {

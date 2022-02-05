@@ -1,11 +1,11 @@
 import { useContext, useState } from "react"
 import actions from "../api"
-import { songData } from "../contexts/SongData"
+import { SongDataContext } from "../contexts/SongData"
 import TheContext from "../contexts/TheContext"
 
 export default function usePostComment() {
   const { user } = useContext(TheContext)
-  const { allSongComments, setAllSongComments } = useContext(songData)
+  const { allSongComments, setAllSongComments } = useContext(SongDataContext)
 
   const initialComments = {
     USERS_COMMENT: false,

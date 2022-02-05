@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { v4 as uuidv4 } from "uuid";
 import datamuse from "datamuse";
@@ -10,8 +10,6 @@ import ErrorModal from "../components/ErrorModal";
 import AudioTimeSlider from "../components/AudioTimeSlider";
 import SaveSongModal from "../components/SaveSongModal";
 import RecordingBoothModal from "../components/RecordingBoothModal";
-import useDebugInformation from "../utils/useDebugInformation"
-import useEventListener from "../utils/useEventListener"
 import useRefilterProfanity from "../utils/useRefilterProfanity"
 import { beatList } from '../constants/index'
 import actions from "../api";
@@ -19,19 +17,8 @@ import NavBar from "../components/NavBar";
 import { micIcon, playIcon, pauseIcon, stopIcon, closeIcon, saveIcon, lockedIcon, shuffleIcon, guideIcon } from '../assets/images/_icons'
 
 function TestAudio(props) {
-  const { user, windowSize } = React.useContext(TheContext)
-  // useDebugInformation("TestAudio", props)
-  useEventListener('resize', e => {
-    var onChange = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    if (onChange < 600) {
-      document.getElementById('body').style.height = `${windowSize}px`
-      document.getElementById('TestAudio').style.height = `${windowSize}px`
-    } else {
-      document.getElementById('body').style.height = `${onChange}px`
-      document.getElementById('TestAudio').style.height = `${onChange}px`
-    }
-  })
-  
+  const { user } = React.useContext(TheContext)
+
   const navigate = useNavigate()
   const { refilterProfanity } = useRefilterProfanity()
 
@@ -83,8 +70,7 @@ function TestAudio(props) {
   const [showSelectBeatMenu, setShowSelectBeatMenu] = useState(false)
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [allTakes, setAllTakes] = useState([]);
-  const [songUploadObject, setSongUploadObject] = useState();
-  const [selectedOption, setSelectedOption] = useState();
+
   const [lyricsArr, setLyricsArr] = useState([]);
   const [rhymeWordHolder, setRhymeWordHolder] = useState("");
   const [lockRhymeHolder, setLockRhymeHolder] = useState();
@@ -96,7 +82,7 @@ function TestAudio(props) {
   const [topRhymes, setTopRhymes] = useState([]);
   const [lockedRhymes, setLockedRhymes] = useState([]);
   const [selectedRhymes, setSelectedRhymes] = useState([]);
-  const [loadSelectedTake, setLoadSelectedTake] = useState();
+
   const [showLyricsLine, setShowLyricsLine] = useState([]);
   const [blobData, setBlobData] = useState({})
   const [dateBefore, setDateBefore] = useState();
@@ -138,9 +124,7 @@ function TestAudio(props) {
       }
 
       setAudioSrc(songObject.song_URL)
-      setSelectedOption(songObject.song_URL)
       setCurrentSong(songObject)
-      setSongUploadObject(currentSong)
       setBlobData({})
       setAllTakes(eachTake => [...eachTake, {...songObject}])
     }
@@ -340,12 +324,13 @@ function TestAudio(props) {
   }
 
   const displayTakeLyrics = useCallback(() => {
+    console.log(currentSong, "HYOUO")
     if (allTakes.length === 0) {
       return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
     } else {
       return (
         <>
-          {loadSelectedTake?.lyrics.map((row, index) => {
+          {currentSong?.lyrics.map((row, index) => {
             return (
               <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
                 <div className="transcript-bar-no">
@@ -366,7 +351,7 @@ function TestAudio(props) {
         </>
       )
     }
-  }, [allTakes, loadSelectedTake])
+  }, [allTakes, currentSong])
 
   const showRhymes = (array) => {
     if (array?.length >= selectedRhymeNo) {
@@ -500,7 +485,7 @@ function TestAudio(props) {
       
       audioIn_01.connect(dest)
       audioIn_02.connect(dest)
-      console.log(dest, "wok asdlfkjwe flaksdjflas flskdfj")
+
       setRecorderState((prevState) => {
         return {
           ...prevState,
@@ -516,7 +501,6 @@ function TestAudio(props) {
   }
 
   const stopRecording = () => {
-    console.log(recorderState.otherMediaStream, "ugh")
     if (recorderState.mediaRecorder !== null) {
       if (recorderState.mediaRecorder.state !== "inactive") {
         SpeechRecognition.stopListening();
@@ -524,6 +508,8 @@ function TestAudio(props) {
         recordAudioRef.current.pause();
         recordAudioRef.current.currentTime = 0;
         setLyricsHandler()
+        setRecordingDisplay(false)
+        resetTranscript()
         setRecorderState((prevState) => {
           return {
             ...prevState,
@@ -570,7 +556,7 @@ function TestAudio(props) {
   }
 
   const handleSaveSongMenu = () => {
-    if (allTakes.length === 0) return setShowErrorModal(true)
+    // if (allTakes.length === 0) return setShowErrorModal(true)
     setShowSaveSongModal(true)
   }
 

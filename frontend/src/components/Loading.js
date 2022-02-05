@@ -1,14 +1,11 @@
-import { useContext } from 'react'
-import { songData } from "../contexts/SongData";
 
-function Loading(props) {
-  const { isLoading } = useContext(songData)
+export default function Loading({ addClass, margin, isLoading }) {
   return (
     <div 
-      className={`Loading ${props.addClass}`}
+      className={`Loading ${addClass}`}
       style={isLoading === true ? {opacity: "1"} : {opacity: "0"}}
     >
-      <div className="loading-background">
+      <div className="loading-background" style={{marginTop: `${margin}`}}>
         <div className="loading_shadow-div-inset">
           <div className="loading_shadow-div-outset">
             <div className="loading-circle_shadow-div-inset">
@@ -25,4 +22,3 @@ function Loading(props) {
     </div>
   )
 }
-export default Loading

@@ -1,9 +1,13 @@
 .SongScreen {
   background-size: 100% 65%;
   background-position: top;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+
+
+  .song-screen--container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
 
   .close-window-frame {
     @include flexCenter(15%, 100%, 0px, space-evenly, center, row);
@@ -329,7 +333,7 @@
               width: 3em;
               margin-left: 10%;
             }
-            .heart {
+            .like {
               height: 1.8em;
               width: 1.8em;
             }
@@ -365,7 +369,7 @@
             margin-top: 3px;
 
             p {
-              font-size: 12px;
+              font-size: .85rem;
               font-weight: bold;
               color: white;
             }
@@ -374,4 +378,6 @@
       }
     }
   }
+      
+}
 }

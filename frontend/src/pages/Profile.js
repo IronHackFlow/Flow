@@ -126,10 +126,10 @@ function Profile(props) {
             <>
               <div className="track-details-container">
                 <div className="song-name-container">
-                  <Link
+                  <button
                     to={`/songScreen/${eachSong._id}`}
-                    state={{ propCurrentSong: eachSong }}
                     className="song-name-outset"
+                    onClick={() => navigate(`/songScreen/${eachSong._id}`, { state: { currentSong: eachSong }})}
                   >
                     <div className="track-title-container">
                       <p>{eachSong.name}</p>
@@ -154,7 +154,7 @@ function Profile(props) {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 </div>
                 <div className="lyrics-container">
                   <div className="lyrics-outset">

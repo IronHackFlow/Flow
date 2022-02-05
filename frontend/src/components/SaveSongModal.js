@@ -70,7 +70,6 @@ export default function SaveSongModal(props) {
 
   const handleSaveSong = async () => {
     let currentName = currentSong.name
-    console.log(currentName, "LOL")
     currentSong.name = name
     currentSong.caption = caption
     const fileName = user?._id + currentSong.name.replaceAll(" ", "-")

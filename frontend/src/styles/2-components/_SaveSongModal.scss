@@ -6,7 +6,7 @@
     position: absolute;
 
     .save-song_modal-container {
-        @include flexCenter(58%, 100%, 0px 0px 8px 8px, center, center, column);
+        @include flexCenter(53%, 100%, 0px 0px 8px 8px, center, center, column);
         background: linear-gradient(323deg, #4b4b4b 0%, #979797 100%);
         box-shadow: 0px 15px 30px #000000d1;
 
