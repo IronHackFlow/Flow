@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
-import actions from "../api.js";
-import { SongDataContext } from "../contexts/SongData";
-import TheContext from "../contexts/TheContext.js"
+import { useContext, useState } from 'react'
+import actions from '../api.js'
+import { SongDataContext } from '../contexts/SongData'
+import TheContext from '../contexts/TheContext.js'
 
 export default function usePostLike() {
   const { user } = useContext(TheContext)
-  const {homeFeedSongs, setHomeFeedSongs,  allSongComments, setAllSongComments } = useContext(SongDataContext)
+  const { homeFeedSongs, setHomeFeedSongs, allSongComments, setAllSongComments } =
+    useContext(SongDataContext)
 
   const initialLikes = {
     TYPE: 'SONG',
@@ -19,8 +20,8 @@ export default function usePostLike() {
     USERS_COMMENTLIKE_TO_DELETE: null,
     TOTAL_COMMENT_LIKES: null,
   }
-  const [likes, setLikes] = useState(initialLikes);
-  const [commentLikes, setCommentLikes] = useState(initialCommentLikes);
+  const [likes, setLikes] = useState(initialLikes)
+  const [commentLikes, setCommentLikes] = useState(initialCommentLikes)
 
   const addSongLike = (songId, setUsersLike) => {
     if (songId == null || setUsersLike == null) return
@@ -28,8 +29,13 @@ export default function usePostLike() {
     actions
       .addSongLike({ songId: songId, date: new Date() })
       .then(res => {
-        console.log(`ADDED a SONGLIKE: ---`, res.data.like, `--- to ${res.data.song.name}'s song_likes: `, res.data.song.song_likes)
-       
+        console.log(
+          `ADDED a SONGLIKE: ---`,
+          res.data.like,
+          `--- to ${res.data.song.name}'s song_likes: `,
+          res.data.song.song_likes,
+        )
+
         const songLikes = res.data.song.song_likes
         const likeToDelete = res.data.like
 
@@ -37,9 +43,8 @@ export default function usePostLike() {
 
         let updateFeed = homeFeedSongs.map(each => {
           if (each.song._id === songId) {
-            return {...each, song: { ...each.song, song_likes: songLikes }}
-          }
-          else return each
+            return { ...each, song: { ...each.song, song_likes: songLikes } }
+          } else return each
         })
 
         setHomeFeedSongs(updateFeed)
@@ -53,15 +58,19 @@ export default function usePostLike() {
     actions
       .deleteSongLike({ songId: songId, likeToDelete: toDelete })
       .then(res => {
-        console.log(`DELETED a SONGLIKE: ---`, res.data.like, `--- from ${res.data.song.name}'s song_likes: `, res.data.song.song_likes)
-        
+        console.log(
+          `DELETED a SONGLIKE: ---`,
+          res.data.like,
+          `--- from ${res.data.song.name}'s song_likes: `,
+          res.data.song.song_likes,
+        )
+
         const songLikes = res.data.song.song_likes
 
         let updateFeed = homeFeedSongs.map(each => {
           if (each.song._id === songId) {
-            return {...each, song: { ...each.song, song_likes: songLikes }}
-          }
-          else return each
+            return { ...each, song: { ...each.song, song_likes: songLikes } }
+          } else return each
         })
 
         setHomeFeedSongs(updateFeed)
@@ -69,70 +78,86 @@ export default function usePostLike() {
       .catch(console.error)
   }
 
-  const addCommentLike = async (commentId, songId) => {
+  const addCommentLike = async (commentId, songId, setUsersLike) => {
     await actions
       .addCommentLike({ commentId: commentId, date: new Date() })
       .then(res => {
-        console.log(`ADDED a COMMENTLIKE: ---`, res.data.like, `--- to ${res.data.comment._id}'s likes: `, res.data.comment.likes)
+        console.log(
+          `ADDED a COMMENTLIKE: ---`,
+          res.data.like,
+          `--- to ${res.data.comment._id}'s likes: `,
+          res.data.comment.likes,
+        )
         const commentLikes = res.data.comment.likes
         const likeToDelete = res.data.like
+        setUsersLike(likeToDelete)
 
-        setCommentLikes(prevCommentLikes => ({
-          ...prevCommentLikes,
-          IS_LIKED: true,
-          TOTAL_COMMENT_LIKES: commentLikes.length,
-          USERS_COMMENTLIKE_TO_DELETE: likeToDelete
-        }))
-
-        updateCommentsArr(commentId, songId, commentLikes)
+        setHomeFeedSongs(prev =>
+          prev.map(each => {
+            if (each.song._id === songId) {
+              let songComments = each.song.song_comments.map(comm => {
+                if (comm._id === commentId) {
+                  return {
+                    ...comm,
+                    likes: commentLikes,
+                  }
+                } else return comm
+              })
+              console.log(each, 'lolololololollllllll')
+              return { ...each, song: { ...each.song, song_comments: songComments } }
+            } else return each
+          }),
+        )
       })
       .catch(console.error)
   }
 
-  const deleteCommentLike = async (commentId, toDelete, songId) => {
+  const deleteCommentLike = async (commentId, songId, toDelete) => {
     await actions
       .deleteCommentLike({ commentId: commentId, likeToDelete: toDelete })
       .then(res => {
-        console.log(`DELETED a COMMENTLIKE: ---`, res.data.like, `--- from ${res.data.comment._id}'s likes: `, res.data.comment.likes)
+        console.log(
+          `DELETED a COMMENTLIKE: ---`,
+          res.data.like,
+          `--- from ${res.data.comment._id}'s likes: `,
+          res.data.comment.likes,
+        )
         const commentLikes = res.data.comment.likes
 
-        setCommentLikes(prevCommentLikes => ({
-          ...prevCommentLikes,
-          IS_LIKED: false,
-          TOTAL_COMMENT_LIKES: commentLikes.length,
-          USERS_COMMENTLIKE_TO_DELETE: null,
-        }))
-
-        updateCommentsArr(commentId, songId, commentLikes)
+        setHomeFeedSongs(prev =>
+          prev.map(each => {
+            if (each.song._id === songId) {
+              let songComments = each.song.song_comments.map(comm => {
+                if (comm._id === commentId) {
+                  return {
+                    ...comm,
+                    likes: commentLikes,
+                  }
+                } else return comm
+              })
+              console.log(each, 'lolololololollllllll')
+              return { ...each, song: { ...each.song, song_comments: songComments } }
+            } else return each
+          }),
+        )
+        // updateCommentsArr(commentId, songId, commentLikes)
       })
       .catch(console.error)
   }
-
-  // const updateLikesArr = (songId, newLikes) => {
-  //   let newLikesArr = allSongLikes.map(like => {
-  //     if (like.songId === songId) {
-  //       return {...like, likes: newLikes }
-  //     } else {
-  //       return like
-  //     }
-  //   })
-  //   setAllSongLikes(newLikesArr)
-  // }
 
   const updateCommentsArr = (commentId, songId, newLikes) => {
     let newCommentArr = allSongComments.map(song => {
       if (song.songId === songId) {
-
         let newCommentLikes = song.comments.map(comment => {
           if (comment._id === commentId) {
-            return {...comment, likes: newLikes }
+            return { ...comment, likes: newLikes }
           } else {
             return comment
           }
         })
-        return {...song, comments: newCommentLikes }
+        return { ...song, comments: newCommentLikes }
       } else {
-        return song 
+        return song
       }
     })
     setAllSongComments(newCommentArr)
@@ -143,13 +168,17 @@ export default function usePostLike() {
 
     let likeData = await allSongComments.filter(song => song.songId === songId)
 
-    const { liked, likeToDelete, likesArr } = await filterLikesArray(likeData[0]?.comments, '_id', commentId)
+    const { liked, likeToDelete, likesArr } = await filterLikesArray(
+      likeData[0]?.comments,
+      '_id',
+      commentId,
+    )
 
     setCommentLikes(prevCommentLikes => ({
       ...prevCommentLikes,
       IS_LIKED: liked,
       TOTAL_COMMENT_LIKES: likesArr?.length,
-      USERS_COMMENTLIKE_TO_DELETE: likeToDelete
+      USERS_COMMENTLIKE_TO_DELETE: likeToDelete,
     }))
   }
 
@@ -187,26 +216,21 @@ export default function usePostLike() {
   }
 
   const handlePostLike = (like, commentId, songId, songUserId) => {
-    if (like.TYPE === "SONG") {
-      if (songUserId === user?._id) return 
+    if (like.TYPE === 'SONG') {
+      if (songUserId === user?._id) return
       else if (like.IS_LIKED) return deleteSongLike(songId, like.USERS_LIKE_TO_DELETE)
       else return addSongLike(songId)
     } else {
-      if (like.IS_LIKED) return deleteCommentLike(commentId, like.USERS_COMMENTLIKE_TO_DELETE, songId)
+      if (like.IS_LIKED)
+        return deleteCommentLike(commentId, like.USERS_COMMENTLIKE_TO_DELETE, songId)
       else return addCommentLike(commentId, songId)
     }
   }
 
-  return { 
-    handlePostLike,
-    // handleInViewLikes,
-    handleInViewCommentLikes,
-    initialLikes,
-    likes, 
-    setLikes,
-    commentLikes, 
-    setCommentLikes,
+  return {
+    addCommentLike,
+    deleteCommentLike,
     addSongLike,
-    deleteSongLike
+    deleteSongLike,
   }
 }

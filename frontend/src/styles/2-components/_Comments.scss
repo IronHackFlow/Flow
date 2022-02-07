@@ -1,260 +1,318 @@
 /* ------------------------------ Comment Pop Up menu ------------------------------------------*/
 .CommentMenu {
-    @include flexCenter(0%, 100%, 0, flex-start, center, column);
-    background: linear-gradient(0deg, #a09e9e 0%, #b9b9b9 100%);
-    box-shadow: 0px 10px 10px #000000a3;
-    position: relative;
-    top: 0;
-    transition: height 0.5s ease-out;
-  
-    .comments__list--container {
-      @include flexCenter(80%, 100%, 0, flex-end, center, column);
+  @include flexCenter(0%, 100%, 0, flex-start, center, column);
+  background: linear-gradient(0deg, #a09e9e 0%, #b9b9b9 100%);
+  box-shadow: 0px 10px 10px #000000a3;
+  position: relative;
+  top: 0;
+  transition: height 0.5s ease-out;
 
-      .comments__list--shadow-outset {
-        @include flexCenter(97%, 96%, 0.5em 0.5em 0.5em 3em, center, center, column);
-        box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
-  
-        .comments__list--shadow-inset {
-          @include flexCenter(97%, 97%, 0.5em 0.5em 0.5em 3em, center, center, column);
-          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
-          overflow: hidden;
+  .comments__list--container {
+    @include flexCenter(80%, 100%, 0, flex-end, center, column);
 
-          .comments__list {
-            @include flexCenter(95%, 97%, 0.4em 0.4em 0.4em 2.6em, flex-start, center, column);
-            overflow-y: scroll;
-            background: linear-gradient(313deg, #383737, #767676);
-            box-shadow: inset 3px 3px 3px #303030, inset -2px -2px 2px 0px #303030;
+    .comments__list--shadow-outset {
+      @include flexCenter(97%, 96%, 0.5em 0.5em 0.5em 3em, center, center, column);
+      box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
 
-            .comments__item {
-              width: 96%;
-              border-radius: 11px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-direction: column;
-              margin-top: 1%;
-              box-shadow: inset 2px 2px 4px #313131, inset -2px -2px 3px #777777;
-  
-              .comment-list-inner {
-                @include flexCenter(auto, 100%, 0px, space-evenly, flex-start, row);
-  
-                .comment-list-photo {
-                  @include flexCenter(98%, 22%, 0px, center, flex-start, row);
-                  padding-top: 1.5%;
-    
-                  .comment-photo-inner {
-                    @include flexCenter(4em, 82%, 9px 30px 30px 4px, center, center, column);
-                    box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 3px #9d9d9d;
-    
-                    .comment-photo-outer {
-                      @include flexCenter(80%, 80%, 50px, center, center, row);
-                      box-shadow: 2px 2px 3px #3b3b3b, -2px -2px 2px #939292;
-    
-                      a {
-                        @include flexCenter(90%, 90%, 50px, center, center, row);
-                        overflow: hidden;
-                        object-fit: contain;
-    
-                        img {
-                          height: 100%;
+      .comments__list--shadow-inset {
+        @include flexCenter(97%, 97%, 0.5em 0.5em 0.5em 3em, center, center, column);
+        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
+        overflow: hidden;
+
+        .comments__list {
+          @include flexCenter(95%, 97%, 0.4em 0.4em 0.4em 2.6em, flex-start, center, column);
+          overflow-y: scroll;
+          background: linear-gradient(313deg, #383737, #767676);
+          box-shadow: inset 3px 3px 3px #303030, inset -2px -2px 2px 0px #303030;
+
+          .comments__item {
+            width: 96%;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 1%;
+            box-shadow: inset 2px 2px 4px #313131, inset -2px -2px 3px #777777;
+
+            .comment-list-inner {
+              @include flexCenter(auto, 100%, 0px, space-evenly, flex-start, row);
+
+              .comment-list-photo {
+                @include flexCenter(98%, 22%, 0px, center, flex-start, row);
+                padding-top: 1.5%;
+
+                .comment-photo-inner {
+                  @include flexCenter(4em, 82%, 9px 30px 30px 4px, center, center, column);
+                  box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 3px #9d9d9d;
+
+                  .comment-photo-outer {
+                    @include flexCenter(80%, 80%, 50px, center, center, row);
+                    box-shadow: 2px 2px 3px #3b3b3b, -2px -2px 2px #939292;
+
+                    a {
+                      @include flexCenter(90%, 90%, 50px, center, center, row);
+                      overflow: hidden;
+                      object-fit: contain;
+
+                      img {
+                        height: 100%;
+                        width: 100%;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .comment-text-container {
+                @include flexCenter(auto, 78%, 0, center, flex-start, column);
+
+                .comment-list-outer {
+                  @include flexCenter(auto, 97%, 22px 5px 30px 5px, center, center, column);
+                  box-shadow: 2px 2px 3px #2f2f2f, -2px -2px 2px #989898;
+                  margin-top: 3%;
+
+                  .comment-username {
+                    height: 15px;
+                    width: 90%;
+                    font-size: 1.1rem;
+                    color: #ec6aa0;
+                    font-weight: bold;
+                    text-align: start;
+                    margin: 1% 0% 1% 0%;
+                    span {
+                      color: white;
+                      font-weight: bold;
+                      font-size: 0.85rem;
+                    }
+                  }
+                  .comment-date {
+                    height: 15px;
+                    font-size: 0.9rem;
+                    width: 90%;
+                    color: #efbfbf;
+                    text-align: start;
+                    margin-bottom: 2%;
+                  }
+                  .comment-text {
+                    height: fit-content;
+                    width: 90%;
+                    text-align: start;
+                    color: white;
+                    word-wrap: break-word;
+                    font-size: 1rem;
+                    line-height: 1;
+                    margin-bottom: 5px;
+                  }
+                  .comment-text-input {
+                    min-height: 15px;
+                    border-radius: 5px 5px 15px 15px;
+                    background: initial;
+                    box-shadow: inset 2px 2px 3px #464646, inset -2px -2px 3px #9e9e9e;
+                    width: 90%;
+                    font-size: 13px;
+                    padding: 3px;
+                    text-align: start;
+                    color: white;
+                    word-wrap: break-word;
+                    line-height: 1;
+                    margin-bottom: 5px;
+
+                    &::placeholder {
+                      color: rgb(155, 155, 155);
+                      font-family: 'Roboto', sans-serif;
+                    }
+                    &:focus {
+                      border: 2px solid pink;
+                      outline: none !important;
+                      color: white;
+                      border-radius: 5px 5px 15px 15px;
+                    }
+                  }
+                }
+              }
+            }
+
+            .comments__actions--container {
+              @include flexCenter(2.5em, 100%, 0, flex-start, center, row);
+              margin: 2% 0% 2% 0%;
+
+              .space-filler {
+                @include flexCenter(100%, 22%, 0, center, center, row);
+              }
+
+              .comments__actions {
+                @include flexCenter(100%, 78%, 0, flex-start, center, row);
+
+                .comments__actions--shadow-inset {
+                  @include flexCenter(100%, 97%, 30px 5px 15px 30px, flex-start, center, row);
+                  box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
+
+                  .comments__btn--container {
+                    @include flexCenter(100%, 40%, 0px, center, center, row);
+                    margin-left: 2%;
+
+                    .comments__btn {
+                      @include flexCenter(68%, 95%, 4px, center, center, row);
+                      box-shadow: 2px 2px 3px #353535, -2px -2px 2px #858585;
+
+                      .comments__btn-icon {
+                        @include flexCenter(100%, 32%, 0, center, center, row);
+                        // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+
+                        img.reply {
+                          height: 1rem;
+                        }
+                        img.like {
+                          height: 1.3rem;
+                        }
+                        img.edit {
+                          height: 1.4rem;
+                        }
+                        img.delete {
+                          height: 1.6rem;
+                        }
+                      }
+                      .comments__btn-icon.edit,
+                      .comments__btn-icon.delete {
+                        width: 40%;
+                      }
+
+                      &:active {
+                        background: #606060;
+                        box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
+                      }
+
+                      .comments__btn-text--container {
+                        @include flexCenter(100%, 68%, 0, center, center, row);
+
+                        .comments__btn-text {
+                          @include flexCenter(100%, 50%, 0, flex-start, center, row);
+                          font-weight: bold;
+                          font-size: 0.8rem;
+                          color: white;
+                        }
+                        .comments__btn-text.reply {
+                          width: 60%;
+                        }
+                        .comments__btn-text.delete,
+                        .comments__btn-text.edit {
                           width: 100%;
                         }
-                      }
-                    }
-                  }
-                }
-  
-                .comment-text-container {
-                  @include flexCenter(auto, 78%, 0, center, flex-start, column);
-  
-                  .comment-list-outer {
-                    @include flexCenter(auto, 97%, 22px 5px 30px 5px, center, center, column);
-                    box-shadow: 2px 2px 3px #2f2f2f, -2px -2px 2px #989898;
-                    margin-top: 3%;
-  
-                    .comment-username {
-                      height: 15px;
-                      width: 90%;
-                      font-size: 1.1rem;
-                      color: #ec6aa0;
-                      font-weight: bold;
-                      text-align: start;
-                      margin: 1% 0% 1% 0%;
-                    }
-                    .comment-date {
-                      height: 15px;
-                      width: 90%;
-                      color: #efbfbf;
-                      text-align: start;
-                      margin-bottom: 2%;
-                      p {
-                        font-size: .8rem;
-                      }
-                    }
-                    .comment-text {
-                      height: fit-content;
-                      width: 90%;
-                      text-align: start;
-                      color: white;
-                      word-wrap: break-word;
-                      font-size: 1rem;
-                      line-height: 1;
-                      margin-bottom: 5px;
-                    }
-                    .comment-text-input {
-                      min-height: 15px;
-                      border-radius: 5px 5px 15px 15px;
-                      background: initial;
-                      box-shadow: inset 2px 2px 3px #464646, inset -2px -2px 3px #9e9e9e;
-                      width: 90%;
-                      font-size: 13px;
-                      padding: 3px;
-                      text-align: start;
-                      color: white;
-                      word-wrap: break-word;
-                      line-height: 1;
-                      margin-bottom: 5px;
-                      
-                      &::placeholder {
-                        color: rgb(155, 155, 155);
-                        font-family: 'Roboto', sans-serif;
-                      }
-                      &:focus {
-                        border: 2px solid pink;
-                        outline: none !important;
-                        color: white;
-                        border-radius: 5px 5px 15px 15px;
-                      }
-                    }
-                  }
-                }
-              }
-  
-              .comment-list-buttons {
-                @include flexCenter(2.5em, 100%, 0, flex-start, center, row);
-                margin: 2% 0% 2% 0%;
-  
-                .space-filler {
-                  @include flexCenter(100%, 22%, 0, center, center, row);
-  
-                }
-                .comment-btns-container {
-                  @include flexCenter(100%, 78%, 0, flex-start, center, row);
-  
-                  .comment-btns_shadow-div-inset {
-                    @include flexCenter(100%, 97%, 30px 5px 15px 30px, flex-start, center, row);
-                    box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
-  
-                    .action-buttons-container {
-                      @include flexCenter(100%, 40%, 0px, center, center, row);
-                      margin-left: 2%;
-  
-                      .action-btn_shadow-div-outset {
-                        @include flexCenter(68%, 95%, 4px, center, center, row);
-                        box-shadow: 2px 2px 3px #353535, -2px -2px 2px #858585;
-  
-                        .action-btn-icon-container {
-                          @include flexCenter(100%, 32%, 0, center, center, row);
-                          // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
-  
-                          img.comment {
-                            height: 1rem;
-                          }
-                          img.heart {
-                            height: 1.3rem;
-                          }
-                          img.edit {
-                            height: 1.4rem;
-                          }
-                          img.delete {
-                            height: 1.6rem;
-                          }
+                        .comments__btn-number.like {
+                          color: pink;
+                          font-size: 0.75rem;
                         }
-  
-                        .action-btn-text-container {
-                          @include flexCenter(100%, 68%, 0, center, center, row);
-  
-                          p {
-                            @include flexCenter(100%, 50%, 0, center, center, row);
-                            font-weight: bold;
-                            font-size: .8rem;
-                            color: white;
-                          }
-                          p.like-number {
-                            color: pink;
-                            font-size: .75rem;
-                          }
-                          p.reply-text {
-                            width: 60%;
-                          }
-                          p.reply-number {
-                            width: 40%;
-                            color: pink;
-                            font-size: .75rem;
-                          }
-                          p.edit-delete-text {
-                            justify-content: flex-start;
-                            width: 100%;
-                          }
-                        }
-  
-                        .action-btn-icon-container.edit-delete {
+                        .comments__btn-number.reply {
                           width: 40%;
-                        }
-                        .action-btn-text-container.edit-delete {
-                          width: 60%
-                        }
-                        &:active {
-                          background: #606060;
-                          box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
-                        }
-                      }
-  
-                      .comment-like-btn-pressed {
-                        box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
-                        background: #ec6aa0;
-          
-                        .action-btn-icon-container {
-                          img {
-                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                          }
-                        }
-                        
-                        &:active {
-                          background: #606060;
-                          box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
-                          transition: all .3s ease-in;
+                          color: pink;
+                          font-size: 0.75rem;
                         }
                       }
                     }
-                    .clc-2 {
-                      justify-content: flex-start;
+
+                    .comment-like-btn-pressed {
+                      box-shadow: 2px 2px 3px #3e2c33, -2px -2px 2px #ffcae0;
+                      background: #ec6aa0;
+
+                      .comments__btn-icon {
+                        img {
+                          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                            brightness(107%) contrast(103%);
+                        }
+                      }
+
+                      &:active {
+                        background: #606060;
+                        box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
+                        transition: all 0.3s ease-in;
+                      }
                     }
-  
-                    .comment-popout-container {
-                      @include flexCenter(auto, 30%, 8px, flex-start, center, row);
-                      box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
-                      position: relative;
-  
-                      .clc-3,
-                      .clc-4 {
-                        .clb-3,
-                        .clb-4 {
-                          @include flexCenter(26px, 26px, 50px, center, center, row);
+                  }
+                  .clc-2 {
+                    justify-content: flex-start;
+                  }
+
+                  .comment-popout-container {
+                    @include flexCenter(auto, 30%, 8px, flex-start, center, row);
+                    box-shadow: 0px 0px 0px #686a6b, 0px 0px 0px #686a6b;
+                    position: relative;
+
+                    .clc-3,
+                    .clc-4 {
+                      .clb-3,
+                      .clb-4 {
+                        @include flexCenter(26px, 26px, 50px, center, center, row);
+                      }
+                    }
+                    .dot-menu {
+                      @include flexCenter(100%, 30px, 0px, center, center, column);
+                      position: absolute;
+                      right: 11px;
+
+                      .dots {
+                        height: 9px;
+                        width: 9px;
+                        border-radius: 50px;
+                        box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .highlight {
+            background: #e24f8c;
+            box-shadow: inset 2px 2px 4px #7a3250, inset -2px -2px 3px #ffbdd9;
+            .comment-list-inner {
+              .comment-list-photo {
+                .comment-photo-inner {
+                  box-shadow: inset 2px 2px 4px #7a3250, inset -2px -2px 3px #ffbdd9;
+                  .comment-photo-outer {
+                    box-shadow: 2px 2px 4px #7a3250, -2px -2px 3px #ffbdd9;
+                  }
+                }
+              }
+              .comment-text-container {
+                .comment-list-outer {
+                  box-shadow: 2px 2px 4px #7a3250, -2px -2px 3px #fba3c8;
+                  .comment-username {
+                    color: #fe83b6;
+                    span {
+                      color: #fe83b6;
+                    }
+                  }
+                  .comment-text {
+                    color: #fe83b6;
+                  }
+                }
+              }
+            }
+            .comments__actions--container {
+              .comments__actions {
+                .comments__actions--shadow-inset {
+                  box-shadow: inset 2px 2px 4px #7a3250, inset -2px -2px 3px #ffbdd9;
+                  .comments__btn--container {
+                    .comments__btn {
+                      box-shadow: 2px 2px 4px #7a3250, -1px -1px 3px #ffbdd9;
+
+                      .comments__btn-icon {
+                        img {
+                          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                            brightness(107%) contrast(103%);
                         }
                       }
-                      .dot-menu {
-                        @include flexCenter(100%, 30px, 0px, center, center, column);
-                        position: absolute;
-                        right: 11px;
-  
-                        .dots {
-                          height: 9px;
-                          width: 9px;
-                          border-radius: 50px;
-                          box-shadow: inset 2px 2px 1px #3b3b3b, inset -2px -2px 1px #949292;
+                      .comments__btn-text--container {
+                        .comments__btn-text {
+                          color: #ff9fc7;
                         }
                       }
+                    }
+                    .comments__btn.edit {
+                      background: #d43a7a;
+                      box-shadow: inset 2px 2px 4px #7a3250, inset -1px -1px 3px #ffbdd9;
                     }
                   }
                 }
@@ -264,112 +322,65 @@
         }
       }
     }
+  }
 
-    .comments__header--container {
-      @include flexCenter(20%, 100%, 0, center, center, column);
+  .comments__header--container {
+    @include flexCenter(20%, 100%, 0, center, center, column);
 
-      .comments__header--shadow-outset {
-        @include flexCenter(76%, 97%, 5em .5em .5em 5em, center, center, row);
-        box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
+    .comments__header--shadow-outset {
+      @include flexCenter(76%, 97%, 5em 0.5em 0.5em 5em, center, center, row);
+      box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
 
-        .comments__header--shadow-inset {
-          @include flexCenter(86%, 98%, 100vh, center, center, row);
-          box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
+      .comments__header--shadow-inset {
+        @include flexCenter(86%, 98%, 100vh, center, center, row);
+        box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
 
-          .comments__back-btn--container {
-            @include flexCenter(100%, 18%, 0, center, center, row);
+        .comments__back-btn--container {
+          @include flexCenter(100%, 18%, 0, center, center, row);
 
-            .comments__back-btn {
-              @include flexCenter(68%, 80%, 10em 1em 1em 10em, center, center, row);
-              box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
-               
-              &:active {
-                box-shadow: inset 2px 2px 3px #434343, inset -2px -3px 2px #dfdfdf;
+          .comments__back-btn {
+            @include flexCenter(68%, 80%, 10em 1em 1em 10em, center, center, row);
+            box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
 
-              }
+            &:active {
+              box-shadow: inset 2px 2px 3px #434343, inset -2px -3px 2px #dfdfdf;
             }
           }
+        }
 
-          .comments__title--container {
-            @include flexCenter(100%, 82%, 0, flex-start, center, row);
+        .comments__title--container {
+          @include flexCenter(100%, 82%, 0, flex-start, center, row);
 
-            .comments__title--shadow-outset {
-              @include flexCenter(68%, 98%, 1em 10em 10em 1em, flex-start, center, row);
-              box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
+          .comments__title--shadow-outset {
+            @include flexCenter(68%, 98%, 1em 10em 10em 1em, flex-start, center, row);
+            box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
 
-              .comments__text {
-                width: 32%;
-                color: white;
-                text-align: start;
-                text-indent: 5%;
-              }
+            .comments__text {
+              width: 32%;
+              color: white;
+              text-align: start;
+              text-indent: 5%;
+            }
 
-              p {
-                color: #efbfbf;
-              }
+            p {
+              color: #efbfbf;
             }
           }
         }
       }
     }
-    // .com-cont-1 {
-    //     @include flexCenter(15%, 100%, 0px, center, center, row);
-
-    //     .social-comment-form {
-    //       @include flexCenter(77%, 96%, 20px, space-evenly, center, row);
-    //       box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 2px #ffffff;
-  
-    //       .social-input-container {
-    //         @include flexCenter(100%, 83%, 0, flex-end, center, row);
-  
-    //         .social-comment-input {
-    //           font-family: inherit;
-    //           font-size: 1em;
-    //           height: 70%;
-    //           width: 94%;
-    //           border-radius: 20px;
-    //           border: none;
-    //           padding-left: 3%;
-    //           background: #686a6b;
-    //           box-shadow: inset 2px 2px 3px #444444, inset -2px -2px 2px #ffffff;
-    
-    //           &:defined {
-    //             color: pink;
-    //           }
-    //           &::placeholder {
-    //             color: #adadad;
-    //           }
-    //           &:focus {
-    //             border: 2px solid pink;
-    //             outline: none !important;
-    //             color: white;
-    //             border-radius: 20px;
-    //           }
-    //         }
-    //       }
-  
-    //       .comment-btn-container {
-    //         @include flexCenter(100%, 17%, 0px, center, center, row);
-  
-    //         .comment-button {
-    //           @include flexCenter(77%, 78%, 30px, center, center, row);
-    //           box-shadow: 2px 2px 3px #373737, -2px -1px 2px #e7e7e7;
-    //           background: #ec6aa0;
-    //         }
-    //       }
-    //     }
-    //   }
+  }
 }
 
 .show-menu {
-  height: 37%;
+  height: 40%;
   margin-bottom: -8%;
   z-index: 5;
-  transition: height .3s ease-in;
+  transition: height 0.3s ease-in;
 
   .comments__list--container {
     opacity: 1;
-    transition: opacity .2s .2s;
+    transition: opacity 0.2s 0.2s;
   }
   .comments__header--container {
     opacity: 1;
@@ -381,18 +392,18 @@
   opacity: 0;
   margin-bottom: 0%;
   visibility: hidden;
-  transition: height .5s ease-in, border-radius .5s ease-in, opacity .1s .5s, visibility .1s .5s;
+  transition: height 0.5s ease-in, border-radius 0.5s ease-in, opacity 0.1s 0.5s,
+    visibility 0.1s 0.5s;
 
   .comments__list--container {
     opacity: 0;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
   }
   .comments__header--container {
     opacity: 0;
-    transition: opacity .2s .5s;
+    transition: opacity 0.2s 0.5s;
   }
 }
-
 
 // stick input that will appear above mobile keyboard
 .CommentInputModal {
@@ -404,20 +415,20 @@
   bottom: 0;
   z-index: 5;
 
-  .social-comment-form {
-    @include flexCenter(auto, 97%, 0.5em 0.5em 2em 0.5em, space-evenly, flex-end, row);
+  .comment-input__form {
+    @include flexCenter(auto, 97%, 0.5em 0.5em 2em 0.5em, center, flex-start, column);
     box-shadow: inset 2px 2px 3px #505050, inset -2px -2px 2px #ffffff;
-    padding: 0.5em 0em 0.5em 0em;
+    padding: 0.5em 0em 0em 0em;
 
-    .social-input-container {
-      @include flexCenter(auto, 83%, 0, flex-end, center, row);
+    .comment-input__input--container {
+      @include flexCenter(auto, 100%, 0, center, center, row);
 
-      .social-comment-input {
+      .comment-input__input {
         font-size: 1rem;
         height: auto;
         min-height: 40px;
         max-height: 110px;
-        width: 94%;
+        width: 93%;
         border-radius: 0.5em 0.5em 1.5em 0.5em;
         border: none;
         padding-left: 3%;
@@ -441,18 +452,53 @@
       }
     }
 
-    .comment-btn-container {
-      @include flexCenter(100%, 17%, 0px, center, center, row);
+    .comment-input__header {
+      @include flexCenter(2em, 95%, 0, center, center, row);
 
-      .comment-button {
-        @include flexCenter(3em, 80%, 0.5em 0.5em 1.7em 0.5em, flex-start, flex-start, row);
-        box-shadow: 2px 2px 3px #373737, -2px -1px 2px #e7e7e7;
-        background: #ec6aa0;
+      .comment-input__title--container {
+        @include flexCenter(100%, 55%, 0, flex-start, center, row);
 
-        img {
-          height: 70%;
-          width: 90%;
-          margin-top: 0.3em;
+        .comment-input__title {
+          @include flexCenter(65%, 93%, 2em 0.5em 0.5em 2em, center, center, row);
+          box-shadow: 2px 2px 3px #686868, -1px -1px 2px #ffffff;
+          margin-left: 4%;
+
+          h2 {
+            width: 100%;
+            text-indent: 6%;
+            color: #ec6aa0;
+          }
+        }
+      }
+
+      .comment-input__btn--container {
+        @include flexCenter(100%, 45%, 0, center, center, row);
+
+        .comment-input__btn {
+          @include flexCenter(100%, 50%, 0, flex-start, center, row);
+
+          &--cancel {
+            @include flexCenter(65%, 94%, 0.3em, center, center, row);
+            box-shadow: 2px 2px 3px #686868, -1px -1px 2px #ffffff;
+            color: #707070;
+            font-size: 0.9rem;
+            &:active {
+              box-shadow: inset 2px 2px 3px #686868, inset -1px -1px 2px #ffffff;
+            }
+          }
+
+          &--submit {
+            @include flexCenter(65%, 94%, 0.5em 0.5em 2.5em 0.5em, flex-start, flex-start, row);
+            box-shadow: 2px 2px 3px #373737, -2px -1px 2px #e7e7e7;
+            background: #ec6aa0;
+
+            img {
+              margin-right: 0.3em;
+            }
+            &:active {
+              box-shadow: inset 2px 2px 3px #783853, inset -1px -1px 2px #ffffff;
+            }
+          }
         }
       }
     }
@@ -461,6 +507,6 @@
 
 @media screen and (min-width: 500px) {
   .CommentInputModal {
-    width: (100vh * .46);
+    width: (100vh * 0.46);
   }
 }

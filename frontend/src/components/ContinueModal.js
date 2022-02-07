@@ -1,14 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-export default function ContinueModal({title, text, isOpen, onClose, onExit}) {
+export default function ContinueModal({
+  title,
+  text,
+  btnText = 'Discard',
+  isOpen,
+  onClose,
+  onExit,
+}) {
   if (!isOpen) return null
 
   return ReactDOM.createPortal(
-    <div 
-      className="ContinueModal"
-      onClick={() => onClose(false)}
-    >
+    <div className="ContinueModal" onClick={() => onClose(false)}>
       <div className="continue--container">
         <div className="continue--shadow-inset">
           <div className="continue__header--container">
@@ -17,11 +21,11 @@ export default function ContinueModal({title, text, isOpen, onClose, onExit}) {
               <p className="continue__text">{text}</p>
             </div>
           </div>
-          
+
           <div className="continue__btns--container">
             <div className="continue__cancel--container">
-              <button 
-                className="continue__cancel--shadow-outset" 
+              <button
+                className="continue__cancel--shadow-outset"
                 type="button"
                 onClick={() => onClose(false)}
               >
@@ -30,18 +34,20 @@ export default function ContinueModal({title, text, isOpen, onClose, onExit}) {
             </div>
 
             <div className="continue__exit--container">
-              <button 
-                className="continue__exit--shadow-outset" 
+              <button
+                className="continue__exit--shadow-outset"
                 type="button"
-                onClick={() => { onExit() }}
-                >
-                Discard
+                onClick={() => {
+                  onExit()
+                }}
+              >
+                {btnText}
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>,
-    document.body
-  ) 
+    document.body,
+  )
 }

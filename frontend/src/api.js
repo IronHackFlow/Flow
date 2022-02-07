@@ -1,29 +1,33 @@
 import axios from 'axios'
 // const baseURL = `http://localhost:5000/api`;
 // const baseURL = 'https://iron-flow.herokuapp.com/api'
-const baseURL = process.env.NODE_ENV === "production" ? "https://iron-flow.herokuapp.com/api" : "http://localhost:5000/api"
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://iron-flow.herokuapp.com/api'
+    : 'http://localhost:5000/api'
 
 const token = localStorage.getItem('token')
 
 const API = axios.create({
   baseURL,
-  headers: { Authorization: "Bearer " + token },
+  headers: { Authorization: 'Bearer ' + token },
 })
 
 let resetHead = () => {
   return {
+    baseURL,
     headers: {
-      Authorization: "Bearer " + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   }
 }
 
 const actions = {
-  signUp: async (user) => {
+  signUp: async user => {
     return await axios.post(`${baseURL}/signUp`, user, resetHead())
   },
 
-  logIn: async (user) => {
+  logIn: async user => {
     return await axios.post(`${baseURL}/logIn`, user, resetHead())
   },
 
@@ -50,8 +54,8 @@ const actions = {
   getBeat: async () => {
     return await axios.get(`${baseURL}/getBeatRT`, resetHead())
   },
-  
-  updateEachUserLikes: async (id) => {
+
+  updateEachUserLikes: async id => {
     return await axios.post(`${baseURL}/updateEachUserLikes`, id, resetHead())
   },
 
@@ -197,7 +201,7 @@ const actions = {
         resetHead(),
       )
       .then(res => {
-        console.log(res, "YO WHTF IS GONING ON HERE OK??")
+        console.log(res, 'YO WHTF IS GONING ON HERE OK??')
         var rtnData = res.data
         var signedRequest = rtnData.signedRequest
         var url = rtnData.url
@@ -206,7 +210,7 @@ const actions = {
             'Content-Type': fileType,
           },
         }
-        console.log(signedRequest, file, options, "come on man what is goin on h??")
+        console.log(signedRequest, file, options, 'come on man what is goin on h??')
 
         // return response
         axios
@@ -240,7 +244,6 @@ const actions = {
             alert('File uploaded')
           })
           .catch(console.error)
-
       })
       .catch(console.error)
   },
