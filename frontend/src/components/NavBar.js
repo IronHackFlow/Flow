@@ -1,93 +1,71 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, memo } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import TheContext from '../contexts/TheContext'
 import { homeIcon, micIcon, searchIcon, profileIcon } from '../assets/images/_icons'
+import useDebugInformation from '../utils/useDebugInformation'
 
-function NavBar({locationClass, isVisible}) {
-  // useDebugInformation("NavBar", props)
-  const { user, locationIndicator } = React.useContext(TheContext)
-  const [selectedBtn, setSelectedBtn] = useState('')
-
-  useEffect(() => {
-    if (locationIndicator?.pathname === '/') {
-      setSelectedBtn('home')
-    }  else if (locationIndicator?.pathname === '/search') {
-      setSelectedBtn('search')
-    }  else if (locationIndicator?.pathname.slice(0, 8) === '/profile') {
-      setSelectedBtn('profile')
-    } else if (locationIndicator?.pathname === "/recordingBooth") {
-      setSelectedBtn('recordBooth')
-    }
-  }, [locationIndicator])
+const MemoizedNavBar = memo(function NavBar({ locationClass, isVisible }) {
+  // useDebugInformation('NavBar', { locationClass, isVisible })
+  const { user } = useContext(TheContext)
+  const location = useLocation()
+  const path = location.pathname
 
   return (
-    <div 
+    <div
       className={`NavBar ${locationClass}`}
-      style={isVisible ? {height: "0%", visibility: "hidden"} : {}}
+      style={isVisible ? { height: '0%', visibility: 'hidden' } : {}}
     >
       <div className="navbar_section">
         <div className="navbar_shadow-div-outset">
           <div className="navbar_shadow-div-inset">
             <Link
               to="/"
-              className={`navbar-btn-container ${selectedBtn === 'home' ? "btn-selected" : 'btn-unselected'}`}
+              className={`navbar-btn-container ${path === '/' ? 'btn-selected' : 'btn-unselected'}`}
               style={{ borderRadius: '40px 8px 8px 40px' }}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
-                  <img
-                    className="button-icons bi-social"
-                    src={homeIcon}
-                    alt="social feed icon"
-                  />
+                  <img className="button-icons bi-social" src={homeIcon} alt="social feed icon" />
                 </div>
               </div>
-              <div className="navbar-btn-text">
-                Home
-              </div>
+              <div className="navbar-btn-text">Home</div>
             </Link>
 
             <Link
               to="/recordingBooth"
-              className={`navbar-btn-container ${selectedBtn === 'recordBooth' ? "btn-selected" : 'btn-unselected'}`}
+              className={`navbar-btn-container ${
+                path === '/recordingBooth' ? 'btn-selected' : 'btn-unselected'
+              }`}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
-                  <img
-                    className="button-icons bi-record"
-                    src={micIcon}
-                    alt="record song icon"
-                  />
+                  <img className="button-icons bi-record" src={micIcon} alt="record song icon" />
                 </div>
               </div>
-              <div className="navbar-btn-text">
-                Record
-              </div>
+              <div className="navbar-btn-text">Record</div>
             </Link>
 
-            <Link 
+            <Link
               to="/search"
-              state={{returnValue: null}}
-              className={`navbar-btn-container ${selectedBtn === 'search' ? "btn-selected" : 'btn-unselected'}`}
+              state={{ returnValue: null }}
+              className={`navbar-btn-container ${
+                path === '/search' ? 'btn-selected' : 'btn-unselected'
+              }`}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
-                  <img
-                    className="button-icons"
-                    src={searchIcon}
-                    alt="search icon"
-                  />
+                  <img className="button-icons" src={searchIcon} alt="search icon" />
                 </div>
               </div>
-              <div className="navbar-btn-text">
-                Search
-              </div>
+              <div className="navbar-btn-text">Search</div>
             </Link>
 
             <Link
               to={user ? `/profile/${user?._id}` : '/auth'}
               state={{ propSongUser: user }}
-              className={`navbar-btn-container ${selectedBtn === 'profile' ? "btn-selected" : 'btn-unselected'}`}
+              className={`navbar-btn-container ${
+                path.slice(0, 8) === '/profile' ? 'btn-selected' : 'btn-unselected'
+              }`}
               style={{ borderRadius: '8px 40px 40px 8px' }}
             >
               <div className="navbar-btn_shadow-div-inset">
@@ -99,15 +77,13 @@ function NavBar({locationClass, isVisible}) {
                   />
                 </div>
               </div>
-              <div className="navbar-btn-text">
-                Profile
-              </div>
+              <div className="navbar-btn-text">Profile</div>
             </Link>
           </div>
         </div>
       </div>
     </div>
   )
-}
+})
 
-export default NavBar
+export default MemoizedNavBar

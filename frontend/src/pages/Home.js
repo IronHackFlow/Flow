@@ -7,7 +7,7 @@ import useDebugInformation from '../utils/useDebugInformation'
 import useFormatDate from '../utils/useFormatDate'
 import usePostFollow from '../utils/usePostFollow'
 import usePostLike from '../utils/usePostLike'
-import Feed from '../components/Feed'
+import Feed from '../components/Feed/Feed'
 import NavBar from '../components/NavBar.js'
 import ButtonSocialAction from '../components/ButtonSocialAction'
 import CommentButton from '../components/Comments/CommentButton'
@@ -16,13 +16,13 @@ import CommentInputModal from '../components/Comments/CommentInputModal'
 import AudioTimeSlider from '../components/AudioTimeSlider.js'
 import { playIcon, pauseIcon, bulletPointIcon } from '../assets/images/_icons'
 
-const MemoizedHome = memo(function Home(props) {
+export default function Home(props) {
   const { user } = useContext(TheContext)
   const { homeFeedSongs, isLoading } = useContext(SongDataContext)
   const { formatDate } = useFormatDate()
-  useDebugInformation('Home', props)
   const { addSongLike, deleteSongLike } = usePostLike()
   const { postFollow, deleteFollow } = usePostFollow()
+  useDebugInformation('Home', props)
 
   const [songInView, setSongInView] = useState(homeFeedSongs[0]?.song)
   const [currentInView, setCurrentInView] = useState(null)
@@ -32,8 +32,6 @@ const MemoizedHome = memo(function Home(props) {
   const [showCommentMenu, setShowCommentMenu] = useState(false)
   const [showCommentInputModal, setShowCommentInputModal] = useState(null)
   const [editComment, setEditComment] = useState(null)
-
-  const playPauseRef = useRef()
 
   useEffect(() => {
     if (currentInView) {
@@ -88,11 +86,6 @@ const MemoizedHome = memo(function Home(props) {
       )
   }, [homeFeedSongs, toggleFeed, showCommentMenu])
 
-  const popUpComments = () => {
-    setShowCommentMenu(true)
-    setShowCommentInputModal('comment')
-  }
-
   const showFeedHandler = feed => {
     setTrackInView(prev => ({
       ...prev,
@@ -101,8 +94,15 @@ const MemoizedHome = memo(function Home(props) {
     setToggleFeed(feed)
   }
 
+  const handleCommentMenu = () => {
+    setShowCommentMenu(true)
+    setShowCommentInputModal('comment')
+  }
+
   return (
-    <HomeContext.Provider value={{ editComment, setEditComment, setShowCommentInputModal }}>
+    <HomeContext.Provider
+      value={{ editComment, setEditComment, showCommentInputModal, setShowCommentInputModal }}
+    >
       <div className="Home" id="Home">
         <CommentInputModal
           songId={songInView?._id}
@@ -110,7 +110,6 @@ const MemoizedHome = memo(function Home(props) {
           onClose={setShowCommentInputModal}
           onEdit={editComment}
         />
-
         <CommentMenu
           songInView={songInView}
           isOpen={showCommentMenu}
@@ -212,20 +211,17 @@ const MemoizedHome = memo(function Home(props) {
                       btnStyle="home"
                       action={{ add: postFollow, delete: deleteFollow }}
                     />
-
                     <ButtonSocialAction
                       type="like"
                       songInView={{ id: songInView?._id, list: songInView?.song_likes }}
                       btnStyle="home"
                       action={{ add: addSongLike, delete: deleteSongLike }}
                     />
-                    {/* <FollowButton songInView={songInView} btnStyle="home" />
-                    <LikeButton songInView={songInView} btnStyle="home" /> */}
                     <CommentButton
                       songInView={songInView}
                       btnStyle="home"
                       isPushed={showCommentMenu}
-                      onClose={popUpComments}
+                      onClose={handleCommentMenu}
                     />
                   </div>
                 </div>
@@ -247,7 +243,7 @@ const MemoizedHome = memo(function Home(props) {
                             className="loading loading-pic"
                             style={isLoading ? { opacity: '1' } : { opacity: '0' }}
                           ></div>
-                          <img src={songInView?.song_user?.picture} alt="song user profile" />
+                          <img src={songInView?.song_user?.picture} alt="" />
                         </Link>
                       </div>
                     </div>
@@ -298,7 +294,6 @@ const MemoizedHome = memo(function Home(props) {
                               <img
                                 className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
                                 src={isPlaying ? pauseIcon : playIcon}
-                                ref={playPauseRef}
                                 alt="play or pause"
                               />
                             </button>
@@ -327,6 +322,4 @@ const MemoizedHome = memo(function Home(props) {
       </div>
     </HomeContext.Provider>
   )
-})
-
-export default MemoizedHome
+}

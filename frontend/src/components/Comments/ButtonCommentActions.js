@@ -8,7 +8,8 @@ import { deleteIcon, commentIcon, thumbsUpIcon, editIcon } from '../../assets/im
 
 function ButtonCommentActions({ type, actions }) {
   const { user } = useContext(TheContext)
-  const { setEditComment, setShowCommentInputModal } = useContext(HomeContext)
+  const { setEditComment, showCommentInputModal, setShowCommentInputModal } =
+    useContext(HomeContext)
   const { deleteComment } = usePostComment()
   const [isLiked, setIsLiked] = useState()
   const [isDelete, setIsDelete] = useState(false)
@@ -36,7 +37,6 @@ function ButtonCommentActions({ type, actions }) {
   }, [])
 
   const onClick = () => {
-    console.log("this shouldn't be a callback i'm suspecting")
     switch (type) {
       case 'like':
         if (!isLiked) {
@@ -51,9 +51,14 @@ function ButtonCommentActions({ type, actions }) {
       case 'reply':
         break
       case 'edit':
-        setEditComment(actions.value)
-        actions.setEdit(true)
-        return setShowCommentInputModal('edit')
+        if (actions.isEdit === actions.itemId) {
+          actions.setEdit(null)
+          return setShowCommentInputModal('comment')
+        } else {
+          actions.setEdit(actions.itemId)
+          setEditComment({ comment: actions.comment, editValue: actions.value })
+          return setShowCommentInputModal('edit')
+        }
       case 'delete':
         return setIsDelete(true)
       default:

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { Routes, Route, useLocation, } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './styles/style.css'
 import { SongDataProvider } from './contexts/SongData'
 import TheContext from './contexts/TheContext'
@@ -16,12 +16,8 @@ const LazySongScreen = React.lazy(() => import('./pages/SongScreen'))
 const LazyTestAudio = React.lazy(() => import('./pages/TestAudio'))
 const LazyEditLyrics = React.lazy(() => import('./components/EditLyrics'))
 
-
-
 function App() {
-  const location = useLocation()
   const [user, setUser] = useState()
-  const [locationIndicator, setLocationIndicator] = useState()
 
   useEffect(() => {
     const controller = new AbortController()
@@ -29,33 +25,25 @@ function App() {
 
     actions
       .isUserAuth()
-      .then(res => {
-        console.log(res, "I GOT AN AUTH USER HERE")
-        setUser(res.data.user)
-      }, { signal: signal })
+      .then(
+        res => {
+          console.log(res, 'I GOT AN AUTH USER HERE')
+          setUser(res.data.user)
+        },
+        { signal: signal },
+      )
       .catch(err => console.log(err))
 
     return () => controller.abort()
   }, [])
-  
-  useEffect(() => {
-    setLocationIndicator(location)
-  }, [location])
-  
+
   return (
-    <TheContext.Provider
-      value={{
-        user,
-        setUser,
-        locationIndicator,
-        setLocationIndicator,
-      }}
-    >
+    <TheContext.Provider value={{ user, setUser }}>
       <SongDataProvider>
         <div className="App">
           <Suspense fallback={<Loading margin={0.5} isLoading={true} />}>
             <Routes>
-              <Route path="/" element={<Home />}></Route> 
+              <Route path="/" element={<Home />}></Route>
               <Route path="/auth" element={<Auth />}></Route>
               <Route path="/navBar" element={<NavBar />}></Route>
               <Route path="/profile/:id" element={<LazyProfile />}></Route>

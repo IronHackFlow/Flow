@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import useHandleOSK from '../../utils/useHandleOSK'
 import usePostComment from '../../utils/usePostComment'
 import { sendIcon } from '../../assets/images/_icons'
 
 export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
   const { handleOnFocus } = useHandleOSK()
-  const { addComment } = usePostComment()
+  const { addComment, editComment } = usePostComment()
   const [comment, setComment] = useState()
+  const inputRef = useRef()
+
+  useEffect(() => {
+    inputRef.current.focus()
+    if (isOpen === 'edit') setComment(onEdit.editValue)
+    else setComment('')
+  }, [isOpen, onEdit])
 
   const expandTextarea = text => {
     setComment(text.value)
@@ -24,15 +31,14 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
   const handleSubmit = (e, songId, value) => {
     e.preventDefault()
     if (value === '') return
-    addComment(songId, value)
+    if (isOpen === 'comment') {
+      addComment(songId, value)
+    } else if (isOpen === 'edit') {
+      editComment(songId, onEdit.comment, value)
+    }
     setComment('')
     onClose(null)
   }
-
-  useEffect(() => {
-    if (isOpen === 'edit') setComment(onEdit)
-    else setComment('')
-  }, [isOpen])
 
   return (
     <div
@@ -45,9 +51,9 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
         <div className="comment-input__input--container">
           <textarea
             className="comment-input__input"
+            ref={inputRef}
             type="text"
             placeholder="Express your thoughts..."
-            autoFocus
             value={comment}
             onFocus={() => handleOnFocus()}
             onChange={e => expandTextarea(e.target)}

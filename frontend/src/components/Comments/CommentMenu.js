@@ -4,6 +4,7 @@ import { goBackIcon } from '../../assets/images/_icons'
 
 export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput }) {
   const [songComments, setSongComments] = useState([])
+  const [isEdit, setIsEdit] = useState(null)
 
   useEffect(() => {
     setSongComments(songInView?.song_comments)
@@ -19,9 +20,12 @@ export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput 
                 return (
                   <CommentItem
                     key={item._id}
+                    itemId={item._id}
                     songInView={songInView}
                     comment={item}
                     isOpen={isOpen}
+                    isEdit={isEdit}
+                    setIsEdit={setIsEdit}
                   />
                 )
               })}

@@ -15,7 +15,6 @@ const API = axios.create({
 
 let resetHead = () => {
   return {
-    baseURL,
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
@@ -108,6 +107,10 @@ const actions = {
 
   deleteComment: async comment => {
     return await axios.post(`${baseURL}/deleteComment`, comment, resetHead())
+  },
+
+  editComment: async comment => {
+    return await axios.post(`${baseURL}/editComment`, comment, resetHead())
   },
 
   getUsersLikes: async user => {

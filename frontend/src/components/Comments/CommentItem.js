@@ -5,7 +5,7 @@ import ButtonCommentActions from './ButtonCommentActions'
 import usePostLike from '../../utils/usePostLike'
 import useFormatDate from '../../utils/useFormatDate'
 
-export default function CommentItem({ songInView, comment, isOpen }) {
+export default function CommentItem({ itemId, songInView, comment, isOpen, isEdit, setIsEdit }) {
   const { user } = useContext(TheContext)
   const { _id: songId } = songInView
   const { id: songUserId } = songInView.song_user
@@ -16,25 +16,21 @@ export default function CommentItem({ songInView, comment, isOpen }) {
 
   const [isCommenterAuthor, setIsCommenterAuthor] = useState(false)
   const [isCommenterUser, setIsCommenterUser] = useState(false)
-  const [isEdit, setIsEdit] = useState(false)
-
-  const listBtnsRef = useRef()
+  const [isEditClass, setIsEditClass] = useState(false)
 
   useEffect(() => {
-    if (commentUserId === user?._id) {
-      setIsCommenterUser(true)
-    }
-    if (songUserId === commentUserId) {
-      setIsCommenterAuthor(true)
-    }
+    if (commentUserId === user?._id) setIsCommenterUser(true)
+    if (songUserId === commentUserId) setIsCommenterAuthor(true)
   }, [])
 
   useEffect(() => {
-    if (!isOpen) setIsEdit(false)
-  }, [isOpen])
+    if (!isOpen) setIsEdit(null)
+    if (itemId === isEdit) setIsEditClass(true)
+    else setIsEditClass(false)
+  }, [isOpen, isEdit])
 
   return (
-    <li className={`comments__item ${isEdit ? 'highlight' : ''}`}>
+    <li id={itemId} className={`comments__item ${isEditClass ? 'highlight' : ''}`}>
       <div className="comment-list-inner">
         <div className="comment-list-photo">
           <div className="comment-photo-inner">
@@ -58,7 +54,7 @@ export default function CommentItem({ songInView, comment, isOpen }) {
         </div>
       </div>
 
-      <div className="comments__actions--container" ref={listBtnsRef}>
+      <div className="comments__actions--container">
         <div className="space-filler"></div>
         <div className="comments__actions">
           <div className="comments__actions--shadow-inset">
@@ -70,7 +66,13 @@ export default function CommentItem({ songInView, comment, isOpen }) {
                 />
                 <ButtonCommentActions
                   type="edit"
-                  actions={{ setEdit: setIsEdit, value: commentText }}
+                  actions={{
+                    itemId: itemId,
+                    comment: comment,
+                    isEdit: isEdit,
+                    setEdit: setIsEdit,
+                    value: commentText,
+                  }}
                 />
               </>
             ) : (

@@ -1,6 +1,6 @@
 import { useEffect, useState, memo } from 'react'
 import { useInView } from 'react-intersection-observer'
-import gradientbg from '../assets/images/gradient-bg-2.png'
+import gradientbg from '../../assets/images/gradient-bg-2.png'
 
 const MemoizedVideo = memo(
   function Video({ song, video, onInView }) {

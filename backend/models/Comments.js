@@ -7,6 +7,7 @@ const Comments = model(
     song: { type: Schema.Types.ObjectId, ref: 'Songs' },
     comment: String,
     likes: [{ type: Schema.Types.ObjectId, ref: 'Likes' }],
+    editedOn: Date,
   }),
   // new Schema({
   //   commDate: Date,
