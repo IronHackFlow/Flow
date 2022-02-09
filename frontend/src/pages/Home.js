@@ -299,7 +299,9 @@ export default function Home(props) {
                             className="song-caption"
                             style={isLoading ? { opacity: '0' } : { opacity: '1' }}
                           >
-                            {songInView?.caption ? songInView?.caption : 'no caption for this song'}
+                            {songInView?.caption
+                              ? `${songInView?.caption}`
+                              : 'no caption for this song'}
                           </p>
                         </div>
                       </div>

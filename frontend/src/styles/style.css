@@ -1110,7 +1110,7 @@ button {
 .section-1_feed .section-1c_song-details {
   height: 40%;
   width: 100%;
-  border-radius: 4vh 0vh 0vh 0vh;
+  border-radius: 2em 0em 0em 0em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1153,7 +1153,7 @@ button {
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset {
   height: 81%;
   width: 96%;
-  border-radius: 4vh 0.5vh 0.5vh 4vh;
+  border-radius: 2em 0.3em 0.3em 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1174,7 +1174,7 @@ button {
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset {
   height: 85%;
   width: 97.5%;
-  border-radius: 4vh 0.5vh 0.5vh 4vh;
+  border-radius: 2em 0.2em 0.2em 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1320,7 +1320,7 @@ button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-1_actions .actions_shadow-div-outset .actions_shadow-div-inset .action-btns-container .action-btn_shadow-div-outset .action-btn-container .action-btn-text p {
-  height: 50%;
+  height: 45%;
   width: 100%;
   font-size: 0.8rem;
   color: #ffd6d6;
@@ -1661,13 +1661,22 @@ button {
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
   font-size: 0.8rem;
   color: #e0bbbb;
-  margin: 0em 0.3em 0em 0.6em;
+  margin: 0em 0.4em 0em 0.6em;
   text-align: start;
 }
 
+.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .song-title-container .song-title_shadow-div-outset .song-caption-container .song-date span {
+  margin-left: 0.3em;
+}
+
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-user-section .song-user-container .song-title-container .song-title_shadow-div-outset .song-caption-container .song-caption {
+  height: 100%;
   width: 76%;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -9275,7 +9284,7 @@ button {
 
 .CommentMenu .comments__list--container .comments__list--shadow-outset .comments__list--shadow-inset .comments__list .comments__item .comment-list-inner .comments__text--container .comments__text--shadow-outset .comments__user-details {
   height: 30px;
-  width: 94%;
+  width: 96%;
   border-radius: 1.6em 0.2em 1.8em 0.2em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -9292,7 +9301,7 @@ button {
           flex-direction: column;
   -webkit-box-shadow: inset 2px 2px 3px #823756, inset -1px -1px 2px #ffd6e7;
           box-shadow: inset 2px 2px 3px #823756, inset -1px -1px 2px #ffd6e7;
-  margin: 3% 0% 2% 0%;
+  margin: 2% 0% 2% 0%;
   background: #ec6aa0;
 }
 

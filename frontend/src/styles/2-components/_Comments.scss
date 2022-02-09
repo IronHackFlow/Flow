@@ -73,9 +73,9 @@
                   margin-top: 3%;
 
                   .comments__user-details {
-                    @include flexCenter(30px, 94%, 1.6em 0.2em 1.8em 0.2em, center, center, column);
+                    @include flexCenter(30px, 96%, 1.6em 0.2em 1.8em 0.2em, center, center, column);
                     box-shadow: inset 2px 2px 3px #823756, inset -1px -1px 2px #ffd6e7;
-                    margin: 3% 0% 2% 0%;
+                    margin: 2% 0% 2% 0%;
                     background: #ec6aa0;
 
                     .comments__username {
