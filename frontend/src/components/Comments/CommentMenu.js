@@ -20,9 +20,8 @@ export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput 
                 return (
                   <CommentItem
                     key={item._id}
-                    itemId={item._id}
                     songInView={songInView}
-                    comment={item}
+                    commentData={item}
                     isOpen={isOpen}
                     isEdit={isEdit}
                     setIsEdit={setIsEdit}

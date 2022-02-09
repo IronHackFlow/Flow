@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef, useCallback, memo } from 'react'
+import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback, memo } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../contexts/TheContext'
 import HomeContext from '../contexts/HomeContext'
@@ -32,6 +32,20 @@ export default function Home(props) {
   const [showCommentMenu, setShowCommentMenu] = useState(false)
   const [showCommentInputModal, setShowCommentInputModal] = useState(null)
   const [editComment, setEditComment] = useState(null)
+  const [isMarquee, setIsMarquee] = useState(false)
+
+  const titleRef = useRef()
+  const wrapperRef = useRef()
+
+  useLayoutEffect(() => {
+    let computedTitleWidth = window.getComputedStyle(titleRef.current)
+    let computedWrapperWidth = window.getComputedStyle(wrapperRef.current)
+    let titleWidth = parseInt(computedTitleWidth.getPropertyValue('width'))
+    let wrapperWidth = parseInt(computedWrapperWidth.getPropertyValue('width'))
+
+    if (titleWidth >= wrapperWidth) setIsMarquee(true)
+    else setIsMarquee(false)
+  }, [songInView])
 
   useEffect(() => {
     if (currentInView) {
@@ -251,24 +265,36 @@ export default function Home(props) {
                     <div className="song-title-container">
                       <div className="song-title_shadow-div-outset">
                         <div className="song-title_shadow-div-inset">
-                          <div
-                            className="loading loading-title"
-                            style={isLoading ? { opacity: '1' } : { opacity: '0' }}
-                          ></div>
-                          <p id="one">{songInView?.name}</p>
-                          <p id="two">
-                            <img src={bulletPointIcon} alt="bullet point" />
-                            {songInView?.song_user?.user_name}
-                          </p>
+                          <div className="song-title_title--container">
+                            <div
+                              className="loading loading-title"
+                              style={isLoading ? { opacity: '1' } : { opacity: '0' }}
+                            ></div>
+                            <div
+                              className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
+                              ref={wrapperRef}
+                            >
+                              <p className="song-title-marquee" id="marquee-one" ref={titleRef}>
+                                {songInView?.name} {String.fromCodePoint(8226)}{' '}
+                                <span>{songInView?.song_user?.user_name}</span>
+                              </p>
+                              {isMarquee && (
+                                <p className="song-title-marquee" id="marquee-two">
+                                  {songInView?.name} {String.fromCodePoint(8226)}{' '}
+                                  <span>{songInView?.song_user?.user_name}</span>
+                                </p>
+                              )}
+                            </div>
+                          </div>
                         </div>
                         <div className="song-caption-container">
-                          <div
+                          <p
                             className="song-date"
                             style={isLoading ? { opacity: '0' } : { opacity: '1' }}
                           >
-                            <p>{formatDate(songInView?.date, 'm')}</p>
-                            <img src={bulletPointIcon} alt="bullet point" />
-                          </div>
+                            {formatDate(songInView?.date, 'm')}
+                            <span>{String.fromCodePoint(8226)}</span>
+                          </p>
                           <p
                             className="song-caption"
                             style={isLoading ? { opacity: '0' } : { opacity: '1' }}

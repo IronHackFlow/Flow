@@ -86,7 +86,6 @@ router.post(`/editComment`, verifyJWT, async (req, res, next) => {
     comment: req.body.comment,
     editedOn: req.body.editDate,
   }
-  let response = { song: {}, comment: body.commentToEdit }
 
   await Comments.findByIdAndUpdate(
     { _id: body.commentToEdit._id },
@@ -98,19 +97,17 @@ router.post(`/editComment`, verifyJWT, async (req, res, next) => {
   await Songs.findById({ _id: body.song })
     .populate({ path: 'song_comments', populate: [{ path: 'user' }, { path: 'likes' }] })
     .then(song => {
-      response.song = song
       console.log(
         `EDITED a COMMENT: ---`,
-        body.commentToEdit,
         `--- from ${song.name}_${song._id}'s COMMENTS: `,
         song.song_comments,
       )
+
+      res.status(200).json(song)
     })
     .catch(err => {
       console.log(err)
     })
-
-  res.status(200).json(response)
 })
 
 router.post(`/getCommentsRT`, async (req, res, next) => {

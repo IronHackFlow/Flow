@@ -61,10 +61,10 @@ export default function usePostComment() {
         console.log(
           `EDITED a COMMENT: ---`,
           res.data.comment,
-          `--- from ${res.data.song.name}'s song_comments: `,
-          res.data.song.song_comments,
+          `--- from ${res.data.name}'s song_comments: `,
+          res.data.song_comments,
         )
-        const songComments = res.data.song.song_comments
+        const songComments = res.data.song_comments
         updateFeed(songId, songComments)
       })
   }

@@ -28,7 +28,7 @@ export default function CommentButton({ songInView, btnStyle, isPushed, onClose 
             ></div>
             <div className="action-btn-text">
               <p style={{ color: 'white' }}>{totalComments}</p>
-              <p>{totalComments === 1 ? 'Comment' : 'Comments'}</p>
+              <p>{totalComments === 1 ? 'comment' : 'comments'}</p>
             </div>
           </div>
         </button>

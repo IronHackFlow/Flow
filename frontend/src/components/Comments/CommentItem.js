@@ -5,32 +5,36 @@ import ButtonCommentActions from './ButtonCommentActions'
 import usePostLike from '../../utils/usePostLike'
 import useFormatDate from '../../utils/useFormatDate'
 
-export default function CommentItem({ itemId, songInView, comment, isOpen, isEdit, setIsEdit }) {
+export default function CommentItem({ songInView, commentData, isOpen, isEdit, setIsEdit }) {
   const { user } = useContext(TheContext)
   const { _id: songId } = songInView
-  const { id: songUserId } = songInView.song_user
-  const { _id: id, user: commentUser, date: commentDate, comment: commentText, likes } = comment
-  const { _id: commentUserId, user_name: commentUserName, picture: commentPicture } = comment.user
+  const { _id: songUserId } = songInView.song_user
+  const { _id: id, user: commentUser, date: commentDate, comment: commentText, likes } = commentData
+  const {
+    _id: commentUserId,
+    user_name: commentUserName,
+    picture: commentPicture,
+  } = commentData.user
   const { addCommentLike, deleteCommentLike } = usePostLike()
   const { formatDate } = useFormatDate()
 
-  const [isCommenterAuthor, setIsCommenterAuthor] = useState(false)
+  const [isAuthor, setIsAuthor] = useState(false)
   const [isCommenterUser, setIsCommenterUser] = useState(false)
   const [isEditClass, setIsEditClass] = useState(false)
 
   useEffect(() => {
     if (commentUserId === user?._id) setIsCommenterUser(true)
-    if (songUserId === commentUserId) setIsCommenterAuthor(true)
-  }, [])
+    if (songUserId === commentUserId) setIsAuthor(true)
+  }, [commentUserId])
 
   useEffect(() => {
     if (!isOpen) setIsEdit(null)
-    if (itemId === isEdit) setIsEditClass(true)
+    if (id === isEdit) setIsEditClass(true)
     else setIsEditClass(false)
   }, [isOpen, isEdit])
 
   return (
-    <li id={itemId} className={`comments__item ${isEditClass ? 'highlight' : ''}`}>
+    <li id={id} className={`comments__item ${isEditClass ? 'highlight' : ''}`}>
       <div className="comment-list-inner">
         <div className="comment-list-photo">
           <div className="comment-photo-inner">
@@ -42,14 +46,22 @@ export default function CommentItem({ itemId, songInView, comment, isOpen, isEdi
           </div>
         </div>
 
-        <div className="comment-text-container">
-          <div className="comment-list-outer">
-            <p className="comment-username">
-              {commentUserName}
-              <span>{isCommenterAuthor ? ' 𑁦 song author' : null}</span>
-            </p>
-            <div className="comment-date">{formatDate(commentDate, 'm')}</div>
-            <p className="comment-text">{commentText}</p>
+        <div className="comments__text--container">
+          <div className="comments__text--shadow-outset">
+            <div className="comments__user-details">
+              <p className="comments__username">
+                {commentUserName}
+                <span>{isAuthor ? `${String.fromCodePoint(8226)} song author` : null}</span>
+              </p>
+              <p className="comments__date">
+                {commentData.editedOn
+                  ? `${formatDate(commentData.editedOn, 'm')} *edited* `
+                  : commentDate
+                  ? formatDate(commentDate, 'm')
+                  : '1y'}
+              </p>
+            </div>
+            <p className="comments__comment">{commentText}</p>
           </div>
         </div>
       </div>
@@ -62,13 +74,13 @@ export default function CommentItem({ itemId, songInView, comment, isOpen, isEdi
               <>
                 <ButtonCommentActions
                   type="delete"
-                  actions={{ songId: songId, toDelete: comment }}
+                  actions={{ songId: songId, toDelete: commentData }}
                 />
                 <ButtonCommentActions
                   type="edit"
                   actions={{
-                    itemId: itemId,
-                    comment: comment,
+                    itemId: id,
+                    comment: commentData,
                     isEdit: isEdit,
                     setEdit: setIsEdit,
                     value: commentText,

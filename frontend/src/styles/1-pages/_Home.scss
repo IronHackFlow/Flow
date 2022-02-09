@@ -1,3 +1,12 @@
+@keyframes floatText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .Home {
   background: linear-gradient(345deg, #000000, #606060);
   position: relative;
@@ -166,7 +175,7 @@
                   p {
                     height: 50%;
                     width: 100%;
-                    font-size: 0.9rem;
+                    font-size: 0.8rem;
                     color: #ffd6d6;
                     overflow-x: hidden;
                   }
@@ -212,7 +221,7 @@
       @include flexCenter(77%, 100%, 0px, flex-start, center, column);
 
       .song-data-container {
-        @include flexCenter(60%, 96%, 0.5vh 0.5vh 0.5vh 4.8vh, space-evenly, center, column);
+        @include flexCenter(60%, 96%, 0.3em 0.3em 0.3em 2.5em, space-evenly, center, column);
         box-shadow: 1px 5px 10px #2a2a2a, -2px -2px 3px 0px #ffffff;
 
         .song-user-section {
@@ -256,68 +265,61 @@
                 box-shadow: 3px 3px 4px #494949, -2px -2px 3px 0px #e9e9e9;
 
                 .song-title_shadow-div-inset {
-                  @include flexCenter(49%, 96%, 0.5vh 4vh 4vh 0.5vh, flex-start, center, row);
-                  box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                  @include flexCenter(67%, 100%, 0.5vh 4vh 4vh 0.5vh, center, center, row);
                   overflow-x: scroll;
                   position: relative;
 
-                  #one {
-                    font-size: 1.05rem;
-                    color: white;
-                    font-weight: bold;
-                    white-space: nowrap;
-                    text-align: start;
-                    text-indent: 0.5em;
-                  }
+                  .song-title_title--container {
+                    @include flexCenter(80%, 97%, 0.3em 0.3em 1.5em 0.3em, center, center, row);
+                    box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
+                    background: #ec6aa0;
+                    position: absolute;
+                    overflow: hidden;
 
-                  #two {
-                    font-size: 1rem;
-                    color: #e0bbbb;
-                    white-space: nowrap;
-                    margin-left: 2%;
+                    .marquee-wrapper {
+                      @include flexCenter(75%, 92%, 0em 0em 1.4em 0em, flex-start, center, row);
+                      position: absolute;
+                      overflow: hidden;
 
-                    img {
-                      height: 5px;
-                      width: 5px;
-                      margin-left: 5px;
-                      margin-right: 5px;
-                      filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg)
-                        brightness(100%) contrast(76%);
+                      .song-title-marquee {
+                        font-size: 1.05rem;
+                        color: white;
+                        font-weight: bold;
+                        white-space: nowrap;
+                        text-align: start;
+                        span {
+                          font-size: 0.95rem;
+                          color: #ffc4dd;
+                        }
+                      }
+                    }
+
+                    .marquee--animation {
+                      .song-title-marquee {
+                        animation: floatText 5s linear infinite;
+                        padding-left: 30%;
+                        display: inline-block;
+                      }
                     }
                   }
                 }
 
                 .song-caption-container {
-                  @include flexCenter(35%, 100%, 50px, flex-start, center, row);
+                  @include flexCenter(33%, 100%, 0, flex-start, flex-start, row);
 
                   .song-date {
-                    display: flex;
-                    flex-direction: row;
+                    font-size: 0.8rem;
                     color: #e0bbbb;
-                    margin-left: 7px;
-                    white-space: nowrap;
-                    text-align: left;
-
-                    p {
-                      font-size: 0.85rem;
-                    }
-                    img {
-                      height: 5px;
-                      width: 5px;
-                      margin-left: 4px;
-                      margin-top: 4px;
-                      filter: invert(85%) sepia(8%) saturate(859%) hue-rotate(314deg)
-                        brightness(100%) contrast(76%);
-                    }
+                    margin: 0em 0.3em 0em 0.6em;
+                    text-align: start;
                   }
 
                   .song-caption {
                     width: 76%;
+                    font-size: 0.8rem;
                     white-space: nowrap;
                     text-align: left;
                     color: #e0bbbb;
-                    font-size: 11px;
-                    padding-left: 8px;
                     overflow-x: hidden;
                     text-overflow: ellipsis;
                   }
@@ -334,11 +336,11 @@
             @include flexCenter(100%, 22%, 0, center, center, row);
 
             .play-btn-container {
-              @include flexCenter(88%, 89%, 0.5vh 4.2vh 4.2vh 5vh, center, center, row);
+              @include flexCenter(88%, 89%, 0.3em 2.3em 2.3em 2.6em, center, center, row);
               box-shadow: inset 2px 3px 2px #424242, inset -2px -3px 3px 0px #adadad;
 
               .play-btn-container-2 {
-                @include flexCenter(78%, 82%, 0.5vh 4vh 4vh 5vh, flex-end, center, row);
+                @include flexCenter(78%, 82%, 0.3em 2.3em 2.3em 2.6em, flex-end, center, row);
                 box-shadow: 1px 2px 3px #3c3c3c, -1px -2px 3px 0px #c9c9c9;
 
                 .play-btn_inset-container {
@@ -396,20 +398,20 @@
 
                 input[type='range'] {
                   appearance: none;
-                  height: 35%;
+                  height: 1.2em;
                   width: 92%;
                   border-radius: 50px;
                   box-shadow: inset 2px 2px 2px 0px #424141, inset -1px -1px 2px #e8e4e4;
                 }
                 input[type='range']::-webkit-slider-thumb {
                   appearance: none;
-                  height: 20px;
-                  width: 10px;
-                  border-radius: 5px;
+                  height: 1em;
+                  width: 1em;
+                  border-radius: 5em;
                   cursor: pointer;
                   background: #767676;
                   transition: background-color 1s ease;
-                  box-shadow: inset 1px 1px 1px 0px #c2c2c2, inset -1px -1px 1px #222222;
+                  box-shadow: inset 1px 1px 1px 0px #c2c2c2, inset -1px -1px 1px #353535;
                 }
 
                 .time-text-container {

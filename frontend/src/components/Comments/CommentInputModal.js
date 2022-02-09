@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import useHandleOSK from '../../utils/useHandleOSK'
 import usePostComment from '../../utils/usePostComment'
 import { sendIcon } from '../../assets/images/_icons'
@@ -15,18 +15,21 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
     else setComment('')
   }, [isOpen, onEdit])
 
-  const expandTextarea = text => {
-    setComment(text.value)
-    text.style.height = 'inherit'
-    let computed = window.getComputedStyle(text)
-    let height =
-      parseInt(computed.getPropertyValue('border-top-width'), 10) +
-      parseInt(computed.getPropertyValue('padding-top'), 10) +
-      text.scrollHeight +
-      parseInt(computed.getPropertyValue('padding-bottom'), 10) +
-      parseInt(computed.getPropertyValue('border-bottom-width'), 10)
-    text.style.height = `${height}px`
-  }
+  const expandTextarea = useCallback(
+    text => {
+      setComment(text.value)
+      text.style.height = 'inherit'
+      let computed = window.getComputedStyle(text)
+      let height =
+        parseInt(computed.getPropertyValue('border-top-width'), 10) +
+        parseInt(computed.getPropertyValue('padding-top'), 10) +
+        text.scrollHeight +
+        parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+        parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+      text.style.height = `${height}px`
+    },
+    [comment, songId, isOpen, onEdit],
+  )
 
   const handleSubmit = (e, songId, value) => {
     e.preventDefault()
