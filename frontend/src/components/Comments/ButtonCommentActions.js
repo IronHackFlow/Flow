@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback, memo } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import TheContext from '../../contexts/TheContext'
 import HomeContext from '../../contexts/HomeContext'
 import usePostComment from '../../utils/usePostComment'
@@ -6,10 +6,8 @@ import ContinueModal from '../ContinueModal'
 import useDebugInformation from '../../utils/useDebugInformation'
 import { deleteIcon, commentIcon, thumbsUpIcon, editIcon } from '../../assets/images/_icons'
 
-function ButtonCommentActions({ type, actions }) {
+function ButtonCommentActions({ type, actions, setEditComment, setShowCommentInputModal }) {
   const { user } = useContext(TheContext)
-  const { setEditComment, showCommentInputModal, setShowCommentInputModal } =
-    useContext(HomeContext)
   const { deleteComment } = usePostComment()
   const [isLiked, setIsLiked] = useState()
   const [isDelete, setIsDelete] = useState(false)

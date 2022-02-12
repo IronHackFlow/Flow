@@ -21,5 +21,5 @@ export const signUpSchema = yup.object().shape({
 
 export const saveSongSchema = yup.object().shape({
   name: yup.string().required('name is required to save your Flow').max(30),
-  caption: yup.string().max(40),
+  caption: yup.string().max(60),
 })

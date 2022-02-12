@@ -41,6 +41,14 @@
             color: #ec6aa0;
             font-weight: bolder;
           }
+          &:hover {
+            background: #f3b9c3;
+            box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+            .each-feed_shadow-div-inset-2 {
+              box-shadow: inset 1px 1px 2px #6e5a62, inset -1px -1px 2px 0px #ffffff;
+              color: white;
+            }
+          }
         }
         // classes to apply to toggle feed button when clicked
         .toggle-feed {
@@ -144,7 +152,19 @@
                 box-shadow: inset 2px 2px 5px #3d3f3f, inset -2px -2px 3px #989898;
                 transition: box-shadow 0.5s;
               }
-
+              &:hover {
+                background: #f3b9c3;
+                box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+                .action-btn-container {
+                  .action-btn-text {
+                    background: #f3b9c3;
+                    box-shadow: inset 1px 1px 3px #8b576c, inset -1px -1px 3px #fff1f1;
+                    p {
+                      color: white;
+                    }
+                  }
+                }
+              }
               .action-btn-icon_shadow-div-inset {
                 @include flexCenter(100%, 32%, 0, center, center, row);
                 color: #ec6aa0;

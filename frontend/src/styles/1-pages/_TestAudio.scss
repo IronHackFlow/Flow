@@ -1,795 +1,809 @@
-
 .TestAudio {
   position: absolute;
 }
 
 .section-1_speech {
-    @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
-    // background-image: url('../images/turnt-bg-image.jpg');
-    // background-size: 104%;
-    // background-position-x: 50%;
-    // background-position-y: 10%;
-    background: linear-gradient(323deg, #262626 0%, #474646 100%);
+  @include flexCenter(30%, 100%, 0px, space-evenly, center, column);
+  // background-image: url('../images/turnt-bg-image.jpg');
+  // background-size: 104%;
+  // background-position-x: 50%;
+  // background-position-y: 10%;
+  background: linear-gradient(323deg, #262626 0%, #474646 100%);
 
-    .modal-toggle-btn {
-        @include flexCenter(35px, 35px, 50px, center, center, column);
-        background: #ec6aa0;
-        box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
-        border: 1px solid #e74d8d;
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        
-        img {
-            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-        }
+  .modal-toggle-btn {
+    @include flexCenter(35px, 35px, 50px, center, center, column);
+    background: #ec6aa0;
+    box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
+    border: 1px solid #e74d8d;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    img {
+      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
     }
+  }
 
-    .scroll-rhymes-container {
-        @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
-        overflow-y: scroll;
-        // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
-        box-shadow: inset 2px 2px 3px #272727fc, inset -2px -2px 3px #5d5d5ddb;
+  .scroll-rhymes-container {
+    @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
+    overflow-y: scroll;
+    // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+    box-shadow: inset 2px 2px 3px #272727fc, inset -2px -2px 3px #5d5d5ddb;
 
-        .prev-transcript-container {
-            @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
-            padding-left: 2%;
-            margin-top: 2%;
+    .prev-transcript-container {
+      @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
+      padding-left: 2%;
+      margin-top: 2%;
 
-            .transcript-bar-no {
-                height: 10px;
-                width: 10px;
-                font-size: 10px;
-                color: #7d7d7d;
-                position: relative;
-                bottom: -5px;
-                margin-right: 1%;
-            }
+      .transcript-bar-no {
+        height: 10px;
+        width: 10px;
+        font-size: 10px;
+        color: #7d7d7d;
+        position: relative;
+        bottom: -5px;
+        margin-right: 1%;
+      }
 
-            .transcript-word-container {
-                @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
-                flex-wrap: wrap;
+      .transcript-word-container {
+        @include flexCenter(initial, 98%, 20px, flex-start, stretch, row);
+        flex-wrap: wrap;
 
-                .prev-transcript-word {
-                    @include flexCenter(11px, initial, 0px, center, center, row);
-                    color: white;
-                    font-size: 14px;
-                    padding: 1px 2px 1px 2px;
-                }
-            }
-        }
-
-        .no-takes-msg {
-            color: white;
-            font-size: 15px;
-        }
-    }
-    
-    .scroll-rhymes-line {
-        @include flexCenter(15%, 96%, 25px, center, center, row);
-        // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
-        box-shadow: inset 2px 2px 3px #222222fc, inset -2px -2px 3px #5d5d5ddb;
-        overflow-x: scroll;
-
-        .transcript-line-2 {
-          height: 90%;
-          width: 93%;
-          text-align: start;
-          overflow-y: scroll;
-          color: #01fff3;
+        .prev-transcript-word {
+          @include flexCenter(11px, initial, 0px, center, center, row);
+          color: white;
           font-size: 14px;
-          font-weight: bold;
+          padding: 1px 2px 1px 2px;
         }
+      }
     }
+
+    .no-takes-msg {
+      color: white;
+      font-size: 15px;
+    }
+  }
+
+  .scroll-rhymes-line {
+    @include flexCenter(15%, 96%, 25px, center, center, row);
+    // box-shadow: inset 2px 2px 3px #000000fc, inset -2px -2px 3px #ffffffdb;
+    box-shadow: inset 2px 2px 3px #222222fc, inset -2px -2px 3px #5d5d5ddb;
+    overflow-x: scroll;
+
+    .transcript-line-2 {
+      height: 90%;
+      width: 93%;
+      text-align: start;
+      overflow-y: scroll;
+      color: #01fff3;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
 }
 
 .section-2_control-panel {
-    height: 70%;
-    // background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
-    background: linear-gradient(323deg, #4b4b4b 0%, #757575 100%);
+  height: 70%;
+  // background: linear-gradient(0deg, #4f4f4f 0%, #8d8d8d 100%);
+  background: linear-gradient(323deg, #4b4b4b 0%, #757575 100%);
 
-    .section-2a_flow-suggestions {
-        //height:49%
-        @include flexCenter(35%, 100%, 0vh 0vh 3.5vh 3.5vh, space-evenly, center, column);
-        position: absolute;
-        background: linear-gradient(314deg, #858585 0%, #a7a7a7 100%);
-        z-index: 1;
-        box-shadow: 0px 12px 30px 10px #2a2a2a;
-        // border-top: 1px solid #c4c4c4;
-        transition: height .5s;
+  .section-2a_flow-suggestions {
+    //height:49%
+    @include flexCenter(35%, 100%, 0vh 0vh 3.5vh 3.5vh, space-evenly, center, column);
+    position: absolute;
+    background: linear-gradient(314deg, #858585 0%, #a7a7a7 100%);
+    z-index: 1;
+    box-shadow: 0px 12px 30px 10px #2a2a2a;
+    // border-top: 1px solid #c4c4c4;
+    transition: height 0.5s;
 
-        .next-bar-container {
-            @include flexCenter(8%, 96%, 20px, flex-start, flex-start, row);
-            box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #bebebe;
-            opacity: 1;
-            transition: opacity .3s .3s;
+    .next-bar-container {
+      @include flexCenter(8%, 96%, 20px, flex-start, flex-start, row);
+      box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #bebebe;
+      opacity: 1;
+      transition: opacity 0.3s 0.3s;
 
-            .action-word-container {
-                @include flexCenter(90%, 96%, 20px, flex-start, center, row);
-                overflow-x: scroll;
+      .action-word-container {
+        @include flexCenter(90%, 96%, 20px, flex-start, center, row);
+        overflow-x: scroll;
 
-                .each-action-word {
-                    @include flexCenter(initial, initial, 0px, center, center, row);
-                    color: #424242;
-                    font-size: 16px;
-                    padding: 1px 3px 1px 3px;
-                }
-                .initial-prompt {
-                    margin-left: 2%;
-                }
-            }
+        .each-action-word {
+          @include flexCenter(initial, initial, 0px, center, center, row);
+          color: #424242;
+          font-size: 16px;
+          padding: 1px 3px 1px 3px;
         }
-
-        .suggestions {
-            @include flexCenter(22%, 96%, 10px 50px 50px 10px, center, flex-start, row);
-            box-shadow: inset 2px 2px 3px 0px #585858, inset -2px -2px 3px #d0d0d0;
-            transition: height .5s;
-
-            .custom-rhyme {
-                @include flexCenter(100%, 83%, 0, space-evenly, flex-start, column);
-                opacity: 1;
-                transition: opacity .3s .3s;
-
-                .rhymed-word_shadow-div-inset {
-                    @include flexCenter(35%, 55%, 5px 0px 22px 0px, flex-start, center, row);
-                    box-shadow: inset 2px 2px 2px #565656, inset -2px -2px 2px #c8c8c8;
-                    
-                    p {
-                        color: white;
-                        margin-left: 6%;
-                        font-size: 14px;
-                        font-weight: bold;
-                        letter-spacing: .5px;
-                    }
-                    .top-word-holder {
-                        color: #fc85b6;
-                    }
-                    .locked-word-holder {
-                        color: #ffbc00;
-                    }
-                    .selected-word-holder {
-                        color: #00ffd3;
-                    }
-                }
-
-                .custom-rhyme-inner {
-                    @include flexCenter(65%, 100%, 5px 20px 20px 5px, center, flex-start, row);
-                    overflow-x: scroll;
-
-                    .custom-rhyme_shadow-div-inset {
-                        @include flexCenter(90%, 97%, 5px 20px 20px 5px, center, center, row);
-
-                        .top-rhymes-container {
-                            @include flexCenter(94%, 100%, 0px, flex-start, center, row);
-                            flex-wrap: wrap;
-                            position: relative;
-    
-                            .each-top-rhyme {
-                                @include flexCenter(10px, initial, 0px, center, center, row);
-                                color: #ffb9d6;
-                                font-size: 15px;
-                                font-weight: bold;
-                                padding: 1px 3px 1px 3px;
-                            }
-
-                            .initial-prompt {
-                                @include flexCenter(80%, initial, 0px, center, flex-start, row);
-                                color: #464646;
-                                font-size: 13px;
-                                text-align: start;
-                                padding: 1px 3px 1px 3px;
-                            }
-    
-                            .rhyme-lock-outset {
-                                @include flexCenter(90%, 17%, 50px, center, center, row);
-                                position: absolute;
-                                right: 1px;
-
-                                .rhyme-lock-btn {
-                                    @include flexCenter(59%, 72%, 50px, center, center, row);
-                                    background-color: #8a8a8a;
-                                    box-shadow: 3px 3px 5px 0px #545454, -2px -2px 3px #cccccc;
-                                
-                                    img {
-                                        height: 1.6em;
-                                        width: 1.6em;
-                                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                    }
-                                    
-                                    &:active {
-                                        box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
-                                    }
-                                }
-                            }
-                        }
-
-                        .each-locked-rhyme {
-                            @include flexCenter(10px, initial, 0px, center, center, row);
-                            color: #ffe9ad;
-                            font-size: 15px;
-                            font-weight: bold;
-                            padding: 1px 3px 1px 3px;
-                        }
-                        .each-selected-rhyme {
-                            @include flexCenter(10px, initial, 0px, center, center, row);
-                            color: #b0feec;
-                            font-size: 15px;
-                            font-weight: bold;
-                            padding: 1px 3px 1px 3px;
-                        }
-                    }
-                }
-            }
-
-            .rhyme-lock-container {
-                @include flexCenter(100%, 17%, 0, flex-end, center, row);
-                opacity: 1;
-                transition: opacity .3s .3s;
-
-                .rhyme-lock-button {
-                    @include flexCenter(80%, calc(100vh * .06), 100vh, center, center, row);
-                    box-shadow: 2px 2px 3px #5e5e5e, -2px -2px 2px #d3d3d3;
-                    margin-right: 10%;
-
-                    .rhyme-lock-outset {
-                        @include flexCenter(88%, 88%, 100vh, center, center, row);
-                        box-shadow: inset 2px 2px 2px 0px #5e5e5e, inset -2px -2px 3px #d3d3d3;
-                    
-                        .rhyme-lock-btn {
-                            @include flexCenter(73%, 73%, 100vh, center, center, row);
-                            background-color: #e24f8c;
-                            box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
-                            
-                            img {
-                                height: 70%;
-                                width: 70%;
-                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                            }
-                            
-                            &:active {
-                                height: 80%;
-                                width: 80%;
-                                background-color: #ec6aa0;
-                                box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
-
-                                img {
-                                   filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        .initial-prompt {
+          margin-left: 2%;
         }
-
-        .suggestion-button-container {
-            @include flexCenter(17%, 97%, 50px, center, center, row);
-            box-shadow: inset 3px 3px 3px 0px #505050, inset -2px -2px 3px #dedede;
-            opacity: 1;
-            transition: .3s .3s;
-
-            .rhyme-lock-container {
-                @include flexCenter(70%, 96%, 50px, space-between, center, row);
-                box-shadow: 3px 3px 3px #404040, -2px -2px 2px #d2d2d2;
-
-                .rhyme-lock-button {
-                    @include flexCenter(100%, 30%, 50px, center, center, row);
-
-                    .rhyme-lock-outset {
-                        @include flexCenter(70%, 45%, 50px, center, center, row);
-                        margin-bottom: 1%;
-                        box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
-
-                        a {
-                            text-decoration: none;
-                        }
-                        .rhyme-lock-btn {
-                            @include flexCenter(100%, 100%, 50px, center, center, row);
-                            background-color: #ec6aa0;
-                            box-shadow: inset 2px 2px 5px 0px #b74b78, inset -2px -2px 5px #ffcfe3;
-                            // border: 1px solid #ec6aa0;
-                            color: white;
-
-                            img {
-                                height: 1.6em;
-                                width: 1.6em;
-                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                            }
-                            
-                            &:active {
-                                box-shadow: none;
-                            }
-                        }
-                        .select-no {
-                            font-size: 13px;
-                            font-weight: bold;
-                            color: white;
-
-                            &:focus{
-                                outline: none !important;
-                                border: 1px solid white;
-                            }
-                        }
-                    }
-                }
-
-                .rlb-1 {
-                    width: 31%;
-                    .rhyme-lock-outset {
-                        width: 90%;
-                    }
-                }
-                .rlb-2 {
-                    width: 35%;
-                    .rhyme-lock-outset {
-                        width: 94%;
-                    }
-                }
-                .rlb-3 {
-                    width: 35%;
-
-                    .rhyme-lock-outset {
-                        width: 91%;
-                    }
-                }
-            }
-        }
+      }
     }
+
+    .suggestions {
+      @include flexCenter(22%, 96%, 10px 50px 50px 10px, center, flex-start, row);
+      box-shadow: inset 2px 2px 3px 0px #585858, inset -2px -2px 3px #d0d0d0;
+      transition: height 0.5s;
+
+      .custom-rhyme {
+        @include flexCenter(100%, 83%, 0, space-evenly, flex-start, column);
+        opacity: 1;
+        transition: opacity 0.3s 0.3s;
+
+        .rhymed-word_shadow-div-inset {
+          @include flexCenter(35%, 55%, 5px 0px 22px 0px, flex-start, center, row);
+          box-shadow: inset 2px 2px 2px #565656, inset -2px -2px 2px #c8c8c8;
+
+          p {
+            color: white;
+            margin-left: 6%;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+          }
+          .top-word-holder {
+            color: #fc85b6;
+          }
+          .locked-word-holder {
+            color: #ffbc00;
+          }
+          .selected-word-holder {
+            color: #00ffd3;
+          }
+        }
+
+        .custom-rhyme-inner {
+          @include flexCenter(65%, 100%, 5px 20px 20px 5px, center, flex-start, row);
+          overflow-x: scroll;
+
+          .custom-rhyme_shadow-div-inset {
+            @include flexCenter(90%, 97%, 5px 20px 20px 5px, center, center, row);
+
+            .top-rhymes-container {
+              @include flexCenter(94%, 100%, 0px, flex-start, center, row);
+              flex-wrap: wrap;
+              position: relative;
+
+              .each-top-rhyme {
+                @include flexCenter(10px, initial, 0px, center, center, row);
+                color: #ffb9d6;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 1px 3px 1px 3px;
+              }
+
+              .initial-prompt {
+                @include flexCenter(80%, initial, 0px, center, flex-start, row);
+                color: #464646;
+                font-size: 13px;
+                text-align: start;
+                padding: 1px 3px 1px 3px;
+              }
+
+              .rhyme-lock-outset {
+                @include flexCenter(90%, 17%, 50px, center, center, row);
+                position: absolute;
+                right: 1px;
+
+                .rhyme-lock-btn {
+                  @include flexCenter(59%, 72%, 50px, center, center, row);
+                  background-color: #8a8a8a;
+                  box-shadow: 3px 3px 5px 0px #545454, -2px -2px 3px #cccccc;
+
+                  img {
+                    height: 1.6em;
+                    width: 1.6em;
+                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                      contrast(103%);
+                  }
+
+                  &:active {
+                    box-shadow: inset 2px 2px 3px 0px #5a5a5a, inset -2px -2px 3px #cdcdcd;
+                  }
+                }
+              }
+            }
+
+            .each-locked-rhyme {
+              @include flexCenter(10px, initial, 0px, center, center, row);
+              color: #ffe9ad;
+              font-size: 15px;
+              font-weight: bold;
+              padding: 1px 3px 1px 3px;
+            }
+            .each-selected-rhyme {
+              @include flexCenter(10px, initial, 0px, center, center, row);
+              color: #b0feec;
+              font-size: 15px;
+              font-weight: bold;
+              padding: 1px 3px 1px 3px;
+            }
+          }
+        }
+      }
+
+      .rhyme-lock-container {
+        @include flexCenter(100%, 17%, 0, flex-end, center, row);
+        opacity: 1;
+        transition: opacity 0.3s 0.3s;
+
+        .rhyme-lock-button {
+          @include flexCenter(80%, calc(100vh * 0.06), 100vh, center, center, row);
+          box-shadow: 2px 2px 3px #5e5e5e, -2px -2px 2px #d3d3d3;
+          margin-right: 10%;
+
+          .rhyme-lock-outset {
+            @include flexCenter(88%, 88%, 100vh, center, center, row);
+            box-shadow: inset 2px 2px 2px 0px #5e5e5e, inset -2px -2px 3px #d3d3d3;
+
+            .rhyme-lock-btn {
+              @include flexCenter(73%, 73%, 100vh, center, center, row);
+              background-color: #e24f8c;
+              box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
+
+              img {
+                height: 70%;
+                width: 70%;
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
+              }
+
+              &:active {
+                height: 80%;
+                width: 80%;
+                background-color: #ec6aa0;
+                box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
+
+                img {
+                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                    contrast(103%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .suggestion-button-container {
+      @include flexCenter(17%, 97%, 50px, center, center, row);
+      box-shadow: inset 3px 3px 3px 0px #505050, inset -2px -2px 3px #dedede;
+      opacity: 1;
+      transition: 0.3s 0.3s;
+
+      .rhyme-lock-container {
+        @include flexCenter(70%, 96%, 50px, space-between, center, row);
+        box-shadow: 3px 3px 3px #404040, -2px -2px 2px #d2d2d2;
+
+        .rhyme-lock-button {
+          @include flexCenter(100%, 30%, 50px, center, center, row);
+
+          .rhyme-lock-outset {
+            @include flexCenter(70%, 45%, 50px, center, center, row);
+            margin-bottom: 1%;
+            box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
+
+            a {
+              text-decoration: none;
+            }
+            .rhyme-lock-btn {
+              @include flexCenter(100%, 100%, 50px, center, center, row);
+              background-color: #ec6aa0;
+              box-shadow: inset 2px 2px 5px 0px #b74b78, inset -2px -2px 5px #ffcfe3;
+              // border: 1px solid #ec6aa0;
+              color: white;
+
+              img {
+                height: 1.6em;
+                width: 1.6em;
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
+              }
+
+              &:active {
+                box-shadow: none;
+              }
+            }
+            .select-no {
+              font-size: 13px;
+              font-weight: bold;
+              color: white;
+
+              &:focus {
+                outline: none !important;
+                border: 1px solid white;
+              }
+            }
+          }
+        }
+
+        .rlb-1 {
+          width: 31%;
+          .rhyme-lock-outset {
+            width: 90%;
+          }
+        }
+        .rlb-2 {
+          width: 35%;
+          .rhyme-lock-outset {
+            width: 94%;
+          }
+        }
+        .rlb-3 {
+          width: 35%;
+
+          .rhyme-lock-outset {
+            width: 91%;
+          }
+        }
+      }
+    }
+  }
 }
 
 .section-2b_flow-controls {
-    //height 35%
-    @include flexCenter(39%, 100%, 0px, center, flex-start, row);
-    transition: height .5s;
+  //height 35%
+  @include flexCenter(39%, 100%, 0px, center, flex-start, row);
+  transition: height 0.5s;
+  position: absolute;
+  bottom: 0;
+
+  .flow-controls-container {
+    @include flexCenter(55%, 96%, 0.7vh, center, center, column);
+    // box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
+    box-shadow: inset 3px 3px 3px 0px #343434, inset -3px -3px 4px #929292;
     position: absolute;
-    bottom: 0;
+    bottom: 30%;
+    transition: height 0.5s;
 
-    .flow-controls-container {
-        @include flexCenter(55%, 96%, .7vh, center, center, column);
-        // box-shadow: inset 3px 3px 4px 0px #464545, inset -3px -3px 4px #9c9c9c;
-        box-shadow: inset 3px 3px 3px 0px #343434, inset -3px -3px 4px #929292;
-        position: absolute;
-        bottom: 30%;
-        transition: height .5s;
+    .flow-controls-1_playback-display {
+      @include flexCenter(30%, 100%, 0px, center, flex-end, row);
+      position: relative;
+      transition: height 0.5s;
 
-        .flow-controls-1_playback-display {
-            @include flexCenter(30%, 100%, 0px, center, flex-end, row);
-            position: relative;
-            transition: height .5s;
+      .play-btn-container {
+        @include flexCenter(100%, 17%, 50px, center, flex-end, row);
 
-            .play-btn-container {
-                @include flexCenter(100%, 17%, 50px, center, flex-end, row);
+        .play-btn-container_shadow-div-outset {
+          @include flexCenter(85%, 84%, 5vh 0.2vh 0.2vh 5vh, flex-end, center, row);
+          box-shadow: 3px 3px 5px #2c2c2c, -2px -2px 2px 0px #a0a0a0;
 
-                .play-btn-container_shadow-div-outset {
-                    @include flexCenter(85%, 84%, 5vh 0.2vh .2vh 5vh, flex-end, center, row);
-                    box-shadow: 3px 3px 5px #2c2c2c, -2px -2px 2px 0px #a0a0a0;
+          .play-btn-container_shadow-div-inset {
+            @include flexCenter(84%, 85%, 5vh 0.2vh 0.2vh 5vh, flex-start, center, row);
+            box-shadow: inset 2px 2px 3px 0px #242424, inset -2px -2px 3px #a3a3a3;
+            margin-right: 8.5%;
 
+            .play-btn_shadow-div-outset {
+              @include flexCenter(77%, calc(100vh * 0.035), 100vh, center, center, row);
+              text-align: center;
+              font-weight: bold;
+              background: #e24f8c;
+              margin-left: 13%;
+              box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
 
-                    .play-btn-container_shadow-div-inset {
-                        @include flexCenter(84%, 85%, 5vh 0.2vh .2vh 5vh, flex-start, center, row);
-                        box-shadow: inset 2px 2px 3px 0px #242424, inset -2px -2px 3px #a3a3a3;
-                        margin-right: 8.5%;
+              img {
+                height: 85%;
+                width: 85%;
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
+              }
 
-                        .play-btn_shadow-div-outset {
-                            @include flexCenter(77%, calc(100vh * .035), 100vh, center, center,row);
-                            text-align: center;
-                            font-weight: bold;
-                            background: #e24f8c;
-                            margin-left: 13%;
-                            box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
-                            
-                            img {
-                                height: 85%;
-                                width: 85%;
-                                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                            }
-                            
-                            &:active {
-                                box-shadow: inset 2px 2px 3px #313232, 
-                                            inset -2px -2px 3px #9fa2a4;
-                            }
-                        }
-                    }
-                }
+              &:active {
+                box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+              }
             }
-
-            .play-slider-container {
-                @include flexCenter(100%, 81%, 0px, center, flex-end, row);
-
-                .play-slider-container_shadow-div-outset {
-                    @include flexCenter(85%, 97%, 8px 50px 50px 8px, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -1px -2px 3px 0px #c6c6c6;
-
-                    .play-slider-container_shadow-div-inset {
-                        @include flexCenter(84%, 97%, 8px 50px 50px 8px, center, center, row);
-                        // background: #5d5d5d;
-                        box-shadow: inset 2px 2px 3px 0px #262626, inset -2px -2px 3px #b5b5b5;
-
-                        .play-slider_shadow-div-outset {
-                            @include flexCenter(70%, 95%, 8px 50px 50px 8px, center, center, column);
-                            box-shadow: 3px 3px 3px #323232, -2px -2px 2px 0px #a2a2a2;
-
-                            .play-slider_shadow-div-inset {
-                                @include flexCenter(100%, 100%, 8px 50px 50px 8px, space-evenly, flex-start, column);
-                                // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
-
-                                input[type="range"] {
-                                    appearance: none;
-                                    height: 46%;
-                                    width: 94%;
-                                    margin-left: 1%;
-                                    border-radius: 50px;
-                                    // background: #63DEBC;
-                                    box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
-                                }
-                                input[type="range"]::-webkit-slider-thumb {
-                                    appearance: none;
-                                    height: 20px;
-                                    width: 20px;
-                                    border-radius: 50px;
-                                    cursor: pointer;
-                                    background: #4b4b4b;
-                                    transition: background-color 1s ease;
-                                    box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
-
-                                }
-
-                                .time-text-container {
-                                    @include flexCenter(25%, 90%, 8px, space-between, center, row);
-                                    padding: 0% 3%;
-    
-                                    .time-text-start {
-                                        font-size: 10px;
-                                        color: white;
-                                    }
-                                    .time-text-end {
-                                        font-size: 11px;
-                                        color: white;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
 
-        .flow-controls-2_actions {
-            @include flexCenter(70%, 100%, 0px, center, center, column);
-            transition: height .5s;
+      .play-slider-container {
+        @include flexCenter(100%, 81%, 0px, center, flex-end, row);
 
-            .actions-container_shadow-div-outset {
-                @include flexCenter(88%, 96%, 4.4vh 4.4vh .5vh .5vh, center, center, column);
-                box-shadow: 3px 3px 5px #202020, -2px -2px 2px 0px #808080;
-                transition: height .5s;
+        .play-slider-container_shadow-div-outset {
+          @include flexCenter(85%, 97%, 8px 50px 50px 8px, center, center, row);
+          box-shadow: 3px 3px 5px #282828, -1px -2px 3px 0px #c6c6c6;
 
-                .actions-container_shadow-div-inset {
-                    @include flexCenter(92%, 97.5%, 4vh 4vh 0.4vh 0.4vh, space-evenly, center, column);
-                    box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
-                    transition: height .5s;
+          .play-slider-container_shadow-div-inset {
+            @include flexCenter(84%, 97%, 8px 50px 50px 8px, center, center, row);
+            // background: #5d5d5d;
+            box-shadow: inset 2px 2px 3px 0px #262626, inset -2px -2px 3px #b5b5b5;
 
-                    .actions-1_flow-takes {
-                        @include flexCenter(50%, 100%, 0px, space-between, center, row);
-                        transition: height .5s;
+            .play-slider_shadow-div-outset {
+              @include flexCenter(70%, 95%, 8px 50px 50px 8px, center, center, column);
+              box-shadow: 3px 3px 3px #323232, -2px -2px 2px 0px #a2a2a2;
 
-                        .flow-takes-1_select-takes {
-                            @include flexCenter(96%, 65%, 0px, center, center, row);
-                            transition: width .5s;
-            
-                            .select-takes-container_shadow-div-outset {
-                                @include flexCenter(79%, 94%, 14.5vh 10vh 10vh 0vh, center, center, row);
-                                box-shadow: 3px 3px 5px #323232, -2px -2px 2px 0px #8b8b8b;
-                                
-                                .select-takes-container {
-                                    @include flexCenter(80%, 95.7%, 15.5vh 10vh 10vh 0.5vh, center, flex-end, column);
-                                    transition: width .5s;
-                                    box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
-                                    margin-right: 1%;
+              .play-slider_shadow-div-inset {
+                @include flexCenter(
+                  100%,
+                  100%,
+                  8px 50px 50px 8px,
+                  space-evenly,
+                  flex-start,
+                  column
+                );
+                // box-shadow: inset 2px 2px 3px 0px #3d3d3d, inset -2px -2px 5px #afaeae;
 
-                                    .select-takes_shadow-div-inset {
-                                        @include flexCenter(65%, 90%, 100vh, center, center, column);
-                                        box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #8c8c8c;
-                                        margin-right: 3%;
-
-                                        .select-takes_shadow-div-outset {
-                                            @include flexCenter(100%, 91%, 30px, center, center, column);
-                                            // box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
-                                            color: white;
-
-                                            &:focus {
-                                                outline: none !important;
-                                            }
-                                        }
-                                    }
-
-                                    .select-takes-title {
-                                        @include flexCenter(30%, 100%, 50px, flex-start, center, row);
-                                        color: pink;
-                                        font-size: 12px;
-                                        margin-left: 4%;
-                                    }
-                                }
-
-                                .edit-takes-container_shadow-div-inset {
-                                    @include flexCenter(81%, 22%, 50px, center, center, row);
-                                    box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
-                                    
-                                    .edit-takes-btn_shadow-div-outset {
-                                        @include flexCenter(70%, 70%, 50px, center, center, row);
-                                        box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
-                                        
-                                        img {
-                                            height: 1.5em;
-                                            width: 1.5em;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .flow-takes-2_takes-actions {
-                            @include flexCenter(100%, 33%, 50px, flex-start, center, row);
-                            margin-right: 1%;
-
-                            .takes-actions-container {
-                                @include flexCenter(83%, 90%, 50px, space-evenly, center, row);
-                                
-                                .actions-btn-container {
-                                    @include flexCenter(95%, 39%, 50%, center, center, row);
-                                    box-shadow: inset 2px 2px 3px 0px #2a2a2a, inset -2px -2px 2px #a0a0a0;
-
-                                    .actions-btn_shadow-div-outset {
-                                        @include flexCenter(73%, 73%, 50%, center, center,row);
-                                        text-align: center;
-                                        font-weight: bold;
-                                        box-shadow: 2px 2px 3px #313131, -1px -1px 2px #b5b5b5;
-
-                                        img {
-                                            height: 1.5em;
-                                            width: 1.5em;
-                                        }
-
-                                        &:active {
-                                            box-shadow: none;
-                                        }
-                                    }
-                                    .ab-save {
-                                        background: #e24f8c;
-
-                                        img {
-                                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                input[type='range'] {
+                  appearance: none;
+                  height: 46%;
+                  width: 94%;
+                  margin-left: 1%;
+                  border-radius: 50px;
+                  // background: #63DEBC;
+                  box-shadow: inset 2px 2px 3px 0px #161616, inset -2px -2px 3px #808080;
                 }
-            }
-        } 
-    }
-    
-    .record-2_record-btn {
-        @include flexCenter(50px, 50px, 50%, flex-end, center, row);
-        position: absolute;
-        right: 6%;
-        bottom: 32%;
-        box-shadow: -2px 5px 10px #292828;
-
-        .record-btn_shadow-div-inset {
-            @include flexCenter(100%, 100%, 50%, center, center, row);
-
-            .record-btn_shadow-div-outset {
-                @include flexCenter(98%, 98%, 50%, center, center, row);
-                background: #63DEBC;
-                box-shadow: inset 2px 2px 2px 0px #baf9e9, inset -1px -1px 2px #216c56;
-                border: 1px solid #4b9c86;
-
-                img {
-                    height: 2.1em;
-                    width: 2.1em;
-                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                input[type='range']::-webkit-slider-thumb {
+                  appearance: none;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50px;
+                  cursor: pointer;
+                  background: #4b4b4b;
+                  transition: background-color 1s ease;
+                  box-shadow: inset 1px 1px 1px 0px #9b9b9b, inset -1px -1px 1px #222222;
                 }
+
+                .time-text-container {
+                  @include flexCenter(25%, 90%, 8px, space-between, center, row);
+                  padding: 0% 3%;
+
+                  .time-text-start {
+                    font-size: 10px;
+                    color: white;
+                  }
+                  .time-text-end {
+                    font-size: 11px;
+                    color: white;
+                  }
+                }
+              }
             }
+          }
         }
+      }
     }
+
+    .flow-controls-2_actions {
+      @include flexCenter(70%, 100%, 0px, center, center, column);
+      transition: height 0.5s;
+
+      .actions-container_shadow-div-outset {
+        @include flexCenter(88%, 96%, 4.4vh 4.4vh 0.5vh 0.5vh, center, center, column);
+        box-shadow: 3px 3px 5px #202020, -2px -2px 2px 0px #808080;
+        transition: height 0.5s;
+
+        .actions-container_shadow-div-inset {
+          @include flexCenter(92%, 97.5%, 4vh 4vh 0.4vh 0.4vh, space-evenly, center, column);
+          box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
+          transition: height 0.5s;
+
+          .actions-1_flow-takes {
+            @include flexCenter(50%, 100%, 0px, space-between, center, row);
+            transition: height 0.5s;
+
+            .flow-takes-1_select-takes {
+              @include flexCenter(96%, 65%, 0px, center, center, row);
+              transition: width 0.5s;
+
+              .select-takes-container_shadow-div-outset {
+                @include flexCenter(79%, 94%, 14.5vh 10vh 10vh 0vh, center, center, row);
+                box-shadow: 3px 3px 5px #323232, -2px -2px 2px 0px #8b8b8b;
+
+                .select-takes-container {
+                  @include flexCenter(80%, 95.7%, 15.5vh 10vh 10vh 0.5vh, center, flex-end, column);
+                  transition: width 0.5s;
+                  box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+                  margin-right: 1%;
+
+                  .select-takes_shadow-div-inset {
+                    @include flexCenter(65%, 90%, 100vh, center, center, column);
+                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #8c8c8c;
+                    margin-right: 3%;
+
+                    .select-takes_shadow-div-outset {
+                      @include flexCenter(100%, 91%, 30px, center, center, column);
+                      // box-shadow: 2px 2px 4px 0px #464545, -1px -1px 3px #c8c8c8;
+                      color: white;
+
+                      &:focus {
+                        outline: none !important;
+                      }
+                    }
+                  }
+
+                  .select-takes-title {
+                    @include flexCenter(30%, 100%, 50px, flex-start, center, row);
+                    color: pink;
+                    font-size: 12px;
+                    margin-left: 4%;
+                  }
+                }
+
+                .edit-takes-container_shadow-div-inset {
+                  @include flexCenter(81%, 22%, 50px, center, center, row);
+                  box-shadow: inset 2px 2px 3px 0px #4c4b4b, inset -3px -3px 4px #929191;
+
+                  .edit-takes-btn_shadow-div-outset {
+                    @include flexCenter(70%, 70%, 50px, center, center, row);
+                    box-shadow: 3px 3px 5px 0px #464545, -2px -2px 3px #aeaeae;
+
+                    img {
+                      height: 1.5em;
+                      width: 1.5em;
+                    }
+                  }
+                }
+              }
+            }
+
+            .flow-takes-2_takes-actions {
+              @include flexCenter(100%, 33%, 50px, flex-start, center, row);
+              margin-right: 1%;
+
+              .takes-actions-container {
+                @include flexCenter(83%, 90%, 50px, space-evenly, center, row);
+
+                .actions-btn-container {
+                  @include flexCenter(95%, 39%, 50%, center, center, row);
+                  box-shadow: inset 2px 2px 3px 0px #2a2a2a, inset -2px -2px 2px #a0a0a0;
+
+                  .actions-btn_shadow-div-outset {
+                    @include flexCenter(73%, 73%, 50%, center, center, row);
+                    text-align: center;
+                    font-weight: bold;
+                    box-shadow: 2px 2px 3px #313131, -1px -1px 2px #b5b5b5;
+
+                    img {
+                      height: 1.5em;
+                      width: 1.5em;
+                    }
+
+                    &:active {
+                      box-shadow: none;
+                    }
+                  }
+                  .ab-save {
+                    background: #e24f8c;
+
+                    img {
+                      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                        brightness(107%) contrast(103%);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .record-2_record-btn {
+    @include flexCenter(50px, 50px, 50%, flex-end, center, row);
+    position: absolute;
+    right: 6%;
+    bottom: 32%;
+    box-shadow: -2px 5px 10px #292828;
+
+    .record-btn_shadow-div-inset {
+      @include flexCenter(100%, 100%, 50%, center, center, row);
+
+      .record-btn_shadow-div-outset {
+        @include flexCenter(98%, 98%, 50%, center, center, row);
+        background: #63debc;
+        box-shadow: inset 2px 2px 2px 0px #baf9e9, inset -1px -1px 2px #216c56;
+        border: 1px solid #4b9c86;
+
+        img {
+          height: 2.1em;
+          width: 2.1em;
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+            contrast(103%);
+        }
+      }
+    }
+  }
 }
-
 
 @keyframes opacityTransition {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .actions-2_record {
-    @include flexCenter(50%, 100%, 0px, center, flex-start, row);
-    opacity: 1;
-    // animation: opacityTransition 1s forwards;
+  @include flexCenter(50%, 100%, 0px, center, flex-start, row);
+  opacity: 1;
+  // animation: opacityTransition 1s forwards;
 
-    .record-container {
-        @include flexCenter(89%, 96%, 1.2vh 10vh 10vh 11.5vh, space-between, center, row);
-        box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #939393;
+  .record-container {
+    @include flexCenter(89%, 96%, 1.2vh 10vh 10vh 11.5vh, space-between, center, row);
+    box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #939393;
 
-        .record-1_select-beat {
-            @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
-            
-            .select-beat_shadow-div-inset {
-                @include flexCenter(85%, 97%, 2vh 10vh 10vh 12.5vh, flex-end, center, row);
-                box-shadow: inset 3px 3px 3px 0px #2c2c2c, inset -2px -2px 2px #9c9c9c;
-                
-                .select-beat_play-container {
-                    @include flexCenter(100%, 17%, 0, flex-end, center, row);
+    .record-1_select-beat {
+      @include flexCenter(100%, 65%, 0px, space-evenly, center, column);
 
-                    .select-beat_play-btn {
-                        @include flexCenter(calc(100vh * .031), calc(100vh * .031), 100vh, center, center, row);
-                        box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8f8f8f;
-                        background: #e24f8c;
-                        margin-right: 9%;
+      .select-beat_shadow-div-inset {
+        @include flexCenter(85%, 97%, 2vh 10vh 10vh 12.5vh, flex-end, center, row);
+        box-shadow: inset 3px 3px 3px 0px #2c2c2c, inset -2px -2px 2px #9c9c9c;
 
-                        img {
-                            height: 80%;
-                            width: 80%;
-                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-                        }
-                        .play {
-                            margin-left: 3px;
-                        }
-                        &:active {
-                            box-shadow: inset 2px 2px 3px #313232, 
-                                        inset -2px -2px 3px #9fa2a4;
-                        }
-                    }
-                }
-                .select-beat_container {
-                    @include flexCenter(100%, 83%, 0, flex-start, center, row);
+        .select-beat_play-container {
+          @include flexCenter(100%, 17%, 0, flex-end, center, row);
 
-                    .select-beat_shadow-div-outset {
-                        @include flexCenter(70%, 96%, 100vh, center, center, column);
-                        box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
-    
-                        .select-beat-title {
-                            @include flexCenter(40%, 92%, 0px, center, flex-start, column);
-                            color: pink;
-                            font-size: 10px;
-                            margin-left: 8%;
-                        }
-                        .track-select {
-                            color: white;
-                            height: 60%;
-                            width: 90%;
-    
-                            &:focus {
-                                outline: none !important;
-                            }
-                        }
-                        &:focus {
-                            background: #787878;
-                            box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
-    
-                        }
-                        &:active {
-                            background: #787878;
-                            box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
-                        }
-                    }
-                }
+          .select-beat_play-btn {
+            @include flexCenter(
+              calc(100vh * 0.031),
+              calc(100vh * 0.031),
+              100vh,
+              center,
+              center,
+              row
+            );
+            box-shadow: 2px 2px 3px 0px #262626, -1px -1px 2px #afafaf;
+            background: #e24f8c;
+            margin-right: 9%;
+
+            img {
+              height: 80%;
+              width: 80%;
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                contrast(103%);
             }
+            .play {
+              margin-left: 3px;
+            }
+            &:active {
+              box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+            }
+          }
         }
+        .select-beat_container {
+          @include flexCenter(100%, 83%, 0, flex-start, center, row);
+
+          .select-beat_shadow-div-outset {
+            @include flexCenter(70%, 96%, 100vh, center, center, column);
+            box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
+
+            .select-beat-title {
+              @include flexCenter(40%, 92%, 0px, center, flex-start, column);
+              color: pink;
+              font-size: 10px;
+              margin-left: 8%;
+            }
+            .track-select {
+              color: white;
+              height: 60%;
+              width: 90%;
+
+              &:focus {
+                outline: none !important;
+              }
+            }
+            &:focus {
+              background: #787878;
+              box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+            }
+            &:active {
+              background: #787878;
+              box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+            }
+          }
+        }
+      }
     }
+  }
 }
 // when save menu clicked adds this class to animate menu
 .save-menu-active {
-    .section-2a_flow-suggestions {
-        height: 10%;
-        transition: height .5s;
-        
-        .next-bar-container {
-            opacity: 0;
-            transition: opacity .3s;
-        }
-        .suggestions {
-            height: 20%;
-            transition: height .5s;
+  .section-2a_flow-suggestions {
+    height: 10%;
+    transition: height 0.5s;
 
-            .custom-rhyme {
-                opacity: 0;
-                transition: opacity .3s;
-            }
-            .rhyme-lock-container {
-                opacity: 0;
-                transition: opacity .3s;
-            }
-        }
-        .suggestion-button-container {
-            opacity: 0;
-            transition: opacity .3s;
-        }
+    .next-bar-container {
+      opacity: 0;
+      transition: opacity 0.3s;
     }
+    .suggestions {
+      height: 20%;
+      transition: height 0.5s;
 
-    .section-2b_flow-controls {
-        height: 61%;
-        transition: height .5s;
+      .custom-rhyme {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .rhyme-lock-container {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+    }
+    .suggestion-button-container {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  }
 
-        .flow-controls-container {
-            height: 75%;
-            bottom: 21%;
-            transition: all .5s;
+  .section-2b_flow-controls {
+    height: 61%;
+    transition: height 0.5s;
 
-            .flow-controls-1_playback-display {
-                height: 14%;
-                transition: height .5s;
-            }
+    .flow-controls-container {
+      height: 75%;
+      bottom: 21%;
+      transition: all 0.5s;
 
-            .flow-controls-2_actions {
-                height: 85%;
-                transition: height .5s;
+      .flow-controls-1_playback-display {
+        height: 14%;
+        transition: height 0.5s;
+      }
 
-                .actions-container_shadow-div-outset {
-                    height: 96%;
-                    width: 95%;
-                    transition: all .5s;
+      .flow-controls-2_actions {
+        height: 85%;
+        transition: height 0.5s;
 
-                    .actions-container_shadow-div-inset {
-                        height: 98%;
-                        width: 98%;
-                        transition: height .5s;
+        .actions-container_shadow-div-outset {
+          height: 96%;
+          width: 95%;
+          transition: all 0.5s;
 
-                        .actions-1_flow-takes {
-                            height: 20%;
-                            transition: height .5s;
-                            
-                            .flow-takes-1_select-takes {
-                                width: 100%;
-                                transition: width .5s;
+          .actions-container_shadow-div-inset {
+            height: 98%;
+            width: 98%;
+            transition: height 0.5s;
 
-                                .select-takes-container_shadow-div-outset { 
-                                    height: 80%; 
-                                    width: 95%;
-                                    border-radius: 40px 30px 30px 5px;
-                                    transition: all .5s;
+            .actions-1_flow-takes {
+              height: 20%;
+              transition: height 0.5s;
 
-                                    .select-takes-container {
-                                        height: 82%;
-                                        width: 98%;
-                                        border-radius: 55px 40px 40px 9px;
-                                        transition: all .5s;
+              .flow-takes-1_select-takes {
+                width: 100%;
+                transition: width 0.5s;
 
-                                        .select-takes_shadow-div-inset {
-                                            width: 94%;
-                                            margin-right: 2%;
-                                            transition: width .5s;
+                .select-takes-container_shadow-div-outset {
+                  height: 80%;
+                  width: 95%;
+                  border-radius: 40px 30px 30px 5px;
+                  transition: all 0.5s;
 
-                                            .select-takes_shadow-div-outset {
-                                                background-color: #424242
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                  .select-takes-container {
+                    height: 82%;
+                    width: 98%;
+                    border-radius: 55px 40px 40px 9px;
+                    transition: all 0.5s;
 
-                            .flow-takes-2_takes-actions {
-                                @include flexCenter(100%, 0px, 50px, flex-start, center, row);
-                                opacity: 0;
-                                transition: all .25s;
-                            }
-                        }
+                    .select-takes_shadow-div-inset {
+                      width: 94%;
+                      margin-right: 2%;
+                      transition: width 0.5s;
+
+                      .select-takes_shadow-div-outset {
+                        background-color: #424242;
+                      }
                     }
+                  }
                 }
+              }
+
+              .flow-takes-2_takes-actions {
+                @include flexCenter(100%, 0px, 50px, flex-start, center, row);
+                opacity: 0;
+                transition: all 0.25s;
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 .slideOut {
-    transform: translateX(170%);
-    opacity: 0;
-    transition: all .4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  transform: translateX(170%);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 .slideIn {
-    transform: translateX(0%);
-    opacity: 1;
-    transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  transform: translateX(0%);
+  opacity: 1;
+  transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }

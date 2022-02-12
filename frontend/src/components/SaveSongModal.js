@@ -1,63 +1,66 @@
-import { useContext, useEffect, useState, useRef, useCallback } from "react";
-import actions from "../api";
-import axios from "axios";
-import TheContext from "../contexts/TheContext"
-import RecordBoothContext from "../contexts/RecordBoothContext"
-import AudioTimeSlider from "../components/AudioTimeSlider";
-import SelectMenuModal from "../components/SelectMenuModal";
-import { saveSongSchema } from "../utils/validationSchemas"
-import InputError from "./InputError"
-import ButtonClearText from "../components/ButtonClearText";
-import useDebugInformation from "../utils/useDebugInformation"
-import { playIcon, pauseIcon, closeIcon } from "../assets/images/_icons"
+import { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import actions from '../api'
+import axios from 'axios'
+import TheContext from '../contexts/TheContext'
+import RecordBoothContext from '../contexts/RecordBoothContext'
+import AudioTimeSlider from '../components/AudioTimeSlider'
+import SelectMenuModal from '../components/SelectMenuModal'
+import { saveSongSchema } from '../utils/validationSchemas'
+import InputError from './InputError'
+import ButtonClearText from '../components/ButtonClearText'
+import useDebugInformation from '../utils/useDebugInformation'
+import { playIcon, pauseIcon, closeIcon } from '../assets/images/_icons'
 
 export default function SaveSongModal(props) {
   const { user } = useContext(TheContext)
-  const { 
-    allTakes, setAllTakes,
-    currentSong, setCurrentSong, 
-    showSaveSongModal, setShowSaveSongModal 
+  const {
+    allTakes,
+    setAllTakes,
+    currentSong,
+    setCurrentSong,
+    showSaveSongModal,
+    setShowSaveSongModal,
   } = useContext(RecordBoothContext)
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [showError, setShowError] = useState(false)
   const [showSelectMenu, setShowSelectMenu] = useState(false)
-  const [name, setName] = useState("")
-  const [caption, setCaption] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [errorPath, setErrorPath] = useState("")
-  
-  const songCaptionInputRef = useRef();
+  const [name, setName] = useState('')
+  const [caption, setCaption] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [errorPath, setErrorPath] = useState('')
+
+  const songCaptionInputRef = useRef()
   const songNameInputRef = useRef()
-  const buttonCloseRef = useRef();
-  const saveSongPopUpRef = useRef();
+  const buttonCloseRef = useRef()
+  const saveSongPopUpRef = useRef()
 
   useEffect(() => {
     if (showSaveSongModal) {
       songNameInputRef.current.focus()
     } else {
-      setErrorPath("")
-      setName("")
-      setCaption("")
+      setErrorPath('')
+      setName('')
+      setCaption('')
       songNameInputRef.current.blur()
     }
   }, [showSaveSongModal])
 
-  const handleErrorFocus = (errorPath) => {
+  const handleErrorFocus = errorPath => {
     let name = songNameInputRef.current
     let caption = songCaptionInputRef.current
-    if (errorPath === "name") name.focus()
+    if (errorPath === 'name') name.focus()
     else caption.focus()
   }
 
-  const validateInputs = (e) => {
+  const validateInputs = e => {
     e.preventDefault()
     const songData = { name: name, caption: caption }
     saveSongSchema
       .validate(songData, { abortEarly: false })
       .then(valid => {
         setShowError(false)
-        setErrorPath("")
+        setErrorPath('')
         handleSaveSong()
       })
       .catch(err => {
@@ -72,58 +75,71 @@ export default function SaveSongModal(props) {
     let currentName = currentSong.name
     currentSong.name = name
     currentSong.caption = caption
-    const fileName = user?._id + currentSong.name.replaceAll(" ", "-")
-    const fileType = "audio/mpeg-3"
+    const fileName = user?._id + currentSong.name.replaceAll(' ', '-')
+    const fileType = 'audio/mpeg-3'
     const file = currentSong.blob
 
     actions
-      .getSignedS3({fileName: fileName, fileType: fileType})
-        .then(async res => {
-          console.log(res.data)
-          if (res.data.success) {
-            const signedURL = res.data.signedRequest.signed_URL
-            const awsURL = res.data.signedRequest.aws_URL
-            const options = {
-              headers: {
-                'Content-Type': "audio/mpeg-3"
-              }
-            }
-            return axios.put(signedURL, file, options)
-              .then(res => {
-                actions
-                  .addSong({currentSong, awsURL})
-                    .then(res => {
-                      if (res.data.success) {
-                        console.log(res.data.song, res.data.message)
-                        setAllTakes(prevTakes => prevTakes.map(each => {
-                          if (each.name === currentName) {
-                            return {
-                              ...each,
-                              name: currentSong.name,
-                              caption: currentSong.caption
-                            }
-                          } else {
-                            return each
-                          }
-                        }))
-                        setShowSaveSongModal(false)
-                      }
-                    })
-                    .catch(err => console.log(err))
-              })
-              .catch(err => console.log(err))
+      .getSignedS3({ fileName: fileName, fileType: fileType })
+      .then(async res => {
+        console.log(res.data)
+        if (res.data.success) {
+          const signedURL = res.data.signedRequest.signed_URL
+          const awsURL = res.data.signedRequest.aws_URL
+          const options = {
+            headers: {
+              'Content-Type': 'audio/mpeg-3',
+            },
           }
-        })
-        .catch(err => console.log(err))
-        .finally(() => {
-          setName("")
-          setCaption("")
-        })
+          return axios
+            .put(signedURL, file, options)
+            .then(res => {
+              actions
+                .addSong({ currentSong, awsURL })
+                .then(res => {
+                  if (res.data.success) {
+                    console.log(res.data.song, res.data.message)
+                    setAllTakes(prevTakes =>
+                      prevTakes.map(each => {
+                        if (each.name === currentName) {
+                          return {
+                            ...each,
+                            name: currentSong.name,
+                            caption: currentSong.caption,
+                          }
+                        } else {
+                          return each
+                        }
+                      }),
+                    )
+                    setShowSaveSongModal(false)
+                  }
+                })
+                .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
+        }
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        setName('')
+        setCaption('')
+      })
   }
-  
+
   return (
-    <div className={`SaveSongModal ${showSaveSongModal ? "SaveSongModal--show" : "SaveSongModal--hide"}`}> 
-      <div className={`save-song_modal-container ${showSaveSongModal ? "save-song_modal-container--transition-in" : "save-song_modal-container--transition-out"}`}>
+    <div
+      className={`SaveSongModal ${
+        showSaveSongModal ? 'SaveSongModal--show' : 'SaveSongModal--hide'
+      }`}
+    >
+      <div
+        className={`save-song_modal-container ${
+          showSaveSongModal
+            ? 'save-song_modal-container--transition-in'
+            : 'save-song_modal-container--transition-out'
+        }`}
+      >
         <div className="save-song_header">
           <div className="save-song_header-shadow-inset">
             <div className="save-song_header-container">
@@ -153,12 +169,12 @@ export default function SaveSongModal(props) {
               <div className="play-btn-container_shadow-div-outset">
                 <div className="play-btn-container_shadow-div-inset">
                   <button
-                    className={`play-btn_shadow-div-outset ${isPlaying ? "pause" : "play"}`}
-                    aria-label={isPlaying ? "Pause" : "Play"}
+                    className={`play-btn_shadow-div-outset ${isPlaying ? 'pause' : 'play'}`}
+                    aria-label={isPlaying ? 'Pause' : 'Play'}
                     onClick={() => setIsPlaying(!isPlaying)}
                   >
                     <img
-                      className={`button-icons ${isPlaying ? "bi-pause" : "bi-play"}`}
+                      className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
                       id="play-stop-img"
                       src={isPlaying ? pauseIcon : playIcon}
                       alt="play or pause icon"
@@ -192,14 +208,14 @@ export default function SaveSongModal(props) {
                     <div className="select-takes-container_shadow-div-outset">
                       <div className="select-takes-container">
                         <div className="select-takes_shadow-div-inset">
-                          <button 
-                            className="select-takes_shadow-div-outset" 
+                          <button
+                            className="select-takes_shadow-div-outset"
                             onClick={() => setShowSelectMenu(true)}
                           >
                             <p>{currentSong?.name}</p>
                           </button>
 
-                          <SelectMenuModal 
+                          <SelectMenuModal
                             positionTop={true}
                             positionY={41.5}
                             maxHeight={96 - 41.5}
@@ -220,12 +236,12 @@ export default function SaveSongModal(props) {
                     isOpen={showError}
                     onClose={setShowError}
                     message={errorMessage}
-                    modHeight={50}
+                    modHeight={45}
                     modWidth={78}
-                    top={25.5}
+                    top={23}
                     left={10}
                   />
-                  <form className="song-inputs-container" onSubmit={(e) => validateInputs(e)}>
+                  <form className="song-inputs-container" onSubmit={e => validateInputs(e)}>
                     <div className="section-title">
                       <h2>Upload Your Flow</h2>
                     </div>
@@ -235,21 +251,21 @@ export default function SaveSongModal(props) {
                         <div className="input-field-container">
                           <input
                             className="input-field"
-                            style={errorPath === "name" ? {border: "3px solid #ff6e6e"} : {}}
+                            style={errorPath === 'name' ? { border: '3px solid #ff6e6e' } : {}}
                             ref={songNameInputRef}
                             type="text"
                             name="name"
                             placeholder="Name"
                             autoComplete="off"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={e => setName(e.target.value)}
                           />
                         </div>
 
-                        <ButtonClearText 
-                          containerWidth={19} 
-                          inset={true} 
-                          shadowColors={["#282828", "#bcbaba", "#282828", "#a7a7a7"]}
+                        <ButtonClearText
+                          containerWidth={19}
+                          inset={true}
+                          shadowColors={['#282828', '#bcbaba', '#282828', '#a7a7a7']}
                           inputRef={songNameInputRef}
                           value={name}
                           setValue={setName}
@@ -260,25 +276,25 @@ export default function SaveSongModal(props) {
                         <div className="input-field-container">
                           <input
                             className="input-field"
-                            style={errorPath === "caption" ? {border: "3px solid #ff6e6e"} : {}}
+                            style={errorPath === 'caption' ? { border: '3px solid #ff6e6e' } : {}}
                             ref={songCaptionInputRef}
                             type="text"
                             name="caption"
                             placeholder="Caption"
                             autoComplete="off"
                             value={caption}
-                            onChange={(e) => setCaption(e.target.value)}
+                            onChange={e => setCaption(e.target.value)}
                           />
                         </div>
 
-                        <ButtonClearText 
-                          inset={true} 
-                          shadowColors={["#282828", "#bcbaba", "#282828", "#a7a7a7"]}
+                        <ButtonClearText
+                          inset={true}
+                          shadowColors={['#282828', '#bcbaba', '#282828', '#a7a7a7']}
                           inputRef={songCaptionInputRef}
                           value={caption}
                           setValue={setCaption}
                         />
-                      </div>  
+                      </div>
                     </div>
 
                     <div className="buttons-container">

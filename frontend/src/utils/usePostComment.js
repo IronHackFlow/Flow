@@ -23,6 +23,7 @@ export default function usePostComment() {
           `--- to ${res.data.song.name}'s song_comments: `,
           res.data.song.song_comments,
         )
+
         const songComments = res.data.song.song_comments
         updateFeed(songId, songComments)
       })
@@ -41,6 +42,7 @@ export default function usePostComment() {
           `--- from ${res.data.song.name}'s song_comments: `,
           res.data.song.song_comments,
         )
+
         const songComments = res.data.song.song_comments
         updateFeed(songId, songComments)
       })
@@ -64,6 +66,7 @@ export default function usePostComment() {
           `--- from ${res.data.name}'s song_comments: `,
           res.data.song_comments,
         )
+
         const songComments = res.data.song_comments
         updateFeed(songId, songComments)
       })

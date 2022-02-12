@@ -27,13 +27,11 @@ export default function SongScreen() {
   const [songInView, setSongInView] = useState({ song: currentSong, songVideo: gifsCopy[0].url })
   const [usersSongs, setUsersSongs] = useState([])
   const [isPlaying, setIsPlaying] = useState(false)
-  const [showCommentInputModal, setShowCommentInputModal] = useState(false)
   const [showCommentMenu, setShowCommentMenu] = useState(false)
-  const [commentsArray, setCommentsArray] = useState([])
-  const [totalComments, setTotalComments] = useState(currentSong?.song_comments?.length)
+  const [showCommentInputModal, setShowCommentInputModal] = useState(null)
+  const [editComment, setEditComment] = useState(null)
   const [songScreen] = useState(`#353535`)
 
-  const commentInputRef = useRef()
   const playPauseRef = useRef()
 
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function SongScreen() {
     setUsersSongs(filterSongs)
   }, [homeFeedSongs])
 
-  const popUpComments = () => {
+  const handleCommentMenu = () => {
     setShowCommentMenu(true)
     setShowCommentInputModal(true)
   }
@@ -92,17 +90,18 @@ export default function SongScreen() {
       }}
     >
       <Loading addClass={'LoadingSongScreen'} />
-      <CommentInputModal isOpen={showCommentInputModal} onClose={setShowCommentInputModal} />
+      <CommentInputModal
+        songId={songInView?.song?._id}
+        isOpen={showCommentInputModal}
+        onClose={setShowCommentInputModal}
+        onEdit={editComment}
+      />
       <CommentMenu
-        commentInputRef={commentInputRef}
-        songInView={songInView}
-        commentsArray={commentsArray}
-        setCommentsArray={setCommentsArray}
-        totalComments={totalComments}
-        setTotalComments={setTotalComments}
+        songInView={songInView?.song}
         isOpen={showCommentMenu}
         onClose={setShowCommentMenu}
         onCloseInput={setShowCommentInputModal}
+        setEditComment={setEditComment}
       />
 
       <div className="song-screen--container">
@@ -248,13 +247,11 @@ export default function SongScreen() {
                 btnStyle="songScreen"
                 action={{ add: addSongLike, delete: deleteSongLike }}
               />
-              {/* <FollowButton songInView={songInView.song} btnStyle="songScreen" />
-            <LikeButton songInView={songInView.song} btnStyle="songScreen" /> */}
               <CommentButton
                 songInView={songInView.song}
                 btnStyle="songScreen"
                 isPushed={showCommentMenu}
-                onClose={popUpComments}
+                onClose={handleCommentMenu}
               />
             </div>
           </div>

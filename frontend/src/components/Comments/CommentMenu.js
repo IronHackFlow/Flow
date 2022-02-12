@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import CommentItem from './CommentItem'
 import { goBackIcon } from '../../assets/images/_icons'
 
-export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput }) {
+export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput, setEditComment }) {
   const [songComments, setSongComments] = useState([])
   const [isEdit, setIsEdit] = useState(null)
 
@@ -25,6 +25,8 @@ export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput 
                     isOpen={isOpen}
                     isEdit={isEdit}
                     setIsEdit={setIsEdit}
+                    setEditComment={setEditComment}
+                    setShowCommentInputModal={onCloseInput}
                   />
                 )
               })}

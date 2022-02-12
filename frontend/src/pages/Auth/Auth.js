@@ -20,22 +20,22 @@ const Auth = () => {
     setShowErrorModal(false)
   }, [isLogIn])
 
-  const onResponse = (response) => {
+  const onResponse = response => {
     actions
       .logInGoogle(response)
       .then(async res => {
         if (res.data.success) {
-          console.log(res.data, "SUCCESSFUL GOOGLE LOGIN")
+          console.log(res.data, 'SUCCESSFUL GOOGLE LOGIN')
           localStorage.setItem('token', res.data.token)
           await actions
-            .isUserAuth()
+            .getAuthUser()
             .then(res => {
               if (res.data.isLoggedIn) {
                 setUser(res.data.user)
                 navigate('/')
               }
-          })
-          .catch(console.error)
+            })
+            .catch(console.error)
         } else {
           //TODO: add errors to display to user
           console.log(res.data.message)
@@ -50,9 +50,7 @@ const Auth = () => {
         <div className="upper-container">
           <div className="upper-outset">
             <div className="upper-inset">
-              <div className="upper-inset-outset">
-                Welcome To
-              </div>
+              <div className="upper-inset-outset">Welcome To</div>
             </div>
           </div>
         </div>
@@ -66,9 +64,7 @@ const Auth = () => {
                 <div className="user-input-container">
                   <div className="user-login_shadow-div-outset">
                     <div className="user-login-1_title">
-                      <div className="title_shadow-div-inset">
-                        {isLogIn ? `Sign Up` : `Log In` }
-                      </div>
+                      <div className="title_shadow-div-inset">{isLogIn ? `Sign Up` : `Log In`}</div>
                     </div>
                     <div className="user-login-2_other-logins">
                       <InputError
@@ -83,25 +79,29 @@ const Auth = () => {
                       <div className="other-logins-1_google-btn">
                         <div className="google-btn_shadow-div-outset">
                           <p>Continue with </p>
-                          <GoogleLogin 
+                          <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLEID}
-                            buttonText={isLogIn ? "Sign Up" : "Log In" }
+                            buttonText={isLogIn ? 'Sign Up' : 'Log In'}
                             onSuccess={onResponse}
                             onFailure={onResponse}
-                            cookiePolicy={"single_host_origin"}
+                            cookiePolicy={'single_host_origin'}
                           />
                         </div>
                       </div>
-                      <div 
+                      <div
                         className="other-logins-2_or-container"
-                        style={showErrorModal ? {height: "15%"} : {height: "25%"}}
+                        style={showErrorModal ? { height: '15%' } : { height: '25%' }}
                       >
                         <div className="border"></div>
                         <p>or</p>
                         <div className="border"></div>
                       </div>
                     </div>
-                    {isLogIn ? (<AuthSignUp showError={setShowErrorModal} onError={setErrorMessage} />) : (<AuthLogIn showError={setShowErrorModal} onError={setErrorMessage} />) }
+                    {isLogIn ? (
+                      <AuthSignUp showError={setShowErrorModal} onError={setErrorMessage} />
+                    ) : (
+                      <AuthLogIn showError={setShowErrorModal} onError={setErrorMessage} />
+                    )}
                   </div>
                 </div>
               </div>
@@ -111,11 +111,13 @@ const Auth = () => {
               <div className="switch--shadow-outset">
                 <div className="switch--shadow-inset">
                   <div className="switch__text--container">
-                    <p className="switch__text">{ isLogIn ? "Already a member of Flow?" : "Don't have an account?" }</p>
+                    <p className="switch__text">
+                      {isLogIn ? 'Already a member of Flow?' : "Don't have an account?"}
+                    </p>
                   </div>
                   <div className="switch__btn--container">
                     <button className="switch__btn" onClick={() => setIsLogIn()}>
-                      {isLogIn ? "Log In" : "Sign Up"} 
+                      {isLogIn ? 'Log In' : 'Sign Up'}
                     </button>
                   </div>
                 </div>

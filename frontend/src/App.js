@@ -14,7 +14,7 @@ const LazyEditProfile = React.lazy(() => import('./pages/EditProfile/EditProfile
 const LazyProfile = React.lazy(() => import('./pages/Profile'))
 const LazySongScreen = React.lazy(() => import('./pages/SongScreen'))
 const LazyTestAudio = React.lazy(() => import('./pages/TestAudio'))
-const LazyEditLyrics = React.lazy(() => import('./components/EditLyrics'))
+const LazyEditLyrics = React.lazy(() => import('./components/EditLyrics/EditLyrics'))
 
 function App() {
   const [user, setUser] = useState()
@@ -24,7 +24,7 @@ function App() {
     const signal = controller.signal
 
     actions
-      .isUserAuth()
+      .getAuthUser()
       .then(
         res => {
           console.log(res, 'I GOT AN AUTH USER HERE')

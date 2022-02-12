@@ -5,7 +5,15 @@ import ButtonCommentActions from './ButtonCommentActions'
 import usePostLike from '../../utils/usePostLike'
 import useFormatDate from '../../utils/useFormatDate'
 
-export default function CommentItem({ songInView, commentData, isOpen, isEdit, setIsEdit }) {
+export default function CommentItem({
+  songInView,
+  commentData,
+  isOpen,
+  isEdit,
+  setIsEdit,
+  setEditComment,
+  setShowCommentInputModal,
+}) {
   const { user } = useContext(TheContext)
   const { _id: songId } = songInView
   const { _id: songUserId } = songInView.song_user
@@ -85,6 +93,8 @@ export default function CommentItem({ songInView, commentData, isOpen, isEdit, s
                     setEdit: setIsEdit,
                     value: commentText,
                   }}
+                  setEditComment={setEditComment}
+                  setShowCommentInputModal={setShowCommentInputModal}
                 />
               </>
             ) : (

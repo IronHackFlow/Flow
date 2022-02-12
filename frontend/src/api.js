@@ -30,75 +30,49 @@ const actions = {
     return await axios.post(`${baseURL}/logIn`, user, resetHead())
   },
 
-  isUserAuth: async () => {
-    return await axios.get(`${baseURL}/isUserAuth`, resetHead())
+  logInGoogle: async data => {
+    localStorage.setItem('googleTokenId', data.tokenId)
+    let headerObj = resetHead()
+    headerObj.headers['X-Google-Token'] = data.tokenId
+    let resFromOurDB = await axios.post(`${baseURL}/logInGoogle`, data, headerObj)
+    window.localStorage.setItem('token', resFromOurDB?.data?.token)
+    return resFromOurDB
   },
 
   getAuthUser: async () => {
     return await axios.get(`${baseURL}/getAuthUser`, resetHead())
   },
 
-  getUserName: async () => {
-    return await axios.get(`${baseURL}/getUserName`, resetHead())
-  },
-
-  getUser: async () => {
-    return await axios.get(`${baseURL}/user`, resetHead())
-  },
-
-  getAllBeats: async () => {
-    return await axios.get(`${baseURL}/getAllBeatsRT`, resetHead())
-  },
-
-  getBeat: async () => {
-    return await axios.get(`${baseURL}/getBeatRT`, resetHead())
-  },
-
-  updateEachUserLikes: async id => {
-    return await axios.post(`${baseURL}/updateEachUserLikes`, id, resetHead())
-  },
-
   getUserSongs: async theUser => {
-    return await axios.post(`${baseURL}/getUserSongsRT`, theUser, resetHead())
-  },
-  getUserFollowsSongs: async userFollows => {
-    return await axios.post(`${baseURL}/getUserFollowsSongsRT`, userFollows, resetHead())
-  },
-  //search bar bobby
-  getManySongsAndUsers: async searchStr => {
-    return await axios.post(`${baseURL}/getManySongsAndUsersRT`, searchStr, resetHead())
+    return await axios.post(`${baseURL}/getUserSongs`, theUser, resetHead())
   },
 
-  getManySongs: async searchStr => {
-    return await axios.post(`${baseURL}/getManySongsRT`, searchStr, resetHead())
+  getUsersLikes: async user => {
+    return await axios.post(`${baseURL}/getUsersLikes`, user, resetHead())
   },
 
-  getSong: async getSong => {
-    return await axios.post(`${baseURL}/getSongRT`, getSong, resetHead())
+  updateUserProfile: async person => {
+    return await axios.post(`${baseURL}/updateUserProfile`, person, resetHead())
   },
 
-  getUserLikedSongs: async () => {
-    return await axios.get(`${baseURL}/getUserLikedSongsRT`, resetHead())
+  getSignedS3: async ({ fileName, fileType }) => {
+    return await axios.post(`${baseURL}/getSignedS3`, { fileName, fileType }, resetHead())
   },
 
-  getMostLikedSongs: async () => {
-    return await axios.post(`${baseURL}/getMostLikedSongsRT`, resetHead())
+  addSong: async song => {
+    return await axios.post(`${baseURL}/addSong`, song, resetHead())
   },
 
-  addSongLike: async like => {
-    return await axios.post(`${baseURL}/addSongLike`, like, resetHead())
+  deleteSong: async song => {
+    return await axios.post(`${baseURL}/deleteSong`, song, resetHead())
   },
 
-  deleteSongLike: async like => {
-    return await axios.post(`${baseURL}/deleteSongLike`, like, resetHead())
+  getAllSongs: async () => {
+    return await axios.get(`${baseURL}/getAllSongs`, resetHead())
   },
 
-  addCommentLike: async like => {
-    return await axios.post(`${baseURL}/addCommentLike`, like, resetHead())
-  },
-
-  deleteCommentLike: async like => {
-    return await axios.post(`${baseURL}/deleteCommentLike`, like, resetHead())
+  searchUsersAndSongs: async searchStr => {
+    return await axios.post(`${baseURL}/searchUsersAndSongs`, searchStr, resetHead())
   },
 
   addComment: async comment => {
@@ -113,8 +87,24 @@ const actions = {
     return await axios.post(`${baseURL}/editComment`, comment, resetHead())
   },
 
-  getUsersLikes: async user => {
-    return await axios.post(`${baseURL}/getUsersLikes`, user, resetHead())
+  getComments: async dat => {
+    return await axios.post(`${baseURL}/getComments`, dat, resetHead())
+  },
+
+  addCommentLike: async like => {
+    return await axios.post(`${baseURL}/addCommentLike`, like, resetHead())
+  },
+
+  deleteCommentLike: async like => {
+    return await axios.post(`${baseURL}/deleteCommentLike`, like, resetHead())
+  },
+
+  addSongLike: async like => {
+    return await axios.post(`${baseURL}/addSongLike`, like, resetHead())
+  },
+
+  deleteSongLike: async like => {
+    return await axios.post(`${baseURL}/deleteSongLike`, like, resetHead())
   },
 
   addFollow: async follow => {
@@ -124,132 +114,71 @@ const actions = {
   deleteFollow: async follow => {
     return await axios.post(`${baseURL}/deleteFollow`, follow, resetHead())
   },
-
-  addSong: async song => {
-    return await axios.post(`${baseURL}/addSongRT`, song, resetHead())
-  },
-
-  deleteSong: async song => {
-    return await axios.post(`${baseURL}/deleteSongRT`, song, resetHead())
-  },
-
-  addBeat: async () => {
-    return await axios.post(`${baseURL}/addBeatRT`, resetHead())
-  },
-
-  addSongBG: async () => {
-    return await axios.post(`${baseURL}/addSongBGRT`, resetHead())
-  },
-
-  getOneUser: async () => {
-    return await axios.get(`${baseURL}/getOneUserRT`, resetHead())
-  },
-
-  getAUser: async userid => {
-    return await axios.post(`${baseURL}/getAUserRT`, userid, resetHead())
-  },
-
-  addUserProf: async person => {
-    return await axios.post(`${baseURL}/addUserProfRT`, person, resetHead())
-  },
-
-  addUserPhoto: async () => {
-    return await axios.post(`${baseURL}/addUserPhotoRT`, resetHead())
-  },
-
-  getUsersFollowed: async () => {
-    return await axios.get(`${baseURL}/getUsersFollowedRT`, resetHead())
-  },
-
-  getComments: async dat => {
-    return await axios.post(`${baseURL}/getCommentsRT`, dat, resetHead())
-  },
-
-  getAComment: async aComm => {
-    return await axios.post(`${baseURL}/getACommentRT`, aComm, resetHead())
-  },
-
-  getUserComments: async () => {
-    return await axios.get(`${baseURL}/getUserCommentsRT`, resetHead())
-  },
-
-  getMostFollowed: async () => {
-    return await axios.get(`${baseURL}/getMostFollowedRT`, resetHead())
-  },
-
-  logInGoogle: async data => {
-    localStorage.setItem('googleTokenId', data.tokenId)
-    let headerObj = resetHead()
-    headerObj.headers['X-Google-Token'] = data.tokenId
-    let resFromOurDB = await axios.post(`${baseURL}/logInGoogle`, data, headerObj)
-    window.localStorage.setItem('token', resFromOurDB?.data?.token)
-    return resFromOurDB
-  },
-
-  getSignedS3: async ({ fileName, fileType }) => {
-    return await axios.post(`${baseURL}/getSignedS3`, { fileName, fileType }, resetHead())
-  },
-
-  uploadFile: async ({ fileName, fileType, file, kind }, songData) => {
-    console.log(songData)
-    axios
-      .post(
-        `${baseURL}/sign_s3`,
-        {
-          fileName: fileName,
-          fileType: fileType,
-          file: file,
-          kind: kind,
-        },
-        resetHead(),
-      )
-      .then(res => {
-        console.log(res, 'YO WHTF IS GONING ON HERE OK??')
-        var rtnData = res.data
-        var signedRequest = rtnData.signedRequest
-        var url = rtnData.url
-        var options = {
-          headers: {
-            'Content-Type': fileType,
-          },
-        }
-        console.log(signedRequest, file, options, 'come on man what is goin on h??')
-
-        // return response
-        axios
-          .put(signedRequest, file, options)
-          .then(async result => {
-            console.log(result, ' kindddd', kind, url)
-            if (kind === 'song') {
-              return await axios.post(
-                `${baseURL}/addSongRT`,
-                {
-                  song_URL: url,
-                  song_user: songData.song_user,
-                  video: null,
-                  date: songData.date,
-                  duration: songData.duration,
-                  name: songData.name,
-                  lyrics: songData.lyrics,
-                  song_PBR: null,
-                  song_BPM: null,
-                  caption: songData.caption,
-                  song_beattrack: null,
-                },
-                resetHead(),
-              )
-            }
-            if (kind === 'beatTrack') {
-              return await axios.post(`${baseURL}/addSongRT`, { url }, resetHead())
-            }
-            //this.setState({ audio: url }, () => console.log(this.state.audio));
-            //post url to mongoose here??  or better do it from backend index.js before sending response to here???
-            alert('File uploaded')
-          })
-          .catch(console.error)
-      })
-      .catch(console.error)
-  },
 }
 
 export default actions
+
+// addUserPhoto: async () => {
+//   return await axios.post(`${baseURL}/addUserPhotoRT`, resetHead())
+// },
+
+// uploadFile: async ({ fileName, fileType, file, kind }, songData) => {
+//   console.log(songData)
+//   axios
+//     .post(
+//       `${baseURL}/sign_s3`,
+//       {
+//         fileName: fileName,
+//         fileType: fileType,
+//         file: file,
+//         kind: kind,
+//       },
+//       resetHead(),
+//     )
+//     .then(res => {
+//       console.log(res, 'YO WHTF IS GONING ON HERE OK??')
+//       var rtnData = res.data
+//       var signedRequest = rtnData.signedRequest
+//       var url = rtnData.url
+//       var options = {
+//         headers: {
+//           'Content-Type': fileType,
+//         },
+//       }
+//       console.log(signedRequest, file, options, 'come on man what is goin on h??')
+
+//       // return response
+//       axios
+//         .put(signedRequest, file, options)
+//         .then(async result => {
+//           console.log(result, ' kindddd', kind, url)
+//           if (kind === 'song') {
+//             return await axios.post(
+//               `${baseURL}/addSongRT`,
+//               {
+//                 song_URL: url,
+//                 song_user: songData.song_user,
+//                 video: null,
+//                 date: songData.date,
+//                 duration: songData.duration,
+//                 name: songData.name,
+//                 lyrics: songData.lyrics,
+//                 song_PBR: null,
+//                 song_BPM: null,
+//                 caption: songData.caption,
+//                 song_beattrack: null,
+//               },
+//               resetHead(),
+//             )
+//           }
+//           if (kind === 'beatTrack') {
+//             return await axios.post(`${baseURL}/addSongRT`, { url }, resetHead())
+//           }
+//           //this.setState({ audio: url }, () => console.log(this.state.audio));
+//           //post url to mongoose here??  or better do it from backend index.js before sending response to here???
+//           alert('File uploaded')
+//         })
+//         .catch(console.error)
+//     })
+//     .catch(console.error)
+// },
