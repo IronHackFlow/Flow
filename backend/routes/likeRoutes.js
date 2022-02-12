@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const verifyJWT = require('./verifyToken')
-
 const User = require('../models/User')
 const Songs = require('../models/Songs')
 const Comments = require('../models/Comments')

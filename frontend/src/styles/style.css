@@ -6312,11 +6312,11 @@ button {
 }
 
 .EditLyrics {
-  background: #444444;
+  background: #cccccc;
 }
 
-.EditLyrics .section-1_profile-el {
-  height: 5%;
+.EditLyrics .edit-lyrics__header {
+  height: 7%;
   width: 100%;
   border-radius: 0px;
   display: -webkit-box;
@@ -6325,16 +6325,269 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset {
+  height: 85%;
+  width: 97%;
+  border-radius: 0.2em 1.5em 0.2em 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #686868, inset -3px -3px 3px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #686868, inset -3px -3px 3px #ffffff;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit {
+  height: 100%;
+  width: 11%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn {
+  height: 77%;
+  width: 74%;
+  border-radius: 0.2em 0.2em 0.2em 1.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background: #ec6aa0;
+  -webkit-box-shadow: 2px 2px 3px #787878, -2px -2px 2px 0px #efefef;
+          box-shadow: 2px 2px 3px #787878, -2px -2px 2px 0px #efefef;
+  margin-left: 0.3em;
 }
 
-.EditLyrics .section-1_profile-el .close-screen {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn img {
+  height: 85%;
+  width: 85%;
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn:active {
+  background: #f691bb;
+  -webkit-box-shadow: inset 2px 2px 3px #a55a79, inset -2px -2px 2px 0px #ffe3ef;
+          box-shadow: inset 2px 2px 3px #a55a79, inset -2px -2px 2px 0px #ffe3ef;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container {
+  height: 100%;
+  width: 40%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset {
+  height: 77%;
+  width: 96%;
+  border-radius: 0.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #908f8f, -2px -2px 2px 0px #ffffff;
+          box-shadow: 2px 2px 3px #908f8f, -2px -2px 2px 0px #ffffff;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset .edit-lyrics__header-title {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset .edit-lyrics__header-title-name {
+  color: #ec6aa0;
+  font-size: 0.9rem;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song {
+  height: 100%;
+  width: 49%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset {
+  height: 77%;
+  width: 97%;
+  border-radius: 0.2em 1.3em 0.2em 0.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 3px #777777, -2px -2px 2px 0px #ffffff;
+          box-shadow: 2px 2px 3px #777777, -2px -2px 2px 0px #ffffff;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset {
+  height: 80%;
+  width: 96%;
+  border-radius: 0.2em 1.3em 0.2em 0.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #808080, inset -2px -2px 2px #ffffff;
+          box-shadow: inset 2px 2px 3px 0px #808080, inset -2px -2px 2px #ffffff;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .choose-song-title {
+  height: 100%;
+  width: 17%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: pink;
+  font-size: 0.8rem;
+  text-align: start;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs {
+  height: 75%;
+  width: 91%;
+  border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #808080, -1px -1px 3px 0px #ffffff;
+          box-shadow: 2px 2px 3px #808080, -1px -1px 3px 0px #ffffff;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs p {
+  width: 100%;
+  font-size: 0.9rem;
+  color: #ec6aa0;
+  text-indent: 2%;
+  text-align: start;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs:hover {
+  background: #f3b9c3;
+  -webkit-box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+          box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs:active {
+  background: #b4b4b4;
+  -webkit-box-shadow: inset 1px 1px 3px 0px #5f5f5f, inset -2px -2px 2px #efefef;
+          box-shadow: inset 1px 1px 3px 0px #5f5f5f, inset -2px -2px 2px #efefef;
+}
+
+.EditLyrics .edit-lyrics__header .close-screen {
   height: 30px;
   width: 30px;
   border-radius: 50px;
@@ -6359,7 +6612,7 @@ button {
 }
 
 .EditLyrics .section-2_lyrics-el {
-  height: 77%;
+  height: 76%;
   width: 100%;
   border-radius: 2.3em 0em 0em 0em;
   display: -webkit-box;
@@ -7334,117 +7587,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #949494;
-          box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #949494;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song {
-  height: 100%;
-  width: 70%;
-  border-radius: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset {
-  height: 70%;
-  width: 94%;
-  border-radius: 2em 2em 2em 0.5em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #3c3c3c, -1px -1px 3px 0px #adadad;
-          box-shadow: 2px 2px 3px #3c3c3c, -1px -1px 3px 0px #adadad;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .choose-song--shadow-outset {
-  height: 80%;
-  width: 96%;
-  border-radius: 2em 2em 2em 0.3em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #484848, inset -2px -2px 2px #8d8d8d;
-          box-shadow: inset 2px 2px 3px 0px #484848, inset -2px -2px 2px #8d8d8d;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .choose-song--shadow-outset .choose-song-title {
-  height: 100%;
-  width: 17%;
-  border-radius: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  color: pink;
-  font-size: 0.8rem;
-  text-align: start;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .choose-song--shadow-outset .select-songs {
-  height: 100%;
-  width: 83%;
-  border-radius: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  color: white;
-}
-
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-1_choose-song .choose-song_shadow-div-inset .choose-song--shadow-outset .select-songs p {
-  width: 100%;
-  text-indent: 2%;
-  text-align: start;
+  -webkit-box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #828282;
+          box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #828282;
 }
 
 .EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics {
@@ -7566,8 +7710,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #9c9c9c;
-          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #9c9c9c;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #808080;
+          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #808080;
 }
 
 .EditLyrics .section-3_controls .controls-container .controls-2_inner .inner_shadow-div-outset .flow-controls-1_playback-display {
@@ -9263,8 +9407,8 @@ button {
 }
 
 .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
-  height: 2rem;
-  width: 2rem;
+  height: 65%;
+  width: 65%;
 }
 
 .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset:active {
@@ -9332,8 +9476,8 @@ button {
   -webkit-box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
           box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
   border: 1px solid #ec6aa0;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .btn-selected .navbar-btn_shadow-div-inset {
@@ -14620,8 +14764,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 3px #d8d8d8;
-          box-shadow: inset 3px 3px 3px 0px #323232, inset -3px -3px 3px #d8d8d8;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #686868, inset -2px -2px 3px #d8d8d8;
+          box-shadow: inset 2px 2px 3px 0px #686868, inset -2px -2px 3px #d8d8d8;
   padding: 1.5%;
   overflow-y: scroll;
 }
@@ -14673,8 +14817,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #424242, -2px -2px 2px 0px #f5f5f5;
-          box-shadow: 2px 2px 3px #424242, -2px -2px 2px 0px #f5f5f5;
+  -webkit-box-shadow: 2px 2px 3px #5a5a5a, -2px -2px 2px 0px #f5f5f5;
+          box-shadow: 2px 2px 3px #5a5a5a, -2px -2px 2px 0px #f5f5f5;
 }
 
 .SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .select-menu__item-container .select-menu__item--shadow-outset .select-menu__item--shadow-inset {

@@ -1,20 +1,30 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
-import { v4 as uuidv4 } from "uuid";
-import datamuse from "datamuse";
-import TheContext from "../contexts/TheContext";
-import RecordBoothContext from "../contexts/RecordBoothContext";
-import SelectMenuModal from "../components/SelectMenuModal";
-import ErrorModal from "../components/ErrorModal";
-import AudioTimeSlider from "../components/AudioTimeSlider";
-import SaveSongModal from "../components/SaveSongModal";
-import RecordingBoothModal from "../components/RecordingBoothModal";
-import useRefilterProfanity from "../utils/useRefilterProfanity"
+import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { v4 as uuidv4 } from 'uuid'
+import datamuse from 'datamuse'
+import TheContext from '../contexts/TheContext'
+import RecordBoothContext from '../contexts/RecordBoothContext'
+import SelectMenuModal from '../components/SelectMenuModal'
+import ErrorModal from '../components/ErrorModal'
+import AudioTimeSlider from '../components/AudioTimeSlider'
+import SaveSongModal from '../components/SaveSongModal'
+import RecordingBoothModal from '../components/RecordingBoothModal'
+import useRefilterProfanity from '../utils/useRefilterProfanity'
 import { beatList } from '../constants/index'
-import actions from "../api";
-import NavBar from "../components/NavBar";
-import { micIcon, playIcon, pauseIcon, stopIcon, closeIcon, saveIcon, lockedIcon, shuffleIcon, guideIcon } from '../assets/images/_icons'
+import actions from '../api'
+import NavBar from '../components/NavBar'
+import {
+  micIcon,
+  playIcon,
+  pauseIcon,
+  stopIcon,
+  closeIcon,
+  saveIcon,
+  lockedIcon,
+  shuffleIcon,
+  guideIcon,
+} from '../assets/images/_icons'
 
 function TestAudio(props) {
   const { user } = React.useContext(TheContext)
@@ -24,8 +34,8 @@ function TestAudio(props) {
 
   const commands = [
     {
-      command: /\b(\w(\S{4,}))/g, 
-      callback: (command) => getActionWords(`${command}`),
+      command: /\b(\w(\S{4,}))/g,
+      callback: command => getActionWords(`${command}`),
       matchInterim: true,
     },
     // {
@@ -35,7 +45,7 @@ function TestAudio(props) {
     // }
   ]
 
-  const { transcript, resetTranscript } = useSpeechRecognition({ commands });
+  const { transcript, resetTranscript } = useSpeechRecognition({ commands })
   const initialState = {
     recordingMinutes: 0,
     recordingSeconds: 0,
@@ -53,50 +63,46 @@ function TestAudio(props) {
     date: null,
     duration: 0,
     caption: '',
-    video: null
+    video: null,
   }
 
-
-  const [recorderState, setRecorderState] = useState(initialState);
+  const [recorderState, setRecorderState] = useState(initialState)
   const [currentSong, setCurrentSong] = useState(initialSongObject)
   const [currentBeat, setCurrentBeat] = useState(beatList[0])
-  const [audioSrc, setAudioSrc] = useState(null);
-  const [silent, setSilent] = useState(false);
-  const [recordingDisplay, setRecordingDisplay] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isBeatPlaying, setIsBeatPlaying] = useState(false);
-  const [showSaveSongModal, setShowSaveSongModal] = useState(false);
+  const [silent, setSilent] = useState(false)
+  const [recordingDisplay, setRecordingDisplay] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isBeatPlaying, setIsBeatPlaying] = useState(false)
+  const [showSaveSongModal, setShowSaveSongModal] = useState(false)
   const [showSelectSongMenu, setShowSelectSongMenu] = useState(false)
   const [showSelectBeatMenu, setShowSelectBeatMenu] = useState(false)
-  const [showErrorModal, setShowErrorModal] = useState(false);
-  const [allTakes, setAllTakes] = useState([]);
+  const [showErrorModal, setShowErrorModal] = useState(false)
+  const [allTakes, setAllTakes] = useState([])
 
-  const [lyricsArr, setLyricsArr] = useState([]);
-  const [rhymeWordHolder, setRhymeWordHolder] = useState("");
-  const [lockRhymeHolder, setLockRhymeHolder] = useState();
-  const [retrievedRhymes, setRetrievedRhymes] = useState([]);
-  const [retrievedSelectedRhymes, setRetrievedSelectedRhymes] = useState([]);
-  const [retrievedActionRhymes, setRetrievedActionRhymes] = useState([]);
-  const [selectedRhymeNo, setSelectedRhymeNo] = useState(5);
-  const [selectedWordHolder, setSelectedWordHolder] = useState();
-  const [topRhymes, setTopRhymes] = useState([]);
-  const [lockedRhymes, setLockedRhymes] = useState([]);
-  const [selectedRhymes, setSelectedRhymes] = useState([]);
+  const [lyricsArr, setLyricsArr] = useState([])
+  const [rhymeWordHolder, setRhymeWordHolder] = useState('')
+  const [lockRhymeHolder, setLockRhymeHolder] = useState()
+  const [retrievedRhymes, setRetrievedRhymes] = useState([])
+  const [retrievedSelectedRhymes, setRetrievedSelectedRhymes] = useState([])
+  const [retrievedActionRhymes, setRetrievedActionRhymes] = useState([])
+  const [selectedRhymeNo, setSelectedRhymeNo] = useState(5)
+  const [selectedWordHolder, setSelectedWordHolder] = useState()
+  const [lockedRhymes, setLockedRhymes] = useState([])
 
-  const [showLyricsLine, setShowLyricsLine] = useState([]);
+  const [showLyricsLine, setShowLyricsLine] = useState([])
   const [blobData, setBlobData] = useState({})
-  const [dateBefore, setDateBefore] = useState();
-  const [dateAfter, setDateAfter] = useState();
-  const [toggleModal, setToggleModal] = useState(false);
+  const [dateBefore, setDateBefore] = useState()
+  const [dateAfter, setDateAfter] = useState()
+  const [toggleModal, setToggleModal] = useState(false)
   const [focusBorder, setFocusBorder] = useState(null)
-  const [selectTitle, setSelectTitle] = useState("")
+  const [selectTitle, setSelectTitle] = useState('')
 
-  const modalBtnRef = useRef();
-  const playBeatRef = useRef();
-  const recordAudioRef = useRef();
-  const scrollRef = useRef();
-  const selectTakesRef = useRef();
-  const keyRef = useRef(0);
+  const modalBtnRef = useRef()
+  const playBeatRef = useRef()
+  const recordAudioRef = useRef()
+  const scrollRef = useRef()
+  const selectTakesRef = useRef()
+  const keyRef = useRef(0)
   const barNumberRef = useRef(1)
 
   useEffect(() => {
@@ -109,8 +115,8 @@ function TestAudio(props) {
 
   useEffect(() => {
     if (Object.keys(blobData).length !== 0) {
-      const songDate = new Date();
-      const songDuration = (dateAfter - dateBefore) - 200;
+      const songDate = new Date()
+      const songDuration = dateAfter - dateBefore - 200
       const songObject = {
         name: blobData.name,
         song_user: user,
@@ -120,25 +126,24 @@ function TestAudio(props) {
         date: songDate,
         duration: songDuration,
         caption: '',
-        video: null
+        video: null,
       }
 
-      setAudioSrc(songObject.song_URL)
       setCurrentSong(songObject)
       setBlobData({})
-      setAllTakes(eachTake => [...eachTake, {...songObject}])
+      setAllTakes(eachTake => [...eachTake, { ...songObject }])
     }
     console.log('Check out the updated AllTakes: ', allTakes, currentSong)
   }, [blobData])
-  
 
   useEffect(() => {
     setRetrievedSelectedRhymes([])
     if (selectedWordHolder !== undefined) {
-      datamuse.request(`words?rel_rhy=${selectedWordHolder}&max=20`)
-        .then((res) => {
+      datamuse
+        .request(`words?rel_rhy=${selectedWordHolder}&max=20`)
+        .then(res => {
           if (res.length !== 0) {
-            res.forEach((each) => {
+            res.forEach(each => {
               setRetrievedSelectedRhymes(oldRhymes => [...oldRhymes, each.word])
             })
           }
@@ -149,10 +154,10 @@ function TestAudio(props) {
 
   useEffect(() => {
     if (recorderState.mediaStream) {
-      setRecorderState((prevState) => {
+      setRecorderState(prevState => {
         return {
           ...prevState,
-          mediaRecorder: new MediaRecorder(prevState.mediaStream)
+          mediaRecorder: new MediaRecorder(prevState.mediaStream),
         }
       })
     }
@@ -161,32 +166,31 @@ function TestAudio(props) {
   useEffect(() => {
     const recorder = recorderState.mediaRecorder
 
-    if (recorder && recorder.state === "inactive") {
+    if (recorder && recorder.state === 'inactive') {
       setDateBefore(Date.now())
       recorder.start()
       let chunks = []
       let url
 
-      recorder.ondataavailable = (event) => {
+      recorder.ondataavailable = event => {
         setDateAfter(Date.now())
         chunks.push(event.data)
-        let mpegBlob = new Blob(chunks, { type: "audio/mpeg-3" });
-        url = URL.createObjectURL(mpegBlob);
+        let mpegBlob = new Blob(chunks, { type: 'audio/mpeg-3' })
+        url = URL.createObjectURL(mpegBlob)
         keyRef.current++
         setBlobData({ name: `Flow ${keyRef.current}`, blob: mpegBlob, song_URL: url })
       }
-      
+
       recorder.onstop = () => {
         chunks = []
         recorderState.otherMediaStream.getAudioTracks().forEach(track => track.stop())
-        setRecorderState((prevState) => {
+        setRecorderState(prevState => {
           if (prevState.mediaRecorder) {
             return {
               ...initialState,
-              audio: url
+              audio: url,
             }
-          }
-          else {
+          } else {
             return initialState
           }
         })
@@ -195,15 +199,17 @@ function TestAudio(props) {
 
     return () => {
       if (recorder) {
-        recorder.stream.getAudioTracks().forEach((track) => track.stop())
+        recorder.stream.getAudioTracks().forEach(track => track.stop())
       }
     }
   }, [recorderState.mediaRecorder])
 
   useEffect(() => {
-    if (allTakes.length === 0 && !recorderState.initRecording) return setSelectTitle("No Recorded Flows")
-    if (recorderState.initRecording) return setSelectTitle("Recording...")
-    else if (currentSong.name === "" && !recorderState.initRecording) return setSelectTitle("No Recorded Flows")
+    if (allTakes.length === 0 && !recorderState.initRecording)
+      return setSelectTitle('No Recorded Flows')
+    if (recorderState.initRecording) return setSelectTitle('Recording...')
+    else if (currentSong.name === '' && !recorderState.initRecording)
+      return setSelectTitle('No Recorded Flows')
     else return setSelectTitle(`${currentSong.name}`)
   }, [allTakes, currentSong, recorderState.initRecording])
 
@@ -226,7 +232,9 @@ function TestAudio(props) {
   const displayActionWords = useCallback(() => {
     return retrievedActionRhymes.slice(0, 5).map((each, index) => {
       return (
-        <p className="each-action-word" key={`${uuidv4()}action${index}`}>{each}</p>
+        <p className="each-action-word" key={`${uuidv4()}action${index}`}>
+          {each}
+        </p>
       )
     })
   }, [retrievedActionRhymes])
@@ -238,12 +246,13 @@ function TestAudio(props) {
 
   async function getActionWords(regex) {
     let finalWord = regex
-    if (regex.includes("*")) {
+    if (regex.includes('*')) {
       finalWord = refilterProfanity(regex)
     }
 
-    const getData = await datamuse.request(`words?rel_trg=${finalWord}&max=20`)
-      .then((res) => {
+    const getData = await datamuse
+      .request(`words?rel_trg=${finalWord}&max=20`)
+      .then(res => {
         if (res.length !== 0) {
           console.log(res)
           for (let i = 0; i < 1; i++) {
@@ -254,32 +263,33 @@ function TestAudio(props) {
         }
       })
       .catch(console.error)
-    console.log(retrievedActionRhymes, "RETRIEVED ACTIONS VERBS")
+    console.log(retrievedActionRhymes, 'RETRIEVED ACTIONS VERBS')
   }
 
   async function getDatamuseRhymes() {
-    let splitScript = transcript.split(" ")
+    let splitScript = transcript.split(' ')
 
-    if (splitScript[0] !== "") {
+    if (splitScript[0] !== '') {
       let lastWord = splitScript[splitScript.length - 1]
       let finalWord = lastWord
 
       if (lastWord.includes("'")) {
         finalWord = lastWord.split("'").join('')
       }
-      if (lastWord.includes("*")) {
+      if (lastWord.includes('*')) {
         finalWord = refilterProfanity(lastWord)
       }
 
       setRhymeWordHolder(finalWord)
       setRetrievedRhymes([])
-      console.log(finalWord, " - this is the last word")
+      console.log(finalWord, ' - this is the last word')
 
-      const getData = await datamuse.request(`words?rel_rhy=${finalWord}&max=30`)
-        .then((res) => {
+      const getData = await datamuse
+        .request(`words?rel_rhy=${finalWord}&max=30`)
+        .then(res => {
           console.log(res, "I'm gonna need to see what I'm working with here")
           if (res.length !== 0) {
-            res.forEach((each) => {
+            res.forEach(each => {
               setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
             })
           }
@@ -289,7 +299,7 @@ function TestAudio(props) {
   }
 
   const setLyricsHandler = () => {
-    const splitTranscript = transcript.split(" ")
+    const splitTranscript = transcript.split(' ')
     const filterTranscript = splitTranscript.filter(each => each.length > 0)
     if (filterTranscript.length !== 0) {
       setLyricsArr(oldArr => [...oldArr, filterTranscript])
@@ -299,22 +309,20 @@ function TestAudio(props) {
     autoScroll()
   }
 
-  const createLyricLine = (transcript) => {
+  const createLyricLine = transcript => {
     return (
       <div className="prev-transcript-container">
-        <div className="transcript-bar-no">
-          {`${barNumberRef.current++}`}
-        </div>
+        <div className="transcript-bar-no">{`${barNumberRef.current++}`}</div>
         <div className="transcript-word-container">
           {transcript.map((each, index) => {
             let isCurse = refilterProfanity(each)
             return (
-              <p 
-                className="prev-transcript-word" 
+              <p
+                className="prev-transcript-word"
                 key={`transcript${uuidv4()}and${index}`}
-                onClick={(e) => showSelectedWord(e)}
-                >
-                  {isCurse ? isCurse : each}
+                onClick={e => showSelectedWord(e)}
+              >
+                {isCurse ? isCurse : each}
               </p>
             )
           })}
@@ -324,7 +332,7 @@ function TestAudio(props) {
   }
 
   const displayTakeLyrics = useCallback(() => {
-    console.log(currentSong, "HYOUO")
+    console.log(currentSong, 'HYOUO')
     if (allTakes.length === 0) {
       return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
     } else {
@@ -333,9 +341,7 @@ function TestAudio(props) {
           {currentSong?.lyrics.map((row, index) => {
             return (
               <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
-                <div className="transcript-bar-no">
-                  {`${index + 1}`}
-                </div>
+                <div className="transcript-bar-no">{`${index + 1}`}</div>
                 <div className="transcript-word-container">
                   {row.map((word, index) => {
                     return (
@@ -353,32 +359,48 @@ function TestAudio(props) {
     }
   }, [allTakes, currentSong])
 
-  const showRhymes = (array) => {
+  const showRhymes = array => {
     if (array?.length >= selectedRhymeNo) {
       return array.slice(0, selectedRhymeNo).map((each, index) => {
         if (index === selectedRhymeNo - 1) {
-          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each}
+            </p>
+          )
         } else {
-          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each} {'\u2022'}
+            </p>
+          )
         }
       })
     } else {
       return array?.map((each, index) => {
         if (index === array.length - 1) {
-          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}</p>
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each}
+            </p>
+          )
         } else {
-          return <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>{each}{' '}{'\u2022'}</p>
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each} {'\u2022'}
+            </p>
+          )
         }
       })
     }
   }
 
-  const showRhymeWord = (holder) => {
+  const showRhymeWord = holder => {
     let uppercasedWord = holder.charAt(0).toUpperCase() + holder.slice(1)
     return uppercasedWord
   }
-  
-  const showSelectedWord = (e) => {
+
+  const showSelectedWord = e => {
     let selectStr = e.target.innerText
     let uppercasedStr = selectStr.charAt(0).toUpperCase() + selectStr.slice(1)
     setSelectedWordHolder(uppercasedStr)
@@ -398,17 +420,15 @@ function TestAudio(props) {
     })
   }, [selectedRhymeNo])
 
-
   const shuffleRhymeHandler = (array, theState) => {
     let randomRhymeArr = []
     if (array.length !== 0) {
       for (let i = 1; i <= selectedRhymeNo; i++) {
         randomRhymeArr.push(array[Math.floor(Math.random() * array?.length)])
       }
-      if (theState === "topRhymes") {
+      if (theState === 'topRhymes') {
         setRetrievedRhymes(randomRhymeArr)
-      }
-      else {
+      } else {
         setRetrievedSelectedRhymes(randomRhymeArr)
       }
     }
@@ -417,27 +437,27 @@ function TestAudio(props) {
   const lockSuggestion = () => {
     if (retrievedRhymes) {
       setLockRhymeHolder(rhymeWordHolder)
-      const copyRhyme = [...retrievedRhymes];
-      setLockedRhymes(copyRhyme);
+      const copyRhyme = [...retrievedRhymes]
+      setLockedRhymes(copyRhyme)
     }
-  };
+  }
 
-  let myReq; //animation frame ID
+  let myReq //animation frame ID
   const detectSilence = (stream, silence_delay = 50, min_decibels = -80) => {
-    const ctx = new AudioContext();
-    const analyser = ctx.createAnalyser();
-    const streamNode = ctx.createMediaStreamSource(stream);
+    const ctx = new AudioContext()
+    const analyser = ctx.createAnalyser()
+    const streamNode = ctx.createMediaStreamSource(stream)
     streamNode.connect(analyser)
     analyser.minDecibels = min_decibels
-    const data = new Uint8Array(analyser.frequencyBinCount); // will hold our data
-    let silence_start = performance.now();
-    let triggered = false; // trigger only once per silence event
+    const data = new Uint8Array(analyser.frequencyBinCount) // will hold our data
+    let silence_start = performance.now()
+    let triggered = false // trigger only once per silence event
 
-    const loop = (time) => {
-      myReq = requestAnimationFrame(loop);
-       // we'll loop every 60th of a second to check
-      analyser.getByteFrequencyData(data); // get current data
-      if (data.some((v) => v)) {
+    const loop = time => {
+      myReq = requestAnimationFrame(loop)
+      // we'll loop every 60th of a second to check
+      analyser.getByteFrequencyData(data) // get current data
+      if (data.some(v => v)) {
         // if there is data above the given db limit
         if (triggered) {
           triggered = false
@@ -463,7 +483,6 @@ function TestAudio(props) {
     setSelectedWordHolder(null)
     setRetrievedRhymes([])
     setLockedRhymes([])
-    setSelectedRhymes([])
     resetTranscript()
     barNumberRef.current = 1
   }
@@ -472,29 +491,28 @@ function TestAudio(props) {
     try {
       resetSuggestions()
       const stream1 = await navigator.mediaDevices.getUserMedia({ audio: true })
-      SpeechRecognition.startListening({ continuous: true });
+      SpeechRecognition.startListening({ continuous: true })
 
-      var audio = document.getElementById("song").captureStream();
-      document.getElementById("song").play();
-      
+      var audio = document.getElementById('song').captureStream()
+      document.getElementById('song').play()
+
       detectSilence(stream1)
-      const audioContext = new AudioContext();
+      const audioContext = new AudioContext()
       let audioIn_01 = audioContext.createMediaStreamSource(stream1)
       let audioIn_02 = audioContext.createMediaStreamSource(audio)
       let dest = audioContext.createMediaStreamDestination()
-      
+
       audioIn_01.connect(dest)
       audioIn_02.connect(dest)
 
-      setRecorderState((prevState) => {
+      setRecorderState(prevState => {
         return {
           ...prevState,
           initRecording: true,
           mediaStream: dest.stream,
-          otherMediaStream: stream1
+          otherMediaStream: stream1,
         }
       })
-
     } catch (err) {
       console.log(err)
     }
@@ -502,15 +520,15 @@ function TestAudio(props) {
 
   const stopRecording = () => {
     if (recorderState.mediaRecorder !== null) {
-      if (recorderState.mediaRecorder.state !== "inactive") {
-        SpeechRecognition.stopListening();
+      if (recorderState.mediaRecorder.state !== 'inactive') {
+        SpeechRecognition.stopListening()
         recorderState.mediaRecorder.stop()
-        recordAudioRef.current.pause();
-        recordAudioRef.current.currentTime = 0;
+        recordAudioRef.current.pause()
+        recordAudioRef.current.currentTime = 0
         setLyricsHandler()
         setRecordingDisplay(false)
         resetTranscript()
-        setRecorderState((prevState) => {
+        setRecorderState(prevState => {
           return {
             ...prevState,
             initRecording: false,
@@ -520,12 +538,11 @@ function TestAudio(props) {
     }
   }
 
-  const handlePlayPause = (bool) => {
-    if ((allTakes.length !== 0)) {
+  const handlePlayPause = bool => {
+    if (allTakes.length !== 0) {
       if (bool === true) {
         setIsPlaying(true)
-      }
-      else {
+      } else {
         setIsPlaying(false)
       }
     }
@@ -562,36 +579,44 @@ function TestAudio(props) {
 
   const navigateToEditLyrics = async () => {
     await actions
-    .getUserSongs({ song_user: user?._id })
-    .then(res => {
-      let userSongs = res.data
-      let allSongs = [...allTakes, ...userSongs]
+      .getUserSongs({ song_user: user?._id })
+      .then(res => {
+        let userSongs = res.data
+        let allSongs = [...allTakes, ...userSongs]
 
-      if (userSongs.length === 0 && allTakes.length === 0) {
-        setShowErrorModal(true)
-      }
-      else {
-        navigate('/editLyrics', { state: { propSongs: allSongs, propCurrentSong: currentSong.name ? currentSong : userSongs[0]}})
-      }
-    })
-    .catch(console.error)
+        if (userSongs.length === 0 && allTakes.length === 0) {
+          setShowErrorModal(true)
+        } else {
+          navigate('/editLyrics', {
+            state: {
+              propSongs: allSongs,
+              propCurrentSong: currentSong.name ? currentSong : userSongs[0],
+            },
+          })
+        }
+      })
+      .catch(console.error)
   }
 
   return (
-    <RecordBoothContext.Provider value={{
-      allTakes, setAllTakes,
-      currentSong, setCurrentSong,
-      showSaveSongModal, setShowSaveSongModal,
-      currentBeat, setCurrentBeat
-    }}>
+    <RecordBoothContext.Provider
+      value={{
+        allTakes,
+        setAllTakes,
+        currentSong,
+        setCurrentSong,
+        showSaveSongModal,
+        setShowSaveSongModal,
+      }}
+    >
       <div id="TestAudio" className="TestAudio">
-        <RecordingBoothModal 
-          toggleModal={toggleModal} 
+        <RecordingBoothModal
+          toggleModal={toggleModal}
           setToggleModal={setToggleModal}
           modalBtnRef={modalBtnRef}
           focusBorder={focusBorder}
           setFocusBorder={setFocusBorder}
-          />
+        />
 
         <SaveSongModal />
 
@@ -606,7 +631,7 @@ function TestAudio(props) {
           onClose={setShowSelectSongMenu}
         />
 
-        <SelectMenuModal 
+        <SelectMenuModal
           positionTop={false}
           positionY={20}
           maxHeight={96 - 20}
@@ -620,39 +645,57 @@ function TestAudio(props) {
         <audio id="song" src={currentBeat?.song} loop={true} ref={recordAudioRef}></audio>
 
         <div className="section-1_speech">
-          <button 
+          <button
             className="modal-toggle-btn"
-            ref={modalBtnRef} 
+            ref={modalBtnRef}
             onClick={() => toggleModalHandler()}
           >
             <img className="button-icons" src={guideIcon} alt="modal" />
           </button>
 
-          <div className={`scroll-rhymes-container ${focusBorder === 31 ? "focus-border" : ""}`} id="currentTranscript" ref={scrollRef}>
+          <div
+            className={`scroll-rhymes-container ${focusBorder === 31 ? 'focus-border' : ''}`}
+            id="currentTranscript"
+            ref={scrollRef}
+          >
             {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
           </div>
-          <div className={`scroll-rhymes-line ${focusBorder === 30 ? "focus-border" : ""}`}>
+          <div className={`scroll-rhymes-line ${focusBorder === 30 ? 'focus-border' : ''}`}>
             <p className="transcript-line-2">{transcript}</p>
           </div>
         </div>
-        
+
         <div className="section-2_control-panel">
           <div className="section-2a_flow-suggestions">
             <div className="next-bar-container">
               <div className="action-word-container">
-                {(retrievedActionRhymes && recordingDisplay) ? displayActionWords() : <p className="initial-prompt" style={{color: '#464646', fontSize: '12px'}}>Suggestions for your next bar will be here.</p>}
+                {retrievedActionRhymes && recordingDisplay ? (
+                  displayActionWords()
+                ) : (
+                  <p className="initial-prompt" style={{ color: '#464646', fontSize: '12px' }}>
+                    Suggestions for your next bar will be here.
+                  </p>
+                )}
               </div>
             </div>
 
-            <div className={`suggestions ${focusBorder === 20 ? "focus-border" : ""}`}>
+            <div className={`suggestions ${focusBorder === 20 ? 'focus-border' : ''}`}>
               <div className="custom-rhyme">
                 <div className="rhymed-word_shadow-div-inset">
-                  {(rhymeWordHolder && recordingDisplay) ? <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p> : <p>Top Rhymes</p>}
+                  {rhymeWordHolder && recordingDisplay ? (
+                    <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p>
+                  ) : (
+                    <p>Top Rhymes</p>
+                  )}
                 </div>
                 <div className="custom-rhyme-inner">
                   <div className="custom-rhyme_shadow-div-inset">
                     <div className="top-rhymes-container">
-                      {(rhymeWordHolder && recordingDisplay) ? showRhymes(retrievedRhymes) : <p className="initial-prompt">Start recording to see your top rhymes.</p>}
+                      {rhymeWordHolder && recordingDisplay ? (
+                        showRhymes(retrievedRhymes)
+                      ) : (
+                        <p className="initial-prompt">Start recording to see your top rhymes.</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -661,7 +704,10 @@ function TestAudio(props) {
               <div className="rhyme-lock-container">
                 <div className="rhyme-lock-button">
                   <div className="rhyme-lock-outset">
-                    <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedRhymes, "topRhymes")}>
+                    <button
+                      className="rhyme-lock-btn"
+                      onClick={() => shuffleRhymeHandler(retrievedRhymes, 'topRhymes')}
+                    >
                       <img className="button-icons" src={shuffleIcon} alt="shuffle" />
                     </button>
                   </div>
@@ -669,19 +715,28 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className={`suggestions ${focusBorder === 21 ? "focus-border" : ""}`}>
+            <div className={`suggestions ${focusBorder === 21 ? 'focus-border' : ''}`}>
               <div className="custom-rhyme">
                 <div className="rhymed-word_shadow-div-inset rw-two">
-                    {(lockRhymeHolder && recordingDisplay) ? <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p> : <p>Locked Rhymes</p>}
-                  </div>
+                  {lockRhymeHolder && recordingDisplay ? (
+                    <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p>
+                  ) : (
+                    <p>Locked Rhymes</p>
+                  )}
+                </div>
                 <div className="custom-rhyme-inner" id="lockedRhyme">
                   <div className="custom-rhyme_shadow-div-inset">
                     <div className="top-rhymes-container">
-                      {(lockRhymeHolder && recordingDisplay) ? showRhymes(lockedRhymes) : <p className="initial-prompt">Click lock button above to save top rhymes here.</p>}
+                      {lockRhymeHolder && recordingDisplay ? (
+                        showRhymes(lockedRhymes)
+                      ) : (
+                        <p className="initial-prompt">
+                          Click lock button above to save top rhymes here.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
-
               </div>
               <div className="rhyme-lock-container">
                 <div className="rhyme-lock-button">
@@ -694,15 +749,25 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className={`suggestions ${focusBorder === 22 ? "focus-border" : ""}`}>
+            <div className={`suggestions ${focusBorder === 22 ? 'focus-border' : ''}`}>
               <div className="custom-rhyme">
                 <div className="rhymed-word_shadow-div-inset rw-three">
-                  {(selectedWordHolder && recordingDisplay) ? <p className="selected-word-holder">{selectedWordHolder}</p> : <p>Selected Rhymes</p>}
+                  {selectedWordHolder && recordingDisplay ? (
+                    <p className="selected-word-holder">{selectedWordHolder}</p>
+                  ) : (
+                    <p>Selected Rhymes</p>
+                  )}
                 </div>
                 <div className="custom-rhyme-inner" id="lockedRhyme">
                   <div className="custom-rhyme_shadow-div-inset">
                     <div className="top-rhymes-container">
-                      {(selectedWordHolder && recordingDisplay) ? showRhymes(retrievedSelectedRhymes) : <p className="initial-prompt">Click any flowed lyric to generate rhymes here.</p>}
+                      {selectedWordHolder && recordingDisplay ? (
+                        showRhymes(retrievedSelectedRhymes)
+                      ) : (
+                        <p className="initial-prompt">
+                          Click any flowed lyric to generate rhymes here.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -710,7 +775,10 @@ function TestAudio(props) {
               <div className="rhyme-lock-container">
                 <div className="rhyme-lock-button">
                   <div className="rhyme-lock-outset">
-                    <button className="rhyme-lock-btn" onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, "selectedRhymes")}>
+                    <button
+                      className="rhyme-lock-btn"
+                      onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, 'selectedRhymes')}
+                    >
                       <img className="button-icons" src={shuffleIcon} alt="shuffle" />
                     </button>
                   </div>
@@ -722,22 +790,19 @@ function TestAudio(props) {
               <div className="rhyme-lock-container">
                 <div className="rhyme-lock-button rlb-1">
                   <div className="rhyme-lock-outset">
-                    <select 
-                      className="rhyme-lock-btn select-no" 
+                    <select
+                      className="rhyme-lock-btn select-no"
                       value={selectedRhymeNo}
-                      onChange={(e) => setSelectedRhymeNo(e.target.value)}
-                      >
-                        {rhymeOptionNoHandler()}
+                      onChange={e => setSelectedRhymeNo(e.target.value)}
+                    >
+                      {rhymeOptionNoHandler()}
                     </select>
                   </div>
                 </div>
-  
+
                 <div className="rhyme-lock-button rlb-3">
                   <div className="rhyme-lock-outset">
-                    <button 
-                      className="rhyme-lock-btn"
-                      onClick={() => navigateToEditLyrics()}
-                    >
+                    <button className="rhyme-lock-btn" onClick={() => navigateToEditLyrics()}>
                       EditLyrics
                     </button>
                   </div>
@@ -746,7 +811,7 @@ function TestAudio(props) {
             </div>
           </div>
 
-          <div className="section-2b_flow-controls"> 
+          <div className="section-2b_flow-controls">
             <div className="flow-controls-container">
               <div className="flow-controls-1_playback-display">
                 <div className="play-btn-container">
@@ -767,19 +832,18 @@ function TestAudio(props) {
                         </button>
                       ) : (
                         <button
-                        className="play-btn_shadow-div-outset pause"
-                        aria-label="Play"
-                        onClick={() => handlePlayPause(true)}
-                      >
-                        <img
-                          className="button-icons bi-play"
-                          id="play-stop-img"
-                          src={playIcon}
-                          alt="play icon"
-                        />
-                      </button>
-                      )
-                    }
+                          className="play-btn_shadow-div-outset pause"
+                          aria-label="Play"
+                          onClick={() => handlePlayPause(true)}
+                        >
+                          <img
+                            className="button-icons bi-play"
+                            id="play-stop-img"
+                            src={playIcon}
+                            alt="play icon"
+                          />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -808,10 +872,12 @@ function TestAudio(props) {
                         <div className="select-takes-container_shadow-div-outset">
                           <div className="select-takes-container">
                             <div className="select-takes_shadow-div-inset">
-                              <button 
-                                className="select-takes_shadow-div-outset" 
+                              <button
+                                className="select-takes_shadow-div-outset"
                                 ref={selectTakesRef}
-                                onClick={() => allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null}
+                                onClick={() =>
+                                  allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null
+                                }
                               >
                                 <p>{selectTitle}</p>
                               </button>
@@ -822,27 +888,38 @@ function TestAudio(props) {
 
                       <div className="flow-takes-2_takes-actions">
                         <div className="takes-actions-container">
-                          <div className={`actions-btn-container ${focusBorder === 12 ? "focus-border" : ""}`}>
-                            <button 
-                              className="actions-btn_shadow-div-outset ab-save" 
+                          <div
+                            className={`actions-btn-container ${
+                              focusBorder === 12 ? 'focus-border' : ''
+                            }`}
+                          >
+                            <button
+                              className="actions-btn_shadow-div-outset ab-save"
                               onClick={handleSaveSongMenu}
                             >
-                              <img className="button-icons bi-help" src={saveIcon} alt="save icon" />
+                              <img
+                                className="button-icons bi-help"
+                                src={saveIcon}
+                                alt="save icon"
+                              />
                             </button>
-                            
-                            <ErrorModal 
-                              isOpen={showErrorModal} 
-                              onClose={setShowErrorModal} 
-                              title={"No Recorded Takes to Save"}
-                              nextActions={"Press the green mic button to begin Flowing!"}
+
+                            <ErrorModal
+                              isOpen={showErrorModal}
+                              onClose={setShowErrorModal}
+                              title={'No Recorded Takes to Save'}
+                              nextActions={'Press the green mic button to begin Flowing!'}
                               opacity={true}
                               modHeight={56}
                               modWidth={99}
-                              placement={.5}
+                              placement={0.5}
                             />
                           </div>
                           <div className="actions-btn-container">
-                            <button className="actions-btn_shadow-div-outset" onClick={handleDeleteFlow}>
+                            <button
+                              className="actions-btn_shadow-div-outset"
+                              onClick={handleDeleteFlow}
+                            >
                               <img className="button-icons" src={closeIcon} alt="delete bin icon" />
                             </button>
                           </div>
@@ -852,23 +929,26 @@ function TestAudio(props) {
                     <div className="actions-2_record">
                       <div className="record-container">
                         <div className="record-1_select-beat">
-                          <div className={`select-beat_shadow-div-inset ${focusBorder === 10 ? "focus-border" : ""}`}>
+                          <div
+                            className={`select-beat_shadow-div-inset ${
+                              focusBorder === 10 ? 'focus-border' : ''
+                            }`}
+                          >
                             <div className="select-beat_play-container">
-                              <button 
-                                className="select-beat_play-btn"
-                                onClick={handlePlayBeat}
-                                >
-                                <img className={`button-icons ${isBeatPlaying ? "pause" : "play"}`} src={isBeatPlaying ? pauseIcon : playIcon} alt="play or pause" />
+                              <button className="select-beat_play-btn" onClick={handlePlayBeat}>
+                                <img
+                                  className={`button-icons ${isBeatPlaying ? 'pause' : 'play'}`}
+                                  src={isBeatPlaying ? pauseIcon : playIcon}
+                                  alt="play or pause"
+                                />
                               </button>
                               <audio src={currentBeat?.song} ref={playBeatRef} />
                             </div>
                             <div className="select-beat_container">
                               <button className="select-beat_shadow-div-outset">
-                                <div className="select-beat-title">
-                                  Select A Beat :
-                                </div>
-                                <div 
-                                  className="track-select" 
+                                <div className="select-beat-title">Select A Beat :</div>
+                                <div
+                                  className="track-select"
                                   onClick={() => setShowSelectBeatMenu(true)}
                                 >
                                   {currentBeat?.name}
@@ -885,30 +965,28 @@ function TestAudio(props) {
             </div>
 
             <div className="record-2_record-btn">
-              <div className={`record-btn_shadow-div-inset ${focusBorder === 11 ? "focus-border" : ""}`}>
+              <div
+                className={`record-btn_shadow-div-inset ${
+                  focusBorder === 11 ? 'focus-border' : ''
+                }`}
+              >
                 {recorderState.initRecording ? (
-                  <button
-                    className="record-btn_shadow-div-outset"
-                    onClick={stopRecording}
-                  >
+                  <button className="record-btn_shadow-div-outset" onClick={stopRecording}>
                     <img
                       className="button-icons"
                       id="record-stop-img"
                       src={stopIcon}
                       alt="record stop icon"
-                      />
+                    />
                   </button>
                 ) : (
-                  <button
-                    className="record-btn_shadow-div-outset"
-                    onClick={startRecording}
-                  >
+                  <button className="record-btn_shadow-div-outset" onClick={startRecording}>
                     <img
                       className="button-icons"
                       id="record-stop-img"
                       src={micIcon}
                       alt="record mic icon"
-                      />
+                    />
                   </button>
                 )}
               </div>
@@ -920,4 +998,4 @@ function TestAudio(props) {
     </RecordBoothContext.Provider>
   )
 }
-export default TestAudio;
+export default TestAudio

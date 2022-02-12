@@ -7,7 +7,7 @@ import EditLyricsItem from './EditLyricsItem'
 import AudioTimeSlider from '../AudioTimeSlider'
 import SelectMenuModal from '../SelectMenuModal'
 import { beatList } from '../../constants/index'
-import { closeIcon, downIcon, playIcon, pauseIcon } from '../../assets/images/_icons'
+import { closeIcon, downIcon, playIcon, pauseIcon, goBackIcon } from '../../assets/images/_icons'
 
 function EditLyrics() {
   const { user } = useContext(TheContext)
@@ -81,7 +81,7 @@ function EditLyrics() {
     }
   }
 
-  const closeWindow = () => {
+  const onCloseHandler = () => {
     navigate(-1)
   }
 
@@ -134,21 +134,33 @@ function EditLyrics() {
         onClose={setShowSelectBeatMenu}
       />
 
-      <div className="section-1_profile-el">
-        <h1
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '30px',
-            color: 'white',
-            fontSize: '16px',
-          }}
-        >
-          This is A Work In Progress
-        </h1>
+      <div className="edit-lyrics__header">
+        <div className="edit-lyrics__header--shadow-inset">
+          <div className="edit-lyrics__header-exit">
+            <button className="edit-lyrics__exit-btn" onClick={() => onCloseHandler()}>
+              <img className="button-icons" src={goBackIcon} alt="exit" />
+            </button>
+          </div>
+          <div className="edit-lyrics__header-title--container">
+            <div className="edit-lyrics__header-title--shadow-outset">
+              <p className="edit-lyrics__header-title">Edit Your Lyrics</p>
+              <p className="edit-lyrics__header-title-name">{currentSong?.song_user?.user_name}</p>
+            </div>
+          </div>
+          <div className="edit-lyrics__header-song">
+            <div className="choose-song_shadow-div-inset">
+              <div className="choose-song--shadow-inset">
+                <button className="select-songs" onClick={() => setShowSelectSongMenu(true)}>
+                  <p>{currentSong?.name}</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* 
         <button className="close-screen" onClick={closeWindow}>
           <img className="button-icons" src={closeIcon} alt="exit" />
-        </button>
+        </button> */}
       </div>
 
       <div className="section-2_lyrics-el">
@@ -174,19 +186,6 @@ function EditLyrics() {
         <div className="controls-container">
           <div className="controls-1_options">
             <div className="options_shadow-div-outset">
-              <div className="options-1_choose-song">
-                <div
-                  className="choose-song_shadow-div-inset"
-                  onClick={() => setShowSelectSongMenu(true)}
-                >
-                  <button className="choose-song--shadow-outset">
-                    <div className="choose-song-title">Song:</div>
-                    <div className="select-songs">
-                      <p>{currentSong?.name}</p>
-                    </div>
-                  </button>
-                </div>
-              </div>
               <div className="options-2_toggle-lyrics">
                 <div className="save-reset-btn--container">
                   <button className="save-reset-btn reset">reset</button>

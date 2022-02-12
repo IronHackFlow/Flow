@@ -8,22 +8,8 @@ const User = require('../models/User')
 const Songs = require('../models/Songs')
 const Likes = require('../models/Likes')
 
-
-router.post(`/getAUserRT`, async (req, res, next) => {
-  console.log('Grabbing a user: ', req.body)
-  await User.findById(req.body.id)
-    .populate('followers')
-    .populate('userFollows')
-    .then(user => {
-      console.log(user, "ugh")
-      res.status(200).json(user)
-    })
-    .catch(err => res.status(500).json(err))
-})
-
-//search bar bobby
-router.post('/getManySongsAndUsersRT', async (req, res, next) => {
-  let searchData = { user: "", songs: "" }
+router.post('/searchUsersAndSongs', async (req, res, next) => {
+  let searchData = { user: '', songs: '' }
 
   await User.find({ user_name: { $regex: req.body.search, $options: '$i' } })
     .then(user => {
@@ -50,7 +36,7 @@ aws.config.update({
   region: 'us-west-1',
   accessKeyId: process.env.AWSAccessKeyId,
   secretAccessKey: process.env.AWSSecretKey,
-  signatureVersion: 'v4'
+  signatureVersion: 'v4',
 })
 
 const S3_BUCKET = process.env.Bucket
@@ -64,14 +50,21 @@ router.post('/getSignedS3', verifyJWT, async (req, res, next) => {
     Key: fileName,
     Expires: 3000,
     ContentType: fileType,
-    ACL: 'public-read'
+    ACL: 'public-read',
   }
 
   s3.getSignedUrl('putObject', s3Params, async (err, data) => {
     if (err) {
-      return res.json({ success: false, error: err,  message: "AWS unable to sign request" })
+      return res.json({ success: false, error: err, message: 'AWS unable to sign request' })
     } else {
-      return res.json({ success: true, signedRequest: { signed_URL: data, aws_URL: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}` }, message: "AWS Successfully signed URL"})
+      return res.json({
+        success: true,
+        signedRequest: {
+          signed_URL: data,
+          aws_URL: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+        },
+        message: 'AWS Successfully signed URL',
+      })
     }
   })
 })

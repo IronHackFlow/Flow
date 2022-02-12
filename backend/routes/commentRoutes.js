@@ -110,7 +110,7 @@ router.post(`/editComment`, verifyJWT, async (req, res, next) => {
     })
 })
 
-router.post(`/getCommentsRT`, async (req, res, next) => {
+router.post(`/getComments`, async (req, res, next) => {
   console.log('getting some song comments', req.body.id)
   const body = { id: req.body.id }
 
@@ -118,15 +118,6 @@ router.post(`/getCommentsRT`, async (req, res, next) => {
     .populate({ path: 'song_comments', populate: 'user' })
     .then(songComments => {
       res.status(200).json(songComments)
-    })
-    .catch(err => res.status(500).json(err))
-})
-
-router.post(`/getACommentRT`, async (req, res, next) => {
-  Comments.findById(req.body.id)
-    .populate('likes')
-    .then(comm => {
-      res.status(200).json(comm)
     })
     .catch(err => res.status(500).json(err))
 })

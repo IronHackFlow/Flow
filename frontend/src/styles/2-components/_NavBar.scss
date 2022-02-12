@@ -9,7 +9,6 @@
 //   }
 // }
 
-
 // .NavBarProfile {
 //   height: 21%;
 //   position: relative;
@@ -50,7 +49,6 @@
 // .navbar_shadow-div-outset {
 //   @include flexCenter(76%, 93%, 50px, center, center, row);
 //   box-shadow: 2px 2px 3px 0px #9d9d9d, -3px -3px 4px #ffffff;
-
 
 //   .navbar_shadow-div-inset {
 //     @include flexCenter(84%, 97%, 55px, space-evenly, center, row);
@@ -100,9 +98,9 @@
     box-shadow: 0px -8px 30px 0px #222222;
 
     .navbar_shadow-div-outset {
-      @include flexCenter(81%, 96%, 4vh 4vh .5vh .5vh, center, center, row);
+      @include flexCenter(81%, 96%, 4vh 4vh 0.5vh 0.5vh, center, center, row);
       box-shadow: 4px 6px 5px 0px #393939, -2px -2px 2px #989898;
-    
+
       .navbar_shadow-div-inset {
         @include flexCenter(87%, 97%, 100vh, space-evenly, center, row);
         box-shadow: inset 3px 3px 4px 0px #363535, inset -2px -2px 2px #808080;
@@ -111,7 +109,7 @@
           @include flexCenter(80%, 23%, 3px, center, center, column);
           // box-shadow: 3px 3px 6px #363535, -2px -2px 2px #8c8c8c;
           text-decoration: none;
-        
+
           .navbar-btn_shadow-div-inset {
             border-radius: 100vh;
             display: flex;
@@ -119,26 +117,26 @@
             align-items: center;
             // @include flexCenter(initial, initial, 50px, center, center, row);
             // box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
-        
+
             .navbar-btn_shadow-div-outset {
               @include flexCenter(100%, 100%, 50px, center, center, row);
               box-shadow: none;
-              
+
               img {
-                height: 2rem;
-                width: 2rem;
+                height: 65%;
+                width: 65%;
               }
               &:active {
                 box-shadow: none;
               }
             }
           }
-        
+
           .navbar-btn-text {
             @include flexCenter(15%, 100%, 0px, center, center, column);
             font-size: 11px;
             color: #ff8ebd;
-            display: none
+            display: none;
           }
         }
       }
@@ -164,7 +162,8 @@
     .navbar-btn_shadow-div-outset {
       box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
       img {
-        filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+        filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%)
+          contrast(98%);
       }
     }
   }
@@ -178,7 +177,7 @@
   background: #ec6aa0;
   box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
   border: 1px solid #ec6aa0;
-  transition: all .3s;
+  transition: all 0.3s;
   .navbar-btn_shadow-div-inset {
     height: 2.3rem;
     width: 2.3rem;
@@ -187,7 +186,8 @@
     .navbar-btn_shadow-div-outset {
       box-shadow: none;
       img {
-        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+          contrast(103%);
       }
     }
   }

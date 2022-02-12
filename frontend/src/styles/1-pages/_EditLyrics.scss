@@ -1,8 +1,99 @@
 .EditLyrics {
-  background: #444444;
+  background: #cccccc;
 
-  .section-1_profile-el {
-    @include flexCenter(5%, 100%, 0px, center, flex-end, column);
+  .edit-lyrics__header {
+    @include flexCenter(7%, 100%, 0px, center, center, row);
+
+    .edit-lyrics__header--shadow-inset {
+      @include flexCenter(85%, 97%, 0.2em 1.5em 0.2em 1.5em, center, center, row);
+      box-shadow: inset 2px 2px 3px 0px #686868, inset -3px -3px 3px #ffffff;
+      .edit-lyrics__header-exit {
+        @include flexCenter(100%, 11%, 0, flex-start, center, row);
+
+        .edit-lyrics__exit-btn {
+          @include flexCenter(77%, 74%, 0.2em 0.2em 0.2em 1.2em, center, center, column);
+          background: #ec6aa0;
+          box-shadow: 2px 2px 3px #787878, -2px -2px 2px 0px #efefef;
+          margin-left: 0.3em;
+
+          img {
+            height: 85%;
+            width: 85%;
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+              contrast(103%);
+          }
+          &:active {
+            background: #f691bb;
+            box-shadow: inset 2px 2px 3px #a55a79, inset -2px -2px 2px 0px #ffe3ef;
+          }
+        }
+      }
+
+      .edit-lyrics__header-title--container {
+        @include flexCenter(100%, 40%, 0, flex-start, center, row);
+        .edit-lyrics__header-title--shadow-outset {
+          @include flexCenter(77%, 96%, 0.2em, center, center, column);
+          box-shadow: 2px 2px 3px #908f8f, -2px -2px 2px 0px #ffffff;
+
+          .edit-lyrics__header-title {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+          }
+          .edit-lyrics__header-title-name {
+            color: #ec6aa0;
+            font-size: 0.9rem;
+          }
+        }
+      }
+      .edit-lyrics__header-song {
+        @include flexCenter(100%, 49%, 0, flex-start, center, row);
+        // box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+
+        .choose-song_shadow-div-inset {
+          @include flexCenter(77%, 97%, 0.2em 1.3em 0.2em 0.2em, center, center, column);
+          // box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
+          box-shadow: 2px 2px 3px #777777, -2px -2px 2px 0px #ffffff;
+
+          .choose-song--shadow-inset {
+            @include flexCenter(80%, 96%, 0.2em 1.3em 0.2em 0.2em, center, center, row);
+            // box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
+            box-shadow: inset 2px 2px 3px 0px #808080, inset -2px -2px 2px #ffffff;
+
+            .choose-song-title {
+              @include flexCenter(100%, 17%, 0, flex-end, center, row);
+              color: pink;
+              font-size: 0.8rem;
+              text-align: start;
+            }
+
+            .select-songs {
+              @include flexCenter(75%, 91%, 100vh, flex-start, center, row);
+              box-shadow: 2px 2px 3px #808080, -1px -1px 3px 0px #ffffff;
+
+              p {
+                width: 100%;
+                font-size: 0.9rem;
+                color: #ec6aa0;
+                text-indent: 2%;
+                text-align: start;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+              &:hover {
+                background: #f3b9c3;
+                box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+              }
+              &:active {
+                background: #b4b4b4;
+                box-shadow: inset 1px 1px 3px 0px #5f5f5f, inset -2px -2px 2px #efefef;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .close-screen {
       @include flexCenter(30px, 30px, 50px, center, center, column);
       background-color: initial;
@@ -11,8 +102,9 @@
       margin-right: 2%;
     }
   }
+
   .section-2_lyrics-el {
-    @include flexCenter(77%, 100%, 2.3em 0em 0em 0em, flex-start, center, column);
+    @include flexCenter(76%, 100%, 2.3em 0em 0em 0em, flex-start, center, column);
     // background: linear-gradient(337deg, #5d5d5d 0%, #8d8d8d 100%);
     background: linear-gradient(314deg, #858585 0%, #a7a7a7 100%);
     position: absolute;
@@ -408,42 +500,7 @@
         .options_shadow-div-outset {
           @include flexCenter(94%, 98%, 30px 30px 30px 5px, center, center, row);
           // box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
-          box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #949494;
-
-          .options-1_choose-song {
-            @include flexCenter(100%, 70%, 0, center, center, column);
-            // box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
-
-            .choose-song_shadow-div-inset {
-              @include flexCenter(70%, 94%, 2em 2em 2em 0.5em, center, center, column);
-              // box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
-              box-shadow: 2px 2px 3px #3c3c3c, -1px -1px 3px 0px #adadad;
-
-              .choose-song--shadow-outset {
-                @include flexCenter(80%, 96%, 2em 2em 2em 0.3em, center, center, row);
-                // box-shadow: 3px 3px 5px #1d1d1d, -2px -2px 2px 0px #4d4d4d;
-                box-shadow: inset 2px 2px 3px 0px #484848, inset -2px -2px 2px #8d8d8d;
-
-                .choose-song-title {
-                  @include flexCenter(100%, 17%, 0, flex-end, center, row);
-                  color: pink;
-                  font-size: 0.8rem;
-                  text-align: start;
-                }
-
-                .select-songs {
-                  @include flexCenter(100%, 83%, 0, flex-start, center, row);
-                  color: white;
-
-                  p {
-                    width: 100%;
-                    text-indent: 2%;
-                    text-align: start;
-                  }
-                }
-              }
-            }
-          }
+          box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #828282;
 
           .options-2_toggle-lyrics {
             @include flexCenter(100%, 30%, 0, center, center, row);
@@ -488,7 +545,7 @@
         .inner_shadow-div-outset {
           @include flexCenter(85%, 98%, 0.2em 2em 2em 0.2em, center, center, column);
           // box-shadow: inset 3px 3px 5px #1d1d1d, inset -2px -2px 2px 0px #4d4d4d;
-          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #9c9c9c;
+          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #808080;
 
           .flow-controls-1_playback-display {
             @include flexCenter(85%, 100%, 0px, center, center, row);
