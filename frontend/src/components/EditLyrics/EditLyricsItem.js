@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
+import useHistory from '../../hooks/useHistory'
 import {
   editIcon,
   saveIcon,
@@ -9,8 +10,11 @@ import {
 } from '../../assets/images/_icons'
 
 export default function EachLyricLine({ line, index, updateLyrics }) {
+  const [lyricLine, setLyricLine, { history, pointer, back, forward, go }] = useHistory(
+    [...line.array][0],
+  )
+  const [initialLyricLine, setInitialLyricLIne] = useState(line)
   const [deleteBool, setDeleteBool] = useState(false)
-  const [lyricLine, setLyricLine] = useState([...line.array][0])
   const [isEditing, setIsEditing] = useState(false)
   const [isEdited, setIsEdited] = useState(false)
   const lyricRefs = useRef()
@@ -26,6 +30,13 @@ export default function EachLyricLine({ line, index, updateLyrics }) {
   }
 
   const saveLyricLine = e => {
+    // setLyricLine([...lyricLine, lyricLine])
+    updateLyrics(prevArr =>
+      prevArr.map(each => {
+        if (each.id === line.id) return { ...each, array: [lyricLine] }
+        else return each
+      }),
+    )
     setIsEdited(true)
     setIsEditing(false)
     console.log(e, 'saved')
@@ -141,12 +152,12 @@ export default function EachLyricLine({ line, index, updateLyrics }) {
           <div className="get-lyrics--container"></div>
           <div className="undo-redo--container">
             <div className="undo-redo__btn--container">
-              <button className="undo-redo__btn undo">
+              <button className="undo-redo__btn undo" onClick={back}>
                 <img src={undoIcon} alt="undo" className="button-icons" />
               </button>
             </div>
             <div className="undo-redo__btn--container">
-              <button className="undo-redo__btn redo">
+              <button className="undo-redo__btn redo" onClick={forward}>
                 <img src={redoIcon} alt="redo" className="button-icons" />
               </button>
             </div>

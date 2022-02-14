@@ -3,11 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ReactSortable } from 'react-sortablejs'
 import actions from '../../api'
 import TheContext from '../../contexts/TheContext'
+import useHistory from '../../hooks/useHistory'
 import EditLyricsItem from './EditLyricsItem'
 import AudioTimeSlider from '../AudioTimeSlider'
 import SelectMenuModal from '../SelectMenuModal'
 import { beatList } from '../../constants/index'
-import { closeIcon, downIcon, playIcon, pauseIcon, goBackIcon } from '../../assets/images/_icons'
+import {
+  downIcon,
+  playIcon,
+  pauseIcon,
+  goBackIcon,
+  undoIcon,
+  redoIcon,
+} from '../../assets/images/_icons'
 
 function EditLyrics() {
   const { user } = useContext(TheContext)
@@ -18,7 +26,8 @@ function EditLyrics() {
   const [currentSong, setCurrentSong] = useState(null)
   const [currentBeat, setCurrentBeat] = useState(beatList[0])
   const [allSongs, setAllSongs] = useState([])
-  const [lyricsArray, setLyricsArray] = useState([])
+  const [initialSongs, setInitialSongs] = useState([])
+  const [lyricsArray, setLyricsArray, { history, back, forward }] = useHistory([])
   const [lyricsDisplay, setLyricsDisplay] = useState([])
 
   const [isPlaying, setIsPlaying] = useState(false)
@@ -42,6 +51,7 @@ function EditLyrics() {
   useEffect(() => {
     setCurrentSong(testSongs[0])
     setAllSongs(testSongs)
+    setInitialSongs(testSongs)
   }, [testSongs])
 
   useEffect(() => {
@@ -53,9 +63,10 @@ function EditLyrics() {
       }
     })
     setLyricsArray(lyricArray)
-  }, [currentSong])
+  }, [currentSong, allSongs])
 
   useEffect(() => {
+    console.log(history, 'what is this look like')
     if (currentSong) {
       let lyricDisplay = lyricsArray?.map((each, index) => {
         return (
@@ -100,7 +111,7 @@ function EditLyrics() {
         </div>
       )
     })
-  }, [lyricsArray, lyricsDisplay])
+  }, [lyricsArray, lyricsDisplay, allSongs, currentSong])
 
   const setLyricsArrayHandler = e => {
     let getItem = lyricsArray.filter(
@@ -110,12 +121,50 @@ function EditLyrics() {
     lyricsArray.splice(e.newDraggableIndex, 0, getItem[0])
   }
 
+  const handleSaveLyrics = () => {
+    let savedLyrics = lyricsArray.map(each => each.array)
+    setAllSongs(prev =>
+      prev.map(each => {
+        if (each._id === currentSong._id) {
+          setCurrentSong({ ...each, lyrics: savedLyrics })
+          return { ...each, lyrics: savedLyrics }
+        } else {
+          return each
+        }
+      }),
+    )
+  }
+
+  const handleResetLyrics = () => {
+    let replaceSong = initialSongs.filter(each => each._id === currentSong._id)
+    setAllSongs(prev =>
+      prev.map(each => {
+        if (each._id === currentSong._id) {
+          setCurrentSong(replaceSong[0])
+          return replaceSong[0]
+        } else {
+          return each
+        }
+      }),
+    )
+  }
+
+  const onUndo = () => {
+    // console.log(lyricsArray, history, 'UNDO THIS SHIT YO')
+    back()
+  }
+
+  const onRedo = () => {
+    // console.log(lyricsArray, 'redo THIS SHIT YO')
+    forward()
+  }
+
   return (
     <div className="EditLyrics">
       <SelectMenuModal
-        positionTop={false}
-        positionY={21}
-        maxHeight={96 - 21}
+        positionTop={true}
+        positionY={6}
+        maxHeight={96 - 6}
         list={allSongs}
         currentItem={currentSong}
         setCurrentItem={setCurrentSong}
@@ -136,37 +185,36 @@ function EditLyrics() {
 
       <div className="edit-lyrics__header">
         <div className="edit-lyrics__header--shadow-inset">
-          <div className="edit-lyrics__header-exit">
+          <div className="edit-lyrics__exit--container">
             <button className="edit-lyrics__exit-btn" onClick={() => onCloseHandler()}>
               <img className="button-icons" src={goBackIcon} alt="exit" />
             </button>
           </div>
-          <div className="edit-lyrics__header-title--container">
-            <div className="edit-lyrics__header-title--shadow-outset">
-              <p className="edit-lyrics__header-title">Edit Your Lyrics</p>
-              <p className="edit-lyrics__header-title-name">{currentSong?.song_user?.user_name}</p>
+          <div className="edit-lyrics__title--container">
+            <div className="edit-lyrics__title--shadow-outset">
+              <p className="edit-lyrics__title">Edit Your Lyrics</p>
+              <p className="edit-lyrics__title name">{currentSong?.song_user?.user_name}</p>
             </div>
           </div>
-          <div className="edit-lyrics__header-song">
-            <div className="choose-song_shadow-div-inset">
-              <div className="choose-song--shadow-inset">
-                <button className="select-songs" onClick={() => setShowSelectSongMenu(true)}>
-                  <p>{currentSong?.name}</p>
+          <div className="edit-lyrics__select-song">
+            <div className="edit-lyrics__select-song--shadow-outset">
+              <div className="edit-lyrics__select-song--shadow-inset">
+                <button
+                  className="edit-lyrics__select-song-btn"
+                  onClick={() => setShowSelectSongMenu(true)}
+                >
+                  <p className="edit-lyrics__select-song-text">{currentSong?.name}</p>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        {/* 
-        <button className="close-screen" onClick={closeWindow}>
-          <img className="button-icons" src={closeIcon} alt="exit" />
-        </button> */}
       </div>
 
-      <div className="section-2_lyrics-el">
+      <div className="edit-lyrics__lyrics--container">
         <ReactSortable
           tag="ul"
-          className="lyrics-list-container"
+          className="edit-lyrics__lyrics-list"
           list={lyricsDisplay}
           setList={setLyricsDisplay}
           group="groupName"
@@ -179,7 +227,6 @@ function EditLyrics() {
         >
           {lyricsDisplay}
         </ReactSortable>
-        <div className="padding--container"></div>
       </div>
 
       <div className="section-3_controls">
@@ -188,10 +235,24 @@ function EditLyrics() {
             <div className="options_shadow-div-outset">
               <div className="options-2_toggle-lyrics">
                 <div className="save-reset-btn--container">
-                  <button className="save-reset-btn reset">reset</button>
+                  <button className="save-reset-btn reset" onClick={() => handleResetLyrics()}>
+                    reset
+                  </button>
+                </div>
+                <div className="edit-lyrics__undo-redo">
+                  <button className="edit-lyrics__undo-redo-btn" onClick={() => onUndo()}>
+                    <img src={undoIcon} alt="undo" className="button-icons" />
+                  </button>
+                </div>
+                <div className="edit-lyrics__undo-redo">
+                  <button className="edit-lyrics__undo-redo-btn" onClick={() => onRedo()}>
+                    <img src={redoIcon} alt="redo" className="button-icons" />
+                  </button>
                 </div>
                 <div className="save-reset-btn--container">
-                  <button className="save-reset-btn save">Save</button>
+                  <button className="save-reset-btn save" onClick={() => handleSaveLyrics()}>
+                    save
+                  </button>
                 </div>
               </div>
             </div>

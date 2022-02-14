@@ -106,9 +106,8 @@
         box-shadow: inset 3px 3px 4px 0px #363535, inset -2px -2px 2px #808080;
 
         .navbar-btn-container {
-          @include flexCenter(80%, 23%, 3px, center, center, column);
+          @include flexCenter(80%, 23%, 0.2em, center, center, column);
           // box-shadow: 3px 3px 6px #363535, -2px -2px 2px #8c8c8c;
-          text-decoration: none;
 
           .navbar-btn_shadow-div-inset {
             border-radius: 100vh;
@@ -167,8 +166,18 @@
       }
     }
   }
-  .navbar-btn-text {
-    color: #ff8ebd;
+  &:hover {
+    background: #ec6aa0;
+    box-shadow: 3px 3px 6px #3b3b3b, -1px -1px 2px #cecece;
+    .navbar-btn_shadow-div-inset {
+      box-shadow: inset 2px 2px 3px 0px #a54e72, inset -2px -2px 3px #efa2c2;
+      .navbar-btn_shadow-div-outset {
+        img {
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+            contrast(103%);
+        }
+      }
+    }
   }
 }
 
@@ -191,8 +200,12 @@
       }
     }
   }
-  .navbar-btn-text {
-    color: #ffffff;
+  &:hover {
+    background: #f6a3c5;
+    box-shadow: inset 2px 2px 3px #7f636f, inset -2px -2px 3px #fff0f6;
+    .navbar-btn_shadow-div-inset {
+      box-shadow: #a9748a 2px 2px 2px 0px, #fdc7dd -2px -2px 2px;
+    }
   }
 }
 

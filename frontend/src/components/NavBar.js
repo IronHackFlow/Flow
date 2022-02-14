@@ -21,7 +21,7 @@ const MemoizedNavBar = memo(function NavBar({ locationClass, isVisible }) {
             <Link
               to="/"
               className={`navbar-btn-container ${path === '/' ? 'btn-selected' : 'btn-unselected'}`}
-              style={{ borderRadius: '40px 8px 8px 40px' }}
+              style={{ borderRadius: '2.5em 0.3em 0.3em 2.5em' }}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">
@@ -66,7 +66,7 @@ const MemoizedNavBar = memo(function NavBar({ locationClass, isVisible }) {
               className={`navbar-btn-container ${
                 path.slice(0, 8) === '/profile' ? 'btn-selected' : 'btn-unselected'
               }`}
-              style={{ borderRadius: '8px 40px 40px 8px' }}
+              style={{ borderRadius: '0.3em 2.5em 2.5em 0.3em' }}
             >
               <div className="navbar-btn_shadow-div-inset">
                 <div className="navbar-btn_shadow-div-outset">

@@ -2358,7 +2358,7 @@ button {
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-inset .fields_shadow-div-outset .users-details-each .p-1 p {
   width: 85%;
   padding-left: 15%;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: white;
   text-align: start;
   word-break: break-all;
@@ -2387,7 +2387,7 @@ button {
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-inset .fields_shadow-div-outset .users-details-each .p-2 p {
   height: 80%;
   width: 90%;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: #ff728a;
   text-align: start;
   overflow-y: scroll;
@@ -2769,6 +2769,10 @@ button {
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
+.section-1_profile .section-1b_user-data .user-data-2_btns-container .edit-logout-container .edit-logout_shadow-div-inset .each-button-container .profile-button-outset:hover {
+  background: #f791bc;
+}
+
 .section-2_profile {
   height: 53%;
   width: 100%;
@@ -2835,9 +2839,9 @@ button {
 }
 
 .section-2_profile .section-2a_songs {
-  height: 77%;
+  height: 78%;
   width: 100%;
-  border-radius: 18px;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2855,8 +2859,8 @@ button {
 
 .section-2_profile .section-2a_songs .songs-1_songs-list {
   height: 86%;
-  width: 86%;
-  border-radius: 15px;
+  width: 96%;
+  border-radius: 0.7em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2875,10 +2879,10 @@ button {
           box-shadow: inset 0px -2px 3px #bebebe;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container {
-  min-height: 155px;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item {
+  min-height: 135px;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 1%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2888,90 +2892,86 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-radius: 16px;
-  -webkit-box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 3px #999999;
-          box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 3px #999999;
+  border-radius: 0.7em;
+  -webkit-box-shadow: inset 2px 2px 3px #545454, inset -2px -2px 2px #969595;
+          box-shadow: inset 2px 2px 3px #545454, inset -2px -2px 2px #969595;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:focus {
-  background: pink;
-}
-
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover {
   background: #ec6aa0;
   -webkit-box-shadow: inset 2px 2px 2px 0px #532739, inset -2px -2px 2px #ffd5e6;
           box-shadow: inset 2px 2px 2px 0px #532739, inset -2px -2px 2px #ffd5e6;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .track-details-container .song-name-container .song-name-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
           box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .track-details-container .song-name-container .song-name-outset .track-title-container p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__title .profile-songs__title-text {
   color: white;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .track-details-container .song-name-container .song-name-outset .track-data-container .track-caption-container p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container p {
   color: #e0e0e0;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .track-details-container .lyrics-container .lyrics-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__body .profile-songs__lyrics .profile-songs__lyrics--shadow-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
           box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .buttons-container .buttons-inner {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__action-btns--container .buttons-inner {
   -webkit-box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
           box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset {
   -webkit-box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
           box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset {
   -webkit-box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
           box-shadow: 2px 2px 2px 0px #a84a72, -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container {
   -webkit-box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #ffd2e4;
           box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #ffd2e4;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container .delete-question-container p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container .delete-question-container p {
   color: white;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container .delete-question-container p span {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container .delete-question-container p span {
   color: #b13c6d;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset {
   -webkit-box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
           box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset .cancel-btn-container .cancel-btn_shadow-div-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset .cancel-btn-container .cancel-btn_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
           box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
   color: #d1d1d1;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset .confirm-btn-container .confirm-btn_shadow-div-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item:hover .delete-container .delete-btn-container .delete-btn_shadow-div-inset .confirm-btn-container .confirm-btn_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
           box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
   color: white;
   border: 2px solid white;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body {
   height: 100%;
-  width: 80%;
+  width: 83%;
   border-radius: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2988,7 +2988,7 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header {
   height: 35%;
   width: 100%;
   border-radius: 0px;
@@ -3007,10 +3007,10 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset {
-  height: 89%;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset {
+  height: 88%;
   width: 95%;
-  border-radius: 10px 25Px 25px 2px;
+  border-radius: 0.4em 2em 2em 0.4em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3024,12 +3024,12 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 2px 0px #424242, -2px -2px 2px #c9c9c9;
-          box-shadow: 2px 2px 2px 0px #424242, -2px -2px 2px #c9c9c9;
+  -webkit-box-shadow: 2px 2px 3px 0px #545454, -2px -2px 2px #a9a9a9;
+          box-shadow: 2px 2px 3px 0px #545454, -2px -2px 2px #a9a9a9;
   text-decoration: none;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-title-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__title {
   height: 40%;
   width: 100%;
   border-radius: 0;
@@ -3048,10 +3048,10 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-title-container p {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__title .profile-songs__title-text {
   width: 90%;
-  color: #e24f8c;
-  text-indent: 4%;
+  color: #ec6aa0;
+  text-indent: 2%;
   font-size: 1rem;
   font-weight: bold;
   text-align: start;
@@ -3060,16 +3060,16 @@ button {
   text-overflow: ellipsis;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info {
   height: 60%;
-  width: 95%;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -3079,38 +3079,10 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container p {
-  font-size: .85rem;
-  color: #c2c2c2;
-  text-align: start;
-}
-
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container .track-caption-container {
-  height: 50%;
-  width: 95%;
-  border-radius: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-left: 4%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container .track-social-container {
-  height: 50%;
-  width: 95%;
-  border-radius: 10px;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container {
+  height: 46%;
+  width: 100%;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3124,14 +3096,32 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-left: 4%;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .song-name-container .song-name-outset .track-data-container .track-social-container p {
-  margin-right: 3%;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container .profile-songs__text {
+  height: 100%;
+  width: 95%;
+  font-size: 0.8rem;
+  color: #c2c2c2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: start;
+  text-indent: 2%;
+  text-overflow: ellipsis;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container .profile-songs__text .profile-songs__text-bullet {
+  height: 100%;
+  margin: 0% 2% 0% 2%;
+  font-size: 0.85rem;
+  color: #ffb6d4;
+}
+
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset:hover {
+  background: #f791bc;
+}
+
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__lyrics {
   height: 65%;
   width: 100%;
   border-radius: 20px;
@@ -3150,10 +3140,10 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset {
-  height: 91%;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__lyrics .profile-songs__lyrics--shadow-outset {
+  height: 88%;
   width: 95%;
-  border-radius: 2px 25px 25px 15px;
+  border-radius: 0.3em 3em 3em 0.3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3167,11 +3157,11 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px 0px #424242, -2px -2px 2px #c9c9c9;
-          box-shadow: 2px 2px 3px 0px #424242, -2px -2px 2px #c9c9c9;
+  -webkit-box-shadow: 2px 2px 3px 0px #545454, -2px -2px 2px #a9a9a9;
+          box-shadow: 2px 2px 3px 0px #545454, -2px -2px 2px #a9a9a9;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset .p-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__lyrics .profile-songs__lyrics--shadow-outset .profile-songs__lyrics-text {
   height: 90%;
   width: 95%;
   font-size: 13px;
@@ -3181,7 +3171,7 @@ button {
   text-align: start;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset .p-container .each-line-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__lyrics .profile-songs__lyrics--shadow-outset .profile-songs__lyrics-text .each-line-container {
   height: initial;
   width: 100%;
   border-radius: 15px;
@@ -3200,15 +3190,15 @@ button {
           flex-direction: row;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .track-details-container .lyrics-container .lyrics-outset .p-container .each-line-container .each-line-no {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__lyrics .profile-songs__lyrics--shadow-outset .profile-songs__lyrics-text .each-line-container .each-line-no {
   font-size: 10px;
   color: #c2c2c2;
   margin-right: 1%;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container {
   height: 100%;
-  width: 20%;
+  width: 17%;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3225,10 +3215,10 @@ button {
           flex-direction: column;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner {
   height: 92%;
   width: 90%;
-  border-radius: 12px;
+  border-radius: 1.5em 0.4em 0.4em 1.5em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3242,14 +3232,14 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
-          box-shadow: inset 3px 3px 4px #424242, inset -3px -3px 5px #999999;
+  -webkit-box-shadow: inset 2px 2px 3px #4a4a4a, inset -2px -2px 2px #919191;
+          box-shadow: inset 2px 2px 3px #4a4a4a, inset -2px -2px 2px #919191;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container {
   height: 32%;
   width: 100%;
-  border-radius: 5px 50px 50px 5px;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3265,10 +3255,10 @@ button {
           flex-direction: row;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container {
-  height: 95%;
-  width: 90%;
-  border-radius: 50px 5px 5px 50px;
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container {
+  height: 2.7em;
+  width: 2.7em;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3284,7 +3274,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset {
   height: 95%;
   width: 95%;
   border-radius: 50%;
@@ -3301,11 +3291,11 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #a3a3a3;
-          box-shadow: inset 2px 2px 3px 0px #303030, inset -2px -2px 2px #a3a3a3;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 2px #a3a3a3;
+          box-shadow: inset 2px 2px 3px 0px #474747, inset -2px -2px 2px #a3a3a3;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset {
   height: 75%;
   width: 75%;
   border-radius: 50%;
@@ -3322,32 +3312,36 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 2px #adadad;
-          box-shadow: 2px 2px 3px 0px #4a4a4a, -2px -2px 2px #adadad;
+  -webkit-box-shadow: 2px 2px 3px 0px #535353, -1px -1px 2px #c9c9c9;
+          box-shadow: 2px 2px 3px 0px #535353, -1px -1px 2px #c9c9c9;
   background: #ec6aa0;
   border: none;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset img {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset img {
   height: 1.5em;
   width: 1.5em;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset .bi-play-2 {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset .bi-play-2 {
   margin: 1px 0px 0px 4px;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset:active {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset:active {
   -webkit-box-shadow: none;
           box-shadow: none;
   background: none;
 }
 
-.section-2_profile .section-2a_songs .songs-1_songs-list .each-track-container .buttons-container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset:active img {
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset:active img {
   -webkit-filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
           filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
+}
+
+.section-2_profile .section-2a_songs .songs-1_songs-list .profile-songs__item .profile-songs__action-btns--container .buttons-inner .delete-btn-container .play-container .play-outset .play-inset:hover {
+  background: #f791bc;
 }
 
 .section-2_profile .section-2a_songs .songs-1_songs-list .no-tracks-container {
@@ -3630,6 +3624,12 @@ button {
   color: #b9b9b9;
 }
 
+.delete-container .delete-btn-container .delete-btn_shadow-div-inset .cancel-btn-container .cancel-btn_shadow-div-outset:active {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #984466, inset -2px -2px 2px #fcaece;
+          box-shadow: inset 2px 2px 2px 0px #984466, inset -2px -2px 2px #fcaece;
+  color: white;
+}
+
 .delete-container .delete-btn-container .delete-btn_shadow-div-inset .confirm-btn-container {
   height: 100%;
   width: 30%;
@@ -3669,6 +3669,12 @@ button {
   -webkit-box-shadow: 3px 3px 3px #545454, -2px -2px 2px #acacac;
           box-shadow: 3px 3px 3px #545454, -2px -2px 2px #acacac;
   background: #ec6aa0;
+  color: white;
+}
+
+.delete-container .delete-btn-container .delete-btn_shadow-div-inset .confirm-btn-container .confirm-btn_shadow-div-outset:active {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #984466, inset -2px -2px 2px #fcaece;
+          box-shadow: inset 2px 2px 2px 0px #984466, inset -2px -2px 2px #fcaece;
   color: white;
 }
 
@@ -6312,7 +6318,7 @@ button {
 }
 
 .EditLyrics {
-  background: #cccccc;
+  background: #545454;
 }
 
 .EditLyrics .edit-lyrics__header {
@@ -6351,11 +6357,11 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #686868, inset -3px -3px 3px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #686868, inset -3px -3px 3px #ffffff;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #313131, inset -2px -2px 3px #898989;
+          box-shadow: inset 2px 2px 3px 0px #313131, inset -2px -2px 3px #898989;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__exit--container {
   height: 100%;
   width: 11%;
   border-radius: 0;
@@ -6374,7 +6380,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__exit--container .edit-lyrics__exit-btn {
   height: 77%;
   width: 74%;
   border-radius: 0.2em 0.2em 0.2em 1.2em;
@@ -6392,25 +6398,29 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   background: #ec6aa0;
-  -webkit-box-shadow: 2px 2px 3px #787878, -2px -2px 2px 0px #efefef;
-          box-shadow: 2px 2px 3px #787878, -2px -2px 2px 0px #efefef;
+  -webkit-box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #c3c3c3;
+          box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #c3c3c3;
   margin-left: 0.3em;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn img {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__exit--container .edit-lyrics__exit-btn img {
   height: 85%;
   width: 85%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-exit .edit-lyrics__exit-btn:active {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__exit--container .edit-lyrics__exit-btn:active {
   background: #f691bb;
   -webkit-box-shadow: inset 2px 2px 3px #a55a79, inset -2px -2px 2px 0px #ffe3ef;
           box-shadow: inset 2px 2px 3px #a55a79, inset -2px -2px 2px 0px #ffe3ef;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__exit--container .edit-lyrics__exit-btn:hover {
+  background: #e08daf;
+}
+
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__title--container {
   height: 100%;
   width: 40%;
   border-radius: 0;
@@ -6429,7 +6439,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__title--container .edit-lyrics__title--shadow-outset {
   height: 77%;
   width: 96%;
   border-radius: 0.2em;
@@ -6446,22 +6456,24 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #908f8f, -2px -2px 2px 0px #ffffff;
-          box-shadow: 2px 2px 3px #908f8f, -2px -2px 2px 0px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #858585;
+          box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #858585;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset .edit-lyrics__header-title {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__title--container .edit-lyrics__title--shadow-outset .edit-lyrics__title {
   color: white;
+  width: 100%;
   font-size: 0.9rem;
   font-weight: bold;
+  text-align: start;
+  text-indent: 5%;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-title--container .edit-lyrics__header-title--shadow-outset .edit-lyrics__header-title-name {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__title--container .edit-lyrics__title--shadow-outset .edit-lyrics__title.name {
   color: #ec6aa0;
-  font-size: 0.9rem;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song {
   height: 100%;
   width: 49%;
   border-radius: 0;
@@ -6480,7 +6492,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset {
   height: 77%;
   width: 97%;
   border-radius: 0.2em 1.3em 0.2em 0.2em;
@@ -6497,11 +6509,11 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 2px 2px 3px #777777, -2px -2px 2px 0px #ffffff;
-          box-shadow: 2px 2px 3px #777777, -2px -2px 2px 0px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #858585;
+          box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #858585;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset {
   height: 80%;
   width: 96%;
   border-radius: 0.2em 1.3em 0.2em 0.2em;
@@ -6518,34 +6530,12 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #808080, inset -2px -2px 2px #ffffff;
-          box-shadow: inset 2px 2px 3px 0px #808080, inset -2px -2px 2px #ffffff;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #333333, inset -2px -2px 3px #7e7e7e;
+          box-shadow: inset 2px 2px 3px 0px #333333, inset -2px -2px 3px #7e7e7e;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .choose-song-title {
-  height: 100%;
-  width: 17%;
-  border-radius: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  color: pink;
-  font-size: 0.8rem;
-  text-align: start;
-}
-
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs {
-  height: 75%;
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn {
+  height: 66%;
   width: 91%;
   border-radius: 100vh;
   display: -webkit-box;
@@ -6561,11 +6551,11 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 2px 2px 3px #808080, -1px -1px 3px 0px #ffffff;
-          box-shadow: 2px 2px 3px #808080, -1px -1px 3px 0px #ffffff;
+  -webkit-box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #838383;
+          box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #838383;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs p {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn .edit-lyrics__select-song-text {
   width: 100%;
   font-size: 0.9rem;
   color: #ec6aa0;
@@ -6575,43 +6565,27 @@ button {
   overflow: hidden;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs:hover {
-  background: #f3b9c3;
-  -webkit-box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
-          box-shadow: 3px 3px 4px #6e5a62, -2px -2px 2px 0px #ffe5e5;
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn:hover {
+  background: #ec6aa0;
+  -webkit-box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #cbcbcb;
+          box-shadow: 2px 2px 3px 0px #333333, -1px -1px 2px #cbcbcb;
 }
 
-.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__header-song .choose-song_shadow-div-inset .choose-song--shadow-inset .select-songs:active {
-  background: #b4b4b4;
-  -webkit-box-shadow: inset 1px 1px 3px 0px #5f5f5f, inset -2px -2px 2px #efefef;
-          box-shadow: inset 1px 1px 3px 0px #5f5f5f, inset -2px -2px 2px #efefef;
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn:hover .edit-lyrics__select-song-text {
+  color: white;
 }
 
-.EditLyrics .edit-lyrics__header .close-screen {
-  height: 30px;
-  width: 30px;
-  border-radius: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: initial;
-  border: none;
-  -webkit-box-shadow: 3px 3px 5px 0px #1f1f1f, -1px -1px 2px #cfcfcf;
-          box-shadow: 3px 3px 5px 0px #1f1f1f, -1px -1px 2px #cfcfcf;
-  margin-right: 2%;
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn:active {
+  background: #ec6aa0;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #712f49, inset -2px -2px 2px #fd9ec5;
+          box-shadow: inset 2px 2px 3px 0px #712f49, inset -2px -2px 2px #fd9ec5;
 }
 
-.EditLyrics .section-2_lyrics-el {
+.EditLyrics .edit-lyrics__header .edit-lyrics__header--shadow-inset .edit-lyrics__select-song .edit-lyrics__select-song--shadow-outset .edit-lyrics__select-song--shadow-inset .edit-lyrics__select-song-btn:active .edit-lyrics__select-song-text {
+  color: white;
+}
+
+.EditLyrics .edit-lyrics__lyrics--container {
   height: 76%;
   width: 100%;
   border-radius: 2.3em 0em 0em 0em;
@@ -6629,11 +6603,13 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   background: linear-gradient(314deg, #858585 0%, #a7a7a7 100%);
+  -webkit-box-shadow: 0px -5px 25px #00000099;
+          box-shadow: 0px -5px 25px #00000099;
   position: absolute;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container {
-  height: intial;
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list {
+  height: initial;
   width: 97%;
   border-radius: 2em 0em 0em 0em;
   display: -webkit-box;
@@ -6649,11 +6625,12 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  max-height: 93%;
   margin-top: 1.5%;
   overflow-y: scroll;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item {
   height: intial;
   width: 100%;
   border-radius: 2em 0.3em;
@@ -6677,7 +6654,7 @@ button {
           box-shadow: inset 2px 2px 3px 0px #4a4a4a, inset -2px -2px 3px #c3c3c3;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics {
   height: 100%;
   width: 100%;
   border-radius: 0;
@@ -6696,7 +6673,7 @@ button {
           flex-direction: column;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container {
   height: 65%;
   width: 100%;
   border-radius: 0;
@@ -6715,7 +6692,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset {
   height: 88%;
   width: 96%;
   border-radius: 2em 0.3em 0.3em 2em;
@@ -6736,7 +6713,7 @@ button {
           box-shadow: 3px 3px 5px 0px #545454, -2px -2px 2px #cfcfcf;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container {
   height: 100%;
   width: 20%;
   border-radius: 8px;
@@ -6755,7 +6732,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset {
   height: 89%;
   width: 93%;
   border-radius: 30px 5px 5px 30px;
@@ -6776,7 +6753,7 @@ button {
           box-shadow: inset 2px 2px 4px 0px #3f3f3f, inset -2px -2px 2px #e6e6e6;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container {
   height: 100%;
   width: 40%;
   border-radius: 8px;
@@ -6795,7 +6772,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset {
   height: 89%;
   width: 92%;
   border-radius: 50px;
@@ -6814,7 +6791,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset .bar-num_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset .bar-num_shadow-div-outset {
   height: 85%;
   width: 85%;
   border-radius: 50px 0px 0px 50px;
@@ -6837,7 +6814,7 @@ button {
   font-size: 13px;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset {
   height: 89%;
   width: 60%;
   border-radius: 50px;
@@ -6856,7 +6833,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset {
   height: 85%;
   width: 76%;
   border-radius: 3px;
@@ -6880,25 +6857,25 @@ button {
           box-shadow: 2px 2px 3px 0px #4f4e4e, -1px -1px 3px #ffffff;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset img {
   height: 1.6em;
   width: 1.6em;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active {
   background: initial;
   -webkit-box-shadow: inset 2px 2px 3px 0px #3f3f3f, inset -1px -1px 3px #ffffff;
           box-shadow: inset 2px 2px 3px 0px #3f3f3f, inset -1px -1px 3px #ffffff;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active img {
   -webkit-filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
           filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container {
   height: 100%;
   width: 65%;
   border-radius: 0;
@@ -6918,7 +6895,7 @@ button {
   overflow-y: scroll;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container {
   height: 100%;
   width: 100%;
   border-radius: 0;
@@ -6937,7 +6914,7 @@ button {
           flex-direction: column;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .confirm-delete-title {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .confirm-delete-title {
   height: 30%;
   width: 100%;
   border-radius: 0;
@@ -6956,14 +6933,14 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .confirm-delete-title p {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .confirm-delete-title p {
   height: 16px;
   font-size: 13px;
   color: white;
   margin-left: 4px;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container {
   height: 70%;
   width: 100%;
   border-radius: 8px;
@@ -6982,7 +6959,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel {
   height: 60%;
   width: 25%;
   border-radius: 2em 0.3em 0.3em 2em;
@@ -7008,7 +6985,7 @@ button {
   font-size: 12px;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete {
   height: 60%;
   width: 25%;
   border-radius: 0.3em 2em 2em 0.3em;
@@ -7034,7 +7011,7 @@ button {
   font-size: 12px;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container {
   height: 92%;
   width: 99%;
   border-radius: 0;
@@ -7055,7 +7032,7 @@ button {
       flex-wrap: wrap;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text {
   font-size: 0.9rem;
   color: white;
   margin-left: 4px;
@@ -7063,11 +7040,11 @@ button {
   line-height: 1;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text.edited {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text.edited {
   color: #e24f8c;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form {
   height: 100%;
   width: 100%;
   border-radius: 0;
@@ -7086,7 +7063,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field {
   height: 82%;
   width: 94%;
   border-radius: 0.5em;
@@ -7113,37 +7090,37 @@ button {
   line-height: 1;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::-webkit-input-placeholder {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::-webkit-input-placeholder {
   color: white;
   text-align: start;
   text-indent: 3%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:-ms-input-placeholder {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:-ms-input-placeholder {
   color: white;
   text-align: start;
   text-indent: 3%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::-ms-input-placeholder {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::-ms-input-placeholder {
   color: white;
   text-align: start;
   text-indent: 3%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::placeholder {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field::placeholder {
   color: white;
   text-align: start;
   text-indent: 3%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:focus {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:focus {
   border: 2px solid pink;
   outline: none !important;
   border-radius: 0.5em;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container {
   height: 100%;
   width: 15%;
   border-radius: 0;
@@ -7162,7 +7139,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset {
   height: 89%;
   width: 3.3em;
   border-radius: 2em 0.2em 2em 2em;
@@ -7184,7 +7161,7 @@ button {
   margin-right: 0.3em;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset {
   height: 77%;
   width: 74%;
   border-radius: 100vh;
@@ -7209,23 +7186,23 @@ button {
   margin-left: 11%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset img {
   height: 1.7em;
   width: 1.7em;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active {
   background: #ec6aa0;
   -webkit-box-shadow: inset 1px 1px 6px 0px #37071b, inset -1px -1px 1px #ffffff;
           box-shadow: inset 1px 1px 6px 0px #37071b, inset -1px -1px 1px #ffffff;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions {
   height: 35%;
   width: 100%;
   border-radius: 0;
@@ -7244,7 +7221,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container {
   height: 100%;
   width: 10%;
   border-radius: 0;
@@ -7263,7 +7240,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn {
   height: 70%;
   width: 70%;
   border-radius: 0.1em;
@@ -7284,14 +7261,14 @@ button {
           box-shadow: 2px 2px 3px 0px #5e5e5e, -1px -1px 2px #c7c7c7;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
   height: 80%;
   width: 80%;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .get-lyrics--container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .get-lyrics--container {
   height: 100%;
   width: 60%;
   border-radius: 0;
@@ -7310,7 +7287,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container {
   height: 100%;
   width: 30%;
   border-radius: 0;
@@ -7329,7 +7306,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container {
   height: 100%;
   width: 43%;
   border-radius: 0;
@@ -7348,7 +7325,7 @@ button {
           flex-direction: row;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn {
   height: 60%;
   width: 90%;
   border-radius: 0;
@@ -7369,142 +7346,143 @@ button {
           box-shadow: 2px 2px 3px 0px #4c4c4c, -1px -1px 3px #cdcdcd;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn.undo {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn.undo {
   border-radius: 2em 0.2em 0.2em 2em;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn.redo {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn.redo {
   border-radius: 0.2em 2em 2em 0.2em;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover {
   background: #ec6aa0;
   -webkit-box-shadow: inset 2px 2px 3px 0px #6e4556, inset -2px -2px 3px #ffcae0;
           box-shadow: inset 2px 2px 3px 0px #6e4556, inset -2px -2px 3px #ffcae0;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -2px -2px 2px #ffa7cc;
           box-shadow: 2px 2px 3px 0px #964c6b, -2px -2px 2px #ffa7cc;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset {
   -webkit-box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #ffb0d1;
           box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #ffb0d1;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset .bar-num_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .bar-number-container .bar-num_shadow-div-inset .bar-num_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:hover {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:hover {
   background: #ff96c2;
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #fffbfd;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #fffbfd;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .buttons-container .buttons-container_shadow-div-inset .buttons_shadow-div-inset .buttons_shadow-div-outset:active {
   background: #ff96c2;
   -webkit-box-shadow: inset 2px 2px 3px 0px #964c6b, inset -1px -1px 2px #fffbfd;
           box-shadow: inset 2px 2px 3px 0px #964c6b, inset -1px -1px 2px #fffbfd;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset {
   -webkit-box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #f394bc;
           box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #f394bc;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -2px -2px 2px #ffa7cc;
           box-shadow: 2px 2px 3px 0px #964c6b, -2px -2px 2px #ffa7cc;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:hover {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:hover {
   background: #ff96c2;
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffe9f3;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffe9f3;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .close-btn-container .close-btn_shadow-div-inset .close-btn_shadow-div-outset:active {
   background: #ff96c2;
   -webkit-box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #ffd7e8;
           box-shadow: inset 2px 2px 3px 0px #964c6b, inset -2px -2px 2px #ffd7e8;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel {
   color: #ffb9d6;
   -webkit-box-shadow: 2px 2px 3px 0px #974969, -1px -1px 2px #ffbcd8;
           box-shadow: 2px 2px 3px 0px #974969, -1px -1px 2px #ffbcd8;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-cancel:active {
   background: #e5659a;
   -webkit-box-shadow: inset 2px 2px 3px 0px #974969, inset -2px -2px 2px #e9a1bf;
           box-shadow: inset 2px 2px 3px 0px #974969, inset -2px -2px 2px #e9a1bf;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete {
   background: #e35490;
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #fbb6d3;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #fbb6d3;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .confirm-delete-container .word-btn-container .word-delete:active {
   background: #e5659a;
   -webkit-box-shadow: inset 2px 2px 3px 0px #974969, inset -2px -2px 2px #e9a1bf;
           box-shadow: inset 2px 2px 3px 0px #974969, inset -2px -2px 2px #e9a1bf;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field {
   background: #e24f8c;
   -webkit-box-shadow: inset 2px 2px 3px 0px #994065, inset -2px -2px 3px #ffb6d4;
           box-shadow: inset 2px 2px 3px 0px #994065, inset -2px -2px 3px #ffb6d4;
   border: 2px solid #ec6aa0;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:focus {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__form .edit-lyrics__edit-field:focus {
   border: 2px solid #ffedf4;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text.edited {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .edit-lyrics-container .edit-lyrics_shadow-div-outset .each-lyric-container .each-word-container .edit-lyrics__text.edited {
   color: #fea3c9;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn:active {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .move-handle--container .move-handle__btn:active {
   background: #c5497d;
   -webkit-box-shadow: inset 2px 2px 3px 0px #733b53, inset -1px -1px 2px #febcd9;
           box-shadow: inset 2px 2px 3px 0px #733b53, inset -1px -1px 2px #febcd9;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn {
   -webkit-box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
           box-shadow: 2px 2px 3px 0px #964c6b, -1px -1px 2px #ffdaea;
 }
 
-.EditLyrics .section-2_lyrics-el .lyrics-list-container .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn img {
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.EditLyrics .section-2_lyrics-el .padding--container {
-  height: 38%;
-  width: 100%;
+.EditLyrics .edit-lyrics__lyrics--container .edit-lyrics__lyrics-list .lyrics-list-item:hover .list-item-1_edit-lyrics .list-item-2_lyric-suggestions .undo-redo--container .undo-redo__btn--container .undo-redo__btn:active {
+  background: #ff96c2;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #995673, inset -2px -2px 2px #fbd1e3;
+          box-shadow: inset 2px 2px 3px 0px #995673, inset -2px -2px 2px #fbd1e3;
 }
 
 .EditLyrics .section-3_controls {
@@ -7591,9 +7569,9 @@ button {
           box-shadow: inset 2px 2px 3px #3a3a3a, inset -2px -2px 2px 0px #828282;
 }
 
-.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics {
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .edit-lyrics__undo-redo--container {
   height: 100%;
-  width: 30%;
+  width: 70%;
   border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -7610,6 +7588,71 @@ button {
           flex-direction: row;
 }
 
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics {
+  height: 100%;
+  width: 70%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .edit-lyrics__undo-redo {
+  height: 100%;
+  width: 50%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .edit-lyrics__undo-redo .edit-lyrics__undo-redo-btn {
+  height: 75%;
+  width: 88%;
+  border-radius: 0.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px #3c3c3c, -1px -1px 3px 0px #adadad;
+          box-shadow: 2px 2px 3px #3c3c3c, -1px -1px 3px 0px #adadad;
+}
+
+.EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .edit-lyrics__undo-redo .edit-lyrics__undo-redo-btn:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: gray;
+}
+
 .EditLyrics .section-3_controls .controls-container .controls-1_options .options_shadow-div-outset .options-2_toggle-lyrics .save-reset-btn--container {
   height: 100%;
   width: 50%;
@@ -7617,9 +7660,9 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -9355,7 +9398,7 @@ button {
 .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container {
   height: 80%;
   width: 23%;
-  border-radius: 3px;
+  border-radius: 0.2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9369,7 +9412,6 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  text-decoration: none;
 }
 
 .NavBar .navbar_section .navbar_shadow-div-outset .navbar_shadow-div-inset .navbar-btn-container .navbar-btn_shadow-div-inset {
@@ -9467,8 +9509,20 @@ button {
           filter: invert(42%) sepia(65%) saturate(2055%) hue-rotate(310deg) brightness(100%) contrast(98%);
 }
 
-.btn-unselected .navbar-btn-text {
-  color: #ff8ebd;
+.btn-unselected:hover {
+  background: #ec6aa0;
+  -webkit-box-shadow: 3px 3px 6px #3b3b3b, -1px -1px 2px #cecece;
+          box-shadow: 3px 3px 6px #3b3b3b, -1px -1px 2px #cecece;
+}
+
+.btn-unselected:hover .navbar-btn_shadow-div-inset {
+  -webkit-box-shadow: inset 2px 2px 3px 0px #a54e72, inset -2px -2px 3px #efa2c2;
+          box-shadow: inset 2px 2px 3px 0px #a54e72, inset -2px -2px 3px #efa2c2;
+}
+
+.btn-unselected:hover .navbar-btn_shadow-div-inset .navbar-btn_shadow-div-outset img {
+  -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
 .btn-selected {
@@ -9497,8 +9551,15 @@ button {
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.btn-selected .navbar-btn-text {
-  color: #ffffff;
+.btn-selected:hover {
+  background: #f6a3c5;
+  -webkit-box-shadow: inset 2px 2px 3px #7f636f, inset -2px -2px 3px #fff0f6;
+          box-shadow: inset 2px 2px 3px #7f636f, inset -2px -2px 3px #fff0f6;
+}
+
+.btn-selected:hover .navbar-btn_shadow-div-inset {
+  -webkit-box-shadow: #a9748a 2px 2px 2px 0px, #fdc7dd -2px -2px 2px;
+          box-shadow: #a9748a 2px 2px 2px 0px, #fdc7dd -2px -2px 2px;
 }
 
 /* ------------------------------ Comment Pop Up menu ------------------------------------------*/
@@ -13613,7 +13674,7 @@ button {
           flex-direction: row;
   -webkit-box-shadow: inset 3px 3px 2px 0px #464646, inset -2px -2px 3px #c0c0c0;
           box-shadow: inset 3px 3px 2px 0px #464646, inset -2px -2px 3px #c0c0c0;
-  margin-top: .5%;
+  margin-top: 0.5%;
 }
 
 .SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_header-container {
@@ -13708,6 +13769,11 @@ button {
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
+.SaveSongModal .save-song_modal-container .save-song_header .save-song_header-shadow-inset .save-song_btn-container .save-song_btn--close:active {
+  -webkit-box-shadow: inset 2px 2px 3px #663449, inset -1px -1px 2px 0px #ffb6d4;
+          box-shadow: inset 2px 2px 3px #663449, inset -1px -1px 2px 0px #ffb6d4;
+}
+
 .SaveSongModal .save-song_modal-container .flow-controls-container {
   height: 87%;
   width: 97%;
@@ -13727,8 +13793,8 @@ button {
           flex-direction: column;
   -webkit-box-shadow: inset 3px 3px 3px 0px #3e3e3e, inset -3px -3px 4px #9c9c9c;
           box-shadow: inset 3px 3px 3px 0px #3e3e3e, inset -3px -3px 4px #9c9c9c;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display {
@@ -13749,8 +13815,8 @@ button {
       -ms-flex-direction: row;
           flex-direction: row;
   position: relative;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-btn-container {
@@ -13849,8 +13915,8 @@ button {
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset:active {
-  -webkit-box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
-          box-shadow: inset 2px 2px 3px #313232,  inset -2px -2px 3px #9fa2a4;
+  -webkit-box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+          box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-slider-container {
@@ -13954,7 +14020,7 @@ button {
           flex-direction: column;
 }
 
-.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"] {
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type='range'] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -13966,7 +14032,7 @@ button {
           box-shadow: inset 2px 2px 3px 0px #262626, inset -2px -2px 3px #b2b2b2;
 }
 
-.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type="range"]::-webkit-slider-thumb {
+.SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-1_playback-display .play-slider-container .play-slider-container_shadow-div-outset .play-slider-container_shadow-div-inset .play-slider_shadow-div-outset .play-slider_shadow-div-inset input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
   height: 20px;
@@ -14027,8 +14093,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset {
@@ -14050,8 +14116,8 @@ button {
           flex-direction: column;
   -webkit-box-shadow: 3px 3px 3px #202020, -2px -2px 2px 0px #acacac;
           box-shadow: 3px 3px 3px #202020, -2px -2px 2px 0px #acacac;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset {
@@ -14073,8 +14139,8 @@ button {
           flex-direction: column;
   -webkit-box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
           box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes {
@@ -14094,8 +14160,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-1_select-takes {
@@ -14115,8 +14181,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-transition: width .5s;
-  transition: width .5s;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-1_select-takes .select-takes-container_shadow-div-outset {
@@ -14157,8 +14223,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-transition: width .5s;
-  transition: width .5s;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
   -webkit-box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
           box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
 }
@@ -14202,7 +14268,7 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: linear-gradient(266deg, #6D6D6D, #828282);
+  background: linear-gradient(266deg, #6d6d6d, #828282);
   border: none;
   color: white;
 }
@@ -14404,8 +14470,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container {
@@ -14671,33 +14737,33 @@ button {
 .SaveSongModal .save-song_modal-container--transition-in {
   -webkit-transform: translateY(0%);
           transform: translateY(0%);
-  -webkit-transition: -webkit-transform .4s ease-out;
-  transition: -webkit-transform .4s ease-out;
-  transition: transform .4s ease-out;
-  transition: transform .4s ease-out, -webkit-transform .4s ease-out;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  transition: transform 0.4s ease-out, -webkit-transform 0.4s ease-out;
 }
 
 .SaveSongModal .save-song_modal-container--transition-out {
   -webkit-transform: translateY(-100%);
           transform: translateY(-100%);
-  -webkit-transition: -webkit-transform .3s ease-in;
-  transition: -webkit-transform .3s ease-in;
-  transition: transform .3s ease-in;
-  transition: transform .3s ease-in, -webkit-transform .3s ease-in;
+  -webkit-transition: -webkit-transform 0.3s ease-in;
+  transition: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+  transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
 }
 
 .SaveSongModal--show {
   opacity: 1;
   z-index: 3;
-  -webkit-transition: opacity .3s ease-out;
-  transition: opacity .3s ease-out;
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 .SaveSongModal--hide {
   opacity: 0;
   z-index: -1;
-  -webkit-transition: all .3s .42s ease-in;
-  transition: all .3s .42s ease-in;
+  -webkit-transition: all 0.3s 0.42s ease-in;
+  transition: all 0.3s 0.42s ease-in;
 }
 
 .SelectMenuModal {
@@ -14935,6 +15001,7 @@ button {
   text-indent: 3%;
   text-align: start;
   color: white;
+  cursor: pointer;
 }
 
 .SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected .selected_2 {

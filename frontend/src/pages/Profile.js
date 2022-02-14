@@ -125,51 +125,59 @@ function Profile() {
     }
 
     return (
-      <li className="each-track-container" ref={setSongRefs} onClick={e => setFocus(e)}>
+      <li className="profile-songs__item" ref={setSongRefs} onClick={e => setFocus(e)}>
         {deleteCheck ? (
           <>
-            <div className="track-details-container">
-              <div className="song-name-container">
-                <button
+            <div className="profile-songs__body">
+              <div className="profile-songs__header">
+                <Link
                   to={`/songScreen/${eachSong._id}`}
-                  className="song-name-outset"
-                  onClick={() =>
-                    navigate(`/songScreen/${eachSong._id}`, { state: { currentSong: eachSong } })
-                  }
+                  state={{ currentSong: eachSong }}
+                  type="button"
+                  className="profile-songs__header--shadow-outset"
+                  // onClick={() =>
+                  //   navigate(`/songScreen/${eachSong._id}`, { state: { currentSong: eachSong } })
+                  // }
                 >
-                  <div className="track-title-container">
-                    <p>{eachSong.name}</p>
+                  <div className="profile-songs__title">
+                    <p className="profile-songs__title-text">{eachSong.name}</p>
                   </div>
-                  <div className="track-data-container">
-                    <div className="track-caption-container">
-                      <p>This is a caption for the above song. I'm testing the length</p>
+                  <div className="profile-songs__song-info">
+                    <div className="profile-songs__text--container">
+                      <p className="profile-songs__text caption">
+                        This is a caption for the above song. I'm testing the length
+                      </p>
                     </div>
-                    <div className="track-social-container">
-                      <p>{formatDate(eachSong.date, 'm')}</p>
-                      <p>
+                    <div className="profile-songs__text--container">
+                      <p className="profile-songs__text">
+                        {formatDate(eachSong.date, 'm')}
+                        <span className="profile-songs__text-bullet">
+                          {String.fromCodePoint(8226)}
+                        </span>
                         {eachSong.song_likes.length === 1
-                          ? `${eachSong.song_likes.length} Like`
-                          : `${eachSong.song_likes.length} Likes`}
-                      </p>
-                      <p>
+                          ? `${eachSong.song_likes.length} like`
+                          : `${eachSong.song_likes.length} likes`}
+                        <span className="profile-songs__text-bullet">
+                          {String.fromCodePoint(8226)}
+                        </span>
                         {eachSong.song_comments.length === 1
-                          ? `${eachSong.song_comments.length} Comment`
-                          : `${eachSong.song_comments.length} Comments`}
+                          ? `${eachSong.song_comments.length} comment`
+                          : `${eachSong.song_comments.length} comments`}
                       </p>
                     </div>
                   </div>
-                </button>
+                </Link>
               </div>
-              <div className="lyrics-container">
-                <div className="lyrics-outset">
-                  <div className="p-container">{showLyrics()}</div>
+              <div className="profile-songs__lyrics">
+                <div className="profile-songs__lyrics--shadow-outset">
+                  <div className="profile-songs__lyrics-text">{showLyrics()}</div>
                 </div>
               </div>
             </div>
 
-            <div className="buttons-container">
+            <div className="profile-songs__action-btns--container">
               <div className="buttons-inner">
-                {propSongUser?._id === user?._id ? (
+                {propSongUser?._id === user?._id && (
                   <>
                     <div className="delete-btn-container">
                       <div className="play-container">
@@ -199,8 +207,6 @@ function Profile() {
                       </div>
                     </div>
                   </>
-                ) : (
-                  ''
                 )}
                 <div className="delete-btn-container">
                   <audio src={eachSong.songURL} ref={setAudioRefs}></audio>
@@ -423,29 +429,31 @@ function Profile() {
               {thisUser?._id === user?._id ? (
                 <div className="edit-logout_shadow-div-inset">
                   <div className="each-button-container ebc-4">
-                    <button
+                    <Link
                       className="profile-button-outset"
+                      to="/editProfile"
                       style={{ borderRadius: '35px 4px 4px 4px' }}
                     >
-                      <Link to="/editProfile" className="profile-button-inset pbe-4">
+                      <div className="profile-button-inset pbe-4">
                         <img
                           className="button-icons edit"
                           src={editIcon}
                           style={{ margin: '12% 0% 0% 11%' }}
                           alt="edit"
                         />
-                      </Link>
+                      </div>
                       <div className="btn-title">Edit</div>
-                    </button>
+                    </Link>
                   </div>
 
                   <div className="each-button-container ebc-5">
                     <button
                       className="profile-button-outset"
                       style={{ borderRadius: '4px 4px 4px 35px' }}
+                      onClick={() => logout()}
                     >
                       <div className="btn-title">Log Out</div>
-                      <div className="profile-button-inset pbe-5" onClick={() => logout()}>
+                      <div className="profile-button-inset pbe-5">
                         <img
                           className="button-icons logout"
                           src={logOutIcon}
@@ -468,20 +476,23 @@ function Profile() {
             {thisUserSongs?.length ? (
               showProfileSongs()
             ) : (
-              <li className="each-track-container">
-                <div className="track-details-container">
-                  <div className="song-name-container">
-                    <div className="song-name-outset">
-                      <div className="track-title-container">
-                        <p style={{ fontWeight: 'bold', fontSize: '14px' }}>
+              <li className="profile-songs__item">
+                <div className="profile-songs__body">
+                  <div className="profile-songs__header">
+                    <div className="profile-songs__header--shadow-outset">
+                      <div className="profile-songs__title">
+                        <p
+                          className="profile-songs__title-text"
+                          style={{ fontWeight: 'bold', fontSize: '14px' }}
+                        >
                           User hasn't saved any Flows
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="lyrics-container">
-                    <div className="lyrics-outset">
-                      <div className="p-container">
+                  <div className="profile-songs__lyrics">
+                    <div className="profile-songs__lyrics--shadow-outset">
+                      <div className="profile-songs__lyrics-text">
                         <p>
                           {thisUser?._id === user?._id
                             ? 'Go to the Recording Booth to start your budding new rap career!'
@@ -491,17 +502,17 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-                <div className="buttons-container">
+                <div className="profile-songs__action-btns--container">
                   <div className="buttons-inner"></div>
                 </div>
               </li>
             )}
           </ul>
-          <div className="songs-2_slider-container">
+          {/* <div className="songs-2_slider-container">
             <div className="songs-slider-outer">
               <div className="songs-slider-bar"></div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <NavBar locationClass={'NavBarProfile'} />
