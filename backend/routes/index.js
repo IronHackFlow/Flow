@@ -20,6 +20,7 @@ router.post('/searchUsersAndSongs', async (req, res, next) => {
 
   await Songs.find({ name: { $regex: req.body.search, $options: '$i' } })
     .populate('song_user')
+    .populate('song_comments')
     .then(songs => {
       searchData.songs = songs
       console.log('yo its ya boi 2' + songs)

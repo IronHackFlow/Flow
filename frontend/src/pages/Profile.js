@@ -114,9 +114,9 @@ function Profile() {
     const showLyrics = () => {
       return eachSong?.lyrics?.map((eachLine, index) => {
         return (
-          <div className="each-line-container" key={`${eachLine}lyrics${index}`}>
-            <p className="each-line-no">{index + 1}</p>
-            <p className="each-line-lyric" key={`${eachLine}_${index}`}>
+          <div className="profile-songs__lyrics-line" key={`${eachLine}lyrics${index}`}>
+            <p className="profile-songs__lyrics-line-text no">{index + 1}</p>
+            <p className="profile-songs__lyrics-line-text line" key={`${eachLine}_${index}`}>
               {eachLine}
             </p>
           </div>
@@ -135,9 +135,6 @@ function Profile() {
                   state={{ currentSong: eachSong }}
                   type="button"
                   className="profile-songs__header--shadow-outset"
-                  // onClick={() =>
-                  //   navigate(`/songScreen/${eachSong._id}`, { state: { currentSong: eachSong } })
-                  // }
                 >
                   <div className="profile-songs__title">
                     <p className="profile-songs__title-text">{eachSong.name}</p>
@@ -145,7 +142,7 @@ function Profile() {
                   <div className="profile-songs__song-info">
                     <div className="profile-songs__text--container">
                       <p className="profile-songs__text caption">
-                        This is a caption for the above song. I'm testing the length
+                        {eachSong.caption ? eachSong.caption : 'no caption for this flow'}
                       </p>
                     </div>
                     <div className="profile-songs__text--container">

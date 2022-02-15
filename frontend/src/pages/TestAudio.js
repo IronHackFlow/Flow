@@ -645,14 +645,6 @@ function TestAudio(props) {
         <audio id="song" src={currentBeat?.song} loop={true} ref={recordAudioRef}></audio>
 
         <div className="section-1_speech">
-          <button
-            className="modal-toggle-btn"
-            ref={modalBtnRef}
-            onClick={() => toggleModalHandler()}
-          >
-            <img className="button-icons" src={guideIcon} alt="modal" />
-          </button>
-
           <div
             className={`scroll-rhymes-container ${focusBorder === 31 ? 'focus-border' : ''}`}
             id="currentTranscript"
@@ -786,26 +778,34 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className="suggestion-button-container">
-              <div className="rhyme-lock-container">
-                <div className="rhyme-lock-button rlb-1">
-                  <div className="rhyme-lock-outset">
-                    <select
-                      className="rhyme-lock-btn select-no"
-                      value={selectedRhymeNo}
-                      onChange={e => setSelectedRhymeNo(e.target.value)}
-                    >
-                      {rhymeOptionNoHandler()}
-                    </select>
-                  </div>
+            <div className="interactions__options--container">
+              <div className="interactions__options--shadow-inset">
+                <div className="interactions__btn--container rhyme-no">
+                  <select
+                    className="interactions__btn--shadow-outset"
+                    value={selectedRhymeNo}
+                    onChange={e => setSelectedRhymeNo(e.target.value)}
+                  >
+                    {rhymeOptionNoHandler()}
+                  </select>
                 </div>
-
-                <div className="rhyme-lock-button rlb-3">
-                  <div className="rhyme-lock-outset">
-                    <button className="rhyme-lock-btn" onClick={() => navigateToEditLyrics()}>
-                      EditLyrics
-                    </button>
+                <button className="interactions__btn--container tutorial">
+                  <div
+                    className="interactions__btn--shadow-outset"
+                    ref={modalBtnRef}
+                    onClick={() => toggleModalHandler()}
+                  >
+                    <img className="button-icons" src={guideIcon} alt="modal" />
+                    tutorial
                   </div>
+                </button>
+                <div className="interactions__btn--container edit-lyrics">
+                  <button
+                    className="interactions__btn--shadow-outset"
+                    onClick={() => navigateToEditLyrics()}
+                  >
+                    edit lyrics
+                  </button>
                 </div>
               </div>
             </div>

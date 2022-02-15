@@ -27,7 +27,7 @@ function EditLyrics() {
   const [currentBeat, setCurrentBeat] = useState(beatList[0])
   const [allSongs, setAllSongs] = useState([])
   const [initialSongs, setInitialSongs] = useState([])
-  const [lyricsArray, setLyricsArray, { history, back, forward }] = useHistory([])
+  const [lyricsArray, setLyricsArray, { history, pointer, back, forward }] = useHistory()
   const [lyricsDisplay, setLyricsDisplay] = useState([])
 
   const [isPlaying, setIsPlaying] = useState(false)
@@ -119,6 +119,7 @@ function EditLyrics() {
     )
     lyricsArray.splice(e.oldDraggableIndex, 1)
     lyricsArray.splice(e.newDraggableIndex, 0, getItem[0])
+    setLyricsArray(lyricsArray)
   }
 
   const handleSaveLyrics = () => {
@@ -151,7 +152,11 @@ function EditLyrics() {
 
   const onUndo = () => {
     // console.log(lyricsArray, history, 'UNDO THIS SHIT YO')
+    console.log(history[pointer - 1], 'what is it?')
+    // if (history[pointer - 1] == null) return
     back()
+    // if (history[pointer - 1] !== null || history[pointer - 1] !== undefined) {
+    // }
   }
 
   const onRedo = () => {

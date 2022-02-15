@@ -10,20 +10,6 @@
   // background-position-y: 10%;
   background: linear-gradient(323deg, #262626 0%, #474646 100%);
 
-  .modal-toggle-btn {
-    @include flexCenter(35px, 35px, 50px, center, center, column);
-    background: #ec6aa0;
-    box-shadow: inset 1px 1px 1px 0px #ffffff, inset -2px -2px 2px #ad3366;
-    border: 1px solid #e74d8d;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-
-    img {
-      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
-    }
-  }
-
   .scroll-rhymes-container {
     @include flexCenter(76%, 96%, 5px 5px 20px 20px, flex-start, stretch, column);
     overflow-y: scroll;
@@ -264,75 +250,70 @@
       }
     }
 
-    .suggestion-button-container {
-      @include flexCenter(17%, 97%, 50px, center, center, row);
-      box-shadow: inset 3px 3px 3px 0px #505050, inset -2px -2px 3px #dedede;
+    .interactions__options--container {
+      @include flexCenter(17%, 100%, 0, center, center, row);
       opacity: 1;
       transition: 0.3s 0.3s;
 
-      .rhyme-lock-container {
-        @include flexCenter(70%, 96%, 50px, space-between, center, row);
-        box-shadow: 3px 3px 3px #404040, -2px -2px 2px #d2d2d2;
+      .interactions__options--shadow-inset {
+        @include flexCenter(95%, 97%, 2em, center, center, row);
+        box-shadow: inset 3px 3px 3px 0px #505050, inset -2px -2px 3px #dedede;
 
-        .rhyme-lock-button {
-          @include flexCenter(100%, 30%, 50px, center, center, row);
+        .interactions__btn--container {
+          @include flexCenter(100%, 32%, 0, center, center, row);
 
-          .rhyme-lock-outset {
-            @include flexCenter(70%, 45%, 50px, center, center, row);
-            margin-bottom: 1%;
-            box-shadow: 3px 3px 5px #414141, -2px -2px 5px #7b7b7b;
+          .interactions__btn--shadow-outset {
+            @include flexCenter(75%, 90%, 0.3em, center, center, row);
+            background-color: #ec6aa0;
+            box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
+            color: white;
 
-            a {
-              text-decoration: none;
+            img {
+              height: 1.6em;
+              width: 1.6em;
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                contrast(103%);
             }
-            .rhyme-lock-btn {
-              @include flexCenter(100%, 100%, 50px, center, center, row);
-              background-color: #ec6aa0;
-              box-shadow: inset 2px 2px 5px 0px #b74b78, inset -2px -2px 5px #ffcfe3;
-              // border: 1px solid #ec6aa0;
-              color: white;
 
-              img {
-                height: 1.6em;
-                width: 1.6em;
-                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                  contrast(103%);
-              }
-
-              &:active {
-                box-shadow: none;
-              }
+            &:active {
+              box-shadow: none;
             }
-            .select-no {
-              font-size: 13px;
-              font-weight: bold;
-              color: white;
+          }
+          .select-no {
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
 
-              &:focus {
-                outline: none !important;
-                border: 1px solid white;
-              }
+            &:focus {
+              outline: none !important;
+              border: 1px solid white;
             }
           }
         }
 
-        .rlb-1 {
-          width: 31%;
-          .rhyme-lock-outset {
-            width: 90%;
+        .interactions__btn--container.rhyme-no {
+          width: 33%;
+          justify-content: flex-end;
+          .interactions__btn--shadow-outset {
+            border-radius: 2em 0.2em 0.2em 2em;
+            width: 97%;
           }
         }
-        .rlb-2 {
-          width: 35%;
-          .rhyme-lock-outset {
-            width: 94%;
+        .interactions__btn--container.tutorial {
+          .interactions__btn--shadow-outset {
+            justify-content: space-evenly;
+            img {
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                contrast(103%);
+            }
           }
         }
-        .rlb-3 {
-          width: 35%;
-
-          .rhyme-lock-outset {
-            width: 91%;
+        .interactions__btn--container.edit-lyrics {
+          width: 33%;
+          justify-content: flex-start;
+          .interactions__btn--shadow-outset {
+            border-radius: 0.2em 2em 2em 0.2em;
+            width: 97%;
           }
         }
       }
@@ -688,108 +669,6 @@
             &:active {
               background: #787878;
               box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-// when save menu clicked adds this class to animate menu
-.save-menu-active {
-  .section-2a_flow-suggestions {
-    height: 10%;
-    transition: height 0.5s;
-
-    .next-bar-container {
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .suggestions {
-      height: 20%;
-      transition: height 0.5s;
-
-      .custom-rhyme {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .rhyme-lock-container {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-    }
-    .suggestion-button-container {
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-  }
-
-  .section-2b_flow-controls {
-    height: 61%;
-    transition: height 0.5s;
-
-    .flow-controls-container {
-      height: 75%;
-      bottom: 21%;
-      transition: all 0.5s;
-
-      .flow-controls-1_playback-display {
-        height: 14%;
-        transition: height 0.5s;
-      }
-
-      .flow-controls-2_actions {
-        height: 85%;
-        transition: height 0.5s;
-
-        .actions-container_shadow-div-outset {
-          height: 96%;
-          width: 95%;
-          transition: all 0.5s;
-
-          .actions-container_shadow-div-inset {
-            height: 98%;
-            width: 98%;
-            transition: height 0.5s;
-
-            .actions-1_flow-takes {
-              height: 20%;
-              transition: height 0.5s;
-
-              .flow-takes-1_select-takes {
-                width: 100%;
-                transition: width 0.5s;
-
-                .select-takes-container_shadow-div-outset {
-                  height: 80%;
-                  width: 95%;
-                  border-radius: 40px 30px 30px 5px;
-                  transition: all 0.5s;
-
-                  .select-takes-container {
-                    height: 82%;
-                    width: 98%;
-                    border-radius: 55px 40px 40px 9px;
-                    transition: all 0.5s;
-
-                    .select-takes_shadow-div-inset {
-                      width: 94%;
-                      margin-right: 2%;
-                      transition: width 0.5s;
-
-                      .select-takes_shadow-div-outset {
-                        background-color: #424242;
-                      }
-                    }
-                  }
-                }
-              }
-
-              .flow-takes-2_takes-actions {
-                @include flexCenter(100%, 0px, 50px, flex-start, center, row);
-                opacity: 0;
-                transition: all 0.25s;
-              }
             }
           }
         }

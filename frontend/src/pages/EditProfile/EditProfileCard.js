@@ -45,7 +45,7 @@ const MemoizedCard = React.memo(
           setUpdateList(Object.keys(inputData))
 
           await actions
-            .isUserAuth()
+            .getAuthUser()
             .then(res => {
               setUser(res.data.user)
               handleClearForm()
@@ -72,7 +72,6 @@ const MemoizedCard = React.memo(
         </button>
 
         <div className="edit-section__error--container"></div>
-        {console.log(items, 'HMMMMM MUST BE HERE')}
         <div className="edit-section__form--container">
           <div className="edit-section__form">
             <ul className="edit-section__list">{displayItems()}</ul>

@@ -56,13 +56,21 @@
           width: 92%;
           background: #e24f8c;
           box-shadow: inset 2px 2px 3px #813052, inset -2px -2px 2px #fedeeb;
-          transition: background 0.4s ease-in;
+          transition: background 0.3s ease-in;
 
           .toggle-feed-2 {
             height: 68%;
             width: 91%;
             box-shadow: inset 1px 1px 3px #6c2341, inset -1px -1px 3px #eab4ca;
             color: white;
+          }
+          &:hover {
+            background: #f3b9c3;
+            box-shadow: inset 2px 2px 3px #8e5b71, inset -2px -2px 2px #fef2f7;
+            .each-feed_shadow-div-inset-2 {
+              box-shadow: inset 2px 2px 3px #8e5b71, inset -2px -2px 2px #fef2f7;
+              color: white;
+            }
           }
         }
       }

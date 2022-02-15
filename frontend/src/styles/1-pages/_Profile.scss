@@ -438,22 +438,27 @@
             @include flexCenter(65%, 100%, 20px, center, center, column);
 
             .profile-songs__lyrics--shadow-outset {
-              @include flexCenter(88%, 95%, 0.3em 3em 3em 0.3em, center, center, column);
+              @include flexCenter(88%, 95%, 0.3em 3em 3em 0.3em, flex-start, center, row);
               box-shadow: 2px 2px 3px 0px #545454, -2px -2px 2px #a9a9a9;
 
               .profile-songs__lyrics-text {
                 height: 90%;
-                width: 95%;
-                font-size: 13px;
+                width: 90%;
                 line-height: 1.2;
+                margin-left: 2%;
                 color: #ffb2bf;
                 overflow-y: scroll;
                 text-align: start;
 
-                .each-line-container {
+                .profile-songs__lyrics-line {
                   @include flexCenter(initial, 100%, 15px, flex-start, flex-start, row);
-                  .each-line-no {
-                    font-size: 10px;
+
+                  .profile-songs__lyrics-line-text {
+                    font-size: 0.85rem;
+                    color: #ffb2bf;
+                  }
+                  .profile-songs__lyrics-line-text.no {
+                    font-size: 0.75rem;
                     color: #c2c2c2;
                     margin-right: 1%;
                   }

@@ -63,7 +63,7 @@ export default function CommentItem({
               </p>
               <p className="comments__date">
                 {commentData.editedOn
-                  ? `${formatDate(commentData.editedOn, 'm')} *edited* `
+                  ? `${formatDate(commentData.editedOn, 'm')} ${String.fromCodePoint(8226)} edited`
                   : commentDate
                   ? formatDate(commentDate, 'm')
                   : '1y'}
