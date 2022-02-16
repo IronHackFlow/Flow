@@ -388,7 +388,7 @@
                     button.play-btn_shadow-div-outset {
                       @include flexCenter(74%, 74%, 100vh, center, center, row);
                       box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
-                      background: #e24f8c;
+                      background: #ec6aa0;
 
                       img {
                         height: 85%;
@@ -405,8 +405,10 @@
                       &:active {
                         box-shadow: none;
                       }
+                      &:hover {
+                        background: #e24f8c;
+                      }
                     }
-
                     &:active {
                       box-shadow: inset 3px 3px 3px #4c4c4c, inset -2px -2px 3px 0px #a3a3a3;
                       transition: all 0.2s ease-out;

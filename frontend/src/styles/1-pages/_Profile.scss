@@ -43,11 +43,11 @@
         @include flexCenter(100%, 75%, none, flex-start, center, row);
 
         .user-name_shadow-div-outset {
-          @include flexCenter(77%, 97%, 5px 50px 50px 5px, center, center, row);
+          @include flexCenter(75%, 97%, 0.2em 2em 2em 0.2em, center, center, row);
           box-shadow: 2px 2px 3px 1px #7b7b7b, -2px -2px 2px #ffffff;
 
           .user-name_shadow-div-inset {
-            @include flexCenter(83%, 96%, 8px 50px 50px 8px, center, center, row);
+            @include flexCenter(80%, 96%, 0.3em 2em 2em 0.3em, center, center, row);
             box-shadow: inset 2px 2px 3px #7b7b7b, inset -2px -2px 3px #e7e7e7;
 
             .username-text-me {
@@ -114,7 +114,7 @@
                 height: 80%;
                 width: 90%;
                 font-size: 0.8rem;
-                color: #ff728a;
+                color: #c08ba1;
                 text-align: start;
                 overflow-y: scroll;
               }

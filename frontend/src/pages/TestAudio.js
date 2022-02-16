@@ -946,7 +946,7 @@ function TestAudio(props) {
                             </div>
                             <div className="select-beat_container">
                               <button className="select-beat_shadow-div-outset">
-                                <div className="select-beat-title">Select A Beat :</div>
+                                <div className="select-beat-title">Beat :</div>
                                 <div
                                   className="track-select"
                                   onClick={() => setShowSelectBeatMenu(true)}

@@ -82,24 +82,25 @@
                     overflow: hidden;
 
                     .marquee-wrapper {
-                      @include flexCenter(75%, 68%, 0em 0em 1.4em 0em, flex-start, center, row);
+                      @include flexCenter(75%, 77%, 0.2em 0.2em 0.2em 2em, flex-start, center, row);
                       position: absolute;
                       overflow: hidden;
                       top: 0.2em;
-                      left: 1em;
+                      left: 0.3em;
 
                       .songscreen__song-title {
                         // width: 75%;
                         color: white;
                         font-weight: bold;
                         font-size: 0.9rem;
+                        white-space: nowrap;
                         text-align: start;
                       }
                     }
                     .marquee--animation {
-                      .song-title-marquee {
+                      .songscreen__song-title {
                         animation: floatText 5s linear infinite;
-                        padding-left: 30%;
+                        padding-left: 35%;
                         display: inline-block;
                       }
                     }

@@ -223,7 +223,7 @@
 
             .rhyme-lock-btn {
               @include flexCenter(73%, 73%, 100vh, center, center, row);
-              background-color: #e24f8c;
+              background-color: #ec6aa0;
               box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
 
               img {
@@ -233,6 +233,9 @@
                   contrast(103%);
               }
 
+              &:hover {
+                background: #e24f8c;
+              }
               &:active {
                 height: 80%;
                 width: 80%;
@@ -277,6 +280,9 @@
 
             &:active {
               box-shadow: none;
+            }
+            &:hover {
+              background: #e24f8c;
             }
           }
           .select-no {
@@ -357,7 +363,7 @@
               @include flexCenter(77%, calc(100vh * 0.035), 100vh, center, center, row);
               text-align: center;
               font-weight: bold;
-              background: #e24f8c;
+              background: #ec6aa0;
               margin-left: 13%;
               box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
 
@@ -367,7 +373,9 @@
                 filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
                   contrast(103%);
               }
-
+              &:hover {
+                background: #e24f8c;
+              }
               &:active {
                 box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
               }
@@ -543,11 +551,14 @@
                     }
                   }
                   .ab-save {
-                    background: #e24f8c;
+                    background: #ec6aa0;
 
                     img {
                       filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
                         brightness(107%) contrast(103%);
+                    }
+                    &:hover {
+                      background: #e24f8c;
                     }
                   }
                 }
@@ -580,6 +591,10 @@
           width: 2.1em;
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
             contrast(103%);
+        }
+        &:hover {
+          background: #2ab58e;
+          box-shadow: inset 2px 2px 2px 0px #8cebd3, inset -1px -1px 2px #216c56;
         }
       }
     }
@@ -623,7 +638,7 @@
               row
             );
             box-shadow: 2px 2px 3px 0px #262626, -1px -1px 2px #afafaf;
-            background: #e24f8c;
+            background: #ec6aa0;
             margin-right: 9%;
 
             img {
@@ -635,6 +650,9 @@
             .play {
               margin-left: 3px;
             }
+            &:hover {
+              background: #e24f8c;
+            }
             &:active {
               box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
             }
@@ -644,19 +662,18 @@
           @include flexCenter(100%, 83%, 0, flex-start, center, row);
 
           .select-beat_shadow-div-outset {
-            @include flexCenter(70%, 96%, 100vh, center, center, column);
+            @include flexCenter(70%, 96%, 100vh, center, center, row);
             box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
 
             .select-beat-title {
-              @include flexCenter(40%, 92%, 0px, center, flex-start, column);
+              @include flexCenter(100%, 25%, 0px, center, center, column);
               color: pink;
               font-size: 10px;
-              margin-left: 8%;
             }
             .track-select {
+              @include flexCenter(100%, 75%, 0px, flex-start, center, row);
+              font-size: 0.9rem;
               color: white;
-              height: 60%;
-              width: 90%;
 
               &:focus {
                 outline: none !important;
@@ -665,6 +682,10 @@
             &:focus {
               background: #787878;
               box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+            }
+            &:hover {
+              background: #787878;
+              box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #b1b1b1;
             }
             &:active {
               background: #787878;

@@ -1865,7 +1865,7 @@ button {
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
           box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
-  background: #e24f8c;
+  background: #ec6aa0;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_inset-container .play-btn_shadow-div-inset button.play-btn_shadow-div-outset img {
@@ -1886,6 +1886,10 @@ button {
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_inset-container .play-btn_shadow-div-inset button.play-btn_shadow-div-outset:active {
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_inset-container .play-btn_shadow-div-inset button.play-btn_shadow-div-outset:hover {
+  background: #e24f8c;
 }
 
 .section-1_feed .section-1c_song-details .song-details-2_song-data .song-data-container .song-play-section .play-song-container .play-btn-container .play-btn-container-2 .play-btn_inset-container .play-btn_shadow-div-inset:active {
@@ -2181,9 +2185,9 @@ button {
 }
 
 .section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset {
-  height: 77%;
+  height: 75%;
   width: 97%;
-  border-radius: 5px 50px 50px 5px;
+  border-radius: 0.2em 2em 2em 0.2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2202,9 +2206,9 @@ button {
 }
 
 .section-1_profile .section-1a_user-title .user-title_shadow-div-inset .user-name-container .user-name_shadow-div-outset .user-name_shadow-div-inset {
-  height: 83%;
+  height: 80%;
   width: 96%;
-  border-radius: 8px 50px 50px 8px;
+  border-radius: 0.3em 2em 2em 0.3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2400,7 +2404,7 @@ button {
   height: 80%;
   width: 90%;
   font-size: 0.8rem;
-  color: #ff728a;
+  color: #c08ba1;
   text-align: start;
   overflow-y: scroll;
 }
@@ -4329,7 +4333,7 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #e24f8c;
+  background-color: #ec6aa0;
   -webkit-box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
           box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
 }
@@ -4339,6 +4343,10 @@ button {
   width: 70%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.section-2_control-panel .section-2a_flow-suggestions .suggestions .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .rhyme-lock-btn:hover {
+  background: #e24f8c;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .suggestions .rhyme-lock-container .rhyme-lock-button .rhyme-lock-outset .rhyme-lock-btn:active {
@@ -4449,6 +4457,10 @@ button {
 .section-2_control-panel .section-2a_flow-suggestions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:active {
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.section-2_control-panel .section-2a_flow-suggestions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:hover {
+  background: #e24f8c;
 }
 
 .section-2_control-panel .section-2a_flow-suggestions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .select-no {
@@ -4648,7 +4660,7 @@ button {
           flex-direction: row;
   text-align: center;
   font-weight: bold;
-  background: #e24f8c;
+  background: #ec6aa0;
   margin-left: 13%;
   -webkit-box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
           box-shadow: 2px 2px 3px #393939, -1px -1px 2px #dedede;
@@ -4659,6 +4671,10 @@ button {
   width: 85%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset:hover {
+  background: #e24f8c;
 }
 
 .section-2b_flow-controls .flow-controls-container .flow-controls-1_playback-display .play-btn-container .play-btn-container_shadow-div-outset .play-btn-container_shadow-div-inset .play-btn_shadow-div-outset:active {
@@ -5186,12 +5202,16 @@ button {
 }
 
 .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-2_takes-actions .takes-actions-container .actions-btn-container .ab-save {
-  background: #e24f8c;
+  background: #ec6aa0;
 }
 
 .section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-2_takes-actions .takes-actions-container .actions-btn-container .ab-save img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.section-2b_flow-controls .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .actions-1_flow-takes .flow-takes-2_takes-actions .takes-actions-container .actions-btn-container .ab-save:hover {
+  background: #e24f8c;
 }
 
 .section-2b_flow-controls .record-2_record-btn {
@@ -5265,6 +5285,12 @@ button {
   width: 2.1em;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+}
+
+.section-2b_flow-controls .record-2_record-btn .record-btn_shadow-div-inset .record-btn_shadow-div-outset:hover {
+  background: #2ab58e;
+  -webkit-box-shadow: inset 2px 2px 2px 0px #8cebd3, inset -1px -1px 2px #216c56;
+          box-shadow: inset 2px 2px 2px 0px #8cebd3, inset -1px -1px 2px #216c56;
 }
 
 @-webkit-keyframes opacityTransition {
@@ -5404,7 +5430,7 @@ button {
           flex-direction: row;
   -webkit-box-shadow: 2px 2px 3px 0px #262626, -1px -1px 2px #afafaf;
           box-shadow: 2px 2px 3px 0px #262626, -1px -1px 2px #afafaf;
-  background: #e24f8c;
+  background: #ec6aa0;
   margin-right: 9%;
 }
 
@@ -5417,6 +5443,10 @@ button {
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn .play {
   margin-left: 3px;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn:hover {
+  background: #e24f8c;
 }
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_play-container .select-beat_play-btn:active {
@@ -5456,17 +5486,17 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
           box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #8e8e8e;
 }
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_container .select-beat_shadow-div-outset .select-beat-title {
-  height: 40%;
-  width: 92%;
+  height: 100%;
+  width: 25%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5474,22 +5504,36 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   color: pink;
   font-size: 10px;
-  margin-left: 8%;
 }
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_container .select-beat_shadow-div-outset .track-select {
+  height: 100%;
+  width: 75%;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 0.9rem;
   color: white;
-  height: 60%;
-  width: 90%;
 }
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_container .select-beat_shadow-div-outset .track-select:focus {
@@ -5500,6 +5544,12 @@ button {
   background: #787878;
   -webkit-box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
           box-shadow: inset 3px 3px 4px 0px #262626, inset -2px -2px 2px #a7a7a7;
+}
+
+.actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_container .select-beat_shadow-div-outset:hover {
+  background: #787878;
+  -webkit-box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #b1b1b1;
+          box-shadow: 2px 2px 3px 0px #262626, -2px -2px 2px #b1b1b1;
 }
 
 .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_container .select-beat_shadow-div-outset:active {
@@ -8473,8 +8523,8 @@ button {
 
 .SongScreen .song-screen--container .songscreen__header--container .songscreen__header--shadow-outset .songscreen__header--shadow-inset .songscreen__title--container .songscreen__title--shadow-inset .songscreen__song-data--container .songscreen__song-title--container .songscreen__song-title--shadow-inset .marquee-wrapper {
   height: 75%;
-  width: 68%;
-  border-radius: 0em 0em 1.4em 0em;
+  width: 77%;
+  border-radius: 0.2em 0.2em 0.2em 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8491,20 +8541,21 @@ button {
   position: absolute;
   overflow: hidden;
   top: 0.2em;
-  left: 1em;
+  left: 0.3em;
 }
 
 .SongScreen .song-screen--container .songscreen__header--container .songscreen__header--shadow-outset .songscreen__header--shadow-inset .songscreen__title--container .songscreen__title--shadow-inset .songscreen__song-data--container .songscreen__song-title--container .songscreen__song-title--shadow-inset .marquee-wrapper .songscreen__song-title {
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
+  white-space: nowrap;
   text-align: start;
 }
 
-.SongScreen .song-screen--container .songscreen__header--container .songscreen__header--shadow-outset .songscreen__header--shadow-inset .songscreen__title--container .songscreen__title--shadow-inset .songscreen__song-data--container .songscreen__song-title--container .songscreen__song-title--shadow-inset .marquee--animation .song-title-marquee {
+.SongScreen .song-screen--container .songscreen__header--container .songscreen__header--shadow-outset .songscreen__header--shadow-inset .songscreen__title--container .songscreen__title--shadow-inset .songscreen__song-data--container .songscreen__song-title--container .songscreen__song-title--shadow-inset .marquee--animation .songscreen__song-title {
   -webkit-animation: floatText 5s linear infinite;
           animation: floatText 5s linear infinite;
-  padding-left: 30%;
+  padding-left: 35%;
   display: inline-block;
 }
 

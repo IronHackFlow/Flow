@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import actions from '../api'
 import TheContext from '../contexts/TheContext'
+import { SongDataContext } from '../contexts/SongData'
 import useFormatDate from '../utils/useFormatDate'
 import NavBar from '../components/NavBar'
 import {
@@ -18,6 +19,7 @@ import {
 
 function Profile() {
   const { user, setUser } = useContext(TheContext)
+  const { homeFeedSongs } = useContext(SongDataContext)
   const { formatDate } = useFormatDate()
   const navigate = useNavigate()
   const location = useLocation()
@@ -32,12 +34,10 @@ function Profile() {
   }, [propSongUser])
 
   useEffect(() => {
-    actions
-      .getUserSongs({ song_user: thisUser?._id })
-      .then(res => {
-        setThisUserSongs(res.data)
-      })
-      .catch(console.error)
+    let getUserSongs = homeFeedSongs?.filter(each => {
+      if (each.song.song_user._id === thisUser?._id) return each.song
+    })
+    setThisUserSongs(getUserSongs)
   }, [thisUser, user])
 
   useEffect(() => {
@@ -259,7 +259,9 @@ function Profile() {
 
   const showProfileSongs = useCallback(() => {
     return thisUserSongs?.map((eachSong, index) => {
-      return <ProfileSongs key={`${uuidv4()}song${eachSong._id}_${index}`} {...eachSong} />
+      return (
+        <ProfileSongs key={`${uuidv4()}song${eachSong.song._id}_${index}`} {...eachSong.song} />
+      )
     })
   }, [thisUserSongs])
 
