@@ -37,7 +37,11 @@ export default function CommentButton({ songInView, btnStyle, isPushed, onClose 
   } else {
     return (
       <>
-        <div className="social-button-container">
+        <div className="songscreen__btn">
+          <div className="songscreen__text--container">
+            <p className="songscreen__text num">{totalComments}</p>
+            <p className="songscreen__text title">{totalComments === 1 ? 'comment' : 'comments'}</p>
+          </div>
           <button className={`social-button ${isPushed ? 'pushed' : ''}`} onClick={() => onClose()}>
             <img
               className="social-icons comment"
@@ -45,11 +49,6 @@ export default function CommentButton({ songInView, btnStyle, isPushed, onClose 
               alt="comment on post icon"
             ></img>
           </button>
-
-          <div className="button-title">
-            <p style={{ color: '#ff3b8c' }}>{totalComments}</p>
-            <p>{totalComments === 1 ? 'Comment' : 'Comments'}</p>
-          </div>
         </div>
       </>
     )

@@ -126,6 +126,7 @@ export default function Home(props) {
         onClose={setShowCommentMenu}
         onCloseInput={setShowCommentInputModal}
         setEditComment={setEditComment}
+        page="home"
       />
       <div className="section-1_feed">
         <div

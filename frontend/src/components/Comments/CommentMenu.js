@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react'
 import CommentItem from './CommentItem'
 import { goBackIcon } from '../../assets/images/_icons'
 
-export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput, setEditComment }) {
+export default function CommentMenu({
+  songInView,
+  isOpen,
+  onClose,
+  onCloseInput,
+  setEditComment,
+  page,
+}) {
   const [songComments, setSongComments] = useState([])
   const [isEdit, setIsEdit] = useState(null)
 
@@ -11,7 +18,10 @@ export default function CommentMenu({ songInView, isOpen, onClose, onCloseInput,
   }, [songInView])
 
   return (
-    <div className={`CommentMenu ${isOpen ? 'show-menu' : 'hide-menu'}`}>
+    <div
+      className={`CommentMenu ${isOpen ? 'show-menu' : 'hide-menu'}`}
+      style={page === 'home' && isOpen ? { marginBottom: '-8%' } : { marginBottom: '0%' }}
+    >
       <div className="comments__list--container">
         <div className="comments__list--shadow-outset">
           <div className="comments__list--shadow-inset">

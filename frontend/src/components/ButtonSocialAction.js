@@ -71,7 +71,11 @@ export default function ButtonSocialAction({ type, songInView, btnStyle, action 
     )
   } else {
     return (
-      <div className="social-button-container">
+      <div className="songscreen__btn">
+        <div className="songscreen__text--container">
+          <p className="songscreen__text num">{total}</p>
+          <p className="songscreen__text title">{total === 1 ? `${type}` : `${type}s`}</p>
+        </div>
         <button
           className={`social-button ${hasUser ? 'pushed' : ''}`}
           onClick={e => {
@@ -85,10 +89,6 @@ export default function ButtonSocialAction({ type, songInView, btnStyle, action 
             alt={`${type} user icon`}
           />
         </button>
-        <div className="button-title">
-          <p style={{ color: '#ff3b8c' }}>{total}</p>
-          <p>{total === 1 ? `${type}` : `${type}s`}</p>
-        </div>
       </div>
     )
   }
