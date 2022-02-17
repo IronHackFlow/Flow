@@ -11,9 +11,9 @@ import Loading from './components/Loading'
 
 const LazySearch = React.lazy(() => import('./pages/Search'))
 const LazyEditProfile = React.lazy(() => import('./pages/EditProfile/EditProfile'))
-const LazyProfile = React.lazy(() => import('./pages/Profile'))
+const LazyProfile = React.lazy(() => import('./pages/Profile/Profile'))
 const LazySongScreen = React.lazy(() => import('./pages/SongScreen'))
-const LazyTestAudio = React.lazy(() => import('./pages/TestAudio'))
+const LazyTestAudio = React.lazy(() => import('./pages/Record'))
 const LazyEditLyrics = React.lazy(() => import('./components/EditLyrics/EditLyrics'))
 
 function App() {

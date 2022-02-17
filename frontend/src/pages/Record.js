@@ -101,7 +101,6 @@ function TestAudio(props) {
   const playBeatRef = useRef()
   const recordAudioRef = useRef()
   const scrollRef = useRef()
-  const selectTakesRef = useRef()
   const keyRef = useRef(0)
   const barNumberRef = useRef(1)
 
@@ -874,7 +873,6 @@ function TestAudio(props) {
                             <div className="select-takes_shadow-div-inset">
                               <button
                                 className="select-takes_shadow-div-outset"
-                                ref={selectTakesRef}
                                 onClick={() =>
                                   allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null
                                 }

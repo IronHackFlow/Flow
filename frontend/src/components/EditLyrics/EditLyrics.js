@@ -320,7 +320,7 @@ function EditLyrics() {
                   </div>
 
                   <button className="select-beat_shadow-div-outset">
-                    <div className="select-beat-title">Select A Beat :</div>
+                    <div className="select-beat-title">Beat:</div>
                     <div
                       id="selectBox"
                       className="track-select"

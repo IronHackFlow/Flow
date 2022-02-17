@@ -8000,9 +8000,31 @@ button {
 }
 
 .EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset {
-  height: 80%;
-  width: 79%;
+  height: 65%;
+  width: 77%;
   border-radius: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #7c7c7c;
+          box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #7c7c7c;
+  margin: none;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .select-beat-title {
+  height: 100%;
+  width: 25%;
+  border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8016,14 +8038,13 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: inset 2px 2px 3px 0px #404040, inset -2px -2px 2px #7c7c7c;
-          box-shadow: inset 2px 2px 3px 0px #404040, inset -2px -2px 2px #7c7c7c;
-  margin: none;
+  color: pink;
+  font-size: 10px;
 }
 
-.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .select-beat-title {
-  height: 33%;
-  width: 100%;
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select {
+  height: 100%;
+  width: 75%;
   border-radius: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8038,20 +8059,23 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  color: pink;
-  font-size: 10px;
-  margin-left: 15%;
-}
-
-.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select {
   color: white;
-  border: none;
-  height: 50%;
-  width: 90%;
 }
 
 .EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset .track-select:focus {
   outline: none !important;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset:hover {
+  background: #767676;
+  -webkit-box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #979797;
+          box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #979797;
+}
+
+.EditLyrics .section-3_controls .controls-container .actions-2_record .record-container .record-1_select-beat .select-beat_shadow-div-inset .select-beat_shadow-div-outset:active {
+  background: #767676;
+  -webkit-box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 2px #9d9d9d;
+          box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 2px #9d9d9d;
 }
 
 .EditLyrics .section-4_display-lyrics {
@@ -15091,6 +15115,27 @@ button {
 
 .SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected .selected_2 .selected_3 .selected_4 .selected_5 .selected_6 .selected_7 {
   background: #77ffc9;
+}
+
+.SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected:active .selected_2 {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+          box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+  background: #db7ba3;
+}
+
+.SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected:active .selected_2 .selected_3 {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+          box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+}
+
+.SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected:active .selected_2 .selected_3 .selected_4 {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+          box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+}
+
+.SelectMenuModal .select-menu__list--container .select-menu__list--shadow-inset .select-menu__list .selected:active .selected_2 .selected_3 .selected_4 .selected_5 .selected_6 {
+  -webkit-box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+          box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
 }
 
 .ContinueModal {

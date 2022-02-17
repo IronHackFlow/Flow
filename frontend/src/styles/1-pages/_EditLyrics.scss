@@ -699,26 +699,31 @@
               }
 
               .select-beat_shadow-div-outset {
-                @include flexCenter(80%, 79%, 100vh, center, center, column);
-                box-shadow: inset 2px 2px 3px 0px #404040, inset -2px -2px 2px #7c7c7c;
+                @include flexCenter(65%, 77%, 100vh, center, center, row);
+                box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #7c7c7c;
                 margin: none;
 
                 .select-beat-title {
-                  @include flexCenter(33%, 100%, 0px, center, flex-start, column);
+                  @include flexCenter(100%, 25%, 0px, center, center, column);
                   color: pink;
                   font-size: 10px;
-                  margin-left: 15%;
                 }
                 .track-select {
-                  // background-color: #272727;
+                  @include flexCenter(100%, 75%, 0px, center, flex-start, column);
+
                   color: white;
-                  border: none;
-                  height: 50%;
-                  width: 90%;
 
                   &:focus {
                     outline: none !important;
                   }
+                }
+                &:hover {
+                  background: #767676;
+                  box-shadow: 2px 2px 3px 0px #404040, -2px -2px 2px #979797;
+                }
+                &:active {
+                  background: #767676;
+                  box-shadow: inset 2px 2px 3px 0px #424242, inset -2px -2px 2px #9d9d9d;
                 }
               }
             }

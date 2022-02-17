@@ -10,7 +10,7 @@ import {
 } from '../../assets/images/_icons'
 
 export default function EachLyricLine({ line, index, updateLyrics }) {
-  const [lyricLine, setLyricLine, { history, pointer, back, forward, go }] = useHistory(
+  const [lyricLine, setLyricLine, { history, pointer, back, forward }] = useHistory(
     [...line.array][0],
   )
   const [initialLyricLine, setInitialLyricLIne] = useState(line)

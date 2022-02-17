@@ -96,6 +96,23 @@
               }
             }
           }
+          &:active {
+            .selected_2 {
+              box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+              background: #db7ba3;
+              .selected_3 {
+                box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+                .selected_4 {
+                  box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+                  .selected_5 {
+                    .selected_6 {
+                      box-shadow: inset 2px 2px 2px 0px #864d65, inset -2px -2px 2px #ffaccf;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
