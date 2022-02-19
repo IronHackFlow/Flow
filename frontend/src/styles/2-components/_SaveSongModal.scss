@@ -38,13 +38,16 @@
             @include flexCenter(67%, 58%, 50px, center, center, row);
             box-shadow: 2px 2px 3px #383838, -1px -1px 2px 0px #e6e6e6;
             margin-right: 5%;
-            background: #e24f8c;
+            background: #ec6aa0;
             img {
               filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
                 contrast(103%);
             }
             &:active {
               box-shadow: inset 2px 2px 3px #663449, inset -1px -1px 2px 0px #ffb6d4;
+            }
+            &:hover {
+              background: #e24f8c;
             }
           }
         }
@@ -80,7 +83,7 @@
                 @include flexCenter(76%, 74%, 100vh, center, center, row);
                 text-align: center;
                 font-weight: bold;
-                background: #e24f8c;
+                background: #ec6aa0;
                 margin-left: 14%;
                 border: none;
                 box-shadow: 2px 2px 4px #232323, -1px -1px 2px #e1e1e1;
@@ -94,6 +97,9 @@
 
                 &:active {
                   box-shadow: inset 2px 2px 3px #313232, inset -2px -2px 3px #9fa2a4;
+                }
+                &:hover {
+                  background: #e24f8c;
                 }
               }
             }
@@ -372,6 +378,9 @@
                         box-shadow: inset 3px 3px 3px #424242, inset -2px -2px 2px #e0fff6;
                         background: #adadad;
                         color: #63debc;
+                      }
+                      &:hover {
+                        background: #36a486;
                       }
                     }
                   }

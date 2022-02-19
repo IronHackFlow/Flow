@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState, useRef } from 'react'
+import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import actions from '../api'
-import useHandleOSK from '../utils/useHandleOSK'
 import NavBar from '../components/NavBar'
-import { searchIcon, goBackIcon, closeIcon, bulletPointIcon } from '../assets/images/_icons'
+import ButtonClearText from '../components/ButtonClearText'
+import useHandleOSK from '../utils/useHandleOSK'
+import { searchIcon, goBackIcon } from '../assets/images/_icons'
 
 function Search() {
   const { handleOnFocus } = useHandleOSK()
@@ -23,22 +24,26 @@ function Search() {
     grabUsers(returnValue)
   }, [])
 
-  const clearSearchField = e => {
-    e.preventDefault()
-    searchInputRef.current.value = ''
-    setSearchValue('')
-    setSuggestions(<h4>Find Friends & Artists</h4>)
-  }
-
-  const listUsers = e => {
-    e.preventDefault()
-    setSearchValue(e.target.value)
-    if (e.target.value.length > 0) {
-      grabUsers(e.target.value)
-    } else {
+  const clearSearchField = useCallback(val => {
+    if (val === '') {
+      searchInputRef.current.value = ''
+      setSearchValue('')
       setSuggestions(<h4>Find Friends & Artists</h4>)
     }
-  }
+  }, [])
+
+  const listUsers = useCallback(
+    e => {
+      e.preventDefault()
+      setSearchValue(e.target.value)
+      if (e.target.value.length > 0) {
+        grabUsers(e.target.value)
+      } else {
+        setSuggestions(<h4>Find Friends & Artists</h4>)
+      }
+    },
+    [searchValue],
+  )
 
   const grabUsers = theQuery => {
     actions
@@ -84,8 +89,6 @@ function Search() {
                     state: { currentSong: ele.song, returnValue: searchInputRef.current.value },
                   })
               }}
-              // to={ele.user ? `/profile/${ele.user._id}` : `/SongScreen/${ele.song._id}`}
-              // state={ele.user ? { propSongUser: ele.user } : { propCurrentSong: ele.song, propSearchValue: searchInputRef.current.value, propReturnLink: '/search' }}
             >
               <div className="result-1_data">
                 <div className="data_shadow-div-outset">
@@ -101,8 +104,7 @@ function Search() {
                         <p className="data-type">Artist</p>
                       ) : (
                         <p className="data-type">
-                          Song <img src={bulletPointIcon} alt="bulletpoint" />{' '}
-                          {`${ele.song.song_user.user_name}`}
+                          Song {String.fromCodePoint(8226)} {ele.song.song_user.user_name}
                         </p>
                       )}
                     </div>
@@ -157,21 +159,17 @@ function Search() {
                   onChange={listUsers}
                   type="text"
                   inputMode="search"
-                  style={{ width: `${searchValue ? '82%' : '94%'}` }}
+                  style={{ marginRight: `${searchValue ? '0%' : '2%'}` }}
                   placeholder="&#xf002; Search for a user"
                   onFocus={() => handleOnFocus()}
-                ></input>
-                {searchValue ? (
-                  <button
-                    className="search-clear-btn"
-                    type="button"
-                    onClick={e => clearSearchField(e)}
-                  >
-                    <img className="social-icons" src={closeIcon} alt="clear search" />
-                  </button>
-                ) : (
-                  <></>
-                )}
+                />
+                <ButtonClearText
+                  inset={true}
+                  shadowColors={['#525252', '#c7c7c7', '#525252', '#c7c7c7']}
+                  inputRef={searchInputRef}
+                  value={searchValue}
+                  setValue={clearSearchField}
+                />
               </div>
             </form>
           </div>

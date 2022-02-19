@@ -361,6 +361,10 @@
                   .cancel-btn_shadow-div-outset {
                     box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
                     color: #d1d1d1;
+
+                    &:active {
+                      box-shadow: inset 2px 2px 2px 0px #984466, inset -2px -2px 2px #fcaece;
+                    }
                   }
                 }
                 .confirm-btn-container {
@@ -368,6 +372,12 @@
                     box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #fcaece;
                     color: white;
                     border: 2px solid white;
+                    &:active {
+                      background: white;
+                      color: #ec6aa0;
+                      border: 2px solid #ffb6d4;
+                      box-shadow: inset 2px 2px 2px 0px #c06c8e, inset -2px -2px 2px #fcd7e6;
+                    }
                   }
                 }
               }

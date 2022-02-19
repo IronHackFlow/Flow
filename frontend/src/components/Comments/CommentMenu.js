@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { SongDataContext } from '../../contexts/SongData'
 import CommentItem from './CommentItem'
 import { goBackIcon } from '../../assets/images/_icons'
 
@@ -10,12 +11,20 @@ export default function CommentMenu({
   setEditComment,
   page,
 }) {
+  const { homeFeedSongs } = useContext(SongDataContext)
   const [songComments, setSongComments] = useState([])
   const [isEdit, setIsEdit] = useState(null)
 
   useEffect(() => {
     setSongComments(songInView?.song_comments)
-  }, [songInView])
+    homeFeedSongs.forEach(song => {
+      if (song.song._id === songInView?._id) {
+        if (songComments?.length !== song.song.song_comments.length) {
+          setSongComments(song.song.song_comments)
+        }
+      }
+    })
+  }, [songInView, homeFeedSongs])
 
   return (
     <div

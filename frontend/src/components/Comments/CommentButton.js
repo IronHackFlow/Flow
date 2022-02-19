@@ -3,13 +3,20 @@ import { commentIcon } from '../../assets/images/_icons'
 import { SongDataContext } from '../../contexts/SongData'
 
 export default function CommentButton({ songInView, btnStyle, isPushed, onClose }) {
-  const { isLoading } = useContext(SongDataContext)
+  const { homeFeedSongs, isLoading } = useContext(SongDataContext)
   const comments = songInView?.song_comments
   const [totalComments, setTotalComments] = useState()
 
   useEffect(() => {
     setTotalComments(comments?.length)
-  }, [songInView])
+    homeFeedSongs.forEach(song => {
+      if (song.song._id === songInView?._id) {
+        if (totalComments !== song.song.song_comments.length) {
+          setTotalComments(song.song.song_comments.length)
+        }
+      }
+    })
+  }, [songInView, homeFeedSongs])
 
   if (btnStyle === 'home') {
     return (

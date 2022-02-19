@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useEffect, useState, useRef } from 'react'
+import { useContext, useLayoutEffect, useEffect, useState, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SongDataContext } from '../contexts/SongData'
 import Loading from '../components/Loading'
@@ -38,7 +38,7 @@ export default function SongScreen() {
   const playPauseRef = useRef()
 
   useLayoutEffect(() => {
-    let computedTitleWidth = window.getComputedStyle(titleRef.current)
+    let computedTitleWidth = window.getComputedStyle(document.getElementById('marquee-one'))
     let computedWrapperWidth = window.getComputedStyle(wrapperRef.current)
     let titleWidth = parseInt(computedTitleWidth.getPropertyValue('width'))
     let wrapperWidth = parseInt(computedWrapperWidth.getPropertyValue('width'))
@@ -56,29 +56,32 @@ export default function SongScreen() {
 
   const handleCommentMenu = () => {
     setShowCommentMenu(true)
-    setShowCommentInputModal(true)
+    setShowCommentInputModal('comment')
   }
 
-  const findCurrentSong = direction => {
-    usersSongs.filter((each, index) => {
-      if (each.song._id === songInView?.song?._id) {
-        if (direction === 'back') {
-          if (index === 0) {
-            return null
+  const findCurrentSong = useCallback(
+    direction => {
+      usersSongs.filter((each, index) => {
+        if (each.song._id === songInView?.song?._id) {
+          if (direction === 'back') {
+            if (index === 0) {
+              return null
+            } else {
+              setSongInView(usersSongs[index - 1])
+              console.log(songInView, 'back')
+            }
           } else {
-            setSongInView(usersSongs[index - 1])
-            console.log(songInView, 'back')
-          }
-        } else {
-          if (index === usersSongs.length - 1) {
-            return null
-          } else {
-            setSongInView(usersSongs[index + 1])
+            if (index === usersSongs.length - 1) {
+              return null
+            } else {
+              setSongInView(usersSongs[index + 1])
+            }
           }
         }
-      }
-    })
-  }
+      })
+    },
+    [usersSongs, songInView],
+  )
 
   const getSongIndex = (array, current) => {
     let index = array.map((each, index) => {
@@ -115,6 +118,7 @@ export default function SongScreen() {
         onClose={setShowCommentMenu}
         onCloseInput={setShowCommentInputModal}
         setEditComment={setEditComment}
+        page="songScreen"
       />
 
       <div className="song-screen--container">
@@ -143,7 +147,12 @@ export default function SongScreen() {
                           className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
                           ref={wrapperRef}
                         >
-                          <p className="songscreen__song-title" id="marquee-one" ref={titleRef}>
+                          <p
+                            className="songscreen__song-title"
+                            id="marquee-one"
+                            ref={titleRef}
+                            style={isMarquee ? {} : { paddingLeft: '6%' }}
+                          >
                             {songInView?.song?.name}
                           </p>
                           {isMarquee && (

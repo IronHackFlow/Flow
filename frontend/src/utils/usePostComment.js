@@ -31,6 +31,7 @@ export default function usePostComment() {
   }
 
   const deleteComment = (songId, toDelete) => {
+    if (!user) return
     if (user?._id !== toDelete.user._id || songId == null || toDelete == null) return
 
     actions

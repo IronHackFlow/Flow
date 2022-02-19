@@ -37,8 +37,8 @@ export default function Home(props) {
   const wrapperRef = useRef()
 
   useLayoutEffect(() => {
-    let computedTitleWidth = window.getComputedStyle(titleRef.current)
-    let computedWrapperWidth = window.getComputedStyle(wrapperRef.current)
+    let computedTitleWidth = window.getComputedStyle(titleRef?.current)
+    let computedWrapperWidth = window.getComputedStyle(wrapperRef?.current)
     let titleWidth = parseInt(computedTitleWidth.getPropertyValue('width'))
     let wrapperWidth = parseInt(computedWrapperWidth.getPropertyValue('width'))
 

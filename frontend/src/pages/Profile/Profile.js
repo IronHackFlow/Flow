@@ -32,7 +32,7 @@ function Profile() {
       if (each.song.song_user._id === thisUser?._id) return each.song
     })
     setThisUserSongs(getUserSongs)
-  }, [thisUser])
+  }, [thisUser, homeFeedSongs])
 
   useEffect(() => {
     actions

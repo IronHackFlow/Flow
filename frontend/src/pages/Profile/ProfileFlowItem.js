@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../../contexts/TheContext'
+import { SongDataContext } from '../../contexts/SongData'
 import actions from '../../api'
 import useFormatDate from '../../utils/useFormatDate'
 import { editIcon, closeIcon, playIcon, pauseIcon } from '../../assets/images/_icons'
 
 export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) {
   const { user } = useContext(TheContext)
+  const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
   const { formatDate } = useFormatDate()
   const [deleteCheck, setDeleteCheck] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -52,6 +54,7 @@ export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) 
       .then(res => {
         console.log(res.data)
         setSongs(oldArr => oldArr.filter(item => item._id !== eachSong._id))
+        setHomeFeedSongs(prev => prev.filter(item => item.song._id !== eachSong._id))
       })
       .catch(console.error)
   }

@@ -48,10 +48,9 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
 
-
 .ButtonClearText {
   @include flexCenter(100%, 0%, 0, center, center, row);
-  transition: width .3s;
+  transition: width 0.3s;
 
   .btn-clear--shadow-inset {
     @include flexCenter(80%, 80%, 100vh, center, center, row);
@@ -60,18 +59,17 @@
 
     .btn-clear--shadow-outset {
       @include flexCenter(73%, 73%, 100vh, center, center, row);
-      // box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
 
       img {
         height: 90%;
         width: 90%;
       }
-    }
-
-    &:active {
-      background: #9b9b9b;
-      .btn-clear--shadow-outset {
-        box-shadow: none;
+      &:hover {
+        background: #afafaf;
+        box-shadow: #525252 2px 2px 3px, #e8e8e8 -1px -1px 2px 0px;
+      }
+      &:active {
+        box-shadow: inset #525252 2px 2px 3px, inset #c7c7c7 -1px -1px 2px 0px;
       }
     }
   }
@@ -85,15 +83,14 @@
   .show-password-btn {
     @include flexCenter(70%, auto, 100vh, center, center, column);
     box-shadow: 2px 2px 2px #777777, -1px -1px 2px #eeeeee;
-  
+
     img {
       height: 100%;
       width: 100%;
     }
-  
+
     &:active {
       box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #d6d6d6;
-  
     }
   }
 }
