@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import actions from '../../api'
 import TheContext from '../../contexts/TheContext'
 import useDebugInformation from '../../utils/useDebugInformation'
@@ -11,7 +11,9 @@ export default function EditProfile(props) {
   useDebugInformation('EditProfile', props)
   const { user } = useContext(TheContext)
   const navigate = useNavigate()
+  const domLocation = useLocation()
 
+  const { songs } = domLocation?.state
   const [thisUser, setThisUser] = useState()
   const [thisUsersSongs, setThisUsersSongs] = useState([])
   const [showExitModal, setShowExitModal] = useState(false)
@@ -22,6 +24,7 @@ export default function EditProfile(props) {
   }, [user])
 
   useEffect(() => {
+    console.log(songs, domLocation, 'what dis?')
     actions
       .getUserSongs(thisUser)
       .then(res => {
@@ -257,7 +260,7 @@ export default function EditProfile(props) {
                 />
                 <EditProfileCard
                   title="Songs"
-                  items={[]}
+                  items={songs}
                   isExpanded={isExpanded}
                   onExpand={setIsExpanded}
                 />

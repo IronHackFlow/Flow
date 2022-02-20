@@ -13,6 +13,7 @@ export default function CommentItem({
   setIsEdit,
   setEditComment,
   setShowCommentInputModal,
+  update,
 }) {
   const { user } = useContext(TheContext)
   const { _id: songId } = songInView
@@ -92,6 +93,7 @@ export default function CommentItem({
                     isEdit: isEdit,
                     setEdit: setIsEdit,
                     value: commentText,
+                    update: update,
                   }}
                   setEditComment={setEditComment}
                   setShowCommentInputModal={setShowCommentInputModal}

@@ -264,6 +264,7 @@ function Profile() {
                     <Link
                       className="profile-button-outset"
                       to="/editProfile"
+                      state={{ songs: [...thisUserSongs] }}
                       style={{ borderRadius: '35px 4px 4px 4px' }}
                     >
                       <div className="profile-button-inset pbe-4">

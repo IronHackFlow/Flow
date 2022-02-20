@@ -38,6 +38,7 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
       addComment(songId, value)
     } else if (isOpen === 'edit') {
       editComment(songId, onEdit.comment, value)
+      onEdit.update(true)
     }
     setComment('')
     onClose(null)

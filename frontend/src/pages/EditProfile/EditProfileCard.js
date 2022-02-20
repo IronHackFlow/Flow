@@ -3,6 +3,7 @@ import actions from '../../api'
 import TheContext from '../../contexts/TheContext'
 import useDebugInformation from '../../utils/useDebugInformation'
 import EditProfileItem from './EditProfileItem'
+import EditProfileFlowItem from './EditProfileFlowItem'
 
 const MemoizedCard = React.memo(
   function EditProfileCard({ title, items, isExpanded, onExpand }) {
@@ -11,9 +12,21 @@ const MemoizedCard = React.memo(
     const [updateList, setUpdateList] = useState([])
 
     const displayItems = useCallback(() => {
-      return items.map(inputData => (
-        <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />
-      ))
+      if (title === 'Songs') {
+        return items.map((inputData, index) => (
+          <EditProfileFlowItem
+            inputData={inputData.song}
+            key={inputData.song._id}
+            index={index}
+            indexLength={items.length}
+            updateList={updateList}
+          />
+        ))
+      } else {
+        return items.map(inputData => (
+          <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />
+        ))
+      }
     }, [items])
 
     const handleExpandCard = useCallback(
@@ -76,7 +89,10 @@ const MemoizedCard = React.memo(
           <div className="edit-section__form">
             <ul className="edit-section__list">{displayItems()}</ul>
 
-            <div className="edit-section__btn--container">
+            <div
+              className="edit-section__btn--container"
+              style={title === 'Songs' ? { display: 'none' } : {}}
+            >
               <div className="edit-section__btn-cancel--container">
                 <button
                   className="edit-section__btn-cancel"

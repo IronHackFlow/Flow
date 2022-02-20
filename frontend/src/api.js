@@ -67,6 +67,10 @@ const actions = {
     return await axios.post(`${baseURL}/deleteSong`, song, resetHead())
   },
 
+  updateSong: async song => {
+    return await axios.post(`${baseURL}/updateSong`, song, resetHead())
+  },
+
   getAllSongs: async () => {
     return await axios.get(`${baseURL}/getAllSongs`, resetHead())
   },

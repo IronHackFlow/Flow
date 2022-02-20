@@ -54,7 +54,11 @@ function ButtonCommentActions({ type, actions, setEditComment, setShowCommentInp
           return setShowCommentInputModal('comment')
         } else {
           actions.setEdit(actions.itemId)
-          setEditComment({ comment: actions.comment, editValue: actions.value })
+          setEditComment({
+            comment: actions.comment,
+            editValue: actions.value,
+            update: actions.update,
+          })
           return setShowCommentInputModal('edit')
         }
       case 'delete':

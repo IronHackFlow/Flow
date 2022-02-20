@@ -1,4 +1,3 @@
-
 @keyframes editOpacityIn {
   0% {
     height: 65%;
@@ -29,16 +28,16 @@
   background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
 
   .edit-profile__body {
-    @include flexCenter(75%, 96%, 5vh 5vh .5vh .5vh, center, center, row);
+    @include flexCenter(75%, 96%, 5vh 5vh 0.5vh 0.5vh, center, center, row);
     box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
     margin-top: 2%;
 
     .edit-profile__form {
       @include flexCenter(98.3%, 97%, 4.4vh, center, center, column);
       box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
-      
+
       .edit-profile__form--shadow-outset {
-        @include flexCenter(87%, 96%, 4vh 4vh .5vh .5vh, center, center, row);
+        @include flexCenter(87%, 96%, 4vh 4vh 0.5vh 0.5vh, center, center, row);
         background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
         box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
         margin-top: 2.3%;
@@ -49,7 +48,7 @@
 
           .edit-profile__header {
             @include flexCenter(11%, 100%, 0px, center, center, row);
-            
+
             .edit-profile__header--container {
               @include flexCenter(100%, 80%, 0, flex-end, flex-end, row);
 
@@ -72,14 +71,19 @@
                       img {
                         height: 85%;
                         width: 85%;
-                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                          brightness(107%) contrast(103%);
                       }
                       &:active {
                         box-shadow: inset 2px 2px 3px #828282, inset -2px -2px 3px #ffffff;
                         background: white;
                         img {
-                          filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg) brightness(95%) contrast(95%);
+                          filter: invert(73%) sepia(28%) saturate(6219%) hue-rotate(297deg)
+                            brightness(95%) contrast(95%);
                         }
+                      }
+                      &:hover {
+                        background: #e24f8c;
                       }
                     }
                   }
@@ -95,12 +99,12 @@
 
                     .edit-profile__user-title--container {
                       @include flexCenter(100%, 83%, 0, center, center, row);
-                      
+
                       h3 {
                         height: 80%;
                         width: 95%;
                         color: #ec6aa0;
-                        line-height: .9;
+                        line-height: 0.9;
                         text-align: start;
 
                         span {
@@ -131,51 +135,51 @@
 
           .edit-section {
             @include flexCenter(89%, 100%, 0, space-evenly, center, column);
-          
+
             .edit-section--shadow-inset {
               @include flexCenter(5%, 95%, 0.6vh, space-evenly, center, column);
               box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
-          
+
               .edit-section__header {
                 @include flexCenter(10%, 100%, 0, space-evenly, center, column);
                 color: #e24f8c;
               }
               .edit-section__error--container {
                 @include flexCenter(25%, 100%, 0, space-evenly, center, column);
-              
               }
               .edit-section__form--container {
                 @include flexCenter(65%, 100%, 0, space-evenly, center, column);
-              
+
                 .edit-section__form {
-                  @include flexCenter(96%, 97%, 3.4vh 3.4vh 2.4vh 2.4vh, space-evenly, center, column);
+                  @include flexCenter(96%, 97%, 3.4vh 3.4vh 2.4vh 2.4vh, center, center, column);
                   box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
-                
+
                   .edit-section__list {
-                    @include flexCenter(77%, 100%, 0, space-evenly, center, column);
-                  
+                    @include flexCenter(77%, 100%, 1.4em, flex-start, center, column);
+                    overflow: scroll;
+
                     .edit-section__item {
                       @include flexCenter(32%, 100%, 0, flex-end, center, column);
                       list-style-type: none;
 
                       .edit-section__item--shadow-outset {
-                        @include flexCenter(90%, 91%, 2.8vh 2.8vh 0.5vh 0.5vh, center, center, row);
-                        box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
+                        @include flexCenter(88%, 91%, 1.3em, center, center, row);
+                        box-shadow: 3px 3px 3px #686868, -1px -1px 4px #ffffff;
                         padding: 0% 2% 0% 2%;
-          
+
                         .edit-section__item-input-container {
                           @include flexCenter(77%, fill-available, 100vh, center, flex-end, row);
                           position: relative;
                           box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
                           background: #919191;
-                          
+
                           p {
                             position: absolute;
                             top: 2px;
                             height: 12px;
                             width: 90%;
-                            font-size: .75rem;
-                            color: #d1d1d1;
+                            font-size: 0.75rem;
+                            color: #b5b5b5;
                             text-align: start;
                             text-indent: 1%;
                             text-overflow: ellipsis;
@@ -186,13 +190,13 @@
                           .edit-section__item-input {
                             @include flexCenter(70%, 95%, 100vh, center, center, column);
                             padding-left: 6%;
-                            
+
                             &:defined {
                               color: pink;
                             }
                             &::placeholder {
-                              color: #fafafa;                              
-                              font-size: .9rem;
+                              color: #fafafa;
+                              font-size: 0.9rem;
                             }
                             &:focus {
                               border: none;
@@ -213,7 +217,6 @@
                             outline: none !important;
                             color: white;
                             border-radius: 100vh;
-
                           }
                         }
                       }
@@ -222,7 +225,7 @@
 
                   .edit-section__btn--container {
                     @include flexCenter(23%, 100%, 0, space-evenly, center, row);
-                    
+
                     .edit-section__btn-cancel--container {
                       @include flexCenter(100%, 30%, 0, center, center, column);
 
@@ -231,11 +234,14 @@
                         box-shadow: 2px 2px 3px #545454, -1px -1px 2px #e7e7e7;
                         // background: #989898;
                         color: #636363;
-                        font-size: .9rem;
-                        
+                        font-size: 0.9rem;
+
                         &:active {
                           background: #8e8e8e;
                           box-shadow: inset 2px 2px 3px #545454, inset -1px -1px 2px #e7e7e7;
+                        }
+                        &:hover {
+                          background: #b6b6b6;
                         }
                       }
                     }
@@ -253,6 +259,9 @@
                           background: linear-gradient(45deg, #e24f8c, #e57da7);
                           box-shadow: inset 2px 2px 3px #70344d, inset -2px -2px 3px #ffe3ef;
                         }
+                        &:hover {
+                          background: #ef95b8;
+                        }
                       }
                     }
                   }
@@ -263,19 +272,138 @@
               height: 75%;
               border-radius: 3vh 3vh 0.6vh 0.6vh;
             }
-            .Personal {
-            }
-            .Social {
-            }
             .Songs {
               border-radius: 0.6vh 0.6vh 3vh 3vh;
+              .edit-section__header {
+                height: 5%;
+              }
+              .edit-section__error--container {
+                height: 0%;
+                display: none;
+              }
+              .edit-section__form--container {
+                height: 95%;
+
+                .edit-section__form {
+                  height: 97%;
+                  .edit-section__list {
+                    height: 98%;
+                    .edit-section__item.song {
+                      min-height: 120px;
+                      margin-bottom: 1%;
+
+                      .edit-section__item--shadow-outset {
+                        flex-direction: column;
+                        height: 96%;
+                        width: 95%;
+                        padding: 0%;
+
+                        .edit-section__item-header {
+                          @include flexCenter(14%, 100%, 0, center, center, row);
+
+                          .edit-section__title {
+                            width: 100%;
+                            color: white;
+                            text-indent: 7%;
+                            text-align: start;
+                            font-size: 0.9rem;
+                            font-weight: bold;
+                            span {
+                              color: #bf7391;
+                              font-size: 0.9rem;
+                            }
+                          }
+                        }
+                        .edit-section__flow--container {
+                          @include flexCenter(55%, 100%, 0, center, center, column);
+
+                          .edit-section__flow-input--container {
+                            @include flexCenter(100%, 96%, 0, center, center, row);
+
+                            .edit-section__item-input-container {
+                              @include flexCenter(88%, fill-available, 2em, center, flex-end, row);
+                              position: relative;
+                              box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
+                              background: #919191;
+
+                              p {
+                                position: absolute;
+                                top: 2px;
+                                height: 12px;
+                                width: 90%;
+                                font-size: 0.75rem;
+                                color: rgb(243, 243, 243);
+                                text-align: start;
+                                text-indent: 1%;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                pointer-events: none;
+                              }
+                              .edit-section__item-input {
+                                @include flexCenter(70%, 95%, 100vh, center, center, column);
+                                padding-left: 6%;
+
+                                &:defined {
+                                  color: pink;
+                                }
+                                &::placeholder {
+                                  color: #bbbbbb;
+                                  font-size: 0.9rem;
+                                }
+                                &:focus {
+                                  border: none;
+                                  outline: none !important;
+                                }
+                              }
+                              .input-error {
+                                &:focus {
+                                  border: 2px solid red;
+                                  outline: none !important;
+                                  color: white;
+                                  border-radius: 100vh;
+                                  padding-right: 20%;
+                                }
+                              }
+                              &:focus-within {
+                                border: 2px solid pink;
+                                outline: none !important;
+                                color: white;
+                                border-radius: 100vh;
+                              }
+                            }
+                          }
+                        }
+                        .edit-section__btn--container.song {
+                          height: 31%;
+                          .edit-section__btn--shadow-inset {
+                            @include flexCenter(82%, 96%, 2em, space-evenly, center, row);
+                            box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
+                            .edit-section__btn--container {
+                              .edit-section__btn-cancel {
+                                height: 67%;
+                              }
+                              .edit-section__btn-save {
+                                height: 67%;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .edit-section__btn--container {
+                    height: 17%;
+                  }
+                }
+              }
             }
 
             .shrink-card {
               height: 5%;
-              transition: all .4s;
+              transition: all 0.4s;
               .edit-section__header {
-                height: 100%
+                height: 100%;
               }
               .edit-section__error--container {
                 height: 0%;
@@ -284,13 +412,19 @@
                 height: 0%;
                 opacity: 0;
                 visibility: hidden;
-                transition: all .4s;
+                transition: all 0.4s;
+              }
+              &:hover {
+                background: #e591b4;
+                .edit-section__header {
+                  color: white;
+                }
               }
             }
-            
+
             .expand-card {
               height: 75%;
-              transition: all .4s;
+              transition: all 0.4s;
               .edit-section__header {
                 height: 10%;
               }
@@ -300,7 +434,21 @@
               .edit-section__form--container {
                 height: 65%;
                 opacity: 1;
-                visibility: visibile;
+                visibility: visible;
+              }
+            }
+
+            .Songs.expand-card {
+              height: 75%;
+              transition: all 0.4s;
+              .edit-section__header {
+                height: 5%;
+              }
+              .edit-section__error--container {
+                height: 0%;
+              }
+              .edit-section__form--container {
+                height: 95%;
               }
             }
           }
@@ -309,7 +457,7 @@
 
       .edit-profile__submit-all {
         @include flexCenter(13%, 100%, 0, center, center, row);
-       
+
         .switch--shadow-outset {
           @include flexCenter(81%, 96%, 0.2vh 0.2vh 3.8vh 3.8vh, space-evenly, center, row);
           box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
@@ -321,17 +469,20 @@
 
             .switch__btn--container {
               @include flexCenter(100%, 100%, 0, space-evenly, center, row);
-  
+
               .switch__btn {
                 @include flexCenter(75%, 95%, 100vh, center, center, row);
-                background: linear-gradient(315deg,#2ec291, #68d3b0);
+                background: linear-gradient(315deg, #2ec291, #68d3b0);
                 box-shadow: 2px 2px 3px #545454, -1px -1px 2px #ffffff;
                 color: white;
                 font-weight: bold;
-  
+
                 &:active {
-                  background: linear-gradient(45deg,#2ec291, #68d3b0);
+                  background: linear-gradient(45deg, #2ec291, #68d3b0);
                   box-shadow: inset 2px 2px 3px #186048, inset -2px -2px 2px #c2ffeb;
+                }
+                &:hover {
+                  background: #229b73;
                 }
               }
             }
