@@ -12,6 +12,8 @@ export default function SongPosts() {
   const deleteSong = () => {}
 
   const updateSong = async (songId, name, caption) => {
+    if (songId == null || name == null || caption == null) return
+
     await actions
       .updateSong({ songId: songId, name: name, caption: caption })
       .then(res => {
@@ -22,7 +24,6 @@ export default function SongPosts() {
           if (songs.song._id === songId) return { ...songs, song: updatedSong }
           else return songs
         })
-        console.log(updateFeed, 'omfg always something..')
         setHomeFeedSongs(updateFeed)
       })
       .catch(err => console.log(err))

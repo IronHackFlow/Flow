@@ -6,8 +6,9 @@ import ContinueModal from '../ContinueModal'
 import useDebugInformation from '../../utils/useDebugInformation'
 import { deleteIcon, commentIcon, thumbsUpIcon, editIcon } from '../../assets/images/_icons'
 
-function ButtonCommentActions({ type, actions, setEditComment, setShowCommentInputModal }) {
+function ButtonCommentActions({ type, actions }) {
   const { user } = useContext(TheContext)
+  const { setCommentToEdit, setShowCommentInputModal } = useContext(HomeContext)
   const { deleteComment } = usePostComment()
   const [isLiked, setIsLiked] = useState()
   const [isDelete, setIsDelete] = useState(false)
@@ -54,7 +55,7 @@ function ButtonCommentActions({ type, actions, setEditComment, setShowCommentInp
           return setShowCommentInputModal('comment')
         } else {
           actions.setEdit(actions.itemId)
-          setEditComment({
+          setCommentToEdit({
             comment: actions.comment,
             editValue: actions.value,
             update: actions.update,

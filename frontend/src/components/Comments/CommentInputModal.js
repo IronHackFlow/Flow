@@ -1,19 +1,24 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import HomeContext from '../../contexts/HomeContext'
 import useHandleOSK from '../../utils/useHandleOSK'
 import usePostComment from '../../utils/usePostComment'
 import { sendIcon } from '../../assets/images/_icons'
 
-export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
+export default function CommentInputModal() {
+  const { songInView, showCommentInputModal, setShowCommentInputModal, setIsEdit, commentToEdit } =
+    useContext(HomeContext)
+  const { _id: songId } = songInView
   const { handleOnFocus } = useHandleOSK()
   const { addComment, editComment } = usePostComment()
   const [comment, setComment] = useState()
+
   const inputRef = useRef()
 
   useEffect(() => {
     inputRef.current.focus()
-    if (isOpen === 'edit') setComment(onEdit.editValue)
+    if (showCommentInputModal === 'edit') setComment(commentToEdit.editValue)
     else setComment('')
-  }, [isOpen, onEdit])
+  }, [showCommentInputModal, commentToEdit])
 
   const expandTextarea = useCallback(
     text => {
@@ -28,27 +33,31 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
         parseInt(computed.getPropertyValue('border-bottom-width'), 10)
       text.style.height = `${height}px`
     },
-    [comment, songId, isOpen, onEdit],
+    [comment, songId, showCommentInputModal, commentToEdit],
   )
 
   const handleSubmit = (e, songId, value) => {
     e.preventDefault()
     if (value === '') return
-    if (isOpen === 'comment') {
+    if (showCommentInputModal === 'comment') {
       addComment(songId, value)
-    } else if (isOpen === 'edit') {
-      editComment(songId, onEdit.comment, value)
-      onEdit.update(true)
+    } else if (showCommentInputModal === 'edit') {
+      editComment(songId, commentToEdit.comment, value)
+      commentToEdit.update(true)
     }
     setComment('')
-    onClose(null)
+    // setShowCommentMenu(false)
+    setIsEdit(null)
+    setShowCommentInputModal('comment')
   }
 
   return (
     <div
       className="CommentInputModal"
       style={
-        isOpen ? { position: 'fixed', display: 'flex' } : { position: 'relative', display: 'none' }
+        showCommentInputModal
+          ? { position: 'fixed', display: 'flex' }
+          : { position: 'relative', display: 'none' }
       }
     >
       <form className="comment-input__form" onSubmit={e => handleSubmit(e, songId, comment)}>
@@ -67,9 +76,9 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
           <div className="comment-input__title--container">
             <div className="comment-input__title">
               <h2>
-                {isOpen === 'comment'
+                {showCommentInputModal === 'comment'
                   ? 'Leave your Comment'
-                  : isOpen === 'edit'
+                  : showCommentInputModal === 'edit'
                   ? 'Edit your Comment'
                   : 'Make your Reply'}
               </h2>
@@ -81,7 +90,7 @@ export default function CommentInputModal({ songId, isOpen, onClose, onEdit }) {
               <button
                 className="comment-input__btn--cancel"
                 type="button"
-                onClick={() => onClose(null)}
+                onClick={() => setShowCommentInputModal(null)}
               >
                 cancel
               </button>

@@ -1,19 +1,15 @@
-import { useContext, useEffect, useState, useCallback } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { SongDataContext } from '../../contexts/SongData'
+import HomeContext from '../../contexts/HomeContext'
 import CommentItem from './CommentItem'
 import { goBackIcon } from '../../assets/images/_icons'
 
-export default function CommentMenu({
-  songInView,
-  isOpen,
-  onClose,
-  onCloseInput,
-  setEditComment,
-  page,
-}) {
+export default function CommentMenu({ page }) {
   const { homeFeedSongs } = useContext(SongDataContext)
+  const { songInView, showCommentMenu, setShowCommentMenu, setShowCommentInputModal } =
+    useContext(HomeContext)
   const [songComments, setSongComments] = useState([])
-  const [isEdit, setIsEdit] = useState(null)
+  // const [isEdit, setIsEdit] = useState(null)
   const [updateComments, setUpdateComments] = useState(false)
 
   useEffect(() => {
@@ -32,8 +28,8 @@ export default function CommentMenu({
 
   return (
     <div
-      className={`CommentMenu ${isOpen ? 'show-menu' : 'hide-menu'}`}
-      style={page === 'home' && isOpen ? { marginBottom: '-8%' } : { marginBottom: '0%' }}
+      className={`CommentMenu ${showCommentMenu ? 'show-menu' : 'hide-menu'}`}
+      style={page === 'home' && showCommentMenu ? { marginBottom: '-8%' } : { marginBottom: '0%' }}
     >
       <div className="comments__list--container">
         <div className="comments__list--shadow-outset">
@@ -43,13 +39,9 @@ export default function CommentMenu({
                 return (
                   <CommentItem
                     key={item._id}
-                    songInView={songInView}
                     commentData={item}
-                    isOpen={isOpen}
-                    isEdit={isEdit}
-                    setIsEdit={setIsEdit}
-                    setEditComment={setEditComment}
-                    setShowCommentInputModal={onCloseInput}
+                    // isEdit={isEdit}
+                    // setIsEdit={setIsEdit}
                     update={setUpdateComments}
                   />
                 )
@@ -67,8 +59,8 @@ export default function CommentMenu({
                 className="comments__back-btn"
                 type="button"
                 onClick={() => {
-                  onClose(false)
-                  onCloseInput(null)
+                  setShowCommentMenu(false)
+                  setShowCommentInputModal(null)
                 }}
               >
                 <img className="button-icons" src={goBackIcon} alt="go back" />

@@ -1,6 +1,7 @@
 import { useContext, useLayoutEffect, useEffect, useState, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SongDataContext } from '../contexts/SongData'
+import HomeContext from '../contexts/HomeContext'
 import Loading from '../components/Loading'
 import ButtonSocialAction from '../components/ButtonSocialAction'
 import usePostFollow from '../utils/usePostFollow'
@@ -16,6 +17,7 @@ import { playIcon, pauseIcon, previousIcon, forwardIcon, goBackIcon } from '../a
 
 export default function SongScreen() {
   const { homeFeedSongs, isLoading } = useContext(SongDataContext)
+
   const navigate = useNavigate()
   const location = useLocation()
   const { currentSong, returnValue } = location.state
@@ -24,12 +26,14 @@ export default function SongScreen() {
   const { postFollow, deleteFollow } = usePostFollow()
 
   const gifsCopy = [...gifsArr]
-  const [songInView, setSongInView] = useState({ song: currentSong, songVideo: gifsCopy[0].url })
+  const [currSong, setCurrSong] = useState({ song: currentSong, songVideo: gifsCopy[0].url })
+  const [songInView, setSongInView] = useState(currentSong)
   const [usersSongs, setUsersSongs] = useState([])
   const [isPlaying, setIsPlaying] = useState(false)
   const [showCommentMenu, setShowCommentMenu] = useState(false)
   const [showCommentInputModal, setShowCommentInputModal] = useState(null)
-  const [editComment, setEditComment] = useState(null)
+  const [isEdit, setIsEdit] = useState(null)
+  const [commentToEdit, setCommentToEdit] = useState(null)
   const [songScreen] = useState(`#353535`)
   const [isMarquee, setIsMarquee] = useState(false)
 
@@ -45,7 +49,7 @@ export default function SongScreen() {
 
     if (titleWidth >= wrapperWidth) setIsMarquee(true)
     else setIsMarquee(false)
-  }, [songInView])
+  }, [currSong])
 
   useEffect(() => {
     let filterSongs = homeFeedSongs?.filter(
@@ -62,25 +66,27 @@ export default function SongScreen() {
   const findCurrentSong = useCallback(
     direction => {
       usersSongs.filter((each, index) => {
-        if (each.song._id === songInView?.song?._id) {
+        if (each.song._id === currSong?.song?._id) {
           if (direction === 'back') {
             if (index === 0) {
               return null
             } else {
-              setSongInView(usersSongs[index - 1])
-              console.log(songInView, 'back')
+              setCurrSong(usersSongs[index - 1])
+              setSongInView(usersSongs[index - 1].song)
+              console.log(currSong, 'back')
             }
           } else {
             if (index === usersSongs.length - 1) {
               return null
             } else {
-              setSongInView(usersSongs[index + 1])
+              setCurrSong(usersSongs[index + 1])
+              setSongInView(usersSongs[index + 1].song)
             }
           }
         }
       })
     },
-    [usersSongs, songInView],
+    [usersSongs, currSong],
   )
 
   const getSongIndex = (array, current) => {
@@ -98,221 +104,226 @@ export default function SongScreen() {
   }
 
   return (
-    <div
-      id="SongScreen"
-      className="SongScreen"
-      style={{
-        backgroundImage: `url('${gradientbg}'), url(${songInView?.songVideo})`,
+    <HomeContext.Provider
+      value={{
+        songInView,
+        setSongInView,
+        showCommentMenu,
+        setShowCommentMenu,
+        showCommentInputModal,
+        setShowCommentInputModal,
+        isEdit,
+        setIsEdit,
+        commentToEdit,
+        setCommentToEdit,
       }}
     >
-      <Loading addClass={'LoadingSongScreen'} />
-      <CommentInputModal
-        songId={songInView?.song?._id}
-        isOpen={showCommentInputModal}
-        onClose={setShowCommentInputModal}
-        onEdit={editComment}
-      />
-      <CommentMenu
-        songInView={songInView?.song}
-        isOpen={showCommentMenu}
-        onClose={setShowCommentMenu}
-        onCloseInput={setShowCommentInputModal}
-        setEditComment={setEditComment}
-        page="songScreen"
-      />
+      <div
+        id="SongScreen"
+        className="SongScreen"
+        style={{
+          backgroundImage: `url('${gradientbg}'), url(${currSong?.songVideo})`,
+        }}
+      >
+        <Loading addClass={'LoadingSongScreen'} />
+        <CommentInputModal />
+        <CommentMenu page="songScreen" />
 
-      <div className="song-screen--container">
-        <div className="songscreen__header--container">
-          <div className="songscreen__header--shadow-outset">
-            <div className="songscreen__header--shadow-inset">
-              <div className="songscreen__exit--container">
-                <button className="songscreen__exit-btn" onClick={() => onClose()}>
-                  <img className="button-icons" src={goBackIcon} alt="go back" />
-                </button>
-              </div>
-              <div className="songscreen__title--container">
-                <div className="songscreen__title--shadow-inset">
-                  <div className="songscreen__photo--container">
-                    <div className="songscreen__photo--shadow-inset">
-                      <div className="songscreen__photo--shadow-outset">
-                        <img src={songInView?.song?.song_user?.picture} alt="song user" />
+        <div className="song-screen--container">
+          <div className="songscreen__header--container">
+            <div className="songscreen__header--shadow-outset">
+              <div className="songscreen__header--shadow-inset">
+                <div className="songscreen__exit--container">
+                  <button className="songscreen__exit-btn" onClick={() => onClose()}>
+                    <div className="songscreen__exit-btn--shadow-inset">
+                      <img className="button-icons" src={goBackIcon} alt="go back" />
+                    </div>
+                  </button>
+                </div>
+                <div className="songscreen__title--container">
+                  <div className="songscreen__title--shadow-inset">
+                    <div className="songscreen__photo--container">
+                      <div className="songscreen__photo--shadow-inset">
+                        <div className="songscreen__photo--shadow-outset">
+                          <img src={currSong?.song?.song_user?.picture} alt="song user" />
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="songscreen__song-data--container">
-                    <div className="songscreen__song-title--container">
-                      <div className="songscreen__song-title--shadow-inset">
-                        <div
-                          className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
-                          ref={wrapperRef}
-                        >
-                          <p
-                            className="songscreen__song-title"
-                            id="marquee-one"
-                            ref={titleRef}
-                            style={isMarquee ? {} : { paddingLeft: '6%' }}
+                    <div className="songscreen__song-data--container">
+                      <div className="songscreen__song-title--container">
+                        <div className="songscreen__song-title--shadow-inset">
+                          <div
+                            className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
+                            ref={wrapperRef}
                           >
-                            {songInView?.song?.name}
-                          </p>
-                          {isMarquee && (
-                            <p className="songscreen__song-title" id="marquee-two" ref={titleRef}>
-                              {songInView?.song?.name}
+                            <p
+                              className="songscreen__song-title"
+                              id="marquee-one"
+                              ref={titleRef}
+                              style={isMarquee ? {} : { paddingLeft: '6%' }}
+                            >
+                              {currSong?.song?.name}
                             </p>
-                          )}
+                            {isMarquee && (
+                              <p className="songscreen__song-title" id="marquee-two" ref={titleRef}>
+                                {currSong?.song?.name}
+                              </p>
+                            )}
+                          </div>
+                          <p className="songscreen__song-index">
+                            <span>{getSongIndex(usersSongs, currSong)}</span>
+                            of {usersSongs?.length}
+                          </p>
                         </div>
-                        <p className="songscreen__song-index">
-                          <span>{getSongIndex(usersSongs, songInView)}</span>
-                          of {usersSongs?.length}
+                      </div>
+                      <div className="songscreen__song-data">
+                        <p>
+                          {currSong?.song?.caption
+                            ? currSong?.song?.caption
+                            : 'No caption for this song'}
                         </p>
+                        <p>
+                          by: <span> {currSong?.song?.song_user?.user_name}</span>
+                        </p>
+                        <p>on: {formatDate(currSong?.song?.date, 'MMMM_Dth_YYYY')}</p>
                       </div>
                     </div>
-                    <div className="songscreen__song-data">
-                      <p>
-                        {songInView?.song?.caption
-                          ? songInView?.song?.caption
-                          : 'No caption for this song'}
-                      </p>
-                      <p>
-                        by: <span> {songInView?.song?.song_user?.user_name}</span>
-                      </p>
-                      <p>on: {formatDate(songInView?.song?.date, 'MMMM_Dth_YYYY')}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="song-video-frame"
-          style={isLoading === true ? { opacity: '0' } : { opacity: '1' }}
-        >
-          <div className="song-lyric-container">
-            {songInView?.song?.lyrics?.map((each, index) => {
-              return (
-                <div className="each-lyric-container" key={`${each}_${index}`}>
-                  <p className="each-lyric-no">{index + 1}</p>
-                  <p className="each-lyric-line">{each}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        <div className="songscreen__interactions--container">
-          <div className="songscreen__play--container">
-            <div className="songscreen__play--shadow-inset">
-              <div className="songscreen__play--shadow-outset">
-                <div className="songscreen__play">
-                  <div className="songscreen__navigate back">
-                    <button
-                      className="songscreen__navigate-btn"
-                      onClick={() => findCurrentSong('back')}
-                    >
-                      <img src={previousIcon} alt="go back" />
-                    </button>
-                  </div>
-
-                  <div className="songscreen__play-btn--container">
-                    <div className="songscreen__play-btn--shadow-inset">
-                      {isPlaying ? (
-                        <div className="songscreen__play-btn">
-                          <div className="songscreen__play-btn--shadow-outset">
-                            <button
-                              className="songscreen__play-btn--shadow-outset2"
-                              onClick={() => setIsPlaying(false)}
-                            >
-                              <div className="songscreen__play-btn--shadow-inset">
-                                <img
-                                  src={pauseIcon}
-                                  ref={playPauseRef}
-                                  style={{ marginLeft: '0%' }}
-                                  alt="pause icon"
-                                />
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="songscreen__play-btn">
-                          <div className="songscreen__play-btn--shadow-outset">
-                            <button
-                              className="songscreen__play-btn--shadow-outset2"
-                              onClick={() => setIsPlaying(true)}
-                            >
-                              <div className="songscreen__play-btn--shadow-inset">
-                                <img src={playIcon} ref={playPauseRef} alt="play icon" />
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="songscreen__navigate forward">
-                    <button
-                      className="songscreen__navigate-btn"
-                      onClick={() => findCurrentSong('next')}
-                    >
-                      <img src={forwardIcon} alt="go forward" />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="songscreen__audioslider--container">
-                  <div className="songscreen__audioslider--shadow-inset">
-                    <div className="songscreen__audioslider--shadow-outset">
-                      <AudioTimeSlider
-                        isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
-                        currentSong={songInView.song}
-                        location={songScreen}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="songscreen__social-btns--container">
-            <div className="songscreen__social-btns--shadow-outset">
-              <div className="songscreen__social-btns--shadow-inset">
-                <div className="songscreen__btn--container follow">
-                  <ButtonSocialAction
-                    type="follow"
-                    songInView={{
-                      id: songInView?.song?.song_user?._id,
-                      list: songInView?.song?.song_user?.followers,
-                    }}
-                    btnStyle="songScreen"
-                    action={{ add: postFollow, delete: deleteFollow }}
-                  />
+          <div
+            className="song-video-frame"
+            style={isLoading === true ? { opacity: '0' } : { opacity: '1' }}
+          >
+            <div className="song-lyric-container">
+              {currSong?.song?.lyrics?.map((each, index) => {
+                return (
+                  <div className="each-lyric-container" key={`${each}_${index}`}>
+                    <p className="each-lyric-no">{index + 1}</p>
+                    <p className="each-lyric-line">{each}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="songscreen__interactions--container">
+            <div className="songscreen__play--container">
+              <div className="songscreen__play--shadow-inset">
+                <div className="songscreen__play--shadow-outset">
+                  <div className="songscreen__play">
+                    <div className="songscreen__navigate back">
+                      <button
+                        className="songscreen__navigate-btn"
+                        onClick={() => findCurrentSong('back')}
+                      >
+                        <img src={previousIcon} alt="go back" />
+                      </button>
+                    </div>
+
+                    <div className="songscreen__play-btn--container">
+                      <div className="songscreen__play-btn--shadow-inset">
+                        {isPlaying ? (
+                          <div className="songscreen__play-btn">
+                            <div className="songscreen__play-btn--shadow-outset">
+                              <button
+                                className="songscreen__play-btn--shadow-outset2"
+                                onClick={() => setIsPlaying(false)}
+                              >
+                                <div className="songscreen__play-btn--shadow-inset">
+                                  <img
+                                    src={pauseIcon}
+                                    ref={playPauseRef}
+                                    style={{ marginLeft: '0%' }}
+                                    alt="pause icon"
+                                  />
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="songscreen__play-btn">
+                            <div className="songscreen__play-btn--shadow-outset">
+                              <button
+                                className="songscreen__play-btn--shadow-outset2"
+                                onClick={() => setIsPlaying(true)}
+                              >
+                                <div className="songscreen__play-btn--shadow-inset">
+                                  <img src={playIcon} ref={playPauseRef} alt="play icon" />
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="songscreen__navigate forward">
+                      <button
+                        className="songscreen__navigate-btn"
+                        onClick={() => findCurrentSong('next')}
+                      >
+                        <img src={forwardIcon} alt="go forward" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="songscreen__audioslider--container">
+                    <div className="songscreen__audioslider--shadow-inset">
+                      <div className="songscreen__audioslider--shadow-outset">
+                        <AudioTimeSlider
+                          isPlaying={isPlaying}
+                          setIsPlaying={setIsPlaying}
+                          currentSong={currSong.song}
+                          location={songScreen}
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="songscreen__btn--container like">
-                  <ButtonSocialAction
-                    type="like"
-                    songInView={{ id: songInView?.song?._id, list: songInView?.song?.song_likes }}
-                    btnStyle="songScreen"
-                    action={{ add: addSongLike, delete: deleteSongLike }}
-                  />
-                </div>
-                <div className="songscreen__btn--container comment">
-                  <CommentButton
-                    songInView={songInView.song}
-                    btnStyle="songScreen"
-                    isPushed={showCommentMenu}
-                    onClose={handleCommentMenu}
-                  />
+              </div>
+            </div>
+
+            <div className="songscreen__social-btns--container">
+              <div className="songscreen__social-btns--shadow-outset">
+                <div className="songscreen__social-btns--shadow-inset">
+                  <div className="songscreen__btn--container follow">
+                    <ButtonSocialAction
+                      type="follow"
+                      songInView={{
+                        id: currSong?.song?.song_user?._id,
+                        list: currSong?.song?.song_user?.followers,
+                      }}
+                      btnStyle="songScreen"
+                      action={{ add: postFollow, delete: deleteFollow }}
+                    />
+                  </div>
+                  <div className="songscreen__btn--container like">
+                    <ButtonSocialAction
+                      type="like"
+                      songInView={{ id: currSong?.song?._id, list: currSong?.song?.song_likes }}
+                      btnStyle="songScreen"
+                      action={{ add: addSongLike, delete: deleteSongLike }}
+                    />
+                  </div>
+                  <div className="songscreen__btn--container comment">
+                    <CommentButton
+                      songInView={currSong.song}
+                      btnStyle="songScreen"
+                      isPushed={showCommentMenu}
+                      onClose={handleCommentMenu}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </HomeContext.Provider>
   )
 }

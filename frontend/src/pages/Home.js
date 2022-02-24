@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useLayoutEffect, useRef, useCallback, 
 import { Link } from 'react-router-dom'
 import TheContext from '../contexts/TheContext'
 import { SongDataContext } from '../contexts/SongData'
+import HomeContext from '../contexts/HomeContext'
 import useDebugInformation from '../utils/useDebugInformation'
 import useFormatDate from '../utils/useFormatDate'
 import usePostFollow from '../utils/usePostFollow'
@@ -30,7 +31,8 @@ export default function Home(props) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showCommentMenu, setShowCommentMenu] = useState(false)
   const [showCommentInputModal, setShowCommentInputModal] = useState(null)
-  const [editComment, setEditComment] = useState(null)
+  const [isEdit, setIsEdit] = useState(null)
+  const [commentToEdit, setCommentToEdit] = useState(null)
   const [isMarquee, setIsMarquee] = useState(false)
 
   const titleRef = useRef()
@@ -113,230 +115,233 @@ export default function Home(props) {
   }
 
   return (
-    <div className="Home" id="Home">
-      <CommentInputModal
-        songId={songInView?._id}
-        isOpen={showCommentInputModal}
-        onClose={setShowCommentInputModal}
-        onEdit={editComment}
-      />
-      <CommentMenu
-        songInView={songInView}
-        isOpen={showCommentMenu}
-        onClose={setShowCommentMenu}
-        onCloseInput={setShowCommentInputModal}
-        setEditComment={setEditComment}
-        page="home"
-      />
-      <div className="section-1_feed">
-        <div
-          className="section-1a_toggle-feed"
-          style={showCommentMenu ? { height: '0%', visibility: 'hidden' } : {}}
-        >
-          <div className="toggle-feed-container">
-            <div
-              className="each-feed_shadow-div-inset"
-              style={{ borderRadius: '0.3vh 0.3vh 0.3vh 2.5vh' }}
-            >
-              <button
-                className={
-                  toggleFeed === 'home'
-                    ? 'each-feed_shadow-div-outset toggle-feed'
-                    : 'each-feed_shadow-div-outset'
-                }
-                onClick={() => showFeedHandler('home')}
-                style={{ borderRadius: '4vh .2vh .2vh 4vh' }}
+    <HomeContext.Provider
+      value={{
+        songInView,
+        setSongInView,
+        showCommentMenu,
+        setShowCommentMenu,
+        showCommentInputModal,
+        setShowCommentInputModal,
+        isEdit,
+        setIsEdit,
+        commentToEdit,
+        setCommentToEdit,
+      }}
+    >
+      <div className="Home" id="Home">
+        <CommentInputModal />
+        <CommentMenu page="home" />
+        <div className="section-1_feed">
+          <div
+            className="section-1a_toggle-feed"
+            style={showCommentMenu ? { height: '0%', visibility: 'hidden' } : {}}
+          >
+            <div className="toggle-feed-container">
+              <div
+                className="each-feed_shadow-div-inset"
+                style={{ borderRadius: '0.3vh 0.3vh 0.3vh 2.5vh' }}
               >
-                <div
+                <button
                   className={
                     toggleFeed === 'home'
-                      ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
-                      : 'each-feed_shadow-div-inset-2'
+                      ? 'each-feed_shadow-div-outset toggle-feed'
+                      : 'each-feed_shadow-div-outset'
                   }
+                  onClick={() => showFeedHandler('home')}
+                  style={{ borderRadius: '4vh .2vh .2vh 4vh' }}
                 >
-                  Feed
-                </div>
-              </button>
-            </div>
-            <div className="each-feed_shadow-div-inset">
-              <button
-                className={
-                  toggleFeed === 'trending'
-                    ? 'each-feed_shadow-div-outset toggle-feed'
-                    : 'each-feed_shadow-div-outset'
-                }
-                onClick={() => showFeedHandler('trending')}
-              >
-                <div
+                  <div
+                    className={
+                      toggleFeed === 'home'
+                        ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
+                        : 'each-feed_shadow-div-inset-2'
+                    }
+                  >
+                    Feed
+                  </div>
+                </button>
+              </div>
+              <div className="each-feed_shadow-div-inset">
+                <button
                   className={
                     toggleFeed === 'trending'
-                      ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
-                      : 'each-feed_shadow-div-inset-2'
+                      ? 'each-feed_shadow-div-outset toggle-feed'
+                      : 'each-feed_shadow-div-outset'
                   }
+                  onClick={() => showFeedHandler('trending')}
                 >
-                  Trending
-                </div>
-              </button>
-            </div>
-            <div
-              className="each-feed_shadow-div-inset"
-              style={{ borderRadius: '.3vh .3vh 2.5vh .3vh' }}
-            >
-              <button
-                className={
-                  toggleFeed === 'following'
-                    ? 'each-feed_shadow-div-outset toggle-feed'
-                    : 'each-feed_shadow-div-outset'
-                }
-                style={{ borderRadius: '.2vh 4vh 4vh .2vh' }}
-                onClick={() => showFeedHandler('following')}
+                  <div
+                    className={
+                      toggleFeed === 'trending'
+                        ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
+                        : 'each-feed_shadow-div-inset-2'
+                    }
+                  >
+                    Trending
+                  </div>
+                </button>
+              </div>
+              <div
+                className="each-feed_shadow-div-inset"
+                style={{ borderRadius: '.3vh .3vh 2.5vh .3vh' }}
               >
-                <div
+                <button
                   className={
                     toggleFeed === 'following'
-                      ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
-                      : 'each-feed_shadow-div-inset-2'
+                      ? 'each-feed_shadow-div-outset toggle-feed'
+                      : 'each-feed_shadow-div-outset'
                   }
+                  style={{ borderRadius: '.2vh 4vh 4vh .2vh' }}
+                  onClick={() => showFeedHandler('following')}
                 >
-                  Following
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-        {showFeedInDisplay()}
-        <div className="section-1c_song-details">
-          <div className="song-details-1_actions">
-            <div className="actions_shadow-div-outset">
-              <div className="actions_shadow-div-inset">
-                <div className="action-btns-container">
-                  <ButtonSocialAction
-                    type="follow"
-                    songInView={{
-                      id: songInView?.song_user?._id,
-                      list: songInView?.song_user?.followers,
-                    }}
-                    btnStyle="home"
-                    action={{ add: postFollow, delete: deleteFollow }}
-                  />
-                  <ButtonSocialAction
-                    type="like"
-                    songInView={{ id: songInView?._id, list: songInView?.song_likes }}
-                    btnStyle="home"
-                    action={{ add: addSongLike, delete: deleteSongLike }}
-                  />
-                  <CommentButton
-                    songInView={songInView}
-                    btnStyle="home"
-                    isPushed={showCommentMenu}
-                    onClose={handleCommentMenu}
-                  />
-                </div>
+                  <div
+                    className={
+                      toggleFeed === 'following'
+                        ? 'each-feed_shadow-div-inset-2 toggle-feed-2'
+                        : 'each-feed_shadow-div-inset-2'
+                    }
+                  >
+                    Following
+                  </div>
+                </button>
               </div>
             </div>
           </div>
-          <div className="song-details-2_song-data">
-            <div className="song-data-container">
-              <div className="song-user-section">
-                <div className="song-user-container">
-                  <div className="user-pic-container">
-                    <div className="user-pic_shadow-div-outset">
-                      <Link
-                        to={`/profile/${songInView?.song_user?._id}`}
-                        state={{ propSongUser: songInView?.song_user }}
-                        className="user-pic_shadow-div-inset"
-                      >
-                        <div
-                          className="loading loading-pic"
-                          style={isLoading ? { opacity: '1' } : { opacity: '0' }}
-                        ></div>
-                        <img src={songInView?.song_user?.picture} alt="" />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="song-title-container">
-                    <div className="song-title_shadow-div-outset">
-                      <div className="song-title_shadow-div-inset">
-                        <div className="song-title_title--container">
-                          <div
-                            className="loading loading-title"
-                            style={isLoading ? { opacity: '1' } : { opacity: '0' }}
-                          ></div>
-                          <div
-                            className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
-                            ref={wrapperRef}
-                          >
-                            <p className="song-title-marquee" id="marquee-one" ref={titleRef}>
-                              {songInView?.name} {String.fromCodePoint(8226)}{' '}
-                              <span>{songInView?.song_user?.user_name}</span>
-                            </p>
-                            {isMarquee && (
-                              <p className="song-title-marquee" id="marquee-two">
-                                {songInView?.name} {String.fromCodePoint(8226)}{' '}
-                                <span>{songInView?.song_user?.user_name}</span>
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="song-caption-container">
-                        <p
-                          className="song-date"
-                          style={isLoading ? { opacity: '0' } : { opacity: '1' }}
-                        >
-                          {formatDate(songInView?.date, 'm')}
-                          <span>{String.fromCodePoint(8226)}</span>
-                        </p>
-                        <p
-                          className="song-caption"
-                          style={isLoading ? { opacity: '0' } : { opacity: '1' }}
-                        >
-                          {songInView?.caption
-                            ? `${songInView?.caption}`
-                            : 'no caption for this song'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="song-play-section">
-                <div className="play-song-container">
-                  <div className="play-btn-container">
-                    <div className="play-btn-container-2">
-                      <div className="play-btn_inset-container">
-                        <div className="play-btn_shadow-div-inset">
-                          <button
-                            className="play-btn_shadow-div-outset"
-                            onClick={() => setIsPlaying(!isPlaying)}
-                          >
-                            <img
-                              className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
-                              src={isPlaying ? pauseIcon : playIcon}
-                              alt="play or pause"
-                            />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="play-bar-container">
-                  <div className="play-bar_shadow-div-inset">
-                    <AudioTimeSlider
-                      isPlaying={isPlaying}
-                      setIsPlaying={setIsPlaying}
-                      currentSong={songInView}
-                      bgColor={`#6d6d6d`}
+          {showFeedInDisplay()}
+          <div className="section-1c_song-details">
+            <div className="song-details-1_actions">
+              <div className="actions_shadow-div-outset">
+                <div className="actions_shadow-div-inset">
+                  <div className="action-btns-container">
+                    <ButtonSocialAction
+                      type="follow"
+                      songInView={{
+                        id: songInView?.song_user?._id,
+                        list: songInView?.song_user?.followers,
+                      }}
+                      btnStyle="home"
+                      action={{ add: postFollow, delete: deleteFollow }}
+                    />
+                    <ButtonSocialAction
+                      type="like"
+                      songInView={{ id: songInView?._id, list: songInView?.song_likes }}
+                      btnStyle="home"
+                      action={{ add: addSongLike, delete: deleteSongLike }}
+                    />
+                    <CommentButton
+                      songInView={songInView}
+                      btnStyle="home"
+                      isPushed={showCommentMenu}
+                      onClose={handleCommentMenu}
                     />
                   </div>
                 </div>
               </div>
             </div>
+            <div className="song-details-2_song-data">
+              <div className="song-data-container">
+                <div className="song-user-section">
+                  <div className="song-user-container">
+                    <div className="user-pic-container">
+                      <div className="user-pic_shadow-div-outset">
+                        <Link
+                          to={`/profile/${songInView?.song_user?._id}`}
+                          state={{ propSongUser: songInView?.song_user }}
+                          className="user-pic_shadow-div-inset"
+                        >
+                          <div
+                            className="loading loading-pic"
+                            style={isLoading ? { opacity: '1' } : { opacity: '0' }}
+                          ></div>
+                          <img src={songInView?.song_user?.picture} alt="" />
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="song-title-container">
+                      <div className="song-title_shadow-div-outset">
+                        <div className="song-title_shadow-div-inset">
+                          <div className="song-title_title--container">
+                            <div
+                              className="loading loading-title"
+                              style={isLoading ? { opacity: '1' } : { opacity: '0' }}
+                            ></div>
+                            <div
+                              className={`marquee-wrapper ${isMarquee ? 'marquee--animation' : ''}`}
+                              ref={wrapperRef}
+                            >
+                              <p className="song-title-marquee" id="marquee-one" ref={titleRef}>
+                                {songInView?.name} {String.fromCodePoint(8226)}{' '}
+                                <span>{songInView?.song_user?.user_name}</span>
+                              </p>
+                              {isMarquee && (
+                                <p className="song-title-marquee" id="marquee-two">
+                                  {songInView?.name} {String.fromCodePoint(8226)}{' '}
+                                  <span>{songInView?.song_user?.user_name}</span>
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="song-caption-container">
+                          <p
+                            className="song-date"
+                            style={isLoading ? { opacity: '0' } : { opacity: '1' }}
+                          >
+                            {formatDate(songInView?.date, 'm')}
+                            <span>{String.fromCodePoint(8226)}</span>
+                          </p>
+                          <p
+                            className="song-caption"
+                            style={isLoading ? { opacity: '0' } : { opacity: '1' }}
+                          >
+                            {songInView?.caption
+                              ? `${songInView?.caption}`
+                              : 'no caption for this song'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="song-play-section">
+                  <div className="play-song-container">
+                    <div className="play-btn-container">
+                      <div className="play-btn-container-2">
+                        <div className="play-btn_inset-container">
+                          <div className="play-btn_shadow-div-inset">
+                            <button
+                              className="play-btn_shadow-div-outset"
+                              onClick={() => setIsPlaying(!isPlaying)}
+                            >
+                              <img
+                                className={`button-icons ${isPlaying ? 'bi-pause' : 'bi-play'}`}
+                                src={isPlaying ? pauseIcon : playIcon}
+                                alt="play or pause"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="play-bar-container">
+                    <div className="play-bar_shadow-div-inset">
+                      <AudioTimeSlider
+                        isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
+                        currentSong={songInView}
+                        bgColor={`#6d6d6d`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <NavBar isVisible={showCommentMenu} />
       </div>
-      <NavBar isVisible={showCommentMenu} />
-    </div>
+    </HomeContext.Provider>
   )
 }

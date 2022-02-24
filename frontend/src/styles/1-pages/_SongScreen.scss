@@ -29,13 +29,29 @@
               @include flexCenter(85%, 73%, 0.3em 0.3em 0.3em 10em, center, flex-start, row);
               box-shadow: 2px 2px 3px #424242, -1px -1px 3px 0px #efefef;
 
-              img {
-                height: 40%;
-                width: 100%;
-                margin-top: 1em;
+              .songscreen__exit-btn--shadow-inset {
+                @include flexCenter(29%, 83%, 0.2em, center, center, row);
+                box-shadow: inset 1px 1px 4px #464646, inset -1px -1px 3px 0px #f8f8f8;
+                margin-top: 0.25em;
+
+                img {
+                  height: 90%;
+                  width: 100%;
+                }
               }
               &:hover {
-                background: #f3b9c3;
+                background: #868686;
+                box-shadow: 2px 2px 3px #424242, -1px -1px 3px 0px #d0d0d0;
+                .songscreen__exit-btn--shadow-inset {
+                  box-shadow: inset 1px 1px 4px #3e3e3e, inset -1px -1px 3px 0px #cecece;
+                }
+              }
+              &:active {
+                background: #7f7f7f;
+                box-shadow: inset 2px 2px 3px #3c3c3c, inset -1px -1px 3px 0px #c2c2c2;
+                .songscreen__exit-btn--shadow-inset {
+                  box-shadow: inset 1px 1px 4px #1c1c1c, inset -1px -1px 3px 0px #dadada;
+                }
               }
             }
           }
@@ -192,7 +208,7 @@
 
           .songscreen__play--shadow-outset {
             @include flexCenter(94%, 96%, 1.6em, center, center, column);
-            box-shadow: 2px 2px 3px #525252, -1.5px -1.5px 3px 0px #ffffff;
+            box-shadow: 2px 2px 3px #525252, -1.5px -1.5px 3px 0px #e5e5e5;
 
             .songscreen__play {
               @include flexCenter(74%, 100%, 0, center, center, row);

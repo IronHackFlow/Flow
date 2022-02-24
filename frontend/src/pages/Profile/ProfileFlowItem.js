@@ -132,7 +132,7 @@ export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) 
             <div className="buttons-inner">
               {profileUser?._id === user?._id && (
                 <>
-                  <div className="delete-btn-container">
+                  <div className="delete-btn-container delete">
                     <div className="play-container">
                       <div className="play-outset">
                         <button className="play-inset">
@@ -146,7 +146,7 @@ export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) 
                       </div>
                     </div>
                   </div>
-                  <div className="delete-btn-container">
+                  <div className="delete-btn-container edit">
                     <div className="play-container">
                       <div className="play-outset">
                         <Link
@@ -161,7 +161,7 @@ export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) 
                   </div>
                 </>
               )}
-              <div className="delete-btn-container">
+              <div className="delete-btn-container play">
                 <audio src={song.songURL} ref={setAudioRefs}></audio>
                 <div className="play-container">
                   <div className="play-outset">

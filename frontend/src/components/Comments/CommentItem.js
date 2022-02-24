@@ -1,23 +1,21 @@
-import { useContext, useEffect, useState, useRef, useCallback } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import TheContext from '../../contexts/TheContext'
+import HomeContext from '../../contexts/HomeContext'
 import ButtonCommentActions from './ButtonCommentActions'
 import usePostLike from '../../utils/usePostLike'
 import useFormatDate from '../../utils/useFormatDate'
 
 export default function CommentItem({
-  songInView,
   commentData,
-  isOpen,
-  isEdit,
-  setIsEdit,
-  setEditComment,
-  setShowCommentInputModal,
+  // isEdit,
+  // setIsEdit,
   update,
 }) {
   const { user } = useContext(TheContext)
+  const { songInView, showCommentMenu, isEdit, setIsEdit } = useContext(HomeContext)
   const { _id: songId } = songInView
-  const { _id: songUserId } = songInView.song_user
+  const { _id: songUserId } = songInView?.song_user
   const { _id: id, user: commentUser, date: commentDate, comment: commentText, likes } = commentData
   const {
     _id: commentUserId,
@@ -37,10 +35,10 @@ export default function CommentItem({
   }, [commentUserId])
 
   useEffect(() => {
-    if (!isOpen) setIsEdit(null)
+    if (!showCommentMenu) setIsEdit(null)
     if (id === isEdit) setIsEditClass(true)
     else setIsEditClass(false)
-  }, [isOpen, isEdit])
+  }, [showCommentMenu, isEdit])
 
   return (
     <li id={id} className={`comments__item ${isEditClass ? 'highlight' : ''}`}>
@@ -95,8 +93,6 @@ export default function CommentItem({
                     value: commentText,
                     update: update,
                   }}
-                  setEditComment={setEditComment}
-                  setShowCommentInputModal={setShowCommentInputModal}
                 />
               </>
             ) : (

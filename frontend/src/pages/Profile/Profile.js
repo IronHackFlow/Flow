@@ -258,7 +258,7 @@ function Profile() {
             </div>
 
             <div className="edit-logout-container">
-              {thisUser?._id === user?._id ? (
+              {thisUser?._id === user?._id && (
                 <div className="edit-logout_shadow-div-inset">
                   <div className="each-button-container ebc-4">
                     <Link
@@ -297,7 +297,7 @@ function Profile() {
                     </button>
                   </div>
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
@@ -305,7 +305,9 @@ function Profile() {
 
       <div className="section-2_profile">
         <div className="section-2a_songs">
-          <ul className="songs-1_songs-list">{showProfileSongs()}</ul>
+          <div className="section-2a_songs-container">
+            <ul className="songs-1_songs-list">{showProfileSongs()}</ul>
+          </div>
           {/* <div className="songs-2_slider-container">
             <div className="songs-slider-outer">
               <div className="songs-slider-bar"></div>

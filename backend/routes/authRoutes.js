@@ -147,7 +147,7 @@ router.get(`/getAuthUser`, verifyJWT, (req, res, next) => {
     .populate('user_follows')
     .populate('user_likes')
     .then(user => {
-      console.log(user, 'this user is authorized')
+      console.log(user._id, user.user_name, 'this user is authorized')
       res.status(200).json({ success: true, isLoggedIn: true, user })
     })
     .catch(err =>

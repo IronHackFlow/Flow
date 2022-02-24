@@ -45,6 +45,25 @@ router.post(`/deleteSong`, verifyJWT, async (req, res, next) => {
   }
 })
 
+router.post(`/updateSong`, verifyJWT, async (req, res, next) => {
+  const songId = req.body.songId
+  const body = {
+    name: req.body.name,
+    caption: req.body.caption,
+  }
+  await Songs.findByIdAndUpdate(songId, body, { new: true })
+    .populate('song_likes')
+    .populate({
+      path: 'song_comments',
+      populate: [{ path: 'user' }, { path: 'likes' }],
+    })
+    .populate({ path: 'song_user', populate: 'followers' })
+    .then(song => {
+      res.status(200).json(song)
+    })
+    .catch(err => res.status(500).json(err))
+})
+
 router.get(`/getAllSongs`, async (req, res, next) => {
   const songs = await Songs.find({})
     .populate('song_likes')
