@@ -7,10 +7,10 @@ export default function usePostComment() {
   const { user } = useContext(TheContext)
   const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
 
-  const addComment = (songId, commentString) => {
+  const addComment = async (songId, commentString) => {
     if (songId == null || commentString == null) return
 
-    actions
+    await actions
       .addComment({
         songId: songId,
         comment: commentString,
@@ -30,11 +30,11 @@ export default function usePostComment() {
       .catch(console.error)
   }
 
-  const deleteComment = (songId, toDelete) => {
+  const deleteComment = async (songId, toDelete) => {
     if (!user) return
-    if (user?._id !== toDelete.user._id || songId == null || toDelete == null) return
+    if (user?._id !== toDelete?.user?._id || songId == null || toDelete == null) return
 
-    actions
+    await actions
       .deleteComment({ songId: songId, commentToDelete: toDelete })
       .then(res => {
         console.log(
@@ -50,10 +50,10 @@ export default function usePostComment() {
       .catch(console.error)
   }
 
-  const editComment = (songId, toEdit, commentString) => {
+  const editComment = async (songId, toEdit, commentString) => {
     if (songId == null || toEdit == null) return
 
-    actions
+    await actions
       .editComment({
         songId: songId,
         commentToEdit: toEdit,

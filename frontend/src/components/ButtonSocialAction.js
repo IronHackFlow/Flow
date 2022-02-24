@@ -28,6 +28,7 @@ export default function ButtonSocialAction({ type, songInView, btnStyle, action 
   }, [songInView?.list])
 
   const postHandler = () => {
+    if (type === 'follow' && id === user?._id) return
     if (hasUser) {
       action.delete(id, usersAction)
       setHasUser(false)

@@ -9,7 +9,6 @@ export default function CommentMenu({ page }) {
   const { songInView, showCommentMenu, setShowCommentMenu, setShowCommentInputModal } =
     useContext(HomeContext)
   const [songComments, setSongComments] = useState([])
-  // const [isEdit, setIsEdit] = useState(null)
   const [updateComments, setUpdateComments] = useState(false)
 
   useEffect(() => {
@@ -24,6 +23,7 @@ export default function CommentMenu({ page }) {
         }
       }
     })
+    console.log(songComments, 'ok problem here?? or waht??')
   }, [songInView, homeFeedSongs, updateComments])
 
   return (
@@ -36,15 +36,7 @@ export default function CommentMenu({ page }) {
           <div className="comments__list--shadow-inset">
             <ul className="comments__list">
               {songComments?.map(item => {
-                return (
-                  <CommentItem
-                    key={item._id}
-                    commentData={item}
-                    // isEdit={isEdit}
-                    // setIsEdit={setIsEdit}
-                    update={setUpdateComments}
-                  />
-                )
+                return <CommentItem key={item._id} commentData={item} update={setUpdateComments} />
               })}
             </ul>
           </div>

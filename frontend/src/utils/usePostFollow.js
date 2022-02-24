@@ -1,13 +1,15 @@
 import { useContext } from 'react'
 import actions from '../api.js'
+import TheContext from '../contexts/TheContext'
 import { SongDataContext } from '../contexts/SongData.js'
 
 export default function usePostFollow() {
+  const { user } = useContext(TheContext)
   const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
 
   const postFollow = (songUserId, setUsersFollow) => {
     if (songUserId == null || setUsersFollow == null) return
-
+    if (songUserId === user._id) return console.log("You can't follow yourself")
     actions
       .addFollow({ followed_user: songUserId, date: new Date() })
       .then(res => {
@@ -39,6 +41,7 @@ export default function usePostFollow() {
 
   const deleteFollow = (songUserId, toDelete) => {
     if (songUserId == null || toDelete == null) return
+    if (songUserId === user._id) return
 
     actions
       .deleteFollow({ followed_user: songUserId, followToDelete: toDelete })

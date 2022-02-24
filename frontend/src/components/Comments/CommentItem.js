@@ -6,12 +6,7 @@ import ButtonCommentActions from './ButtonCommentActions'
 import usePostLike from '../../utils/usePostLike'
 import useFormatDate from '../../utils/useFormatDate'
 
-export default function CommentItem({
-  commentData,
-  // isEdit,
-  // setIsEdit,
-  update,
-}) {
+export default function CommentItem({ commentData, update }) {
   const { user } = useContext(TheContext)
   const { songInView, showCommentMenu, isEdit, setIsEdit } = useContext(HomeContext)
   const { _id: songId } = songInView
@@ -21,7 +16,7 @@ export default function CommentItem({
     _id: commentUserId,
     user_name: commentUserName,
     picture: commentPicture,
-  } = commentData.user
+  } = commentData?.user
   const { addCommentLike, deleteCommentLike } = usePostLike()
   const { formatDate } = useFormatDate()
 
@@ -88,8 +83,6 @@ export default function CommentItem({
                   actions={{
                     itemId: id,
                     comment: commentData,
-                    isEdit: isEdit,
-                    setEdit: setIsEdit,
                     value: commentText,
                     update: update,
                   }}

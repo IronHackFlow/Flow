@@ -7,7 +7,6 @@ import { sendIcon } from '../../assets/images/_icons'
 export default function CommentInputModal() {
   const { songInView, showCommentInputModal, setShowCommentInputModal, setIsEdit, commentToEdit } =
     useContext(HomeContext)
-  const { _id: songId } = songInView
   const { handleOnFocus } = useHandleOSK()
   const { addComment, editComment } = usePostComment()
   const [comment, setComment] = useState()
@@ -33,7 +32,7 @@ export default function CommentInputModal() {
         parseInt(computed.getPropertyValue('border-bottom-width'), 10)
       text.style.height = `${height}px`
     },
-    [comment, songId, showCommentInputModal, commentToEdit],
+    [comment, songInView, showCommentInputModal, commentToEdit],
   )
 
   const handleSubmit = (e, songId, value) => {
@@ -41,12 +40,11 @@ export default function CommentInputModal() {
     if (value === '') return
     if (showCommentInputModal === 'comment') {
       addComment(songId, value)
-    } else if (showCommentInputModal === 'edit') {
+    } else if (showCommentInputModal === 'edit' && value !== comment) {
       editComment(songId, commentToEdit.comment, value)
       commentToEdit.update(true)
     }
     setComment('')
-    // setShowCommentMenu(false)
     setIsEdit(null)
     setShowCommentInputModal('comment')
   }
@@ -60,7 +58,10 @@ export default function CommentInputModal() {
           : { position: 'relative', display: 'none' }
       }
     >
-      <form className="comment-input__form" onSubmit={e => handleSubmit(e, songId, comment)}>
+      <form
+        className="comment-input__form"
+        onSubmit={e => handleSubmit(e, songInView?._id, comment)}
+      >
         <div className="comment-input__input--container">
           <textarea
             className="comment-input__input"
@@ -100,7 +101,7 @@ export default function CommentInputModal() {
               <button
                 className="comment-input__btn--submit"
                 type="submit"
-                onClick={e => handleSubmit(e, songId, comment)}
+                onClick={e => handleSubmit(e, songInView?._id, comment)}
               >
                 <img className="social-icons si-send" src={sendIcon} alt="send" />
               </button>
