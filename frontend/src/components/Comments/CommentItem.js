@@ -95,7 +95,6 @@ export default function CommentItem({ commentData, update }) {
                   actions={{
                     add: addCommentLike,
                     delete: deleteCommentLike,
-                    songId: songId,
                     commentId: id,
                     likes: [...likes],
                   }}

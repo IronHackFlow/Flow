@@ -28,22 +28,22 @@
   background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
 
   .edit-profile__body {
-    @include flexCenter(75%, 96%, 5vh 5vh 0.5vh 0.5vh, center, center, row);
+    @include flexCenter(75%, 96%, 2.7em 2.7em 0.3em 0.3em, center, center, row);
     box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
     margin-top: 2%;
 
     .edit-profile__form {
-      @include flexCenter(98.3%, 97%, 4.4vh, center, center, column);
+      @include flexCenter(98%, 97%, 2.3em, center, center, column);
       box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
 
       .edit-profile__form--shadow-outset {
-        @include flexCenter(87%, 96%, 4vh 4vh 0.5vh 0.5vh, center, center, row);
+        @include flexCenter(87%, 96%, 2em 2em 0.3em 0.3em, center, center, row);
         background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
         box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
         margin-top: 2.3%;
 
         .edit-profile__form--shadow-inset {
-          @include flexCenter(98.3%, 97%, 3.3vh, center, center, column);
+          @include flexCenter(97.5%, 96%, 1.5em 2em, center, center, column);
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
           .edit-profile__header {
@@ -151,7 +151,7 @@
                 @include flexCenter(65%, 100%, 0, space-evenly, center, column);
 
                 .edit-section__form {
-                  @include flexCenter(96%, 97%, 3.4vh 3.4vh 2.4vh 2.4vh, center, center, column);
+                  @include flexCenter(96%, 97%, 1.4em, center, center, column);
                   box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
 
                   .edit-section__list {
@@ -163,7 +163,7 @@
                       list-style-type: none;
 
                       .edit-section__item--shadow-outset {
-                        @include flexCenter(88%, 91%, 1.3em, center, center, row);
+                        @include flexCenter(88%, 91%, 1.1em, center, center, row);
                         box-shadow: 3px 3px 3px #686868, -1px -1px 4px #ffffff;
                         padding: 0% 2% 0% 2%;
 
@@ -269,11 +269,11 @@
               }
             }
             .Public {
-              height: 75%;
-              border-radius: 3vh 3vh 0.6vh 0.6vh;
+              height: 76%;
+              border-radius: 2em 2em 0.3em 0.3em;
             }
             .Songs {
-              border-radius: 0.6vh 0.6vh 3vh 3vh;
+              border-radius: 0.3em 0.3em 1.6em 1.6em;
               .edit-section__header {
                 height: 5%;
               }
@@ -294,7 +294,7 @@
 
                       .edit-section__item--shadow-outset {
                         flex-direction: column;
-                        height: 96%;
+                        height: 97%;
                         width: 95%;
                         padding: 0%;
 
@@ -423,7 +423,7 @@
             }
 
             .expand-card {
-              height: 75%;
+              height: 76%;
               transition: all 0.4s;
               .edit-section__header {
                 height: 10%;
@@ -439,7 +439,7 @@
             }
 
             .Songs.expand-card {
-              height: 75%;
+              height: 76%;
               transition: all 0.4s;
               .edit-section__header {
                 height: 5%;
@@ -459,7 +459,7 @@
         @include flexCenter(13%, 100%, 0, center, center, row);
 
         .switch--shadow-outset {
-          @include flexCenter(81%, 96%, 0.2vh 0.2vh 3.8vh 3.8vh, space-evenly, center, row);
+          @include flexCenter(81%, 96%, 0.3em 0.3em 2em 2em, space-evenly, center, row);
           box-shadow: 3px 3px 3px #535353, -2px -2px 2px #d5d5d5;
           background: #939393;
 

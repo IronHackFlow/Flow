@@ -5,17 +5,15 @@ import { v4 as uuidv4 } from 'uuid'
 import datamuse from 'datamuse'
 import TheContext from '../contexts/TheContext'
 import RecordBoothContext from '../contexts/RecordBoothContext'
-import RhymeActionBar from './Record/RhymeActionBar'
 import SelectMenuModal from '../components/SelectMenuModal'
 import ErrorModal from '../components/ErrorModal'
 import AudioTimeSlider from '../components/AudioTimeSlider'
 import SaveSongModal from '../components/SaveSongModal'
 import RecordingBoothModal from '../components/RecordingBoothModal'
-import useRefilterProfanity from '../utils/useRefilterProfanity'
+import useRefilterProfanity from './useRefilterProfanity'
 import { beatList, rhymeNumList } from '../constants/index'
 import actions from '../api'
 import NavBar from '../components/NavBar'
-import LyricLine from './Record/LyricLine'
 import {
   micIcon,
   playIcon,
@@ -23,6 +21,8 @@ import {
   stopIcon,
   closeIcon,
   saveIcon,
+  lockedIcon,
+  shuffleIcon,
   helpFilledIcon,
   editIcon,
   selectArrowDownIcon,
@@ -83,24 +83,23 @@ function TestAudio(props) {
   const [showSelectBeatMenu, setShowSelectBeatMenu] = useState(false)
   const [showSelectRhymeNumMenu, setShowSelectRhymeNumMenu] = useState(false)
   const [showErrorModal, setShowErrorModal] = useState(false)
-  const [toggleModal, setToggleModal] = useState(false)
-
   const [allTakes, setAllTakes] = useState([])
+
   const [lyricsArr, setLyricsArr] = useState([])
-
-  const [rhymeWord, setRhymeWord] = useState('')
-  const [rhymeWordLocked, setRhymeWordLocked] = useState('')
-  const [rhymeWordSelected, setRhymeWordSelected] = useState('')
-
-  const [rhymes, setRhymes] = useState([])
-  const [rhymesLocked, setRhymesLocked] = useState([])
-  const [rhymesSelected, setRhymesSelected] = useState([])
+  const [rhymeWordHolder, setRhymeWordHolder] = useState('')
+  const [lockRhymeHolder, setLockRhymeHolder] = useState()
+  const [retrievedRhymes, setRetrievedRhymes] = useState([])
+  const [retrievedSelectedRhymes, setRetrievedSelectedRhymes] = useState([])
   const [retrievedActionRhymes, setRetrievedActionRhymes] = useState([])
+
+  const [selectedWordHolder, setSelectedWordHolder] = useState()
+  const [lockedRhymes, setLockedRhymes] = useState([])
 
   const [showLyricsLine, setShowLyricsLine] = useState([])
   const [blobData, setBlobData] = useState({})
   const [dateBefore, setDateBefore] = useState()
   const [dateAfter, setDateAfter] = useState()
+  const [toggleModal, setToggleModal] = useState(false)
   const [focusBorder, setFocusBorder] = useState(null)
   const [selectTitle, setSelectTitle] = useState('')
 
@@ -112,12 +111,11 @@ function TestAudio(props) {
   const barNumberRef = useRef(1)
 
   useEffect(() => {
+    console.log(transcript, 'HAHAH WHAT THIS LOOK LIKE?????????')
     if (silent && recorderState.initRecording) {
       setRetrievedActionRhymes([])
-      getDatamuseRhymes(transcript)
+      getDatamuseRhymes()
       setLyricsHandler()
-      resetTranscript()
-      autoScroll()
     }
   }, [silent])
 
@@ -143,6 +141,22 @@ function TestAudio(props) {
     }
     console.log('Check out the updated AllTakes: ', allTakes, currentSong)
   }, [blobData])
+
+  useEffect(() => {
+    setRetrievedSelectedRhymes([])
+    if (selectedWordHolder !== undefined) {
+      datamuse
+        .request(`words?rel_rhy=${selectedWordHolder}&max=20`)
+        .then(res => {
+          if (res.length !== 0) {
+            res.forEach(each => {
+              setRetrievedSelectedRhymes(oldRhymes => [...oldRhymes, each.word])
+            })
+          }
+        })
+        .catch(console.error)
+    }
+  }, [selectedWordHolder])
 
   useEffect(() => {
     if (recorderState.mediaStream) {
@@ -224,18 +238,17 @@ function TestAudio(props) {
   const displayActionWords = useCallback(() => {
     return retrievedActionRhymes.slice(0, 5).map((each, index) => {
       return (
-        <p className="rhyme-actions__action-rhyme-text" key={`${uuidv4()}action${index}`}>
-          <span>{index !== 0 ? String.fromCodePoint(8226) : ''}</span>
+        <p className="each-action-word" key={`${uuidv4()}action${index}`}>
           {each}
         </p>
       )
     })
   }, [retrievedActionRhymes])
 
-  const autoScroll = useCallback(() => {
+  const autoScroll = () => {
     let scrollLyrics = document.getElementById('currentTranscript')
-    scrollLyrics.scrollTop = scrollLyrics.scrollHeight + 26
-  }, [lyricsArr])
+    scrollLyrics.scrollTop = scrollLyrics.scrollHeight
+  }
 
   async function getActionWords(regex) {
     let finalWord = regex
@@ -259,73 +272,166 @@ function TestAudio(props) {
     console.log(retrievedActionRhymes, 'RETRIEVED ACTIONS VERBS')
   }
 
-  const getDatamuseRhymes = useCallback(async transcript => {
-    let validated = validateTranscript(transcript, 'word')
-    if (validated == null || validated === ' ' || validated === '') return
+  async function getDatamuseRhymes() {
+    let splitScript = transcript.split(' ')
 
-    setRhymeWord(validated)
-    setRhymes([])
+    if (splitScript[0] !== '') {
+      let lastWord = splitScript[splitScript.length - 1]
+      let finalWord = lastWord
 
-    await datamuse
-      .request(`words?rel_rhy=${validated}&max=30`)
-      .then(res => {
-        // console.log(res, "I'm gonna need to see what I'm working with here")
-        if (res.length !== 0) {
-          let fillRhymes = res.map(each => each.word)
-          setRhymes(fillRhymes)
-        }
-      })
-      .catch(console.error)
-  }, [])
+      if (lastWord.includes("'")) {
+        finalWord = lastWord.split("'").join('')
+      }
+      if (lastWord.includes('*')) {
+        finalWord = refilterProfanity(lastWord)
+      }
+
+      setRhymeWordHolder(finalWord)
+      setRetrievedRhymes([])
+      console.log(finalWord, ' - this is the last word')
+
+      const getData = await datamuse
+        .request(`words?rel_rhy=${finalWord}&max=30`)
+        .then(res => {
+          console.log(res, "I'm gonna need to see what I'm working with here")
+          if (res.length !== 0) {
+            res.forEach(each => {
+              setRetrievedRhymes(oldRhymes => [...oldRhymes, each.word])
+            })
+          }
+        })
+        .catch(console.error)
+    }
+  }
 
   const setLyricsHandler = () => {
     const splitTranscript = transcript.split(' ')
     const filterTranscript = splitTranscript.filter(each => each.length > 0)
     if (filterTranscript.length !== 0) {
       setLyricsArr(oldArr => [...oldArr, filterTranscript])
+      setShowLyricsLine(oldLine => [...oldLine, createLyricLine(filterTranscript)])
     }
+    resetTranscript()
+    autoScroll()
+  }
+
+  const createLyricLine = transcript => {
+    return (
+      <div className="prev-transcript-container">
+        <div className="transcript-bar-no">{`${barNumberRef.current++}`}</div>
+        <div className="transcript-word-container">
+          {transcript.map((each, index) => {
+            let isCurse = refilterProfanity(each)
+            return (
+              <p
+                className="prev-transcript-word"
+                key={`transcript${uuidv4()}and${index}`}
+                onClick={e => showSelectedWord(e)}
+              >
+                {isCurse ? isCurse : each}
+              </p>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 
   const displayTakeLyrics = useCallback(() => {
     if (allTakes.length === 0) {
       return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
+    } else {
+      return (
+        <>
+          {currentSong?.lyrics.map((row, index) => {
+            return (
+              <div className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
+                <div className="transcript-bar-no">{`${index + 1}`}</div>
+                <div className="transcript-word-container">
+                  {row.map((word, index) => {
+                    return (
+                      <p className="prev-transcript-word" key={`${uuidv4()}_${index}_${word}`}>
+                        {word}
+                      </p>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )
     }
-    if (recorderState.initRecording) {
-      return lyricsArr.map((row, index) => {
-        return (
-          <li className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
-            <div className="transcript-bar-no">{`${index + 1}`}</div>
-            <div className="transcript-word-container">
-              {row.map((word, index) => {
-                return (
-                  <p className="prev-transcript-word" key={`${uuidv4()}_${index}_${word}`}>
-                    {word}
-                  </p>
-                )
-              })}
-            </div>
-          </li>
-        )
+  }, [allTakes, currentSong])
+
+  const showRhymes = array => {
+    if (array.length >= currentRhymeNum.song) {
+      return array.slice(0, currentRhymeNum.song).map((each, index) => {
+        if (index === currentRhymeNum.song - 1) {
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each}
+            </p>
+          )
+        } else {
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each} {'\u2022'}
+            </p>
+          )
+        }
       })
     } else {
-      return currentSong.lyrics.map((row, index) => {
-        return (
-          <li className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
-            <div className="transcript-bar-no">{`${index + 1}`}</div>
-            <div className="transcript-word-container">
-              {row.map((word, index) => {
-                return (
-                  <p className="prev-transcript-word" key={`${uuidv4()}_${index}_${word}`}>
-                    {word}
-                  </p>
-                )
-              })}
-            </div>
-          </li>
-        )
+      return array?.map((each, index) => {
+        if (index === array.length - 1) {
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each}
+            </p>
+          )
+        } else {
+          return (
+            <p className="each-top-rhyme" key={`${uuidv4()}toprhymes${index}`}>
+              {each} {'\u2022'}
+            </p>
+          )
+        }
       })
     }
-  }, [allTakes, currentSong, lyricsArr, recorderState.initRecording])
+  }
+
+  const showRhymeWord = holder => {
+    let uppercasedWord = holder.charAt(0).toUpperCase() + holder.slice(1)
+    return uppercasedWord
+  }
+
+  const showSelectedWord = e => {
+    let selectStr = e.target.innerText
+    let uppercasedStr = selectStr.charAt(0).toUpperCase() + selectStr.slice(1)
+    setSelectedWordHolder(uppercasedStr)
+  }
+
+  const shuffleRhymeHandler = (array, theState) => {
+    let randomRhymeArr = []
+    if (array.length !== 0) {
+      for (let i = 1; i <= currentRhymeNum; i++) {
+        randomRhymeArr.push(array[Math.floor(Math.random() * array?.length)])
+      }
+      if (theState === 'topRhymes') {
+        setRetrievedRhymes(randomRhymeArr)
+      } else {
+        setRetrievedSelectedRhymes(randomRhymeArr)
+      }
+    }
+  }
+
+  const lockSuggestion = () => {
+    if (retrievedRhymes) {
+      setLockRhymeHolder(rhymeWordHolder)
+      const copyRhyme = [...retrievedRhymes]
+      setLockedRhymes(copyRhyme)
+    }
+  }
 
   let myReq //animation frame ID
   const detectSilence = (stream, silence_delay = 50, min_decibels = -80) => {
@@ -358,23 +464,23 @@ function TestAudio(props) {
     loop()
   }
 
-  const resetRecording = () => {
-    // setRecordingDisplay(true)
+  const resetSuggestions = () => {
+    setRecordingDisplay(true)
     setCurrentSong(initialSongObject)
     setLyricsArr([])
     setShowLyricsLine([])
-    setRhymeWord(null)
-    setRhymeWordLocked(null)
-    setRhymeWordSelected(null)
-    setRhymes([])
-    setRhymesLocked([])
+    setRhymeWordHolder(null)
+    setLockRhymeHolder(null)
+    setSelectedWordHolder(null)
+    setRetrievedRhymes([])
+    setLockedRhymes([])
     resetTranscript()
     barNumberRef.current = 1
   }
 
   async function startRecording() {
-    resetRecording()
     try {
+      resetSuggestions()
       const stream1 = await navigator.mediaDevices.getUserMedia({ audio: true })
       SpeechRecognition.startListening({ continuous: true })
 
@@ -483,56 +589,30 @@ function TestAudio(props) {
       })
       .catch(console.error)
   }
-
   const [lastWord, setLastWord] = useState('')
 
-  const validateTranscript = (transcript, returnValue) => {
-    if (transcript == null || transcript === '' || transcript === ' ') return
-    const copyTranscript = transcript.slice().trim()
-    const transcriptArray = copyTranscript.split(' ')
-
-    if (returnValue === 'word') {
-      const refilteredWord = refilterProfanity(transcriptArray[transcriptArray.length - 1])
-      if (refilteredWord.includes("'")) {
-        return refilteredWord.split("'").join('')
-      }
-      return refilteredWord
-    } else {
-      const filteredArray = transcriptArray.map(each => {
-        const filterWord = refilterProfanity(each)
-        return filterWord
-      })
-      return filteredArray
+  const validateTranscript = transcript => {
+    console.log(transcript, 'what am i doing here?')
+    const transcriptArray = transcript.trim().split()
+    const refilteredWord = refilterProfanity(transcriptArray[transcriptArray.length - 1])
+    if (refilteredWord.includes("'")) {
+      return refilteredWord.split("'").join('')
     }
+    return refilteredWord
   }
 
+  const getRhymes = async transcript => {
+    const getWord = validateTranscript(transcript)
+  }
   return (
     <RecordBoothContext.Provider
       value={{
-        focusBorder,
-        recorderState,
         allTakes,
         setAllTakes,
         currentSong,
         setCurrentSong,
         showSaveSongModal,
         setShowSaveSongModal,
-        currentRhymeNum,
-        setCurrentRhymeNum,
-        rhymeWord,
-        setRhymeWord,
-        rhymeWordLocked,
-        setRhymeWordLocked,
-        rhymeWordSelected,
-        setRhymeWordSelected,
-        rhymes,
-        setRhymes,
-        rhymesLocked,
-        setRhymesLocked,
-        rhymesSelected,
-        setRhymesSelected,
-        retrievedActionRhymes,
-        setRetrievedActionRhymes,
       }}
     >
       <div id="TestAudio" className="TestAudio">
@@ -580,38 +660,138 @@ function TestAudio(props) {
         <audio id="song" src={currentBeat?.song} loop={true} ref={recordAudioRef}></audio>
 
         <div className="section-1_speech">
-          <ul
+          <div
             className={`scroll-rhymes-container ${focusBorder === 31 ? 'focus-border' : ''}`}
             id="currentTranscript"
             ref={scrollRef}
           >
-            {/* {recorderState.initRecording ? showLyricsLine : displayTakeLyrics()} */}
-            {displayTakeLyrics()}
-          </ul>
+            {recordingDisplay ? showLyricsLine : displayTakeLyrics()}
+          </div>
           <div className={`scroll-rhymes-line ${focusBorder === 30 ? 'focus-border' : ''}`}>
             <p className="transcript-line-2">{transcript}</p>
           </div>
         </div>
 
         <div className="section-2_control-panel">
-          <div className="rhyme-actions">
-            <div className="rhyme-actions__bar continuous-rhymes">
-              <div className="rhyme-actions__action-rhyme">
-                {retrievedActionRhymes && recorderState.initRecording ? (
+          <div className="section-2a_flow-suggestions">
+            <div className="next-bar-container">
+              <div className="action-word-container">
+                {retrievedActionRhymes && recordingDisplay ? (
                   displayActionWords()
                 ) : (
-                  <p className="rhyme-actions__action-rhyme-text initial-prompt">
+                  <p className="initial-prompt" style={{ color: '#464646', fontSize: '12px' }}>
                     Suggestions for your next bar will be here.
                   </p>
                 )}
               </div>
             </div>
 
-            <RhymeActionBar type="rhyme" tutBorder={20} />
+            <div className={`suggestions ${focusBorder === 20 ? 'focus-border' : ''}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset">
+                  {rhymeWordHolder && recordingDisplay ? (
+                    <p className="top-word-holder">{showRhymeWord(rhymeWordHolder)}</p>
+                  ) : (
+                    <p>Top Rhymes</p>
+                  )}
+                </div>
+                <div className="custom-rhyme-inner">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {rhymeWordHolder && recordingDisplay ? (
+                        showRhymes(retrievedRhymes)
+                      ) : (
+                        <p className="initial-prompt">Start recording to see your top rhymes.</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <RhymeActionBar type="lock" tutBorder={21} />
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button
+                      className="rhyme-lock-btn"
+                      onClick={() => shuffleRhymeHandler(retrievedRhymes, 'topRhymes')}
+                    >
+                      <img className="button-icons" src={shuffleIcon} alt="shuffle" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <RhymeActionBar type="select" tutBorder={22} />
+            <div className={`suggestions ${focusBorder === 21 ? 'focus-border' : ''}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset rw-two">
+                  {lockRhymeHolder && recordingDisplay ? (
+                    <p className="locked-word-holder">{showRhymeWord(lockRhymeHolder)}</p>
+                  ) : (
+                    <p>Locked Rhymes</p>
+                  )}
+                </div>
+                <div className="custom-rhyme-inner" id="lockedRhyme">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {lockRhymeHolder && recordingDisplay ? (
+                        showRhymes(lockedRhymes)
+                      ) : (
+                        <p className="initial-prompt">
+                          Click lock button above to save top rhymes here.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button className="rhyme-lock-btn" onClick={lockSuggestion}>
+                      <img className="button-icons" src={lockedIcon} alt="lock" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={`suggestions ${focusBorder === 22 ? 'focus-border' : ''}`}>
+              <div className="custom-rhyme">
+                <div className="rhymed-word_shadow-div-inset rw-three">
+                  {selectedWordHolder && recordingDisplay ? (
+                    <p className="selected-word-holder">{selectedWordHolder}</p>
+                  ) : (
+                    <p>Selected Rhymes</p>
+                  )}
+                </div>
+                <div className="custom-rhyme-inner" id="lockedRhyme">
+                  <div className="custom-rhyme_shadow-div-inset">
+                    <div className="top-rhymes-container">
+                      {selectedWordHolder && recordingDisplay ? (
+                        showRhymes(retrievedSelectedRhymes)
+                      ) : (
+                        <p className="initial-prompt">
+                          Click any flowed lyric to generate rhymes here.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rhyme-lock-container">
+                <div className="rhyme-lock-button">
+                  <div className="rhyme-lock-outset">
+                    <button
+                      className="rhyme-lock-btn"
+                      onClick={() => shuffleRhymeHandler(retrievedSelectedRhymes, 'selectedRhymes')}
+                    >
+                      <img className="button-icons" src={shuffleIcon} alt="shuffle" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="interactions__options--container">
               <div className="interactions__options--shadow-inset">
@@ -727,16 +907,16 @@ function TestAudio(props) {
                       <div className="flow-takes-1_select-takes">
                         <div className="select-takes-container_shadow-div-outset">
                           <div className="select-takes-container">
-                            <button
-                              className="select-takes_shadow-div-inset"
-                              onClick={() =>
-                                allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null
-                              }
-                            >
-                              <div className="select-takes_shadow-div-outset">
+                            <div className="select-takes_shadow-div-inset">
+                              <button
+                                className="select-takes_shadow-div-outset"
+                                onClick={() =>
+                                  allTakes?.length !== 0 ? setShowSelectSongMenu(true) : null
+                                }
+                              >
                                 <p>{selectTitle}</p>
-                              </div>
-                            </button>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>

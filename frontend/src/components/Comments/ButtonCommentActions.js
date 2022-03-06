@@ -8,7 +8,8 @@ import { deleteIcon, commentIcon, thumbsUpIcon, editIcon } from '../../assets/im
 
 function ButtonCommentActions({ type, actions }) {
   const { user } = useContext(TheContext)
-  const { setCommentToEdit, setShowCommentInputModal, isEdit, setIsEdit } = useContext(HomeContext)
+  const { songInView, setCommentToEdit, setShowCommentInputModal, isEdit, setIsEdit } =
+    useContext(HomeContext)
   const { deleteComment } = usePostComment()
   const [isLiked, setIsLiked] = useState()
   const [isDelete, setIsDelete] = useState(false)
@@ -33,7 +34,7 @@ function ButtonCommentActions({ type, actions }) {
 
   const deleteCallback = useCallback(() => {
     setIsDelete(false)
-    return deleteComment(actions.songId, actions.toDelete)
+    return deleteComment(songInView?._id, actions.toDelete)
   }, [type])
 
   const onClick = () => {
@@ -42,11 +43,11 @@ function ButtonCommentActions({ type, actions }) {
         if (!isLiked) {
           setTotal(prev => prev + 1)
           setIsLiked(true)
-          return actions.add(actions.commentId, actions.songId, setUsersLike)
+          return actions.add(actions.commentId, songInView?._id, setUsersLike)
         } else {
           setTotal(prev => prev - 1)
           setIsLiked(false)
-          return actions.delete(actions.commentId, actions.songId, usersLike)
+          return actions.delete(actions.commentId, songInView?._id, usersLike)
         }
       case 'reply':
         break

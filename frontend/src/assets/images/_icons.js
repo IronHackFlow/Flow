@@ -14,6 +14,7 @@ import followersIcon from './followers.svg'
 import forwardIcon from './forward.svg'
 import heartIcon from './heart2.svg'
 import helpIcon from './help2.svg'
+import helpFilledIcon from './help-filled.svg'
 import thumbsUpIcon from './like-thumb-up.svg'
 import lockedIcon from './locked.svg'
 import logOutIcon from './logout2.svg'
@@ -29,7 +30,8 @@ import playIcon from './play.svg'
 import replayIcon from './replay.svg'
 import saveIcon from './save-disk.svg'
 import searchIcon from './search.svg'
-import selectArrowIcon from './select-down.svg'
+import selectArrowDownIcon from './select-down.svg'
+import selectArrowUpIcon from './select-up.svg'
 import sendIcon from './send.svg'
 import shareIcon from './share.svg'
 import shuffleIcon from './shuffle.svg'
@@ -56,6 +58,7 @@ export {
   forwardIcon,
   heartIcon,
   helpIcon,
+  helpFilledIcon,
   thumbsUpIcon,
   lockedIcon,
   logOutIcon,
@@ -71,7 +74,8 @@ export {
   replayIcon,
   saveIcon,
   searchIcon,
-  selectArrowIcon,
+  selectArrowDownIcon,
+  selectArrowUpIcon,
   sendIcon,
   shareIcon,
   shuffleIcon,

@@ -75,21 +75,20 @@ export default function usePostLike() {
         const likeToDelete = res.data.like
         setUsersLike(likeToDelete)
 
-        setHomeFeedSongs(prev =>
-          prev.map(each => {
-            if (each.song._id === songId) {
-              let songComments = each.song.song_comments.map(comm => {
-                if (comm._id === commentId) {
-                  return {
-                    ...comm,
-                    likes: commentLikes,
-                  }
-                } else return comm
-              })
-              return { ...each, song: { ...each.song, song_comments: songComments } }
-            } else return each
-          }),
-        )
+        let updateFeed = homeFeedSongs.map(each => {
+          if (each.song._id === songId) {
+            let songComments = each.song.song_comments.map(comm => {
+              if (comm._id === commentId) {
+                return {
+                  ...comm,
+                  likes: commentLikes,
+                }
+              } else return comm
+            })
+            return { ...each, song: { ...each.song, song_comments: songComments } }
+          } else return each
+        })
+        setHomeFeedSongs(updateFeed)
       })
       .catch(console.error)
   }
@@ -108,21 +107,20 @@ export default function usePostLike() {
         )
         const commentLikes = res.data.comment.likes
 
-        setHomeFeedSongs(prev =>
-          prev.map(each => {
-            if (each.song._id === songId) {
-              let songComments = each.song.song_comments.map(comm => {
-                if (comm._id === commentId) {
-                  return {
-                    ...comm,
-                    likes: commentLikes,
-                  }
-                } else return comm
-              })
-              return { ...each, song: { ...each.song, song_comments: songComments } }
-            } else return each
-          }),
-        )
+        let updateFeed = homeFeedSongs.map(each => {
+          if (each.song._id === songId) {
+            let songComments = each.song.song_comments.map(comm => {
+              if (comm._id === commentId) {
+                return {
+                  ...comm,
+                  likes: commentLikes,
+                }
+              } else return comm
+            })
+            return { ...each, song: { ...each.song, song_comments: songComments } }
+          } else return each
+        })
+        setHomeFeedSongs(updateFeed)
       })
       .catch(console.error)
   }
