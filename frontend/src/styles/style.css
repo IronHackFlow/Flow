@@ -13,7 +13,7 @@ body,
 #root,
 .App,
 .Home,
-.TestAudio,
+.Record,
 .EditLyrics,
 .Profile,
 .EditProfileScreen,
@@ -3753,11 +3753,11 @@ button {
   color: white;
 }
 
-.TestAudio {
+.Record {
   position: absolute;
 }
 
-.section-1_speech {
+.record__transcript-lyrics {
   height: 30%;
   width: 100%;
   border-radius: 0px;
@@ -3777,10 +3777,51 @@ button {
   background: linear-gradient(323deg, #262626 0%, #474646 100%);
 }
 
-.section-1_speech .scroll-rhymes-container {
-  height: 76%;
+.record__transcript-lyrics .record__lyrics--container {
+  height: 80%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.record__transcript-lyrics .record__lyrics--container .record__lyrics {
+  height: 96%;
   width: 96%;
-  border-radius: 5px 5px 20px 20px;
+  border-radius: 0.3em 0.3em 1em 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-shadow: inset 2px 2px 2px #222222, inset -2px -2px 2px #484848;
+          box-shadow: inset 2px 2px 2px #222222, inset -2px -2px 2px #484848;
+  margin-top: 2%;
+}
+
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list {
+  height: 93%;
+  width: 96%;
+  border-radius: 0.3em 0.3em 0.7em 0.7em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3794,67 +3835,84 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-top: 2%;
   overflow-y: scroll;
-  -webkit-box-shadow: inset 2px 2px 3px #272727fc, inset -2px -2px 3px #5d5d5ddb;
-          box-shadow: inset 2px 2px 3px #272727fc, inset -2px -2px 3px #5d5d5ddb;
 }
 
-.section-1_speech .scroll-rhymes-container .prev-transcript-container {
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item {
   height: initial;
-  width: 98%;
-  border-radius: 20px;
+  width: 99%;
+  border-radius: 0.5em 1.3em 1.3em 0.5em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding-left: 2%;
-  margin-top: 2%;
+  -webkit-box-shadow: inset 1px 1px 3px #020202fc, inset -1px -1px 2px #6d6d6d;
+          box-shadow: inset 1px 1px 3px #020202fc, inset -1px -1px 2px #6d6d6d;
+  background: #282828;
+  padding: 0.75%;
+  margin-bottom: 1%;
 }
 
-.section-1_speech .scroll-rhymes-container .prev-transcript-container .transcript-bar-no {
-  height: 10px;
-  width: 10px;
-  font-size: 10px;
-  color: #7d7d7d;
-  position: relative;
-  bottom: -5px;
-  margin-right: 1%;
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item .record__item-num {
+  height: 100%;
+  width: 4%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
-.section-1_speech .scroll-rhymes-container .prev-transcript-container .transcript-word-container {
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item .record__item-num .record__item-num-text {
+  color: #6e6e6e;
+  font-size: 0.65rem;
+}
+
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item .record__item-words {
   height: initial;
-  width: 98%;
-  border-radius: 20px;
+  width: 95%;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-left: 1%;
 }
 
-.section-1_speech .scroll-rhymes-container .prev-transcript-container .transcript-word-container .prev-transcript-word {
-  height: 11px;
-  width: initial;
-  border-radius: 0px;
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item .record__item-words .record__item-words-text {
+  height: auto;
+  width: auto;
+  border-radius: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3869,19 +3927,41 @@ button {
       -ms-flex-direction: row;
           flex-direction: row;
   color: white;
-  font-size: 14px;
-  padding: 1px 2px 1px 2px;
+  font-size: 0.8rem;
+  line-height: 1.1;
+  padding: 0em 0.3em 0em 0em;
 }
 
-.section-1_speech .scroll-rhymes-container .no-takes-msg {
-  color: white;
-  font-size: 15px;
+.record__transcript-lyrics .record__lyrics--container .record__lyrics .record__lyrics-list .record__lyrics-item .record__item-words .record__item-words-text.initial-prompt {
+  color: #b4b4b4;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
 }
 
-.section-1_speech .scroll-rhymes-line {
-  height: 15%;
+.record__transcript-lyrics .record__transcript--container {
+  height: 20%;
+  width: 100%;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.record__transcript-lyrics .record__transcript--container .record__transcript {
+  height: 78%;
   width: 96%;
-  border-radius: 25px;
+  border-radius: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3897,25 +3977,25 @@ button {
           flex-direction: row;
   -webkit-box-shadow: inset 2px 2px 3px #222222fc, inset -2px -2px 3px #5d5d5ddb;
           box-shadow: inset 2px 2px 3px #222222fc, inset -2px -2px 3px #5d5d5ddb;
-  overflow-x: scroll;
+  overflow: scroll;
 }
 
-.section-1_speech .scroll-rhymes-line .transcript-line-2 {
+.record__transcript-lyrics .record__transcript--container .record__transcript .record__transcript-text {
   height: 90%;
   width: 93%;
   text-align: start;
   overflow-y: scroll;
   color: #3ad3b9;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: bold;
 }
 
-.section-2_control-panel {
+.record__rhyme-actions {
   height: 70%;
   background: linear-gradient(323deg, #4b4b4b 0%, #757575 100%);
 }
 
-.section-2_control-panel .rhyme-actions {
+.record__rhyme-actions .rhyme-actions {
   height: 35%;
   width: 100%;
   border-radius: 0vh 0vh 3.5vh 3.5vh;
@@ -3939,17 +4019,18 @@ button {
           box-shadow: 0px 5px 13px 5px #2a2a2a;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar.continuous-rhymes {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar.continuous-rhymes {
   height: 8%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-shadow: inset 2px 2px 2px 0px #7c5062, inset -2px -2px 2px #ffcee2;
-          box-shadow: inset 2px 2px 2px 0px #7c5062, inset -2px -2px 2px #ffcee2;
+  border-radius: 2em 2em 0.5em 2em;
+  -webkit-box-shadow: inset 2px 2px 2px 0px #994d6c, inset -2px -2px 2px #ffcee2;
+          box-shadow: inset 2px 2px 2px 0px #994d6c, inset -2px -2px 2px #ffcee2;
   background: #e37da8;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme {
   height: 90%;
   width: 96%;
   border-radius: 20px;
@@ -3970,7 +4051,7 @@ button {
   overflow-x: scroll;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text {
   height: initial;
   width: initial;
   border-radius: 0px;
@@ -3992,16 +4073,16 @@ button {
   padding: 0em 0.15em;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text span {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text span {
   height: 100%;
   margin: 0em 0.15em 0em 0em;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text.initial-prompt {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar.continuous-rhymes .rhyme-actions__action-rhyme .rhyme-actions__action-rhyme-text.initial-prompt {
   color: #585858;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar {
   height: 22%;
   width: 96%;
   border-radius: 1em 0.3em 1.7em 0.2em;
@@ -4022,7 +4103,7 @@ button {
           box-shadow: inset 2px 2px 2px 0px #5c5c5c, inset -2px -2px 3px #d4d4d4;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container {
   height: 100%;
   width: 83%;
   border-radius: 0;
@@ -4041,7 +4122,7 @@ button {
           flex-direction: column;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header {
   height: 45%;
   width: 100%;
   border-radius: 0;
@@ -4060,7 +4141,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header .rhyme-actions__header--shadow-inset {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header .rhyme-actions__header--shadow-inset {
   height: 81%;
   width: 60%;
   border-radius: 2.5em 2em 2em 0.5em;
@@ -4084,14 +4165,14 @@ button {
   margin-left: 2%;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header .rhyme-actions__header--shadow-inset .rhyme-actions__header-text {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__header .rhyme-actions__header--shadow-inset .rhyme-actions__header-text {
   color: white;
   font-size: 0.85rem;
   font-weight: bold;
   letter-spacing: 0.5px;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container {
   height: 55%;
   width: 100%;
   border-radius: 5px 20px 20px 5px;
@@ -4111,7 +4192,7 @@ button {
   overflow-x: scroll;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions {
   height: 90%;
   width: 94%;
   border-radius: 0px;
@@ -4134,7 +4215,7 @@ button {
   overflow: hidden;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions .rhyme-actions__suggestions-text {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions .rhyme-actions__suggestions-text {
   height: 10px;
   width: initial;
   border-radius: 0px;
@@ -4158,13 +4239,13 @@ button {
   padding: 0em 0.25em 0em 0em;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions .rhyme-actions__suggestions-text.initial-prompt {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__rhymes--container .rhyme-actions__suggestions--container .rhyme-actions__suggestions .rhyme-actions__suggestions-text.initial-prompt {
   color: #585858;
   text-align: start;
   font-weight: normal;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container {
   height: 100%;
   width: 17%;
   border-radius: 0;
@@ -4183,7 +4264,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset {
   height: 80%;
   width: calc(100vh * 0.06);
   border-radius: 3em 0.3em 3em 3em;
@@ -4205,7 +4286,7 @@ button {
   margin-right: 10%;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset {
   height: 88%;
   width: 88%;
   border-radius: 100vh;
@@ -4226,7 +4307,7 @@ button {
           box-shadow: inset 2px 2px 2px 0px #5e5e5e, inset -2px -2px 3px #d3d3d3;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn {
   height: 73%;
   width: 73%;
   border-radius: 100vh;
@@ -4248,18 +4329,18 @@ button {
           box-shadow: 2px 2px 2px 0px #5e5e5e, -1px -1px 2px #e9e9e9;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn img {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn img {
   height: 70%;
   width: 70%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:hover {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:hover {
   background: #e24f8c;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:active {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:active {
   height: 80%;
   width: 80%;
   background-color: #ec6aa0;
@@ -4267,12 +4348,12 @@ button {
           box-shadow: inset 2px 2px 3px 0px #464545, inset -2px -2px 3px #c7c7c7;
 }
 
-.section-2_control-panel .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:active img {
+.record__rhyme-actions .rhyme-actions .rhyme-actions__bar .rhyme-actions__btn--container .rhyme-actions__btn--shadow-outset .rhyme-actions__btn--shadow-inset .rhyme-actions__btn:active img {
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container {
+.record__rhyme-actions .rhyme-actions .interactions__options--container {
   height: 17%;
   width: 100%;
   border-radius: 0;
@@ -4291,7 +4372,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset {
   height: 95%;
   width: 97%;
   border-radius: 2em;
@@ -4312,7 +4393,7 @@ button {
           box-shadow: inset 2px 2px 2px 0px #5c5c5c, inset -2px -2px 3px #d4d4d4;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container {
   height: 100%;
   width: 32%;
   border-radius: 0;
@@ -4331,7 +4412,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset {
   height: 75%;
   width: 90%;
   border-radius: 0.3em;
@@ -4354,7 +4435,7 @@ button {
   color: white;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container {
   height: 100%;
   width: 3em;
   border-radius: 0;
@@ -4373,7 +4454,7 @@ button {
           flex-direction: row;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset {
   height: 75%;
   width: 75%;
   border-radius: 0.2em;
@@ -4394,14 +4475,14 @@ button {
           box-shadow: inset 2px 2px 2px 0px #8b4562, inset -2px -2px 2px #fda6ca;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset img {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset img {
   height: 85%;
   width: 85%;
   -webkit-filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
           filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-text {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset .interactions__btn-text {
   height: 100%;
   width: 70%;
   border-radius: 0;
@@ -4421,40 +4502,40 @@ button {
   font-size: 0.9rem;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:active {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:active {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:hover {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container .interactions__btn--shadow-outset:hover {
   background: #e24f8c;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num {
   width: 33%;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num .interactions__btn--shadow-outset {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num .interactions__btn--shadow-outset {
   border-radius: 2em 0.2em 0.2em 2em;
   width: 97%;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset img {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.rhyme-num .interactions__btn--shadow-outset .interactions__btn-icon--container .interactions__btn-icon--shadow-inset img {
   height: 70%;
   width: 70%;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.edit-lyrics {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.edit-lyrics {
   width: 33%;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
 
-.section-2_control-panel .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.edit-lyrics .interactions__btn--shadow-outset {
+.record__rhyme-actions .rhyme-actions .interactions__options--container .interactions__options--shadow-inset .interactions__btn--container.edit-lyrics .interactions__btn--shadow-outset {
   border-radius: 0.2em 2em 2em 0.2em;
   width: 97%;
 }
@@ -5477,22 +5558,6 @@ button {
   background: #787878;
   -webkit-box-shadow: inset 2px 2px 3px 0px #313131, inset -2px -2px 2px #a7a7a7;
           box-shadow: inset 2px 2px 3px 0px #313131, inset -2px -2px 2px #a7a7a7;
-}
-
-.slideOut {
-  -webkit-transform: translateX(170%);
-          transform: translateX(170%);
-  opacity: 0;
-  -webkit-transition: all 0.4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: all 0.4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-}
-
-.slideIn {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
-  opacity: 1;
-  -webkit-transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-  transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .Search {

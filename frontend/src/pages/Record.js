@@ -260,7 +260,7 @@ function TestAudio(props) {
   }
 
   const getDatamuseRhymes = useCallback(async transcript => {
-    let validated = validateTranscript(transcript, 'word')
+    const validated = validateTranscript(transcript, 'word')
     if (validated == null || validated === ' ' || validated === '') return
 
     setRhymeWord(validated)
@@ -279,50 +279,30 @@ function TestAudio(props) {
   }, [])
 
   const setLyricsHandler = () => {
-    const splitTranscript = transcript.split(' ')
-    const filterTranscript = splitTranscript.filter(each => each.length > 0)
-    if (filterTranscript.length !== 0) {
-      setLyricsArr(oldArr => [...oldArr, filterTranscript])
-    }
+    const validated = validateTranscript(transcript, 'list')
+    if (validated?.length === 0 || validated == null) return
+    setLyricsArr(oldArr => [...oldArr, validated])
   }
 
   const displayTakeLyrics = useCallback(() => {
-    if (allTakes.length === 0) {
-      return <p className="no-takes-msg">Start flowing to see your lyrics!</p>
+    if (allTakes.length === 0 && !recorderState.initRecording) {
+      return (
+        <li className="record__lyrics-item">
+          <div className="record__item-words">
+            <p className="record__item-words-text initial-prompt">
+              Start flowing to see your lyrics!
+            </p>
+          </div>
+        </li>
+      )
     }
     if (recorderState.initRecording) {
       return lyricsArr.map((row, index) => {
-        return (
-          <li className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
-            <div className="transcript-bar-no">{`${index + 1}`}</div>
-            <div className="transcript-word-container">
-              {row.map((word, index) => {
-                return (
-                  <p className="prev-transcript-word" key={`${uuidv4()}_${index}_${word}`}>
-                    {word}
-                  </p>
-                )
-              })}
-            </div>
-          </li>
-        )
+        return <LyricLine row={row} index={index} />
       })
     } else {
       return currentSong.lyrics.map((row, index) => {
-        return (
-          <li className="prev-transcript-container" key={`${uuidv4()}_${row}_${index}`}>
-            <div className="transcript-bar-no">{`${index + 1}`}</div>
-            <div className="transcript-word-container">
-              {row.map((word, index) => {
-                return (
-                  <p className="prev-transcript-word" key={`${uuidv4()}_${index}_${word}`}>
-                    {word}
-                  </p>
-                )
-              })}
-            </div>
-          </li>
-        )
+        return <LyricLine row={row} index={index} />
       })
     }
   }, [allTakes, currentSong, lyricsArr, recorderState.initRecording])
@@ -484,9 +464,7 @@ function TestAudio(props) {
       .catch(console.error)
   }
 
-  const [lastWord, setLastWord] = useState('')
-
-  const validateTranscript = (transcript, returnValue) => {
+  const validateTranscript = useCallback((transcript, returnValue) => {
     if (transcript == null || transcript === '' || transcript === ' ') return
     const copyTranscript = transcript.slice().trim()
     const transcriptArray = copyTranscript.split(' ')
@@ -504,7 +482,7 @@ function TestAudio(props) {
       })
       return filteredArray
     }
-  }
+  }, [])
 
   return (
     <RecordBoothContext.Provider
@@ -535,7 +513,7 @@ function TestAudio(props) {
         setRetrievedActionRhymes,
       }}
     >
-      <div id="TestAudio" className="TestAudio">
+      <div className="Record">
         <RecordingBoothModal
           toggleModal={toggleModal}
           setToggleModal={setToggleModal}
@@ -579,21 +557,26 @@ function TestAudio(props) {
 
         <audio id="song" src={currentBeat?.song} loop={true} ref={recordAudioRef}></audio>
 
-        <div className="section-1_speech">
-          <ul
-            className={`scroll-rhymes-container ${focusBorder === 31 ? 'focus-border' : ''}`}
-            id="currentTranscript"
-            ref={scrollRef}
-          >
-            {/* {recorderState.initRecording ? showLyricsLine : displayTakeLyrics()} */}
-            {displayTakeLyrics()}
-          </ul>
-          <div className={`scroll-rhymes-line ${focusBorder === 30 ? 'focus-border' : ''}`}>
-            <p className="transcript-line-2">{transcript}</p>
+        <div className="record__transcript-lyrics">
+          <div className="record__lyrics--container">
+            <div className="record__lyrics">
+              <ul
+                className={`record__lyrics-list ${focusBorder === 31 ? 'focus-border' : ''}`}
+                id="currentTranscript"
+                ref={scrollRef}
+              >
+                {displayTakeLyrics()}
+              </ul>
+            </div>
+          </div>
+          <div className="record__transcript--container">
+            <div className={`record__transcript ${focusBorder === 30 ? 'focus-border' : ''}`}>
+              <p className="record__transcript-text">{transcript}</p>
+            </div>
           </div>
         </div>
 
-        <div className="section-2_control-panel">
+        <div className="record__rhyme-actions">
           <div className="rhyme-actions">
             <div className="rhyme-actions__bar continuous-rhymes">
               <div className="rhyme-actions__action-rhyme">
