@@ -4,15 +4,15 @@ import TheContext from '../contexts/TheContext'
 import { homeIcon, micIcon, searchIcon, profileIcon } from '../assets/images/_icons'
 import useDebugInformation from '../utils/useDebugInformation'
 
-const MemoizedNavBar = memo(function NavBar({ locationClass, isVisible }) {
-  // useDebugInformation('NavBar', { locationClass, isVisible })
+const MemoizedNavBar = memo(function NavBar({ pageClass, isVisible }) {
+  // useDebugInformation('NavBar', { pageClass, isVisible })
   const { user } = useContext(TheContext)
   const location = useLocation()
   const path = location.pathname
 
   return (
     <div
-      className={`NavBar ${locationClass}`}
+      className={`NavBar ${pageClass}`}
       style={isVisible ? { height: '0%', visibility: 'hidden' } : {}}
     >
       <div className="navbar_section">

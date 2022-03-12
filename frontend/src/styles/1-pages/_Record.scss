@@ -1,3 +1,14 @@
+@keyframes smallScale {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
 .Record {
   position: absolute;
 }
@@ -91,10 +102,11 @@
     box-shadow: 0px 5px 13px 5px #2a2a2a;
 
     .rhyme-actions__bar.continuous-rhymes {
-      height: 8%;
+      height: 7%;
       align-items: center;
       border-radius: 2em 2em 0.5em 2em;
       box-shadow: inset 2px 2px 2px 0px #994d6c, inset -2px -2px 2px #ffcee2;
+      border: 2px solid #cdcdcd;
       background: #e37da8;
 
       .rhyme-actions__action-rhyme {
@@ -129,8 +141,9 @@
           @include flexCenter(45%, 100%, 0, flex-start, flex-end, row);
 
           .rhyme-actions__header--shadow-inset {
-            @include flexCenter(81%, 60%, 2.5em 2em 2em 0.5em, flex-start, center, row);
+            @include flexCenter(67%, 60%, 2.5em 2em 2em 0.5em, flex-start, center, row);
             box-shadow: inset 2px 2px 2px #8b4663, inset -2px -2px 2px #f5b0cc;
+            border: 2px solid #c7c7c7;
             background: #ec6aa0;
             padding-left: 4%;
             margin-left: 2%;
@@ -523,19 +536,20 @@
   }
 
   .record-2_record-btn {
-    @include flexCenter(50px, 50px, 50%, flex-end, center, row);
+    @include flexCenter(3.2em, 3.2em, 100vh, flex-end, center, row);
     position: absolute;
-    right: 6%;
-    bottom: 32%;
-    box-shadow: -2px 5px 10px #292828;
+    z-index: 3;
+    right: 3%;
+    bottom: 28%;
+    box-shadow: -1px 5px 5px #0000005c;
 
     .record-btn_shadow-div-inset {
-      @include flexCenter(100%, 100%, 50%, center, center, row);
+      @include flexCenter(100%, 100%, 100vh, center, center, row);
 
       .record-btn_shadow-div-outset {
-        @include flexCenter(98%, 98%, 50%, center, center, row);
+        @include flexCenter(98%, 98%, 100vh, center, center, row);
         background: #63debc;
-        box-shadow: inset 2px 2px 2px 0px #baf9e9, inset -1px -1px 2px #216c56;
+        box-shadow: inset 2px 2px 2px 0px #d6fff4, inset -1px -1px 2px #299374;
         border: 1px solid #4b9c86;
 
         img {
@@ -550,6 +564,24 @@
         }
       }
     }
+    &:active {
+      height: 3em;
+      width: 3em;
+    }
+  }
+  .record-2_record-btn--animation-div {
+    @include flexCenter(3.2em, 3.2em, 100vh, flex-end, center, row);
+    position: absolute;
+    z-index: 2;
+    right: 3%;
+    bottom: 28%;
+    opacity: 0;
+    box-shadow: -1px 5px 5px #0000005c;
+  }
+  .record-btn-animation {
+    opacity: 1;
+    background: #00ffba;
+    animation: smallScale 1s infinite;
   }
 }
 

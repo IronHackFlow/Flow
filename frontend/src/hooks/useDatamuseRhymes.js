@@ -1,18 +1,9 @@
 import { useState, useCallback } from 'react'
 import datamuse from 'datamuse'
-import { transcriptReducer } from 'react-speech-recognition/lib/reducers'
 import useRefilterProfanity from '../utils/useRefilterProfanity'
 
 export default function useDatamuseRhymes({ params }) {
   const [data, setData] = useState([])
-
-  const validateTranscript = useCallback(transcript => {
-    transcript.trim()
-    transcript.split()
-    useRefilterProfanity
-    // profanity filter
-    // transcript line
-  }, [])
 
   const getData = useCallback(async () => {
     await datamuse
@@ -43,10 +34,6 @@ export default function useDatamuseRhymes({ params }) {
 // }, [selectedWordHolder])
 
 // async function getActionWords(regex) {
-//   let finalWord = regex
-//   if (regex.includes('*')) {
-//     finalWord = refilterProfanity(regex)
-//   }
 
 //   const getData = await datamuse
 //     .request(`words?rel_trg=${finalWord}&max=20`)

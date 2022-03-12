@@ -13,6 +13,7 @@ import SaveSongModal from '../components/SaveSongModal'
 import RecordingBoothModal from '../components/RecordingBoothModal'
 import useRefilterProfanity from '../utils/useRefilterProfanity'
 import { beatList, rhymeNumList } from '../constants/index'
+import useEventListener from '../utils/useEventListener'
 import actions from '../api'
 import NavBar from '../components/NavBar'
 import LyricLine from './Record/LyricLine'
@@ -28,8 +29,10 @@ import {
   selectArrowDownIcon,
   selectArrowUpIcon,
 } from '../assets/images/_icons'
+import useDebounce from '../hooks/useDebounce'
+import useThrottle from '../hooks/useThrottle'
 
-function TestAudio(props) {
+export default function Record(props) {
   const { user } = React.useContext(TheContext)
 
   const navigate = useNavigate()
@@ -247,16 +250,16 @@ function TestAudio(props) {
       .request(`words?rel_trg=${finalWord}&max=20`)
       .then(res => {
         if (res.length !== 0) {
-          console.log(res)
+          // console.log(res)
           for (let i = 0; i < 1; i++) {
             let randomIndex = Math.floor(Math.random() * (res.length - 1))
-            console.log(randomIndex, res[randomIndex].word)
+            // console.log(randomIndex, res[randomIndex].word)
             setRetrievedActionRhymes(oldRhymes => [...oldRhymes, res[randomIndex].word])
           }
         }
       })
       .catch(console.error)
-    console.log(retrievedActionRhymes, 'RETRIEVED ACTIONS VERBS')
+    // console.log(retrievedActionRhymes, 'RETRIEVED ACTIONS VERBS')
   }
 
   const getDatamuseRhymes = useCallback(async transcript => {
@@ -308,35 +311,46 @@ function TestAudio(props) {
   }, [allTakes, currentSong, lyricsArr, recorderState.initRecording])
 
   let myReq //animation frame ID
-  const detectSilence = (stream, silence_delay = 50, min_decibels = -80) => {
-    const ctx = new AudioContext()
-    const analyser = ctx.createAnalyser()
-    const streamNode = ctx.createMediaStreamSource(stream)
-    streamNode.connect(analyser)
-    analyser.minDecibels = min_decibels
-    const data = new Uint8Array(analyser.frequencyBinCount) // will hold our data
-    let silence_start = performance.now()
-    let triggered = false // trigger only once per silence event
+  // const detectSilence = useCallback(
+  //   (stream, silence_delay = 50, min_decibels = -80) => {
+  //     const ctx = new AudioContext()
+  //     const analyser = ctx.createAnalyser()
+  //     const streamNode = ctx.createMediaStreamSource(stream)
+  //     streamNode.connect(analyser)
+  //     analyser.minDecibels = min_decibels
+  //     const data = new Uint8Array(analyser.frequencyBinCount) // will hold our data
+  //     let silence_start = performance.now()
+  //     let triggered = false // trigger only once per silence event
 
-    const loop = time => {
-      myReq = requestAnimationFrame(loop)
-      // we'll loop every 60th of a second to check
-      analyser.getByteFrequencyData(data) // get current data
-      if (data.some(v => v)) {
-        // if there is data above the given db limit
-        if (triggered) {
-          triggered = false
-          setSilent(false)
-        }
-        silence_start = time // set it to now
-      }
-      if (!triggered && time - silence_start > silence_delay) {
-        setSilent(true)
-        triggered = true
-      }
-    }
-    loop()
-  }
+  //     const loop = time => {
+  //       myReq = requestAnimationFrame(loop)
+  //       // we'll loop every 60th of a second to check
+  //       analyser.getByteFrequencyData(data) // get current data
+  //       if (data.some(v => v)) {
+  //         // if there is data above the given db limit
+  //         if (triggered) {
+  //           triggered = false
+  //           setSilent(false)
+  //         }
+  //         silence_start = time // set it to now
+  //       }
+  //       if (!triggered && time - silence_start > silence_delay) {
+  //         setSilent(true)
+  //         triggered = true
+  //       }
+  //     }
+  //     loop()
+  //   },
+  //   [silent],
+  // )
+
+  let rec = SpeechRecognition.getRecognition()
+  // let recEvent = SpeechRecognition.getRecognition()
+  useEffect(() => {
+    rec.addEventListener('result', () => {
+      console.log(rec.results, 'HEY WHTF LKSDFJ SD')
+    })
+  }, [])
 
   const resetRecording = () => {
     // setRecordingDisplay(true)
@@ -361,7 +375,7 @@ function TestAudio(props) {
       var audio = document.getElementById('song').captureStream()
       document.getElementById('song').play()
 
-      detectSilence(stream1)
+      // detectSilence(stream1)
       const audioContext = new AudioContext()
       let audioIn_01 = audioContext.createMediaStreamSource(stream1)
       let audioIn_02 = audioContext.createMediaStreamSource(audio)
@@ -443,7 +457,7 @@ function TestAudio(props) {
     setShowSaveSongModal(true)
   }
 
-  const navigateToEditLyrics = async () => {
+  const navigateToEditLyrics = useCallback(async () => {
     await actions
       .getUserSongs({ song_user: user?._id })
       .then(res => {
@@ -462,7 +476,7 @@ function TestAudio(props) {
         }
       })
       .catch(console.error)
-  }
+  }, [])
 
   const validateTranscript = useCallback((transcript, returnValue) => {
     if (transcript == null || transcript === '' || transcript === ' ') return
@@ -559,12 +573,8 @@ function TestAudio(props) {
 
         <div className="record__transcript-lyrics">
           <div className="record__lyrics--container">
-            <div className="record__lyrics">
-              <ul
-                className={`record__lyrics-list ${focusBorder === 31 ? 'focus-border' : ''}`}
-                id="currentTranscript"
-                ref={scrollRef}
-              >
+            <div className={`record__lyrics ${focusBorder === 31 ? 'focus-border' : ''}`}>
+              <ul className="record__lyrics-list" id="currentTranscript" ref={scrollRef}>
                 {displayTakeLyrics()}
               </ul>
             </div>
@@ -802,33 +812,34 @@ function TestAudio(props) {
               </div>
             </div>
 
-            <div className="record-2_record-btn">
-              <div
-                className={`record-btn_shadow-div-inset ${
-                  focusBorder === 11 ? 'focus-border' : ''
-                }`}
-              >
+            <button className={`record-2_record-btn ${focusBorder === 11 ? 'focus-border' : ''}`}>
+              <div className="record-btn_shadow-div-inset">
                 {recorderState.initRecording ? (
-                  <button className="record-btn_shadow-div-outset" onClick={stopRecording}>
+                  <div className="record-btn_shadow-div-outset" onClick={stopRecording}>
                     <img
                       className="button-icons"
                       id="record-stop-img"
                       src={stopIcon}
                       alt="record stop icon"
                     />
-                  </button>
+                  </div>
                 ) : (
-                  <button className="record-btn_shadow-div-outset" onClick={startRecording}>
+                  <div className="record-btn_shadow-div-outset" onClick={startRecording}>
                     <img
                       className="button-icons"
                       id="record-stop-img"
                       src={micIcon}
                       alt="record mic icon"
                     />
-                  </button>
+                  </div>
                 )}
               </div>
-            </div>
+            </button>
+            <div
+              className={`record-2_record-btn--animation-div ${
+                recorderState.initRecording ? 'record-btn-animation' : ''
+              }`}
+            ></div>
           </div>
         </div>
         <NavBar />
@@ -836,4 +847,3 @@ function TestAudio(props) {
     </RecordBoothContext.Provider>
   )
 }
-export default TestAudio

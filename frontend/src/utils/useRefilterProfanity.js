@@ -3,12 +3,12 @@ export default function useRefilterProfanity() {
 
   const refilterProfanity = curse => {
     const isCurse = curse.match(regex)
-    console.log(curse, 'WHAT THE FUCK AM I GETTING HERE LOL PROFANITY IN THE FITLER???')
+    // console.log(curse, 'WHAT THE FUCK AM I GETTING HERE LOL PROFANITY IN THE FITLER???')
 
     if (isCurse) {
       let curseLength = curse.length
       let firstChar = curse.charAt(0)
-      console.log(curseLength, firstChar, 'argh')
+      // console.log(curseLength, firstChar, 'argh')
 
       switch (firstChar) {
         case 'a':

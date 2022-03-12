@@ -9,7 +9,8 @@ function RecordingBoothModal(props) {
       title: 'Welcome to the Flow Recording Booth',
       steps: [
         {
-          step: `In this tutorial you learn all you need to know to start Flowing.
+          step: '',
+          stepText: `In this tutorial you learn all you need to know to start Flowing.
                  After which you'll have no excuses for not reaching your Rap God 
                  letslakdjfladskjflasjdf alsdkjfa lsdjfalsdjf akdjfsldf jsldfkjs 
                  lsdkjflsdkjflasdsjkf djfdkfj aldfjkf dfk djf jdka sdfdklj flkj 
@@ -22,26 +23,38 @@ function RecordingBoothModal(props) {
       index: 1,
       title: 'Flow Controls',
       steps: [
-        { step: 'Select a Beat', show: true },
-        { step: 'Hit the Record Button', show: false },
-        { step: 'Save your first take', show: false },
+        {
+          step: 'Choose Beat',
+          stepText: `Select a dope beat to Flow over from our Collection.`,
+          show: true,
+        },
+        {
+          step: 'Record',
+          stepText: `When you're ready, just hit the Record button and start Flowing!`,
+          show: false,
+        },
+        {
+          step: 'Save It',
+          stepText: `After your track has been layed, save and upload to your profile so you can post it for all your homies to see!`,
+          show: false,
+        },
       ],
     },
     {
       index: 2,
       title: 'Rhyme Suggestions',
       steps: [
-        { step: 'Top Rhymes', show: true },
-        { step: 'Locked Rhymes', show: false },
-        { step: 'Selected Rhymes', show: false },
+        { step: 'Top Rhymes', stepText: ``, show: true },
+        { step: 'Locked Rhymes', stepText: ``, show: false },
+        { step: 'Selected Rhymes', stepText: ``, show: false },
       ],
     },
     {
       index: 3,
       title: 'Lyrics Display',
       steps: [
-        { step: 'Lyrics Transcript', show: true },
-        { step: 'Lyrics List', show: false },
+        { step: 'Lyrics Transcript', stepText: ``, show: true },
+        { step: 'Lyrics List', stepText: ``, show: false },
       ],
     },
   ]
@@ -59,7 +72,7 @@ function RecordingBoothModal(props) {
 
   useEffect(() => {
     if (props.toggleModal === true) {
-      modalWindowRef.current.style.zIndex = 3
+      modalWindowRef.current.style.zIndex = 10
       modalWindowRef.current.style.opacity = 1
       modalWindowRef.current.style.transition = 'opacity .3s'
       props.modalBtnRef.current.style.opacity = 0
@@ -142,19 +155,21 @@ function RecordingBoothModal(props) {
   }, [arrowClass])
 
   const mapSteps = useCallback(() => {
-    return modalInDisplay?.steps.map(each => {
+    return modalInDisplay?.steps.map((each, index) => {
       return (
         <div
-          className="step-containers"
+          className={`steps_shadow-div-inset ${
+            currentStep.step === each.step ? 'highlight-step' : ''
+          }`}
           key={`${uuidv4()}_${each.step}`}
           style={each.show === true ? { opacity: '1' } : { opacity: '0' }}
         >
-          <div
-            className={`steps_shadow-div-inset ${
-              currentStep.step === each.step ? 'highlight-step' : ''
-            }`}
-          >
-            <p>{each.step}</p>
+          <div className="steps__index">
+            <div className="steps__index--shadow-div-outset">{index + 1}</div>
+          </div>
+          <div className="steps__steps">
+            <p className="steps__text title">{each.step}</p>
+            <p className="steps__text text">{each.stepText}</p>
           </div>
         </div>
       )
