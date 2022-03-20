@@ -2379,6 +2379,7 @@ button {
   text-align: start;
   word-break: break-all;
   overflow-y: scroll;
+  line-height: 1;
 }
 
 .section-1_profile .section-1b_user-data .user-data-1_fields-container .fields_shadow-div-inset .fields_shadow-div-outset .users-details-each .p-2 {
@@ -3173,6 +3174,15 @@ button {
   margin: 0% 2% 0% 2%;
   font-size: 0.85rem;
   color: #ffb6d4;
+}
+
+.section-2_profile .section-2a_songs .section-2a_songs-container .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container .profile-songs__text.caption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section-2_profile .section-2a_songs .section-2a_songs-container .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset .profile-songs__song-info .profile-songs__text--container .profiile-songs__text.social {
+  height: auto;
 }
 
 .section-2_profile .section-2a_songs .section-2a_songs-container .songs-1_songs-list .profile-songs__item .profile-songs__body .profile-songs__header .profile-songs__header--shadow-outset:hover {
@@ -12591,8 +12601,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
-          box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
+  -webkit-box-shadow: 3px 3px 3px #7a7a7a, -1px -1px 3px #e9e9e9;
+          box-shadow: 3px 3px 3px #7a7a7a, -1px -1px 3px #e9e9e9;
   background: #ec6aa0;
 }
 
@@ -13877,13 +13887,14 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding-left: 3%;
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .steps_shadow-div-inset .steps__steps .steps__text {
@@ -13898,7 +13909,15 @@ button {
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .steps_shadow-div-inset .steps__steps .steps__text.title {
+  width: 90%;
+  border-radius: 3em;
+  background: #ec6aa0;
+  -webkit-box-shadow: inset 1px 1px 2px 0px #784b5d, inset -1px -1px 2px #fefefe;
+          box-shadow: inset 1px 1px 2px 0px #784b5d, inset -1px -1px 2px #fefefe;
+  color: white;
   font-weight: bold;
+  margin-bottom: 0.25em;
+  padding: 0.7% 0% 0.7% 3%;
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .steps_shadow-div-inset .steps__steps .steps__text.text {
@@ -13921,7 +13940,10 @@ button {
 }
 
 .section-4_controls .section_shadow-div-inset .section_text-container .text-container_shadow-div-outset .highlight-step .steps__steps .steps__text.title {
-  color: white;
+  -webkit-box-shadow: inset 1px 1px 2px 0px #92536c, inset -1px -1px 2px #ffffff;
+          box-shadow: inset 1px 1px 2px 0px #92536c, inset -1px -1px 2px #ffffff;
+  background: #ffd4e6;
+  color: #ec6aa0;
 }
 
 .arrow-container {
@@ -15303,9 +15325,6 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  opacity: 0;
-  -webkit-animation: opacityTransition 1s forwards;
-          animation: opacityTransition 1s forwards;
 }
 
 .SaveSongModal .save-song_modal-container .flow-controls-container .flow-controls-2_actions .actions-container_shadow-div-outset .actions-container_shadow-div-inset .SaveSongDisplay .song-inputs-container .buttons-container .buttons-container_shadow-div-inset {

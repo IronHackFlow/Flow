@@ -358,8 +358,6 @@
 
                 .buttons-container {
                   @include flexCenter(22%, 100%, 0, center, flex-start, row);
-                  opacity: 0;
-                  animation: opacityTransition 1s forwards;
 
                   .buttons-container_shadow-div-inset {
                     @include flexCenter(93%, 94%, 100vh, center, center, row);

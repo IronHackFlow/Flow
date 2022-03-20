@@ -105,6 +105,7 @@
                 text-align: start;
                 word-break: break-all;
                 overflow-y: scroll;
+                line-height: 1;
               }
             }
             .p-2 {
@@ -178,7 +179,7 @@
 
               .btn-title {
                 @include flexCenter(30%, 100%, 50px, center, center, column);
-                font-size: 11px;
+                font-size: .75rem;
                 color: white;
               }
 
@@ -430,11 +431,9 @@
                       width: 95%;
                       font-size: 0.8rem;
                       color: #c2c2c2;
-                      // overflow: hidden;
                       white-space: nowrap;
                       text-align: start;
                       text-indent: 2%;
-                      // text-overflow: ellipsis;
 
                       .profile-songs__text-bullet {
                         height: 100%;
@@ -442,6 +441,13 @@
                         font-size: 0.85rem;
                         color: #ffb6d4;
                       }
+                    }
+                    .profile-songs__text.caption {
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    }
+                    .profiile-songs__text.social {
+                      height: auto;
                     }
                   }
                 }

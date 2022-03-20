@@ -44,17 +44,37 @@ function RecordingBoothModal(props) {
       index: 2,
       title: 'Rhyme Suggestions',
       steps: [
-        { step: 'Top Rhymes', stepText: ``, show: true },
-        { step: 'Locked Rhymes', stepText: ``, show: false },
-        { step: 'Selected Rhymes', stepText: ``, show: false },
+        {
+          step: 'Rhymes',
+          stepText: `As you finish rapping a line, we'll generate some popular rhymes to keep you in Flow!`,
+          show: true,
+        },
+        {
+          step: 'Locked Rhymes',
+          stepText: `To save your generated rhyme above for your next line, hit the lock button to save it here.`,
+          show: false,
+        },
+        {
+          step: 'Selected Rhymes',
+          stepText: `Still not satisfied with the generated rhymes? Click any word you've rapped and generate rhymes for your that here.`,
+          show: false,
+        },
       ],
     },
     {
       index: 3,
       title: 'Lyrics Display',
       steps: [
-        { step: 'Lyrics Transcript', stepText: ``, show: true },
-        { step: 'Lyrics List', stepText: ``, show: false },
+        {
+          step: 'Lyrics Transcript',
+          stepText: `A real time transcript of your Flow will appear here.`,
+          show: true,
+        },
+        {
+          step: 'Lyrics List',
+          stepText: `Your lyrics will auto generate in this field so you can see all your genius rhymes.`,
+          show: false,
+        },
       ],
     },
   ]

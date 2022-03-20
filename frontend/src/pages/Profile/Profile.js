@@ -215,7 +215,7 @@ function Profile() {
                         />
                       </div>
                     </div>
-                    <div className="btn-title">Followers</div>
+                    <div className="btn-title">followers</div>
                   </div>
                 </div>
 
@@ -229,7 +229,7 @@ function Profile() {
                         <img className="button-icons logout" src={followingIcon} alt="following" />
                       </div>
                     </div>
-                    <div className="btn-title">Following</div>
+                    <div className="btn-title">following</div>
                   </div>
                 </div>
 
@@ -238,7 +238,7 @@ function Profile() {
                     className="profile-button-outset"
                     style={{ borderRadius: '4px 4px 4px 35px' }}
                   >
-                    <div className="btn-title">Likes</div>
+                    <div className="btn-title">likes</div>
                     <div className="profile-button-inset pbe-3">
                       <p className="number-container">
                         {thisUserLikes ? thisUserLikes.length : '0'}
@@ -315,7 +315,7 @@ function Profile() {
           </div> */}
         </div>
       </div>
-      <NavBar locationClass={'NavBarProfile'} />
+      <NavBar pageClass={'NavBarProfile'} />
     </div>
   )
 }

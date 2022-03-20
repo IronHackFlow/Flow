@@ -102,7 +102,7 @@ export default function ProfileFlowItem({ song, songs, setSongs, profileUser }) 
                     </p>
                   </div>
                   <div className="profile-songs__text--container">
-                    <p className="profile-songs__text">
+                    <p className="profile-songs__text social">
                       {formatDate(song.date, 'm')}
                       <span className="profile-songs__text-bullet">
                         {String.fromCodePoint(8226)}

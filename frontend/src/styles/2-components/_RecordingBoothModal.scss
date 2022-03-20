@@ -73,7 +73,8 @@
             }
           }
           .steps__steps {
-            @include flexCenter(initial, 90%, 0.2em 2em 0.2em 2em, center, center, column);
+            @include flexCenter(initial, 90%, 0.2em 2em 0.2em 2em, center, flex-start, column);
+            padding-left: 3%;
 
             .steps__text {
               height: fit-content;
@@ -84,7 +85,14 @@
               color: #ec6aa0;
 
               &.title {
+                width: 90%;
+                border-radius: 3em;
+                background: #ec6aa0;
+                box-shadow: inset 1px 1px 2px 0px #784b5d, inset -1px -1px 2px #fefefe;
+                color: white;
                 font-weight: bold;
+                margin-bottom: 0.25em;
+                padding: 0.7% 0% 0.7% 3%;
               }
               &.text {
                 color: white;
@@ -106,7 +114,9 @@
           }
           .steps__steps {
             .steps__text.title {
-              color: white;
+              box-shadow: inset 1px 1px 2px 0px #92536c, inset -1px -1px 2px #ffffff;
+              background: #ffd4e6;
+              color: #ec6aa0;
             }
           }
         }
