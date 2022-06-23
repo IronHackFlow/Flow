@@ -1,14 +1,14 @@
 import { useContext, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import actions from '../../api'
-import TheContext from '../../contexts/TheContext'
-import useHandleOSK from '../../utils/useHandleOSK'
+import { UserContext } from '../../contexts/AuthContext'
+import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
 import ButtonClearText from '../../components/ButtonClearText'
 import ButtonShowPassword from '../../components/ButtonShowPassword'
 import { logInSchema } from '../../utils/validationSchemas'
 
 function AuthLogIn({ showError, onError }) {
-  const { setUser } = useContext(TheContext)
+  const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
   const { handleOnFocus } = useHandleOSK()
 

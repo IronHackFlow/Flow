@@ -1,39 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { errorIcon, closeIcon } from "../assets/images/_icons"
+import { errorIcon } from '../assets/images/_icons'
 
-
-export default function ErrorModal({ 
-  isOpen, onClose, 
-  title, nextActions,
-  opacity, modHeight, modWidth, 
-  placement, children, 
-}) 
-{
+export default function ErrorModal({
+  isOpen,
+  onClose,
+  title,
+  nextActions,
+  opacity,
+  modHeight,
+  modWidth,
+  placement,
+}) {
   if (!isOpen) return null
-  else {
-    // setTimeout(() => {
-    //   onClose(false)
-    // }, 3000) 
-  }
 
-  const bgSpecs = { 
-    background: opacity ? "#0000006e" : "#00000000",
-    opacity: `${isOpen ? "1" : "0"}`,
-    zIndex: `${isOpen ? "3" : "0"}`,
-  } 
+  const bgSpecs = {
+    background: opacity ? '#0000006e' : '#00000000',
+    opacity: `${isOpen ? '1' : '0'}`,
+    zIndex: `${isOpen ? '3' : '0'}`,
+  }
   const modalSpecs = {
     top: `${placement}%`,
     width: `${modWidth}%`,
     height: `${modHeight}px `,
   }
-  
+
   return ReactDOM.createPortal(
-    <div 
-      className="ErrorModal" 
-      style={bgSpecs}
-      onClick={() => onClose()}
-    >
+    <div className="ErrorModal" style={bgSpecs} onClick={() => onClose()}>
       {/* <div className="error-container--red" style={modalSpecs}>
         <div className="error--shadow-inset">
           <div className="icon-container">
@@ -61,52 +54,45 @@ export default function ErrorModal({
           </div>
         </div>
       </div> */}
-          <div className="error-container--input-err" style={modalSpecs}>
-      <div className="error--shadow-inset">
-        <div 
-          className="icon-container"
-        >
-          {/* <div className="error-icon_shadow-div-outset">
+      <div className="error-container--input-err" style={modalSpecs}>
+        <div className="error--shadow-inset">
+          <div className="icon-container">
+            {/* <div className="error-icon_shadow-div-outset">
             <div className="error-icon_shadow-div-inset"> */}
-              <button 
-                className="icon--shadow-outset"
-                onClick={() => onClose()}  
-              >
-                <img className="button-icons" src={errorIcon} alt="exit x button" />
-              </button>
+            <button className="icon--shadow-outset" onClick={() => onClose()}>
+              <img className="button-icons" src={errorIcon} alt="exit x button" />
+            </button>
             {/* </div>
           </div> */}
-        </div>
-        <div className="text-container">
-          <div className="text--shadow-outset">
-            <div className="text-err-container">
-              <h6>{title}</h6>
-              <p>{nextActions}</p>
+          </div>
+          <div className="text-container">
+            <div className="text--shadow-outset">
+              <div className="text-err-container">
+                <h6>{title}</h6>
+                <p>{nextActions}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-      {children}
     </div>,
-    document.body
+    document.body,
   )
 }
 
 // const InputErrorModal = () => {
-  
 
 //   return (
 //     <div className="error-container--input-err" style={modalSpecs}>
 //       <div className="error--shadow-inset">
-//         <div 
+//         <div
 //           className="icon-container"
 //         >
 //           {/* <div className="error-icon_shadow-div-outset">
 //             <div className="error-icon_shadow-div-inset"> */}
-//               <button 
+//               <button
 //                 className="icon--shadow-outset"
-//                 onClick={() => onClose()}  
+//                 onClick={() => onClose()}
 //               >
 //                 <img className="button-icons" src={xExit} alt="exit x button" />
 //               </button>
@@ -139,19 +125,19 @@ export default function ErrorModal({
 //   // specify height, width
 
 //   return (
-//     <div 
-//       className="ErrorModal" 
+//     <div
+//       className="ErrorModal"
 //       style={showErrorModal ? {opacity: "1", zIndex: "2"} : {opacity: "0", zIndex: "0"}}
-//       onClick={() => setShowErrorModal(false)}    
+//       onClick={() => setShowErrorModal(false)}
 //     >
 //       <div className="error-container--red">
 //         <div className="error--shadow-inset">
 //           <div className="icon-container">
 //             {/* <div className="error-icon_shadow-div-outset">
 //               <div className="error-icon_shadow-div-inset"> */}
-//                 <button 
+//                 <button
 //                   className="icon--shadow-outset"
-//                   onClick={() => setShowErrorModal(false)}  
+//                   onClick={() => setShowErrorModal(false)}
 //                 >
 //                   <img className="button-icons" src={xExit} alt="error exclamation" />
 //                 </button>
@@ -169,27 +155,26 @@ export default function ErrorModal({
 //     </div>
 //   )
 // }
-{/* <div className="error-container">
-<div className="error_shadow-div-inset">
-  <div className="error-icon-container">
-    <div className="error-icon_shadow-div-outset">
-      <div className="error-icon_shadow-div-inset">
-        <button 
-          className="error-icon_shadow-div-outset_2"
-          onClick={() => setShowErrorModal(false)}  
-        >
-          <img className="button-icons" src={xExit} alt="error exclamation" />
-        </button>
-      </div>
-    </div>
-  </div>
-  <div className="error-text-container">
-    <div className="error-text_shadow-div-outset">
-      <h5>No Songs To Edit</h5>
-      <p>Record a Flow below!</p>
-    </div>
-  </div>
-</div>
-</div> */}
 
-
+//<div className="error-container">
+//  <div className="error_shadow-div-inset">
+//    <div className="error-icon-container">
+//      <div className="error-icon_shadow-div-outset">
+//        <div className="error-icon_shadow-div-inset">
+//          <button
+//            className="error-icon_shadow-div-outset_2"
+//            onClick={() => setShowErrorModal(false)}
+//          >
+//            <img className="button-icons" src={xExit} alt="error exclamation" />
+//          </button>
+//        </div>
+//      </div>
+//    </div>
+//    <div className="error-text-container">
+//      <div className="error-text_shadow-div-outset">
+//        <h5>No Songs To Edit</h5>
+//        <p>Record a Flow below!</p>
+//      </div>
+//    </div>
+//  </div>
+//</div>

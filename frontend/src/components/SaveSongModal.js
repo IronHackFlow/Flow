@@ -1,18 +1,20 @@
 import { useContext, useEffect, useState, useRef, useCallback } from 'react'
 import actions from '../api'
 import axios from 'axios'
-import TheContext from '../contexts/TheContext'
+import { UserContext } from '../contexts/AuthContext'
 import RecordBoothContext from '../contexts/RecordBoothContext'
-import AudioTimeSlider from '../components/AudioTimeSlider'
-import SelectMenuModal from '../components/SelectMenuModal'
+import AudioTimeSlider from './AudioTimeSlider'
+import SelectMenuModal from './SelectMenuModal'
 import { saveSongSchema } from '../utils/validationSchemas'
 import InputError from './InputError'
-import ButtonClearText from '../components/ButtonClearText'
+import ButtonClearText from './ButtonClearText'
 import useDebugInformation from '../utils/useDebugInformation'
 import { playIcon, pauseIcon, closeIcon } from '../assets/images/_icons'
+import { FormEvent } from 'react'
+import { LayoutTwo, LayoutThree } from './__Layout/LayoutWrappers'
 
-export default function SaveSongModal(props) {
-  const { user } = useContext(TheContext)
+export default function SaveSongModal() {
+  const { user } = useContext(UserContext)
   const {
     allTakes,
     setAllTakes,
@@ -30,27 +32,27 @@ export default function SaveSongModal(props) {
   const [errorMessage, setErrorMessage] = useState('')
   const [errorPath, setErrorPath] = useState('')
 
-  const songCaptionInputRef = useRef()
-  const songNameInputRef = useRef()
-  const buttonCloseRef = useRef()
-  const saveSongPopUpRef = useRef()
+  const songCaptionInputRef = useRef < HTMLInputElement > null
+  const songNameInputRef = useRef < HTMLInputElement > null
+  // const buttonCloseRef = useRef()
+  // const saveSongPopUpRef = useRef()
 
   useEffect(() => {
     if (showSaveSongModal) {
-      songNameInputRef.current.focus()
+      songNameInputRef.current?.focus()
     } else {
       setErrorPath('')
       setName('')
       setCaption('')
-      songNameInputRef.current.blur()
+      songNameInputRef.current?.blur()
     }
   }, [showSaveSongModal])
 
   const handleErrorFocus = errorPath => {
     let name = songNameInputRef.current
     let caption = songCaptionInputRef.current
-    if (errorPath === 'name') name.focus()
-    else caption.focus()
+    if (errorPath === 'name') name?.focus()
+    else caption?.focus()
   }
 
   const validateInputs = e => {
@@ -150,7 +152,7 @@ export default function SaveSongModal(props) {
             <div className="save-song_btn-container">
               <button
                 className="save-song_btn--close"
-                ref={buttonCloseRef}
+                // ref={buttonCloseRef}
                 type="button"
                 onClick={() => {
                   setShowError(false)
@@ -192,7 +194,7 @@ export default function SaveSongModal(props) {
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       currentSong={currentSong}
-                      // location={recordingBooth}
+                      bgColor={''}
                     />
                   </div>
                 </div>
@@ -231,7 +233,7 @@ export default function SaveSongModal(props) {
                   </div>
                 </div>
 
-                <div className="SaveSongDisplay" ref={saveSongPopUpRef}>
+                <div className="SaveSongDisplay">
                   <InputError
                     isOpen={showError}
                     onClose={setShowError}
@@ -263,10 +265,10 @@ export default function SaveSongModal(props) {
                         </div>
 
                         <ButtonClearText
-                          containerWidth={19}
+                          // containerWidth={19}
                           inset={true}
                           shadowColors={['#282828', '#bcbaba', '#282828', '#a7a7a7']}
-                          inputRef={songNameInputRef}
+                          // inputRef={songNameInputRef}
                           value={name}
                           setValue={setName}
                         />
@@ -290,7 +292,7 @@ export default function SaveSongModal(props) {
                         <ButtonClearText
                           inset={true}
                           shadowColors={['#282828', '#bcbaba', '#282828', '#a7a7a7']}
-                          inputRef={songCaptionInputRef}
+                          // inputRef={songCaptionInputRef}
                           value={caption}
                           setValue={setCaption}
                         />

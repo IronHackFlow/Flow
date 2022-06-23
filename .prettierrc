@@ -3,6 +3,7 @@
   "useTabs": false,
   "singleQuote": true,
   "bracketSpacing": true,
+  "editor.formatOnSave": true,
   "tabWidth": 2,
   "arrowParens": "avoid",
   "printWidth": 100,

@@ -2,7 +2,7 @@ import { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import actions from '../../api'
-import TheContext from '../../contexts/TheContext'
+import { UserContext } from '../../contexts/AuthContext'
 import InputError from '../../components/InputError'
 import AuthLogIn from './AuthLogIn'
 import AuthSignUp from './AuthSignUp'
@@ -10,7 +10,7 @@ import { useToggle } from '../../hooks/useToggle'
 import flowLogo from '../../assets/images/FlowLogo.png'
 
 const Auth = () => {
-  const { setUser } = useContext(TheContext)
+  const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
   const [isLogIn, setIsLogIn] = useToggle(false)
   const [errorMessage, setErrorMessage] = useState()

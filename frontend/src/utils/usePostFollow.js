@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import actions from '../api.js'
-import TheContext from '../contexts/TheContext'
-import { SongDataContext } from '../contexts/SongData.js'
+import { UserContext } from '../contexts/AuthContext'
+import { SongDataContext } from '../contexts/SongData'
 
 export default function usePostFollow() {
-  const { user } = useContext(TheContext)
+  const { user } = useContext(UserContext)
   const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
 
   const postFollow = (songUserId, setUsersFollow) => {

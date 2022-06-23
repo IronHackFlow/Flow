@@ -39,21 +39,31 @@
               @include flexCenter(auto, 100%, 0, space-evenly, flex-start, row);
 
               .comment-list-photo {
-                @include flexCenter(98%, 22%, 0, center, flex-start, row);
-                padding-top: 1.5%;
+                @include flexCenter(100%, 22%, 0, flex-start, flex-start, row);
+                // padding-top: 1.5%;
 
                 .comment-photo-inner {
-                  @include flexCenter(4em, 82%, 0.3em 2em 2em 2em, center, center, column);
+                  @include flexCenter(auto, auto, 0.3em 2em 2em 2em, center, center, column);
                   box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 3px #9d9d9d;
+                  margin: 0.4em;
 
                   .comment-photo-outer {
-                    @include flexCenter(80%, 80%, 100vh, center, center, row);
+                    @include flexCenter(auto, auto, 100vh, center, center, row);
                     box-shadow: 2px 2px 3px #3b3b3b, -2px -2px 2px #adadad;
+                    margin: 5px;
 
                     a {
-                      @include flexCenter(90%, 90%, 100vh, center, center, row);
+                      @include flexCenter(
+                        clamp(36px, 100%, 44px),
+                        clamp(36px, 100%, 44px),
+                        100vh,
+                        center,
+                        center,
+                        row
+                      );
                       overflow: hidden;
                       object-fit: contain;
+                      margin: 2px;
 
                       img {
                         height: 100%;
@@ -69,7 +79,7 @@
 
                 .comments__text--shadow-outset {
                   @include flexCenter(auto, 97%, 2em 0.3em 2em 0.5em, center, center, column);
-                  box-shadow: 2px 2px 3px #2f2f2f, -2px -2px 2px #989898;
+                  box-shadow: 2px 2px 3px #2f2f2f, -1px -1px 3px #9b9b9b;
                   margin-top: 3%;
 
                   .comments__user-details {
@@ -85,12 +95,12 @@
                       margin-left: 10%;
                       font-size: 1rem;
                       color: white;
-                      font-weight: bold;
+                      font-weight: 400;
                       text-align: start;
 
                       span {
                         color: #efbfbf;
-                        font-weight: bold;
+                        // font-weight: bold;
                         font-size: 0.75rem;
                         margin-left: 0.4em;
                       }
@@ -101,6 +111,7 @@
                       font-size: 0.75rem;
                       color: #efbfbf;
                       text-align: start;
+                      line-height: 1;
                     }
                   }
                   .comments__comment {
@@ -109,16 +120,17 @@
                     text-align: start;
                     color: white;
                     word-wrap: break-word;
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
                     line-height: 1;
-                    margin-bottom: 5px;
+                    // margin-bottom: 5px;
+                    margin: 0.3em 0em 0.4em 0em;
                   }
                 }
               }
             }
 
             .comments__actions--container {
-              @include flexCenter(2.5em, 100%, 0, flex-start, center, row);
+              @include flexCenter(2.7em, 100%, 0, flex-start, center, row);
               margin: 2% 0% 2% 0%;
 
               .space-filler {
@@ -129,37 +141,39 @@
                 @include flexCenter(100%, 78%, 0, flex-start, center, row);
 
                 .comments__actions--shadow-inset {
-                  @include flexCenter(100%, 97%, 30px 5px 15px 30px, flex-start, center, row);
+                  @include flexCenter(100%, 95%, 30px 5px 5px 30px, flex-start, center, row);
                   box-shadow: inset 2px 2px 4px #2b2b2b, inset -2px -2px 2px #858484;
+                  padding-left: 2%;
 
                   .comments__btn--container {
-                    @include flexCenter(100%, 40%, 0px, center, center, row);
-                    margin-left: 2%;
+                    @include flexCenter(100%, auto, 0px, center, center, row);
+                    // margin-left: 2%;
+                    margin-right: 2%;
 
                     .comments__btn {
-                      @include flexCenter(68%, 95%, 4px, center, center, row);
+                      @include flexCenter(78%, 95%, 2px, flex-start, center, column);
                       box-shadow: 2px 2px 3px #303030, -1px -1px 3px #909090;
+                      padding: 0.15em 0.4em;
 
                       .comments__btn-icon {
-                        @include flexCenter(100%, 32%, 0, center, center, row);
+                        @include flexCenter(1em, 1em, 0, center, center, row);
                         // box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #939597;
+                        // margin: 0em 0.4em;
 
-                        img.reply {
-                          height: 1rem;
+                        img.Reply {
+                          height: 0.9rem;
                         }
-                        img.like {
+                        img.Like {
+                          height: 1.2rem;
+                        }
+                        img.Edit {
+                          height: 1.2rem;
+                          width: 1.2rem;
+                        }
+                        img.Delete {
                           height: 1.3rem;
+                          width: 1.3rem;
                         }
-                        img.edit {
-                          height: 1.4rem;
-                        }
-                        img.delete {
-                          height: 1.6rem;
-                        }
-                      }
-                      .comments__btn-icon.edit,
-                      .comments__btn-icon.delete {
-                        width: 40%;
                       }
 
                       &:active {
@@ -167,34 +181,30 @@
                         box-shadow: inset 2px 2px 3px #353535, inset -2px -2px 2px #858585;
                       }
                       &:hover {
-                        background: #fd9cc5;
-                        box-shadow: 2px 2px 3px #363636, -1px -1px 2px #ffe1ed;
+                        background: #6f6f6f;
+                        box-shadow: 2px 2px 3px #383838, -1px -1px 3px #b3b3b3;
                       }
 
                       .comments__btn-text--container {
-                        @include flexCenter(100%, 68%, 0, center, center, row);
+                        @include flexCenter(auto, auto, 0, flex-start, flex-start, row);
 
                         .comments__btn-text {
-                          @include flexCenter(100%, 50%, 0, flex-start, center, row);
-                          font-weight: bold;
-                          font-size: 0.8rem;
-                          color: white;
-                        }
-                        .comments__btn-text.reply {
-                          width: 60%;
-                        }
-                        .comments__btn-text.delete,
-                        .comments__btn-text.edit {
-                          width: 100%;
-                        }
-                        .comments__btn-number.like {
                           color: pink;
-                          font-size: 0.75rem;
+                          font-size: 0.6rem;
+                          margin-top: 2px;
                         }
-                        .comments__btn-number.reply {
-                          width: 40%;
-                          color: pink;
-                          font-size: 0.75rem;
+                      }
+                      &.Delete {
+                        padding: 0.15em 0.25em;
+                      }
+                      &.isLiked {
+                        background: #ec6aa0;
+                        box-shadow: 2px 2px 3px #303030, -1px -1px 3px #c6c6c6;
+                        .comments__btn-icon {
+                          img {
+                            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                              brightness(107%) contrast(103%);
+                          }
                         }
                       }
                     }
@@ -300,7 +310,7 @@
                         }
                       }
                     }
-                    .comments__btn.edit {
+                    .comments__btn.Edit {
                       background: #d43a7a;
                       box-shadow: inset 2px 2px 4px #7a3250, inset -1px -1px 3px #ffbdd9;
                     }
@@ -325,6 +335,50 @@
         @include flexCenter(86%, 98%, 100vh, center, center, row);
         box-shadow: inset 2px 2px 3px #3d3f3f, inset -2px -3px 2px #ffffff;
 
+        .comments__header-btn--container {
+          @include flexCenter(100%, 18%, 0, center, center, row);
+
+          .comments__header-btn {
+            @include flexCenter(68%, 80%, 10em 1em 1em 10em, center, center, row);
+            box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
+
+            &.close {
+              img {
+                height: 90%;
+                width: 90%;
+              }
+            }
+            &.addComment {
+              width: 85%;
+              border-radius: 10em;
+              background: #ec6aa0;
+
+              .comments__header-icon {
+                @include flexCenter(70%, 70%, 0, center, center, row);
+                img {
+                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                    contrast(103%);
+                }
+              }
+              // p {
+              //   color: white;
+              //   font-size: 0.8rem;
+              //   line-height: 1;
+              // }
+            }
+            &:active {
+              box-shadow: inset 2px 2px 3px #434343, inset -2px -3px 2px #dfdfdf;
+            }
+            &:hover {
+              background: #e6a8c3;
+              img {
+                filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%)
+                  contrast(102%);
+              }
+            }
+          }
+        }
+
         .comments__back-btn--container {
           @include flexCenter(100%, 18%, 0, center, center, row);
 
@@ -346,20 +400,23 @@
         }
 
         .comments__title--container {
-          @include flexCenter(100%, 82%, 0, flex-start, center, row);
+          @include flexCenter(100%, 64%, 0, flex-start, center, row);
 
           .comments__title--shadow-outset {
             @include flexCenter(68%, 98%, 1em 10em 10em 1em, flex-start, center, row);
             box-shadow: 2px 3px 4px #414141, -2px -2px 3px #ffffff;
 
             .comments__text {
-              width: 32%;
+              // width: 32%;
               color: white;
               text-align: start;
-              text-indent: 5%;
+              font-size: 13px;
+              font-weight: 500;
+              margin: 0% 5%;
             }
 
             p {
+              font-size: 12px;
               color: #efbfbf;
             }
           }
@@ -459,10 +516,12 @@
           box-shadow: 2px 2px 3px #686868, -1px -1px 2px #ffffff;
           margin-left: 4%;
 
-          h2 {
+          .comment-input__text {
             width: 100%;
             text-indent: 6%;
-            color: #ec6aa0;
+            color: white;
+            font-weight: 500;
+            font-size: 13px;
           }
         }
       }

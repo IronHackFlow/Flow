@@ -261,7 +261,10 @@
             }
             .interactions__btn-text {
               @include flexCenter(100%, 70%, 0, flex-start, center, row);
-              font-size: 0.9rem;
+              .interactions__text {
+                font-size: 0.9rem;
+                margin-left: 0.4em;
+              }
             }
 
             &:active {
@@ -271,31 +274,29 @@
               background: #e24f8c;
             }
           }
-        }
-
-        .interactions__btn--container.rhyme-num {
-          width: 33%;
-          justify-content: flex-end;
-          .interactions__btn--shadow-outset {
-            border-radius: 2em 0.2em 0.2em 2em;
-            width: 97%;
-            .interactions__btn-icon--container {
-              .interactions__btn-icon--shadow-inset {
-                img {
-                  height: 70%;
-                  width: 70%;
+          &.rhymes {
+            width: 33%;
+            .interactions__btn--shadow-outset {
+              border-radius: 2em 0.2em 0.2em 2em;
+              width: 97%;
+              .interactions__btn-icon--container {
+                .interactions__btn-icon--shadow-inset {
+                  border-radius: 2em 0.4em 0.4em 2em;
+                  img {
+                    height: 70%;
+                    width: 70%;
+                  }
                 }
               }
             }
           }
-        }
-
-        .interactions__btn--container.edit-lyrics {
-          width: 33%;
-          justify-content: flex-start;
-          .interactions__btn--shadow-outset {
-            border-radius: 0.2em 2em 2em 0.2em;
-            width: 97%;
+          &.editLyrics {
+            width: 33%;
+            justify-content: flex-start;
+            .interactions__btn--shadow-outset {
+              border-radius: 0.2em 2em 2em 0.2em;
+              width: 97%;
+            }
           }
         }
       }

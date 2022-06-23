@@ -18,6 +18,7 @@
     "react-google-login": "^5.2.2",
     "react-intersection-observer": "^8.31.0",
     "react-native-track-player": "^2.0.3",
+    "react-query": "^3.39.1",
     "react-router": "^6.0.0-beta.8",
     "react-router-dom": "^6.0.0-beta.8",
     "react-scripts": "4.0.3",
@@ -53,5 +54,8 @@
       "not dead",
       "not op_mini all"
     ]
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.2.0"
   }
 }

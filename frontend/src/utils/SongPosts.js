@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import actions from '../api'
 import { SongDataContext } from '../contexts/SongData'
-import TheContext from '../contexts/TheContext'
+import { UserContext } from '../contexts/AuthContext'
 
 export default function SongPosts() {
-  const { user } = useContext(TheContext)
+  const { user } = useContext(UserContext)
   const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
 
   const addSong = () => {}

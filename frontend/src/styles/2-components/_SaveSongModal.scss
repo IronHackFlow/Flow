@@ -1,14 +1,16 @@
 .SaveSongModal {
   @include flexCenter(100%, 100%, 0px, flex-start, center, column);
-  opacity: 0;
-  z-index: -5;
+  opacity: 1;
+  z-index: 5;
   background: #000000b0;
   position: absolute;
+  top: 0;
 
   .save-song_modal-container {
     @include flexCenter(53%, 100%, 0px 0px 8px 8px, center, center, column);
     background: linear-gradient(323deg, #4b4b4b 0%, #979797 100%);
     box-shadow: 0px 15px 30px #000000d1;
+    opacity: 0;
 
     .save-song_header {
       @include flexCenter(11%, 100%, 0px, center, flex-start, row);
@@ -341,6 +343,9 @@
                         &:defined {
                           color: #ffa1c9;
                         }
+                        &.error {
+                          border: '3px solid #ff6e6e';
+                        }
                       }
                       .required {
                         &::placeholder {
@@ -389,17 +394,39 @@
         }
       }
     }
-  }
-  .save-song_modal-container--transition-in {
-    transform: translateY(0%);
-    transition: transform 0.4s ease-out;
-  }
-  .save-song_modal-container--transition-out {
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in;
+    &.transition-in {
+      // opacity: 1;
+      // transform: translateY(0%);
+      // transition: transform 0.4s ease-out;
+      animation: tranny 0.4s ease-out forwards;
+    }
+    &.transition-out {
+      // transform: translateY(-100%);
+      // transition: transform 0.3s ease-in;
+      animation: trannyOut 0.3s ease-in forwards;
+    }
   }
 }
-
+@keyframes tranny {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes trannyOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
 .SaveSongModal--show {
   opacity: 1;
   z-index: 3;

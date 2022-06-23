@@ -73,6 +73,19 @@
             }
           }
         }
+
+        &.Home {
+          border-radius: 0.3vh 0.3vh 0.3vh 2.5vh;
+          .each-feed_shadow-div-inset {
+            border-radius: 4vh .2vh .2vh 4vh;
+          }
+        }
+        &.Following {
+          border-radius: .3vh .3vh 2.5vh .3vh;
+          .each-feed_shadow-div-inset {
+            border-radius: .2vh 4vh 4vh .2vh;
+          }
+        }
       }
     }
   }

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import { v4 as uuidv4 } from 'uuid'
 import datamuse from 'datamuse'
-import TheContext from '../contexts/TheContext'
+import { UserContext } from '../contexts/AuthContext'
 import RecordBoothContext from '../contexts/RecordBoothContext'
 import SelectMenuModal from '../components/SelectMenuModal'
 import ErrorModal from '../components/ErrorModal'
@@ -30,7 +30,7 @@ import {
 } from '../assets/images/_icons'
 
 function TestAudio(props) {
-  const { user } = React.useContext(TheContext)
+  const { user } = React.useContext(UserContext)
 
   const navigate = useNavigate()
   const { refilterProfanity } = useRefilterProfanity()

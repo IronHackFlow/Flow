@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import actions from '../api'
 import { SongDataContext } from '../contexts/SongData'
-import TheContext from '../contexts/TheContext'
+import { UserContext } from '../contexts/AuthContext'
 
 export default function usePostComment() {
-  const { user } = useContext(TheContext)
+  const { user } = useContext(UserContext)
   const { homeFeedSongs, setHomeFeedSongs } = useContext(SongDataContext)
 
   const addComment = async (songId, commentString) => {
@@ -50,13 +50,13 @@ export default function usePostComment() {
       .catch(console.error)
   }
 
-  const editComment = async (songId, toEdit, commentString) => {
-    if (songId == null || toEdit == null) return
+  const editComment = async (songId, toEditId, commentString) => {
+    if (songId == null || toEditId == null) return
 
     await actions
       .editComment({
         songId: songId,
-        commentToEdit: toEdit,
+        commentToEditId: toEditId,
         comment: commentString,
         editDate: new Date(),
       })

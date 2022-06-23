@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 export const logInSchema = yup.object().shape({
-  user_name: yup
+  username: yup
     .string()
     .required()
     .matches(/^[a-zA-Z0-9]+$/, 'username must contain only letters and numbers and no spaces'),
@@ -9,7 +9,7 @@ export const logInSchema = yup.object().shape({
 })
 
 export const signUpSchema = yup.object().shape({
-  user_name: yup
+  username: yup
     .string()
     .required()
     .min(5)
@@ -20,6 +20,6 @@ export const signUpSchema = yup.object().shape({
 })
 
 export const saveSongSchema = yup.object().shape({
-  name: yup.string().required('name is required to save your Flow').max(30),
+  title: yup.string().required('title is required to save your Flow').max(30),
   caption: yup.string().max(60),
 })
