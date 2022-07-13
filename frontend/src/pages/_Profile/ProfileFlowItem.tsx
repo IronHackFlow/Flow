@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef, useCallback, Dispatch, SetStateAction } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
-import useFormatDate from '../../utils/useFormatDate'
+import useFormatDate from '../../hooks/useFormatDate'
 import { editIcon, closeIcon, playIcon, pauseIcon } from '../../assets/images/_icons'
 import { IUser, ISong } from '../../interfaces/IModels'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 import { ConfirmDeleteSong } from './Displays/DeleteSongDisplay'
+import { PlayButton } from '../../components/_Buttons/PlayButton'
 
 type Props = {
   song: ISong
@@ -17,28 +18,10 @@ type Props = {
 export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
   const { user } = useAuth()
   const { formatDate } = useFormatDate()
+  const navigate = useNavigate()
   const [deleteCheck, setDeleteCheck] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const songListRef = useRef()
-
-  const audioRef = useRef<HTMLAudioElement>()
-
-  useEffect(() => {
-    if (!audioRef.current) return
-    if (isPlaying) {
-      audioRef.current.play()
-    } else {
-      audioRef.current.pause()
-    }
-  }, [isPlaying])
-
-  const handlePlayPause = () => {
-    if (isPlaying) {
-      setIsPlaying(false)
-    } else {
-      setIsPlaying(true)
-    }
-  }
 
   const setFocus = (e: React.MouseEvent<HTMLElement>) => {
     if (document.activeElement === e.currentTarget) {
@@ -73,10 +56,6 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
     songListRef.current = node
   }, [])
 
-  const setAudioRefs = useCallback(node => {
-    audioRef.current = node
-  }, [])
-
   const showLyrics = () => {
     return song?.lyrics?.map((eachLine, index) => {
       return (
@@ -89,6 +68,9 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
       )
     })
   }
+  const navigateToSongScreen = () => {
+    navigate(`/songScreen/${song.user._id}`, { state: { currentSong: song._id } })
+  }
 
   return (
     <li className="profile-songs__item" ref={setSongRefs} onClick={e => setFocus(e)}>
@@ -96,11 +78,10 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
         <>
           <div className="profile-songs__body">
             <div className="profile-songs__header">
-              <Link
-                to={`/songScreen/${song._id}`}
-                state={{ currentSong: song }}
+              <button
                 type="button"
                 className="profile-songs__header--shadow-outset"
+                onClick={() => navigateToSongScreen()}
               >
                 <div className="profile-songs__title">
                   <p className="profile-songs__title-text">{song.title}</p>
@@ -129,17 +110,19 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </button>
             </div>
-            <LayoutTwo classes={["profile-songs__lyrics", "profile-songs__lyrics--shadow-outset"]}>
+            <LayoutTwo classes={['profile-songs__lyrics', 'profile-songs__lyrics--shadow-outset']}>
               <ul className="profile-songs__lyrics-text">{showLyrics()}</ul>
             </LayoutTwo>
           </div>
 
-          <LayoutTwo classes={["profile-songs__action-btns--container", "buttons-inner"]}>
+          <LayoutTwo classes={['profile-songs__action-btns--container', 'buttons-inner']}>
             {profileUser?._id === user?._id && (
               <>
-                <LayoutThree classes={["delete-btn-container delete", "play-container", "play-outset"]}>
+                <LayoutThree
+                  classes={['delete-btn-container delete', 'play-container', 'play-outset']}
+                >
                   <button className="play-inset">
                     <img
                       className="button-icons"
@@ -149,27 +132,22 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
                     />
                   </button>
                 </LayoutThree>
-                <LayoutThree classes={["delete-btn-container edit", "play-container", "play-outset"]}>
-                  <Link
-                    to={`/editLyrics`}
-                    state={{ propSongs: songs, propCurrentSong: song }}
-                    className="play-inset"
-                  >
+                <LayoutThree
+                  classes={['delete-btn-container edit', 'play-container', 'play-outset']}
+                >
+                  <Link to={`/editLyrics`} state={{ currentSong: song }} className="play-inset">
                     <img className="button-icons" src={editIcon} alt="edit" />
                   </Link>
                 </LayoutThree>
               </>
             )}
-            <LayoutThree classes={["delete-btn-container play", "play-container", "play-outset"]}>
-              <audio src={song?.audio} ref={setAudioRefs}></audio>
-              <button className="play-inset">
-                <img
-                  className="button-icons bi-play-2"
-                  src={isPlaying ? pauseIcon : playIcon}
-                  onClick={() => handlePlayPause()}
-                  alt="play"
-                />
-              </button>
+            <LayoutThree classes={['delete-btn-container play', 'play-container', 'play-outset']}>
+              <PlayButton
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                options={{ offset: 8 }}
+                audio={song?.audio}
+              />
             </LayoutThree>
           </LayoutTwo>
         </>

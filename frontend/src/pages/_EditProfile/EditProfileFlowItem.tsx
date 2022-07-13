@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import SongPosts from '../../utils/SongPosts'
+
 import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
-import ButtonClearText from '../../components/ButtonClearText'
+import ButtonClearText from '../../components/_Buttons/ButtonClearText'
 import { ISong } from '../../interfaces/IModels'
 
 type Props = {
@@ -13,12 +13,9 @@ type Props = {
 export default function EditProfileFlowItem({ inputData, index, indexLength }: Props) {
   const { _id: songId, title, caption } = inputData
   const { handleOnFocus } = useHandleOSK()
-  const { updateSong } = SongPosts()
 
-  const nameRef = useRef()
-  const captionRef = useRef()
   const [labelName, setLabelName] = useState<string>(title)
-  const [labelCaption, setLabelCaption] = useState<string>(caption)
+  const [labelCaption, setLabelCaption] = useState<string>(caption ? caption : '')
   const [songName, setSongName] = useState<string>('')
   const [songCaption, setSongCaption] = useState<string>('')
 
@@ -28,15 +25,14 @@ export default function EditProfileFlowItem({ inputData, index, indexLength }: P
     title: string,
     caption: string,
   ) => {
-    e.preventDefault()
-    if (songName !== '' && songCaption !== '') {
-      await updateSong(songId, title, caption)
-
-      setLabelName(songName)
-      setLabelCaption(songCaption)
-      setSongName('')
-      setSongCaption('')
-    }
+    // e.preventDefault()
+    // if (songName !== '' && songCaption !== '') {
+    //   await updateSong(songId, title, caption)
+    //   setLabelName(songName)
+    //   setLabelCaption(songCaption)
+    //   setSongName('')
+    //   setSongCaption('')
+    // }
   }
 
   const handleClearForm = () => {

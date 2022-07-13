@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { axiosConfig } from '../client/axiosConfig'
+import { axiosConfig } from '../axios/axiosConfig'
 
 export const addLike = async (id: string, type: string) => {
   const requestBody = { id: id, type: type }

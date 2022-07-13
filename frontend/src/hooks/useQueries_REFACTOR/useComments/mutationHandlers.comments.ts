@@ -1,24 +1,48 @@
 import { useQueryClient } from 'react-query'
-import { IComment, ISong } from '../../../interfaces/IModels'
+import { IComment, ISong, IUser } from '../../../interfaces/IModels'
 
-const handleUpdateSocialList = (_action: 'add' | 'delete', _list: string[], _userId: string) => {
-  if (_action === 'add') return [..._list, _userId]
-  return [..._list].filter(each => each !== _userId)
+export interface ICommentMutateData {
+  songId: string
+  user: IUser
+  newText: string
+  comment?: IComment
 }
 
-const handleUpdateCommentsList = (
-  _action: 'add' | 'delete' | 'edit',
+const getNewCommentList = (
+  _action: 'Add' | 'Delete' | 'Edit',
   _list: IComment[],
-  _updateValue: any,
-  _id: string,
+  _songId: string,
+  _user: IUser,
+  _newText: string,
+  _comment?: IComment,
 ) => {
-  if (_action === 'add') {
-    return [..._list, _updateValue]
-  } else if (_action === 'edit') {
-    const removeEdited = [..._list].filter(each => each._id !== _id)
-    return [...removeEdited, _updateValue]
-  } else {
-    return [..._list].filter(each => each._id !== _id)
+  switch (_action) {
+    case 'Add':
+      const newComment = createTempComment(_songId, _user, _newText)
+      return [..._list, newComment]
+    case 'Edit':
+      if (!_comment) return
+      const editedComment = { ..._comment, text: _newText, updatedOn: new Date() }
+      const removeEdited = [..._list].filter(each => each._id !== _comment._id)
+      return [...removeEdited, editedComment]
+    case 'Delete':
+      if (!_comment) return
+      return [..._list].filter(each => each._id !== _comment._id)
+    default:
+      return console.log('Input Error')
+  }
+}
+
+const createTempComment = (_songId: string, _user: IUser, _text: string) => {
+  // gonna need entire user
+  return {
+    _id: Math.random().toString(10),
+    song: _songId,
+    user: _user,
+    likes: [],
+    replies: [],
+    createdOn: new Date(),
+    updatedOn: new Date(),
   }
 }
 
@@ -26,26 +50,47 @@ export function useHandleCommentOnMutate() {
   const queryClient = useQueryClient()
 
   const onMutate = (
-    _action: 'add' | 'delete' | 'edit',
-    _data: { song: ISong; userId: string; id: string },
+    _action: 'Add' | 'Delete' | 'Edit',
+    _data: { songId: string; user: IUser; newText: string; comment?: IComment },
   ) => {
-    const previousSongs = queryClient.getQueryData('songs')
+    // const previousSongs = queryClient.getQueryData('songs')
 
-    queryClient.setQueryData('songs', (prevSongs: any) => {
-      return prevSongs.map((song: any) => {
-        if (song._id === _data.song._id) {
-          // const updatedComments = handleUpdateCommentsList(_action, song.comments)
-          // return { ...song, comments: updatedComments }
-        }
-        return song
-      })
-    })
+    const queryKey = ['songs', 'current', _data.songId]
+    // queryClient.setQueryData(['songs'], (prevSongs: any) => {
+    //   return prevSongs.map((song: any) => {
+    //     if (song._id === _data.songId) {
+    //       const newCommentList = getNewCommentList(
+    //         _action,
+    //         song.comments,
+    //         _data.songId,
+    //         _data.user,
+    //         _data.newText,
+    //         _data.comment,
+    //       )
+    //       return { ...song, comments: newCommentList }
+    //     }
+    //     return song
+    //   })
+    // })
 
-    return previousSongs
+    const getSongInView: ISong | undefined = queryClient.getQueryData(queryKey)
+    if (getSongInView) {
+      const newCommentList = getNewCommentList(
+        _action,
+        getSongInView?.comments,
+        _data.songId,
+        _data.user,
+        _data.newText,
+        _data.comment,
+      )
+      const updatedSongInView = { ...getSongInView, comments: newCommentList }
+      queryClient.setQueryData(queryKey, updatedSongInView)
+    }
+    return getSongInView
   }
 
-  const onError = (prevSongs: ISong[]) => {
-    queryClient.setQueryData(['songs'], prevSongs)
+  const onError = (prevSongs: ISong) => {
+    queryClient.setQueryData(['songs', 'current', prevSongs?._id], prevSongs)
   }
 
   const onSettled = () => {

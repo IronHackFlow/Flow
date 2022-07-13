@@ -1,16 +1,17 @@
-import React, { useState, useRef, useEffect, useCallback, Dispatch, SetStateAction, MutableRefObject } from 'react'
+import { useState, useRef, useEffect, useCallback, Dispatch, SetStateAction } from 'react'
+import ReactDOM from 'react-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { closeIcon } from '../assets/images/_icons'
 
 type Props = {
-  toggleModal: boolean,
-  setToggleModal: Dispatch<SetStateAction<boolean>>,
-  modalBtnRef: MutableRefObject<HTMLDivElement>,
-  focusBorder: number,
+  isOpen: boolean
+  onClose: Dispatch<SetStateAction<boolean>>
+  focusBorder: number
   setFocusBorder: Dispatch<SetStateAction<number>>
 }
 
-function RecordingBoothModal({toggleModal, setToggleModal, modalBtnRef, focusBorder, setFocusBorder} : Props) {
+export const RecordingBoothModal = ({ isOpen, onClose, focusBorder, setFocusBorder }: Props) => {
+  const root = document.getElementById('root')!
   let modalObjArr = [
     {
       index: 0,
@@ -97,23 +98,6 @@ function RecordingBoothModal({toggleModal, setToggleModal, modalBtnRef, focusBor
   const [arrowDirectionClass, setArrowDirectionClass] = useState<string>('down')
 
   const modalWindowRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (modalWindowRef.current == null || modalBtnRef.current == null) return
-    if (toggleModal === true) {
-      modalWindowRef.current.style.zIndex = '10'
-      modalWindowRef.current.style.opacity = '1'
-      modalWindowRef.current.style.transition = 'opacity .3s'
-      modalBtnRef.current.style.opacity = '0'
-      modalBtnRef.current.style.transition = 'opacity .2s'
-    } else {
-      modalWindowRef.current.style.opacity = '0'
-      modalWindowRef.current.style.zIndex = '-1'
-      modalWindowRef.current.style.transition = 'opacity .3s'
-      modalBtnRef.current.style.opacity = '1'
-      modalBtnRef.current.style.transition = 'opacity .2s'
-    }
-  }, [toggleModal])
 
   useEffect(() => {
     if (modalInDisplay.index === 3 && modalSteps[modalSteps.length - 1].step === currentStep.step) {
@@ -217,7 +201,7 @@ function RecordingBoothModal({toggleModal, setToggleModal, modalBtnRef, focusBor
   }
 
   const closeWindowHandler = () => {
-    setToggleModal(false)
+    onClose(false)
     setModalInDisplay(modalObjArr[0])
     setModalSteps(modalObjArr[0].steps)
     setCurrentStep(modalObjArr[0].steps[0])
@@ -264,8 +248,8 @@ function RecordingBoothModal({toggleModal, setToggleModal, modalBtnRef, focusBor
       }
     })
   }
-
-  return (
+  if (!isOpen) return null
+  return ReactDOM.createPortal(
     <div className="RecordBoothModal" ref={modalWindowRef}>
       <div
         className={`opacity-section-1 ${modalInDisplay.index === 3 ? `${focusClass}` : ''}`}
@@ -316,7 +300,7 @@ function RecordingBoothModal({toggleModal, setToggleModal, modalBtnRef, focusBor
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    root,
   )
 }
-export default RecordingBoothModal

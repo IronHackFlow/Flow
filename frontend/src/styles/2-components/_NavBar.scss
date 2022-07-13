@@ -22,25 +22,8 @@
           // box-shadow: 3px 3px 6px #363535, -2px -2px 2px #8c8c8c;
 
           .navbar-btn_shadow-div-inset {
-            border-radius: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            // @include flexCenter(initial, initial, 50px, center, center, row);
-            // box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
-
-            .navbar-btn_shadow-div-outset {
-              @include flexCenter(100%, 100%, 50px, center, center, row);
-              box-shadow: none;
-
-              img {
-                height: 65%;
-                width: 65%;
-              }
-              &:active {
-                box-shadow: none;
-              }
-            }
+            // 90 50
+            @include flexCenter(83%, 88%, 0.2em, center, center, row);
           }
 
           .navbar-btn-text {
@@ -48,6 +31,18 @@
             font-size: 11px;
             color: #ff8ebd;
             display: none;
+          }
+          &.Home--navbar {
+            border-radius: 2.5em 0.3em 0.3em 2.5em;
+            .navbar-btn_shadow-div-inset {
+              border-radius: 2em 0.2em 0.2em 2em;
+            }
+          }
+          &.Profile--navbar {
+            border-radius: 0.3em 2.5em 2.5em 0.3em;
+            .navbar-btn_shadow-div-inset {
+              border-radius: 0.2em 2em 2em 0.2em;
+            }
           }
         }
       }
@@ -67,9 +62,11 @@
   border: none;
   // transition: all .4s;
   .navbar-btn_shadow-div-inset {
-    height: 2.6rem;
-    width: 2.5rem;
-    box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
+    // height: 2.6rem;
+    // width: 2.5rem;
+    // box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #6e6e6e;
+    box-shadow: inset 1px 1px 3px 0px #3e3e3e, inset -1px -1px 3px #9d9d9d;
+
     // transition: all .4s;
     .navbar-btn_shadow-div-outset {
       box-shadow: 2px 2px 3px 0px #929292, -2px -2px 3px #ffffff;
@@ -97,14 +94,27 @@
 // toggle class for Home, Profile, and Search when either is SELECTED
 .btn-selected {
   background: #ec6aa0;
-  box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
+  // box-shadow: inset 2px 2px 3px #855d6e, inset -2px -2px 3px #f4c4d8;
+  // box-shadow: inset 2px 2px 3px #883f5e, inset -2px -2px 3px #ffd6e7;
+  box-shadow: inset 1px 1px 3px #6b2f49, inset -1px -1px 3px #ffe9f2;
   border: 1px solid #ec6aa0;
   transition: all 0.3s;
   .navbar-btn_shadow-div-inset {
-    height: 2.3rem;
-    width: 2.3rem;
+    // height: 2.3rem;
+    // width: 2.3rem;
     // box-shadow: #a4416a 2px 2px 3px 0px inset, #f4c4d8 -2px -2px 3px inset;
-    box-shadow: #993b62 2px 2px 2px 0px, #e992b6 -2px -2px 2px;
+    // box-shadow: #993b62 2px 2px 2px 0px, #e992b6 -2px -2px 2px;
+    box-shadow: #b7547d 2px 2px 3px 0px, #f9b2d0 -1px -1px 2px;
+
+    .RoundButton__wrapper {
+      .RoundButton {
+        box-shadow: inset 1px 1px 3px #922c58, inset -1px -1px 3px #ffbad6;
+        img {
+          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+            contrast(103%);
+        }
+      }
+    }
     .navbar-btn_shadow-div-outset {
       box-shadow: none;
       img {
@@ -115,9 +125,15 @@
   }
   &:hover {
     background: #f6a3c5;
-    box-shadow: inset 2px 2px 3px #7f636f, inset -2px -2px 3px #fff0f6;
+    // box-shadow: inset 2px 2px 3px #7f636f, inset -2px -2px 3px #fff0f6;
     .navbar-btn_shadow-div-inset {
-      box-shadow: #a9748a 2px 2px 2px 0px, #fdc7dd -2px -2px 2px;
+      // box-shadow: #a9748a 2px 2px 2px 0px, #fdc7dd -2px -2px 2px;
+      box-shadow: #673a4d 1px 1px 3px 0px, #ffe2ed -1px -1px 2px;
+      .RoundButton__wrapper {
+        .RoundButton {
+          box-shadow: inset 1px 1px 3px #ac6684, inset -1px -1px 3px #ffffff;
+        }
+      }
     }
   }
 }

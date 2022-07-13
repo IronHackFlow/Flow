@@ -3,13 +3,14 @@ import express, { Application, Request, Response, NextFunction } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import cookieparser from 'cookie-parser'
 import path from 'path'
-import indexRoutes from './_routes/index'
-import authRoutes from './_routes/authRoutes'
-import songRoutes from './_routes/songRoutes'
-import likeRoutes from './_routes/likeRoutes'
-import followRoutes from './_routes/followRoutes'
-import commentRoutes from './_routes/commentRoutes'
+import indexRoutes from './src/_routes/index'
+import authRoutes from './src/_routes/authRoutes'
+import songRoutes from './src/_routes/songRoutes'
+import likeRoutes from './src/_routes/likeRoutes'
+import followRoutes from './src/_routes/followRoutes'
+import commentRoutes from './src/_routes/commentRoutes'
 const app: Application = express()
 
 const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/localIronPlate`
@@ -17,18 +18,20 @@ const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/localIronPla
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x: any) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
-  .catch((err: any)=> console.error('Error connecting to mongo', err))
+  .catch((err: any) => console.error('Error connecting to mongo', err))
 // "https://iron-flow.netlify.app"
 
 app.use(
   cors({
     credentials: true,
     origin: ['http://localhost:3000', 'https://iron-flow.herokuapp.com'], //Swap this with the client url
+    optionsSuccessStatus: 200,
   }),
 )
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieparser())
 
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 

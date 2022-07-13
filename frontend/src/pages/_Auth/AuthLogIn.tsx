@@ -1,10 +1,9 @@
-import { useState, useRef, Dispatch, SetStateAction } from 'react'
+import React, { useState, useRef, Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
-import actions from '../../api'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
-import ButtonClearText from '../../components/ButtonClearText'
-import ButtonShowPassword from '../../components/ButtonShowPassword'
+import ButtonClearText from '../../components/_Buttons/ButtonClearText'
+import ButtonShowPassword from '../../components/_Buttons/ButtonShowPassword'
 import { logInSchema } from '../../utils/validationSchemas'
 
 type Props = {
@@ -13,7 +12,7 @@ type Props = {
 }
 
 function AuthLogIn({ showError, onError }: Props) {
-  const { setUser } = useAuth()
+  const { login, setUser } = useAuth()
   const navigate = useNavigate()
   const { handleOnFocus } = useHandleOSK()
 
@@ -25,67 +24,48 @@ function AuthLogIn({ showError, onError }: Props) {
   const userNameInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 
-  const validateInputs = (e: any) => {
-    e.preventDefault()
-    const userData = { username: username, password: password }
-    logInSchema
-      .validate(userData, { abortEarly: false })
-      .then(valid => {
-        setErrorPath('')
-        handleLogIn(valid)
-      })
-      .catch(err => {
-        setErrorFocus(err.inner[0].path)
-        setErrorPath(err.inner[0].path)
-        onError(err.errors[0])
-        showError(true)
-      })
-  }
-
   const setErrorFocus = (errorPath: string) => {
     let username = userNameInputRef.current
     let password = passwordInputRef.current
     if (!username || !password) return
 
-    if (errorPath === 'user_name') {
+    if (errorPath === 'username') {
       username.focus()
     } else if (errorPath === 'password') {
       password.focus()
     }
   }
 
-  const handleLogIn = async (userData: any) => {
-    console.log(userData, 'what we getting hr')
-    try {
-      const res = await actions
-        .logIn(userData)
-        .then(async res => {
-          console.log(res, 'LOGIN THEN')
-          if (res.data.success) {
-            localStorage.setItem('token', res.data.token)
+  const validateCredentials = async () => {
+    const credentials = { username: username, password: password }
+    let valid: { username: string; password: string } | undefined
+    let errors
 
-            await actions
-              .getAuthUser()
-              .then(res => {
-                console.log(res, 'AUTHUSER THEN')
-                if (res.data.isLoggedIn) {
-                  setUser(res.data.user)
-                  navigate('/')
-                }
-              })
-              .catch(console.error)
-          } else {
-            if (res.data.path) {
-              setErrorFocus(res.data.path)
-              setErrorPath(res.data.path)
-              onError(res.data.message)
-              showError(true)
-            }
-          }
-        })
-        .catch(err => console.log(err))
-    } catch (err) {
-      console.log(err)
+    await logInSchema
+      .validate(credentials, { abortEarly: false })
+      .then(isValid => {
+        setErrorPath('')
+        console.log(isValid, 'VALID?')
+        valid = isValid
+      })
+      .catch(err => {
+        setErrorFocus(err.inner[0].path)
+        setErrorPath(err.inner[0].path)
+        onError(err.errors[0])
+        showError(true)
+        errors = err.errors[0]
+      })
+    return { valid, errors }
+  }
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const { valid, errors } = await validateCredentials()
+
+    if (valid) {
+      login(valid)
+    } else {
+      console.log(errors)
     }
   }
 
@@ -97,7 +77,7 @@ function AuthLogIn({ showError, onError }: Props) {
 
   return (
     <div className="user-login-3_form">
-      <form className="login-form" onSubmit={e => validateInputs(e)}>
+      <form className="login-form" onSubmit={event => handleLogin(event)}>
         <div className="user-form-container" style={{ justifyContent: 'flex-start' }}>
           <div className="login-input-container email-container" style={{ height: '40%' }}>
             <div

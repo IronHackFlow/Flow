@@ -1,26 +1,57 @@
-import React, { useState, useRef, useCallback, PropsWithChildren } from 'react'
+import React, { useState, useRef, useCallback, PropsWithChildren, useEffect } from 'react'
 import { NavigationButton, PlayButton, ExitButton, SongTitle, SongInfo } from './SongScreen'
 import CommentMenu from '../../components/_Comments/CommentMenu'
 import AudioTimeSlider from '../../components/_AudioTimeSlider/AudioTimeSlider'
 import { ISong } from '../../interfaces/IModels'
 import { tempMockSong } from '../_Home/initialData'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
+import { useLocation, useNavigate, useParams } from 'react-router'
+import { useUserSongs } from 'src/hooks/useQueries_REFACTOR/useSongs'
+import { FollowButtonWrapper } from 'src/components/_Buttons/SocialButtons/FollowButtonWrapper'
+import { LikeButtonWrapper } from 'src/components/_Buttons/SocialButtons/LikeButtonWrapper'
+import { CommentButtonWrapper } from 'src/components/_Buttons/SocialButtons/CommentButtonWrapper'
+import { LoadingSongPage } from 'src/components/Loading/Skeletons/LoadingHome'
+enum Direction {
+  Back = 'Back',
+  Forward = 'Forward',
+}
+
+type LocationProps = {
+  currentSong: string
+}
 
 export default function SongScreenDisplay() {
+  const { id } = useParams()
+  const songs = useUserSongs(id ? id : '')
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { currentSong } = location.state as LocationProps
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [songInView, setSongInView] = useState<ISong>(tempMockSong)
+  const [songInView, setSongInView] = useState<ISong>()
   const [songScreen] = useState(`#353535`)
   const [userSongs, setUserSongs] = useState<ISong[]>([])
   const [isMarquee, setIsMarquee] = useState(false)
-  const [showMenu, setShowMenu] = useState<boolean>(false)
+  const [showCommentMenu, setShowCommentMenu] = useState<boolean>(false)
 
   const titleRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    if (songs.data) {
+      setUserSongs(songs.data)
+    }
+  }, [songs])
+
+  useEffect(() => {
+    if (!userSongs || !currentSong) return
+    const current = userSongs.filter(each => each._id === currentSong)
+    setSongInView(current[0])
+  }, [userSongs, currentSong])
+
   const findCurrentSong = useCallback(
     direction => {
       userSongs.filter((each, index) => {
-        if (each._id === songInView._id) {
+        if (each._id === songInView?._id) {
           if (direction === 'back') {
             if (index === 0) {
               return null
@@ -42,13 +73,18 @@ export default function SongScreenDisplay() {
   )
 
   const onClose = () => {
-    // if (returnValue) navigate('/search', { state: { returnValue: returnValue } })
-    // else navigate(-1)
+    navigate(-1)
   }
 
+  if (!songInView || songs.isLoading) return <LoadingSongPage />
   return (
     <LayoutTwo classes={['SongScreen', 'song-screen--container']}>
-      <CommentMenu song={songInView} page="songScreen" isOpen={showMenu} onClose={setShowMenu} />
+      <CommentMenu
+        song={songInView}
+        page="songScreen"
+        isOpen={showCommentMenu}
+        onClose={setShowCommentMenu}
+      />
 
       <LayoutThree
         classes={[
@@ -143,9 +179,20 @@ export default function SongScreenDisplay() {
             'songscreen__social-btns--shadow-inset',
           ]}
         >
-          <div className="songscreen__btn--container follow"></div>
-          <div className="songscreen__btn--container like"></div>
-          <div className="songscreen__btn--container comment"></div>
+          <div className="songscreen__btn--container follow">
+            <FollowButtonWrapper page="SongScreen" song={songInView} />
+          </div>
+          <div className="songscreen__btn--container like">
+            <LikeButtonWrapper page="SongScreen" song={songInView} likeType="song" />
+          </div>
+          <div className="songscreen__btn--container comment">
+            <CommentButtonWrapper
+              page="SongScreen"
+              song={songInView}
+              onClick={() => setShowCommentMenu(prev => !prev)}
+              isPushed={false}
+            />
+          </div>
         </LayoutThree>
       </div>
     </LayoutTwo>

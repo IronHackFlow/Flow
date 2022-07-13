@@ -18,7 +18,7 @@
   position: relative;
 
   .section-1a_toggle-feed {
-    @include flexCenter(6%, 100%, 0vh 0vh 3vh 3vh, center, center, row);
+    @include flexCenter(6%, 100%, 0em 0em 1.4em 1.4em, center, center, row);
     background: linear-gradient(327deg, #959595 0%, #cdcdcd 100%);
     position: absolute;
     z-index: 2;
@@ -27,7 +27,7 @@
       @include flexCenter(100%, 99%, 0, space-around, center, row);
 
       .each-feed_shadow-div-inset {
-        @include flexCenter(80%, 32%, 0.3vh, center, center, row);
+        @include flexCenter(80%, 32%, 0.25em, center, center, row);
         box-shadow: inset 2px 2px 3px #484747, inset -2px -2px 2px #ffffff;
 
         .each-feed_shadow-div-outset {
@@ -38,7 +38,7 @@
             @include flexCenter(77%, 93%, 65px, center, center, column);
             box-shadow: inset 1px 1px 3px #545454, inset -1px -1px 3px #ffffff;
             font-size: 1rem;
-            color: #ec6aa0;
+            color: $primary-color-300;
             font-weight: bolder;
           }
           &:hover {
@@ -54,7 +54,7 @@
         .toggle-feed {
           height: 76%;
           width: 92%;
-          background: #e24f8c;
+          background: $primary-color-400;
           box-shadow: inset 2px 2px 3px #813052, inset -2px -2px 2px #fedeeb;
           transition: background 0.3s ease-in;
 
@@ -77,13 +77,13 @@
         &.Home {
           border-radius: 0.3vh 0.3vh 0.3vh 2.5vh;
           .each-feed_shadow-div-inset {
-            border-radius: 4vh .2vh .2vh 4vh;
+            border-radius: 4vh 0.2vh 0.2vh 4vh;
           }
         }
         &.Following {
-          border-radius: .3vh .3vh 2.5vh .3vh;
+          border-radius: 0.3vh 0.3vh 2.5vh 0.3vh;
           .each-feed_shadow-div-inset {
-            border-radius: .2vh 4vh 4vh .2vh;
+            border-radius: 0.2vh 4vh 4vh 0.2vh;
           }
         }
       }
@@ -118,7 +118,7 @@
           @include flexCenter(initial, 100%, 0px, flex-start, flex-start, row);
 
           .each-lyric-no {
-            color: #ffc6de;
+            color: $primary-color-200;
             font-size: 10px;
             margin-left: 1%;
           }
@@ -126,7 +126,7 @@
           .each-lyric-line {
             font-size: 13px;
             margin-left: 1%;
-            color: #ec6aa0;
+            color: $primary-color-300;
             text-align: start;
           }
         }
@@ -144,7 +144,7 @@
 
   .section-1c_song-details {
     //experimenting with border here
-    @include flexCenter(40%, 100%, 2.5em 0em 0em 0em, space-evenly, center, column);
+    @include flexCenter(40%, 100%, 2.2em 0em 0em 0em, space-evenly, center, column);
     background: linear-gradient(180deg, #b1b1b1 0%, #4f4f4f 100%);
     position: absolute;
     bottom: 0;
@@ -188,18 +188,18 @@
               }
               .action-btn-icon_shadow-div-inset {
                 @include flexCenter(100%, 32%, 0, center, center, row);
-                color: #ec6aa0;
+                color: $primary-color-300;
                 list-style-type: none;
 
-                img.follow {
+                img.Follow {
                   height: 3rem;
                   width: 3rem;
                 }
-                img.like {
+                img.Like {
                   height: 1.85rem;
                   width: 1.85rem;
                 }
-                img.comment {
+                img.Comment {
                   height: 1.5rem;
                   width: 1.5rem;
                 }
@@ -217,7 +217,7 @@
                     height: 45%;
                     width: 100%;
                     font-size: 0.8rem;
-                    color: #ffd6d6;
+                    color: $primary-color-200;
                     overflow-x: hidden;
                   }
                 }
@@ -226,12 +226,11 @@
 
             // class to apply on user liking, following, or commenting on a song
             .liked-followed-commented {
-              background: #ec6aa0;
+              background: $primary-color-300;
               box-shadow: 2px 2px 3px #784158, -1px -1px 3px 0px #fff1f7;
               .action-btn-icon_shadow-div-inset {
                 img {
-                  filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                    contrast(103%);
+                  filter: $svg-color-base;
                 }
               }
               .action-btn-text {
@@ -291,8 +290,8 @@
                     width: calc(5vh * 0.9);
                     border-radius: 50px;
                     margin-left: 11%;
-                    border: 2px solid #e24f8c;
-                    background: #e24f8c;
+                    border: 2px solid $primary-color-400;
+                    background: $primary-color-400;
                   }
                 }
               }
@@ -313,7 +312,7 @@
                   .song-title_title--container {
                     @include flexCenter(80%, 97%, 0.3em 0.3em 1.5em 0.3em, center, center, row);
                     box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
-                    background: #ec6aa0;
+                    background: $primary-color-300;
                     position: absolute;
                     overflow: hidden;
 
@@ -330,7 +329,8 @@
                         text-align: start;
                         span {
                           font-size: 0.95rem;
-                          color: #ffc4dd;
+                          color: $primary-color-200;
+                          font-weight: 500;
                         }
                       }
                     }
@@ -352,7 +352,7 @@
                     display: flex;
                     height: 100%;
                     font-size: 0.8rem;
-                    color: #e0bbbb;
+                    color: $primary-color-200;
                     margin: 0em 0.4em 0em 0.6em;
                     text-align: start;
 
@@ -367,7 +367,7 @@
                     font-size: 0.8rem;
                     white-space: nowrap;
                     text-align: left;
-                    color: #e0bbbb;
+                    color: $primary-color-200;
                     overflow-x: hidden;
                     text-overflow: ellipsis;
                   }
@@ -401,13 +401,12 @@
                     button.play-btn_shadow-div-outset {
                       @include flexCenter(74%, 74%, 100vh, center, center, row);
                       box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
-                      background: #ec6aa0;
+                      background: $primary-color-300;
 
                       img {
                         height: 85%;
                         width: 85%;
-                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
-                          brightness(107%) contrast(103%);
+                        filter: $svg-color-base;
                       }
                       img.bi-play {
                         margin-left: 10%;
@@ -419,7 +418,7 @@
                         box-shadow: none;
                       }
                       &:hover {
-                        background: #e24f8c;
+                        background: $primary-color-400;
                       }
                     }
                     &:active {

@@ -1,8 +1,9 @@
 .RecordBoothModal {
   @include flexCenter(100%, 100%, 0px, flex-start, center, column);
   position: absolute;
-  z-index: 0;
-  opacity: 0;
+  top: 0;
+  z-index: 5;
+  opacity: 1;
 }
 
 .opacity-section-1 {

@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom'
 import useMobileKeyboardHandler from '../../hooks/useMobileKeyboardHandler'
 import CommentFormData from './Logic/CommentFormData'
 import { CommentActions, ITextModalObject } from './Logic/types'
-import { IComment } from '../../interfaces/IModels'
+import { ISong, IComment } from '../../interfaces/IModels'
 import { sendIcon } from '../../assets/images/_icons'
 
 type TextInputProps = {
@@ -107,6 +107,10 @@ const TextArea = forwardRef(
       const commentText = commentToEdit ? commentToEdit.text : ''
       setComment(commentText)
     }, [commentToEdit])
+
+    useEffect(() => {
+      if (ref) ref.current.focus()
+    }, [ref])
 
     const expandTextarea = useCallback(
       text => {

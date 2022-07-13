@@ -19,19 +19,25 @@ type CommentMenuButtonProps = PropsWithChildren<{
 }>
 
 export default function CommentMenu({ song, page, isOpen, onClose }: CommentMenuProps) {
+  const [currentSong, setCurrentSong] = useState<ISong>(song)
   const [songComments, setSongComments] = useState<IComment[]>([])
   const initialModalObject = {
     inputType: CommentActions.Hide,
-    songId: song?._id,
+    songId: currentSong?._id,
     comment: undefined,
     isEditing: '',
   }
   const [commentInput, setCommentInput] = useState<ITextModalObject>(initialModalObject)
 
   useEffect(() => {
-    console.log(song, 'wtf is going on??')
-    setSongComments(song.comments)
+    setCurrentSong(song)
   }, [song])
+
+  useEffect(() => {
+    console.log(song, 'wtf is going on??')
+    setSongComments(currentSong.comments)
+    setCommentInput(initialModalObject)
+  }, [currentSong])
 
   const handleCloseMenu = () => {
     onClose(false)
@@ -66,7 +72,7 @@ export default function CommentMenu({ song, page, isOpen, onClose }: CommentMenu
               <CommentItem
                 key={item._id}
                 comment={item}
-                song={song}
+                song={currentSong}
                 textModalObject={commentInput}
                 setTextModalObject={setCommentInput}
               />

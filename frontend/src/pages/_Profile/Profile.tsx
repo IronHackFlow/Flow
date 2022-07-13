@@ -8,7 +8,6 @@ import { ISong, IUser } from '../../interfaces/IModels'
 import { editIcon, logOutIcon } from '../../assets/images/_icons'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 import { DataField, SocialProofItem, NoSongsDisplay } from './Displays/ProfileDisplays'
-import { SongDataContext } from '../../contexts/_SongContext/SongData'
 import { useUserSongs } from '../../hooks/useQueries_REFACTOR/useSongs'
 
 interface propStateType {
@@ -18,13 +17,14 @@ interface propStateType {
 function Profile() {
   const { user, setUser } = useAuth()
   const { id } = useParams()
-  const { songs } = useContext(SongDataContext)
+  const songs = useUserSongs(id ? id : user ? user._id : '')
+  // const { songs } = useContext(SongDataContext)
   const navigate = useNavigate()
   const location = useLocation()
   const state = location.state as propStateType
   const { propSongUser } = state
   const [thisUser, setThisUser] = useState<IUser>(user ? user : propSongUser)
-  const [thisUserSongs, setThisUserSongs] = useState<ISong[]>([])
+  const [userSongs, setUserSongs] = useState<ISong[]>([])
   const [thisUserLikes, setThisUserLikes] = useState([])
 
   useEffect(() => {
@@ -38,21 +38,30 @@ function Profile() {
   }, [user, propSongUser])
 
   useEffect(() => {
-    if (!thisUser || (songs && !songs.length)) return
-    let getUserSongs = songs?.filter(each => {
-      if (each?.user?._id === thisUser?._id) return each
-    })
-    setThisUserSongs(getUserSongs)
+    if (!songs.data) return
+    setUserSongs(songs.data)
   }, [thisUser, songs])
 
-  useEffect(() => {}, [thisUser])
+  // useEffect(() => {
+  //   if (!thisUser || (songs && !songs.length)) return
+  //   let getUserSongs = songs?.filter(each => {
+  //     if (each?.user?._id === thisUser?._id) return each
+  //   })
+  //   setThisUserSongs(getUserSongs)
+  // }, [thisUser, songs])
+
+  // useEffect(() => {}, [thisUser])
 
   const logout = () => {
-    setUser(null)
+    // setUser(null)
     localStorage.removeItem('token')
     navigate('/auth')
   }
 
+  if (!user) {
+    console.log('token expired')
+    return null
+  }
   return (
     <div className="Profile">
       <div className="section-1_profile">
@@ -87,8 +96,8 @@ function Profile() {
           >
             <DataField title="Name" addClass="ude-1">
               <p>
-                {thisUser?.given_name}
-                {thisUser?.family_name}
+                {thisUser?.firstName}
+                {thisUser?.lastName}
               </p>
             </DataField>
             <DataField title="Email" addClass="ude-2">
@@ -131,7 +140,7 @@ function Profile() {
                     <Link
                       className="profile-button-outset"
                       to="/editProfile"
-                      state={{ songs: [...thisUserSongs] }}
+                      state={{ allSongs: [...userSongs] }}
                       style={{ borderRadius: '35px 4px 4px 4px' }}
                     >
                       <div className="profile-button-inset pbe-4">

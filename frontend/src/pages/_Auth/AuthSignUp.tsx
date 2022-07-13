@@ -4,8 +4,8 @@ import actions from '../../api'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
 import { signUpSchema } from '../../utils/validationSchemas'
-import ButtonClearText from '../../components/ButtonClearText'
-import ButtonShowPassword from '../../components/ButtonShowPassword'
+import ButtonClearText from '../../components/_Buttons/ButtonClearText'
+import ButtonShowPassword from '../../components/_Buttons/ButtonShowPassword'
 
 type Props = {
   showError: Dispatch<SetStateAction<boolean>>

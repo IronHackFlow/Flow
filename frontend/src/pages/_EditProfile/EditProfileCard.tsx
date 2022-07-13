@@ -1,131 +1,192 @@
-import React, { useState, useCallback, Dispatch, SetStateAction } from 'react'
-import actions from '../../api'
+import React, { useEffect, useState, useCallback, Dispatch, SetStateAction } from 'react'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
-import useDebugInformation from '../../utils/useDebugInformation'
 import EditProfileItem from './EditProfileItem'
 import EditProfileFlowItem from './EditProfileFlowItem'
-import { SectionType } from './EditProfile'
-import { ISong } from '../../interfaces/IModels'
+import { IUser } from '../../interfaces/IModels'
+import { getFieldData, FieldObject } from './functions/handleFieldData'
+import { tempMockUser } from '../_Home/initialData'
 
 type Props = {
   title: string
-  items: Array<SectionType>
-  songs: ISong[]
   toExpand: string
   onExpand: Dispatch<SetStateAction<string>>
 }
 
+export default function EditProfileCard({ title, toExpand, onExpand }: Props) {
+  const { user, setUser } = useAuth()
+  const [fieldData, setFieldData] = useState<FieldObject>(
+    getFieldData(title, user ? user : tempMockUser),
+  )
+  const [editedUser, setEditedUser] = useState<IUser | null>(null)
+  const [isInputReset, setIsInputReset] = useState<boolean>(false)
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
-export default function EditProfileCard({ title, items, songs, toExpand, onExpand }: Props) {
-    // useDebugInformation('EditProfileCard', { title, items, toExpand, onExpand })
-    const { setUser } = useAuth()
-    const [updateList, setUpdateList] = useState<string[]>([])
+  useEffect(() => {
+    if (!user || title === 'Songs') return
+    const data: FieldObject = getFieldData(title, user)
+    setFieldData(data)
+  }, [user, title])
 
-    const displayItems = useCallback((): React.ReactNode => {
-      if (title === 'Songs' && songs) {
-        return songs?.map((inputData, index) => (
-          <EditProfileFlowItem
-            inputData={inputData}
-            key={inputData._id}
-            index={index}
-            indexLength={songs.length}
-          />
-        ))
-      } else if (items) {
-        return items.map(inputData => (
-          <EditProfileItem inputData={inputData} key={inputData.name} updateList={updateList} />
-        ))
-      }
-    }, [items, songs])
+  useEffect(() => {
+    if (!user) return
+    if (editedUser == null) {
+      setEditedUser({ ...user })
+    }
+  }, [user])
 
-    const handleExpandCard = useCallback(
-      title => {
-        onExpand(title)
-      },
-      [onExpand],
+  useEffect(() => {
+    if (isSubmitted) {
+      console.log(fieldData, 'FIELD DATA AFTER SUBMIT')
+    }
+  }, [isSubmitted, fieldData])
+
+  // const displayItems = useCallback((): React.ReactNode => {
+  //   if (title === 'Songs' && songs) {
+  //     return songs?.map((inputData, index) => (
+  //       <EditProfileFlowItem
+  //         inputData={inputData}
+  //         key={inputData._id}
+  //         index={index}
+  //         indexLength={songs.length}
+  //       />
+  //     ))
+  //   } else if (items) {
+  //     return items.map(inputData => (
+  //       <EditProfileItem name={inputData} key={inputData.name} updateList={updateList} />
+  //     ))
+  //   }
+  // }, [items, songs])
+
+  const handleExpandCard = useCallback(
+    title => {
+      onExpand(title)
+    },
+    [onExpand],
+  )
+
+  const clearAllSectionInputText = () => {
+    setIsInputReset(true)
+    setFieldData(prevData =>
+      Object.fromEntries(
+        Object.entries(prevData).map(([key, val]) => [key, { ...val, value: val.initialValue }]),
+      ),
     )
+  }
 
-    const clearInputValue = useCallback(setValue => {
-      setValue('')
-    }, [])
+  const handleSaveForm = async (e: React.FormEvent) => {
+    e.preventDefault()
+    let inputData: any = {}
+    console.log(fieldData, 'what this?')
+    // if (items) {
+    //   items.forEach(each => (each.value !== '' ? (inputData[each.name] = each.value) : null))
+    // }
 
-    const handleClearForm = () => {
-      if (items) return items.forEach(each => clearInputValue(each.setValue))
-    }
+    if (Object.keys(inputData).length === 0) return
 
-    const handleSaveForm = async (e: React.FormEvent) => {
-      e.preventDefault()
-      let inputData: any = {}
-      if (items) {
-        items.forEach(each => (each.value !== '' ? (inputData[each.name] = each.value) : null))
-      }
+    // await actions
+    //   .updateUserProfile(inputData)
+    //   .then(async res => {
+    //     console.log(res)
+    //     setUpdateList(Object.keys(inputData))
 
-      if (Object.keys(inputData).length === 0) return
+    //     await actions
+    //       .getAuthUser()
+    //       .then(res => {
+    //         setUser(res.data.user)
+    //         handleClearForm()
+    //       })
+    //       .catch(err => console.log(err))
+    //   })
+    //   .catch(err => console.log(err))
+  }
 
-      await actions
-        .updateUserProfile(inputData)
-        .then(async res => {
-          console.log(res)
-          setUpdateList(Object.keys(inputData))
+  return (
+    <div
+      className={`edit-section--shadow-inset ${title} ${
+        toExpand === title ? 'expand-card' : 'shrink-card'
+      }`}
+    >
+      <div className="edit-section__header" onClick={() => handleExpandCard(title)}>
+        <div className="edit-section__header--shadow-outset">
+          <h3>{title}</h3>
+        </div>
+      </div>
 
-          await actions
-            .getAuthUser()
-            .then(res => {
-              setUser(res.data.user)
-              handleClearForm()
-            })
-            .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
-    }
+      <div className="edit-section__error--container"></div>
+      <div className="edit-section__form--container">
+        <div className="edit-section__form">
+          <ul className="edit-section__list">
+            {fieldData &&
+              Object.entries(fieldData).map(entry => {
+                return (
+                  <EditProfileItem
+                    key={entry[0]}
+                    fieldData={entry[1]}
+                    setFieldData={setFieldData}
+                    reset={{ isReset: isInputReset, setIsReset: setIsInputReset }}
+                    isSubmitted={isSubmitted}
+                  />
+                )
+              })}
+          </ul>
 
-    return (
-      <div
-        className={`edit-section--shadow-inset ${title} ${
-          toExpand === title ? 'expand-card' : 'shrink-card'
-        }`}
-      >
-        <button
-          className="edit-section__header"
-          type="button"
-          onClick={() => handleExpandCard(title)}
-        >
-          <div className="edit-section__header--shadow-outset">
-            <h3>{title}</h3>
-          </div>
-        </button>
-
-        <div className="edit-section__error--container"></div>
-        <div className="edit-section__form--container">
-          <div className="edit-section__form">
-            <ul className="edit-section__list">{displayItems()}</ul>
-
-            <div
-              className="edit-section__btn--container"
-              style={title === 'Songs' ? { display: 'none' } : {}}
-            >
-              <div className="edit-section__btn-cancel--container">
-                <button
-                  className="edit-section__btn-cancel"
-                  type="button"
-                  onClick={() => handleClearForm()}
-                >
-                  Cancel
-                </button>
-              </div>
-              <div className="edit-section__btn-save--container">
-                <button
-                  className="edit-section__btn-save"
-                  type="button"
-                  onClick={e => handleSaveForm(e)}
-                >
-                  Save
-                </button>
-              </div>
+          <div
+            className="edit-section__btn--container"
+            style={title === 'Songs' ? { display: 'none' } : {}}
+          >
+            <div className="edit-section__btn-cancel--container">
+              <button
+                className="edit-section__btn-cancel"
+                type="button"
+                onClick={() => clearAllSectionInputText()}
+              >
+                Cancel
+              </button>
+            </div>
+            <div className="edit-section__btn-save--container">
+              <button
+                className="edit-section__btn-save"
+                type="button"
+                onClick={() => setIsSubmitted(true)}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>
       </div>
-    )
+    </div>
+  )
 }
 
+// const useSectionKeys = (section: string, title: string) => {
+//   const { user, setUser } = useAuth()
+//   const [fieldData, setFieldData] = useState<FieldObject>(getFieldData(title, user))
+
+//   // const [editedUser, setEditedUser] = useState<IUser | null>(null)
+//   const [isInputReset, setIsInputReset] = useState<boolean>(false)
+
+//   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+//   const [areInputsClear, setAreInputsClear] = useState<boolean>(false)
+
+//   useEffect(() => {
+//     if (isSubmitted) {
+//       // make mutation
+//     }
+//   }, [isSubmitted])
+
+//   useEffect(() => {
+//     if (areInputsClear) {
+//       // clear field object values
+//     }
+//   }, [areInputsClear])
+
+//   // Submit all inputs
+//   const onSubmit = () => {}
+
+//   const onSubmitUpdateEditUser = () => {}
+//   // Validate all inputs
+//   const validateInput = (key: string, value: string) => {}
+
+//   const clearAllInputs = () => {}
+// }

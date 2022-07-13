@@ -10,7 +10,7 @@ import {
   ReplyButtonWrapper,
 } from './ItemButtonWrappers'
 import { ITextModalObject } from './Logic/types'
-import useFormatDate from '../../utils/useFormatDate'
+import useFormatDate from '../../hooks/useFormatDate'
 
 type CommentItemProps = {
   comment: IComment

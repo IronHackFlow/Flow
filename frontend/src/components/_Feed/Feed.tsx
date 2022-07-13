@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, Dispatch, SetStateAction } from 'react'
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 import Video from './Video'
 import { UseQueryResult } from 'react-query'
 import { ISong } from '../../interfaces/IModels'
@@ -9,7 +9,7 @@ type Props = {
   songArray: ISong[] | undefined
   // trackInView: Song,
   // letScroll: boolean,
-  onInView: Dispatch<SetStateAction<string>>
+  onInView: Dispatch<SetStateAction<ISong | undefined>>
 }
 export const Feed = ({ songArray, onInView }: Props) => {
   // useEffect(() => {
@@ -41,7 +41,7 @@ export const Feed = ({ songArray, onInView }: Props) => {
 
 type FeedDisplayProps = {
   feed: string
-  onInView: Dispatch<SetStateAction<string>>
+  onInView: Dispatch<SetStateAction<ISong | undefined>>
 }
 
 export const FeedDisplay = ({ feed, onInView }: FeedDisplayProps) => {

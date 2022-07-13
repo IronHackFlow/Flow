@@ -34,13 +34,14 @@
             // margin-right: 12%;
 
             img {
-              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                contrast(103%);
             }
           }
         }
       }
     }
-    
+
     .error-text-container {
       @include flexCenter(100%, 80%, 0, center, center, row);
 
@@ -54,7 +55,7 @@
         }
         p {
           @include flexCenter(60%, 95%, 5px 30px 30px 5px, center, flex-start, column);
-          font-size: .9rem;
+          font-size: 0.9rem;
           color: white;
         }
       }
@@ -91,15 +92,17 @@
           img {
             height: 80%;
             width: 80%;
-            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+              contrast(103%);
           }
 
           &:active {
             background: #ffbdbd;
             box-shadow: inset 2px 2px 4px #7c2626, inset -2px -2px 4px 0px #ffffff;
-            transition: all .2s;
+            transition: all 0.2s;
             img {
-              filter: invert(51%) sepia(90%) saturate(1015%) hue-rotate(322deg) brightness(118%) contrast(95%);
+              filter: invert(51%) sepia(90%) saturate(1015%) hue-rotate(322deg) brightness(118%)
+                contrast(95%);
             }
           }
         }
@@ -109,7 +112,7 @@
 
         .text--shadow-outset {
           @include flexCenter(74%, 98%, 50px, center, center, row);
-          box-shadow:2px 2px 3px #944b4b, -2px -2px 2px 0px #fdc4c4;
+          box-shadow: 2px 2px 3px #944b4b, -2px -2px 2px 0px #fdc4c4;
 
           .text-err-icon-container {
             @include flexCenter(100%, 13%, 50px, center, center, column);
@@ -121,7 +124,8 @@
               img {
                 height: 85%;
                 width: 85%;
-                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
               }
             }
           }
@@ -140,9 +144,9 @@
               text-align: start;
               white-space: nowrap;
               text-indent: 2%;
-              line-height: .95;
+              line-height: 0.95;
               color: #ffe0e0;
-              font-size: .9rem;
+              font-size: 0.9rem;
               overflow-x: scroll;
             }
           }
@@ -154,47 +158,59 @@
 //error-input
 
 .error-container--input-err {
-  @include flexCenter(50px, 96%, 5px, center, center, row);
-  box-shadow: 2px 2px 3px #696868, -1px -1px 2px #ffe1e1;
+  @include flexCenter(50px, 96%, 0.2em 2em 2em 0.2em, center, center, row);
+  // box-shadow: 2px 2px 3px #696868, -1px -1px 2px #ffe1e1;
+  box-shadow: inset 2px 2px 3px #75444b, inset -1px -1px 2px #f9ebeb;
   background: #ff7c8c;
   position: absolute;
   top: 58.5%;
   //left 27% top 74% width 42px height
 
   .error--shadow-inset {
-    @include flexCenter(82%, 97%, 5px, center, center, row);
-    box-shadow: inset 2px 2px 2px #cb606d, inset -2px -2px 3px 0px #ffb0b9;
+    // 82 97
+    @include flexCenter(100%, 100%, 0, center, center, row);
+    // box-shadow: inset 2px 2px 2px #cb606d, inset -2px -2px 3px 0px #ffb0b9;
 
     .icon-container {
-      @include flexCenter(auto, auto, 50px, center, center, row);
-      padding: 0% 2% 0% 2%;
+      @include flexCenter(100%, 15%, 0, flex-end, center, row);
+      // padding: 0% 2% 0% 2%;
 
       .icon--shadow-outset {
-        @include flexCenter(1.85rem, 1.85rem, 100vh, center, center, row);
-        box-shadow: 2px 2px 3px #bb5864, -1px -1px 2px 0px #ffe9ec;
+        @include flexCenter(67%, 84%, 2em 0.2em 0.2em 2em, center, center, row);
+        // box-shadow: 2px 2px 3px #bb5864, -1px -1px 2px 0px #ffe9ec;
+        box-shadow: 2px 2px 3px #a64a55, -1px -1px 2px 0px #ffeff1;
 
-        img {
-          height: 85%;
-          width: 85%;
-          filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+        .icon--shadow-inset {
+          @include flexCenter(67%, 84%, 2em 0.2em 0.2em 2em, center, center, row);
+          box-shadow: inset 2px 2px 2px #cb606d, inset -2px -2px 3px 0px #ffb0b9;
+
+          img {
+            height: 85%;
+            width: 85%;
+            filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+              contrast(103%);
+          }
         }
 
         &:active {
-          background: #ffbdbd;
-          box-shadow: inset 2px 2px 4px #7c2626, inset -2px -2px 4px 0px #ffffff;
-          transition: all .2s;
-          img {
-            filter: invert(51%) sepia(90%) saturate(1015%) hue-rotate(322deg) brightness(118%) contrast(95%);
-          }
+          // background: #ffbdbd;
+          // box-shadow: inset 2px 2px 4px #7c2626, inset -2px -2px 4px 0px #ffffff;
+          box-shadow: inset 1px 1px 3px #653131, inset -1px -1px 3px 0px #ffffff;
+          // transition: all .2s;
+          // img {
+          //   filter: invert(51%) sepia(90%) saturate(1015%) hue-rotate(322deg) brightness(118%) contrast(95%);
+          // }
         }
       }
     }
     .text-container {
-      @include flexCenter(100%, fill-available, 0, center, center, column);
+      @include flexCenter(100%, 85%, 0, flex-start, center, row);
 
       .text--shadow-outset {
-        @include flexCenter(74%, 96%, 100vh, center, center, row);
-        box-shadow: 2px 2px 3px #bb5864, -1px -1px 2px 0px #ffdbdf;
+        @include flexCenter(67%, 95%, 0.2em 2em 2em 0.2em, center, center, row);
+        // box-shadow: 2px 2px 3px #bb5864, -1px -1px 2px 0px #ffdbdf;
+        box-shadow: 2px 2px 3px #a64a55, -1px -1px 2px 0px #ffeff1;
+        margin-left: 2%;
 
         .text-err-container {
           @include flexCenter(100%, 100%, 0, center, flex-start, column);
@@ -210,9 +226,9 @@
             width: 96%;
             padding-left: 4%;
             text-align: start;
-            line-height: .85;
+            line-height: 0.85;
             color: white;
-            font-size: .85rem;
+            font-size: 0.85rem;
             overflow-x: scroll;
           }
         }

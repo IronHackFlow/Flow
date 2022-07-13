@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { IComment } from '../../../interfaces/IModels'
-import { useAddComment, useEditComment } from '../../../hooks/useQueries_REFACTOR/useComments'
+import { useAuth } from '../../../contexts/_AuthContext/AuthContext'
+import {
+  useAddComment,
+  useEditComment,
+} from '../../../hooks/useQueries_REFACTOR/useComments/useComments'
 
 export default function CommentFormData() {
+  const { user } = useAuth()
   const addComment = useAddComment()
   const editComment = useEditComment()
   const [error, setError] = useState()
@@ -16,26 +21,21 @@ export default function CommentFormData() {
     _commentToEdit?: IComment,
   ) => {
     e.preventDefault()
-    let newText: string = _newText.value
+    const newText: string = _newText.value
     if (_type === 'Edit' && _commentToEdit) {
-      const isValid = validateInput(newText, _type, _commentToEdit.text)
-      if (!isValid) return console.log('ERROR: you havent editted the text')
-      console.log('executing a comment edit!')
-      // editComment.mutate()
+      const isValid = validateInput(newText, _commentToEdit.text)
+      if (!isValid || !user) return console.log('ERROR: you havent editted the text')
+      // editComment.mutate({ songId: _songId, text: newText, })
     } else {
       const isValid = validateInput(newText)
-      if (!isValid) return console.log('ERROR: invalid text')
-      addComment.mutate({ songId: _songId, text: newText })
-      console.log(newText, 'adding a comment!')
+      if (!isValid || !user) return console.log('ERROR: invalid text')
+      addComment.mutate({ songId: _songId, user: user, newText: newText })
     }
   }
 
-  const validateInput = (_text: string, _type?: string, _originalText?: string) => {
+  const validateInput = (_text: string, _originalText?: string) => {
     if (_text === '') return false
-    if (_type && _type === 'Edit') {
-      if (_originalText && _originalText === _type) return true
-      else return false
-    }
+    if (_originalText && _originalText === _text) return false
     return true
   }
 

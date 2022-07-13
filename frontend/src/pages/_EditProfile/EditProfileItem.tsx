@@ -1,63 +1,79 @@
-import { useCallback } from 'react'
-import { useAuth } from '../../contexts/_AuthContext/AuthContext'
-import { errorStyles } from '../../constants/index'
-import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
-import useDebugInformation from '../../utils/useDebugInformation'
-import ButtonClearText from '../../components/ButtonClearText'
-import { SectionType } from './EditProfile'
+import { useState, forwardRef, useEffect, useRef, Dispatch, SetStateAction } from 'react'
+import useMobileKeyboardHandler from '../../hooks/useMobileKeyboardHandler'
+import ButtonClearText from '../../components/_Buttons/ButtonClearText'
+import { IFieldData, FieldObject } from './functions/handleFieldData'
 
-type Props = {
-  inputData: SectionType
-  updateList: string[]
+interface IEditProfileInputProps {
+  fieldData: IFieldData
+  reset: { isReset: boolean; setIsReset: Dispatch<SetStateAction<boolean>> }
 }
 
-export default function EditProfileItem({ inputData, updateList }: Props) {
-  const { name, type, placeholder, autoComplete, value, setValue, borderRadius } = inputData
-  const { user } = useAuth()
-  const { handleOnFocus } = useHandleOSK()
+interface IEditProfileItemProps extends IEditProfileInputProps {
+  setFieldData: Dispatch<SetStateAction<FieldObject>>
+  isSubmitted: boolean
+}
 
-  const handleInputChange = useCallback(
-    e => {
-      setValue(e.target.value)
-    },
-    [setValue],
-  )
+export default function EditProfileItem({
+  fieldData,
+  setFieldData,
+  reset,
+  isSubmitted,
+}: IEditProfileItemProps) {
+  const valueRef = useRef<any>('')
 
-  const handleInputTitle = useCallback((): string => {
-    if (!user) return ''
-    if (updateList.length !== 0) return value !== '' ? value : `${user[name as keyof typeof user]}`
-    if (user?.hasOwnProperty(name)) return `${user[name as keyof typeof user]}`
-    else return ''
-  }, [updateList, user])
+  useEffect(() => {
+    if (isSubmitted && valueRef.current?.value !== '') {
+      // TODO: Validate input here
+      setFieldData(prevData => ({
+        ...prevData,
+        [fieldData.key]: { ...prevData[fieldData.key], value: valueRef.current?.value },
+      }))
+    }
+  }, [valueRef, isSubmitted])
 
   return (
     <li className="edit-section__item">
-      <div className="edit-section__item--shadow-outset" style={{ borderRadius: borderRadius }}>
-        <label htmlFor={name} className="edit-section__item-input-container">
-          <p>{handleInputTitle()}</p>
-          <input
-            id={name}
-            className="edit-section__item-input"
-            style={inputData?.errorPath === 'name' ? errorStyles : {}}
-            // ref={inputRef}
-            name={name}
-            placeholder={placeholder}
-            type={type}
-            autoComplete={autoComplete}
-            value={value}
-            onFocus={() => handleOnFocus()}
-            onChange={e => handleInputChange(e)}
-          />
-        </label>
-
-        <ButtonClearText
-          inset={true}
-          shadowColors={['#6c6b6b', '#e7e7e7', '#5f5f5f', '#fafafa']}
-          // inputRef={inputRef}
-          value={value}
-          setValue={setValue}
-        />
-      </div>
+      <EditProfileInput fieldData={fieldData} reset={reset} ref={valueRef} />
     </li>
   )
 }
+
+const EditProfileInput = forwardRef(({ fieldData, reset }: IEditProfileInputProps, ref: any) => {
+  const { handleOnFocus } = useMobileKeyboardHandler()
+  const [value, setValue] = useState<string>('')
+
+  useEffect(() => {
+    if (reset.isReset) {
+      setValue('')
+      reset.setIsReset(false)
+    }
+  }, [reset.isReset, value])
+
+  return (
+    <div className={`edit-section__item--shadow-outset ${fieldData?.label}`}>
+      <div className="edit-section__item-input-container">
+        <p>{fieldData?.label}</p>
+        <input
+          id={fieldData?.key}
+          className={`edit-section__item-input ${fieldData?.hasValue ? 'hasValue' : ''}`}
+          // style={inputData?.errorPath === 'name' ? errorStyles : {}}
+          ref={ref}
+          name={fieldData?.key}
+          placeholder={fieldData?.placeholder}
+          type="text"
+          autoComplete="off"
+          value={value}
+          onFocus={() => handleOnFocus()}
+          onChange={e => setValue(e.target.value)}
+        />
+      </div>
+
+      <ButtonClearText
+        inset={true}
+        shadowColors={['#6c6b6b', '#e7e7e7', '#5f5f5f', '#fafafa']}
+        value={value}
+        setValue={setValue}
+      />
+    </div>
+  )
+})

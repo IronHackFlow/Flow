@@ -94,3 +94,57 @@
     }
   }
 }
+
+.PlayButton__wrapper {
+  @include flexCenter(100%, 100%, 100vh, center, center, row);
+
+  .PlayButton {
+    @include flexCenter(74%, 74%, 100vh, center, center, row);
+    box-shadow: 2px 2px 3px #464646, -1px -1px 2px 0px #b7b7b7;
+    background: #ec6aa0;
+
+    img {
+      height: 85%;
+      width: 85%;
+      filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%) contrast(103%);
+    }
+    img.bi-play {
+      margin-left: 10%;
+    }
+    img.bi-pause {
+      margin-left: 3%;
+    }
+    &:active {
+      box-shadow: none;
+    }
+    &:hover {
+      background: #e24f8c;
+    }
+  }
+}
+
+.RoundButton__wrapper {
+  @include flexCenter(100%, 100%, 100vh, center, center, row);
+
+  .RoundButton__inset {
+    @include flexCenter(auto, auto, 100vh, center, center, row);
+    box-shadow: inset 2px 2px 3px #313131, inset -1px -1px 2px #b5b5b5;
+    padding: 5px;
+  }
+}
+.RoundButton {
+  @include flexCenter(75%, 75%, 100vh, center, center, row);
+  box-shadow: 2px 2px 3px #313131, -1px -1px 2px #b5b5b5;
+
+  &.Primary {
+    background: $primary-color-300;
+    box-shadow: 2px 2px 3px #6c4656, -1px -1px 2px #ffdceb;
+  }
+  &.Secondary {
+    background: $secondary-color-300;
+    box-shadow: 2px 2px 3px #1a483a, -1px -1px 2px #b5ffe5;
+  }
+  &.Initial {
+    // box-shadow: 2px 2px 3px #565656, -1px -1px 2px #e8e8e8
+  }
+}

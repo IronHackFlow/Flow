@@ -16,15 +16,20 @@
 }
 
 // @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import '0-base/colors';
 @import '0-base/layout';
 @import '1-pages/AuthLogin';
 @import '1-pages/Home';
+@import '1-pages/LoadingHome';
 @import '1-pages/Profile';
-@import '1-pages/Record';
+@import '1-pages/RecordPage';
+@import '1-pages/Recording';
 @import '1-pages/Search';
 @import '1-pages/EditLyrics';
 @import '1-pages/SongScreen';
+@import '1-pages/LoadingSong';
 @import '2-components/NavBar';
+@import '2-components/Icons';
 @import '2-components/Comments';
 @import '2-components/Buttons';
 @import '2-components/Loading';

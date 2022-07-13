@@ -1,10 +1,10 @@
 import React from 'react'
 import axios, { AxiosResponse } from 'axios'
-import { ISongUpload } from '../../pages/_Record/Record'
-import { axiosConfig } from '../client/axiosConfig'
+import { ISongTake } from 'src/interfaces/IModels'
+import { axiosConfig } from '../axios/axiosConfig'
 import { ISong } from '../../interfaces/IModels'
 
-export const addSong = async (currentSong: ISongUpload, awsURL: string) => {
+export const addSong = async (currentSong: ISongTake, awsURL: string) => {
   const payload = { currentSong: currentSong, awsURL: awsURL }
   const addSong = await axios(axiosConfig(`/addSong`, payload))
   console.log(addSong, 'ADDSONG AXIOS POST RESPONSE')
@@ -40,3 +40,31 @@ export const getAllSongs = async (): Promise<ISong[]> => {
   console.log(allSongs, 'GETALLSONGS AXIOS GET RESPONSE')
   return allSongs.data
 }
+
+export const getSongVideo = async () => {
+  const headers = new Headers()
+
+  const key = process.env.REACT_APP_IMVDB_KEY
+  if (!key) return
+  headers.append('IMVDB-APP-KEY', key)
+
+  const options = {
+    mode: 'no-cors',
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type',
+      'IMVDB-APP-KEY': key,
+    },
+  }
+  const video = await axios.get(`https://imvdb.com/api/v1/video/121779770452`, options)
+  console.log(video.data, 'GETVIDEO AXIOS GET RESPONSE')
+  return video.data
+}
+// export const getSongVideo = async () => {
+//   const video = await axios.get(
+//     `http://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=10`,
+//   )
+//   console.log(video.data, 'GETVIDEO AXIOS GET RESPONSE')
+//   return video.data.data
+// }

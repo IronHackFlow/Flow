@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useRef, ReactNode, PropsWithChildren } from 'react'
+import { useQueryClient, useIsMutating, QueryObserver } from 'react-query'
 import { FeedToggleHeader, FeedToggleButton } from './HomeHeader'
 import { tempMockSong } from './initialData'
 import { UserPhoto, SongTitle, SongCaption } from './SongDetails'
@@ -7,36 +8,54 @@ import { ISong } from '../../interfaces/IModels'
 import Navbar from '../../components/_Navbar/Navbar'
 import AudioTimeSlider from '../../components/_AudioTimeSlider/AudioTimeSlider'
 import CommentMenu from '../../components/_Comments/CommentMenu'
-import CommentButtonWrapper from './CommentButtonWrapper'
-import { FollowButtonWrapper } from '../../components/_LikesFollows/FollowButtonWrapper'
-import { LikeButtonWrapper } from '../../components/_LikesFollows/LikeButtonWrapper'
-import { FeedDisplay } from '../../components/_Feed/Feed'
+import { CommentButtonWrapper } from '../../components/_Buttons/SocialButtons/CommentButtonWrapper'
+import { FollowButtonWrapper } from '../../components/_Buttons/SocialButtons/FollowButtonWrapper'
+import { LikeButtonWrapper } from '../../components/_Buttons/SocialButtons/LikeButtonWrapper'
+import { Feed, FeedDisplay } from '../../components/_Feed/Feed'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
-import { useAllSongs } from '../../hooks/useQueries_REFACTOR/useSongs'
+import LoadingHome from 'src/components/Loading/Skeletons/LoadingHome'
+
+enum Feeds {
+  Home = 'Home',
+  Trending = 'Trending',
+  Following = 'Following',
+}
 
 export default function HomeDisplay() {
-  const songs = useAllSongs()
+  const queryClient = useQueryClient()
   const [showCommentMenu, setShowCommentMenu] = useState<boolean>(false)
-  const [toggleFeed, setToggleFeed] = useState<string>('home')
+  const [toggleFeed, setToggleFeed] = useState<string>(Feeds.Home)
   const [songInView, setSongInView] = useState<ISong>(tempMockSong)
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [trackInView, setTrackInView] = useState<string>('')
+  const [trackInView, setTrackInView] = useState<ISong | undefined>()
 
   const renderRef = useRef(0)
 
   useEffect(() => {
-    if (songs.data) {
-      if (trackInView === '') {
-        setSongInView(songs.data[0])
-      } else {
-        let song = songs.data.filter(each => each._id === trackInView)
-        setSongInView(song[0])
+    // const songs: ISong[] | undefined = queryClient.getQueryData('songs')
+    // if (trackInView === '' && songs) {
+    //   setSongInView(songs[0])
+    // } else {
+    //   let song = songs?.filter(each => each._id === trackInView)
+    //   if (song) {
+    //     setSongInView(song[0])
+    //   }
+    // }
+
+    if (trackInView) {
+      // setSongInView(trackInView)
+      const currentSong: ISong | undefined = queryClient.getQueryData([
+        'songs',
+        'current',
+        trackInView?._id,
+      ])
+      if (currentSong) {
+        setSongInView(currentSong)
       }
     }
-  }, [trackInView, songs])
+  }, [trackInView, songInView])
 
-  if (songs.isLoading) return null
-  if (songs.isError) return null
+  // if (!songInView) return <LoadingHome />
   return (
     <div className="Home" id="Home">
       <CommentMenu
@@ -47,9 +66,17 @@ export default function HomeDisplay() {
       />
       <div className="section-1_feed">
         <FeedToggleHeader showMenu={showCommentMenu}>
-          <FeedToggleButton feed="Home" selectedFeed={toggleFeed} onClick={setToggleFeed} />
-          <FeedToggleButton feed="Trending" selectedFeed={toggleFeed} onClick={setToggleFeed} />
-          <FeedToggleButton feed="Following" selectedFeed={toggleFeed} onClick={setToggleFeed} />
+          <FeedToggleButton feed={Feeds.Home} selectedFeed={toggleFeed} onClick={setToggleFeed} />
+          <FeedToggleButton
+            feed={Feeds.Trending}
+            selectedFeed={toggleFeed}
+            onClick={setToggleFeed}
+          />
+          <FeedToggleButton
+            feed={Feeds.Following}
+            selectedFeed={toggleFeed}
+            onClick={setToggleFeed}
+          />
         </FeedToggleHeader>
 
         <FeedDisplay feed={toggleFeed} onInView={setTrackInView} />
@@ -57,11 +84,11 @@ export default function HomeDisplay() {
         <div className="section-1c_song-details">
           <LayoutTwo classes={['song-details-1_actions', 'actions_shadow-div-outset']}>
             <LayoutTwo classes={['actions_shadow-div-inset', 'action-btns-container']}>
-              <FollowButtonWrapper song={songInView} userId="" type="follow" />
-              <LikeButtonWrapper song={songInView} type="like" likeType="song" />
+              <FollowButtonWrapper page="Home" song={songInView} />
+              <LikeButtonWrapper page="Home" song={songInView} likeType="song" />
               <CommentButtonWrapper
+                page="Home"
                 song={songInView}
-                type="comment"
                 onClick={() => setShowCommentMenu(!showCommentMenu)}
                 isPushed={false}
               />
@@ -85,7 +112,11 @@ export default function HomeDisplay() {
                 classes={['play-song-container', 'play-btn-container', 'play-btn-container-2']}
               >
                 <LayoutTwo classes={['play-btn_inset-container', 'play-btn_shadow-div-inset']}>
-                  <PlayButton isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+                  <PlayButton
+                    isPlaying={isPlaying}
+                    setIsPlaying={setIsPlaying}
+                    options={{ offset: 9 }}
+                  />
                 </LayoutTwo>
               </LayoutThree>
 

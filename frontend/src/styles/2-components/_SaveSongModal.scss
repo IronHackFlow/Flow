@@ -17,39 +17,47 @@
 
       .save-song_header-shadow-inset {
         @include flexCenter(89%, 97%, 0.5vh 0.5vh 3.5vh 3.5vh, center, center, row);
-        box-shadow: inset 3px 3px 2px 0px #464646, inset -2px -2px 3px #c0c0c0;
+        // box-shadow: inset 3px 3px 2px 0px #464646, inset -2px -2px 3px #c0c0c0;
         margin-top: 0.5%;
 
         .save-song_header-container {
-          @include flexCenter(100%, 85%, 0px, center, center, row);
+          @include flexCenter(100%, 85%, 0.5em 3em 3em 3em, center, center, row);
+          box-shadow: inset 2px 2px 3px 0px #434343, inset -2px -2px 3px #cfcfcf;
 
           .save-song_header-shadow-outset {
-            @include flexCenter(67%, 93%, 50px, center, center, row);
-            box-shadow: 3px 3px 3px #363636, -2px -2px 2px 0px #c6c6c6;
+            @include flexCenter(70%, 95%, 2em, center, center, row);
+            box-shadow: 2px 2px 3px #363636, -1px -1px 3px 0px #f2f2f2;
 
             h1 {
-              color: #ec6aa0;
-              font-size: 1.3rem;
+              color: #ffffff;
+              font-size: 1.2rem;
+              font-weight: 500;
             }
           }
         }
         .save-song_btn-container {
           @include flexCenter(100%, 15%, 0px, center, center, row);
 
-          .save-song_btn--close {
-            @include flexCenter(67%, 58%, 50px, center, center, row);
-            box-shadow: 2px 2px 3px #383838, -1px -1px 2px 0px #e6e6e6;
-            margin-right: 5%;
-            background: #ec6aa0;
-            img {
-              filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                contrast(103%);
-            }
-            &:active {
-              box-shadow: inset 2px 2px 3px #663449, inset -1px -1px 2px 0px #ffb6d4;
-            }
-            &:hover {
-              background: #e24f8c;
+          .save-song_btn-shadow-div-inset {
+            @include flexCenter(2.3em, 2.3em, 3em, center, center, row);
+            box-shadow: inset 2px 2px 3px 0px #3e3e3e, inset -2px -2px 3px #bdbdbd;
+
+            .save-song_btn--close {
+              @include flexCenter(67%, 67%, 3em, center, center, row);
+              box-shadow: 2px 2px 3px #383838, -1px -1px 2px 0px #e6e6e6;
+              // margin-right: 5%;
+              // background: #ec6aa0;
+
+              img {
+                filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
+                  contrast(103%);
+              }
+              &:active {
+                box-shadow: inset 2px 2px 3px #663449, inset -1px -1px 2px 0px #ffb6d4;
+              }
+              &:hover {
+                background: #e24f8c;
+              }
             }
           }
         }
@@ -58,7 +66,8 @@
 
     .flow-controls-container {
       @include flexCenter(87%, 97%, 4.5vh 4.5vh 0.8vh 0.8vh, center, center, column);
-      box-shadow: inset 3px 3px 3px 0px #3e3e3e, inset -3px -3px 4px #9c9c9c;
+      // box-shadow: inset 3px 3px 3px 0px #3e3e3e, inset -3px -3px 4px #9c9c9c;
+      box-shadow: inset 2px 2px 3px 0px #393939, inset -1px -1px 3px #b9b9b9;
 
       // background: linear-gradient(323deg, #4b4b4b 0%, #757575 100%);
 
@@ -74,11 +83,13 @@
 
           .play-btn-container_shadow-div-outset {
             @include flexCenter(87%, 78%, 5vh 0.3vh 0.3vh 5vh, flex-end, center, row);
-            box-shadow: 3px 3px 5px #2c2c2c, -2px -2px 2px 0px #bcbcbc;
+            // box-shadow: 3px 3px 5px #2c2c2c, -2px -2px 2px 0px #bcbcbc;
+            box-shadow: 2px 2px 3px #373737, -1px -1px 3px 0px #f1f1f1;
 
             .play-btn-container_shadow-div-inset {
               @include flexCenter(87%, 85%, 6vh 0.3vh 0.3vh 6vh, flex-start, center, row);
-              box-shadow: inset 2px 2px 3px 0px #343434, inset -2px -2px 3px #d7d7d7;
+              // box-shadow: inset 2px 2px 3px 0px #343434, inset -2px -2px 3px #d7d7d7;
+              box-shadow: inset 1px 1px 3px 0px #262626, inset -1px -1px 3px #ffffff;
               margin-right: 8%;
 
               .play-btn_shadow-div-outset {
@@ -113,16 +124,19 @@
 
           .play-slider-container_shadow-div-outset {
             @include flexCenter(87%, 97%, 0.5vh 5vh 5vh 0.5vh, center, center, row);
-            box-shadow: 3px 3px 5px #282828, -2px -2px 3px 0px #dfdfdf;
+            // box-shadow: 3px 3px 5px #282828, -2px -2px 3px 0px #dfdfdf;
+            box-shadow: 2px 2px 3px #373737, -1px -1px 3px 0px #f1f1f1;
 
             .play-slider-container_shadow-div-inset {
               @include flexCenter(85%, 97%, 0.5vh 5vh 5vh 0.5vh, center, center, row);
               // background: #5d5d5d;
-              box-shadow: inset 2px 2px 3px 0px #262626, inset -2px -2px 3px #c9c9c9;
+              // box-shadow: inset 2px 2px 3px 0px #262626, inset -2px -2px 3px #c9c9c9;
+              box-shadow: inset 1px 1px 3px 0px #1d1d1d, inset -1px -1px 3px #e4e4e4;
 
               .play-slider_shadow-div-outset {
                 @include flexCenter(74%, 95%, 0.5vh 5vh 5vh 0.5vh, center, center, column);
-                box-shadow: 2px 2px 3px #202020, -2px -2px 2px 0px #d3d3d3;
+                // box-shadow: 2px 2px 3px #202020, -2px -2px 2px 0px #d3d3d3;
+                box-shadow: 1px 1px 3px #1d1d1d, -1px -1px 2px 0px #ffffff;
 
                 .play-slider_shadow-div-inset {
                   @include flexCenter(100%, 100%, 0, space-evenly, flex-start, column);
@@ -173,8 +187,9 @@
         transition: height 0.5s;
 
         .actions-container_shadow-div-outset {
-          @include flexCenter(95%, 95%, 5vh 5vh 0.8vh 0.8vh, center, center, column);
-          box-shadow: 3px 3px 3px #202020, -2px -2px 2px 0px #acacac;
+          @include flexCenter(96%, 96%, 5vh 5vh 0.8vh 0.8vh, center, center, column);
+          // box-shadow: 3px 3px 3px #202020, -2px -2px 2px 0px #acacac;
+          box-shadow: 2px 2px 3px #333333, -1px -1px 3px 0px #dbdbdb;
           transition: height 0.5s;
 
           .actions-container_shadow-div-inset {
@@ -186,7 +201,8 @@
               center,
               column
             );
-            box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
+            // box-shadow: inset 2px 2px 3px 0px #252424, inset -3px -3px 4px #8d8d8d;
+            box-shadow: inset 2px 2px 3px 0px #393939, inset -1px -1px 3px #b9b9b9;
             transition: height 0.5s;
 
             .actions-1_flow-takes {
@@ -199,16 +215,19 @@
 
                 .select-takes-container_shadow-div-outset {
                   @include flexCenter(81%, 95%, 5vh 4vh 4vh 0.2vh, center, center, row);
-                  box-shadow: 3px 3px 5px #323232, -2px -2px 2px 0px #c7c7c7;
+                  // box-shadow: 3px 3px 5px #323232, -2px -2px 2px 0px #c7c7c7;
+                  box-shadow: 2px 2px 3px #333333, -1px -1px 3px 0px #dbdbdb;
 
                   .select-takes-container {
                     @include flexCenter(83%, 97%, 5vh 4vh 4vh 0.5vh, flex-end, center, row);
                     transition: width 0.5s;
-                    box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+                    // box-shadow: inset 3px 3px 3px 0px #323232, inset -2px -2px 2px #acacac;
+                    box-shadow: inset 1px 1px 3px 0px #272626, inset -1px -1px 3px #d9d9d9;
 
                     .select-takes_shadow-div-inset {
                       @include flexCenter(65%, 94%, 100vh, center, center, column);
-                      box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #aeaeae;
+                      // box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #aeaeae;
+                      box-shadow: 2px 2px 3px #333333, -1px -1px 3px 0px #dbdbdb;
                       margin-right: 2%;
 
                       .select-takes_shadow-div-outset {
@@ -299,7 +318,8 @@
 
               .song-inputs-container {
                 @include flexCenter(97%, 95%, 5px 30px 30px 30px, space-evenly, center, column);
-                box-shadow: 3px 3px 3px #2f2f2f, -2px -2px 2px 0px #afafaf;
+                // box-shadow: 3px 3px 3px #2f2f2f, -2px -2px 2px 0px #afafaf;
+                box-shadow: 2px 2px 3px #333333, -1px -1px 3px 0px #dbdbdb;
 
                 .section-title {
                   @include flexCenter(25%, 100%, 0, flex-end, center, column);
@@ -310,6 +330,7 @@
                     text-align: start;
                     text-indent: 4%;
                     margin-bottom: 3%;
+                    font-weight: 500;
                   }
                 }
 
@@ -318,7 +339,8 @@
 
                   .input-container {
                     @include flexCenter(40%, 94%, 0.5vh 5vh 5vh 0.5vh, center, center, row);
-                    box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
+                    // box-shadow: 3px 3px 5px #282828, -2px -2px 2px 0px #a7a7a7;
+                    box-shadow: 1px 1px 4px #1a1a1a, -1px -1px 3px 0px #dbdbdb;
 
                     .input-field-container {
                       @include flexCenter(100%, 100%, 0, center, center, row);
@@ -328,8 +350,9 @@
                         @include flexCenter(80%, 97%, 100vh, center, center, row);
                         border: none;
                         outline: none;
-                        box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
-                        background: initial;
+                        // box-shadow: inset 2px 2px 3px #282828, inset -2px -2px 2px 0px #8e8e8e;
+                        box-shadow: inset 1px 1px 4px 0px #272727, inset -1px -1px 3px #e6e6e6;
+                        background: #818181;
                         text-indent: 4%;
 
                         &::placeholder {
@@ -365,12 +388,14 @@
                   @include flexCenter(22%, 100%, 0, center, flex-start, row);
 
                   .buttons-container_shadow-div-inset {
-                    @include flexCenter(93%, 94%, 100vh, center, center, row);
-                    box-shadow: inset 3px 3px 3px #2c2c2c, inset -2px -2px 2px 0px #848484;
+                    @include flexCenter(90%, 94%, 100vh, center, center, row);
+                    // box-shadow: inset 3px 3px 3px #2c2c2c, inset -2px -2px 2px 0px #848484;
+                    box-shadow: inset 1px 1px 3px 0px #202020, inset -1px -1px 3px #cbcbcb;
 
                     .save-song-button--submit {
                       @include flexCenter(70%, 95%, 100vh, center, center, row);
-                      box-shadow: 3px 3px 3px #262626, -1px -1px 2px #cdcdcd;
+                      // box-shadow: 3px 3px 3px #262626, -1px -1px 2px #cdcdcd;
+                      box-shadow: 2px 2px 3px #383838, -1px -1px 2px #cdcdcd;
                       background: #63debc;
                       border: 1px solid #e0fff6;
                       color: white;

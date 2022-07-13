@@ -1,36 +1,53 @@
-import { addComment, editComment } from '../../../apis/actions/comments.actions'
+import { addComment, editComment, deleteComment } from '../../../apis/actions/comments.actions'
 import { useMutation, useQueryClient } from 'react-query'
-import { ISong } from '../../../interfaces/IModels'
+import { useHandleCommentOnMutate } from './mutationHandlers.comments'
+import { IComment, IUser } from '../../../interfaces/IModels'
 
-type CommentProps = {
+export type CommentProps = {
   songId: string
-  text: string
+  user: IUser
+  newText: string
+  comment?: IComment
 }
+
 export function useAddComment() {
-  const queryClient = useQueryClient()
+  const { onMutate, onError, onSettled } = useHandleCommentOnMutate()
   return useMutation(
     ['song', 'comments'],
-    ({ songId, text }: { songId: string; text: string }) => addComment(songId, text),
+    ({ songId, user, newText, comment }: CommentProps) => addComment(songId, newText),
     {
       onMutate: async data => {
-        const previousSongs = queryClient.getQueryData('songs')
-
-        if (previousSongs) {
-          // queryClient.setQueryData('songs', (prev) => {
-          //   if (prev._id === songId) {
-          //   }
-          // })
-        }
+        console.log(data, 'I NEED TO KNOW WHAT THIS IS FOR MY MUTATION!!!!!!!!')
+        onMutate('Add', data)
       },
     },
   )
 }
 
 export function useEditComment() {
-  // requires songId && commentId
+  const { onMutate, onError, onSettled } = useHandleCommentOnMutate()
+  return useMutation(
+    ['song', 'comments'],
+    ({ songId, user, newText, comment }: CommentProps) => editComment(songId, newText, comment),
+    {
+      onMutate: async data => {
+        console.log(data, 'I NEED TO KNOW WHAT THIS IS FOR MY MUTATION!!!!!!!!')
+        onMutate('Add', data)
+      },
+    },
+  )
 }
 
-const updateSongsOnMutation = () => {}
-// edit -> replace
-// delete -> pull
-// add -> push -- like, follow, comment --- id, id, whole comment
+export function useDeleteComment() {
+  const { onMutate, onError, onSettled } = useHandleCommentOnMutate()
+  return useMutation(
+    ['song', 'comments'],
+    ({ songId, user, newText, comment }: CommentProps) => deleteComment(songId, comment),
+    {
+      onMutate: async data => {
+        console.log(data, 'I NEED TO KNOW WHAT THIS IS FOR MY MUTATION!!!!!!!!')
+        onMutate('Delete', data)
+      },
+    },
+  )
+}

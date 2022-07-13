@@ -28,36 +28,38 @@
   background: linear-gradient(180deg, #b1b1b1 0%, #666666 100%);
 
   .edit-profile__body {
-    @include flexCenter(75%, 96%, 2.7em 2.7em 0.3em 0.3em, center, center, row);
+    // 75%
+    @include flexCenter(85%, 96%, 3.2em 3.2em 0.3em 0.3em, center, center, row);
     box-shadow: 2px 3px 3px #535353, -1px -3px 3px #d3d3d3;
     margin-top: 2%;
 
     .edit-profile__form {
-      @include flexCenter(98%, 97%, 2.3em, center, center, column);
+      @include flexCenter(98.5%, 97%, 2.9em 2.9em 2.4em 2.4em, center, center, column);
       box-shadow: inset 3px 3px 3px #535353, inset -3px -3px 3px #a9a9a9;
 
       .edit-profile__form--shadow-outset {
-        @include flexCenter(87%, 96%, 2em 2em 0.3em 0.3em, center, center, row);
+        @include flexCenter(87%, 96%, 2.4em 2.3em 0.3em 0.3em, center, center, row);
         background: linear-gradient(180deg, #c7c7c7 0%, #939393 100%);
         box-shadow: 3px 3px 3px #4e4e4e, -2px -2px 3px #ffffff;
         margin-top: 2.3%;
 
         .edit-profile__form--shadow-inset {
-          @include flexCenter(97.5%, 96%, 1.5em 2em, center, center, column);
+          @include flexCenter(98%, 96.5%, 2em 2em 1.5em 1.5em, center, center, column);
           box-shadow: inset 2px 2px 3px #6e6e6e, inset -2px -2px 3px #f7f7f7;
 
           .edit-profile__header {
-            @include flexCenter(11%, 100%, 0px, center, center, row);
+            //height: 11%;
+            @include flexCenter(12%, 100%, 0px, center, center, row);
 
             .edit-profile__header--container {
               @include flexCenter(100%, 80%, 0, flex-end, flex-end, row);
 
               .edit-profile__header--shadow-outset {
-                @include flexCenter(86%, 97%, 100vh, center, center, row);
+                @include flexCenter(90%, 97%, 2em 0.25em 0.25em 2em, center, center, row);
                 box-shadow: 3px 3px 3px #7a7a7a, -2px -2px 3px #ffffff;
 
                 .edit-profile__go-back {
-                  @include flexCenter(100%, 20%, 0, center, center, column);
+                  @include flexCenter(100%, 22%, 0, center, center, column);
 
                   .edit-profile__go-back--shadow-inset {
                     @include flexCenter(85%, 85%, 100vh, center, center, row);
@@ -90,7 +92,7 @@
                 }
 
                 .edit-profile__user-title {
-                  @include flexCenter(100%, 80%, 0, center, flex-start, column);
+                  @include flexCenter(100%, 78%, 0, center, flex-start, column);
 
                   .edit-profile__user-title--shadow-inset {
                     @include flexCenter(85%, 97%, 100vh, center, center, row);
@@ -98,7 +100,8 @@
                     margin-left: 1%;
 
                     .edit-profile__user-title--container {
-                      @include flexCenter(100%, 83%, 0, center, center, row);
+                      @include flexCenter(74%, 94%, 2em, center, center, row);
+                      box-shadow: 2px 2px 3px #7a7a7a, -1px -1px 3px #ffffff;
 
                       h3 {
                         height: 80%;
@@ -121,28 +124,42 @@
               @include flexCenter(100%, 20%, 0, center, flex-end, row);
 
               .edit-profile__user-pic--shadow-outset {
-                @include flexCenter(86%, 74%, 100vh, center, center, row);
+                @include flexCenter(80%, 70%, 0.25em 2em 2em 0.25em, flex-start, center, row);
                 box-shadow: 2px 2px 3px #7a7a7a, -2px -2px 3px #ffffff;
+                padding: 5%;
 
-                img {
-                  height: 86%;
-                  width: 86%;
-                  border-radius: 100vh;
+                .edit-profile__user-pic--shadow-inset {
+                  @include flexCenter(
+                    clamp(40px, 90%, 55px),
+                    clamp(40px, 95%, 55px),
+                    3em,
+                    center,
+                    center,
+                    row
+                  );
+                  box-shadow: inset 2px 2px 3px #7a7a7a, inset -2px -2px 3px #ffffff;
+
+                  img {
+                    height: 80%;
+                    width: 80%;
+                    border-radius: 100vh;
+                  }
                 }
               }
             }
           }
 
           .edit-section {
-            @include flexCenter(89%, 100%, 0, space-evenly, center, column);
+            @include flexCenter(88%, 100%, 0, space-evenly, center, column);
 
             .edit-section--shadow-inset {
-              @include flexCenter(5%, 95%, 0.6vh, space-evenly, center, column);
+              @include flexCenter(5%, 96%, 0.6vh, space-evenly, center, column);
               box-shadow: 3px 3px 3px #686868, -2px -2px 2px #e7e7e7;
 
               .edit-section__header {
                 @include flexCenter(10%, 100%, 0, space-evenly, center, column);
                 color: #e24f8c;
+                cursor: pointer;
               }
               .edit-section__error--container {
                 @include flexCenter(25%, 100%, 0, space-evenly, center, column);
@@ -151,80 +168,93 @@
                 @include flexCenter(65%, 100%, 0, space-evenly, center, column);
 
                 .edit-section__form {
-                  @include flexCenter(96%, 97%, 1.4em, center, center, column);
+                  @include flexCenter(96%, 97%, 1.8em 1.8em 0.4em 0.4em, center, center, column);
                   box-shadow: inset 3px 3px 3px #686868, inset -2px -2px 2px #e7e7e7;
 
                   .edit-section__list {
-                    @include flexCenter(77%, 100%, 1.4em, flex-start, center, column);
-                    overflow: scroll;
+                    //height: 77%
+                    @include flexCenter(80%, 100%, 1.4em, flex-start, center, column);
+                    // overflow: scroll;
 
                     .edit-section__item {
-                      @include flexCenter(32%, 100%, 0, flex-end, center, column);
+                      @include flexCenter(33%, 100%, 0, flex-end, center, column);
                       list-style-type: none;
 
                       .edit-section__item--shadow-outset {
-                        @include flexCenter(88%, 91%, 1.1em, center, center, row);
+                        @include flexCenter(88%, 91.5%, 0.5vh, center, center, row);
                         box-shadow: 3px 3px 3px #686868, -1px -1px 4px #ffffff;
                         padding: 0% 2% 0% 2%;
 
                         .edit-section__item-input-container {
-                          @include flexCenter(77%, fill-available, 100vh, center, flex-end, row);
-                          position: relative;
-                          box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
-                          background: #919191;
+                          @include flexCenter(80%, fill-available, 100vh, center, flex-end, column);
+                          // box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
 
                           p {
-                            position: absolute;
-                            top: 2px;
                             height: 12px;
-                            width: 90%;
+                            width: 100%;
                             font-size: 0.75rem;
-                            color: #b5b5b5;
+                            color: #e24f8c;
                             text-align: start;
-                            text-indent: 1%;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            pointer-events: none;
+                            text-indent: 3%;
                           }
                           .edit-section__item-input {
-                            @include flexCenter(70%, 95%, 100vh, center, center, column);
-                            padding-left: 6%;
+                            @include flexCenter(70%, 96%, 100vh, center, center, column);
+                            padding-left: 3%;
+                            // box-shadow: inset 2px 2px 3px #535353, inset -2px -2px 3px #f1f1f1;
+                            box-shadow: inset 1px 1px 3px #4e4e4e, inset -1px -1px 3px #ffffff;
+                            background: #c2c2c2;
+                            border: 2px solid #aaaaaa;
 
                             &:defined {
                               color: pink;
                             }
                             &::placeholder {
-                              color: #fafafa;
+                              color: #8a8a8a;
                               font-size: 0.9rem;
                             }
                             &:focus {
                               border: none;
                               outline: none !important;
                             }
-                          }
-                          .input-error {
-                            &:focus {
-                              border: 2px solid red;
+                            .input-error {
+                              &:focus {
+                                border: 2px solid red;
+                                outline: none !important;
+                                color: white;
+                                border-radius: 100vh;
+                                padding-right: 20%;
+                              }
+                            }
+                            &:focus-within {
+                              border: 2px solid pink;
                               outline: none !important;
                               color: white;
                               border-radius: 100vh;
-                              padding-right: 20%;
+                            }
+                            &.hasValue {
+                              &::placeholder {
+                                color: #ffffff;
+                              }
                             }
                           }
-                          &:focus-within {
-                            border: 2px solid pink;
-                            outline: none !important;
-                            color: white;
-                            border-radius: 100vh;
-                          }
+                        }
+                        &.Username,
+                        &.First.Name,
+                        &.Twitter {
+                          border-radius: 2.8vh 2.8vh 0.5vh 0.5vh;
+                        }
+                        &.Location,
+                        &.Email,
+                        &.SoundCloud {
+                          border-radius: 0.5vh 0.5vh 2.8vh 2.8vh;
                         }
                       }
                     }
                   }
 
                   .edit-section__btn--container {
-                    @include flexCenter(23%, 100%, 0, space-evenly, center, row);
+                    //height: 23%;
+                    @include flexCenter(20%, 100%, 0, space-evenly, center, row);
 
                     .edit-section__btn-cancel--container {
                       @include flexCenter(100%, 30%, 0, center, center, column);
@@ -268,14 +298,17 @@
                 }
               }
             }
+
             .Public {
-              height: 76%;
+              height: 80%;
+              // height: 76%;
               border-radius: 2em 2em 0.3em 0.3em;
             }
             .Songs {
               border-radius: 0.3em 0.3em 1.6em 1.6em;
               .edit-section__header {
-                height: 5%;
+                // height: 5%;
+                height: 4%;
               }
               .edit-section__error--container {
                 height: 0%;
@@ -400,7 +433,8 @@
             }
 
             .shrink-card {
-              height: 5%;
+              // height: 5%;
+              height: 4%;
               transition: all 0.4s;
               .edit-section__header {
                 height: 100%;
@@ -423,7 +457,8 @@
             }
 
             .expand-card {
-              height: 76%;
+              // height: 76%;
+              height: 80%;
               transition: all 0.4s;
               .edit-section__header {
                 height: 10%;
@@ -439,7 +474,8 @@
             }
 
             .Songs.expand-card {
-              height: 76%;
+              // height: 76%;
+              height: 80%;
               transition: all 0.4s;
               .edit-section__header {
                 height: 5%;

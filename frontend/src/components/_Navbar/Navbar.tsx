@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
-import { homeIcon, micIcon, searchIcon, profileIcon } from '../../assets/images/_icons'
 import { LayoutTwo } from '../__Layout/LayoutWrappers'
+import { ButtonTypes } from '../_Buttons/Icon/Icon'
+import { RoundButton, BtnColorsEnum } from '../_Buttons/RoundButton/RoundButton'
 
 type Props = {
   pageClass?: String
@@ -14,10 +15,6 @@ export default function Navbar({ pageClass, isVisible }: Props) {
   const location = useLocation()
   const path = location.pathname
 
-  // <div
-  //   className={`NavBar ${pageClass}`}
-  //   style={isVisible ? { height: '0%', visibility: 'hidden' } : {}}
-  // >
   return (
     <LayoutTwo classes={[`NavBar ${pageClass}`, 'navbar_section']}>
       <LayoutTwo classes={['navbar_shadow-div-outset', 'navbar_shadow-div-inset']}>
@@ -26,12 +23,25 @@ export default function Navbar({ pageClass, isVisible }: Props) {
         <NavBarButton state={{}} path={'/search'} selected={path} />
         <NavBarButton
           state={{}}
-          path={user?._id ? `/profile/${user?._id}` : 'auth'}
+          path={user?._id ? `/profile/${user?._id}` : '/auth'}
           selected={path}
         />
       </LayoutTwo>
     </LayoutTwo>
   )
+}
+
+const getButtonType = (path: string) => {
+  switch (path) {
+    case '/':
+      return ButtonTypes.Home
+    case '/record':
+      return ButtonTypes.Record
+    case '/search':
+      return ButtonTypes.Search
+    default:
+      return ButtonTypes.Profile
+  }
 }
 
 const NavBarButton = ({
@@ -43,100 +53,19 @@ const NavBarButton = ({
   path: string
   selected: string
 }) => {
-  const pathName =
-    path === '/' ? 'home' : path.slice(0, 8) === '/profile' ? 'profile' : path.slice(1)
+  const type = getButtonType(path)
   const isSelected = path === selected ? 'btn-selected' : 'btn-unselected'
-  const bRadius =
-    pathName === 'home'
-      ? '2.5em 0.3em 0.3em 2.5em'
-      : pathName === 'profile'
-      ? '0.3em 2.5em 2.5em 0.3em'
-      : '0.3em'
-  const icon =
-    pathName === 'home'
-      ? homeIcon
-      : pathName === 'record'
-      ? micIcon
-      : pathName === 'search'
-      ? searchIcon
-      : profileIcon
+
   return (
-    <Link
-      to={path}
-      className={`navbar-btn-container ${isSelected}`}
-      state={state}
-      style={{ borderRadius: bRadius }}
-    >
-      <LayoutTwo classes={['navbar-btn_shadow-div-inset', 'navbar-btn_shadow-div-outset']}>
-        <img className="button-icons bi-record" src={icon} alt="icon" />
-      </LayoutTwo>
-      <div className="navbar-btn-text">{pathName}</div>
+    <Link to={path} className={`navbar-btn-container ${type}--navbar ${isSelected}`} state={state}>
+      <div className="navbar-btn_shadow-div-inset">
+        <RoundButton
+          type={type}
+          btnOptions={{ bgColor: BtnColorsEnum.Initial, offset: 8 }}
+          iconOptions={{ color: 'White', size: 75 }}
+        />
+      </div>
+      <div className="navbar-btn-text">{type}</div>
     </Link>
   )
-}
-
-{
-  /* 
-<Link
-  to="/"
-  className={`navbar-btn-container ${path === '/' ? 'btn-selected' : 'btn-unselected'}`}
-  style={{ borderRadius: '2.5em 0.3em 0.3em 2.5em' }}
->
-  <div className="navbar-btn_shadow-div-inset">
-    <div className="navbar-btn_shadow-div-outset">
-      <img className="button-icons bi-social" src={homeIcon} alt="social feed icon" />
-    </div>
-  </div>
-  <div className="navbar-btn-text">Home</div>
-</Link>
-
-<Link
-  to="/recordingBooth"
-  className={`navbar-btn-container ${
-    path === '/recordingBooth' ? 'btn-selected' : 'btn-unselected'
-  }`}
->
-  <div className="navbar-btn_shadow-div-inset">
-    <div className="navbar-btn_shadow-div-outset">
-      <img className="button-icons bi-record" src={micIcon} alt="record song icon" />
-    </div>
-  </div>
-  <div className="navbar-btn-text">Record</div>
-</Link>
-
-<Link
-  to="/search"
-  state={{ returnValue: null }}
-  className={`navbar-btn-container ${
-    path === '/search' ? 'btn-selected' : 'btn-unselected'
-  }`}
->
-  <div className="navbar-btn_shadow-div-inset">
-    <div className="navbar-btn_shadow-div-outset">
-      <img className="button-icons" src={searchIcon} alt="search icon" />
-    </div>
-  </div>
-  <div className="navbar-btn-text">Search</div>
-</Link>
-
-<Link
-  to={user ? `/profile/${user?._id}` : '/auth'}
-  state={{ propSongUser: user }}
-  className={`navbar-btn-container ${
-    path.slice(0, 8) === '/profile' ? 'btn-selected' : 'btn-unselected'
-  }`}
-  style={{ borderRadius: '0.3em 2.5em 2.5em 0.3em' }}
->
-  <div className="navbar-btn_shadow-div-inset">
-    <div className="navbar-btn_shadow-div-outset">
-      <img
-        className="button-icons bi-profile"
-        src={profileIcon}
-        alt="user profile icon"
-        />
-    </div>
-  </div>
-  <div className="navbar-btn-text">Profile</div>
-</Link> 
-*/
 }

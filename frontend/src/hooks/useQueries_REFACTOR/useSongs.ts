@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { generateSongArray } from '../../pages/_Home/initialData'
 import { ISong } from '../../interfaces/IModels'
 import { useMutation, useQuery, UseQueryResult } from 'react-query'
-import { ISongUpload } from '../../pages/_Record/Record'
+import { ISongTake } from 'src/interfaces/IModels'
 import {
   getSignedS3,
   putSignedS3,
@@ -10,17 +9,7 @@ import {
   getUserSongs,
   getAllSongs,
 } from '../../apis/actions/songs.actions'
-
-export default function useSongs() {
-  const [songs, setSongs] = useState<ISong[]>([])
-
-  useEffect(() => {
-    let getSongs = generateSongArray()
-    setSongs(getSongs)
-  }, [])
-
-  return { songs, setSongs }
-}
+import useAxiosPrivate from 'src/apis/axios/useAxiosPrivate'
 
 type SignedS3Params = {
   fileName: string
@@ -29,7 +18,7 @@ type SignedS3Params = {
 }
 
 type AddSong = {
-  currentSong: ISongUpload
+  currentSong: ISongTake
   awsURL: string
 }
 
@@ -52,6 +41,11 @@ export const useSaveSong = () => {
 }
 
 export const useUserSongs = (id: string) => {
+  const axiosPrivate = useAxiosPrivate()
+  const getUserSongs = async (id: string) => {
+    const songs = await axiosPrivate.get(`/getUserSongs/${id}`)
+    return songs.data
+  }
   return useQuery<ISong[], Error>(['user', 'songs', id], () => getUserSongs(id))
 }
 

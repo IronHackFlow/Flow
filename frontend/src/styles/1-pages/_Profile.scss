@@ -86,37 +86,40 @@
 
         .fields_shadow-div-outset {
           @include flexCenter(98%, 97%, 16px 180px 180px 16px, space-evenly, flex-start, column);
-          box-shadow: inset 2px 3px 3px 0px #838282, inset -2px -2px 3px 0px #e3e3e3;
-
+          // box-shadow: inset 2px 3px 3px 0px #838282, inset -2px -2px 3px 0px #e3e3e3;
+          box-shadow: inset 2px 2px 2px 0px #808080, inset -1px -1px 3px 0px #fffdfd;
           .users-details-each {
-            @include flexCenter(11%, 97%, 7px 30px 30px 7px, center, center, row);
-            box-shadow: inset 2px 2px 3px #707070, inset -3px -3px 2px #d5d4d4;
-            margin-left: 2.5%;
+            @include flexCenter(11%, 97%, 7px 30px 30px 7px, center, flex-start, column);
+            // box-shadow: inset 2px 2px 3px #707070, inset -3px -3px 2px #d5d4d4;
+            box-shadow: 1px 1px 3px #616161, -1px -1px 2px #ffffff;
+            margin-left: 2%;
             font-size: 12px;
 
             .p-1 {
-              @include flexCenter(100%, 50px, 0px, center, center, row);
+              @include flexCenter(50%, 100%, 0px, center, center, row);
 
               p {
-                width: 85%;
-                padding-left: 15%;
-                font-size: 0.8rem;
+                width: 100%;
+                // padding-left: 15%;
+                font-size: 0.7rem;
                 color: white;
                 text-align: start;
+                text-indent: 0.5em;
                 word-break: break-all;
                 overflow-y: scroll;
                 line-height: 1;
               }
             }
             .p-2 {
-              @include flexCenter(100%, 80%, 0px, flex-start, center, row);
+              @include flexCenter(50%, 100%, 0px, flex-start, center, row);
 
               p {
-                height: 80%;
+                // height: 80%;
                 width: 90%;
                 font-size: 0.8rem;
                 color: #c08ba1;
                 text-align: start;
+                text-indent: 0.5em;
                 overflow-y: scroll;
               }
             }
@@ -179,7 +182,7 @@
 
               .btn-title {
                 @include flexCenter(30%, 100%, 50px, center, center, column);
-                font-size: .75rem;
+                font-size: 0.75rem;
                 color: white;
               }
 
@@ -351,7 +354,7 @@
               }
             }
             .delete-container {
-              box-shadow: 2px 2px 2px 0px #984466, -2px -2px 2px #ffd2e4;
+              box-shadow: 2px 2px 2px 0px #984466, -1px -1px 2px #deb1c3;
               .delete-question-container {
                 p {
                   color: white;
@@ -361,7 +364,7 @@
                 }
               }
               .delete-btn-container {
-                box-shadow: 2px 2px 2px 0px #984466, -1px -1px 3px #ffbfd9;
+                // box-shadow: 2px 2px 2px 0px #984466, -1px -1px 3px #ffbfd9;
 
                 .delete-btn_shadow-div-inset {
                   box-shadow: inset 2px 2px 2px 0px #a84a72, inset -2px -2px 2px #ffbfda;
@@ -605,14 +608,15 @@
   }
 }
 .delete-container {
-  @include flexCenter(90%, 95%, 11px, center, center, column);
-  box-shadow: 3px 3px 3px #4a4a4a, -2px -2px 2px #bebebe;
+  @include flexCenter(91%, 96%, 6px, center, center, column);
+  box-shadow: 2px 2px 3px #525252, -1px -1px 2px #b7b7b7;
 
   .delete-question-container {
-    @include flexCenter(60%, 100%, 11px, center, center, row);
+    @include flexCenter(60%, 100%, 11px, center, flex-start, row);
 
     p {
-      font-size: 13px;
+      font-size: 0.9rem;
+      margin-top: 2%;
       color: white;
       span {
         color: #e24f8c;
@@ -623,8 +627,8 @@
     @include flexCenter(40%, 100%, 11px, center, center, row);
 
     .delete-btn_shadow-div-inset {
-      @include flexCenter(86%, 97%, 11px, center, center, row);
-      box-shadow: inset 3px 3px 4px #5a5a5a, inset -2px -2px 3px #b6b6b6;
+      @include flexCenter(86%, 97%, 0.5em 3em 3em 0.5em, center, center, row);
+      box-shadow: inset 2px 2px 3px #5a5a5a, inset -1px -1px 3px #c1c1c1;
 
       .space-container {
         width: 40%;
@@ -634,7 +638,7 @@
 
         .cancel-btn_shadow-div-outset {
           @include flexCenter(70%, 90%, 20px, center, center, row);
-          box-shadow: 3px 3px 3px #545454, -2px -2px 3px #a6a6a6;
+          box-shadow: 2px 2px 3px #4a4a4a, -1px -1px 3px #d1d1d1;
           color: #b9b9b9;
 
           &:active {
@@ -648,7 +652,7 @@
 
         .confirm-btn_shadow-div-outset {
           @include flexCenter(70%, 90%, 20px, center, center, row);
-          box-shadow: 3px 3px 3px #545454, -2px -2px 2px #acacac;
+          box-shadow: 2px 2px 3px #4a4a4a, -1px -1px 3px #d1d1d1;
           background: #ec6aa0;
           color: white;
 
