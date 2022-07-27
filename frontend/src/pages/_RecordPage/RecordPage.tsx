@@ -8,10 +8,10 @@ import Navbar from '../../components/_Navbar/Navbar'
 import { ActionButton } from './ActionButtons'
 import { PlayButton } from '../../components/_Buttons/PlayButton'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
-import { ISongTake } from '../../interfaces/IModels'
+import { ISongTake } from './Utils/types'
 import { SelectBeat, SelectSong, SelectNumberOfRhymesButton, Tutorial } from './Menus-Modals/_index'
-import { RecordingBooth } from '../RecordingBooth/RecordingBooth'
-import LyricsFeed from '../RecordingBooth/LyricsFeed'
+import { RecordingBooth } from 'src/features/recordingBooth/RecordingBooth'
+import LyricsFeed from 'src/features/recordingBooth/LyricsFeed'
 import { SaveSong, DeleteSong } from './Buttons/_index'
 import { tempMockUser } from '../_Home/initialData'
 
@@ -68,8 +68,9 @@ export default function RecordPage() {
         isOpen={showRecordingBooth}
         onClose={setShowRecordingBooth}
       />
-
-      <LyricsFeed songLyrics={currentTake.lyrics} isRecording={isPlaying} />
+      <div className="record__transcript-lyrics">
+        <LyricsFeed isRecording={isPlaying} />
+      </div>
 
       <div className="record__rhyme-actions">
         <div className="rhyme-actions">

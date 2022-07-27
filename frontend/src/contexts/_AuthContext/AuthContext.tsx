@@ -1,93 +1,105 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  Dispatch,
-  SetStateAction,
-  ReactNode,
-  useContext,
-} from 'react'
+import { createContext, useState, ReactNode, useContext } from 'react'
 import { useQueryClient } from 'react-query'
-import { useAuthUser } from '../../hooks/useQueries_REFACTOR/useAuthUser'
-// import actions from '../api'
-import axios from 'src/apis/axios/axios'
-import useLocalStorage from 'src/hooks/useLocalStorage'
-import useAxiosPrivate from 'src/apis/axios/useAxiosPrivate'
-import { IUser } from '../../interfaces/IModels'
-import { tempMockUser } from '../../pages/_Home/initialData'
-import { Navigate, useNavigate } from 'react-router'
-
-const AuthUserContext = createContext<AuthProviderType>({
-  auth: null,
-  setAuth: () => null,
-  user: null,
-  setUser: () => null,
-  login: (credentials: { username: string; password: string }) => Promise.resolve(),
-  logout: () => {},
-  signin: () => {},
-  isAuthenticated: false,
-})
+import { trpc } from '../../utils/trpc'
+import { IUser } from '../../../../backend/src/models/User'
+import { useNavigate } from 'react-router'
+import { RegisterInputClientType } from 'src/pages/_Auth/validation'
 
 type AuthProviderType = ReturnType<typeof useProvideAuth>
 
+const AuthUserContext = createContext<AuthProviderType>({
+  user: null,
+  login: (credentials: { username: string; password: string }) => Promise.resolve(),
+  logout: () => {},
+  register: (credentials: RegisterInputClientType) => Promise.resolve(),
+})
+
 const useProvideAuth = () => {
-  const axiosPrivate = useAxiosPrivate()
-  const [user, setUser] = useState<IUser | null>(null)
-  const [auth, setAuth] = useState<string | null>(null)
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const token = localStorage.getItem('token')
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const [user, setUser] = useState<IUser | null>(null)
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    const getUser = async () => {
-      try {
-        const response = await axiosPrivate.get('/getAuthUser', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        if (response) {
-          setUser(response.data)
-          setIsAuthenticated(true)
-          navigate('/')
+  const authRefresh = trpc.useQuery(['auth.refresh'], {
+    retry: 1,
+    enabled: false,
+    onSuccess: data => {
+      localStorage.setItem('token', data)
+      queryClient.invalidateQueries('users.me')
+    },
+    onError: err => {
+      // document.location.href = '/auth'
+    },
+  })
+
+  const authLogin = trpc.useMutation(['auth.login'], {
+    onSuccess: async data => {
+      localStorage.setItem('token', data)
+      await getMe.refetch()
+      navigate('/')
+    },
+    onError: err => {
+      console.log(err.message)
+    },
+  })
+
+  const authRegister = trpc.useMutation(['auth.register'], {
+    onSuccess: data => {
+      login(data)
+    },
+    onError: err => console.log(err.message),
+  })
+
+  const getMe = trpc.useQuery(['users.get-me'], {
+    enabled: !!token,
+    retry: 1,
+    onSuccess: data => {
+      setUser(data)
+    },
+    onError: error => {
+      let retryRequest = true
+      if (error.message.includes('you must be logged in') && retryRequest) {
+        retryRequest = false
+        try {
+          authRefresh.refetch({ throwOnError: true })
+        } catch (err: any) {
+          console.log(err.message)
+          if (err.message.includes('refresh expired token')) {
+            // navigate('/auth')
+            setUser(null)
+            document.location.href = '/auth'
+          }
         }
-      } catch (err) {
-        console.log(err)
-        setIsAuthenticated(false)
-        navigate('/auth')
       }
-    }
-    getUser()
-  }, [auth])
-
-  const signin = () => {}
+    },
+  })
 
   const login = async (credentials: { username: string; password: string }) => {
-    const login = await axios.post(`/logIn`, credentials)
-    if (login.data) {
-      localStorage.setItem('token', login.data.accessToken)
-      setAuth(login.data.accessToken)
-    }
+    console.log(credentials, 'login args')
+    authLogin.mutate(credentials)
   }
 
   const logout = () => {
     localStorage.removeItem('token')
-    setAuth(null)
+    setUser(null)
+    navigate('/auth')
+  }
+
+  const register = async (credentials: RegisterInputClientType) => {
+    console.log(credentials, 'register args')
+    authRegister.mutate(credentials)
   }
 
   return {
     user,
-    setUser,
-    auth,
-    setAuth,
     login,
     logout,
-    signin,
-    isAuthenticated,
+    register,
   }
 }
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const values = useProvideAuth()
-
   return <AuthUserContext.Provider value={values}>{children}</AuthUserContext.Provider>
 }
 
@@ -95,18 +107,4 @@ function useAuth() {
   return useContext(AuthUserContext)
 }
 
-const Authenticated = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, user } = useAuth()
-
-  if (!user) return <Navigate to="/auth" replace={true} />
-  return <>{children}</>
-}
-
-const Unauthenticated = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, user } = useAuth()
-
-  if (user) return null
-  return <>{children}</>
-}
-
-export { useAuth, AuthProvider, Authenticated, Unauthenticated }
+export { useAuth, AuthProvider }

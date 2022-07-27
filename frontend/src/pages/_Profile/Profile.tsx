@@ -1,67 +1,30 @@
 import { useContext, useState, useEffect, useRef, useCallback, PropsWithChildren } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import actions from '../../api'
+import { trpc } from 'src/utils/trpc'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import ProfileFlowItem from './ProfileFlowItem'
 import Navbar from '../../components/_Navbar/Navbar'
-import { ISong, IUser } from '../../interfaces/IModels'
+// import { ISong, IUser } from '../../interfaces/IModels'
+import { IUser } from '../../../../backend/src/models/User'
 import { editIcon, logOutIcon } from '../../assets/images/_icons'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 import { DataField, SocialProofItem, NoSongsDisplay } from './Displays/ProfileDisplays'
-import { useUserSongs } from '../../hooks/useQueries_REFACTOR/useSongs'
-
-interface propStateType {
-  propSongUser: IUser
-}
+import useProfileUser from './hooks/useProfileUser'
+import { UserPhoto } from 'src/components/UserPhoto/UserPhoto'
 
 function Profile() {
-  const { user, setUser } = useAuth()
+  const { user, logout } = useAuth()
   const { id } = useParams()
-  const songs = useUserSongs(id ? id : user ? user._id : '')
-  // const { songs } = useContext(SongDataContext)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const state = location.state as propStateType
-  const { propSongUser } = state
-  const [thisUser, setThisUser] = useState<IUser>(user ? user : propSongUser)
-  const [userSongs, setUserSongs] = useState<ISong[]>([])
+  const { thisUser, isLoading } = useProfileUser(id)
+
   const [thisUserLikes, setThisUserLikes] = useState([])
 
-  useEffect(() => {
-    console.log(user, propSongUser, 'OMFG ITS ALWAYS SOMETHING')
-    if (propSongUser) {
-      setThisUser(propSongUser)
-    } else {
-      if (!user) return
-      setThisUser(user)
-    }
-  }, [user, propSongUser])
-
-  useEffect(() => {
-    if (!songs.data) return
-    setUserSongs(songs.data)
-  }, [thisUser, songs])
-
-  // useEffect(() => {
-  //   if (!thisUser || (songs && !songs.length)) return
-  //   let getUserSongs = songs?.filter(each => {
-  //     if (each?.user?._id === thisUser?._id) return each
-  //   })
-  //   setThisUserSongs(getUserSongs)
-  // }, [thisUser, songs])
-
-  // useEffect(() => {}, [thisUser])
-
-  const logout = () => {
-    // setUser(null)
-    localStorage.removeItem('token')
-    navigate('/auth')
+  const logoutHandler = () => {
+    // confirm modal
+    logout()
   }
 
-  if (!user) {
-    console.log('token expired')
-    return null
-  }
+  if (!thisUser || isLoading) return <p>loading..</p>
   return (
     <div className="Profile">
       <div className="section-1_profile">
@@ -73,7 +36,8 @@ function Profile() {
               'user-pic_shadow-div-inset',
             ]}
           >
-            <img className="profile-pic" src={thisUser?.picture} alt="prof pic" />
+            {/* <img className="profile-pic" src={thisUser?.picture} alt="prof pic" /> */}
+            <UserPhoto photoUrl={thisUser?.picture} username={thisUser?.username} />
           </LayoutThree>
           <LayoutThree
             classes={[
@@ -140,7 +104,6 @@ function Profile() {
                     <Link
                       className="profile-button-outset"
                       to="/editProfile"
-                      state={{ allSongs: [...userSongs] }}
                       style={{ borderRadius: '35px 4px 4px 4px' }}
                     >
                       <div className="profile-button-inset pbe-4">
@@ -159,7 +122,7 @@ function Profile() {
                     <button
                       className="profile-button-outset"
                       style={{ borderRadius: '4px 4px 4px 35px' }}
-                      onClick={() => logout()}
+                      onClick={() => logoutHandler()}
                     >
                       <div className="btn-title">Log Out</div>
                       <div className="profile-button-inset pbe-5">
@@ -193,25 +156,21 @@ function Profile() {
 export default Profile
 
 const ProfileUserSongsWrapper = ({ user }: { user: IUser }) => {
-  const songs = useUserSongs(user?._id)
-  const [userSongs, setUserSongs] = useState<ISong[]>([])
+  const id = user._id
+  const songs = trpc.useQuery(['songs.users-songs', { _id: id }], {
+    enabled: !!id,
+  })
 
-  useEffect(() => {
-    console.log(songs, 'USEQUERYRESULT IN UI')
-    if (songs.data) {
-      setUserSongs(songs.data)
-    }
-  }, [songs])
-
-  if (userSongs && userSongs.length === 0) return <NoSongsDisplay />
+  if (songs.isLoading && !songs.data) return <p>loading... </p>
+  if (songs.data && songs.data.length === 0) return <NoSongsDisplay />
   return (
     <ul className="songs-1_songs-list">
-      {userSongs?.map((song, index) => {
+      {songs.data?.map((song: any, index: number) => {
         return (
           <ProfileFlowItem
             key={`${song._id}_${index}`}
             song={song}
-            songs={userSongs}
+            songs={songs.data}
             // setSongs={setThisUserSongs}
             profileUser={user}
           />

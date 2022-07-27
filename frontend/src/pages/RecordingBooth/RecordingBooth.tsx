@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, Dispatch, SetStateAction } from 'react'
 import ReactDOM from 'react-dom'
 import { Beat } from 'src/constants/index'
-import { ISongTake } from '../../interfaces/IModels'
+import { ISongTake } from '../_RecordPage/Utils/types'
 import { RecordButton } from '../_RecordPage/Buttons/Record'
 import { ButtonTypes } from 'src/components/_Buttons/Icon/Icon'
 import { RoundButton, BtnColorsEnum } from 'src/components/_Buttons/RoundButton/RoundButton'
@@ -10,6 +10,7 @@ import useMediaRecorder from './useMediaRecorder'
 import LyricsFeed from './LyricsFeed'
 import useTranscript from '../_RecordPage/Utils/useTranscript'
 import { useAuth } from 'src/contexts/_AuthContext/AuthContext'
+import { Types } from 'mongoose'
 
 export enum RhymeActions {
   Top = 'Top',
@@ -48,7 +49,7 @@ export const RecordingBooth = ({
 
   useEffect(() => {
     if (!user) return
-    const id = parseInt(currentTake._id) + 1
+    const id = parseInt(currentTake._id.toString()) + 1
     if (recorderState.audio !== '' && !recorderState.initRecording) {
       const duration =
         recorderState.recordingMinutes * 60000 + recorderState.recordingSeconds * 1000
@@ -62,7 +63,7 @@ export const RecordingBooth = ({
         duration: duration,
         caption: '',
       }
-      setCurrentTake(createTake)
+      setCurrentTake({ ...createTake })
       setSongTakes(prevTakes => [...prevTakes, createTake])
       resetRecording()
     }

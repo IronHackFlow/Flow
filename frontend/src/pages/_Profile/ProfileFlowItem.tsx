@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import useFormatDate from '../../hooks/useFormatDate'
 import { editIcon, closeIcon, playIcon, pauseIcon } from '../../assets/images/_icons'
-import { IUser, ISong } from '../../interfaces/IModels'
+// import { IUser } from '../../interfaces/IModels'
+import { IUser } from '../../../../backend/src/models/User'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 import { ConfirmDeleteSong } from './Displays/DeleteSongDisplay'
 import { PlayButton } from '../../components/_Buttons/PlayButton'
+import { ISong } from '../../../../backend/src/models/Song'
 
 type Props = {
   song: ISong
@@ -52,7 +54,7 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
     //   .catch(console.error)
   }
 
-  const setSongRefs = useCallback(node => {
+  const setSongRefs = useCallback((node: any) => {
     songListRef.current = node
   }, [])
 
@@ -69,7 +71,7 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
     })
   }
   const navigateToSongScreen = () => {
-    navigate(`/songScreen/${song.user._id}`, { state: { currentSong: song._id } })
+    // navigate(`/songScreen/${song.user?._id}`, { state: { currentSong: song._id } })
   }
 
   return (
@@ -118,7 +120,7 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
           </div>
 
           <LayoutTwo classes={['profile-songs__action-btns--container', 'buttons-inner']}>
-            {profileUser?._id === user?._id && (
+            {profileUser?._id === user?._id ? (
               <>
                 <LayoutThree
                   classes={['delete-btn-container delete', 'play-container', 'play-outset']}
@@ -140,6 +142,8 @@ export default function ProfileFlowItem({ song, songs, profileUser }: Props) {
                   </Link>
                 </LayoutThree>
               </>
+            ) : (
+              <></>
             )}
             <LayoutThree classes={['delete-btn-container play', 'play-container', 'play-outset']}>
               <PlayButton

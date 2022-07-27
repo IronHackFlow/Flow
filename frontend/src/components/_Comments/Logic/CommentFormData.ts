@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { IComment } from '../../../interfaces/IModels'
+import { trpc } from 'src/utils/trpc'
+// import { IComment } from '../../../interfaces/IModels'
+import { IComment } from '../../../../../backend/src/models/Comment'
 import { useAuth } from '../../../contexts/_AuthContext/AuthContext'
-import {
-  useAddComment,
-  useEditComment,
-} from '../../../hooks/useQueries_REFACTOR/useComments/useComments'
 
 export default function CommentFormData() {
   const { user } = useAuth()
-  const addComment = useAddComment()
-  const editComment = useEditComment()
+  const addComment = trpc.useMutation(['comments.create'], {
+    onSuccess: data => console.log(data, 'success: added a comment'),
+  })
+  const editComment = trpc.useMutation(['comments.edit'], {
+    onSuccess: data => console.log(data, 'success: edited a comment'),
+  })
   const [error, setError] = useState()
   const [notification, setNotification] = useState()
 
@@ -24,12 +26,12 @@ export default function CommentFormData() {
     const newText: string = _newText.value
     if (_type === 'Edit' && _commentToEdit) {
       const isValid = validateInput(newText, _commentToEdit.text)
-      if (!isValid || !user) return console.log('ERROR: you havent editted the text')
-      // editComment.mutate({ songId: _songId, text: newText, })
+      if (!isValid || !user) return console.log('ERROR: you have not edited the text')
+      editComment.mutate({ _id: _commentToEdit._id, song: _songId, text: newText })
     } else {
       const isValid = validateInput(newText)
       if (!isValid || !user) return console.log('ERROR: invalid text')
-      addComment.mutate({ songId: _songId, user: user, newText: newText })
+      addComment.mutate({ song: _songId, user: user, text: newText })
     }
   }
 

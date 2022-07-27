@@ -48,12 +48,12 @@ export default function EachLyricLine({ line, index, updateLyrics }: Props) {
     // console.log(e, 'saved')
   }
 
-  const setLyricRefs = useCallback(node => {
+  const setLyricRefs = useCallback((node: any) => {
     lyricRefs.current = node
   }, [])
 
   const mapEachLyric = useCallback(
-    wordArr => {
+    (wordArr: any) => {
       return wordArr.array.map((each: any, index: number) => {
         if (isEditing) {
           return (

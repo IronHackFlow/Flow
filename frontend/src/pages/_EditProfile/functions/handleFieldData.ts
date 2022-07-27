@@ -1,4 +1,5 @@
-import { IUser } from 'src/interfaces/IModels'
+// import { IUser } from 'src/interfaces/IModels'
+import { IUser } from '../../../../../backend/src/models/User'
 
 export interface IFieldData {
   key: string

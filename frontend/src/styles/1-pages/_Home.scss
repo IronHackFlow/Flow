@@ -216,7 +216,7 @@
                   p {
                     height: 45%;
                     width: 100%;
-                    font-size: 0.8rem;
+                    font-size: 0.7rem;
                     color: $primary-color-200;
                     overflow-x: hidden;
                   }
@@ -285,13 +285,23 @@
                   margin-left: 5%;
                   position: relative;
 
-                  img {
-                    height: calc(5vh * 0.9);
-                    width: calc(5vh * 0.9);
-                    border-radius: 50px;
+                  .user-pic_wrapper {
+                    @include flexCenter(
+                      calc(5vh * 0.9),
+                      calc(5vh * 0.9),
+                      100%,
+                      center,
+                      stretch,
+                      row
+                    );
                     margin-left: 11%;
-                    border: 2px solid $primary-color-400;
-                    background: $primary-color-400;
+                    overflow: hidden;
+
+                    div,
+                    img,
+                    p {
+                      border-radius: 100%;
+                    }
                   }
                 }
               }
@@ -310,7 +320,7 @@
                   position: relative;
 
                   .song-title_title--container {
-                    @include flexCenter(80%, 97%, 0.3em 0.3em 1.5em 0.3em, center, center, row);
+                    @include flexCenter(80%, 97%, 0.2em 0em 1.3em 0.2em, center, center, row);
                     box-shadow: inset 2px 2px 2px #5d5d5d, inset -2px -2px 2px #cbcbcb;
                     background: $primary-color-300;
                     position: absolute;
@@ -345,31 +355,29 @@
                   }
                 }
 
-                .song-caption-container {
-                  @include flexCenter(33%, 100%, 0, flex-start, flex-start, row);
+                .song-caption--container {
+                  @include flexCenter(33%, 97%, 0, flex-start, center, row);
+                  padding-left: 3%;
 
-                  .song-date {
-                    display: flex;
-                    height: 100%;
-                    font-size: 0.8rem;
+                  .song-caption__text {
+                    @include flexCenter(100%, auto, 0, center, flex-start, row);
+                    font-size: 0.7em;
                     color: $primary-color-200;
-                    margin: 0em 0.4em 0em 0.6em;
-                    text-align: start;
 
-                    span {
-                      margin-left: 0.3em;
+                    &.bullet {
+                      align-items: center;
+                      font-size: 1.5rem;
+                      margin: 0% 2%;
+                      padding-bottom: 1%;
                     }
-                  }
-
-                  .song-caption {
-                    height: 100%;
-                    width: 76%;
-                    font-size: 0.8rem;
-                    white-space: nowrap;
-                    text-align: left;
-                    color: $primary-color-200;
-                    overflow-x: hidden;
-                    text-overflow: ellipsis;
+                    &.caption {
+                      display: block;
+                      width: 76%;
+                      text-align: start;
+                      white-space: nowrap;
+                      overflow-x: hidden;
+                      text-overflow: ellipsis;
+                    }
                   }
                 }
               }

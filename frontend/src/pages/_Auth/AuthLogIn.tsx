@@ -12,8 +12,7 @@ type Props = {
 }
 
 function AuthLogIn({ showError, onError }: Props) {
-  const { login, setUser } = useAuth()
-  const navigate = useNavigate()
+  const { login } = useAuth()
   const { handleOnFocus } = useHandleOSK()
 
   const [username, setUsername] = useState('')
@@ -58,7 +57,7 @@ function AuthLogIn({ showError, onError }: Props) {
     return { valid, errors }
   }
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const loginHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const { valid, errors } = await validateCredentials()
 
@@ -77,7 +76,7 @@ function AuthLogIn({ showError, onError }: Props) {
 
   return (
     <div className="user-login-3_form">
-      <form className="login-form" onSubmit={event => handleLogin(event)}>
+      <form className="login-form" onSubmit={event => loginHandler(event)}>
         <div className="user-form-container" style={{ justifyContent: 'flex-start' }}>
           <div className="login-input-container email-container" style={{ height: '40%' }}>
             <div

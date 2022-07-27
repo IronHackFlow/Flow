@@ -10,7 +10,6 @@ import flowLogo from '../../assets/images/FlowLogo.png'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 
 const Auth = () => {
-  const { setUser } = useAuth()
   const navigate = useNavigate()
   const [isLogIn, setIsLogIn] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -38,7 +37,7 @@ const Auth = () => {
             .getAuthUser()
             .then(res => {
               if (res.data.isLoggedIn) {
-                setUser(res.data.user)
+                // setUser(res.data.user)
                 navigate('/')
               }
             })
@@ -54,7 +53,9 @@ const Auth = () => {
   return (
     <LayoutTwo classes={['LogIn', 'page-container']}>
       <LayoutTwo classes={['upper-container', 'upper-outset']}>
-        <LayoutTwo classes={['upper-inset', 'upper-inset-outset']}>Welcome To</LayoutTwo>
+        <LayoutTwo classes={['upper-inset', 'upper-inset-outset']}>
+          <p>Welcome To</p>
+        </LayoutTwo>
       </LayoutTwo>
 
       <LayoutTwo classes={['middle-container', 'mid-outset']}>

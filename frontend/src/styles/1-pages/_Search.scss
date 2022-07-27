@@ -86,7 +86,7 @@
 
     .section-2_search-results {
       @include flexCenter(77%, 96%, 25px 25px 5px, flex-start, center, column);
-      box-shadow: 2px 3px 4px #414141, -3px -2px 3px #c3c3c3;
+      box-shadow: 2px 3px 4px #414141, -2px -1px 3px #c3c3c3;
 
       .results-1_recent {
         @include flexCenter(20%, 100%, 25px, center, center, column);
@@ -189,14 +189,11 @@
                       box-shadow: 2px 2px 3px #3d3f3f, -2px -2px 3px #9e9e9e;
 
                       .search-results-link {
-                        height: 90%;
-                        width: 90%;
+                        @include flexCenter(90%, 90%, 100vh, center, center, row);
                         overflow: hidden;
-                        border-radius: 50%;
 
-                        img {
-                          height: 100%;
-                          width: 100%;
+                        .prof-pic {
+                          @include flexCenter(100%, 100%, 100vh, center, stretch, row);
                         }
                       }
                     }

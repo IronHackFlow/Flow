@@ -1,22 +1,33 @@
 import { useLayoutEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ISong } from '../../interfaces/IModels'
+import { UserPhoto } from 'src/components/UserPhoto/UserPhoto'
+import { ISong } from '../../../../backend/src/models/Song'
 import useFormatDate from '../../hooks/useFormatDate'
 
 type SongTitleProps = {
   song: ISong
 }
 
-export const UserPhoto = ({ song }: { song: ISong }) => {
+const PRIMARY_COLOR_400 = '#e24f8c'
+const BASE_COLOR = '#ffffff'
+
+export const UserPhotoContainer = ({ song }: { song: ISong }) => {
+  const user = song?.user
   return (
     <div className="user-pic-container">
       <div className="user-pic_shadow-div-outset">
         <Link
-          to={`/profile/${song?.user?._id}`}
-          state={{ propSongUser: song?.user }}
+          to={`/profile/${user?._id}`}
+          state={{ propSongUser: user }}
           className="user-pic_shadow-div-inset"
         >
-          <img src={song?.user?.picture} alt="" />
+          <div
+            className="user-pic_wrapper"
+            style={{ border: `2px solid ${user?.picture ? PRIMARY_COLOR_400 : BASE_COLOR}` }}
+          >
+            <UserPhoto photoUrl={user?.picture} username={user?.username} />
+          </div>
+          {/* <img src={song?.user?.picture} alt="" /> */}
         </Link>
       </div>
     </div>
@@ -63,12 +74,10 @@ export const SongTitle = ({ song }: SongTitleProps) => {
 export const SongCaption = ({ song }: { song: ISong }) => {
   const { formatDate } = useFormatDate()
   return (
-    <div className="song-caption-container">
-      <p className="song-date">
-        {formatDate(song.createdOn, 'm')}
-        <span>{String.fromCodePoint(8226)}</span>
-      </p>
-      <p className="song-caption">
+    <div className="song-caption--container">
+      <p className="song-caption__text date">{formatDate(song.createdOn, 'm')}</p>
+      <p className="song-caption__text bullet">{String.fromCodePoint(8226)}</p>
+      <p className="song-caption__text caption">
         {song?.caption ? `${song.caption}` : 'no caption for this song'}
       </p>
     </div>

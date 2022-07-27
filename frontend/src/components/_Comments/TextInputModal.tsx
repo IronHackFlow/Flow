@@ -11,7 +11,8 @@ import ReactDOM from 'react-dom'
 import useMobileKeyboardHandler from '../../hooks/useMobileKeyboardHandler'
 import CommentFormData from './Logic/CommentFormData'
 import { CommentActions, ITextModalObject } from './Logic/types'
-import { ISong, IComment } from '../../interfaces/IModels'
+// import { ISong, IComment } from '../../interfaces/IModels'
+import { IComment } from '../../../../backend/src/models/Comment'
 import { sendIcon } from '../../assets/images/_icons'
 
 type TextInputProps = {
@@ -113,7 +114,7 @@ const TextArea = forwardRef(
     }, [ref])
 
     const expandTextarea = useCallback(
-      text => {
+      (text: EventTarget & HTMLTextAreaElement) => {
         setComment(text.value)
         text.style.height = 'inherit'
         let computed = window.getComputedStyle(text)

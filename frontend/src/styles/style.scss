@@ -24,6 +24,7 @@
 @import '1-pages/Profile';
 @import '1-pages/RecordPage';
 @import '1-pages/Recording';
+@import '1-pages/Record/LyricFeed';
 @import '1-pages/Search';
 @import '1-pages/EditLyrics';
 @import '1-pages/SongScreen';
@@ -39,4 +40,5 @@
 @import '2-components/SaveSongModal';
 @import '2-components/SelectMenuModal';
 @import '2-components/ContinueModal';
+@import '2-components/UserPhoto';
 @import '3-helpers/mixins';

@@ -374,10 +374,8 @@
                 box-shadow: 2px 2px 3px #424242, -1px -1px 3px 0px #d1d1d1;
 
                 .social-button {
-                  @include flexCenter(2.5em, 2.5em, 100vh, center, center, row);
-                  position: relative;
+                  @include flexCenter(70%, 100%, 0, center, center, row);
                   color: #ec6aa0;
-                  box-shadow: 2px 2px 3px #424242, -1px -1px 3px 0px #e3e3e3;
 
                   .follow {
                     height: 2.8em;
@@ -392,7 +390,8 @@
                     height: 55%;
                     width: 55%;
                   }
-                  &:hover {
+
+                  button:hover {
                     background: #f3b9c3;
                     box-shadow: 2px 2px 3px #424242, -1px -1px 2px 0px #ffffff;
                     img {
@@ -400,39 +399,45 @@
                         brightness(107%) contrast(103%);
                     }
                   }
-                }
 
-                .pushed {
-                  box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
-                  background: #ec6aa0;
-                  border: 1px solid #e24f8c;
-                  // transition: all 0.2s ease-in;
+                  &.pushed {
+                    button {
+                      box-shadow: inset 3px 3px 5px #662e46, inset -2px -2px 2px #fcb5db;
+                      background: #ec6aa0;
+                      border: 1px solid #e24f8c;
+                      // transition: all 0.2s ease-in;
 
-                  img {
-                    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg) brightness(107%)
-                      contrast(103%);
-                  }
-                  &:hover {
-                    background: #f3b9c3;
-                    box-shadow: inset 3px 3px 5px #7f4c61, inset -2px -2px 2px #ffffff;
-                    border: 1px solid #ff84b7;
+                      img {
+                        filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(293deg)
+                          brightness(107%) contrast(103%);
+                      }
+                      &:hover {
+                        background: #f3b9c3;
+                        box-shadow: inset 3px 3px 5px #7f4c61, inset -2px -2px 2px #ffffff;
+                        border: 1px solid #ff84b7;
+                      }
+                    }
                   }
                 }
 
                 .songscreen__text--container {
-                  @include flexCenter(25%, 93%, 0.25em, center, center, row);
-                  box-shadow: inset 2px 2px 3px #66364a, inset -1px -1px 3px 0px #ffd3e6;
-                  margin-bottom: 0.3em;
-                  background: #ec6aa0;
+                  @include flexCenter(30%, 100%, 0, center, flex-end, row);
 
-                  .songscreen__text {
-                    font-size: 0.75rem;
-                    font-weight: bold;
-                    color: white;
-                  }
-                  .songscreen__text.num {
-                    color: #ffb5d4;
-                    margin-right: 0.35em;
+                  .songscreen__text--wrapper {
+                    @include flexCenter(80%, 93%, 0.25em, center, center, row);
+
+                    box-shadow: inset 2px 2px 3px #66364a, inset -1px -1px 3px 0px #ffd3e6;
+                    // margin-bottom: 0.3em;
+                    background: #ec6aa0;
+                    .songscreen__text {
+                      font-size: 0.75rem;
+                      font-weight: bold;
+                      color: white;
+                    }
+                    .songscreen__text.num {
+                      color: #ffb5d4;
+                      margin-right: 0.35em;
+                    }
                   }
                 }
               }

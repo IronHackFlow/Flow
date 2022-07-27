@@ -1,7 +1,8 @@
 import { addComment, editComment, deleteComment } from '../../../apis/actions/comments.actions'
 import { useMutation, useQueryClient } from 'react-query'
 import { useHandleCommentOnMutate } from './mutationHandlers.comments'
-import { IComment, IUser } from '../../../interfaces/IModels'
+import { IComment } from '../../../interfaces/IModels'
+import { IUser } from '../../../../../backend/src/models/User'
 
 export type CommentProps = {
   songId: string

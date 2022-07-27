@@ -3,7 +3,7 @@ import SaveSongModal from 'src/components/_SaveSongModal/SaveSongModal'
 import { RoundButton } from 'src/components/_Buttons/RoundButton/RoundButton'
 import { ButtonTypes } from 'src/components/_Buttons/Icon/Icon'
 import { BtnColorsEnum } from 'src/components/_Buttons/RoundButton/RoundButton'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from '../Utils/types'
 import InputError from 'src/components/Errors/InputError'
 
 type SaveSongButtonProps = {

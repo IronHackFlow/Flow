@@ -1,6 +1,6 @@
 import { useState, useRef, forwardRef, useEffect, Dispatch, SetStateAction } from 'react'
 import { useSongForm } from '../Logic/useSongForm'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 import ButtonClearText from '../../_Buttons/ButtonClearText'
 import InputError from '../../Errors/InputError'
 

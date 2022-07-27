@@ -1,5 +1,6 @@
 import { useQueryClient } from 'react-query'
-import { IComment, ISong, IUser } from '../../../interfaces/IModels'
+import { IComment, ISong } from '../../../interfaces/IModels'
+import { IUser } from '../../../../../backend/src/models/User'
 
 export interface ICommentMutateData {
   songId: string

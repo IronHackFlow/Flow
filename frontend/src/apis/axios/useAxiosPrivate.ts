@@ -6,15 +6,14 @@ import { useAuth } from 'src/contexts/_AuthContext/AuthContext'
 
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken()
-  const { auth, setAuth, setUser } = useAuth()
+  const { logout } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {
-        if (!auth) return config
         if (!config.headers['Authorization']) {
-          config.headers['Authorization'] = `Bearer ${auth}`
+          // config.headers['Authorization'] = `Bearer ${auth}`
         }
         return config
       },
@@ -27,7 +26,7 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config
         if (error?.response?.data?.message === 'redirect') {
           // refresh token has expired
-          setUser(null)
+          logout()
           return navigate('/auth')
         }
         if (error?.response?.status === 403 && !prevRequest?.sent) {
@@ -45,7 +44,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept)
       axiosPrivate.interceptors.response.eject(responseIntercept)
     }
-  }, [auth, refresh])
+  }, [refresh])
 
   return axiosPrivate
 }

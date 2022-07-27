@@ -1,6 +1,4 @@
 import { useState, useRef, Dispatch, SetStateAction } from 'react'
-import { useNavigate } from 'react-router-dom'
-import actions from '../../api'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import useHandleOSK from '../../hooks/useMobileKeyboardHandler'
 import { signUpSchema } from '../../utils/validationSchemas'
@@ -13,9 +11,8 @@ type Props = {
 }
 
 function AuthSignUp({ showError, onError }: Props) {
-  const { setUser } = useAuth()
+  const { register } = useAuth()
   const { handleOnFocus } = useHandleOSK()
-  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -26,21 +23,25 @@ function AuthSignUp({ showError, onError }: Props) {
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 
-  const validateInputs = (e: any) => {
-    const userData = { user_name: username, email: email, password: password }
-    signUpSchema
-      .validate(userData, { abortEarly: false })
-      .then(valid => {
+  const validateCredentials = async () => {
+    const credentials = { username: username, email: email, password: password }
+    let valid: { username: string; email: string; password: string } | undefined
+    let errors
+
+    await signUpSchema
+      .validate(credentials, { abortEarly: false })
+      .then(isValid => {
         setErrorPath('')
-        signUpHandler(userData)
+        valid = isValid
       })
       .catch(err => {
         handleErrorFocus(err.inner[0].path)
         setErrorPath(err.inner[0].path)
         onError(err.errors[0])
         showError(true)
+        errors = err.errors[0]
       })
-    e.preventDefault()
+    return { valid, errors }
   }
 
   const handleErrorFocus = (errorPath: string) => {
@@ -58,49 +59,14 @@ function AuthSignUp({ showError, onError }: Props) {
     }
   }
 
-  /// hahahahahahahahha wow that's a lot of async
-  const signUpHandler = async (userData: any) => {
-    try {
-      actions
-        .signUp(userData)
-        .then(async res => {
-          console.log(res.data)
+  const registerHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const { valid, errors } = await validateCredentials()
 
-          if (res.data.success) {
-            await actions
-              .logIn(userData)
-              .then(async res => {
-                if (res.data.success) {
-                  localStorage.setItem('token', res.data.token)
-
-                  await actions
-                    .getAuthUser()
-                    .then(res => {
-                      console.log(res, 'I GOT AN AUTH USER HERE')
-                      setUser(res.data.user)
-                      navigate('/')
-                    })
-                    .catch(err => console.log(err))
-                } else {
-                  // TODO: create an error here to display on screen
-                  console.log(res.data.message)
-                }
-              })
-              .catch(console.error)
-          } else {
-            console.log(res.data.message)
-
-            if (res.data.path) {
-              handleErrorFocus(res.data.path)
-              setErrorPath(res.data.path)
-              onError(res.data.message)
-              showError(true)
-            }
-          }
-        })
-        .catch(console.error)
-    } catch (err) {
-      console.log(err)
+    if (valid) {
+      register(valid)
+    } else {
+      console.log(errors)
     }
   }
 
@@ -112,7 +78,7 @@ function AuthSignUp({ showError, onError }: Props) {
 
   return (
     <div className="user-login-3_form">
-      <form className="login-form" onSubmit={e => validateInputs(e)}>
+      <form className="login-form" onSubmit={e => registerHandler(e)}>
         <div className="user-form-container">
           <div className="login-input-container email-container">
             <div

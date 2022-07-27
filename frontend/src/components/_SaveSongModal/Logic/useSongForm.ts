@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { useUploadToAWS, useSaveSong } from '../../../hooks/useQueries_REFACTOR/useSongs'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 import { saveSongSchema } from '../../../utils/validationSchemas'
+import { trpc } from 'src/utils/trpc'
 
 export const useSongForm = () => {
-  const signedS3 = useUploadToAWS()
-  const saveSong = useSaveSong()
+  const upload = trpc.useMutation(['songs.upload-song'])
+  const createSong = trpc.useMutation(['songs.create-song'])
   const [error, setError] = useState({ path: '', message: '', showError: false })
 
   const handleSaveSong = async (e: any, _song: ISongTake, _title: any, _caption: any) => {
@@ -15,23 +17,33 @@ export const useSongForm = () => {
       return setError({ path: '', message: "You haven't yet recorded a Flow", showError: true })
     const title = _title.value.trim()
     const caption = _caption.value.trim()
-    const userId = _song.user?._id
+    const userId = _song.user._id
 
-    const songToUpload = await validateInputs(_song, title, caption)
+    const songToUpload = await validateInputs({ ..._song }, title, caption)
     if (!songToUpload) return
 
     const fileName = userId + title.replaceAll(' ', '-')
     const fileType = 'audio/mpeg-3'
     const fileBlob = songToUpload.blob
 
-    signedS3.mutate(
-      { fileName: fileName, fileType: fileType, fileBlob: fileBlob },
+    upload.mutate(
+      { fileName: fileName, fileType: fileType },
       {
-        onSuccess: data => {
-          saveSong.mutate({ currentSong: songToUpload, awsURL: data.signedRequest.aws_URL })
+        onSuccess: async data => {
+          await axios.put(data.signedUrl, fileBlob, data.options)
+          console.log(songToUpload, data.url, 'these values need to be valid')
+          createSong.mutate({ ...songToUpload, audio: data.url })
         },
       },
     )
+    // signedS3.mutate(
+    //   { fileName: fileName, fileType: fileType, fileBlob: fileBlob },
+    //   {
+    //     onSuccess: data => {
+    //       saveSong.mutate({ currentSong: songToUpload, awsURL: data.signedRequest.aws_URL })
+    //     },
+    //   },
+    // )
   }
 
   const validateInputs = async (

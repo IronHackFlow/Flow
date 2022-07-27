@@ -4,7 +4,7 @@ import { LayoutTwo, LayoutThree } from 'src/components/__Layout/LayoutWrappers'
 import useTranscript from '../_RecordPage/Utils/useTranscript'
 import useDatamuse from '../_RecordPage/Utils/useDatamuse'
 
-export const Suggestions = ({ children }: { children: ReactNode }) => {
+export const Suggestions = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
   const { adjectives, nouns, lastWord, transcript } = useTranscript()
   const adjRhymes = useDatamuse(adjectives, 5)
   const nounRhymes = useDatamuse(nouns, 5, lastWord)

@@ -7,15 +7,17 @@ import EditLyricsItem from './EditLyricsItem'
 import AudioTimeSlider from '../../components/_AudioTimeSlider/AudioTimeSlider'
 import { SelectMenu } from '../../components/_Modals/SelectMenu/SelectMenu'
 import { beatList, Beat } from '../../constants/index'
-import { ISong } from '../../interfaces/IModels'
+// import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
 import { downIcon, goBackIcon, undoIcon, redoIcon } from '../../assets/images/_icons'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
 import { PlayButton } from '../../components/_Buttons/PlayButton'
 import { useUserSongs } from 'src/hooks/useQueries_REFACTOR/useSongs'
 import { tempMockSong } from '../_Home/initialData'
+import { ISongTake } from '../_RecordPage/Utils/types'
 
 type LocationPropTypes = {
-  allSongs: ISong[]
+  allSongs: ISong[] | ISongTake[]
   currentSong: ISong
 }
 
@@ -29,7 +31,7 @@ export default function EditLyrics() {
 
   const [currentSong, setCurrentSong] = useState<ISong>(tempMockSong)
   const [currentBeat, setCurrentBeat] = useState<Beat>(beatList[0])
-  const [allSongs, setAllSongs] = useState<ISong[]>([])
+  const [allSongs, setAllSongs] = useState<any>([])
   const [initialSongs, setInitialSongs] = useState<ISong[]>([])
   const [lyricsArray, setLyricsArray, { history, pointer, back, forward }] = useHistory([])
   const [lyricsDisplay, setLyricsDisplay] = useState<Array<HTMLLIElement>>([])
@@ -47,7 +49,7 @@ export default function EditLyrics() {
     if (state.allSongs) {
       const takes = state.allSongs
       const userSongs = songs.data
-      setAllSongs(prevSongs => [...prevSongs, ...takes, ...userSongs])
+      setAllSongs((prevSongs: any) => [...prevSongs, ...takes, ...userSongs])
     } else {
       setAllSongs(songs.data)
     }
@@ -134,8 +136,8 @@ export default function EditLyrics() {
   const handleSaveLyrics = () => {
     if (!currentSong) return
     let savedLyrics = lyricsArray.map((each: { id: string; array: Array<string> }) => each.array)
-    setAllSongs(prev =>
-      prev?.map(each => {
+    setAllSongs((prev: any) =>
+      prev?.map((each: any) => {
         if (each._id === currentSong._id) {
           setCurrentSong({ ...each, lyrics: savedLyrics })
           return { ...each, lyrics: savedLyrics }
@@ -149,8 +151,8 @@ export default function EditLyrics() {
   const handleResetLyrics = () => {
     if (!currentSong) return
     let replaceSong = initialSongs.filter(each => each._id === currentSong._id)
-    setAllSongs(prev =>
-      prev?.map(each => {
+    setAllSongs((prev: any) =>
+      prev?.map((each: any) => {
         if (each._id === currentSong._id) {
           setCurrentSong(replaceSong[0])
           return replaceSong[0]
@@ -228,7 +230,7 @@ export default function EditLyrics() {
       </LayoutTwo>
 
       <div className="edit-lyrics__lyrics--container">
-        <ReactSortable
+        {/* <ReactSortable
           tag="ul"
           className="edit-lyrics__lyrics-list"
           list={lyricsDisplay}
@@ -242,7 +244,7 @@ export default function EditLyrics() {
           delay={2}
         >
           {lyricsDisplay}
-        </ReactSortable>
+        </ReactSortable> */}
       </div>
 
       <LayoutTwo classes={['section-3_controls', 'controls-container']}>

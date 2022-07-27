@@ -92,27 +92,6 @@ export default function RhymeActionBar({
     }
   }, [rhymeWordHolder, rhymeList, isRecording])
 
-  const shuffleRhymesHandler = useCallback((array, type) => {
-    // if (array.length !== 0) {
-    //   let randomRhymeArr = []
-    //   for (let i = 1; i <= currentRhymeNum.song; i++) {
-    //     randomRhymeArr.push(array[Math.floor(Math.random() * array.length)])
-    //   }
-    //   if (type === 'rhyme') {
-    //     setRhymes(randomRhymeArr)
-    //   } else {
-    //     setRhymesSelected(randomRhymeArr)
-    //   }
-    // }
-  }, [])
-
-  const lockRhymesHandler = () => {
-    // if (rhymes) {
-    //   setRhymeWordLocked(rhymeWord)
-    //   setRhymesLocked([...rhymes])
-    // }
-  }
-
   const handleButtonClick = () => {
     switch (type) {
       case 'Selected':

@@ -1,24 +1,31 @@
-import express, { Request, Response, NextFunction } from 'express'
-require('dotenv').config()
-import jwt from 'jsonwebtoken'
-import { User } from '../_models/User'
-import { IUserRequest } from '../interfaces/IUserRequest'
+import * as trpcExpress from '@trpc/server/adapters/express'
+import { TRPCError } from '../utils/trpc'
+import { verifyJwt, CtxUserToken } from '../utils/jwt'
+import { User } from '../models/User'
 
-export const verifyJWT = (req: IUserRequest, res: Response, next: NextFunction) => {
-  const token = req.headers['authorization']?.split(' ')[1]
-  if (!token) return res.status(403).json({ message: 'Token not found' })
+export const verifyToken = async ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1]
 
-  const secret = process.env.ACCESS_TOKEN
-  if (!secret) return res.json({ message: 'JWT secret not found' })
+    const notAuthenticated = {
+      req,
+      res,
+      user: null,
+    }
+    if (!token) return notAuthenticated
 
-  jwt.verify(token, secret, async (err: any, decoded: any) => {
-    if (err) return res.status(403).json({ message: 'Token expired' })
+    const decoded = verifyJwt<CtxUserToken>(token, 'accessTokenPrivateKey')
+    if (!decoded) return notAuthenticated
 
     const user = await User.findOne({ username: decoded.username })
-    req.user = user
-    req.user.email = decoded.email
-    req.user.username = decoded.username
+    if (!user) return notAuthenticated
 
-    next()
-  })
+    return {
+      req,
+      res,
+      user: { username: user.username },
+    }
+  } catch (err: any) {
+    throw TRPCError('INTERNAL_SERVER_ERROR', err.message)
+  }
 }

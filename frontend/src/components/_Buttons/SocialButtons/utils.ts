@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
-import { ISong } from 'src/interfaces/IModels'
+// import { ISong } from 'src/interfaces/IModels'
+import { ISong } from '../../../../../backend/src/models/Song'
 
 export interface IWrapperProps {
   page: 'Home' | 'SongScreen'

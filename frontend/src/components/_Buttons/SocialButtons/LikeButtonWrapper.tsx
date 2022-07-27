@@ -3,7 +3,8 @@ import {
   useAddLike,
   useDeleteLike,
 } from '../../../hooks/useQueries_REFACTOR/useLikesOrFollows/useLikes'
-import { ISong } from '../../../interfaces/IModels'
+// import { ISong } from '../../../interfaces/IModels'
+import { ISong } from '../../../../../backend/src/models/Song'
 import { checkListForUserId } from '../../../utils/Social_REFACTOR/socialFilters'
 import { useAuth } from '../../../contexts/_AuthContext/AuthContext'
 import usePrevious from '../../../hooks/usePrevious'

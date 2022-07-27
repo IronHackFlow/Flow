@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { faker } from '@faker-js/faker'
+import { IUser } from '../../../../backend/src/models/User'
 
 export const tempMockSong = {
   _id: '100',
@@ -22,14 +23,34 @@ export const tempMockSong = {
   video: '',
 }
 const ids = ['100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110']
-const songIds = ['1000','1001','1002','1003','1004','1005','1006','1007','1008','1009','1010','1011','1012','1013','1014','1015','1016','1017','1018','1019',]
-export const tempMockUser = {
+const songIds = [
+  '1000',
+  '1001',
+  '1002',
+  '1003',
+  '1004',
+  '1005',
+  '1006',
+  '1007',
+  '1008',
+  '1009',
+  '1010',
+  '1011',
+  '1012',
+  '1013',
+  '1014',
+  '1015',
+  '1016',
+  '1017',
+  '1018',
+  '1019',
+]
+export const tempMockUser: IUser = {
   _id: '3',
   username: 'pizzle',
   email: 'mpizzle@gmail.com',
   followers: [],
   following: [],
-  likes: [],
 }
 
 const generateSongs = (songIds: string[], users: any) => {
@@ -81,7 +102,7 @@ const generateComments = (count: number, users: any, songId: string) => {
 
 const generateUsers = (ids: string[]) => {
   let users = []
-  
+
   for (let i = 0; i < ids.length; i++) {
     users.push({
       _id: ids[i],

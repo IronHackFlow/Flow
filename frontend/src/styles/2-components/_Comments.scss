@@ -53,22 +53,20 @@
                     margin: 5px;
 
                     a {
+                      @include flexCenter(auto, auto, 100vh, center, center, row);
+                    }
+                    .comment-photo__photo--wrapper {
                       @include flexCenter(
-                        clamp(36px, 100%, 44px),
-                        clamp(36px, 100%, 44px),
+                        clamp(30px, 35px, 44px),
+                        clamp(30px, 35px, 44px),
                         100vh,
                         center,
-                        center,
+                        stretch,
                         row
                       );
                       overflow: hidden;
                       object-fit: contain;
                       margin: 2px;
-
-                      img {
-                        height: 100%;
-                        width: 100%;
-                      }
                     }
                   }
                 }

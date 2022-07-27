@@ -7,6 +7,7 @@ import ContinueModal from 'src/components/_Modals/ContinueModal'
 import { goBackIcon } from '../../assets/images/_icons'
 import { IUser, ISong } from '../../interfaces/IModels'
 import { LayoutThree, LayoutTwo } from '../../components/__Layout/LayoutWrappers'
+import { UserPhoto } from 'src/components/UserPhoto/UserPhoto'
 
 enum ProfileSections {
   Public = 'Public',
@@ -109,7 +110,13 @@ export default function EditProfile() {
                 'edit-profile__user-pic--shadow-inset',
               ]}
             >
-              <img src={user?.picture ? user?.picture : ''} alt="profile"></img>
+              <div className="edit-profile__user-pic--wrapper">
+                <UserPhoto
+                  photoUrl={user?.picture}
+                  username={user?.username ? user.username : 'username'}
+                />
+              </div>
+              {/* <img src={user?.picture ? user?.picture : ''} alt="profile"></img> */}
             </LayoutThree>
           </div>
 

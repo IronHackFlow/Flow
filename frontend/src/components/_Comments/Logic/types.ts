@@ -1,4 +1,5 @@
-import { IComment } from '../../../interfaces/IModels'
+// import { IComment } from '../../../interfaces/IModels'
+import { IComment } from '../../../../../backend/src/models/Comment'
 
 export enum CommentActions {
   Comment = 'Comment',

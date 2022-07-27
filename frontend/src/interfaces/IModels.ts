@@ -69,7 +69,3 @@ export interface ISong {
   likes: string[]
   video?: string
 }
-
-export interface ISongTake extends Omit<ISong, 'comments' | 'likes'> {
-  blob: Blob | null
-}

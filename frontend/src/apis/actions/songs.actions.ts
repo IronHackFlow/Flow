@@ -1,8 +1,8 @@
 import React from 'react'
 import axios, { AxiosResponse } from 'axios'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 import { axiosConfig } from '../axios/axiosConfig'
-import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
 
 export const addSong = async (currentSong: ISongTake, awsURL: string) => {
   const payload = { currentSong: currentSong, awsURL: awsURL }

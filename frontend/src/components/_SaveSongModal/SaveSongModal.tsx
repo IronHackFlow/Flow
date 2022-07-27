@@ -4,7 +4,7 @@ import { closeIcon } from '../../assets/images/_icons'
 import AudioTimeSlider from '../_AudioTimeSlider/AudioTimeSlider'
 import { SelectMenu } from '../_Modals/SelectMenu/SelectMenu'
 import { LayoutTwo, LayoutThree } from '../__Layout/LayoutWrappers'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 import { SaveSongForm } from './Displays/SaveSongForm'
 import { PlayButton } from '../_Buttons/PlayButton'
 

@@ -1,24 +1,30 @@
 import { followIcon, commentIcon, thumbsUpIcon } from '../../../assets/images/_icons'
 import { ISocialButtonProps } from './utils'
+import { RoundButton, BtnColorsEnum } from '../RoundButton/RoundButton'
+import { ButtonTypes } from '../Icon/Icon'
 
 export const SocialButtonSongs = ({ type, total, onClick, hasUser }: ISocialButtonProps) => {
-  const icon = type === 'Follow' ? followIcon : type === 'Like' ? thumbsUpIcon : commentIcon
+  const iconSize = type === 'Follow' ? 125 : type === 'Comment' ? 55 : 75
 
   return (
     <div className="songscreen__btn">
       <div className="songscreen__text--container">
-        <p className="songscreen__text num">{total}</p>
-        <p className="songscreen__text title">{total === 1 ? `${type}` : `${type}s`}</p>
+        <div className="songscreen__text--wrapper">
+          <p className="songscreen__text num">{total}</p>
+          <p className="songscreen__text title">{total === 1 ? `${type}` : `${type}s`}</p>
+        </div>
       </div>
-      <button
-        className={`social-button ${hasUser ? 'pushed' : ''}`}
-        onClick={(e: any) => {
-          e.target.style.transition = 'all .2s ease-in'
-          onClick()
-        }}
-      >
-        <img className={`social-icons ${type}`} src={icon} alt={`${type} user icon`} />
-      </button>
+      <div className={`social-button ${hasUser ? 'pushed' : ''}`}>
+        <RoundButton
+          type={type as ButtonTypes}
+          btnOptions={{
+            offset: 10,
+            bgColor: BtnColorsEnum.Initial,
+          }}
+          iconOptions={{ color: 'Primary', size: iconSize }}
+          onClick={onClick}
+        />
+      </div>
     </div>
   )
 }

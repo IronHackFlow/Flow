@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react'
-import { ISong } from '../../interfaces/IModels'
-import { ISongTake } from 'src/interfaces/IModels'
+// import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 
 type Props = {
   isPlaying: boolean

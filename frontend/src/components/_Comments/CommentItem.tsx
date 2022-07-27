@@ -2,7 +2,9 @@ import { Dispatch, SetStateAction } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import { LayoutTwo, LayoutThree } from '../__Layout/LayoutWrappers'
-import { IComment, ISong } from '../../interfaces/IModels'
+// import { IComment, ISong } from '../../interfaces/IModels'
+import { IComment } from '../../../../backend/src/models/Comment'
+import { ISong } from '../../../../backend/src/models/Song'
 import {
   DeleteButtonWrapper,
   EditButtonWrapper,
@@ -11,6 +13,7 @@ import {
 } from './ItemButtonWrappers'
 import { ITextModalObject } from './Logic/types'
 import useFormatDate from '../../hooks/useFormatDate'
+import { UserPhoto } from '../UserPhoto/UserPhoto'
 
 type CommentItemProps = {
   comment: IComment
@@ -39,7 +42,10 @@ export default function CommentItem({
       <div className="comment-list-inner">
         <LayoutThree classes={['comment-list-photo', 'comment-photo-inner', 'comment-photo-outer']}>
           <Link to={`/profile/${commentUser?._id}`} state={{ propSongUser: commentUser }}>
-            <img src={commentUser?.picture} alt="user's profile" />
+            {/* <img src={commentUser?.picture} alt="user's profile" /> */}
+            <div className="comment-photo__photo--wrapper">
+              <UserPhoto photoUrl={commentUser?.picture} username={commentUser?.username} />
+            </div>
           </Link>
         </LayoutThree>
 
@@ -69,7 +75,7 @@ export default function CommentItem({
             setTextModalObject={setTextModalObject}
             comment={comment}
           />
-          <DeleteButtonWrapper isCommentUser={isCommentUser} comment={comment} />
+          <DeleteButtonWrapper isCommentUser={isCommentUser} comment={comment} songId={song._id} />
         </LayoutTwo>
       </div>
     </li>

@@ -1,5 +1,6 @@
 import { useQueryClient } from 'react-query'
-import { ISong } from '../../../interfaces/IModels'
+// import { ISong } from '../../../interfaces/IModels'
+import { ISong } from '../../../../../backend/src/models/Song'
 
 const handleUpdateSocialList = (_action: 'add' | 'delete', _list: string[], _userId: string) => {
   if (_action === 'add') return [..._list, _userId]

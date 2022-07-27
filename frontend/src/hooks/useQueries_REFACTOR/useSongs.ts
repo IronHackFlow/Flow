@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { ISong } from '../../interfaces/IModels'
+// import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
 import { useMutation, useQuery, UseQueryResult } from 'react-query'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from 'src/pages/_RecordPage/Utils/types'
 import {
   getSignedS3,
   putSignedS3,
@@ -50,5 +51,5 @@ export const useUserSongs = (id: string) => {
 }
 
 export const useAllSongs = () => {
-  return useQuery<ISong[], Error>(['songs'], getAllSongs)
+  // return useQuery<ISong[], Error>(['songs'], getAllSongs)
 }

@@ -1,59 +1,41 @@
-require('dotenv').config()
 import express, { Application, Request, Response, NextFunction } from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import bodyParser from 'body-parser'
-import cookieparser from 'cookie-parser'
+import * as trpcExpress from '@trpc/server/adapters/express'
 import path from 'path'
-import indexRoutes from './src/_routes/index'
-import authRoutes from './src/_routes/authRoutes'
-import songRoutes from './src/_routes/songRoutes'
-import likeRoutes from './src/_routes/likeRoutes'
-import followRoutes from './src/_routes/followRoutes'
-import commentRoutes from './src/_routes/commentRoutes'
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import cookieparser from 'cookie-parser'
+import { createContext } from './src/utils/trpc'
+import { appRouter } from './src/routes/app.router'
+import customConfig from './src/config/default'
+
+dotenv.config({ path: path.join(__dirname, './.env') })
 const app: Application = express()
 
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/localIronPlate`
-
+const MONGODB_URI = customConfig.dbUri
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI)
   .then((x: any) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
   .catch((err: any) => console.error('Error connecting to mongo', err))
-// "https://iron-flow.netlify.app"
 
+app.use(cookieparser())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'https://iron-flow.herokuapp.com'], //Swap this with the client url
+    origin: customConfig.origin,
     optionsSuccessStatus: 200,
   }),
 )
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cookieparser())
-
+app.use('/api/trpc', trpcExpress.createExpressMiddleware({ router: appRouter, createContext }))
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 
-app.use('/api', indexRoutes)
-app.use('/api', authRoutes)
-app.use('/api', songRoutes)
-app.use('/api', likeRoutes)
-app.use('/api', followRoutes)
-app.use('/api', commentRoutes)
-
-const PORT = process.env.PORT || 5000
+const PORT = customConfig.port
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
 })
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
-
-// const express = require('express')
-// const indexRoutes = require('./routes/index')
-// const authRoutes = require('./routes/authRoutes')
-// const songRoutes = require('./routes/songRoutes')
-// const likeRoutes = require('./routes/likeRoutes')
-// const followRoutes = require('./routes/followRoutes')
-// const commentRoutes = require('./routes/commentRoutes')

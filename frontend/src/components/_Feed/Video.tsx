@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useQuery, useQueryClient } from 'react-query'
 import gradientbg from '../../assets/images/gradient-bg-2.png'
-import { ISong } from '../../interfaces/IModels'
+// import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
 import { getSongVideo } from '../../apis/actions/songs.actions'
 
 type Props = {
   song: ISong
   // video: string,
-  onInView: Dispatch<SetStateAction<ISong | undefined>>
+  onInView: Dispatch<SetStateAction<ISong>>
 }
 
 const useGiphy = () => {
@@ -35,16 +36,16 @@ function Video({ song, onInView }: Props) {
   // }, [video])
 
   useEffect(() => {
-    if (inView && onInView) {
-      queryClient.setQueryData(['songs', 'current', song._id], song)
-      const getCurrentSong: ISong | undefined = queryClient.getQueryData([
-        'songs',
-        'current',
-        song._id,
-      ])
-      if (getCurrentSong) {
-        onInView(getCurrentSong)
-      }
+    if (inView) {
+      onInView(song)
+      // queryClient.setQueryData(['songs.all-songs', 'current', song._id], song)
+      // const getCurrentSong: ISong | undefined = queryClient.getQueryData([
+      //   'songs.all-songs',
+      //   song._id,
+      // ])
+      // if (getCurrentSong) {
+      //   onInView(getCurrentSong)
+      // }
       // if (loadVideo === '') setLoadVideo(video)
     }
   }, [inView])

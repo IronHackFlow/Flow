@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import ItemButton from './ItemButton'
 import ContinueModal from '../_Modals/ContinueModal'
-import { IComment } from '../../interfaces/IModels'
+// import { IComment } from '../../interfaces/IModels'
+import { IComment } from '../../../../backend/src/models/Comment'
 import { CommentActions, ITextModalObject } from './Logic/types'
+import { trpc } from 'src/utils/trpc'
 
 interface IButtonWrapper {
   isCommentUser: boolean
@@ -15,6 +17,10 @@ interface IEditButtonWrapper extends IButtonWrapper {
 
 interface ILikeButtonWrapper extends IButtonWrapper {
   userId: string | undefined
+}
+
+interface IDeleteButtonWrapper extends IButtonWrapper {
+  songId: string
 }
 
 export const EditButtonWrapper = ({
@@ -41,12 +47,14 @@ export const EditButtonWrapper = ({
   )
 }
 
-export const DeleteButtonWrapper = ({ isCommentUser, comment }: IButtonWrapper) => {
+export const DeleteButtonWrapper = ({ isCommentUser, comment, songId }: IDeleteButtonWrapper) => {
+  const deleteComment = trpc.useMutation(['comments.delete'])
   const [isDelete, setIsDelete] = useState<boolean>(false)
 
   const handleOnDelete = () => {
     // delete comment with useMutation
     // commentId && songId
+    deleteComment.mutate({ _id: comment._id, song: songId })
     console.log('deleting comment')
   }
 

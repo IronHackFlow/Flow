@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState, useRef, ReactNode, PropsWithChi
 import { useQueryClient, useIsMutating, QueryObserver } from 'react-query'
 import { FeedToggleHeader, FeedToggleButton } from './HomeHeader'
 import { tempMockSong } from './initialData'
-import { UserPhoto, SongTitle, SongCaption } from './SongDetails'
+import { UserPhotoContainer, SongTitle, SongCaption } from './SongDetails'
 import { PlayButton } from '../../components/_Buttons/PlayButton'
-import { ISong } from '../../interfaces/IModels'
+import { ISong } from '../../../../backend/src/models/Song'
 import Navbar from '../../components/_Navbar/Navbar'
 import AudioTimeSlider from '../../components/_AudioTimeSlider/AudioTimeSlider'
 import CommentMenu from '../../components/_Comments/CommentMenu'
@@ -22,38 +22,10 @@ enum Feeds {
 }
 
 export default function HomeDisplay() {
-  const queryClient = useQueryClient()
   const [showCommentMenu, setShowCommentMenu] = useState<boolean>(false)
   const [toggleFeed, setToggleFeed] = useState<string>(Feeds.Home)
   const [songInView, setSongInView] = useState<ISong>(tempMockSong)
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [trackInView, setTrackInView] = useState<ISong | undefined>()
-
-  const renderRef = useRef(0)
-
-  useEffect(() => {
-    // const songs: ISong[] | undefined = queryClient.getQueryData('songs')
-    // if (trackInView === '' && songs) {
-    //   setSongInView(songs[0])
-    // } else {
-    //   let song = songs?.filter(each => each._id === trackInView)
-    //   if (song) {
-    //     setSongInView(song[0])
-    //   }
-    // }
-
-    if (trackInView) {
-      // setSongInView(trackInView)
-      const currentSong: ISong | undefined = queryClient.getQueryData([
-        'songs',
-        'current',
-        trackInView?._id,
-      ])
-      if (currentSong) {
-        setSongInView(currentSong)
-      }
-    }
-  }, [trackInView, songInView])
 
   // if (!songInView) return <LoadingHome />
   return (
@@ -79,7 +51,7 @@ export default function HomeDisplay() {
           />
         </FeedToggleHeader>
 
-        <FeedDisplay feed={toggleFeed} onInView={setTrackInView} />
+        <FeedDisplay feed={toggleFeed} onInView={setSongInView} />
 
         <div className="section-1c_song-details">
           <LayoutTwo classes={['song-details-1_actions', 'actions_shadow-div-outset']}>
@@ -95,11 +67,9 @@ export default function HomeDisplay() {
             </LayoutTwo>
           </LayoutTwo>
 
-          {console.log(renderRef.current++, 'Checking Renders in Home')}
-
           <LayoutTwo classes={['song-details-2_song-data', 'song-data-container']}>
             <LayoutTwo classes={['song-user-section', 'song-user-container']}>
-              <UserPhoto song={songInView} />
+              <UserPhotoContainer song={songInView} />
 
               <LayoutTwo classes={['song-title-container', 'song-title_shadow-div-outset']}>
                 <SongTitle song={songInView} />

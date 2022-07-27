@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback, Dispatch, SetStateAction } fro
 import { useAuth } from '../../contexts/_AuthContext/AuthContext'
 import EditProfileItem from './EditProfileItem'
 import EditProfileFlowItem from './EditProfileFlowItem'
-import { IUser } from '../../interfaces/IModels'
+// import { IUser } from '../../interfaces/IModels'
+import { IUser } from '../../../../backend/src/models/User'
 import { getFieldData, FieldObject } from './functions/handleFieldData'
 import { tempMockUser } from '../_Home/initialData'
 
@@ -13,9 +14,9 @@ type Props = {
 }
 
 export default function EditProfileCard({ title, toExpand, onExpand }: Props) {
-  const { user, setUser } = useAuth()
+  const { user } = useAuth()
   const [fieldData, setFieldData] = useState<FieldObject>(
-    getFieldData(title, user ? user : tempMockUser),
+    getFieldData(title, user !== null ? user : tempMockUser),
   )
   const [editedUser, setEditedUser] = useState<IUser | null>(null)
   const [isInputReset, setIsInputReset] = useState<boolean>(false)
@@ -58,7 +59,7 @@ export default function EditProfileCard({ title, toExpand, onExpand }: Props) {
   // }, [items, songs])
 
   const handleExpandCard = useCallback(
-    title => {
+    (title: string) => {
       onExpand(title)
     },
     [onExpand],

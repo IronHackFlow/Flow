@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react'
-import { ISongTake } from 'src/interfaces/IModels'
+import { ISongTake } from '../Utils/types'
 import { SelectMenu } from 'src/components/_Modals/SelectMenu/SelectMenu'
 
 type SelectSongProps = {

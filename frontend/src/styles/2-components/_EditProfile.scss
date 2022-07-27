@@ -139,10 +139,9 @@
                   );
                   box-shadow: inset 2px 2px 3px #7a7a7a, inset -2px -2px 3px #ffffff;
 
-                  img {
-                    height: 80%;
-                    width: 80%;
-                    border-radius: 100vh;
+                  .edit-profile__user-pic--wrapper {
+                    @include flexCenter(80%, 80%, 100vh, center, center, row);
+                    overflow: hidden;
                   }
                 }
               }

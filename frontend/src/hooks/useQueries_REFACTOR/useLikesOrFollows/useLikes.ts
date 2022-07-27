@@ -1,6 +1,7 @@
 import { useMutation } from 'react-query'
 import { addLike, deleteLike } from '../../../apis/actions/likes.actions'
-import { ISong } from '../../../interfaces/IModels'
+// import { ISong } from '../../../interfaces/IModels'
+import { ISong } from '../../../../../backend/src/models/Song'
 import { useHandleLikeOrFollowOnMutate } from './mutationHandlers.likesFollows'
 
 type LikeProps = {
