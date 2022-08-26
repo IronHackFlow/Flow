@@ -21,7 +21,7 @@
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.1",
-        "mongoose": "^6.0.5",
+        "mongoose": "^6.4.6",
         "react-custom-scrollbars": "^4.2.1",
         "react-dnd-touch-backend": "^14.1.1",
         "react-google-button": "^0.7.2",
